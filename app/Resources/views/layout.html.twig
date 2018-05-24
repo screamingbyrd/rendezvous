@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+
+    <title>{% block title %}Altea{% endblock %}</title>
+
+    {% block stylesheets %}
+        {# On charge le CSS de bootstrap depuis le site directement #}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    {% endblock %}
+</head>
+
+<body>
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="">Altea Group</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Résidences<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+
+                                <li></li>
+                                <li role="separator" class="divider"></li>
+                                <li></li>
+                                <li><</li>
+                            </ul>
+
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Intervention<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Interventions actives</a></li>
+                                <li><a href="">Toutes les interventions</a></li>
+                                <li><a href="">Interventions résolues</a></li>
+                                
+                                <li><a href="">Mes interventions</a></li>
+
+                                <li role="separator" class="divider"></li>
+                                <li><a href="">Nouvelle intervention</a></li>
+
+                            </ul>
+                        </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestion Stock<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="">Liste des emplacements</a></li>
+                                    <li><a href="">Nouvel emplacement</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href=""></a></li>
+                                    <li><a href="">Liste des produits</a></li>
+                                    <li><a href="">Nouveau produit</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="">Ajout stock</a></li>
+                                    <li><a href="">Retrait stock</a></li>
+                                    <li><a href="">Stock</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="">Entrée</a></li>
+                                    <li><a href="">Sortie</a></li>
+
+
+                                </ul>
+
+                            </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('fos_user_profile_edit') }}">Profil</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    {% block header %}
+    {% endblock %}
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"> © 2017 Altea Immobilère. All rights reserved</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right"></ul>
+        </div>
+    </div>
+</nav>
+
+{% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+{% endblock %}
+
+</body>
+</html>
