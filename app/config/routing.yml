@@ -1,3 +1,8 @@
+ai_jobnow:
+    resource: "@AIJobnowBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
