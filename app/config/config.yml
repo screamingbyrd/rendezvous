@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -30,6 +30,16 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
+
+fos_user:
+        db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+        firewall_name: main
+        user_class: AppBundle\Entity\User
+        from_email:
+            address: "arthur.regnault@altea.com"
+            sender_name: "JobNow"
 
 # Twig Configuration
 twig:
