@@ -121,3 +121,4 @@ class PostulatedOffers
         return $this->date;
     }
 }
+

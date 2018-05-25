@@ -96,38 +96,4 @@ class User extends BaseUser
     {
         return $this->lastName;
     }
-
-    /**
-     * Add employer
-     *
-     * @param \AI\AppBundle\Entity\Employer $employer
-     *
-     * @return User
-     */
-    public function addEmployer(\AI\AppBundle\Entity\Employer $employer)
-    {
-        $this->employer[] = $employer;
-
-        return $this;
-    }
-
-    /**
-     * Remove employer
-     *
-     * @param \AI\AppBundle\Entity\Employer $employer
-     */
-    public function removeEmployer(\AI\AppBundle\Entity\Employer $employer)
-    {
-        $this->employer->removeElement($employer);
-    }
-
-    /**
-     * Get employer
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEmployer()
-    {
-        return $this->employer;
-    }
 }

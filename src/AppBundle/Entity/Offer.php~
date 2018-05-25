@@ -401,45 +401,5 @@ class Offer
     }
 
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \AI\AppBundle\Entity\Tag $tag
-     *
-     * @return Offer
-     */
-    public function addTag(\AI\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AI\AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AI\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTag()
-    {
-        return $this->tag;
-    }
 }
+
