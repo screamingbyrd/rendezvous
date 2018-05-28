@@ -6,11 +6,14 @@
 
 {% block header %}
 
+{% for message in app.session.flashbag.get('info') %}
+    <div class="container">
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    </div>
+{% endfor %}
 
-
-
-  {# <div class="legend col-md-4"> Legende : PC = Pièces communes </div> #}
-    TEST LAYOUT
 
 
         {% block body %}

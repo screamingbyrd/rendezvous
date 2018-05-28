@@ -10,37 +10,18 @@ namespace CandidateBundle\Controller;
 
 use AppBundle\Entity\Candidate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\CandidateType;
 
 class CandidateController extends Controller
 {
     public function createAction(Request $request)
     {
+        $session = $request->getSession();
+
         $candidate = new Candidate();
 
-        $form = $this->get('form.factory')->createBuilder(FormType::class)
-            ->add('firstName',      TextType::class, array('required' => true))
-            ->add('lastName',      TextType::class, array('required' => true))
-            ->add('email',      EmailType::class, array('required' => true))
-            ->add('password',      PasswordType::class, array('required' => true))
-            ->add('description',      TextType::class, array('required' => false))
-            ->add('age',      TextType::class, array('required' => false))
-            ->add('experience',      TextType::class, array('required' => false))
-            ->add('license',      TextType::class, array('required' => false))
-            ->add('diploma',      TextType::class, array('required' => false))
-            ->add('socialMedia',      TextType::class, array('required' => false))
-            ->add('phone',      TextType::class, array('required' => true))
-            ->add('save',      SubmitType::class)
-            ->getForm()
-        ;
+        $form = $this->get('form.factory')->create(CandidateType::class);
 
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
@@ -54,32 +35,15 @@ class CandidateController extends Controller
             if ($form->isValid()) {
 
                 $data = $form->getData();
-
-                $userManager = $this->get('fos_user.user_manager');
-
-                $email_exist = $userManager->findUserByEmail($data['email']);
-
-                // Check if the user exists to prevent Integrity constraint violation error in the insertion
-                if($email_exist){
-                    return false;
-                }
-                $user = $userManager->createUser();
-                $user->setUsername($data['email']);
-                $user->setEmail($data['email']);
-                $user->setEmailCanonical($data['email']);
-                $user->setFirstName($data['firstName']);
-                $user->setLastName($data['lastName']);
-                $user->setPlainPassword($data['password']);
-                $userManager->updateUser($user);
-                $user = $userManager->findUserByEmail($data['email']);
+                $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName());
                 $candidate->setUser($user);
-                $candidate->setDescription($data['description']);
-                $candidate->setAge($data['age']);
-                $candidate->setExperience($data['experience']);
-                $candidate->setLicense($data['license']);
-                $candidate->setDiploma($data['diploma']);
-                $candidate->setSocialMedia($data['socialMedia']);
-                $candidate->setPhone($data['phone']);
+                $candidate->setDescription($data->getDescription());
+                $candidate->setAge($data->getAge());
+                $candidate->setExperience($data->getExperience());
+                $candidate->setLicense($data->getLicense());
+                $candidate->setDiploma($data->getDiploma());
+                $candidate->setSocialMedia($data->getSocialMedia());
+                $candidate->setPhone($data->getPhone());
 
                 // On enregistre notre objet $advert dans la base de données, par exemple
                 $em = $this->getDoctrine()->getManager();
@@ -88,8 +52,9 @@ class CandidateController extends Controller
 
                 $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
-                // On redirige vers la page de visualisation de l'annonce nouvellement créée
-                return $this->redirectToRoute('/', array('_locale' => $candidate->getId()));
+                $session->getFlashBag()->add('info', 'Candidat enregistrée !');
+
+                return $this->redirectToRoute('jobnow_home');
             }
         }
 
@@ -100,5 +65,40 @@ class CandidateController extends Controller
         return $this->render('CandidateBundle:Candidate:create.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * This method registers an user in the database manually.
+     *
+     * @return User
+     **/
+    private function register($email,$username,$password,$firstName,$lastName){
+        $userManager = $this->get('fos_user.user_manager');
+
+        // Or you can use the doctrine entity manager if you want instead the fosuser manager
+        // to find
+        //$em = $this->getDoctrine()->getManager();
+        //$usersRepository = $em->getRepository("mybundleuserBundle:User");
+        // or use directly the namespace and the name of the class
+        // $usersRepository = $em->getRepository("mybundle\userBundle\Entity\User");
+        //$email_exist = $usersRepository->findOneBy(array('email' => $email));
+
+        $email_exist = $userManager->findUserByEmail($email);
+
+        // Check if the user exists to prevent Integrity constraint violation error in the insertion
+        if($email_exist){
+            return false;
+        }
+
+        $user = $userManager->createUser();
+        $user->setUsername($username);
+        $user->setEmail($email);
+        $user->setEmailCanonical($email);
+        $user->setFirstName($firstName);
+        $user->SetLastName($lastName);
+        $user->setPlainPassword($password);
+        $userManager->updateUser($user);
+
+        return $user;
     }
 }
