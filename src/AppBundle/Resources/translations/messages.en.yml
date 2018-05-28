@@ -6,6 +6,7 @@ header:
     companies: Companies
     submit: Submit your resume
     dashboard: Dashboard
+    register: Register
   employers:
     title: Employers
     post: Post a job
