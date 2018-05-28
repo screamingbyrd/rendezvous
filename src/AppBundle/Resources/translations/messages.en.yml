@@ -1,0 +1,25 @@
+header:
+  findjob: Find a job
+  candidates:
+    title: Candidates
+    findJob: Find a job
+    companies: Companies
+    submit: Submit your resume
+    dashboard: Dashboard
+  employers:
+    title: Employers
+    post: Post a job
+    findCandidate: Find a candidate
+    pricing: Pricing
+    dashboard: Dashborard
+  about:
+    title: About us
+    faq: FAQ
+    privacy: Privacy policy
+    terms: Terms and conditions
+  login:
+    title: Login
+  language:
+    title: Change language
+    french: French
+    english: English

@@ -9,12 +9,13 @@
     {% block stylesheets %}
         {# On charge le CSS de bootstrap depuis le site directement #}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
 
     {% endblock %}
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top header-navbar">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -24,60 +25,41 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">Altea Group</a>
+            <a class="navbar-brand  header-text" href="">{{ 'header.findjob'|trans }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Résidences<span class="caret"></span></a>
+                       aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-
-                        <li></li>
-                        <li role="separator" class="divider"></li>
-                        <li></li>
-                        <li><</li>
+                        <li><a href="">{{ 'header.candidates.findJob'|trans }}</a></li>
+                        <li><a href="">{{ 'header.candidates.companies'|trans }}</a></li>
+                        <li><a href="">{{ 'header.candidates.submit'|trans }}</a></li>
+                        <li><a href="">{{ 'header.candidates.dashboard'|trans }}</a></li>
                     </ul>
 
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Intervention<span class="caret"></span></a>
+                       aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="">Interventions actives</a></li>
-                        <li><a href="">Toutes les interventions</a></li>
-                        <li><a href="">Interventions résolues</a></li>
-
-                        <li><a href="">Mes interventions</a></li>
-
-                        <li role="separator" class="divider"></li>
-                        <li><a href="">Nouvelle intervention</a></li>
-
+                        <li><a href="">{{ 'header.employers.post'|trans }}</a></li>
+                        <li><a href="">{{ 'header.employers.findCandidate'|trans }}</a></li>
+                        <li><a href="">{{ 'header.employers.pricing'|trans }}</a></li>
+                        <li><a href="">{{ 'header.employers.dashboard'|trans }}</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Gestion Stock<span class="caret"></span></a>
+                       aria-expanded="false">{{ 'header.about.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="">Liste des emplacements</a></li>
-                        <li><a href="">Nouvel emplacement</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href=""></a></li>
-                        <li><a href="">Liste des produits</a></li>
-                        <li><a href="">Nouveau produit</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="">Ajout stock</a></li>
-                        <li><a href="">Retrait stock</a></li>
-                        <li><a href="">Stock</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="">Entrée</a></li>
-                        <li><a href="">Sortie</a></li>
-
-
+                        <li><a href="">{{ 'header.about.faq'|trans }}</a></li>
+                        <li><a href="">{{ 'header.about.privacy'|trans }}</a></li>
+                        <li><a href="">{{ 'header.about.terms'|trans }}</a></li>
                     </ul>
-
                 </li>
             </ul>
 
@@ -94,8 +76,16 @@
                         </ul>
                     </li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
                 {% endif %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ 'header.language.title'|trans }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -107,7 +97,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"> © 2017 Altea Immobilère. All rights reserved</a>
+            <a class="navbar-brand header-text" href="#"> © 2017 Altea Immobilère. All rights reserved</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
