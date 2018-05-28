@@ -22,56 +22,49 @@ class Candidate
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
      */
     private $user;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="age", type="integer", nullable=false)
      */
     private $age;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=false)
      */
     private $experience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="license", type="string", length=255)
+     * @ORM\Column(name="license", type="string", length=255, nullable=false)
      */
     private $license;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="diploma", type="string", length=255)
+     * @ORM\Column(name="diploma", type="string", length=255, nullable=false)
      */
     private $diploma;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="socialMedia", type="string", length=255)
+     * @ORM\Column(name="socialMedia", type="string", length=255, nullable=false)
      */
     private $socialMedia;
 
@@ -83,29 +76,30 @@ class Candidate
     private $phone;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="searchedTag", type="integer")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="searched_tag")
      */
     private $searchedTag;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
      */
     private $typeContract;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="candidate_tag")
      */
     private $tag;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="candidate_notification")
      */
     private $notification;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Offer", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
     private $favorite;
 
@@ -361,5 +355,164 @@ class Candidate
     {
         return $this->typeContract;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->typeContract = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->favorite = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Candidate
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add typeContract
+     *
+     * @param \AppBundle\Entity\ContractType $typeContract
+     *
+     * @return Candidate
+     */
+    public function addTypeContract(\AppBundle\Entity\ContractType $typeContract)
+    {
+        $this->typeContract[] = $typeContract;
+
+        return $this;
+    }
+
+    /**
+     * Remove typeContract
+     *
+     * @param \AppBundle\Entity\ContractType $typeContract
+     */
+    public function removeTypeContract(\AppBundle\Entity\ContractType $typeContract)
+    {
+        $this->typeContract->removeElement($typeContract);
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return Candidate
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Add notification
+     *
+     * @param \AppBundle\Entity\Tag $notification
+     *
+     * @return Candidate
+     */
+    public function addNotification(\AppBundle\Entity\Tag $notification)
+    {
+        $this->notification[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification
+     *
+     * @param \AppBundle\Entity\Tag $notification
+     */
+    public function removeNotification(\AppBundle\Entity\Tag $notification)
+    {
+        $this->notification->removeElement($notification);
+    }
+
+    /**
+     * Get notification
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotification()
+    {
+        return $this->notification;
+    }
+
+    /**
+     * Add favorite
+     *
+     * @param \AppBundle\Entity\Offer $favorite
+     *
+     * @return Candidate
+     */
+    public function addFavorite(\AppBundle\Entity\Offer $favorite)
+    {
+        $this->favorite[] = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorite
+     *
+     * @param \AppBundle\Entity\Offer $favorite
+     */
+    public function removeFavorite(\AppBundle\Entity\Offer $favorite)
+    {
+        $this->favorite->removeElement($favorite);
+    }
+
+    /**
+     * Get favorite
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFavorite()
+    {
+        return $this->favorite;
+    }
+}

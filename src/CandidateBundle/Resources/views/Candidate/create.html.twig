@@ -1,0 +1,17 @@
+
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+    Gestion des résidences - {{ parent() }}
+{% endblock %}
+
+
+
+{% block content %}
+    <h3>Formulaire d'annonce</h3>
+
+    <div class="well">
+        {{ form(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+create_candidate:
+    path:     /register
+    defaults: { _controller: CandidateBundle:Candidate:create }

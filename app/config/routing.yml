@@ -3,8 +3,13 @@ employer:
     type:     annotation
     prefix:   /employer
 
+candidate:
+    resource: "@CandidateBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/candidate
+
 app:
-    resource: '@AppBundle/Resources/config/routing.yml/'
+    resource: '@AppBundle/Resources/config/routing.yml'
+
     prefix:   /{_locale}/
     requirements:
       _locale: fr|en

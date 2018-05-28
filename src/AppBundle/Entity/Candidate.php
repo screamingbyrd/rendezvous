@@ -29,49 +29,42 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="age", type="integer", nullable=false)
      */
     private $age;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=false)
      */
     private $experience;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="license", type="string", length=255)
+     * @ORM\Column(name="license", type="string", length=255, nullable=false)
      */
     private $license;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="diploma", type="string", length=255)
+     * @ORM\Column(name="diploma", type="string", length=255, nullable=false)
      */
     private $diploma;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="socialMedia", type="string", length=255)
+     * @ORM\Column(name="socialMedia", type="string", length=255, nullable=false)
      */
     private $socialMedia;
 
@@ -83,9 +76,8 @@ class Candidate
     private $phone;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="searchedTag", type="integer")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="searched_tag")
      */
     private $searchedTag;
 
@@ -522,5 +514,29 @@ class Candidate
     public function getFavorite()
     {
         return $this->favorite;
+    }
+
+    /**
+     * Add searchedTag
+     *
+     * @param \AppBundle\Entity\Tag $searchedTag
+     *
+     * @return Candidate
+     */
+    public function addSearchedTag(\AppBundle\Entity\Tag $searchedTag)
+    {
+        $this->searchedTag[] = $searchedTag;
+
+        return $this;
+    }
+
+    /**
+     * Remove searchedTag
+     *
+     * @param \AppBundle\Entity\Tag $searchedTag
+     */
+    public function removeSearchedTag(\AppBundle\Entity\Tag $searchedTag)
+    {
+        $this->searchedTag->removeElement($searchedTag);
     }
 }
