@@ -1,12 +1,19 @@
+employer:
+    resource: "@EmployerBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/employer
+
 candidate:
     resource: "@CandidateBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/candidate
 
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
+
     prefix:   /{_locale}/
     requirements:
       _locale: fr|en
+
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix:   /{_locale}/

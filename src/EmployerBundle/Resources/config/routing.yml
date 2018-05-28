@@ -1,0 +1,4 @@
+register_employer:
+    path:     /register
+    defaults: { _controller: EmployerBundle:Employer:register }
+
