@@ -4,8 +4,10 @@ namespace EmployerBundle\Controller;
 
 use AppBundle\Entity\Employer;
 use AppBundle\Form\EmployerType;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class EmployerController extends Controller
 {
@@ -16,6 +18,9 @@ class EmployerController extends Controller
 
     public function registerAction(Request $request)
     {
+
+        $session = $request->getSession();
+
         $employer = new Employer();
 
         $form = $this->get('form.factory')->create(EmployerType::class);
@@ -25,28 +30,31 @@ class EmployerController extends Controller
 
             $data = $form->getData();
 
-            $user = $this->register($data['email'],$data['email'],$data['password']);
+            $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName());
 
             if(isset($user)){
                 // the user is now registered !
 
                 $em = $this->getDoctrine()->getManager();
 
-                $employer->setName($data['name']);
-                $employer->setDescription($data['description']);
+                $employer->setName($data->getEmail());
+                $employer->setDescription($data->getDescription());
                 $employer->setCredit(0);
-                $employer->setWhyUs($data['whyUs']);
-                $employer->setLocation($data['location']);
-                $employer->setLatLong($data['latLong']);
-                $employer->setPhone($data['phone']);
+                $employer->setWhyUs($data->getWhyUs());
+                $employer->setLocation($data->getLocation());
+                $employer->setLatLong($data->getLatlong());
+                $employer->setPhone($data->getPhone());
                 $employer->addUser($user);
-                $employer->setLogo($data['logo']);
-                $employer->setCoverImage($data['coverImage']);
+                $employer->setLogo($data->getLogo());
+                $employer->setCoverImage($data->getCoverImage());
 
                 $em->persist($employer);
                 $em->flush();
 
-                return $this->redirectToRoute('ai_gestion_view', array('id' => $residence->getId()));
+
+                $session->getFlashBag()->add('info', 'Résidence enregistrée !');
+
+                return $this->redirectToRoute('jobnow_home');
 
             }else{
                 // the user exists already !
@@ -57,7 +65,7 @@ class EmployerController extends Controller
 
         }
 
-        return $this->render('AIGestionBundle:Residence:addResidenceForm.html.twig', array(
+        return $this->render('EmployerBundle:form:createEmployer.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -70,9 +78,9 @@ class EmployerController extends Controller
     /**
      * This method registers an user in the database manually.
      *
-     * @return boolean User registered / not registered
+     * @return User
      **/
-    private function register($email,$username,$password){
+    private function register($email,$username,$password,$firstName,$lastName){
         $userManager = $this->get('fos_user.user_manager');
 
         // Or you can use the doctrine entity manager if you want instead the fosuser manager
@@ -94,9 +102,8 @@ class EmployerController extends Controller
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setEmailCanonical($email);
-        $user->setLocked(0); // don't lock the user
-        $user->setEnabled(1); // enable the user or enable it later with a confirmation token in the email
-        // this method will encrypt the password with the default settings :)
+        $user->setFirstName($firstName);
+        $user->SetLastName($lastName);
         $user->setPlainPassword($password);
         $userManager->updateUser($user);
 

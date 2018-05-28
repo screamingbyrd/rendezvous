@@ -1,7 +1,6 @@
 employer:
-    resource: "@EmployerBundle/Controller/"
-    type:     annotation
-    prefix:   /employer
+    resource: "@EmployerBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/employer
 
 candidate:
     resource: "@CandidateBundle/Resources/config/routing.yml"

@@ -16,17 +16,19 @@ class EmployerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('email')
+            ->add('password')
+            ->add('firstName')
+            ->add('lastName')
             ->add('name')
             ->add('description')
             ->add('whyUs')
             ->add('location')
             ->add('latLong')
             ->add('phone')
-            ->add('user')
             ->add('logo')
             ->add('coverImage')
-            ->add('email')
-            ->add('password')
+
 
             ->add('Enregistrer',      SubmitType::class)
         ;
