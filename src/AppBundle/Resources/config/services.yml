@@ -1,4 +1,5 @@
-services:
+
 #    ai_jobnow.example:
 #        class: AppBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:

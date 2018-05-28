@@ -13,3 +13,8 @@
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
     background-color: #a51010;
 }
+
+body {
+    padding-top: 65px;
+    padding-bottom: 65px;
+}

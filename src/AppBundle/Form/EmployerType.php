@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,13 +21,14 @@ class EmployerType extends AbstractType
             ->add('password')
             ->add('firstName')
             ->add('lastName')
+
             ->add('name')
             ->add('description')
             ->add('whyUs')
             ->add('location')
             ->add('latLong')
             ->add('phone')
-            ->add('logo')
+            ->add('logo', ImageType::class)
             ->add('coverImage')
 
 

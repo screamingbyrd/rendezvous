@@ -24,3 +24,9 @@ header:
     title: Changer de langue
     french: Français
     english: Anglais
+
+
+form:
+  registration:
+    firstname: Prénom
+    lastname: Nom

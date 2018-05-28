@@ -51,7 +51,6 @@ class EmployerController extends Controller
                 $em->persist($employer);
                 $em->flush();
 
-
                 $session->getFlashBag()->add('info', 'Résidence enregistrée !');
 
                 return $this->redirectToRoute('jobnow_home');
@@ -59,12 +58,7 @@ class EmployerController extends Controller
             }else{
                 // the user exists already !
             }
-
-            // $session->getFlashBag()->add('info', 'Résidence enregistrée !');
-
-
         }
-
         return $this->render('EmployerBundle:form:createEmployer.html.twig', array(
             'form' => $form->createView(),
         ));
