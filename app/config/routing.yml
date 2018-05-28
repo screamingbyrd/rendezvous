@@ -1,9 +1,15 @@
+employer:
+    resource: "@EmployerBundle/Controller/"
+    type:     annotation
+    prefix:   /employer
+
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    resource: '@AppBundle/Resources/config/routing.yml/'
     prefix:   /{_locale}/
     requirements:
       _locale: fr|en
+
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix:   /{_locale}/
