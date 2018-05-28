@@ -1,0 +1,25 @@
+header:
+  findjob: Trouver un travail
+  candidates:
+    title: Candidats
+    findJob: Trouver un travail
+    companies: Entreprise
+    submit: Envoyer votre cv
+    dashboard: Tableau de bord
+  employers:
+    title: Employeurs
+    post: Poster une offre
+    findCandidate: Trouver un candidat
+    pricing: Prix
+    dashboard: Tableau de bord
+  about:
+    title: A propos de nous
+    faq: FAQ
+    privacy: Vie privée
+    terms: Mentions légales
+  login:
+    title: Connexion
+  language:
+    title: Changer de langue
+    french: Français
+    english: Anglais

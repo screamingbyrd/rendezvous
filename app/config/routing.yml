@@ -1,10 +1,8 @@
-ai_jobnow:
-    resource: "@AIJobnowBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+    prefix:   /{_locale}/
+    requirements:
+      _locale: fr|en
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
