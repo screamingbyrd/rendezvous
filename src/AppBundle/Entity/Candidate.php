@@ -96,11 +96,13 @@ class Candidate
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="candidate_tag")
      */
     private $tag;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="candidate_notification")
      */
     private $notification;
 
