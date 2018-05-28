@@ -90,22 +90,22 @@ class Candidate
     private $searchedTag;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
      */
     private $typeContract;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
      */
     private $tag;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
      */
     private $notification;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Offer", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
     private $favorite;
 
@@ -375,11 +375,11 @@ class Candidate
     /**
      * Set user
      *
-     * @param \AI\AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\User $user
      *
      * @return Candidate
      */
-    public function setUser(\AI\AppBundle\Entity\User $user = null)
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -389,7 +389,7 @@ class Candidate
     /**
      * Get user
      *
-     * @return \AI\AppBundle\Entity\User
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {
@@ -399,11 +399,11 @@ class Candidate
     /**
      * Add typeContract
      *
-     * @param \AI\AppBundle\Entity\ContractType $typeContract
+     * @param \AppBundle\Entity\ContractType $typeContract
      *
      * @return Candidate
      */
-    public function addTypeContract(\AI\AppBundle\Entity\ContractType $typeContract)
+    public function addTypeContract(\AppBundle\Entity\ContractType $typeContract)
     {
         $this->typeContract[] = $typeContract;
 
@@ -413,9 +413,9 @@ class Candidate
     /**
      * Remove typeContract
      *
-     * @param \AI\AppBundle\Entity\ContractType $typeContract
+     * @param \AppBundle\Entity\ContractType $typeContract
      */
-    public function removeTypeContract(\AI\AppBundle\Entity\ContractType $typeContract)
+    public function removeTypeContract(\AppBundle\Entity\ContractType $typeContract)
     {
         $this->typeContract->removeElement($typeContract);
     }
@@ -423,11 +423,11 @@ class Candidate
     /**
      * Add tag
      *
-     * @param \AI\AppBundle\Entity\Tag $tag
+     * @param \AppBundle\Entity\Tag $tag
      *
      * @return Candidate
      */
-    public function addTag(\AI\AppBundle\Entity\Tag $tag)
+    public function addTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tag[] = $tag;
 
@@ -437,9 +437,9 @@ class Candidate
     /**
      * Remove tag
      *
-     * @param \AI\AppBundle\Entity\Tag $tag
+     * @param \AppBundle\Entity\Tag $tag
      */
-    public function removeTag(\AI\AppBundle\Entity\Tag $tag)
+    public function removeTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tag->removeElement($tag);
     }
@@ -457,11 +457,11 @@ class Candidate
     /**
      * Add notification
      *
-     * @param \AI\AppBundle\Entity\Tag $notification
+     * @param \AppBundle\Entity\Tag $notification
      *
      * @return Candidate
      */
-    public function addNotification(\AI\AppBundle\Entity\Tag $notification)
+    public function addNotification(\AppBundle\Entity\Tag $notification)
     {
         $this->notification[] = $notification;
 
@@ -471,9 +471,9 @@ class Candidate
     /**
      * Remove notification
      *
-     * @param \AI\AppBundle\Entity\Tag $notification
+     * @param \AppBundle\Entity\Tag $notification
      */
-    public function removeNotification(\AI\AppBundle\Entity\Tag $notification)
+    public function removeNotification(\AppBundle\Entity\Tag $notification)
     {
         $this->notification->removeElement($notification);
     }
@@ -491,11 +491,11 @@ class Candidate
     /**
      * Add favorite
      *
-     * @param \AI\AppBundle\Entity\Offer $favorite
+     * @param \AppBundle\Entity\Offer $favorite
      *
      * @return Candidate
      */
-    public function addFavorite(\AI\AppBundle\Entity\Offer $favorite)
+    public function addFavorite(\AppBundle\Entity\Offer $favorite)
     {
         $this->favorite[] = $favorite;
 
@@ -505,9 +505,9 @@ class Candidate
     /**
      * Remove favorite
      *
-     * @param \AI\AppBundle\Entity\Offer $favorite
+     * @param \AppBundle\Entity\Offer $favorite
      */
-    public function removeFavorite(\AI\AppBundle\Entity\Offer $favorite)
+    public function removeFavorite(\AppBundle\Entity\Offer $favorite)
     {
         $this->favorite->removeElement($favorite);
     }

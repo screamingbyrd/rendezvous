@@ -50,7 +50,7 @@ class Offer
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\Image", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
 
@@ -104,12 +104,12 @@ class Offer
     private $diploma;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
      */
     private $contractType;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
      */
     private $tag;
 
@@ -412,11 +412,11 @@ class Offer
     /**
      * Add tag
      *
-     * @param \AI\AppBundle\Entity\Tag $tag
+     * @param \AppBundle\Entity\Tag $tag
      *
      * @return Offer
      */
-    public function addTag(\AI\AppBundle\Entity\Tag $tag)
+    public function addTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tag[] = $tag;
 
@@ -426,9 +426,9 @@ class Offer
     /**
      * Remove tag
      *
-     * @param \AI\AppBundle\Entity\Tag $tag
+     * @param \AppBundle\Entity\Tag $tag
      */
-    public function removeTag(\AI\AppBundle\Entity\Tag $tag)
+    public function removeTag(\AppBundle\Entity\Tag $tag)
     {
         $this->tag->removeElement($tag);
     }

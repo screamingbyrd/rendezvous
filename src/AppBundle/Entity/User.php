@@ -45,7 +45,7 @@ class User extends BaseUser
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Employer", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Employer", cascade={"persist"})
      */
     private $employer;
 
@@ -100,11 +100,11 @@ class User extends BaseUser
     /**
      * Add employer
      *
-     * @param \AI\AppBundle\Entity\Employer $employer
+     * @param \AppBundle\Entity\Employer $employer
      *
      * @return User
      */
-    public function addEmployer(\AI\AppBundle\Entity\Employer $employer)
+    public function addEmployer(\AppBundle\Entity\Employer $employer)
     {
         $this->employer[] = $employer;
 
@@ -114,9 +114,9 @@ class User extends BaseUser
     /**
      * Remove employer
      *
-     * @param \AI\AppBundle\Entity\Employer $employer
+     * @param \AppBundle\Entity\Employer $employer
      */
-    public function removeEmployer(\AI\AppBundle\Entity\Employer $employer)
+    public function removeEmployer(\AppBundle\Entity\Employer $employer)
     {
         $this->employer->removeElement($employer);
     }

@@ -22,7 +22,7 @@ class Tag
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AI\AppBundle\Entity\Tag")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Tag")
      * @ORM\JoinColumn(nullable=true)
      */
     private $category;
@@ -35,12 +35,12 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Candidate", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Candidate", cascade={"persist"})
      */
     private $candidate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Offer", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
     private $offer;
 
@@ -114,11 +114,11 @@ class Tag
     /**
      * Add candidate
      *
-     * @param \AI\AppBundle\Entity\Candidate $candidate
+     * @param \AppBundle\Entity\Candidate $candidate
      *
      * @return Tag
      */
-    public function addCandidate(\AI\AppBundle\Entity\Candidate $candidate)
+    public function addCandidate(\AppBundle\Entity\Candidate $candidate)
     {
         $this->candidate[] = $candidate;
 
@@ -128,9 +128,9 @@ class Tag
     /**
      * Remove candidate
      *
-     * @param \AI\AppBundle\Entity\Candidate $candidate
+     * @param \AppBundle\Entity\Candidate $candidate
      */
-    public function removeCandidate(\AI\AppBundle\Entity\Candidate $candidate)
+    public function removeCandidate(\AppBundle\Entity\Candidate $candidate)
     {
         $this->candidate->removeElement($candidate);
     }
@@ -148,11 +148,11 @@ class Tag
     /**
      * Add offer
      *
-     * @param \AI\AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\Offer $offer
      *
      * @return Tag
      */
-    public function addOffer(\AI\AppBundle\Entity\Offer $offer)
+    public function addOffer(\AppBundle\Entity\Offer $offer)
     {
         $this->offer[] = $offer;
 
@@ -162,9 +162,9 @@ class Tag
     /**
      * Remove offer
      *
-     * @param \AI\AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\Offer $offer
      */
-    public function removeOffer(\AI\AppBundle\Entity\Offer $offer)
+    public function removeOffer(\AppBundle\Entity\Offer $offer)
     {
         $this->offer->removeElement($offer);
     }

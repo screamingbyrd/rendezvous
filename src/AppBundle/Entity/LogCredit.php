@@ -36,7 +36,7 @@ class LogCredit
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="OC\PlatformBundle\Entity\Employer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employerId;

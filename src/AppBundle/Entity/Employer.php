@@ -22,7 +22,7 @@ class Employer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", cascade={"persist"})
      */
     private $user;
 
@@ -48,12 +48,12 @@ class Employer
     private $credit;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
      */
     private $logo;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
      */
     private $coverImage;
 
@@ -308,11 +308,11 @@ class Employer
     /**
      * Add user
      *
-     * @param \AI\AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\User $user
      *
      * @return Employer
      */
-    public function addUser(\AI\AppBundle\Entity\User $user)
+    public function addUser(\AppBundle\Entity\User $user)
     {
         $this->user[] = $user;
 
@@ -322,9 +322,9 @@ class Employer
     /**
      * Remove user
      *
-     * @param \AI\AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\User $user
      */
-    public function removeUser(\AI\AppBundle\Entity\User $user)
+    public function removeUser(\AppBundle\Entity\User $user)
     {
         $this->user->removeElement($user);
     }
