@@ -37,7 +37,7 @@
                         <li><a href="">{{ 'header.candidates.findJob'|trans }}</a></li>
                         <li><a href="">{{ 'header.candidates.companies'|trans }}</a></li>
                         <li><a href="">{{ 'header.candidates.submit'|trans }}</a></li>
-                        <li><a href="">{{ 'header.candidates.dashboard'|trans }}</a></li>
+                        <li><a href="{{ path('dashboard_candidate') }}">{{ 'header.candidates.dashboard'|trans }}</a></li>
                         {% if app.user.roles is not defined or not 'ROLE_CANDIDATE' in app.user.roles %}<li><a href="{{ path('create_candidate') }}">{{ 'header.candidates.register'|trans }}</a></li>{% endif %}
                     </ul>
 

@@ -35,7 +35,9 @@ class CandidateController extends Controller
             if ($form->isValid()) {
 
                 $data = $form->getData();
-                $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CANDIDATE');
+
+                $userRegister = $this->get('app.user_register');
+                $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CANDIDATE');
                 $candidate->setUser($user);
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
@@ -67,44 +69,13 @@ class CandidateController extends Controller
         ));
     }
 
-    /**
-     * This method registers an user in the database manually.
-     *
-     * @return User
-     **/
-    private function register($email,$username,$password,$firstName,$lastName,$role){
-        $userManager = $this->get('fos_user.user_manager');
-
-        // Or you can use the doctrine entity manager if you want instead the fosuser manager
-        // to find
-        //$em = $this->getDoctrine()->getManager();
-        //$usersRepository = $em->getRepository("mybundleuserBundle:User");
-        // or use directly the namespace and the name of the class
-        // $usersRepository = $em->getRepository("mybundle\userBundle\Entity\User");
-        //$email_exist = $usersRepository->findOneBy(array('email' => $email));
-
-        $email_exist = $userManager->findUserByEmail($email);
-
-        // Check if the user exists to prevent Integrity constraint violation error in the insertion
-        if($email_exist){
-            return false;
+    public function dashboardAction(){
+        $user = $this->getUser();
+        if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
+            return $this->redirectToRoute('create_candidate');
         }
 
-        $user = $userManager->createUser();
-        $user->setUsername($username);
-        $user->setEmail($email);
-        $user->setEmailCanonical($email);
-        $user->setFirstName($firstName);
-        $user->SetLastName($lastName);
-        $user->setPlainPassword($password);
-        $user->addRole($role);
-        $userManager->updateUser($user);
-
-        $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $password, "main", array($role));
-        $this->get('security.token_storage')->setToken($token);
-
-        $this->get('session')->set('_security_secured_area', serialize($token));
-
-        return $user;
+        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array(
+        ));
     }
 }
