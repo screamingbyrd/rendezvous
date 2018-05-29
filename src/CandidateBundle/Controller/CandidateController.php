@@ -37,7 +37,12 @@ class CandidateController extends Controller
                 $data = $form->getData();
 
                 $userRegister = $this->get('app.user_register');
+
+
                 $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CANDIDATE');
+
+
+                if($user != false){
                 $candidate->setUser($user);
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
@@ -52,11 +57,17 @@ class CandidateController extends Controller
                 $em->persist($candidate);
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
-                $session->getFlashBag()->add('info', 'Candidat enregistrée !');
+                $translated = $this->get('translator')->trans('form.registration.successCandidate');
+                $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('jobnow_home');
+
+                }else{
+                    $translated = $this->get('translator')->trans('form.registration.error');
+                    $session->getFlashBag()->add('danger', $translated);
+
+                    return $this->redirectToRoute('jobnow_home');
+                }
             }
         }
 

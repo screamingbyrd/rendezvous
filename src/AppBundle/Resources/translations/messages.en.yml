@@ -29,5 +29,9 @@ form:
   registration:
     firstname: First name
     lastname: Last name
-    success: You successfully register as an employer !
+    successEmployer: You successfully register as an employer !
+    successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: E-mail adress already used !
+    exp0: -- Your experience --
+    exp1: 0 to 2 years
+    exp2: 2 to 5 years

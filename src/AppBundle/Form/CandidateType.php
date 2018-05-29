@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,7 +30,13 @@ class CandidateType extends AbstractType
             ->add('password',      PasswordType::class, array('required' => true))
             ->add('description',      TextType::class, array('required' => false))
             ->add('age',      TextType::class, array('required' => false))
-            ->add('experience',      TextType::class, array('required' => false))
+            ->add('experience',      TextType::class, array('required' => true))
+            ->add('experience', ChoiceType::class, array('choices' => array(
+                'form.registration.exp1' => 'form.registration.exp1',
+                'form.registration.exp2' => 'form.registration.exp1',
+            ),
+                'placeholder' => 'form.registration.exp0',
+            ))
             ->add('license',      TextType::class, array('required' => false))
             ->add('diploma',      TextType::class, array('required' => false))
             ->add('socialMedia',      TextType::class, array('required' => false))

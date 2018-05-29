@@ -29,14 +29,14 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="age", type="integer", nullable=false)
+     * @ORM\Column(name="age", type="integer", nullable=true)
      */
     private $age;
 
@@ -64,7 +64,7 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="socialMedia", type="string", length=255, nullable=false)
+     * @ORM\Column(name="socialMedia", type="string", length=255, nullable=true)
      */
     private $socialMedia;
 
@@ -101,9 +101,8 @@ class Candidate
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
-
-
     private $favorite;
+
 
     private $firstName;
 
