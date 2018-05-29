@@ -69,13 +69,64 @@ class CandidateController extends Controller
         ));
     }
 
+    public function editAction(Request $request ){
+        $user = $this->getUser();
+        if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
+            return $this->redirectToRoute('create_candidate');
+        }
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+
+        $session = $request->getSession();
+
+        $form = $this->get('form.factory')->create(CandidateType::class, $candidate);
+
+        // Si la requête est en POST
+        if ($request->isMethod('POST')) {
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $candidate->setUser($user);
+                $candidate->setDescription($data->getDescription());
+                $candidate->setAge($data->getAge());
+                $candidate->setExperience($data->getExperience());
+                $candidate->setLicense($data->getLicense());
+                $candidate->setDiploma($data->getDiploma());
+                $candidate->setSocialMedia($data->getSocialMedia());
+                $candidate->setPhone($data->getPhone());
+
+                // On enregistre notre objet $advert dans la base de données, par exemple
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($candidate);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+                $session->getFlashBag()->add('info', 'Candidat enregistrée !');
+
+                return $this->redirectToRoute('jobnow_home');
+            }
+        }
+
+        return $this->render('CandidateBundle:Candidate:edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
     public function dashboardAction(){
         $user = $this->getUser();
         if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
             return $this->redirectToRoute('create_candidate');
         }
 
-        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array(
-        ));
+        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array());
     }
 }

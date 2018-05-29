@@ -1,6 +1,9 @@
 create_candidate:
     path:     /register
     defaults: { _controller: CandidateBundle:Candidate:create }
+edit_candidate:
+    path:     /edit
+    defaults: { _controller: CandidateBundle:Candidate:edit }
 dashboard_candidate:
     path:     /dashboard
     defaults: { _controller: CandidateBundle:Candidate:dashboard }
