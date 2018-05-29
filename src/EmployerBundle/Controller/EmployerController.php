@@ -32,7 +32,7 @@ class EmployerController extends Controller
 
             $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName());
 
-            if(isset($user)){
+            if($user != false){
                 // the user is now registered !
 
                 $em = $this->getDoctrine()->getManager();
@@ -51,12 +51,17 @@ class EmployerController extends Controller
                 $em->persist($employer);
                 $em->flush();
 
-                $session->getFlashBag()->add('info', 'Résidence enregistrée !');
+                $translated = $this->get('translator')->trans('form.registration.success');
+                $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('jobnow_home');
 
             }else{
-                // the user exists already !
+
+                $translated = $this->get('translator')->trans('form.registration.error');
+                $session->getFlashBag()->add('danger', $translated);
+
+                return $this->redirectToRoute('jobnow_home');
             }
         }
         return $this->render('EmployerBundle:form:createEmployer.html.twig', array(

@@ -4,9 +4,14 @@ namespace AppBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 
 class EmployerType extends AbstractType
@@ -17,19 +22,36 @@ class EmployerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
-            ->add('password')
+            ->add('email', EmailType::class)
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'options' => array(
+                    'translation_domain' => 'FOSUserBundle',
+                    'attr' => array(
+                        'autocomplete' => 'new-password',
+                    ),
+                ),
+                'first_options' => array('label' => 'form.password'),
+                'second_options' => array('label' => 'form.password_confirmation'),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
             ->add('firstName')
             ->add('lastName')
 
             ->add('name')
-            ->add('description')
-            ->add('whyUs')
+            ->add('description', TextareaType::class, array(
+                'required' => false,
+
+            ))
+            ->add('whyUs', TextareaType::class, array(
+                'required' => false,
+
+            ))
             ->add('location')
             ->add('latLong')
-            ->add('phone')
+            ->add('phone', TelType::class)
             ->add('logo', ImageType::class)
-            ->add('coverImage')
+            ->add('coverImage', ImageType::class)
 
 
             ->add('Enregistrer',      SubmitType::class)

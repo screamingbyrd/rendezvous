@@ -29,3 +29,5 @@ form:
   registration:
     firstname: First name
     lastname: Last name
+    success: You successfully register as an employer !
+    error: E-mail adress already used !

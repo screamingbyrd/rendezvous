@@ -30,3 +30,5 @@ form:
   registration:
     firstname: Prénom
     lastname: Nom
+    success: Vous êtes à présent inscrit en temps que recruteur !
+    error: Adresse e-mail déjà utilisé, veuillez réessayer !
