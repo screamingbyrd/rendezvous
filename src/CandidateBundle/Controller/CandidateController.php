@@ -84,7 +84,13 @@ class CandidateController extends Controller
 
         $session = $request->getSession();
 
+        $candidate->setFirstName($user->getFirstName());
+        $candidate->setLastName($user->getLastName());
+        $candidate->setEmail($user->getEmail());
+
         $form = $this->get('form.factory')->create(CandidateType::class, $candidate);
+
+        $form->remove('password');
 
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
@@ -94,7 +100,14 @@ class CandidateController extends Controller
 
                 $data = $form->getData();
 
-                $candidate->setUser($user);
+                $userManager = $this->get('fos_user.user_manager');
+
+                $user->setEmail($data->getEmail());
+                $user->setEmailCanonical($data->getEmail());
+                $user->setFirstName($data->getFirstName());
+                $user->SetLastName($data->getLastName());
+                $userManager->updateUser($user);
+
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
                 $candidate->setExperience($data->getExperience());
@@ -103,14 +116,11 @@ class CandidateController extends Controller
                 $candidate->setSocialMedia($data->getSocialMedia());
                 $candidate->setPhone($data->getPhone());
 
-                // On enregistre notre objet $advert dans la base de données, par exemple
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($candidate);
+                $em->merge($candidate);
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-
-                $session->getFlashBag()->add('info', 'Candidat enregistrée !');
+                $session->getFlashBag()->add('info', 'Candidat modifié !');
 
                 return $this->redirectToRoute('jobnow_home');
             }
