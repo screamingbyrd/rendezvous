@@ -16,6 +16,26 @@
 
 
 
+<<<<<<< HEAD
+=======
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashbag.get('danger') %}
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
+
+>>>>>>> image_upload
         {% block body %}
         {% endblock %}
 

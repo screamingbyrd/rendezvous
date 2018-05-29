@@ -9,7 +9,7 @@
     {% block stylesheets %}
         {# On charge le CSS de bootstrap depuis le site directement #}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="{{ asset('build/main.css') }}" />
 
     {% endblock %}
 </head>
@@ -51,6 +51,7 @@
                         <li><a href="">{{ 'header.employers.findCandidate'|trans }}</a></li>
                         <li><a href="">{{ 'header.employers.pricing'|trans }}</a></li>
                         <li><a href="">{{ 'header.employers.dashboard'|trans }}</a></li>
+                        <li><a href="{{ path('register_employer') }}">{{ 'header.candidates.register'|trans }}</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

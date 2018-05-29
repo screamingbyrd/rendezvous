@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 services:
   app.user_register:
       class: AppBundle\Service\RegisterUser
       arguments: ['@fos_user.user_manager','@security.token_storage','@session']
+=======
+
+#    ai_jobnow.example:
+#        class: AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:
+>>>>>>> image_upload

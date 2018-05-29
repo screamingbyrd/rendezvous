@@ -34,9 +34,9 @@ class Employer
     private $name;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -60,7 +60,7 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="whyUs", type="string", length=255)
+     * @ORM\Column(name="whyUs", type="text", nullable=true)
      */
     private $whyUs;
 
@@ -74,7 +74,7 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="latLong", type="string", length=255)
+     * @ORM\Column(name="latLong", type="string", length=255, nullable=true)
      */
     private $latLong;
 
@@ -86,6 +86,12 @@ class Employer
     private $phone;
 
     private $email;
+
+    private $password;
+
+    private $firstName;
+
+    private $lastName;
 
     /**
      * @return mixed
@@ -158,13 +164,6 @@ class Employer
         $this->lastName = $lastName;
         return $this;
     }
-
-    private $password;
-
-    private $firstName;
-
-    private $lastName;
-
 
     /**
      * @return string

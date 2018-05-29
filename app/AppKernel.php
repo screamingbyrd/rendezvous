@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new EmployerBundle\EmployerBundle(),
             new CandidateBundle\CandidateBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
 
         ];
 
