@@ -35,7 +35,7 @@ class CandidateController extends Controller
             if ($form->isValid()) {
 
                 $data = $form->getData();
-                $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName());
+                $user = $this->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CANDIDATE');
                 $candidate->setUser($user);
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
@@ -72,7 +72,7 @@ class CandidateController extends Controller
      *
      * @return User
      **/
-    private function register($email,$username,$password,$firstName,$lastName){
+    private function register($email,$username,$password,$firstName,$lastName,$role){
         $userManager = $this->get('fos_user.user_manager');
 
         // Or you can use the doctrine entity manager if you want instead the fosuser manager
@@ -97,7 +97,13 @@ class CandidateController extends Controller
         $user->setFirstName($firstName);
         $user->SetLastName($lastName);
         $user->setPlainPassword($password);
+        $user->addRole($role);
         $userManager->updateUser($user);
+
+        $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $password, "main", array($role));
+        $this->get('security.token_storage')->setToken($token);
+
+        $this->get('session')->set('_security_secured_area', serialize($token));
 
         return $user;
     }

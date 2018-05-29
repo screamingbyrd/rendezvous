@@ -38,8 +38,13 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-
-            logout:       true
+                always_use_default_target_path: true
+                default_target_path: jobnow_home
+                login_path:    fos_user_security_login
+                check_path:    fos_user_security_check
+            logout:
+                path: fos_user_security_logout
+                target: jobnow_home
             anonymous:    true
 
     access_control:
