@@ -139,4 +139,26 @@ class CandidateController extends Controller
 
         return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array());
     }
+
+    public function deleteAction(Request $request){
+
+        $session = $request->getSession();
+        $user = $this->getUser();
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($candidate);
+        $em->remove($user);
+        $em->flush();
+
+        $session->getFlashBag()->add('info', 'Candidat supprimé !');
+
+        return $this->redirectToRoute('jobnow_home');
+    }
 }
