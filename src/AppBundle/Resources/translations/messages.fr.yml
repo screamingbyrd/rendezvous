@@ -1,3 +1,6 @@
+yes: oui
+no: non
+
 header:
   findjob: Trouver un travail
   candidates:
@@ -32,3 +35,8 @@ form:
     lastname: Nom
     success: Vous êtes à présent inscrit en temps que recruteur !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
+
+candidate:
+  delete:
+    delete: Supprimer mon compte
+    sure: Etes vous sûre de vouloir supprimer votre compte

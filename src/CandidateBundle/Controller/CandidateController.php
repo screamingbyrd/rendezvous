@@ -161,4 +161,18 @@ class CandidateController extends Controller
 
         return $this->redirectToRoute('jobnow_home');
     }
+
+    public function showAction($id){
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidate = $candidateRepository->findOneBy(array('id' => $id));
+
+        return $this->render('CandidateBundle:Candidate:show.html.twig', array(
+            'candidate' => $candidate,
+        ));
+    }
 }

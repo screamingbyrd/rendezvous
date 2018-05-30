@@ -1,13 +1,44 @@
 {% extends "::layout.html.twig" %}
 
-{% block title %}
-    Gestion des résidences - {{ parent() }}
-{% endblock %}
-
 {% block content %}
     <h3>Edition</h3>
 
     <div class="well">
         {{ form(form) }}
+
+        <button class="btn btn-default" id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</button>
+                        <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert" role="alert" id="result"></div>
     </div>
+
+    <script>
+
+        $("#btn-confirm").on("click", function(){
+            $("#mi-modal").modal('show');
+        });
+
+        $("#modal-btn-yes").on("click", function(){
+            window.location.replace("{{ path('delete_candidate') }}");
+        });
+
+        $("#modal-btn-no").on("click", function(){
+            $("#mi-modal").modal('hide');
+        });
+
+    </script>
 {% endblock %}

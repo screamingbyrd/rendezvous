@@ -31,3 +31,8 @@ form:
     lastname: Last name
     success: You successfully register as an employer !
     error: E-mail adress already used !
+
+candidate:
+  delete:
+    delete: Delete my account
+    sure: Are you sure that you want to delete your account?

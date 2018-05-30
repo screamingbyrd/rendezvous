@@ -1,0 +1,30 @@
+{% extends "::layout.html.twig" %}
+
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="col-md-12 col-sm-12">
+            <h2 class="widget-title">Description</h2>
+            <div >{{ candidate.description }}</div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <h2 class="widget-title">Experience</h2>
+            <div >{{ candidate.experience }}</div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <h2 class="widget-title">License</h2>
+            <div >{{ candidate.license }}</div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <h2 class="widget-title">Diploma</h2>
+            <div >{{ candidate.diploma }}</div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <h2 class="widget-title">Social Media</h2>
+            <div >{{ candidate.socialMedia }}</div>
+        </div>
+    </div>
+
+{% endblock %}

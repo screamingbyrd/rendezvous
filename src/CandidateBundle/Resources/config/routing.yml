@@ -4,6 +4,12 @@ create_candidate:
 edit_candidate:
     path:     /edit
     defaults: { _controller: CandidateBundle:Candidate:edit }
+delete_candidate:
+    path:     /delete
+    defaults: { _controller: CandidateBundle:Candidate:delete }
+show_candidate:
+    path:     /{id}
+    defaults: { _controller: CandidateBundle:Candidate:show }
 dashboard_candidate:
     path:     /dashboard
     defaults: { _controller: CandidateBundle:Candidate:dashboard }
