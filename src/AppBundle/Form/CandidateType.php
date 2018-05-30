@@ -30,7 +30,6 @@ class CandidateType extends AbstractType
             ->add('password',      PasswordType::class, array('required' => true))
             ->add('description',      TextType::class, array('required' => false))
             ->add('age',      TextType::class, array('required' => false))
-            ->add('experience',      TextType::class, array('required' => true))
             ->add('experience', ChoiceType::class, array('choices' => array(
                 'form.registration.exp1' => 'form.registration.exp1',
                 'form.registration.exp2' => 'form.registration.exp1',
