@@ -33,10 +33,20 @@ form:
   registration:
     firstname: Prénom
     lastname: Nom
+
     success: Vous êtes à présent inscrit en temps que recruteur !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
+    successEmployer: Vous êtes à présent inscrit en temps que recruteur !
+    successCandidate: Vous êtes à présent inscrit en temps que candidat !
+    error: Adresse e-mail déjà utilisé, veuillez réessayer !
+    exp0: -- Indiquez votre expérience --
+    exp1: 0 à 2 ans
+    exp2: 2 à 5 ans
 
 candidate:
   delete:
     delete: Supprimer mon compte
     sure: Etes vous sûre de vouloir supprimer votre compte
+
+
+
