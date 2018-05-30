@@ -117,7 +117,7 @@ class CandidateController extends Controller
                 $candidate->setPhone($data->getPhone());
 
                 $em = $this->getDoctrine()->getManager();
-                $em->merge($candidate);
+                $em->persist($candidate);
                 $em->flush();
 
                 $session->getFlashBag()->add('info', 'Candidat modifié !');
