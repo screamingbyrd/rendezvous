@@ -114,6 +114,13 @@ class Candidate
     private $password;
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="modifiedDate", type="datetime")
+     */
+    private $modifiedDate;
+
+    /**
      * Get id
      *
      * @return int
@@ -616,6 +623,24 @@ class Candidate
     public function setPassword($password)
     {
         $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getModifiedDate()
+    {
+        return $this->modifiedDate;
+    }
+
+    /**
+     * @param datetime $modifiedDate
+     * @return Candidate
+     */
+    public function setModifiedDate($modifiedDate)
+    {
+        $this->modifiedDate = $modifiedDate;
         return $this;
     }
 
