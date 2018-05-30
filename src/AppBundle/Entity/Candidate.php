@@ -114,7 +114,7 @@ class Candidate
     private $password;
 
     /**
-     * @var datetime
+     * @var \datetime
      *
      * @ORM\Column(name="modifiedDate", type="datetime")
      */
@@ -378,6 +378,7 @@ class Candidate
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
         $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
         $this->favorite = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->modifiedDate =  new \datetime();
     }
 
     /**
