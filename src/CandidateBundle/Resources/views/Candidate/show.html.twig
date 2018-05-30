@@ -3,34 +3,122 @@
 
 {% block content %}
 
-    <div class="page-header">
-        <h2 class="page-title">{{ candidate.user.firstName }}</h2>
+        <div class="candidate-header">
+            <h2 class="page-title candidate-name">{{ candidate.user.firstName }}</h2>
+            <h3 class="page-subtitle">
+                    <div class="job-title">Developer full stack</div>
+                    <div class="updated-date">dernière modification le {{ candidate.modifiedDate |date('Y-m-d')}}</div>
+
+           </h3>
+        </div>
+<style>
+.candidate-header{
+    text-align: center;
+    overflow: hidden;
+    padding: 20px 0;
+    background: #fafafa;
+    border-bottom: 1px solid rgba(204,204,204,.41);
+    margin-bottom: 30px;
+}
+.page-subtitle{
+    text-align: center;
+    font-size: 18px;
+}
+.job-title, .updated-date{
+    display: inline-block;
+    padding: 20px;
+}
+.candidate-body{
+    text-align: center;
+    height:  300px;
+}
+.nav-candidate{
+    display: inline-block;
+}
+.candidate-content{
+    display: inline-flex;
+    width: 80%;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    color: #ea3222;
+    background-color: #fff;
+}
+.candidate-action{
+    text-align: center;
+}
+.link-social{
+    display: inline-block;
+    padding: 20px;
+}
+.contact-button{
+    color: #ea3222;
+    background-color: #fff;
+
+}
+</style>
+
+
+        <div class="container candidate-body">
+            <ul class="nav nav-pills nav-candidate">
+                <li class="active">
+                    <a  href="#1" data-toggle="tab">Description</a>
+                </li>
+                <li><a href="#2" data-toggle="tab">Experience</a>
+                </li>
+                <li><a href="#3" data-toggle="tab">Diploma</a>
+                </li>
+            </ul>
+
+            <div class="tab-content candidate-content">
+                <div class="tab-pane active" id="1">
+                    <h3>{{ candidate.description }}</h3>
+                </div>
+                <div class="tab-pane" id="2">
+                    <h3>{{ candidate.experience }}</h3>
+                </div>
+                <div class="tab-pane" id="3">
+                    <h3>{{ candidate.license }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="candidate-action">
+            <div class="link-social"><a href="{{  candidate.socialMedia }} }}">{{ candidate.socialMedia }}</a></div>
+            <button class="btn btn-default contact-button" id="btn-confirm">Contact</button>
+
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</button>
+                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
+    <script>
 
+        $("#btn-confirm").on("click", function(){
+            $("#mi-modal").modal('show');
+        });
 
+        $("#modal-btn-yes").on("click", function(){
+            window.location.replace("{{ path('jobnow_home') }}");
+        });
 
-        <div class="col-md-12 col-sm-12">
-            <h2 class="widget-title">Description</h2>
-            <div >{{ candidate.description }}</div>
-        </div>
-        <div class="col-md-12 col-sm-12">
-            <h2 class="widget-title">Experience</h2>
-            <div >{{ candidate.experience }}</div>
-        </div>
-        <div class="col-md-12 col-sm-12">
-            <h2 class="widget-title">License</h2>
-            <div >{{ candidate.license }}</div>
-        </div>
-        <div class="col-md-12 col-sm-12">
-            <h2 class="widget-title">Diploma</h2>
-            <div >{{ candidate.diploma }}</div>
-        </div>
-        <div class="col-md-12 col-sm-12">
-            <h2 class="widget-title">Social Media</h2>
-            <div >{{ candidate.socialMedia }}</div>
-        </div>
-    </div>
+        $("#modal-btn-no").on("click", function(){
+            $("#mi-modal").modal('hide');
+        });
+
+    </script>
 
 {% endblock %}
