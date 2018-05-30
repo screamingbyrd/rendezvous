@@ -121,14 +121,15 @@ class CandidateController extends Controller
 
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
-                $candidate->setExperience($data->getExperience());
+                $candidate->setExperience($this->get('translator')->trans($data->getExperience()));
                 $candidate->setLicense($data->getLicense());
                 $candidate->setDiploma($data->getDiploma());
                 $candidate->setSocialMedia($data->getSocialMedia());
                 $candidate->setPhone($data->getPhone());
+                $candidate->setModifiedDate( new \datetime());
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($candidate);
+                $em->merge($candidate);
                 $em->flush();
 
                 $session->getFlashBag()->add('info', 'Candidat modifié !');
