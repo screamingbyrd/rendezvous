@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new EmployerBundle\EmployerBundle(),
             new CandidateBundle\CandidateBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
 
         ];
 
