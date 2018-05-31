@@ -22,7 +22,8 @@ class Employer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", cascade={"persist","remove"}, mappedBy="employer")
+     *
      */
     private $user;
 
@@ -373,8 +374,6 @@ class Employer
         $this->phone = $phone;
         return $this;
     }
-
-
     /**
      * Constructor
      */

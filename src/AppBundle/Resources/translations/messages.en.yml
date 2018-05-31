@@ -36,6 +36,13 @@ form:
     exp1: 0 to 2 years
     exp2: 2 to 5 years
 
+dashboard:
+  employer:
+    edit: Edit your company information
+
+
+
+
 
 candidate:
   delete:
