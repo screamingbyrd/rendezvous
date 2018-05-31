@@ -1,4 +1,10 @@
 register_employer:
     path:     /register
     defaults: { _controller: EmployerBundle:Employer:register }
+post_offer:
+    path:     /post-offer
+    defaults: { _controller: EmployerBundle:Employer:postOffer }
+edit_offer:
+    path:     /edit-offer
+    defaults: { _controller: EmployerBundle:Employer:editOffer }
 

@@ -113,6 +113,13 @@ class Offer
      */
     private $tag;
 
+    /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
 
     /**
      * Get id
@@ -442,4 +449,24 @@ class Offer
     {
         return $this->tag;
     }
+
+    /**
+     * @return \datetime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \datetime $creationDate
+     * @return Offer
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+
 }
