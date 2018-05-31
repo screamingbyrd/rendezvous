@@ -18,6 +18,7 @@ class ContactController extends Controller
     public function contactAction(Request $request)
     {
 
+        $email = $request->get('email');
         $form = $this->get('form.factory')->create(ContactType::class);
 
         if ($request->isMethod('POST')) {
@@ -26,7 +27,7 @@ class ContactController extends Controller
 
             if($form->isValid()){
                 // Send mail
-                if($this->sendEmail($form->getData())){
+                if($this->sendEmail($email,$form->getData())){
 
                     // Everything OK, redirect to wherever you want ! :
 
@@ -39,31 +40,38 @@ class ContactController extends Controller
         }
 
         return $this->render('AppBundle:Contact:contact.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'email' => $email
         ));
     }
 
-    private function sendEmail($data){
-        $myappContactMail = 'mycontactmail@mymail.com';
-        $myappContactPassword = 'yourmailpassword';
+    private function sendEmail($email, $data){
+        $message = (new \Swift_Message('Contact'))
+            ->setFrom($data['email'])
+            ->setTo($email)
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'Emails/contact.html.twig',
+                    array('name' => $data['name'],
+                          'message' => $data['message']
+                        )
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'Emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
 
-        // In this case we'll use the ZOHO mail services.
-        // If your service is another, then read the following article to know which smpt code to use and which port
-        // http://ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
-        $transport = \Swift_SmtpTransport::newInstance('smtp.zoho.com', 465,'ssl')
-            ->setUsername($myappContactMail)
-            ->setPassword($myappContactPassword);
-
-        $mailer = \Swift_Mailer::newInstance($transport);
-
-        $message = \Swift_Message::newInstance("Our Code World Contact Form ". $data["subject"])
-            ->setFrom(array($myappContactMail => "Message by ".$data["name"]))
-            ->setTo(array(
-                $myappContactMail => $myappContactMail
-            ))
-            ->setBody($data["message"]."<br>ContactMail :".$data["email"]);
-
-        return $mailer->send($message);
+        return $this->get('mailer')->send($message);
     }
 
 

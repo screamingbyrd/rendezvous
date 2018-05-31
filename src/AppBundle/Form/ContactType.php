@@ -33,7 +33,7 @@ class ContactType extends AbstractType
             ->add('name', TextType::class, array('required' => false))
             ->add('email', EmailType::class, array('required' => true))
             ->add('message', TextType::class, array('required' => false))
-            ->add('save',      SubmitType::class)
+            ->add('contact',      SubmitType::class)
             ->getForm();
     }
 

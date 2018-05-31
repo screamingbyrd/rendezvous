@@ -1,1 +1,20 @@
-{{ form(form) }}
+{{ form(form, {'attr': {'id': 'form-contact'}}) }}
+
+<script>
+  //@TODO correct the contact form
+    $("#form-contact").on("submit",function(e) {
+        e.preventDefault();
+        $.ajax({
+            url:'{{ (path('jobnow_contact')) }}',
+            type: "POST",
+            dataType: "json",
+            data: [22],
+            async: true,
+            success: function (data)
+            {
+                console.log('jj');
+
+            }
+        });
+    });
+</script>

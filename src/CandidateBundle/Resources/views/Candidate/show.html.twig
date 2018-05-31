@@ -16,9 +16,25 @@
     text-align: center;
     overflow: hidden;
     padding: 20px 0;
-    background: #fafafa;
+    background: transparent;
     border-bottom: 1px solid rgba(204,204,204,.41);
     margin-bottom: 30px;
+display: block;
+    position:relative;
+
+}
+.candidate-header::after{
+    opacity:0.3;
+    content: '';
+    background-image:url({{asset('images/candidate.jpg')}});
+    background-size: 100% 350px;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position:absolute;
+    z-index: -1;
 }
 .page-subtitle{
     text-align: center;
@@ -96,7 +112,8 @@
                             <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
                         </div>
                         {{ render(controller(
-                            'AppBundle:Contact:contact'
+                            'AppBundle:Contact:contact',
+                            { 'email': candidate.user.email }
                         )) }}
                     </div>
                 </div>
