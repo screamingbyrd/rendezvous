@@ -46,6 +46,12 @@ fos_user:
             form:
                 type: AppBundle\Form\RegistrationType
 
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        app: ~
+
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
