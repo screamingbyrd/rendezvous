@@ -9,7 +9,12 @@ delete_candidate:
     defaults: { _controller: CandidateBundle:Candidate:delete }
 show_candidate:
     path:     /{id}
+    requirements:
+      id: \d+
     defaults: { _controller: CandidateBundle:Candidate:show }
 dashboard_candidate:
     path:     /dashboard
     defaults: { _controller: CandidateBundle:Candidate:dashboard }
+search_candidate:
+    path:     /search
+    defaults: { _controller: CandidateBundle:Candidate:search }

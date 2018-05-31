@@ -175,7 +175,6 @@ class CandidateController extends Controller
     }
 
     public function showAction($id){
-
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -185,6 +184,19 @@ class CandidateController extends Controller
 
         return $this->render('CandidateBundle:Candidate:show.html.twig', array(
             'candidate' => $candidate,
+        ));
+    }
+
+    public function searchAction(){
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidates = $candidateRepository->findAll();
+
+        return $this->render('CandidateBundle:Candidate:search.html.twig', array(
+            'candidates' => $candidates,
         ));
     }
 }
