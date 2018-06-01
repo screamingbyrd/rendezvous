@@ -1,0 +1,53 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    employer.name - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row well" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
+
+
+
+            <img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="250" width="250"/>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h1>{{ employer.name }} {{ 'employer.show.title'|trans }}</h1>
+                <hr>
+                <p>{{ employer.description }}</p>
+                <h3>{{ 'employer.show.whyus'|trans }}</h3>
+                <p>{{ employer.whyUs }}</p>
+            </div>
+            <div class="col-md-4">
+                INSERT MAIN TAG HERE
+            </div>
+        </div>
+
+
+
+
+        {{ dump(status) }}
+
+
+
+
+        <div class="row">
+
+            {{ ivory_google_map(map) }}
+            {{ ivory_google_api([map]) }}
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+{% endblock %}

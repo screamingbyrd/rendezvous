@@ -86,6 +86,9 @@ class Employer
      */
     private $phone;
 
+
+
+
     private $email;
 
     private $password;

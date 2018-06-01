@@ -52,12 +52,13 @@ dashboard:
     edit: Edit your company information
 
 
-
-
-
 candidate:
   delete:
     delete: Delete my account
     sure: Are you sure that you want to delete your account?
 
 
+employer:
+  show:
+    title: Presentation of the company
+    whyus: Why us?
