@@ -393,6 +393,8 @@ class Employer
     {
         $this->user[] = $user;
 
+        $user->setEmployer($this);
+
         return $this;
     }
 

@@ -6,6 +6,10 @@ edit_employer:
     path:     /edit
     defaults: { _controller: EmployerBundle:Employer:edit }
 
+delete_employer:
+    path:     /delete/{id}
+    defaults: { _controller: EmployerBundle:Employer:delete }
+
 dashboard_employer:
     path:     /dashboard
     defaults: { _controller: EmployerBundle:Employer:dashboard }

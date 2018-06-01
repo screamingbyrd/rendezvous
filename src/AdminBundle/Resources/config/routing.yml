@@ -1,0 +1,7 @@
+dashboard_admin:
+    path:     /dashboard
+    defaults: { _controller: AdminBundle:Admin:index }
+
+list_employer_admin:
+    path:     /employer/list
+    defaults: { _controller: AdminBundle:Admin:listEmployer }

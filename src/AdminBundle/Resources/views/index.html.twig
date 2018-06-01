@@ -1,0 +1,26 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Panneau d'administration - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container well">
+
+        <h3>Panneau d'administration</h3>
+
+        <div class="row">
+            <ul>
+                <li><a href="{{ path('edit_employer') }}">{{ 'dashboard.employer.edit' | trans }}</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+
+
+        </div>
+
+{% endblock %}
