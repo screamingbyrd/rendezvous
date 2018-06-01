@@ -1,0 +1,38 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+   Liste des employeurs - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h2> Liste des employeurs </h2>
+
+        <table class="table table-bordered table-striped well">
+            <tr>
+                <th>Société</th>
+                <th>Email</th>
+                <th>Crédits</th>
+                <th>Addresse</th>
+                <th>Action(s)</th>
+            </tr>
+
+            {% for employer in employers %}
+                <tr>
+                    <td>{{ employer.employer.name }} </td>
+                    <td>{{ employer.email }}</td>
+
+                    <td>{{ employer.employer.credit }}</td>
+                    <td>{{ employer.employer.location }}</td>
+                    <td>
+                        <a href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{%  endblock %}

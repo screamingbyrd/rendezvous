@@ -38,6 +38,7 @@ class RegisterUser
         }
 
         $user = $this->userManager->createUser();
+        $user->setEnabled(true);
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setEmailCanonical($email);

@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new CandidateBundle\CandidateBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
-
+            new AdminBundle\AdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

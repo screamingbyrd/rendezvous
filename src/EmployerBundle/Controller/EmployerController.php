@@ -51,9 +51,6 @@ class EmployerController extends Controller
                 $employer->setLogo($data->getLogo());
                 $employer->setCoverImage($data->getCoverImage());
 
-                $user->setEmployer($employer);
-
-                $em->persist($employer);
                 $em->persist($user);
                 $em->flush();
 
@@ -140,9 +137,53 @@ class EmployerController extends Controller
         ));
     }
 
+    public function deleteAction(Request $request, $id)
+    {
+
+        $session = $request->getSession();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+
+        $employer = $repository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($employer);
+        $em->flush();
+
+        $session->getFlashBag()->add('info', 'Employer supprimé !');
+
+        return $this->redirectToRoute('jobnow_home');
+
+    }
+
+    public function showAction(Request $request, $id)
+    {
+
+        $session = $request->getSession();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+
+        $employer = $repository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($employer);
+        $em->flush();
+
+        $session->getFlashBag()->add('info', 'Employer supprimé !');
+
+        return $this->redirectToRoute('jobnow_home');
+
+    }
+
     public function dashboardAction(){
-
-
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(
 
@@ -298,7 +339,7 @@ class EmployerController extends Controller
         return true;
     }
 
-    public function showAction($id){
+    public function showOfferAction($id){
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
