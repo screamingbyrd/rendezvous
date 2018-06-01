@@ -18,7 +18,7 @@ class EmployerController extends Controller
         return $this->render('', array('name' => $name));
     }
 
-    public function registerAction(Request $request)
+    public function createAction(Request $request)
     {
 
         $session = $request->getSession();
@@ -40,7 +40,7 @@ class EmployerController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
 
-                $employer->setName($data->getEmail());
+                $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
                 $employer->setCredit(0);
                 $employer->setWhyUs($data->getWhyUs());
@@ -51,7 +51,10 @@ class EmployerController extends Controller
                 $employer->setLogo($data->getLogo());
                 $employer->setCoverImage($data->getCoverImage());
 
+                $user->setEmployer($employer);
+
                 $em->persist($employer);
+                $em->persist($user);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('form.registration.successEmployer');
@@ -69,6 +72,80 @@ class EmployerController extends Controller
         }
         return $this->render('EmployerBundle:form:createEmployer.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    public function editAction(Request $request ){
+        $user = $this->getUser();
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $repository->findOneBy(array('id' => $user->getEmployer()));
+
+        $session = $request->getSession();
+
+        $employer->setFirstName($user->getFirstName());
+        $employer->setLastName($user->getLastName());
+        $employer->setEmail($user->getEmail());
+
+        $form = $this->get('form.factory')->create(EmployerType::class, $employer);
+
+        $form->remove('password');
+
+        // Si la requête est en POST
+        if ($request->isMethod('POST')) {
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $userManager = $this->get('fos_user.user_manager');
+
+                $user->setEmail($data->getEmail());
+                $user->setEmailCanonical($data->getEmail());
+                $user->setFirstName($data->getFirstName());
+                $user->SetLastName($data->getLastName());
+                $userManager->updateUser($user);
+
+                $employer->setName($data->getEmail());
+                $employer->setDescription($data->getDescription());
+                $employer->setCredit(0);
+                $employer->setWhyUs($data->getWhyUs());
+                $employer->setLocation($data->getLocation());
+                $employer->setLatLong($data->getLatlong());
+                $employer->setPhone($data->getPhone());
+                $employer->addUser($user);
+                $employer->setLogo($data->getLogo());
+                $employer->setCoverImage($data->getCoverImage());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->merge($employer);
+                $em->flush();
+
+                $session->getFlashBag()->add('info', 'Candidat modifié !');
+
+                return $this->redirectToRoute('jobnow_home');
+            }
+        }
+
+        return $this->render('EmployerBundle:form:editEmployer.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function dashboardAction(){
+
+
+
+        return $this->render('EmployerBundle::dashboard.html.twig', array(
+
         ));
     }
 

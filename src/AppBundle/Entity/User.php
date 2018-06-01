@@ -45,7 +45,8 @@ class User extends BaseUser
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Employer", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", inversedBy="user")
+     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id")
      */
     private $employer;
 
@@ -97,34 +98,26 @@ class User extends BaseUser
         return $this->lastName;
     }
 
+
+
     /**
-     * Add employer
+     * Set employer
      *
      * @param \AppBundle\Entity\Employer $employer
      *
      * @return User
      */
-    public function addEmployer(\AppBundle\Entity\Employer $employer)
+    public function setEmployer(\AppBundle\Entity\Employer $employer = null)
     {
-        $this->employer[] = $employer;
+        $this->employer = $employer;
 
         return $this;
     }
 
     /**
-     * Remove employer
-     *
-     * @param \AppBundle\Entity\Employer $employer
-     */
-    public function removeEmployer(\AppBundle\Entity\Employer $employer)
-    {
-        $this->employer->removeElement($employer);
-    }
-
-    /**
      * Get employer
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \AppBundle\Entity\Employer
      */
     public function getEmployer()
     {

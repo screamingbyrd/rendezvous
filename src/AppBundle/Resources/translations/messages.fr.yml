@@ -28,7 +28,6 @@ header:
     french: Français
     english: Anglais
 
-
 form:
   registration:
     firstname: Prénom
@@ -42,6 +41,12 @@ form:
     exp0: -- Indiquez votre expérience --
     exp1: 0 à 2 ans
     exp2: 2 à 5 ans
+
+
+dashboard:
+  employer:
+    edit: Modifier les informations de votre société
+
 
 candidate:
   delete:

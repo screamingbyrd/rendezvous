@@ -22,7 +22,8 @@ class Employer
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", cascade={"persist","remove"}, mappedBy="employer")
+     *
      */
     private $user;
 
@@ -60,7 +61,7 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="whyUs", type="text", length=255, nullable=true)
+     * @ORM\Column(name="whyUs", type="text", nullable=true)
      */
     private $whyUs;
 
@@ -86,6 +87,12 @@ class Employer
     private $phone;
 
     private $email;
+
+    private $password;
+
+    private $firstName;
+
+    private $lastName;
 
     /**
      * @return mixed
@@ -158,13 +165,6 @@ class Employer
         $this->lastName = $lastName;
         return $this;
     }
-
-    private $password;
-
-    private $firstName;
-
-    private $lastName;
-
 
     /**
      * @return string
@@ -374,8 +374,6 @@ class Employer
         $this->phone = $phone;
         return $this;
     }
-
-
     /**
      * Constructor
      */

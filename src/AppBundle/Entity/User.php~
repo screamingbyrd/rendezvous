@@ -45,7 +45,8 @@ class User extends BaseUser
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Employer", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", inversedBy="user")
+     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id")
      */
     private $employer;
 
@@ -95,5 +96,31 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+
+
+    /**
+     * Set employer
+     *
+     * @param \AppBundle\Entity\Employer $employer
+     *
+     * @return User
+     */
+    public function setEmployer(\AppBundle\Entity\Employer $employer = null)
+    {
+        $this->employer = $employer;
+
+        return $this;
+    }
+
+    /**
+     * Get employer
+     *
+     * @return \AppBundle\Entity\Employer
+     */
+    public function getEmployer()
+    {
+        return $this->employer;
     }
 }

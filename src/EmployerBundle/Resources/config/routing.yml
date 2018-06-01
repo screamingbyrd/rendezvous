@@ -1,10 +1,15 @@
-register_employer:
+create_employer:
     path:     /register
-    defaults: { _controller: EmployerBundle:Employer:register }
+    defaults: { _controller: EmployerBundle:Employer:create }
+edit_employer:
+    path:     /edit
+    defaults: { _controller: EmployerBundle:Employer:edit }
+dashboard_employer:
+    path:     /dashboard
+    defaults: { _controller: EmployerBundle:Employer:dashboard }
 post_offer:
     path:     /post-offer
     defaults: { _controller: EmployerBundle:Employer:postOffer }
 edit_offer:
     path:     /edit-offer
     defaults: { _controller: EmployerBundle:Employer:editOffer }
-

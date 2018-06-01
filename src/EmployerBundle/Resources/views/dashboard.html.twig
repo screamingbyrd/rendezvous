@@ -1,0 +1,29 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Register - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container well">
+
+        <h3>Dashboard</h3>
+        <div class="row">
+            <ul>
+                <li><a href="{{ path('edit_employer') }}">{{ 'dashboard.employer.edit' | trans }}</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+
+
+
+        </div>
+
+
+    </div>
+
+{% endblock %}
