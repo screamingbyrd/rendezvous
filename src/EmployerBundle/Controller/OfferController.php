@@ -52,9 +52,9 @@ class OfferController extends Controller
             $offer->setBenefits($data->getBenefits());
             $offer->setCountView(0);
             $offer->setCountContact(0);
-            $now = new \DateTime();
-            $offer->setStartDate($now);
-            $offer->setEndDate($now->modify( '+ 1 month' ));
+            $past = new \DateTime('01-01-1900');
+            $offer->setStartDate($past);
+            $offer->setEndDate($past);
 
             $em->persist($offer);
             $em->flush();
@@ -62,7 +62,7 @@ class OfferController extends Controller
             $translated = $this->get('translator')->trans('form.offer.creation.success');
             $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('dashboard_employer');
 
         }
         return $this->render('EmployerBundle:form:postOffer.html.twig', array(
@@ -123,7 +123,7 @@ class OfferController extends Controller
             $translated = $this->get('translator')->trans('form.offer.edition.success');
             $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('dashboard_employer');
 
         }
         return $this->render('EmployerBundle:form:editOffer.html.twig', array(
@@ -131,7 +131,7 @@ class OfferController extends Controller
         ));
     }
 
-    public function deleterAction(Request $request){
+    public function deleteAction(Request $request){
 
         $session = $request->getSession();
 
@@ -156,7 +156,7 @@ class OfferController extends Controller
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployerId() != $employer->getId()){
             $translated = $this->get('translator')->trans('form.offer.edition.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('dashboard_employer');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -166,7 +166,7 @@ class OfferController extends Controller
         $translated = $this->get('translator')->trans('form.offer.delete.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return true;
+        return $this->redirectToRoute('dashboard_employer');
     }
 
     public function showAction($id){
@@ -211,16 +211,16 @@ class OfferController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
 
-        $creditEmployer = $employer->getCrediit();
+        $creditEmployer = $employer->getCredit();
         $creditOffer = $creditInfo->getPublishOffer();
 
-        if($employer->getCrediit() < $creditInfo->getPublishOffer()){
+        if($creditEmployer < $creditOffer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('jobnow_home');
         }
 
-        $employer->setCountCredit($creditEmployer - $creditOffer);
+        $employer->setCredit($creditEmployer - $creditOffer);
 
         $now = new \DateTime();
         $offer->setStartDate($now);
@@ -234,7 +234,7 @@ class OfferController extends Controller
         $translated = $this->get('translator')->trans('form.offer.activate.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return true;
+        return $this->redirectToRoute('dashboard_employer');
     }
 
 }

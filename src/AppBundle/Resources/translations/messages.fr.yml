@@ -57,6 +57,11 @@ dashboard:
   employer:
     edit: Modifier les informations de votre société
 
+offer:
+  delete:
+      sure: Etes vous sure de vouloir archiver cette offre ?
+  activate:
+      sure: Etes vous sure de vouloir activer cette offre, cela vous coutera %credit% crédit?
 
 candidate:
   delete:

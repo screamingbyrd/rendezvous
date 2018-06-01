@@ -181,9 +181,19 @@ class EmployerController extends Controller
     }
 
     public function dashboardAction(){
+        $user = $this->getUser();
+
+        $OfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offers = $OfferRepository->findBy(array('employerId' => $user->getEmployer()));
+        $creditInfo = $this->container->get('app.credit_info');
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(
-
+            'offers' => $offers,
+            'publishedOffer' => $creditInfo->getPublishOffer()
         ));
     }
 

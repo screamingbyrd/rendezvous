@@ -5,6 +5,75 @@
 {% endblock %}
 
 {% block body %}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myUL li .offer-element {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+        }
+
+        #myUL li .offer-element:hover:not(.header) {
+            background-color: #eee;
+        }
+        .offer-element{
+            display: table;
+            width: 100%;
+        }
+        .element-offer-list{
+            margin-left: 5px;
+            margin-right: 5px;
+            float: right;
+        }
+        .description-offer-dashboard{
+            margin-top: 20px;
+        }
+        .collapse-offer-info{
+            display: none;
+        }
+    </style>
+    <script>
+
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("span")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+        }
+    </script>
 
     <div class="container well">
 
@@ -18,12 +87,89 @@
                 <li></li>
             </ul>
 
+            <h3>Mes offres</h3>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for title.." title="Type in a title">
+
+            <ul id="myUL">
+                {% for offer in offers %}
+                    <li>
+                        <div class='offer-element'>
+                            <span>{{ offer.title }}</span>
+                            <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">Delete offer</button>
+                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">Edit offer</a>
+                            <div class="element-offer-list">
+                                {% if date(offer.endDate) > date() %}
+                                    <button type="button" class="btn btn-success element-offer-list">end date: {{ offer.endDate|date("m/d/Y")}}</button>
+                                {% else %}
+                                    <button class="btn btn-primary element-offer-list  activate-offer" data-href="{{ path('activate_offer', {'id': offer.id }) }}">Activate offer</button>
+                                {% endif %}
+                            </div>
+                            <div id="collapse{{ offer.id }}" class="collapse-offer-info">
+                                <div class="description-offer-dashboard">
+                                    Description:
+                                    <div>{{ offer.description }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
 
 
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-delete">
+                <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.delete.sure'|trans }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-default" id="modal-btn-yes-delete">{{ 'yes'|trans }}</a>
+                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-activate">
+                <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-default" id="modal-btn-yes-activate">{{ 'yes'|trans }}</a>
+                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $(".offer-element").click(function() {
+                    $(this).children(".collapse-offer-info").slideToggle("medium");
+                    return false;
+                });
+
+                $(".delete-offer").on("click", function(e){
+                    $('#modal-btn-yes-delete').attr("href", $(this).data('href'));
+                    $("#modal-delete").modal('show');
+                });
+
+                $(".activate-offer").on("click", function(e){
+                    $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
+                    $("#modal-activate").modal('show');
+                });
+
+                $("#modal-btn-no").on("click", function(){
+                    $("#mi-modal").modal('hide');
+                });
+
+            </script>
 
         </div>
-
-
     </div>
 
 {% endblock %}

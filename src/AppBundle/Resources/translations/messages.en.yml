@@ -53,6 +53,11 @@ dashboard:
 
 
 
+offer:
+  delete:
+      sure: Are you sure that you want to archive this offer?
+  activate:
+      sure: Are you sure that you want to activate this offer?This will cost you %credit% credit?
 
 
 candidate:

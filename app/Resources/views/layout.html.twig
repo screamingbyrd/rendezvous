@@ -12,6 +12,12 @@
         <link rel="stylesheet" href="{{ asset('build/main.css') }}" />
 
     {% endblock %}
+    {% block javascripts %}
+        {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    {% endblock %}
 </head>
 
 <body>
@@ -112,14 +118,7 @@
     </div>
 </nav>
 
-{% block javascripts %}
-    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
-{% endblock %}
 
 <div style='max-width:1200px;margin:0 auto; font-family: Verdana, Geneva, sans-serif;'>
     <div style="">
