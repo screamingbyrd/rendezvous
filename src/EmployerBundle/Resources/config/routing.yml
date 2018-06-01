@@ -11,5 +11,17 @@ post_offer:
     path:     /post-offer
     defaults: { _controller: EmployerBundle:Employer:postOffer }
 edit_offer:
-    path:     /edit-offer
+    path:     /edit-offer/{id}
     defaults: { _controller: EmployerBundle:Employer:editOffer }
+    requirements:
+      id: \d+
+delete_offer:
+    path:     /delete-offer/{id}
+    defaults: { _controller: EmployerBundle:Employer:deleteOffer }
+    requirements:
+      id: \d+
+activate_offer:
+    path:     /activate-offer/{id}
+    defaults: { _controller: EmployerBundle:Employer:activateOffer }
+    requirements:
+      id: \d+

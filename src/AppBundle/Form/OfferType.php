@@ -30,12 +30,11 @@ class OfferType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'required' => false,
             ))
-            ->add('image', ImageType::class, array(
+            ->add('experience', TextareaType::class, array(
                 'required' => false,
             ))
-            ->add('whyUs', TextareaType::class, array(
+            ->add('image', ImageType::class, array(
                 'required' => false,
-
             ))
             ->add('title',      TextType::class, array('required' => false))
             ->add('wage',      TextType::class, array('required' => false))
@@ -50,7 +49,7 @@ class OfferType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Employer'
+            'data_class' => 'AppBundle\Entity\Offer'
         ));
     }
 

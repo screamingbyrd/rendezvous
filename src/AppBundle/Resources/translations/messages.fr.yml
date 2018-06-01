@@ -41,7 +41,17 @@ form:
     exp0: -- Indiquez votre expérience --
     exp1: 0 à 2 ans
     exp2: 2 à 5 ans
-
+  offer:
+    creation:
+      success: L'offre a bien été crée !
+    edition:
+      success: L'offre a bien été éditée !
+      error: Vous ne pouvez pas modifier cette offre !
+    delete:
+      success: L'offre a bien été supprimé !
+    activate:
+      success: L'offre a bien éé activée !
+      error: Vous n'assez de credit pour l'activée !
 
 dashboard:
   employer:

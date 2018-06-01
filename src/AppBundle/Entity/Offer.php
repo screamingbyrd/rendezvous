@@ -414,6 +414,7 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creationDate =  new \datetime();
     }
 
     /**

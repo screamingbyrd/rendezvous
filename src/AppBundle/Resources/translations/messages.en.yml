@@ -35,6 +35,17 @@ form:
     exp0: -- Your experience --
     exp1: 0 to 2 years
     exp2: 2 to 5 years
+  offer:
+    creation:
+      success: The offer has been created !
+    edition:
+      success: The offer has been modified !
+      error: You can't modify this offer !
+    delete:
+      success: The offer has been deleted !
+    activate:
+      success: The offer has benn activated !
+      error: You do not have enough credit !
 
 dashboard:
   employer:
