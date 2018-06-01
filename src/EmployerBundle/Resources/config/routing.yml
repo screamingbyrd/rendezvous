@@ -12,19 +12,19 @@ dashboard_employer:
     defaults: { _controller: EmployerBundle:Employer:dashboard }
 post_offer:
     path:     /post-offer
-    defaults: { _controller: EmployerBundle:Employer:postOffer }
+    defaults: { _controller: EmployerBundle:Offer:post }
 edit_offer:
     path:     /edit-offer/{id}
-    defaults: { _controller: EmployerBundle:Employer:editOffer }
+    defaults: { _controller: EmployerBundle:Offer:edit }
     requirements:
       id: \d+
 delete_offer:
     path:     /delete-offer/{id}
-    defaults: { _controller: EmployerBundle:Employer:deleteOffer }
+    defaults: { _controller: EmployerBundle:Offer:delete }
     requirements:
       id: \d+
 activate_offer:
     path:     /activate-offer/{id}
-    defaults: { _controller: EmployerBundle:Employer:activateOffer }
+    defaults: { _controller: EmployerBundle:Offer:activate }
     requirements:
       id: \d+
