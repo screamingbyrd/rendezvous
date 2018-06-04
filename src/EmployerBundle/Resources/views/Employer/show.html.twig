@@ -1,53 +1,49 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    employer.name - {{ parent() }}
+    {{ employer.name }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
 
     <div class="container">
         <div class="row well" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
-
-
-
             <img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="250" width="250"/>
-
-
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <h1>{{ employer.name }} {{ 'employer.show.title'|trans }}</h1>
                 <hr>
                 <p>{{ employer.description }}</p>
                 <h3>{{ 'employer.show.whyus'|trans }}</h3>
                 <p>{{ employer.whyUs }}</p>
             </div>
-            <div class="col-md-4">
-                INSERT MAIN TAG HERE
+            <div class="col-md-2">
+                <h3 class="well well-sm">{{ 'employer.show.lastoffers'|trans }}</h3>
+                <ul>
+                    <li>INSERT LAST OFFERS HERE</li>
+                    <li>INSERT LAST OFFERS HERE</li>
+                </ul>
             </div>
         </div>
 
-
-
-
-        {{ dump(status) }}
-
-
-
-
         <div class="row">
+            <div class="col-md-10">
+                {{ dump(status) }}
 
-            {{ ivory_google_map(map) }}
-            {{ ivory_google_api([map]) }}
+                {{ ivory_google_map(map) }}
+                {{ ivory_google_api([map]) }}
+
+            </div>
+            <div class="col-md-2">
+                <h3 class="well well-sm">{{ 'employer.show.tags'|trans }}</h3>
+                <ul>
+                    <li>INSERT MAIN TAGS</li>
+                    <li>INSERT MAIN TAGS</li>
+                </ul>
+            </div>
 
         </div>
-
-
-
-
-
-
     </div>
 
 {% endblock %}

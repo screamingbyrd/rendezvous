@@ -118,7 +118,7 @@ class EmployerController extends Controller
                 $user->SetLastName($data->getLastName());
                 $userManager->updateUser($user);
 
-                $employer->setName($data->getEmail());
+                $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
                 $employer->setCredit(0);
                 $employer->setWhyUs($data->getWhyUs());
