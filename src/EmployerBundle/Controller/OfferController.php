@@ -123,7 +123,7 @@ class OfferController extends Controller
             $translated = $this->get('translator')->trans('form.offer.edition.success');
             $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('dashboard_employer');
+            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
 
         }
         return $this->render('EmployerBundle:form:editOffer.html.twig', array(
@@ -156,17 +156,20 @@ class OfferController extends Controller
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployerId() != $employer->getId()){
             $translated = $this->get('translator')->trans('form.offer.edition.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('dashboard_employer');
+            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
         }
 
+        $bool = boolval($offer->isArchived());
+        $offer->setArchived(!$bool);
+
         $em = $this->getDoctrine()->getManager();
-        $em->remove($offer);
+        $em->merge($offer);
         $em->flush();
 
         $translated = $this->get('translator')->trans('form.offer.delete.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer');
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
     public function showAction($id){
@@ -234,7 +237,7 @@ class OfferController extends Controller
         $translated = $this->get('translator')->trans('form.offer.activate.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer');
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
 }

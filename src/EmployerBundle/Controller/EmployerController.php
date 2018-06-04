@@ -180,7 +180,7 @@ class EmployerController extends Controller
 
     }
 
-    public function dashboardAction(){
+    public function dashboardAction($archived = 0){
         $user = $this->getUser();
 
         $OfferRepository = $this
@@ -188,7 +188,16 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-        $offers = $OfferRepository->findBy(array('employerId' => $user->getEmployer()));
+
+        $searchArray = array('employerId' => $user->getEmployer());
+
+        if($archived == 0){
+            $searchArray['archived'] = 0;
+        }
+
+        $_SESSION['archived'] = $archived;
+
+        $offers = $OfferRepository->findBy($searchArray);
         $creditInfo = $this->container->get('app.credit_info');
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(

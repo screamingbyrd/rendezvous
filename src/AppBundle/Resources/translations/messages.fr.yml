@@ -54,14 +54,26 @@ form:
       error: Vous n'assez de credit pour l'activée !
 
 dashboard:
+  title: Tableau de bord
   employer:
     edit: Modifier les informations de votre société
+    showArchived: Montrer les offres archivées
+    hideArchived: Cacher les offres archivées
+    activateOffer: Activer
+    editOffer: Editer
+    archiveOffer: Archiver
+    unarchiveOffer: Désarchiver
+    myOffers: Mes offres
+    typeTitle: Entrer un titre
+    searchTitle: Chercher un titre
 
 offer:
   delete:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:
       sure: Etes vous sure de vouloir activer cette offre, cela vous coutera %credit% crédit?
+  endDate: Date de fin :
+  archived: Archivée
 
 candidate:
   delete:

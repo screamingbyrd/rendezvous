@@ -15,7 +15,7 @@
             background-repeat: no-repeat;
             width: 100%;
             font-size: 16px;
-            padding: 12px 20px 12px 40px;
+            padding: 12px 20px 12px 13px;
             border: 1px solid #ddd;
             margin-bottom: 12px;
         }
@@ -54,6 +54,13 @@
         .collapse-offer-info{
             display: none;
         }
+        .archived-offer{
+            background-color: #dad9d9 !important;
+        }
+        .show-archived{
+            float: left;
+            margin-top: 15px;
+        }
     </style>
     <script>
 
@@ -77,31 +84,31 @@
 
     <div class="container well">
 
-        <h3>Dashboard</h3>
-        <div class="row">
-            <ul>
-                <li><a href="{{ path('edit_employer') }}">{{ 'dashboard.employer.edit' | trans }}</a></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+        <h3>{{ 'dashboard.title' | trans }}</h3>
 
-            <h3>Mes offres</h3>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for title.." title="Type in a title">
+            <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
 
             <ul id="myUL">
                 {% for offer in offers %}
                     <li>
-                        <div class='offer-element'>
+                        <div class='offer-element {% if offer.archived %}archived-offer{% endif %}'>
                             <span>{{ offer.title }}</span>
-                            <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">Delete offer</button>
-                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">Edit offer</a>
+                            {% if offer.archived %}
+                                <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
+                            {% else %}
+                                <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
+                            {% endif %}
+                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">{{ 'dashboard.employer.editOffer' | trans }}</a>
                             <div class="element-offer-list">
-                                {% if date(offer.endDate) > date() %}
-                                    <button type="button" class="btn btn-success element-offer-list">end date: {{ offer.endDate|date("m/d/Y")}}</button>
+                                {% if offer.archived %}
+                                    <button type="button" class="btn element-offer-list">{{ 'offer.archived' | trans }}</button>
                                 {% else %}
-                                    <button class="btn btn-primary element-offer-list  activate-offer" data-href="{{ path('activate_offer', {'id': offer.id }) }}">Activate offer</button>
+                                    {% if date(offer.endDate) > date() %}
+                                        <button type="button" class="btn btn-success element-offer-list">{{ 'offer.endDate' | trans }} {{ offer.endDate|date("m/d/Y")}}</button>
+                                    {% else %}
+                                        <button class="btn btn-primary element-offer-list  activate-offer" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             <div id="collapse{{ offer.id }}" class="collapse-offer-info">
@@ -115,6 +122,13 @@
                 {% endfor %}
             </ul>
 
+            <a href="{{ path('dashboard_employer', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
+                {% if app.request.get('archived') %}
+                    {{ 'dashboard.employer.hideArchived' | trans }}
+                {% else %}
+                    {{ 'dashboard.employer.showArchived' | trans }}
+                {% endif %}
+            </a>
 
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-delete">
                 <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
@@ -126,7 +140,7 @@
                         </div>
                         <div class="modal-footer">
                             <a type="button" class="btn btn-default" id="modal-btn-yes-delete">{{ 'yes'|trans }}</a>
-                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -141,7 +155,7 @@
                         </div>
                         <div class="modal-footer">
                             <a type="button" class="btn btn-default" id="modal-btn-yes-activate">{{ 'yes'|trans }}</a>
-                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -163,13 +177,12 @@
                     $("#modal-activate").modal('show');
                 });
 
-                $("#modal-btn-no").on("click", function(){
-                    $("#mi-modal").modal('hide');
+                $(".modal-btn-no").on("click", function(){
+                    $(".modal").modal('hide');
                 });
 
             </script>
 
-        </div>
     </div>
 
 {% endblock %}

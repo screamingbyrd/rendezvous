@@ -8,8 +8,10 @@ delete_employer:
     path:     /delete/{id}
     defaults: { _controller: EmployerBundle:Employer:delete }
 dashboard_employer:
-    path:     /dashboard
-    defaults: { _controller: EmployerBundle:Employer:dashboard }
+    path:     /dashboard/{archived}
+    defaults: { _controller: EmployerBundle:Employer:dashboard , archived: 0}
+    requirements:
+      archived: 0|1
 post_offer:
     path:     /post-offer
     defaults: { _controller: EmployerBundle:Offer:post }
@@ -26,5 +28,10 @@ delete_offer:
 activate_offer:
     path:     /activate-offer/{id}
     defaults: { _controller: EmployerBundle:Offer:activate }
+    requirements:
+      id: \d+
+show_offer:
+    path:     /show-offer/{id}
+    defaults: { _controller: EmployerBundle:Offer:show }
     requirements:
       id: \d+

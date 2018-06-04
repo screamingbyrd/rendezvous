@@ -45,6 +45,13 @@ class Offer
     /**
      * @var string
      *
+     * @ORM\Column(name="location", type="string", length=255)
+     */
+    private $location;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
@@ -120,6 +127,13 @@ class Offer
      */
     private $creationDate;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archived", type="boolean")
+
+     */
+    protected $archived = 0;
 
     /**
      * Get id
@@ -469,5 +483,50 @@ class Offer
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param boolean $archived
+     * @return Offer
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     * @return Offer
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+
+    /**
+     * @return boolean
+     */
+    public function isActive()
+    {
+        $now = new \datetime();
+        return ($now >= $this->startDate) && ($now <= $this->endDate);
+    }
 
 }
