@@ -7,6 +7,13 @@ edit_employer:
 delete_employer:
     path:     /delete/{id}
     defaults: { _controller: EmployerBundle:Employer:delete }
+
+show_employer:
+    path:     /{id}
+    defaults: { _controller: EmployerBundle:Employer:show }
+    requirements:
+        id: \d+
+
 dashboard_employer:
     path:     /dashboard/{archived}
     defaults: { _controller: EmployerBundle:Employer:dashboard , archived: 0}

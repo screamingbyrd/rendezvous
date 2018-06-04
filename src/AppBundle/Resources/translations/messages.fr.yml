@@ -80,5 +80,10 @@ candidate:
     delete: Supprimer mon compte
     sure: Etes vous sûre de vouloir supprimer votre compte
 
-
+employer:
+  show:
+    title: Présentation de l'entreprise
+    whyus: Pourquoi nous choisir ?
+    lastoffers: Dernières offres
+    tags: Catégories principales
 

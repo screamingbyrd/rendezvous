@@ -4,8 +4,17 @@ namespace EmployerBundle\Controller;
 
 use AppBundle\Entity\Employer;
 use AppBundle\Form\EmployerType;
+use AppBundle\Form\OfferType;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Overlay\Marker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
+
 
 
 class EmployerController extends Controller
@@ -108,7 +117,7 @@ class EmployerController extends Controller
                 $user->SetLastName($data->getLastName());
                 $userManager->updateUser($user);
 
-                $employer->setName($data->getEmail());
+                $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
                 $employer->setCredit(0);
                 $employer->setWhyUs($data->getWhyUs());
@@ -157,11 +166,8 @@ class EmployerController extends Controller
 
     }
 
-    public function showAction(Request $request, $id)
+    public function showAction($id)
     {
-
-        $session = $request->getSession();
-
         $repository = $this
             ->getDoctrine()
             ->getManager()
@@ -169,14 +175,60 @@ class EmployerController extends Controller
 
         $employer = $repository->find($id);
 
-        $em = $this->getDoctrine()->getManager();
+        $map = new Map();
 
-        $em->remove($employer);
-        $em->flush();
 
-        $session->getFlashBag()->add('info', 'Employer supprimé !');
+        //workarround to ssl certificat pb curl error 60
 
-        return $this->redirectToRoute('jobnow_home');
+        $config = [
+            'verify' => false,
+        ];
+
+        $adapter = GuzzleAdapter::createWithConfig($config);
+
+        // GeoCoder API
+        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
+
+        //try to match string location to get Object with lat long info
+        $request = new GeocoderAddressRequest($employer->getLocation());
+        $response = $geocoder->geocode($request);
+
+
+        $status = $response->getStatus();
+
+
+
+        foreach ($response->getResults() as $result) {
+
+            $coord = $result->getGeometry()->getLocation();
+            continue;
+
+        }
+
+
+        if(isset($coord)) {
+            $marker = new Marker($coord);
+            $map->setCenter($coord);
+            $map->getOverlayManager()->addMarker($marker);
+        }
+
+        $map->setStylesheetOption('width', 1100);
+        $map->setMapOption('zoom', 10);
+
+
+
+
+
+
+
+
+        return $this->render('EmployerBundle:Employer:show.html.twig', array(
+            'employer' => $employer,
+            'map' => $map,
+            'status' => $status
+
+
+        ));
 
     }
 

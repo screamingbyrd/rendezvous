@@ -61,8 +61,6 @@ dashboard:
     typeTitle: Type in a title
     searchTitle: Search a title
 
-
-
 offer:
   delete:
       sure: Are you sure that you want to archive this offer?
@@ -71,10 +69,15 @@ offer:
   endDate: End date:
   archived: Archived
 
-
 candidate:
   delete:
     delete: Delete my account
     sure: Are you sure that you want to delete your account?
 
 
+employer:
+  show:
+    title: Presentation of the company
+    whyus: Why us?
+    lastoffers: Last offers
+    tags: Main categories
