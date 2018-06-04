@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 
 
 class EmployerType extends AbstractType
@@ -47,7 +48,7 @@ class EmployerType extends AbstractType
                 'required' => false,
 
             ))
-            ->add('location')
+            ->add('location', PlaceAutocompleteType::class)
             ->add('latLong')
             ->add('phone', TelType::class)
             ->add('logo', ImageType::class)

@@ -92,8 +92,29 @@ swiftmailer:
 
 vich_uploader:
     db_driver: orm
-
     mappings:
         employer_image:
             uri_prefix: /images/employer
-            upload_destination: '%kernel.project_dir%/../web/uploads'
+            upload_destination: '%kernel.project_dir%/web/uploads/images/employer'
+
+
+ivory_google_map:
+    map:
+        debug: "%kernel.debug%"
+        language: "%locale%"
+        api_key: "AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc"
+    geocoder:
+        client: httplug.client.default
+        message_factory: httplug.message_factory.default
+
+
+httplug:
+    classes:
+        client: Http\Adapter\Guzzle6\Client
+        message_factory: Http\Message\MessageFactory\GuzzleMessageFactory
+    clients:
+        acme:
+            factory: httplug.factory.guzzle6
+
+
+
