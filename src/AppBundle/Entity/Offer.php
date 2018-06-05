@@ -36,11 +36,10 @@ class Offer
     private $endDate;
 
     /**
-     * @var int
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist","remove"})
      *
-     * @ORM\Column(name="employerId", type="integer")
      */
-    private $employerId;
+    private $employer;
 
     /**
      * @var string
@@ -191,30 +190,6 @@ class Offer
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set employerId
-     *
-     * @param integer $employerId
-     *
-     * @return Offer
-     */
-    public function setEmployerId($employerId)
-    {
-        $this->employerId = $employerId;
-
-        return $this;
-    }
-
-    /**
-     * Get employerId
-     *
-     * @return int
-     */
-    public function getEmployerId()
-    {
-        return $this->employerId;
     }
 
     /**
@@ -517,6 +492,30 @@ class Offer
     {
         $this->location = $location;
         return $this;
+    }
+
+    /**
+     * Set employer
+     *
+     * @param \AppBundle\Entity\Employer $employer
+     *
+     * @return Offer
+     */
+    public function setEmployer(\AppBundle\Entity\Employer $employer = null)
+    {
+        $this->employer = $employer;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\Employer
+     */
+    public function getEmployer()
+    {
+        return $this->employer;
     }
 
 

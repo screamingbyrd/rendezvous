@@ -241,7 +241,7 @@ class EmployerController extends Controller
             ->getRepository('AppBundle:Offer')
         ;
 
-        $searchArray = array('employerId' => $user->getEmployer());
+        $searchArray = array('employer' => $user->getEmployer());
 
         if($archived == 0){
             $searchArray['archived'] = 0;

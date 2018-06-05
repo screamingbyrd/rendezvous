@@ -42,8 +42,10 @@ class OfferController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $offer = new Offer();
-            $offer->setEmployerId($employer->getId());
+            $offer->setEmployer($employer);
             $offer->setDescription($data->getDescription());
+            $offer->setLocation($data->getLocation());
+            $offer->setContractType($data->getContractType());
             $offer->setImage($data->getImage());
             $offer->setTitle($data->getTitle());
             $offer->setWage($data->getWage());
@@ -93,7 +95,7 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployerId() != $employer->getId()){
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
             $translated = $this->get('translator')->trans('form.offer.edition.error');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('jobnow_home');
@@ -110,6 +112,7 @@ class OfferController extends Controller
             $offer->setDescription($data->getDescription());
             $offer->setImage($data->getImage());
             $offer->setTitle($data->getTitle());
+            $offer->setLocation($data->getLocation());
             $offer->setWage($data->getWage());
             $offer->setExperience($data->getExperience());
             $offer->setDiploma($data->getDiploma());
@@ -153,7 +156,7 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployerId() != $employer->getId()){
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
             $translated = $this->get('translator')->trans('form.offer.edition.error');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
@@ -206,7 +209,7 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployerId() != $employer->getId()){
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
             $translated = $this->get('translator')->trans('form.offer.edition.error');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('jobnow_home');
@@ -238,6 +241,38 @@ class OfferController extends Controller
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+    }
+
+    public function searchAction(Request $request){
+        $keywords = $request->get('keyword');
+        $location = $request->get('location');
+        $finder = $this->container->get('fos_elastica.finder.app.offer');
+        $boolQuery = new \Elastica\Query\BoolQuery();
+
+        if($keywords != ''){
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('title', $keywords);
+            $boolQuery->addMust($fieldQuery);
+        }
+
+        if($location != ''){
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('location', $location);
+            $boolQuery->addMust($fieldQuery);
+        }
+
+        $fieldQuery = new \Elastica\Query\Match();
+        $fieldQuery->setFieldQuery('archived', false);
+        $boolQuery->addMust($fieldQuery);
+
+        $data = $finder->find($boolQuery);
+
+        return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $data));
+    }
+
+    public function searchPageAction(){
+
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig');
     }
 
 }

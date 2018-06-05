@@ -1,0 +1,165 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Search offer
+{% endblock %}
+
+{% block body %}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #keyword-input, #location-input {
+            background-position: 10px 12px;
+            background-repeat: no-repeat;
+            width: 40%;
+            font-size: 16px;
+            padding: 12px 20px 12px 13px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+
+        .searchOffer{
+            margin-left: 10px;
+        }
+        #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myUL li .offer-element {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #f6f6f6;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+        }
+
+        #myUL li .offer-element:hover:not(.header) {
+            background-color: #eee;
+        }
+        .offer-element{
+            display: table;
+            width: 100%;
+        }
+        .element-offer-list{
+            margin-left: 5px;
+            margin-right: 5px;
+            float: right;
+        }
+        .description-offer-dashboard{
+            margin-top: 20px;
+        }
+        .collapse-offer-info{
+            display: none;
+        }
+        .archived-offer{
+            background-color: #dad9d9 !important;
+        }
+        .show-archived{
+            float: left;
+            margin-top: 15px;
+        }
+        .offer-search-element{
+            width: 90%;
+            margin-left: 3%;
+            display: inline-block;
+        }
+        .job-title-employer{
+            vertical-align: middle;
+            display: inline-block;
+            margin-right: 3%;
+            margin-bottom: 0;
+            width: 45%;
+        }
+    </style>
+
+    <div class="container well">
+
+        <h3>{{ 'dashboard.title' | trans }}</h3>
+
+        <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
+        <form method="post" action="" id="search-offer-form">
+            <div>
+                <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                <input type="submit" class="btn btn-primary searchOffer" value="Search">
+            </div>
+        </form>
+        <ul id="myUL">
+
+        </ul>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-activate">
+            <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" id="modal-btn-yes-activate">{{ 'yes'|trans }}</a>
+                        <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function() {
+                let keyword = $("#keyword-input").val();
+                let location = $("#location-input").val();
+                let url = window.location.href;
+                url = url.replace("search-page-offer", 'search-offer');
+                $.ajax({
+                    url: url,
+                    data: {keyword:keyword,location:location}
+                }).done(function( data ) {
+                    // insert data into div
+                    $("#myUL").html(data);
+                });
+            };
+
+            $("#search-offer-form input[type='submit']").click(function() {
+                let keyword = $("#keyword-input").val();
+                let location = $("#location-input").val();
+                let url = window.location.href;
+                url = url.replace("search-page-offer", 'search-offer');
+                $.ajax({
+                    url: url,
+                    data: {keyword:keyword,location:location}
+                }).done(function( data ) {
+                    // insert data into div
+                    $("#myUL").html(data);
+                });
+
+                return false;
+            });
+
+            $(".offer-element").click(function() {
+                $(this).children(".collapse-offer-info").slideToggle("medium");
+            });
+
+            $(".delete-offer").on("click", function(e){
+                $('#modal-btn-yes-delete').attr("href", $(this).data('href'));
+                $("#modal-delete").modal('show');
+            });
+
+            $(".activate-offer").on("click", function(e){
+                $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
+                $("#modal-activate").modal('show');
+            });
+
+            $(".modal-btn-no").on("click", function(){
+                $(".modal").modal('hide');
+            });
+
+        </script>
+
+    </div>
+
+{% endblock %}

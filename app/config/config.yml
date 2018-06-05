@@ -51,7 +51,34 @@ fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
     indexes:
-        app: ~
+            app:
+                settings:
+                    index:
+                        analysis:
+                            analyzer:
+                                autocomplete_analyzer:
+                                    type: custom
+                                    tokenizer: autocomplete_tokenizer
+                                    filter: [lowercase, asciifolding]
+                            tokenizer:
+                                autocomplete_tokenizer:
+                                    type: nGram
+                                    min_gram: 3
+                                    max_gram: 20
+                types:
+                    offer:
+                        properties:
+                            id: ~
+                            description: ~
+                            title: { type: text, analyzer: autocomplete_analyzer }
+                            location: { type: text, analyzer: autocomplete_analyzer }
+                            archived: ~
+                        persistence:
+                        # the driver can be orm, mongodb or phpcr
+                            driver: orm
+                            model: AppBundle\Entity\Offer
+                            provider: ~
+                            finder: ~
 
 # Twig Configuration
 twig:

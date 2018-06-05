@@ -42,3 +42,9 @@ show_offer:
     defaults: { _controller: EmployerBundle:Offer:show }
     requirements:
       id: \d+
+search_offer:
+    path:     /search-offer
+    defaults: { _controller: EmployerBundle:Offer:search }
+search_page_offer:
+    path:     /search-page-offer
+    defaults: { _controller: EmployerBundle:Offer:searchPage }

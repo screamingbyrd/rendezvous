@@ -32,7 +32,6 @@ form:
   registration:
     firstname: Prénom
     lastname: Nom
-
     success: Vous êtes à présent inscrit en temps que recruteur !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
@@ -52,6 +51,10 @@ form:
     activate:
       success: L'offre a bien éé activée !
       error: Vous n'assez de credit pour l'activée !
+    search:
+      keyword: Mots clefs
+      location: Position
+    contractType: -- Choisissez le type de contrat --
 
 dashboard:
   title: Tableau de bord
@@ -87,3 +90,8 @@ employer:
     lastoffers: Dernières offres
     tags: Catégories principales
 
+freelance: Freelance
+full-time: CDI
+part-time: Mi-temps
+internship: Stage
+temporary: CDD

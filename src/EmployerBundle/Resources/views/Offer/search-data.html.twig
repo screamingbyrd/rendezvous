@@ -1,0 +1,18 @@
+{% for offer in data %}
+    {% if true %}
+        <li>
+            <a class='offer-element'>
+                {% if offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+                <div class="offer-search-element">
+                    <div class="job-title-employer">
+                        <div>{{ offer.title }}</div>
+                        <div>{{ offer.employer.name }}</div>
+                    </div>
+
+                    <span>{{ offer.location }}</span>
+                </div>
+
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}

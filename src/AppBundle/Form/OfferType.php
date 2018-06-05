@@ -8,6 +8,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\ContractType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -18,6 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class OfferType extends AbstractType
 {
@@ -32,6 +34,17 @@ class OfferType extends AbstractType
             ))
             ->add('experience', TextareaType::class, array(
                 'required' => false,
+            ))
+            ->add('location', TextType::class, array(
+                'required' => false,
+            ))
+            ->add('contractType', EntityType::class, array(
+                'required' => false,
+                'class' => ContractType::class,
+                'choice_label' =>  'name',
+                'placeholder' => 'form.offer.contractType',
+                'choice_translation_domain' => 'messages',
+                'order_by' => 'name'
             ))
             ->add('image', ImageType::class, array(
                 'required' => false,

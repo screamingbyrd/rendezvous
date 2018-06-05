@@ -46,6 +46,10 @@ form:
     activate:
       success: The offer has benn activated !
       error: You do not have enough credit !
+    search:
+      keyword: Keywords
+      location: Location
+    contractType: -- Choose the type of contract --
 
 dashboard:
   title: Dashboard
@@ -81,3 +85,9 @@ employer:
     whyus: Why us?
     lastoffers: Last offers
     tags: Main categories
+
+freelance: Freelance
+full-time: Full time
+part-time: Part time
+internship: Internship
+temporary: Temporary
