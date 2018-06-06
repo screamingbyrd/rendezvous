@@ -89,6 +89,9 @@ employer:
     whyus: Pourquoi nous choisir ?
     lastoffers: Dernières offres
     tags: Catégories principales
+  credit:
+    title: Crédits
+    have: Vous avez actuellement %credit% credits !
 
 freelance: Freelance
 fulltime: CDI

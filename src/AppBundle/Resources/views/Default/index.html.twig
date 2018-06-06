@@ -7,18 +7,56 @@
 
 {% block body %}
 
-    <div class="container well">
-        <h1> Page d'acceuil </h1>
-        <ul>
-            <li> Hello World! </li>
-        </ul>
-        <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
-            <div>
-                <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
-                <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
-                <input type="submit" class="btn btn-primary searchOffer" value="Search">
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1>JobNow</h1>
+            <p>Our mission is to enable locally-present companies find the right candidates at the right moment and to help candidates find their ideal job in Luxembourg. Therefore our dedicated local team of multi-lingual experts works hard every day in order to offer first class customer service combined with state of the art technology. Today, jobs.lu is the benchmark in Luxembourg when it comes to high quality online recruitment and we will continue to develop ourselves further in order to meet our commitment</p>
+            <p >
+                <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
+                    <div style="text-align: center">
+                        <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                        <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                        <input type="submit" class="btn btn-primary searchOffer" value="Search">
+                    </div>
+                </form>
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="..." alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
             </div>
-        </form>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="..." alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="..." alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>...</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 

@@ -85,6 +85,12 @@ employer:
     whyus: Why us?
     lastoffers: Last offers
     tags: Main categories
+  credit:
+    title: Credits
+    have: You actually have %credit% credits!
+
+
+
 
 freelance: Freelance
 fulltime: Full time

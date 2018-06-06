@@ -1,0 +1,56 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ 'employer.credit.title' | trans }}  - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{ 'employer.credit.title' | trans }}</h1>
+
+        <h5>{{ 'employer.credit.have'|trans({'%credit%': credit}) }}</h5>
+
+        <h3>Our packages</h3>
+        <h5>Save money and get free bonus credits when you buy in bulk</h5>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {#<img src="..." alt="...">#}
+                    <div class="caption">
+                        <h3>1 Credit</h3>
+                        <p>No Bonus</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Buy</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {#<img src="..." alt="...">#}
+                    <div class="caption">
+                        <h3>10 Credits</h3>
+                        <p>+ 10€ Bonus</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Buy</a> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {#<img src="..." alt="...">#}
+                    <div class="caption">
+                        <h3>50 Credits</h3>
+                        <p>+ 100 € Bonus</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Buy</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}
