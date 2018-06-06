@@ -247,6 +247,8 @@ class OfferController extends Controller
         $keywords = $request->get('keyword');
         $location = $request->get('location');
         $type =  $request->get('type');
+        $currentPage = $request->get('row');
+        $numberOfItem =  $request->get('number');
         $finder = $this->container->get('fos_elastica.finder.app.offer');
         $boolQuery = new \Elastica\Query\BoolQuery();
 
@@ -274,7 +276,11 @@ class OfferController extends Controller
 
         $data = $finder->find($boolQuery);
 
-        return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $data));
+        $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil (count($data) / $numberOfItem);
+
+        return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $finalArray, 'page' => $currentPage, 'total' => $totalPage));
     }
 
     public function searchPageAction(){

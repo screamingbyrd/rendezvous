@@ -80,7 +80,9 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+        }
+        #number-of-offer {
+            margin: 14px 16px;
         }
         .contract-type {
             float: left;
@@ -88,6 +90,58 @@
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
+        }
+        .selected-page {
+            background-color: #dedede !important;
+        }
+        #paginator-offer {
+            display: table;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        #paginator-offer a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        #paginator-offer a.active {
+            color: white;
+        }
+
+        #paginator-offer a:hover:not(.active) {background-color: #ddd; !important;}
+
+        #loading {
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            background-color: #fff;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 
@@ -109,11 +163,20 @@
                         </li>
                     {% endfor %}
                 </ul>
+                <select id="number-of-offer">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="100">100</option>
+                </select>
             </div>
         </form>
         <ul id="myUL">
 
         </ul>
+
+        <div id="paginator-offer">
+
+        </div>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-activate">
             <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
@@ -131,7 +194,11 @@
         </div>
 
         <script>
-            function searchOffer() {
+            function searchOffer(row, totalItem) {
+                let loader = '<div id="loading">\n' +
+                    '                <div class="loader"></div>\n' +
+                    '            </div>';
+                $("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let url = window.location.href;
@@ -141,38 +208,52 @@
                 url = url.replace("search-page-offer", 'search-offer');
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location,type:type}
+                    data: {keyword:keyword,location:location,type:type,row:row,number:totalItem}
                 }).done(function( data ) {
-                    // insert data into div
+                    $('#loading').hide();
+
                     $("#myUL").html(data);
+                    let total = $('#hidden-search-info').data('total');
+                    let page = $('#hidden-search-info').data('page');
+                    let str = '<a onClick="onPage('+(page==1?1:(page-1))+')" href="#">&laquo;</a>'
+
+                    for (i = 1; i <= total; i++) {
+                        str += '<a onClick="onPage(' + i + ')" class="offer-page-link ' + (i == page?'selected-page':'') + '" href="#">' + i + '</a>';
+                    }
+
+                    str += '<a onClick="onPage('+(page==total?total:(page+1))+')" href="#">&raquo;</a>';
+                    document.getElementById("paginator-offer").innerHTML = str;
+
                 });
             }
 
             window.onload = function() {
-                searchOffer();
+                let total = $('#number-of-offer').val();
+                searchOffer(1,total);
             };
 
-            $("#search-offer-form input[type='submit']").click(
-                searchOffer()
-            );
+            $("#search-offer-form input[type='submit']").click(function(e) {
+                    e.preventDefault();
+                    let total = $('#number-of-offer').val();
+                    searchOffer(1,total);
+            });
 
             $(".type-contract-checkbox").change(function() {
-                searchOffer()
+                let total = $('#number-of-offer').val();
+                searchOffer(1,total);
             });
 
-            $(".offer-element").click(function() {
-                $(this).children(".collapse-offer-info").slideToggle("medium");
+            $('#number-of-offer').change(function() {
+                let page = $('#hidden-search-info').data('page');
+                let total = this.value;
+                searchOffer(page,total);
             });
 
-            $(".delete-offer").on("click", function(e){
-                $('#modal-btn-yes-delete').attr("href", $(this).data('href'));
-                $("#modal-delete").modal('show');
-            });
 
-            $(".activate-offer").on("click", function(e){
-                $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
-                $("#modal-activate").modal('show');
-            });
+            function onPage(page){
+                let total = $('#number-of-offer').val();
+                searchOffer(page,total);
+            }
 
             $(".modal-btn-no").on("click", function(){
                 $(".modal").modal('hide');

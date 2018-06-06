@@ -12,6 +12,13 @@
         <ul>
             <li> Hello World! </li>
         </ul>
+        <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
+            <div>
+                <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                <input type="submit" class="btn btn-primary searchOffer" value="Search">
+            </div>
+        </form>
 
     </div>
 
