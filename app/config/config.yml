@@ -73,6 +73,10 @@ fos_elastica:
                             title: { type: text, analyzer: autocomplete_analyzer }
                             location: { type: text, analyzer: autocomplete_analyzer }
                             archived: ~
+                            contractType:
+                              type: object
+                              properties:
+                                name: { type: text }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm

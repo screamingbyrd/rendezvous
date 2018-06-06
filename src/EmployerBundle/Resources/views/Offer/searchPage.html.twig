@@ -76,6 +76,19 @@
             margin-bottom: 0;
             width: 45%;
         }
+        .contractType-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .contract-type {
+            float: left;
+            display: block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
     </style>
 
     <div class="container well">
@@ -88,6 +101,14 @@
                 <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
                 <input type="submit" class="btn btn-primary searchOffer" value="Search">
+                <ul class="contractType-list">
+                    {% for type in contractType %}
+                        <li class="contract-type">
+                            <input type="checkbox" name="filter_job_type[]" class="type-contract-checkbox" value="{{ type.name }}" checked="checked" id="job_type_{{ type.name }}">
+                            {{  type.name | trans }}
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </form>
         <ul id="myUL">
@@ -114,10 +135,13 @@
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let url = window.location.href;
+                let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
+                    return this.value;
+                }).get();
                 url = url.replace("search-page-offer", 'search-offer');
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location}
+                    data: {keyword:keyword,location:location,type:type}
                 }).done(function( data ) {
                     // insert data into div
                     $("#myUL").html(data);
@@ -128,10 +152,14 @@
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let url = window.location.href;
+                let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
+                    return this.value;
+                }).get();
+
                 url = url.replace("search-page-offer", 'search-offer');
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location}
+                    data: {keyword:keyword,location:location,type:type}
                 }).done(function( data ) {
                     // insert data into div
                     $("#myUL").html(data);

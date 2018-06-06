@@ -44,7 +44,6 @@ class OfferType extends AbstractType
                 'choice_label' =>  'name',
                 'placeholder' => 'form.offer.contractType',
                 'choice_translation_domain' => 'messages',
-                'order_by' => 'name'
             ))
             ->add('image', ImageType::class, array(
                 'required' => false,

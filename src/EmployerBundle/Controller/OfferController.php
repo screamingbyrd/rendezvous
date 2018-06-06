@@ -246,6 +246,7 @@ class OfferController extends Controller
     public function searchAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
+        $type =  $request->get('type');
         $finder = $this->container->get('fos_elastica.finder.app.offer');
         $boolQuery = new \Elastica\Query\BoolQuery();
 
@@ -261,6 +262,12 @@ class OfferController extends Controller
             $boolQuery->addMust($fieldQuery);
         }
 
+        if(isset($type)){
+            $categoryQuery = new \Elastica\Query\Terms();
+            $categoryQuery->setTerms('contractType.name', $type);
+            $boolQuery->addMust($categoryQuery);
+        }
+
         $fieldQuery = new \Elastica\Query\Match();
         $fieldQuery->setFieldQuery('archived', false);
         $boolQuery->addMust($fieldQuery);
@@ -271,8 +278,14 @@ class OfferController extends Controller
     }
 
     public function searchPageAction(){
+        $contractTypeRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:ContractType')
+        ;
+        $contractType = $contractTypeRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig');
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType));
     }
 
 }
