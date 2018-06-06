@@ -17,7 +17,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $array = array('freelance','temporary','part-time','full-time','internship');
+        $array = array('freelance','temporary','parttime','fulltime','internship');
 
         foreach ($array as $name){
             $contract = new ContractType();

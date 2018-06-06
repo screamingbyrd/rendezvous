@@ -131,7 +131,7 @@
         </div>
 
         <script>
-            window.onload = function() {
+            function searchOffer() {
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let url = window.location.href;
@@ -146,26 +146,18 @@
                     // insert data into div
                     $("#myUL").html(data);
                 });
+            }
+
+            window.onload = function() {
+                searchOffer();
             };
 
-            $("#search-offer-form input[type='submit']").click(function() {
-                let keyword = $("#keyword-input").val();
-                let location = $("#location-input").val();
-                let url = window.location.href;
-                let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
-                    return this.value;
-                }).get();
+            $("#search-offer-form input[type='submit']").click(
+                searchOffer()
+            );
 
-                url = url.replace("search-page-offer", 'search-offer');
-                $.ajax({
-                    url: url,
-                    data: {keyword:keyword,location:location,type:type}
-                }).done(function( data ) {
-                    // insert data into div
-                    $("#myUL").html(data);
-                });
-
-                return false;
+            $(".type-contract-checkbox").change(function() {
+                searchOffer()
             });
 
             $(".offer-element").click(function() {

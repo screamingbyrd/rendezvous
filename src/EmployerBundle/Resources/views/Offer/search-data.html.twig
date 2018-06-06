@@ -1,7 +1,7 @@
 {% for offer in data %}
     {% if true %}
         <li>
-            <a class='offer-element'>
+            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
                 {% if offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
                 <div class="offer-search-element">
                     <div class="job-title-employer">

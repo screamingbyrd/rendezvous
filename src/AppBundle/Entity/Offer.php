@@ -110,7 +110,7 @@ class Offer
     private $diploma;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ContractType")
      */
     private $contractType;
 
