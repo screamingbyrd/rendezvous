@@ -14,6 +14,7 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
-/web/
+/web/build/
+/web/uploads/
 /node_modules/
 .idea/
