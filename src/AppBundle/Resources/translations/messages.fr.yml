@@ -83,6 +83,8 @@ offer:
       sure: Etes vous sure de vouloir booster vos offres, cela vous coutera %credit% crédits?
   endDate: Date de fin :
   archived: Archivée
+  applied:
+    success: Vous avez bien postulé à l'offre %title% !
 
 candidate:
   delete:

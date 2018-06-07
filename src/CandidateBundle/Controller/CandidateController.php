@@ -149,7 +149,34 @@ class CandidateController extends Controller
             return $this->redirectToRoute('create_candidate');
         }
 
-        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array());
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidate = $candidateRepository->findOneBy(array('user' => $user));
+
+        $postulatedOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers')
+        ;
+        $postulatedOffers = $postulatedOfferRepository->findBy(array('candidate' => $candidate));
+
+        $offerIdArray = array(1);
+
+        foreach ($postulatedOffers as $postulatedOffer) {
+            $offerIdArray[] = $postulatedOffer->getOffer()->getId();
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offers = $offerRepository->findById($offerIdArray);
+
+        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array('offers' => $offers));
     }
 
     public function deleteAction(Request $request){

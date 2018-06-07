@@ -10,6 +10,7 @@ namespace EmployerBundle\Controller;
 
 use AppBundle\Entity\Employer;
 use AppBundle\Entity\Offer;
+use AppBundle\Entity\PostulatedOffers;
 use AppBundle\Form\EmployerType;
 use AppBundle\Form\OfferType;
 use AppBundle\Entity\User;
@@ -354,6 +355,82 @@ class OfferController extends Controller
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+    }
+
+    public function applyAction(Request $request){
+        $session = $request->getSession();
+
+        $id = $request->get('id');
+        $cv = $request->get('cv');
+        $comment = $request->get('comment');
+        $target_dir = "uploads/images/candidate/";
+        $target_file = $target_dir . basename($_FILES["cv"]["name"]);
+        move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
+        $user = $this->getUser();
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+
+        $arrayEmail = array();
+
+        foreach ($users as $user){
+            $arrayEmail[] = $user->getEmail();
+        }
+        $firstUser = $arrayEmail[0];
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $message = (new \Swift_Message('A candidate applied to the offer: ' . $offer->getTitle()))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($firstUser)
+            ->setCc(array_shift($arrayEmail))
+            ->setBody(
+                $this->renderView(
+                // templates/emails/registration.html.twig
+                    'Emails/apply.html.twig',
+                    array('comment' => $comment)
+                ),
+                'text/html'
+            )
+            ->attach(\Swift_Attachment::fromPath($target_file));
+        ;
+
+        $mailer->send($message);
+        unlink($target_file);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $postulatedOffer = new PostulatedOffers();
+        $postulatedOffer->setCandidate($candidate);
+        $postulatedOffer->setOffer($offer);
+        $now =  new \DateTime();
+        $postulatedOffer->setDate($now);
+
+        $em->persist($postulatedOffer);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('offer.applied.success', array('title' => $offer->getTitle()));
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_candidate');
     }
 
 }

@@ -43,54 +43,5 @@ h1{
     box-sizing: border-box;
 }
 
-#myInput {
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-    width: 100%;
-    font-size: 16px;
-    padding: 12px 20px 12px 13px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-}
 
-#myUL {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
 
-#myUL li .offer-element {
-    border: 1px solid #ddd;
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 18px;
-    color: black;
-}
-
-#myUL li .offer-element:hover:not(.header) {
-    background-color: #eee;
-}
-.offer-element{
-    display: table;
-    width: 100%;
-}
-.element-offer-list{
-    margin-left: 5px;
-    margin-right: 5px;
-    float: right;
-}
-.description-offer-dashboard{
-    margin-top: 20px;
-}
-.collapse-offer-info{
-    display: none;
-}
-.archived-offer{
-    background-color: #dad9d9 !important;
-}
-.show-archived{
-    float: left;
-    margin-top: 15px;
-}

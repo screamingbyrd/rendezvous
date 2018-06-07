@@ -98,7 +98,14 @@
     </div>
 
     <hr>
-    </div>
+
+    <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data">
+        <div style="text-align: center">
+            <input name="cv" type="file" id="cv">
+            <textarea  name="comment" id="comment-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+            <input type="submit" class="btn btn-primary searchOffer" value="Search">
+        </div>
+    </form>
 
 
 {% endblock %}
