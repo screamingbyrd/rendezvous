@@ -49,8 +49,11 @@ form:
     delete:
       success: L'offre a bien été supprimé !
     activate:
-      success: L'offre a bien éé activée !
-      error: Vous n'assez de credit pour l'activée !
+      success: L'offre a bien été activée !
+      error: Vous n'avez pas assez de credit pour l'activée !
+    boost:
+      success: Vos annonces ont bien été boostées !
+      error: Vous n'avez pas assez de credit pour booster vos offres !
     search:
       keyword: Mots clefs
       location: Lieu de travail
@@ -69,12 +72,15 @@ dashboard:
     myOffers: Mes offres
     typeTitle: Entrer un titre
     searchTitle: Chercher un titre
+    boostOffers: Booster vos offres
 
 offer:
   delete:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:
       sure: Etes vous sure de vouloir activer cette offre, cela vous coutera %credit% crédit?
+  boost:
+      sure: Etes vous sure de vouloir booster vos offres, cela vous coutera %credit% crédits?
   endDate: Date de fin :
   archived: Archivée
 

@@ -57,6 +57,7 @@ class OfferController extends Controller
             $past = new \DateTime('01-01-1900');
             $offer->setStartDate($past);
             $offer->setEndDate($past);
+            $offer->setUpdateDate($past);
 
             $em->persist($offer);
             $em->flush();
@@ -228,9 +229,13 @@ class OfferController extends Controller
 
         $employer->setCredit($creditEmployer - $creditOffer);
 
-        $now = new \DateTime();
+        $now =  new \DateTime();
+        $next = new \DateTime();
+
         $offer->setStartDate($now);
-        $offer->setEndDate($now->modify( '+ 1 month' ));
+        $offer->setUpdateDate($now);
+
+        $offer->setEndDate($next->modify( '+ 2 month' ));
 
         $em = $this->getDoctrine()->getManager();
         $em->merge($offer);
@@ -274,7 +279,12 @@ class OfferController extends Controller
         $fieldQuery->setFieldQuery('archived', false);
         $boolQuery->addMust($fieldQuery);
 
-        $data = $finder->find($boolQuery);
+        $boolQuery->addMust($fieldQuery);
+
+        $query = new \Elastica\Query($boolQuery);
+
+        $query->setSort(array('updateDate' => 'desc'));
+        $data = $finder->find($query);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
@@ -283,7 +293,10 @@ class OfferController extends Controller
         return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $finalArray, 'page' => $currentPage, 'total' => $totalPage));
     }
 
-    public function searchPageAction(){
+    public function searchPageAction(Request $request){
+        $keywords = $request->get('keyword');
+        $location = $request->get('location');
+
         $contractTypeRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -291,7 +304,56 @@ class OfferController extends Controller
         ;
         $contractType = $contractTypeRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType));
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location));
+    }
+
+    public function boostAction(Request $request){
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        $creditEmployer = $employer->getCredit();
+        $creditBoost = $creditInfo->getBoostOffers();
+
+        if($creditEmployer < $creditBoost){
+            $translated = $this->get('translator')->trans('form.offer.boost.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $employer->setCredit($creditEmployer - $creditBoost);
+
+        $offerRepository->boostOffer($employer->getId());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($employer);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('form.offer.boost.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
 }

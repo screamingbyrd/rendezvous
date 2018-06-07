@@ -5,63 +5,6 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        #myInput {
-            background-position: 10px 12px;
-            background-repeat: no-repeat;
-            width: 100%;
-            font-size: 16px;
-            padding: 12px 20px 12px 13px;
-            border: 1px solid #ddd;
-            margin-bottom: 12px;
-        }
-
-        #myUL {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #myUL li .offer-element {
-            border: 1px solid #ddd;
-            margin-top: -1px; /* Prevent double borders */
-            background-color: #f6f6f6;
-            padding: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            color: black;
-        }
-
-        #myUL li .offer-element:hover:not(.header) {
-            background-color: #eee;
-        }
-        .offer-element{
-            display: table;
-            width: 100%;
-        }
-        .element-offer-list{
-            margin-left: 5px;
-            margin-right: 5px;
-            float: right;
-        }
-        .description-offer-dashboard{
-            margin-top: 20px;
-        }
-        .collapse-offer-info{
-            display: none;
-        }
-        .archived-offer{
-            background-color: #dad9d9 !important;
-        }
-        .show-archived{
-            float: left;
-            margin-top: 15px;
-        }
-    </style>
     <script>
 
         function myFunction() {
@@ -85,6 +28,9 @@
     <div class="container well">
 
         <h3>{{ 'dashboard.title' | trans }}</h3>
+
+        <button class="btn btn-primary element-offer-list  boost-offer" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
+
 
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
@@ -160,6 +106,20 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-boost">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-default" id="modal-btn-yes-boost">{{ 'yes'|trans }}</a>
+                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <script>
                 $(".offer-element").click(function() {
@@ -174,6 +134,11 @@
                 $(".activate-offer").on("click", function(e){
                     $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
                     $("#modal-activate").modal('show');
+                });
+
+                $(".boost-offer").on("click", function(e){
+                    $('#modal-btn-yes-boost').attr("href", $(this).data('href'));
+                    $("#modal-boost").modal('show');
                 });
 
                 $(".modal-btn-no").on("click", function(){

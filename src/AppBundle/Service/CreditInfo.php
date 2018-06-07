@@ -14,6 +14,7 @@ class CreditInfo
 {
 
     private $publishOffer = 1;
+    private $boostOffers = 3;
     private $featuredOffer = 10;
     private $featuredCompany = 10;
 
@@ -36,6 +37,24 @@ class CreditInfo
     public function setPublishOffer($publishOffer)
     {
         $this->publishOffer = $publishOffer;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBoostOffers()
+    {
+        return $this->boostOffers;
+    }
+
+    /**
+     * @param int $boostOffers
+     * @return CreditInfo
+     */
+    public function setBoostOffers($boostOffers)
+    {
+        $this->boostOffers = $boostOffers;
         return $this;
     }
 
