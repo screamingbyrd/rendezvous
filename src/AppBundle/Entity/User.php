@@ -50,6 +50,12 @@ class User extends BaseUser
      */
     private $employer;
 
+
+    /**
+     * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
+     */
+    protected $chargeId;
+
     /**
      * Set firstName
      *
@@ -122,5 +128,29 @@ class User extends BaseUser
     public function getEmployer()
     {
         return $this->employer;
+    }
+
+    /**
+     * Set chargeId
+     *
+     * @param string $chargeId
+     *
+     * @return User
+     */
+    public function setChargeId($chargeId)
+    {
+        $this->chargeId = $chargeId;
+
+        return $this;
+    }
+
+    /**
+     * Get chargeId
+     *
+     * @return string
+     */
+    public function getChargeId()
+    {
+        return $this->chargeId;
     }
 }

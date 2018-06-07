@@ -8,6 +8,6 @@ jobnow_credit:
     path:     /employer/credit
     defaults: { _controller: AppBundle:Credit:credit }
 
-jobnow_payement:
+jobnow_payment:
     path:     /employer/payment/{id}
     defaults: { _controller: AppBundle:Credit:credit }

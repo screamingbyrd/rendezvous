@@ -38,13 +38,6 @@ class CreditController extends Controller
 
 
 
-
-
-
-
-
-
-
                 $form = $this->get('form.factory')
                     ->createNamedBuilder('payment-form')
                     ->add('token', HiddenType::class, [
@@ -55,7 +48,16 @@ class CreditController extends Controller
                 if ($request->isMethod('POST')) {
                     $form->handleRequest($request);
                     if ($form->isValid()) {
-                        // TODO: charge the card
+                        try {
+                            $this->get('app.client.stripe')->createPremiumCharge($this->getUser(), $form->get('token')->getData(),2.925,$this->getUser()->getEmployer(),1);
+                            $redirect = $this->get('session')->get('premium_redirect');
+                        } catch (\Stripe\Error\Base $e) {
+                            $this->addFlash('warning', sprintf('Unable to take payment, %s', $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : 'please try again.'));
+                            $redirect = $this->generateUrl('premium_payment');
+                        } finally {
+                            return $this->redirect($redirect);
+                        }
+
                     }
                 }
                 return $this->render('AppBundle:Credit:stripePayment.html.twig', [
