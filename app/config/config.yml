@@ -71,6 +71,7 @@ fos_elastica:
                             id: ~
                             description: ~
                             title: { type: text, analyzer: autocomplete_analyzer }
+                            updateDate: { type: date }
                             location: { type: text, analyzer: autocomplete_analyzer }
                             archived: ~
                             contractType:

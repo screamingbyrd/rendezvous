@@ -57,6 +57,7 @@ class OfferController extends Controller
             $past = new \DateTime('01-01-1900');
             $offer->setStartDate($past);
             $offer->setEndDate($past);
+            $offer->setUpdateDate($past);
 
             $em->persist($offer);
             $em->flush();
@@ -230,7 +231,8 @@ class OfferController extends Controller
 
         $now = new \DateTime();
         $offer->setStartDate($now);
-        $offer->setEndDate($now->modify( '+ 1 month' ));
+        $offer->setUpdateDate($now);
+        $offer->setEndDate($now->modify( '+ 2 month' ));
 
         $em = $this->getDoctrine()->getManager();
         $em->merge($offer);
@@ -274,7 +276,12 @@ class OfferController extends Controller
         $fieldQuery->setFieldQuery('archived', false);
         $boolQuery->addMust($fieldQuery);
 
-        $data = $finder->find($boolQuery);
+        $boolQuery->addMust($fieldQuery);
+
+        $query = new \Elastica\Query($boolQuery);
+
+        $query->setSort(array('updateDate' => 'desc'));
+        $data = $finder->find($query);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
@@ -283,7 +290,10 @@ class OfferController extends Controller
         return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $finalArray, 'page' => $currentPage, 'total' => $totalPage));
     }
 
-    public function searchPageAction(){
+    public function searchPageAction(Request $request){
+        $keywords = $request->get('keyword');
+        $location = $request->get('location');
+
         $contractTypeRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -291,7 +301,7 @@ class OfferController extends Controller
         ;
         $contractType = $contractTypeRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType));
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location));
     }
 
 }

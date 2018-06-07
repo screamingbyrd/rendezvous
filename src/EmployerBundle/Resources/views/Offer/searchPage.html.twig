@@ -152,8 +152,8 @@
         <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
         <form method="post" action="" id="search-offer-form">
             <div>
-                <input type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
-                <input type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                <input value="{{ keyword }}" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                <input value="{{ location }}" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
                 <input type="submit" class="btn btn-primary searchOffer" value="Search">
                 <ul class="contractType-list">
                     {% for type in contractType %}
@@ -201,6 +201,11 @@
                 $("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
+                {% if keyword is not null and location is not null %}
+                    keyword = '{{ keyword }}';
+                    location = '{{ location }}';
+                {% endif %}
+
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
                     return this.value;

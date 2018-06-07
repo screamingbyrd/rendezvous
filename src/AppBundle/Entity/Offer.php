@@ -127,6 +127,13 @@ class Offer
     private $creationDate;
 
     /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="updateDate", type="datetime")
+     */
+    private $updateDate;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="archived", type="boolean")
@@ -518,6 +525,23 @@ class Offer
         return $this->employer;
     }
 
+    /**
+     * @return \datetime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * @param \datetime $updateDate
+     * @return Offer
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+        return $this;
+    }
 
     /**
      * @return boolean
