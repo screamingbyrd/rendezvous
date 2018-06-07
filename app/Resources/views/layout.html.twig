@@ -55,18 +55,9 @@
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('post_offer') }}">{{ 'header.employers.post'|trans }}</a></li>
                         <li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>
-                        <li><a href="">{{ 'header.employers.pricing'|trans }}</a></li>
+                        <li><a href="{{ path('jobnow_credit') }}">{{ 'header.employers.pricing'|trans }}</a></li>
                         <li><a href="{{ path('dashboard_employer') }}">{{ 'header.employers.dashboard'|trans }}</a></li>
-                        <li><a href="{{ path('create_employer') }}">{{ 'header.candidates.register'|trans }}</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">{{ 'header.about.title'|trans }}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="">{{ 'header.about.faq'|trans }}</a></li>
-                        <li><a href="">{{ 'header.about.privacy'|trans }}</a></li>
-                        <li><a href="">{{ 'header.about.terms'|trans }}</a></li>
+                        {% if app.user.roles is not defined or not 'ROLE_EMPLOYER' in app.user.roles %}<li><a href="{{ path('create_employer') }}">{{ 'header.candidates.register'|trans }}</a></li>{% endif %}
                     </ul>
                 </li>
             </ul>
@@ -122,6 +113,10 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">À propos</a></li>
                 <li><a href="#">Contact</a></li>
+                <li><a href="">{{ 'header.about.faq'|trans }}</a></li>
+                <li><a href="">{{ 'header.about.privacy'|trans }}</a></li>
+                <li><a href="">{{ 'header.about.terms'|trans }}</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right"></ul>

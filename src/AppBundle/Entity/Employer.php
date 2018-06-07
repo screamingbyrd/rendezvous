@@ -75,19 +75,9 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="latLong", type="string", length=255, nullable=true)
-     */
-    private $latLong;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
-
-
-
 
     private $email;
 
@@ -186,25 +176,6 @@ class Employer
         $this->location = $location;
         return $this;
     }
-
-    /**
-     * @return string
-     */
-    public function getLatLong()
-    {
-        return $this->latLong;
-    }
-
-    /**
-     * @param string $latLong
-     * @return Employer
-     */
-    public function setLatLong($latLong)
-    {
-        $this->latLong = $latLong;
-        return $this;
-    }
-
 
     /**
      * Get id

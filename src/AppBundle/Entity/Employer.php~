@@ -75,16 +75,12 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="latLong", type="string", length=255, nullable=true)
-     */
-    private $latLong;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="phone", type="string", length=255)
      */
     private $phone;
+
+
+
 
     private $email;
 
@@ -392,6 +388,8 @@ class Employer
     public function addUser(\AppBundle\Entity\User $user)
     {
         $this->user[] = $user;
+
+        $user->setEmployer($this);
 
         return $this;
     }

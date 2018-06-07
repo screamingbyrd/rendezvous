@@ -129,7 +129,7 @@ class Offer
     /**
      * @var \datetime
      *
-     * @ORM\Column(name="updateDate", type="datetime")
+     * @ORM\Column(name="updateDate", type="datetime", nullable=true)
      */
     private $updateDate;
 
