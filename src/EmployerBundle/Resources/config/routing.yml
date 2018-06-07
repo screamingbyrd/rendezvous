@@ -48,3 +48,6 @@ search_offer:
 search_page_offer:
     path:     /search-page-offer
     defaults: { _controller: EmployerBundle:Offer:searchPage }
+boost_offers:
+    path:     /boost-offer
+    defaults: { _controller: EmployerBundle:Offer:boost }

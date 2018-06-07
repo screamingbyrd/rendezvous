@@ -229,10 +229,13 @@ class OfferController extends Controller
 
         $employer->setCredit($creditEmployer - $creditOffer);
 
-        $now = new \DateTime();
+        $now =  new \DateTime();
+        $next = new \DateTime();
+
         $offer->setStartDate($now);
         $offer->setUpdateDate($now);
-        $offer->setEndDate($now->modify( '+ 2 month' ));
+
+        $offer->setEndDate($next->modify( '+ 2 month' ));
 
         $em = $this->getDoctrine()->getManager();
         $em->merge($offer);
@@ -302,6 +305,55 @@ class OfferController extends Controller
         $contractType = $contractTypeRepository->findAll();
 
         return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location));
+    }
+
+    public function boostAction(Request $request){
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        $creditEmployer = $employer->getCredit();
+        $creditBoost = $creditInfo->getBoostOffers();
+
+        if($creditEmployer < $creditBoost){
+            $translated = $this->get('translator')->trans('form.offer.boost.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $employer->setCredit($creditEmployer - $creditBoost);
+
+        $offerRepository->boostOffer($employer->getId());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($employer);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('form.offer.boost.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
 }

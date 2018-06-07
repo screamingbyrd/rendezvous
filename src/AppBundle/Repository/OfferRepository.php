@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function boostOffer($employerId)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'UPDATE AppBundle:offer o SET o.updateDate = CURRENT_TIMESTAMP() WHERE o.employer = '
+                .$employerId.' AND o.startDate < CURRENT_TIMESTAMP() AND o.endDate > CURRENT_TIMESTAMP()'
+            )->execute();
+    }
 }

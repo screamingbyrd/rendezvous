@@ -29,6 +29,9 @@
 
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
+        <button class="btn btn-primary element-offer-list  boost-offer" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
+
+
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
 
@@ -103,6 +106,20 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-boost">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn btn-default" id="modal-btn-yes-boost">{{ 'yes'|trans }}</a>
+                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <script>
                 $(".offer-element").click(function() {
@@ -117,6 +134,11 @@
                 $(".activate-offer").on("click", function(e){
                     $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
                     $("#modal-activate").modal('show');
+                });
+
+                $(".boost-offer").on("click", function(e){
+                    $('#modal-btn-yes-boost').attr("href", $(this).data('href'));
+                    $("#modal-boost").modal('show');
                 });
 
                 $(".modal-btn-no").on("click", function(){

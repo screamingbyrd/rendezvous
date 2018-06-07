@@ -254,7 +254,8 @@ class EmployerController extends Controller
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(
             'offers' => $offers,
-            'publishedOffer' => $creditInfo->getPublishOffer()
+            'publishedOffer' => $creditInfo->getPublishOffer(),
+            'boostOffers' => $creditInfo->getBoostOffers(),
         ));
     }
 
