@@ -9,7 +9,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\ContractType;
+use AppBundle\Entity\Tag;
+use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,15 +32,23 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title',      TextType::class, array('required' => false))
             ->add('description', TextareaType::class, array(
                 'required' => false,
             ))
-            ->add('experience', TextareaType::class, array(
-                'required' => false,
+
+
+
+
+            ->add('experience', ChoiceType::class, array('choices' => array(
+                'Haut' => 'Haut',
+                'Moyen' => 'Moyen',
+                'Bas' => 'Bas'),
+                'placeholder' => '-- Choisir le niveau d\'urgence --'
             ))
-            ->add('location', TextType::class, array(
-                'required' => false,
-            ))
+
+
+            ->add('location', PlaceAutocompleteType::class)
             ->add('contractType', EntityType::class, array(
                 'required' => false,
                 'class' => ContractType::class,
@@ -48,7 +59,17 @@ class OfferType extends AbstractType
             ->add('image', ImageType::class, array(
                 'required' => false,
             ))
-            ->add('title',      TextType::class, array('required' => false))
+
+            ->add('tag', EntityType::class, array(
+                'required' => false,
+                'class' => Tag::class,
+                'choice_label' =>  'name',
+                'placeholder' => 'Category',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+
+
             ->add('wage',      TextType::class, array('required' => false))
             ->add('benefits',      TextType::class, array('required' => false))
             ->add('diploma',      TextType::class, array('required' => false))
