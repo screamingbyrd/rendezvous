@@ -24,7 +24,7 @@ class AppController extends Controller
         ;
 
         $featuredEmployer = $featuredEmployerRepository->getCurrentFeaturedEmployer();
-
+        shuffle ($featuredEmployer);
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer
         ));

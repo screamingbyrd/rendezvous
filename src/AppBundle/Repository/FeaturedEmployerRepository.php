@@ -15,7 +15,7 @@ class FeaturedEmployerRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT fe FROM AppBundle:featuredEmployer fe WHERE fe.archived = 0 AND  fe.startDate < CURRENT_TIMESTAMP() '
+                'SELECT fe FROM AppBundle:featuredEmployer fe WHERE fe.archived = 0 AND  fe.startDate < CURRENT_TIMESTAMP() AND fe.endDate > CURRENT_TIMESTAMP()'
             )->execute();
     }
 
