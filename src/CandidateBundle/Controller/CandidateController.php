@@ -163,10 +163,11 @@ class CandidateController extends Controller
         ;
         $postulatedOffers = $postulatedOfferRepository->findBy(array('candidate' => $candidate));
 
-        $offerIdArray = array(1);
+        $offerIdArray = $finalArray = array();
 
         foreach ($postulatedOffers as $postulatedOffer) {
             $offerIdArray[] = $postulatedOffer->getOffer()->getId();
+            $finalArray[$postulatedOffer->getOffer()->getId()]['date'] = $postulatedOffer->getDate();
         }
 
         $offerRepository = $this
@@ -176,7 +177,11 @@ class CandidateController extends Controller
         ;
         $offers = $offerRepository->findById($offerIdArray);
 
-        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array('offers' => $offers));
+        foreach ($offers as $offer){
+            $finalArray[$offer->getId()]['offer'] = $offer;
+        }
+
+        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array('appliedOffer' => $finalArray));
     }
 
     public function deleteAction(Request $request){

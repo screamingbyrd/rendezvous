@@ -10,19 +10,19 @@
 
         <h4>Vous avez postulé à ces offres:</h4>
         <ul id="myUL">
-            {% for offer in offers %}
+            {% for offer in appliedOffer %}
                 <li>
-                    <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
-                        {% if offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+                    <a class='offer-element' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                        {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
                         <div class="offer-search-element">
                             <div class="job-title-employer">
-                                <div>{{ offer.title }}</div>
-                                <div>{{ offer.employer.name }}</div>
+                                <div>{{ offer.offer.title }}</div>
+                                <div>{{ offer.offer.employer.name }}</div>
                             </div>
 
-                            <span>{{ offer.location }}</span>
+                            <span>{{ offer.offer.location }}</span>
+                            <span class="applied-date">Postulé le {{ offer.date | date("d/m/Y")  }}</span>
                         </div>
-
                     </a>
                 </li>
             {% endfor %}

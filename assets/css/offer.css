@@ -73,6 +73,10 @@
     margin-left: 3%;
     display: inline-block;
 }
+.applied-date {
+    float: right;
+    margin-top: 14px;
+}
 .job-title-employer{
     vertical-align: middle;
     display: inline-block;
