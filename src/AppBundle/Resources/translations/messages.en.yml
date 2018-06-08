@@ -1,18 +1,20 @@
 header:
   findjob: Find a job
+  register: Register
   candidates:
     title: Candidates
     findJob: Find a job
     companies: Companies
     submit: Submit your resume
     dashboard: Dashboard
-    register: Register
+    register: Candidate
   employers:
     title: Employers
     post: Post a job
     findCandidate: Find a candidate
     pricing: Pricing
     dashboard: Dashborard
+    register: Employer
   about:
     title: About us
     faq: FAQ
@@ -35,6 +37,24 @@ form:
     exp0: -- Your experience --
     exp1: 0 to 2 years
     exp2: 2 to 5 years
+    exp3: 6 years and more
+    lis0: -- License --
+    lis1: License A
+    lis2: License A1
+    lis3: License A2
+    lis3: License B
+    lis4: License BE
+    lis5: License C
+    lis6: License CE
+    lis7: License C1
+    lis8: License C1E
+    lis9: License D
+    lis10: License D1
+    lis11: License DE
+    lis12: License D1E
+    lis13: License F
+
+
   offer:
     creation:
       success: The offer has been created !

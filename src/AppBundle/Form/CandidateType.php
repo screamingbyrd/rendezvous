@@ -33,6 +33,7 @@ class CandidateType extends AbstractType
             ->add('experience', ChoiceType::class, array('choices' => array(
                 'form.registration.exp1' => 'form.registration.exp1',
                 'form.registration.exp2' => 'form.registration.exp2',
+                'form.registration.exp3' => 'form.registration.exp3',
             ),
                 'placeholder' => 'form.registration.exp0',
             ))

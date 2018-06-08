@@ -2,6 +2,7 @@ yes: oui
 no: non
 
 header:
+  register: S'inscrire
   findjob: Trouver un travail
   candidates:
     title: Candidats
@@ -9,13 +10,14 @@ header:
     companies: Entreprise
     submit: Envoyer votre cv
     dashboard: Tableau de bord
-    register: S'inscrire
+    register: Candidat
   employers:
     title: Employeurs
     post: Poster une offre
     findCandidate: Trouver un candidat
     pricing: Prix
     dashboard: Tableau de bord
+    register: Employeur
   about:
     title: A propos de nous
     faq: FAQ
@@ -40,6 +42,30 @@ form:
     exp0: -- Indiquez votre expérience --
     exp1: 0 à 2 ans
     exp2: 2 à 5 ans
+    exp3: 6 ans et plus
+    lis0: -- Permis --
+    lis1: Permis A
+    lis2: Permis A1
+    lis3: Permis A2
+    lis3: Permis B
+    lis4: Permis BE
+    lis5: Permis C
+    lis6: Permis CE
+    lis7: Permis C1
+    lis8: Permis C1E
+    lis9: Permis D
+    lis10: Permis D1
+    lis11: Permis DE
+    lis12: Permis D1E
+    lis13: Permis F
+
+
+
+
+
+
+
+
   offer:
     creation:
       success: L'offre a bien été crée !

@@ -35,20 +35,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li><a href="">{{ 'header.candidates.companies'|trans }}</a></li>
 
+                {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
-                        <li><a href="">{{ 'header.candidates.companies'|trans }}</a></li>
-                        <li><a href="">{{ 'header.candidates.submit'|trans }}</a></li>
                         <li><a href="{{ path('dashboard_candidate') }}">{{ 'header.candidates.dashboard'|trans }}</a></li>
-                        {% if app.user.roles is not defined or not 'ROLE_CANDIDATE' in app.user.roles %}<li><a href="{{ path('create_candidate') }}">{{ 'header.candidates.register'|trans }}</a></li>{% endif %}
                     </ul>
-
                 </li>
+                {% endif %}
 
+                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
@@ -57,10 +57,12 @@
                         <li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>
                         <li><a href="{{ path('jobnow_credit') }}">{{ 'header.employers.pricing'|trans }}</a></li>
                         <li><a href="{{ path('dashboard_employer') }}">{{ 'header.employers.dashboard'|trans }}</a></li>
-                        {% if app.user.roles is not defined or not 'ROLE_EMPLOYER' in app.user.roles %}<li><a href="{{ path('create_employer') }}">{{ 'header.candidates.register'|trans }}</a></li>{% endif %}
                     </ul>
                 </li>
+                {% endif %}
             </ul>
+
+
 
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -86,6 +88,16 @@
                         </ul>
                     </li>
                 {% else %}
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{ 'header.register'|trans }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('create_employer') }}">{{ 'header.employers.register'|trans }}</a></li>
+                            <li><a href="{{ path('create_candidate') }}">{{ 'header.candidates.register'|trans }}</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
                 {% endif %}
                 <li class="dropdown">

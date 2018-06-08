@@ -13,14 +13,10 @@ use AppBundle\Entity\Tag;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -37,14 +33,13 @@ class OfferType extends AbstractType
                 'required' => false,
             ))
 
-
-
-
-            ->add('experience', ChoiceType::class, array('choices' => array(
-                'Haut' => 'Haut',
-                'Moyen' => 'Moyen',
-                'Bas' => 'Bas'),
-                'placeholder' => '-- Choisir le niveau d\'urgence --'
+            ->add('tag', EntityType::class, array(
+                'required' => false,
+                'class' => Tag::class,
+                'choice_label' =>  'name',
+                'placeholder' => 'Category',
+                'multiple' => true,
+                'expanded' => false,
             ))
 
 
@@ -56,23 +51,71 @@ class OfferType extends AbstractType
                 'placeholder' => 'form.offer.contractType',
                 'choice_translation_domain' => 'messages',
             ))
+
+            ->add('experience', ChoiceType::class, array('choices' => array(
+                'form.registration.exp1' => 'form.registration.exp1',
+                'form.registration.exp2' => 'form.registration.exp2',
+                'form.registration.exp3' => 'form.registration.exp3',
+
+            ),
+                'placeholder' => 'form.registration.exp0',
+            ))
+
+
+            ->add('diploma', ChoiceType::class, array('choices' => array(
+                'form.registration.exp1' => 'form.registration.exp1',
+                'form.registration.exp2' => 'form.registration.exp2',
+                'form.registration.exp3' => 'form.registration.exp3',
+
+            ),
+                'placeholder' => 'form.registration.exp0',
+            ))
+
+            ->add('wage', ChoiceType::class, array('choices' => array(
+                'form.registration.exp1' => 'form.registration.exp1',
+
+            ),
+                'required' => false,
+                'placeholder' => 'form.registration.exp0',
+            ))
+
+            ->add('benefits', ChoiceType::class, array('choices' => array(
+                'form.registration.exp1' => 'form.registration.exp1',
+                'form.registration.exp2' => 'form.registration.exp2',
+                'form.registration.exp3' => 'form.registration.exp3',
+
+            ),
+                'required' => false,
+
+                'placeholder' => 'form.registration.exp0',
+            ))
+
+            ->add('license', ChoiceType::class, array('choices' => array(
+                'form.registration.lis1' => 'form.registration.lis1',
+                'form.registration.lis2' => 'form.registration.lis2',
+                'form.registration.lis3' => 'form.registration.lis3',
+                'form.registration.lis4' => 'form.registration.lis4',
+                'form.registration.lis5' => 'form.registration.lis5',
+                'form.registration.lis6' => 'form.registration.lis6',
+                'form.registration.lis7' => 'form.registration.lis7',
+                'form.registration.lis8' => 'form.registration.lis8',
+                'form.registration.lis9' => 'form.registration.lis9',
+                'form.registration.lis10' => 'form.registration.lis10',
+                'form.registration.lis11' => 'form.registration.lis11',
+                'form.registration.lis12' => 'form.registration.lis12',
+                'form.registration.lis13' => 'form.registration.lis13',
+            ),
+                'placeholder' => 'form.registration.lis0',
+                'multiple' => true,
+                'required' => false,
+            ))
+
+
             ->add('image', ImageType::class, array(
                 'required' => false,
             ))
 
-            ->add('tag', EntityType::class, array(
-                'required' => false,
-                'class' => Tag::class,
-                'choice_label' =>  'name',
-                'placeholder' => 'Category',
-                'multiple' => true,
-                'expanded' => true,
-            ))
 
-
-            ->add('wage',      TextType::class, array('required' => false))
-            ->add('benefits',      TextType::class, array('required' => false))
-            ->add('diploma',      TextType::class, array('required' => false))
             ->add('submit',      SubmitType::class)
             ->getForm()
         ;

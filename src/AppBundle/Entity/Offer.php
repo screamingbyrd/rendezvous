@@ -49,9 +49,9 @@ class Offer
     private $location;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -140,6 +140,13 @@ class Offer
 
      */
     protected $archived = 0;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="license", type="array", nullable=true)
+     */
+    private $license;
 
     /**
      * Get id
@@ -410,6 +417,7 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->license = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate =  new \datetime();
     }
 
@@ -552,4 +560,48 @@ class Offer
         return ($now >= $this->startDate) && ($now <= $this->endDate);
     }
 
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param $license
+     *
+     * @return Offer
+     */
+    public function addLicense($license)
+    {
+        $this->license[] = $license;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param $license
+     */
+    public function removeLicense($license)
+    {
+        $this->license->removeElement($license);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLicense()
+    {
+        return $this->license;
+    }
 }
