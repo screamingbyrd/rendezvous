@@ -15,7 +15,7 @@ class CreditInfo
 
     private $publishOffer = 1;
     private $boostOffers = 3;
-    private $featuredOffer = 10;
+    private $featuredOffer = 11;
     private $featuredEmployer = 10;
 
     public function __construct()

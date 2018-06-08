@@ -35,7 +35,20 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
 
+        <div class="row">
+            {%  for offer in featuredOffer %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+                    <div class="caption">
+                        <h3>{{ offer.offer.title }}</h3>
+                        <p>{{ offer.offer.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
 

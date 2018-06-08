@@ -4,6 +4,7 @@ namespace EmployerBundle\Controller;
 
 use AppBundle\Entity\Employer;
 use AppBundle\Entity\FeaturedEmployer;
+use AppBundle\Entity\FeaturedOffer;
 use AppBundle\Form\EmployerType;
 use AppBundle\Form\OfferType;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -325,6 +326,90 @@ class EmployerController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('featured_employer_page');
+    }
+
+    public function featuredOfferPageAction(Request $request){
+        $user = $this->getUser();
+
+        $featuredOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedOffer')
+        ;
+        $featuredOffer = $featuredOfferRepository->findBy(array('archived' => 0));
+        $featuredArray = array();
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offers = $offerRepository->findBy(array('employer' => $user->getEmployer()));
+
+        foreach ($featuredOffer as $item) {
+
+            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getId();
+        }
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        return $this->render('EmployerBundle::featuredOffer.html.twig', array(
+            'featuredOfferArray' => $featuredArray,
+            'user' => $user,
+            'featuredOfferCredit' => $creditInfo->getFeaturedOffer(),
+            'offers' => $offers
+        ));
+    }
+
+    public function reserveFeaturedOfferAction(Request $request){
+        $date = $request->get('date');
+        $userId = $request->get('user');
+        $offerId = $request->get('offerId');
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offer = $offerRepository->findById($offerId);
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        $employer = $user->getEmployer();
+
+        $creditEmployer = $employer->getCredit();
+        $creditFeaturedOffer = $creditInfo->getFeaturedOffer();
+
+        if($creditEmployer < $creditFeaturedOffer){
+            $translated = $this->get('translator')->trans('form.offer.activate.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $employer->setCredit($creditEmployer - $creditFeaturedOffer);
+
+        $featuredOffer = new FeaturedOffer();
+        $featuredOffer->setOffer($offer[0]);
+        $startDate = new \DateTime($date['date']);
+        $endDate = new \DateTime($date['date']);
+
+        $featuredOffer->setStartDate($startDate);
+        $featuredOffer->setEndDate($endDate->modify( '+ 1 week' ));
+        $featuredOffer->setArchived(0);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($featuredOffer);
+        $em->flush();
+
+        return $this->redirectToRoute('featured_offer_page');
     }
 
 }

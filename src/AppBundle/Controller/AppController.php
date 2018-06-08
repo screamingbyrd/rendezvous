@@ -24,9 +24,19 @@ class AppController extends Controller
         ;
 
         $featuredEmployer = $featuredEmployerRepository->getCurrentFeaturedEmployer();
+
+        $featuredOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedOffer')
+        ;
+
+        $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
         shuffle ($featuredEmployer);
+        shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(
-            'featuredEmployer' => $featuredEmployer
+            'featuredEmployer' => $featuredEmployer,
+            'featuredOffer' => $featuredOffer
         ));
 
     }
