@@ -38,6 +38,13 @@ class PostulatedOffers
      */
     private $date;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    private $archived;
+
 
     /**
      * Get id
@@ -119,5 +126,31 @@ class PostulatedOffers
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param bool $archived
+     * @return PostulatedOffers
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+        return $this;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->archived = 0;
     }
 }

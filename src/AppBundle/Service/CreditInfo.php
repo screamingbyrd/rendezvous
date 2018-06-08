@@ -16,7 +16,7 @@ class CreditInfo
     private $publishOffer = 1;
     private $boostOffers = 3;
     private $featuredOffer = 10;
-    private $featuredCompany = 10;
+    private $featuredEmployer = 10;
 
     public function __construct()
     {
@@ -79,18 +79,18 @@ class CreditInfo
     /**
      * @return int
      */
-    public function getFeaturedCompany()
+    public function getFeaturedEmployer()
     {
-        return $this->featuredCompany;
+        return $this->featuredEmployer;
     }
 
     /**
-     * @param int $featuredCompany
+     * @param int $featuredEmployer
      * @return CreditInfo
      */
-    public function setFeaturedCompany($featuredCompany)
+    public function setFeaturedEmployer($featuredEmployer)
     {
-        $this->featuredCompany = $featuredCompany;
+        $this->featuredEmployer = $featuredEmployer;
         return $this;
     }
 

@@ -3,6 +3,7 @@
 namespace EmployerBundle\Controller;
 
 use AppBundle\Entity\Employer;
+use AppBundle\Entity\FeaturedEmployer;
 use AppBundle\Form\EmployerType;
 use AppBundle\Form\OfferType;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -257,6 +258,73 @@ class EmployerController extends Controller
             'publishedOffer' => $creditInfo->getPublishOffer(),
             'boostOffers' => $creditInfo->getBoostOffers(),
         ));
+    }
+
+    public function featuredEmployerPageAction(Request $request){
+        $user = $this->getUser();
+
+        $featuredEmployerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedEmployer')
+        ;
+
+        $featuredEmployer = $featuredEmployerRepository->findBy(array('archived' => 0));
+        $featuredArray = array();
+
+        foreach ($featuredEmployer as $item) {
+
+            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getEmployer()->getId();
+        }
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        return $this->render('EmployerBundle::featuredEmployer.html.twig', array(
+            'featuredEmployerArray' => $featuredArray,
+            'user' => $user,
+            'featuredEmployerCredit' => $creditInfo->getFeaturedEmployer(),
+        ));
+    }
+
+    public function reserveFeaturedEmployerAction(Request $request){
+        $date = $request->get('date');
+        $userId = $request->get('user');
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        $employer = $user->getEmployer();
+
+        $creditEmployer = $employer->getCredit();
+        $creditFeaturedEmployer = $creditInfo->getFeaturedEmployer();
+
+        if($creditEmployer < $creditFeaturedEmployer){
+            $translated = $this->get('translator')->trans('form.offer.activate.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $employer->setCredit($creditEmployer - $creditFeaturedEmployer);
+
+        $featuredEmployer = new FeaturedEmployer();
+        $featuredEmployer->setEmployer($employer);
+        $startDate = new \DateTime($date['date']);
+        $endDate = new \DateTime($date['date']);
+
+        $featuredEmployer->setStartDate($startDate);
+        $featuredEmployer->setEndDate($endDate->modify( '+ 1 week' ));
+        $featuredEmployer->setArchived(0);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($featuredEmployer);
+        $em->flush();
+
+        return $this->redirectToRoute('featured_employer_page');
     }
 
 }

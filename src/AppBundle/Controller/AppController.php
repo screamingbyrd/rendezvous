@@ -17,8 +17,16 @@ class AppController extends Controller
 
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Default:index.html.twig', array(
+        $featuredEmployerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedEmployer')
+        ;
 
+        $featuredEmployer = $featuredEmployerRepository->getCurrentFeaturedEmployer();
+
+        return $this->render('AppBundle:Default:index.html.twig', array(
+            'featuredEmployer' => $featuredEmployer
         ));
 
     }

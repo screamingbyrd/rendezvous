@@ -1,0 +1,92 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Register - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    <div class="container">
+        Featured Employer
+        <table>
+            {% set firstWeekStart = '2017-01-01 00:00' %}
+            {% set modify = 0 %}
+            {% for i in 1..12 %}
+
+                <tr>
+                    <td>
+                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}
+                        {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
+                    </td>
+                    {% set modify = modify+ 1  %}
+                    <td>
+                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        {{ firstWeekStart|date_modify("+"~  modify  ~"week")|date("d/m/Y") }}
+                        {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
+                    </td>
+                    {% set modify = modify+ 1  %}
+                    <td>
+                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        {{ firstWeekStart|date_modify("+"~ modify  ~"week")|date("d/m/Y") }}
+                        {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
+                    </td>
+                    {% set modify = modify+ 1  %}
+                    <td>
+                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        {{ firstWeekStart|date_modify("+" ~ modify  ~"week")|date("d/m/Y") }}
+                        {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
+                    </td>
+                    {% set modify = modify+ 1  %}
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-featured">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'offer.boost.sure'|trans({'%credit%': featuredEmployerCredit}) }}</h4>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" id="modal-btn-yes-reserve-featured-employer">{{ 'yes'|trans }}</a>
+                    <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(".reserve-featured-employer").on("click", function(e){
+            $('#modal-btn-yes-reserve-featured-employer').attr("href", $(this).data('href'));
+            $("#modal-featured").modal('show');
+        });
+
+        $(".modal-btn-no").on("click", function(){
+            $(".modal").modal('hide');
+        });
+
+    </script>
+
+
+{% endblock %}

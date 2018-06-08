@@ -102,3 +102,7 @@ fulltime: Full time
 parttime: Part time
 internship: Internship
 temporary: Temporary
+
+featured:
+  employer:
+    reserve: Book

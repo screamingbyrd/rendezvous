@@ -56,3 +56,9 @@ search_page_offer:
 boost_offers:
     path:     /boost-offer
     defaults: { _controller: EmployerBundle:Offer:boost }
+featured_employer_page:
+    path:     /featured-employer
+    defaults: { _controller: EmployerBundle:Employer:featuredEmployerPage }
+reserve_featured_employer:
+    path:     /reserve-featured-employer
+    defaults: { _controller: EmployerBundle:Employer:reserveFeaturedEmployer }

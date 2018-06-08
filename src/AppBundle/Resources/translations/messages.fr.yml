@@ -106,3 +106,7 @@ fulltime: CDI
 parttime: Mi-temps
 internship: Stage
 temporary: CDD
+
+featured:
+  employer:
+    reserve: Réserver
