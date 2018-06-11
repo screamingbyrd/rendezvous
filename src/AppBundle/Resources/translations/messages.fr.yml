@@ -2,6 +2,7 @@ yes: oui
 no: non
 
 header:
+  register: S'inscrire
   findjob: Trouver un travail
   candidates:
     title: Candidats
@@ -9,13 +10,14 @@ header:
     companies: Entreprise
     submit: Envoyer votre cv
     dashboard: Tableau de bord
-    register: S'inscrire
+    register: Candidat
   employers:
     title: Employeurs
     post: Poster une offre
     findCandidate: Trouver un candidat
     pricing: Prix
     dashboard: Tableau de bord
+    register: Employeur
   about:
     title: A propos de nous
     faq: FAQ
@@ -38,8 +40,61 @@ form:
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     exp0: -- Indiquez votre expérience --
+    exp00: -- Experience requierement --
     exp1: 0 à 2 ans
     exp2: 2 à 5 ans
+    exp3: 6 ans et plus
+    lis0: -- Permis --
+    lis1: Permis A
+    lis2: Permis A1
+    lis3: Permis A2
+    lis3: Permis B
+    lis4: Permis BE
+    lis5: Permis C
+    lis6: Permis CE
+    lis7: Permis C1
+    lis8: Permis C1E
+    lis9: Permis D
+    lis10: Permis D1
+    lis11: Permis DE
+    lis12: Permis D1E
+    lis13: Permis F
+
+
+
+
+    dip0: -- Diploma --
+    dip1: BTS
+    dip2: Master
+    dip3: Doctor
+    dip4: Bachelor
+    dip5: License
+
+    ben0: -- Benefits you offer --
+    ben1: Parking
+    ben2: Lunch pass
+    ben3: 13th month
+    ben4: Company car
+
+    wag0: -- Salary wage --
+    wag1: Up to 20,000 €
+    wag2: Up to 25,000 €
+    wag3: Up to 30,000 €
+    wag4: Up to 35,000 €
+    wag5: Up to 40,000 €
+    wag6: Up to 50,000 €
+    wag7: Up to 60,000 €
+    wag8: Up to 70,000 €
+    wag9: Up to 80,000 €
+    wag10: Up to 90,000 €
+
+
+
+
+
+
+
+
   offer:
     creation:
       success: L'offre a bien été crée !

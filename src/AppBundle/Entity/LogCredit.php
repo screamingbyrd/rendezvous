@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * logCredit
  *
  * @ORM\Table(name="log_credit")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\logCreditRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LogCreditRepository")
  */
 class LogCredit
 {
@@ -28,6 +28,15 @@ class LogCredit
      */
     private $credit;
 
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+
     /**
      * @var \DateTime
      *
@@ -39,7 +48,7 @@ class LogCredit
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $employerId;
+    private $employer;
 
 
     /**
@@ -103,24 +112,48 @@ class LogCredit
     /**
      * Set employerId
      *
-     * @param integer $employerId
+     * @param integer $employer
      *
      * @return logCredit
      */
-    public function setEmployerId($employerId)
+    public function setEmployer($employer)
     {
-        $this->employerId = $employerId;
+        $this->employer = $employer;
 
         return $this;
     }
 
     /**
-     * Get employerId
+     * Get employer
      *
      * @return int
      */
-    public function getEmployerId()
+    public function getEmployer()
     {
-        return $this->employerId;
+        return $this->employer;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return LogCredit
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

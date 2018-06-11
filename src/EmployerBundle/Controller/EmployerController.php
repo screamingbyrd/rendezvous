@@ -53,7 +53,6 @@ class EmployerController extends Controller
                 $employer->setCredit(0);
                 $employer->setWhyUs($data->getWhyUs());
                 $employer->setLocation($data->getLocation());
-                $employer->setLatLong($data->getLatlong());
                 $employer->setPhone($data->getPhone());
                 $employer->addUser($user);
                 $employer->setLogo($data->getLogo());
@@ -113,6 +112,8 @@ class EmployerController extends Controller
 
                 $userManager = $this->get('fos_user.user_manager');
 
+                $user->setUsername($data->getEmail());
+                $user->setUsernameCanonical($data->getEmail());
                 $user->setEmail($data->getEmail());
                 $user->setEmailCanonical($data->getEmail());
                 $user->setFirstName($data->getFirstName());
@@ -123,7 +124,6 @@ class EmployerController extends Controller
                 $employer->setDescription($data->getDescription());
                 $employer->setWhyUs($data->getWhyUs());
                 $employer->setLocation($data->getLocation());
-                $employer->setLatLong($data->getLatlong());
                 $employer->setPhone($data->getPhone());
                 $employer->addUser($user);
                 $employer->setLogo($data->getLogo());
@@ -250,7 +250,12 @@ class EmployerController extends Controller
 
         $_SESSION['archived'] = $archived;
 
+
+
         $offers = $OfferRepository->findBy($searchArray);
+
+
+
         $creditInfo = $this->container->get('app.credit_info');
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(

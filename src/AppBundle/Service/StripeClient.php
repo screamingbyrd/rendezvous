@@ -19,34 +19,31 @@ class StripeClient
         $this->em = $em;
         $this->logger = $logger;
     }
-    public function createPremiumCharge(User $user, $token, $amount, Employer $employer, $pack)
+    public function createPremiumCharge(User $user, $token, $amount, Employer $employer, $nbrCredit)
     {
         try {
+            $customer = \Stripe\Customer::create(array(
+                'email' => $user->getEmail(),
+                'card'  => $token
+            ));
+
             $charge = \Stripe\Charge::create([
+                'customer' => $customer->id,
                 'amount' => $this->config['decimal'] ? $amount * 100 : $amount,
                 'currency' => $this->config['currency'],
-                'description' => 'Premium blog access',
-                'source' => $token,
+                'description' => $nbrCredit.' JobNow credits',
+
                 'receipt_email' => $user->getEmail(),
             ]);
         } catch (\Stripe\Error\Base $e) {
-            $this->logger->error(sprintf('%s exception encountered when creating a premium payment: "%s"', get_class($e), $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(sprintf('%s exception encountered when creating a credit payment: "%s"', get_class($e), $e->getMessage()), ['exception' => $e]);
             throw $e;
         }
         $user->setChargeId($charge->id);
 
         $credit = $employer->getCredit();
-        switch ($pack){
-            case 1:
-                $credit += 1;
-                break;
-            case 2:
-                $credit += 10;
-                break;
-            case 3:
-                $credit += 50;
-                break;
-        }
+
+        $credit += $nbrCredit;
 
         $employer->setCredit($credit);
 

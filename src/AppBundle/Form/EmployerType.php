@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 
+use AppBundle\Entity\Tag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -48,12 +50,20 @@ class EmployerType extends AbstractType
                 'required' => false,
 
             ))
+
+            ->add('tag', EntityType::class, array(
+                'required' => false,
+                'class' => Tag::class,
+                'choice_label' =>  'name',
+                'placeholder' => 'Category',
+                'multiple' => true,
+                'expanded' => true,
+            ))
+
             ->add('location', PlaceAutocompleteType::class)
-            ->add('latLong')
             ->add('phone', TelType::class)
             ->add('logo', ImageType::class)
             ->add('coverImage', ImageType::class)
-
 
             ->add('Enregistrer',      SubmitType::class)
         ;

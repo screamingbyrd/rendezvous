@@ -36,21 +36,27 @@ class Offer
     private $endDate;
 
     /**
-     * @var int
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist","remove"})
      *
-     * @ORM\Column(name="employerId", type="integer")
      */
-    private $employerId;
+    private $employer;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="location", type="string", length=255)
+     */
+    private $location;
+
+    /**
+     *
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\Image", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
 
@@ -76,9 +82,9 @@ class Offer
     private $countContact;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="wage", type="integer")
+     * @ORM\Column(name="wage", type="string")
      */
     private $wage;
 
@@ -104,15 +110,43 @@ class Offer
     private $diploma;
 
     /**
-     * @ORM\OneToOne(targetEntity="AI\AppBundle\Entity\ContractType", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ContractType")
      */
     private $contractType;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AI\AppBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
      */
     private $tag;
 
+    /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="updateDate", type="datetime", nullable=true)
+     */
+    private $updateDate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archived", type="boolean")
+
+     */
+    protected $archived = 0;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="license", type="array", nullable=true)
+     */
+    private $license;
 
     /**
      * Get id
@@ -170,30 +204,6 @@ class Offer
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set employerId
-     *
-     * @param integer $employerId
-     *
-     * @return Offer
-     */
-    public function setEmployerId($employerId)
-    {
-        $this->employerId = $employerId;
-
-        return $this;
-    }
-
-    /**
-     * Get employerId
-     *
-     * @return int
-     */
-    public function getEmployerId()
-    {
-        return $this->employerId;
     }
 
     /**
@@ -401,5 +411,186 @@ class Offer
     }
 
 
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creationDate =  new \datetime();
+    }
 
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return Offer
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @return \datetime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \datetime $creationDate
+     * @return Offer
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param boolean $archived
+     * @return Offer
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     * @return Offer
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * Set employer
+     *
+     * @param \AppBundle\Entity\Employer $employer
+     *
+     * @return Offer
+     */
+    public function setEmployer(\AppBundle\Entity\Employer $employer = null)
+    {
+        $this->employer = $employer;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\Employer
+     */
+    public function getEmployer()
+    {
+        return $this->employer;
+    }
+
+    /**
+     * @return \datetime
+     */
+    public function getUpdateDate()
+    {
+        return $this->updateDate;
+    }
+
+    /**
+     * @param \datetime $updateDate
+     * @return Offer
+     */
+    public function setUpdateDate($updateDate)
+    {
+        $this->updateDate = $updateDate;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActive()
+    {
+        $now = new \datetime();
+        return ($now >= $this->startDate) && ($now <= $this->endDate);
+    }
+
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return array
+     */
+    public function getLicense()
+    {
+        return $this->license;
+    }
+
+    /**
+     * Set license
+     *
+     * @param array
+     *
+     * @return Offer
+     */
+    public function setLicense($license)
+    {
+        $this->license = $license;
+
+        return $this;
+    }
+}

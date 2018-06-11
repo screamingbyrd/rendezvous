@@ -21,7 +21,7 @@
                     <div class="caption">
                         <h3>1 Credit</h3>
                         <p>No Bonus</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Buy</a></p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="btn btn-primary" role="button">Buy</a></p>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <div class="caption">
                         <h3>10 Credits</h3>
                         <p>+ 10€ Bonus</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Buy</a> </p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="btn btn-primary" role="button">Buy</a> </p>
                     </div>
                 </div>
             </div>
@@ -41,16 +41,32 @@
                     <div class="caption">
                         <h3>50 Credits</h3>
                         <p>+ 100 € Bonus</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Buy</a></p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="btn btn-primary" role="button">Buy</a></p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <h3>History</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <table style="width:100%">
+                        <tr>
+                            <th>Date</th>
+                            <th>Credit(s)</th>
+                            <th>Price</th>
+                        </tr>
+                        {% for logCredit in logsCredit %}
+                            <tr>
+                                <td>{{ logCredit.date|date('d-m-Y H:i:s') }}</td>
+                                <td>{{ logCredit.credit }}</td>
+                                <td>{{ logCredit.price|localizedcurrency('EUR') }}</td>
 
-
-
-
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
     </div>
 
 {% endblock %}

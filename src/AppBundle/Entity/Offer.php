@@ -49,9 +49,9 @@ class Offer
     private $location;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -82,9 +82,9 @@ class Offer
     private $countContact;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="wage", type="integer")
+     * @ORM\Column(name="wage", type="string")
      */
     private $wage;
 
@@ -96,9 +96,9 @@ class Offer
     private $experience;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="benefits", type="string", length=255)
+     * @ORM\Column(name="benefits", type="array", nullable=true)
      */
     private $benefits;
 
@@ -129,7 +129,7 @@ class Offer
     /**
      * @var \datetime
      *
-     * @ORM\Column(name="updateDate", type="datetime")
+     * @ORM\Column(name="updateDate", type="datetime", nullable=true)
      */
     private $updateDate;
 
@@ -140,6 +140,13 @@ class Offer
 
      */
     protected $archived = 0;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="license", type="array", nullable=true)
+     */
+    private $license;
 
     /**
      * Get id
@@ -552,4 +559,38 @@ class Offer
         return ($now >= $this->startDate) && ($now <= $this->endDate);
     }
 
+
+    /**
+     * Get archived
+     *
+     * @return boolean
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return array
+     */
+    public function getLicense()
+    {
+        return $this->license;
+    }
+
+    /**
+     * Set license
+     *
+     * @param array
+     *
+     * @return Offer
+     */
+    public function setLicense($license)
+    {
+        $this->license = $license;
+
+        return $this;
+    }
 }
