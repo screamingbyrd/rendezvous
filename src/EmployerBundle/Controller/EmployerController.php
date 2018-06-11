@@ -330,7 +330,7 @@ class EmployerController extends Controller
 
     public function featuredOfferPageAction(Request $request){
         $user = $this->getUser();
-
+        $employer = $user->getEmployer();
         $featuredOfferRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -348,8 +348,10 @@ class EmployerController extends Controller
         $offers = $offerRepository->findBy(array('employer' => $user->getEmployer()));
 
         foreach ($featuredOffer as $item) {
-
-            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getOffer()->getId();
+            $featuredArray[$item->getStartDate()->format('d/m/Y')]['ids'][] = $item->getOffer()->getId();
+            if($item->getOffer()->getEmployer() == $employer){
+                $featuredArray[$item->getStartDate()->format('d/m/Y')]['titles'][] = $item->getOffer()->getTitle();
+            }
         }
 
         $creditInfo = $this->container->get('app.credit_info');

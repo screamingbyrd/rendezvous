@@ -32,6 +32,22 @@ class AppController extends Controller
         ;
 
         $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($featuredOffer as $offer){
+            $now = new \DateTime();
+            $next = new \DateTime();
+            if($offer->getOffer()->getEndDate() < $now){
+                $offer->getOffer()->setStartDate($now);
+                $offer->getOffer()->setUpdateDate($now);
+
+                $offer->getOffer()->setEndDate($next->modify( '+ 2 month' ));
+
+                $em->merge($offer->getOffer());
+                $em->flush();
+            }
+        }
+
         shuffle ($featuredEmployer);
         shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(

@@ -15,7 +15,7 @@ class FeaturedOfferRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT fo FROM AppBundle:featuredOffer fo WHERE fo.archived = 0 AND  fo.startDate < CURRENT_TIMESTAMP() AND fo.endDate > CURRENT_TIMESTAMP()'
+                'SELECT fo FROM AppBundle:featuredOffer fo WHERE fo.archived = 0 AND  fo.startDate <= CURRENT_TIMESTAMP() AND fo.endDate > CURRENT_TIMESTAMP()'
             )->execute();
     }
 
