@@ -39,7 +39,7 @@ class OfferType extends AbstractType
                 'choice_label' =>  'name',
                 'placeholder' => 'Category',
                 'multiple' => true,
-                'expanded' => false,
+                'expanded' => true,
             ))
 
 
@@ -63,31 +63,44 @@ class OfferType extends AbstractType
 
 
             ->add('diploma', ChoiceType::class, array('choices' => array(
-                'form.registration.exp1' => 'form.registration.exp1',
-                'form.registration.exp2' => 'form.registration.exp2',
-                'form.registration.exp3' => 'form.registration.exp3',
-
+                'form.registration.dip1' => 'form.registration.dip1',
+                'form.registration.dip2' => 'form.registration.dip2',
+                'form.registration.dip3' => 'form.registration.dip3',
+                'form.registration.dip4' => 'form.registration.dip4',
+                'form.registration.dip5' => 'form.registration.dip5',
             ),
-                'placeholder' => 'form.registration.exp0',
+                'placeholder' => 'form.registration.dip0',
             ))
 
             ->add('wage', ChoiceType::class, array('choices' => array(
-                'form.registration.exp1' => 'form.registration.exp1',
+                'form.registration.wag1' => 'form.registration.wag1',
+                'form.registration.wag2' => 'form.registration.wag2',
+                'form.registration.wag3' => 'form.registration.wag3',
+                'form.registration.wag4' => 'form.registration.wag4',
+                'form.registration.wag5' => 'form.registration.wag5',
+                'form.registration.wag6' => 'form.registration.wag6',
+                'form.registration.wag7' => 'form.registration.wag7',
+                'form.registration.wag8' => 'form.registration.wag8',
+                'form.registration.wag9' => 'form.registration.wag9',
+                'form.registration.wag10' => 'form.registration.wag10',
 
             ),
                 'required' => false,
-                'placeholder' => 'form.registration.exp0',
+                'placeholder' => 'form.registration.wag0',
             ))
 
             ->add('benefits', ChoiceType::class, array('choices' => array(
-                'form.registration.exp1' => 'form.registration.exp1',
-                'form.registration.exp2' => 'form.registration.exp2',
-                'form.registration.exp3' => 'form.registration.exp3',
+                'form.registration.ben1' => 'form.registration.ben1',
+                'form.registration.ben2' => 'form.registration.ben2',
+                'form.registration.ben3' => 'form.registration.ben3',
+                'form.registration.ben4' => 'form.registration.ben4',
 
             ),
                 'required' => false,
+                'multiple' => true,
+                'expanded' => true,
 
-                'placeholder' => 'form.registration.exp0',
+                'placeholder' => 'form.registration.ben0',
             ))
 
             ->add('license', ChoiceType::class, array('choices' => array(
@@ -107,6 +120,7 @@ class OfferType extends AbstractType
             ),
                 'placeholder' => 'form.registration.lis0',
                 'multiple' => true,
+                'expanded' => true,
                 'required' => false,
             ))
 

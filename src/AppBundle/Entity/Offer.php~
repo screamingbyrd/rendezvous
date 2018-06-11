@@ -84,7 +84,7 @@ class Offer
     /**
      * @var string
      *
-     * @ORM\Column(name="wage", type="string", nullable=true)
+     * @ORM\Column(name="wage", type="string")
      */
     private $wage;
 
@@ -321,7 +321,7 @@ class Offer
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getWage()
     {
@@ -329,7 +329,7 @@ class Offer
     }
 
     /**
-     * @param string $wage
+     * @param int $wage
      * @return Offer
      */
     public function setWage($wage)
@@ -417,7 +417,6 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->license = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate =  new \datetime();
     }
 
@@ -581,4 +580,17 @@ class Offer
         return $this->license;
     }
 
+    /**
+     * Set license
+     *
+     * @param array
+     *
+     * @return Offer
+     */
+    public function setLicense($license)
+    {
+        $this->license = $license;
+
+        return $this;
+    }
 }

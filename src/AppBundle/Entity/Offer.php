@@ -82,9 +82,9 @@ class Offer
     private $countContact;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="wage", type="integer")
+     * @ORM\Column(name="wage", type="string")
      */
     private $wage;
 
@@ -96,9 +96,9 @@ class Offer
     private $experience;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="benefits", type="string", length=255)
+     * @ORM\Column(name="benefits", type="array", nullable=true)
      */
     private $benefits;
 
@@ -417,7 +417,6 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->license = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate =  new \datetime();
     }
 
@@ -572,36 +571,26 @@ class Offer
     }
 
     /**
-     * Add tag
-     *
-     * @param $license
-     *
-     * @return Offer
-     */
-    public function addLicense($license)
-    {
-        $this->license[] = $license;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param $license
-     */
-    public function removeLicense($license)
-    {
-        $this->license->removeElement($license);
-    }
-
-    /**
      * Get tag
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return array
      */
     public function getLicense()
     {
         return $this->license;
+    }
+
+    /**
+     * Set license
+     *
+     * @param array
+     *
+     * @return Offer
+     */
+    public function setLicense($license)
+    {
+        $this->license = $license;
+
+        return $this;
     }
 }

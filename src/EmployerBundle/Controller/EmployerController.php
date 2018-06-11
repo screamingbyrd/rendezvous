@@ -248,7 +248,12 @@ class EmployerController extends Controller
 
         $_SESSION['archived'] = $archived;
 
+
+
         $offers = $OfferRepository->findBy($searchArray);
+
+
+
         $creditInfo = $this->container->get('app.credit_info');
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(

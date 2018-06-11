@@ -29,16 +29,20 @@ header:
 
 form:
   registration:
+    title:
+      candidate: Register as acandidate
     firstname: First name
     lastname: Last name
     successEmployer: You successfully register as an employer !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: E-mail adress already used !
     exp0: -- Your experience --
+    exp00: -- Experience requierement --
     exp1: 0 to 2 years
     exp2: 2 to 5 years
     exp3: 6 years and more
-    lis0: -- License --
+
+    lis0: -- License requirement --
     lis1: License A
     lis2: License A1
     lis3: License A2
@@ -53,6 +57,33 @@ form:
     lis11: License DE
     lis12: License D1E
     lis13: License F
+
+    dip0: -- Diploma --
+    dip1: BTS
+    dip2: Master
+    dip3: Doctor
+    dip4: Bachelor
+    dip5: License
+
+    ben0: -- Benefits you offer --
+    ben1: Parking
+    ben2: Lunch pass
+    ben3: 13th month
+    ben4: Company car
+
+    wag0: -- Salary wage --
+    wag1: Up to 20,000 €
+    wag2: Up to 25,000 €
+    wag3: Up to 30,000 €
+    wag4: Up to 35,000 €
+    wag5: Up to 40,000 €
+    wag6: Up to 50,000 €
+    wag7: Up to 60,000 €
+    wag8: Up to 70,000 €
+    wag9: Up to 80,000 €
+    wag10: Up to 90,000 €
+
+
 
 
   offer:
