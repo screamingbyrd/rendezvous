@@ -23,37 +23,135 @@
             </p>
         </div>
 
-        <div class="row">
+        <div class="row featured-offer animated">
+            {% if featuredOffer|length > 1 %}
+                <h1>Featured Jobs</h1>
+            {% endif %}
+            {% if featuredOffer|length == 1 %}
+                {% set blocOffer = 12 %}
+            {% elseif featuredOffer|length == 2 %}
+                {% set blocOffer = 6 %}
+            {% else %}
+                {% set blocOffer = 4 %}
+            {% endif %}
+            {%  for offer in featuredOffer %}
+                <a class="col-sm-6 col-md-{{ blocOffer }} zoom" href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                    <div class="thumbnail">
+                        <div class="offer-thumb-image-div">
+                        {% if offer.offer.image is not null %}<img class="offer-thumb-image" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.image, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                        {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="offer-thumb-logo" />{% endif %}
+                        </div>
+                        <div class="caption">
+                            <h3>{{ offer.offer.title }} / {{ offer.offer.id }}</h3>
+                            <p>{{ offer.offer.location }} / {{ offer.offer.contractType.name |trans }}</p>
+                            <p>{{ offer.offer.description }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+
+        <div class="row featured-employer animated">
+            {% if featuredEmployer|length > 1 %}
+                <h1>Featured Employer</h1>
+            {% endif %}
+            {% if featuredEmployer|length == 1 %}
+                {% set blocEmployer = 12 %}
+            {% elseif featuredEmployer|length == 2 %}
+                {% set blocEmployer = 6 %}
+            {% else %}
+                {% set blocEmployer = 4 %}
+            {% endif %}
             {%  for employer in featuredEmployer %}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    {% if employer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+            <a class="col-sm-6 col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
+                <div class="thumbnail" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
                     <div class="caption">
                         <h3>{{ employer.employer.name }}</h3>
-                        <p>{{ employer.employer.description }}</p>
+                        <div class="thumb-employer-info">
+                            {% if employer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
+                            <p>{{ employer.employer.description }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
-
-        <div class="row">
-            {%  for offer in featuredOffer %}
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
-                    <div class="caption">
-                        <h3>{{ offer.offer.title }}</h3>
-                        <p>{{ offer.offer.description }}</p>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
 
 
     </div>
+
+    <style>
+        .thumb-employer-info{
+            display: inline-flex;
+        }
+        .employer-thumb-logo{
+            width: 40%;
+            height: 40%;
+            margin-right: 4%;
+        }
+        .offer-thumb-image-div{
+            position: relative;
+            min-height: 315px;
+        }
+        .offer-thumb-image{
+            width: 100%;
+        }
+        .col-md-4 .offer-thumb-image{
+            height: 200px !important;
+        }
+        .col-md-4 .offer-thumb-image-div{
+            min-height: 200px;
+        }
+        .offer-thumb-logo{
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 20%;
+        }
+        .zoom {
+            transition: transform .2s;
+            text-decoration: none !important;
+            margin-top: 10px;
+        }
+        .zoom:hover {
+            -ms-transform: scale(1.1); /* IE 9 */
+            -webkit-transform: scale(1.1); /* Safari 3-8 */
+            transform: scale(1.1);
+        }
+    </style>
+
+    <script>
+        $.fn.visible = function(partial) {
+
+            let $t            = $(this),
+                $w            = $(window),
+                viewTop       = $w.scrollTop(),
+                viewBottom    = viewTop + $w.height(),
+                _top          = $t.offset().top,
+                _bottom       = _top + $t.height(),
+                compareTop    = partial === true ? _bottom : _top,
+                compareBottom = partial === true ? _top : _bottom;
+
+            return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+
+        };
+
+        if( $('.featured-offer').visible(true)){
+            $('.featured-offer').addClass('fadeInRight');
+        }
+        if( $('.featured-employer').visible(true)){
+            $('.featured-employer').addClass('fadeInLeft');
+        }
+
+        $(window).scroll(function() {
+            if( $('.featured-offer').visible(true)){
+                $('.featured-offer').addClass('fadeInRight');
+            }
+            if( $('.featured-employer').visible(true)){
+                $('.featured-employer').addClass('fadeInLeft');
+            }
+        });
+    </script>
 
 {% endblock %}
 

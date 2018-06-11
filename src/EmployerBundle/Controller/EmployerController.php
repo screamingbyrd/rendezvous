@@ -121,7 +121,6 @@ class EmployerController extends Controller
 
                 $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
-                $employer->setCredit(0);
                 $employer->setWhyUs($data->getWhyUs());
                 $employer->setLocation($data->getLocation());
                 $employer->setLatLong($data->getLatlong());

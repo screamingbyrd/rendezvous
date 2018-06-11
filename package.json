@@ -3,5 +3,7 @@
     "@symfony/webpack-encore": "^0.20.1",
     "webpack-notifier": "^1.6.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "animate.css": "^3.6.1"
+  }
 }
