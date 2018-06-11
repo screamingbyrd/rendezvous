@@ -349,7 +349,7 @@ class EmployerController extends Controller
 
         foreach ($featuredOffer as $item) {
 
-            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getId();
+            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getOffer()->getId();
         }
 
         $creditInfo = $this->container->get('app.credit_info');
