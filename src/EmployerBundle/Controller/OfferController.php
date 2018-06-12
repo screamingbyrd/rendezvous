@@ -361,7 +361,6 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $id = $request->get('id');
-        $cv = $request->get('cv');
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . basename($_FILES["cv"]["name"]);

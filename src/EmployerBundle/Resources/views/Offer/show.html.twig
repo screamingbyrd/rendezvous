@@ -1,33 +1,89 @@
-{% extends "::layout.html.twig" %}
 
+{% extends "AppBundle::layout.html.twig" %}
 
-{% block content %}
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
 
-    <div class="candidate-header">
-        <h2 class="page-title candidate-name">{{ offer.title }}</h2>
+{% block body %}
+
+    <div class="jumbotron offer-jumbotron">
+        <h2>{{ offer.title }}</h2>
         <h3 class="page-subtitle">
-            <div class="job-title">offer.location</div>
+            <div class="job-title">{{ offer.contractType.name |trans }}</div>
+            <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">Postée le {{ offer.creationDate |date('Y-m-d')}}</div>
-
+            <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
         </h3>
     </div>
-    <style>
-        .candidate-header{
-            text-align: center;
-            overflow: hidden;
-            padding: 20px 0;
-            background: transparent;
-            border-bottom: 1px solid rgba(204,204,204,.41);
-            margin-bottom: 30px;
-            display: block;
-            position:relative;
 
-        }
-        .candidate-header::after{
-            opacity:0.3;
+    <div class="container">
+
+        <!-- <div class="container candidate-body">
+            <ul class="nav nav-pills nav-candidate">
+                <li class="active">
+                    <a  href="#1" data-toggle="tab">Description</a>
+                </li>
+                <li><a href="#2" data-toggle="tab">Experience</a>
+                </li>
+                <li><a href="#3" data-toggle="tab">Autre</a>
+                </li>
+            </ul>
+
+            <div class="tab-content candidate-content">
+                <div class="tab-pane active" id="1">
+                    <h3>{{ offer.description }}</h3>
+                </div>
+                <div class="tab-pane" id="2">
+                    <h3>{{ offer.experience }}</h3>
+                </div>
+                <div class="tab-pane" id="3">
+                </div>
+            </div>
+        </div>-->
+
+        <div class="row about-the-offer animated">
+            <h1>About the offer</h1>
+            <div class="col-sm-6 col-md-6">
+                <h4>Wage</h4>
+                {{ offer.wage |trans }}
+                <h4>Experience</h4>
+                {{ offer.experience |trans }}
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <h4>Diploma</h4>
+                {{ offer.diploma |trans }}
+            </div>
+        </div>
+
+        <div class="row job-description animated">
+            <h1>Job description</h1>
+            {{ offer.description }}
+        </div>
+
+       <div class="apply-div-form">
+            <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
+
+            <div class="container">
+                <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
+                    <div class="inside-offer-apply">
+                        <div class="inside-offer-apply-cv">
+                            {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
+                        </div>
+                        <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+                        <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <style>
+        .offer-jumbotron::after{
             content: '';
-            background-image:url({{asset('images/candidate.jpg')}});
-            background-size: 100% 350px;
+            background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
+            background-size: cover;
             background-repeat: no-repeat;
             width: 100%;
             height: 100%;
@@ -36,76 +92,17 @@
             position:absolute;
             z-index: -1;
         }
-        .page-subtitle{
-            text-align: center;
-            font-size: 18px;
-        }
-        .job-title, .updated-date{
-            display: inline-block;
-            padding: 20px;
-        }
-        .candidate-body{
-            text-align: center;
-            height:  300px;
-        }
-        .nav-candidate{
-            display: inline-block;
-        }
-        .candidate-content{
-            display: inline-flex;
-            width: 80%;
-        }
-        .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-            color: #ea3222;
-            background-color: #fff;
-        }
-        .candidate-action{
-            text-align: center;
-        }
-        .link-social{
-            display: inline-block;
-            padding: 20px;
-        }
-        .contact-button{
-            color: #ea3222;
-            background-color: #fff;
-
-        }
     </style>
+    <script>
 
+        $(".apply-button").click(function() {
+            {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                $("#search-offer-homepage").slideToggle("medium");
+            {% else %}
+                window.location.replace('{{ path('create_candidate') }}');
+            {% endif %}
 
-    <div class="container candidate-body">
-        <ul class="nav nav-pills nav-candidate">
-            <li class="active">
-                <a  href="#1" data-toggle="tab">Description</a>
-            </li>
-            <li><a href="#2" data-toggle="tab">Experience</a>
-            </li>
-            <li><a href="#3" data-toggle="tab">Autre</a>
-            </li>
-        </ul>
-
-        <div class="tab-content candidate-content">
-            <div class="tab-pane active" id="1">
-                <h3>{{ offer.description }}</h3>
-            </div>
-            <div class="tab-pane" id="2">
-                <h3>{{ offer.experience }}</h3>
-            </div>
-            <div class="tab-pane" id="3">
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-    <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data">
-        <div style="text-align: center">
-            <input name="cv" type="file" id="cv">
-            <textarea  name="comment" id="comment-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
-            <input type="submit" class="btn btn-primary searchOffer" value="Search">
-        </div>
-    </form>
-
+        });
+    </script>
 
 {% endblock %}

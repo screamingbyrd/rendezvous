@@ -126,6 +126,11 @@ offer:
       sure: Are you sure that you want to boost yout offers?This will cost you %credit% credits?
   endDate: End date:
   archived: Archived
+  apply:
+    title: Apply
+    addCV: Add your resume:
+    coverLetter: Cover letter (optional)
+    send: Send your CV
   applied:
     success: You applied to the offer %title% !
 

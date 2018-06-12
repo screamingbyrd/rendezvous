@@ -43,5 +43,111 @@ h1{
     box-sizing: border-box;
 }
 
+.homepage-search-bar{
+    text-align: center;
+    border: 1px solid black;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1.5;
+    width: 50%;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.jumbotron{
+    text-align: center;
+}
+.homepage-jumbotron, .offer-jumbotron{
+    text-align: center;
+    overflow: hidden;
+    padding: 95px  0;
+    background: transparent;
+    background:rgba(0,0,0,0.6);
+    margin-bottom: 30px;
+    display: block;
+    position:relative;
+    color: orange;
+    margin-top: -14px;
+}
+
+.homepage-jumbotron #keyword-input{
+    color: #333;
+    margin-right: 9px
+}
+.homepage-jumbotron #location-input{
+    color: #333;
+}
+.homepage-subtitle{
+    margin-bottom: 60px !important;
+}
+.background-offer{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.6);
+    opacity: 0.5;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.thumbnail{
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+.header-thumb-employer{
+    display: inline-flex;
+    padding-top: 4px;
+}
+.header-thumb-employer h3{
+    margin-top: 12px;
+
+}
+.thumb-employer-info{
+    font-size: 16px;
+    margin: 10px;
+    height: 100px;
+}
+.employer-thumb-logo{
+    width: 62px;
+    height: 45px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.offer-thumb-image-div{
+    position: relative;
+}
+.col-md-4 .offer-thumb-image{
+    height: 200px !important;
+}
+.col-md-4 .offer-thumb-image-div{
+    min-height: 200px;
+}
+.offer-thumb-logo{
+    width: 20%;
+}
+.offer-thumb-description{
+    height: 100px;
+}
+.zoom {
+    transition: transform .2s;
+    text-decoration: none !important;
+    color:#333;
+    margin-top: 10px;
+}
+.zoom:hover {
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1);
+    color:#333;
+}
 
 
