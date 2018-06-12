@@ -48,9 +48,9 @@ class Candidate
     private $experience;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="license", type="string", length=255, nullable=false)
+     * @ORM\Column(name="license", type="array", nullable=true)
      */
     private $license;
 
@@ -87,9 +87,9 @@ class Candidate
     private $typeContract;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
-     * @ORM\JoinTable(name="candidate_tag")
-     */
+ * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
+ * @ORM\JoinTable(name="candidate_tag")
+ */
     private $tag;
 
     /**

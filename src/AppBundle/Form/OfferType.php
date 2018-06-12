@@ -37,13 +37,14 @@ class OfferType extends AbstractType
                 'required' => false,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
-                'placeholder' => 'Category',
+                'attr' => array('class' => 'select2'),
+                'choices_as_values' => true,
                 'multiple' => true,
-                'expanded' => true,
             ))
 
 
             ->add('location', PlaceAutocompleteType::class)
+
             ->add('contractType', EntityType::class, array(
                 'required' => false,
                 'class' => ContractType::class,
@@ -96,6 +97,7 @@ class OfferType extends AbstractType
                 'form.registration.ben4' => 'form.registration.ben4',
 
             ),
+                'attr' => array('class' => 'select2'),
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
@@ -117,10 +119,11 @@ class OfferType extends AbstractType
                 'form.registration.lis11' => 'form.registration.lis11',
                 'form.registration.lis12' => 'form.registration.lis12',
                 'form.registration.lis13' => 'form.registration.lis13',
+                'form.registration.lis14' => 'form.registration.lis14',
             ),
-                'placeholder' => 'form.registration.lis0',
+                'attr' => array('class' => 'select2'),
+                'choices_as_values' => true,
                 'multiple' => true,
-                'expanded' => true,
                 'required' => false,
             ))
 

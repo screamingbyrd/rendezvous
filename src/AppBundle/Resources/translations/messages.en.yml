@@ -30,7 +30,7 @@ header:
 form:
   registration:
     title:
-      candidate: Register as acandidate
+      candidate: Register as a candidate
     firstname: First name
     lastname: Last name
     successEmployer: You successfully register as an employer !
@@ -46,17 +46,17 @@ form:
     lis1: License A
     lis2: License A1
     lis3: License A2
-    lis3: License B
-    lis4: License BE
-    lis5: License C
-    lis6: License CE
-    lis7: License C1
-    lis8: License C1E
-    lis9: License D
-    lis10: License D1
-    lis11: License DE
-    lis12: License D1E
-    lis13: License F
+    lis4: License B
+    lis5: License BE
+    lis6: License C
+    lis7: License CE
+    lis8: License C1
+    lis9: License C1E
+    lis10: License D
+    lis11: License D1
+    lis12: License DE
+    lis13: License D1E
+    lis14: License F
 
     dip0: -- Diploma --
     dip1: BTS
