@@ -164,4 +164,8 @@ temporary: CDD
 
 featured:
   employer:
+    title: Employeurs en avant
+    reserve: Réserver
+  offer:
+    title: Offres en avant
     reserve: Réserver

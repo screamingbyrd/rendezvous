@@ -29,6 +29,9 @@
 
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
+        <a href="{{ path('featured_offer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.offer.title' | trans }}</a>
+        <a href="{{ path('featured_employer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.employer.title' | trans }}</a>
+
         <button class="btn btn-primary element-offer-list  boost-offer" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
 
 

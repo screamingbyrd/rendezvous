@@ -155,5 +155,9 @@ internship: Internship
 temporary: Temporary
 
 featured:
-  employer:
+  empoyer:
+    title: Featured Employer
+    reserve: Book
+  offer:
+    title: Featured Offer
     reserve: Book
