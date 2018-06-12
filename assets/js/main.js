@@ -3,7 +3,12 @@
 require('../css/main.css');
 require('../css/employer.css');
 require('../css/offer.css');
-var $ = require('jquery');
+
+// require jQuery normally
+const $ = require('jquery');
+
+// create global $ and jQuery variables
+global.$ = global.jQuery = $;
 
 $.fn.visible = function(partial) {
 
@@ -21,6 +26,9 @@ $.fn.visible = function(partial) {
 };
 
 $(document).ready(function() {
+
+    $('.select2').select2();
+
     //main page
 
     if( $('.featured-offer').visible(true)){
@@ -61,7 +69,3 @@ $(document).ready(function() {
 
 
 });
-
-
-
-

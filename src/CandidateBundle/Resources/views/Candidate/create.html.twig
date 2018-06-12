@@ -1,13 +1,14 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}
-   - {{ parent() }}
+  {{ 'form.registration.title.candidate' | trans }} - {{ parent() }}
 {% endblock %}
 
 {% block content %}
-    <h3></h3>
+    <h3>{{ 'form.registration.title.candidate' | trans }}</h3>
 
     <div class="well">
         {{ form(form) }}
     </div>
+
 {% endblock %}
