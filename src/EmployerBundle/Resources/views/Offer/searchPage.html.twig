@@ -62,10 +62,6 @@
                 $("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
-                {% if keyword is not null and location is not null %}
-                    keyword = '{{ keyword }}';
-                    location = '{{ location }}';
-                {% endif %}
 
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
