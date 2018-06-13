@@ -280,3 +280,9 @@
 .button-company-name{
     color: orange !important;
 }
+.tag-offer{
+    margin-right: 5px;
+}
+.tag-offer i{
+    margin-right: 3px;
+}
