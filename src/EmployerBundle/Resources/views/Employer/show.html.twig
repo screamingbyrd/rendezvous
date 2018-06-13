@@ -25,6 +25,7 @@
                 {{ ivory_google_api([map]) }}
 
             </div>
+            {% if offers[0] is defined %}
             <div class="col-md-4 last-offers">
                 <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
                 <ul class="last-job-list">
@@ -47,6 +48,7 @@
                 </ul>
                 <a class="job-see-all">Toute nos offres</a>
             </div>
+            {% endif %}
         </div>
         <style>
             .article-title{

@@ -19,6 +19,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class OfferType extends AbstractType
 {
@@ -44,6 +46,8 @@ class OfferType extends AbstractType
 
 
             ->add('location', PlaceAutocompleteType::class)
+
+            ->add('availableDate',      DateType::class, array('required' => false, 'attr' => ['class' => 'js-datepicker'], 'html5' => false,))
 
             ->add('contractType', EntityType::class, array(
                 'required' => false,
