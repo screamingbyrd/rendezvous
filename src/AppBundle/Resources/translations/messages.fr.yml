@@ -34,8 +34,11 @@ form:
   registration:
     title:
       candidate: S'incrire en tant que candidat
+    email: Email
     firstname: Prénom
     lastname: Nom
+    description: Description
+    license: Driving Licence(s)
     success: Vous êtes à présent inscrit en temps que recruteur !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
@@ -50,17 +53,17 @@ form:
     lis1: Permis A
     lis2: Permis A1
     lis3: Permis A2
-    lis3: Permis B
-    lis4: Permis BE
-    lis5: Permis C
-    lis6: Permis CE
-    lis7: Permis C1
-    lis8: Permis C1E
-    lis9: Permis D
-    lis10: Permis D1
-    lis11: Permis DE
-    lis12: Permis D1E
-    lis13: Permis F
+    lis4: Permis B
+    lis5: Permis BE
+    lis6: Permis C
+    lis7: Permis CE
+    lis8: Permis C1
+    lis9: Permis C1E
+    lis10: Permis D
+    lis11: Permis D1
+    lis12: Permis DE
+    lis13: Permis D1E
+    lis14: Permis F
 
 
 
@@ -90,6 +93,11 @@ form:
     wag9: Up to 80,000 €
     wag10: Up to 90,000 €
 
+    searchedtag: Domaine de compétences désirées
+    searchedtagPH: -- Listez vos compétences désirées --
+
+    tag: Domaine de compétences
+    tagPH: -- Listez vos compétences désirées --
 
 
 

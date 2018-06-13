@@ -24,9 +24,22 @@ class CandidateType extends AbstractType
     {
         $builder
 
-            ->add('email',      EmailType::class, array('required' => true))
-            ->add('firstName',      TextType::class, array('required' => true))
-            ->add('lastName',      TextType::class, array('required' => true))
+            ->add('email',      EmailType::class, array(
+                'required' => true,
+                'label' => 'form.registration.email',
+
+
+
+            ))
+            ->add('firstName',      TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.firstname',
+                ))
+            ->add('lastName',      TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.lastname'
+
+            ))
 
 
             ->add('password', RepeatedType::class, array(
@@ -42,9 +55,15 @@ class CandidateType extends AbstractType
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
 
-            ->add('description',      TextType::class, array('required' => false))
+            ->add('description',      TextType::class, array(
+                'required' => false,
+                'label' => 'form.registration.description'
+                ))
 
-            ->add('age',      TextType::class, array('required' => false))
+            ->add('age',      TextType::class, array(
+                'required' => false,
+                'label' => 'form.registration.description'
+            ))
 
             ->add('experience', ChoiceType::class, array('choices' => array(
                 'form.registration.exp1' => 'form.registration.exp1',
@@ -71,17 +90,21 @@ class CandidateType extends AbstractType
             ),
 
                 'multiple' => true,
-                'expanded' => true,
                 'required' => false,
+                'attr' => array('class' => 'select2'),
+                'label' => 'form.registration.license',
+                'placeholder' => 'form.registration.lis0'
             ))
 
             ->add('searchedtag', EntityType::class, array(
                 'required' => false,
+                'label' => 'form.registration.searchedtag',
                 'class' => Tag::class,
                 'choice_label' =>  'name',
-                'placeholder' => 'Category',
+                'placeholder' => 'form.registration.searchedtagPH',
                 'multiple' => true,
-                'expanded' => true,
+                'attr' => array('class' => 'select2'),
+
             ))
 
             ->add('tag', EntityType::class, array(

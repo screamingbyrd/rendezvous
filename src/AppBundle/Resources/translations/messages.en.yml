@@ -31,8 +31,11 @@ form:
   registration:
     title:
       candidate: Register as a candidate
+    email: Email
     firstname: First name
     lastname: Last name
+    description: Description
+    license: Permis de conduire
     successEmployer: You successfully register as an employer !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: E-mail adress already used !
@@ -82,6 +85,9 @@ form:
     wag8: Up to 70,000 €
     wag9: Up to 80,000 €
     wag10: Up to 90,000 €
+
+    searchedtag: Wanted Skills area
+    searchedtagPH: -- List your wanted skills --
 
 
 
