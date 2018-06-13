@@ -145,6 +145,8 @@ offer:
     addCV: Ajouter votre CV :
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
+  countView: Nombre de vue
+  countContact: Nombre de contact
 
   applied:
     success: Vous avez bien postulé à l'offre %title% !

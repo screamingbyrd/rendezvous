@@ -133,6 +133,8 @@ offer:
     send: Send your CV
   applied:
     success: You applied to the offer %title% !
+  countView: View count
+  countContact: Contact count
 
 candidate:
   delete:

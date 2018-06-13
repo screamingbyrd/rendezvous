@@ -31,39 +31,26 @@ $(document).ready(function() {
 
     //main page
 
-    if( $('.featured-offer').visible(true)){
-        $('.featured-offer').addClass('fadeInRight');
+    if( $('.fade-in-right').visible(true)){
+        $('.fade-in-right').addClass('fadeInRight');
     }
-    if( $('.featured-employer').visible(true)){
-        $('.featured-employer').addClass('fadeInLeft');
+    if( $('.fade-in-left').visible(true)){
+        $('.fade-in-left').addClass('fadeInLeft');
     }
 
     if( $('.jobnow-description').visible(true)){
         $('.jobnow-description').addClass('fadeInRight');
     }
 
-    if( $('.about-the-offer').visible(true)){
-        $('.about-the-offer').addClass('fadeInRight');
-    }
-    if( $('.job-description').visible(true)){
-        $('.job-description').addClass('fadeInLeft');
-    }
-
     $(window).scroll(function() {
-        if( $('.featured-offer').visible(true)){
-            $('.featured-offer').addClass('fadeInRight');
+        if( $('.fade-in-right').visible(true)){
+            $('.fade-in-right').addClass('fadeInRight');
         }
-        if( $('.featured-employer').visible(true)){
-            $('.featured-employer').addClass('fadeInLeft');
+        if( $('.fade-in-left').visible(true)){
+            $('.fade-in-left').addClass('fadeInLeft');
         }
         if( $('.jobnow-description').visible(true)){
             $('.jobnow-description').addClass('fadeInRight');
-        }
-        if( $('.about-the-offer').visible(true)){
-            $('.about-the-offer').addClass('fadeInRight');
-        }
-        if( $('.job-description').visible(true)){
-            $('.job-description').addClass('fadeInLeft');
         }
     });
 

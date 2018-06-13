@@ -21,8 +21,8 @@
         </p>
     </div>
     <div class="container">
-        <div class="row featured-offer animated">
-            {% if featuredOffer|length > 1 %}
+        <div class="row featured-offer fade-in-right animated">
+            {% if featuredOffer|length > 0 %}
                 <h1>Featured Jobs</h1>
             {% endif %}
             {% if featuredOffer|length == 1 %}
@@ -35,7 +35,7 @@
             {%  for offer in featuredOffer %}
                 <a class="col-sm-6 col-md-{{ blocOffer }} zoom" href="{{ path('show_offer', {'id': offer.offer.id}) }}">
                     <div class="thumbnail">
-                        <div class="caption background-offer" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
+                        <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
                             <div class="layer">
                             </div>
                             <div class="offer-thumb-image-div">
@@ -44,17 +44,17 @@
                         </div>
 
                         <div class="caption">
-                            <h3>{{ offer.offer.title }} / {{ offer.offer.id }}</h3>
+                            <h3>{{ offer.offer.title|truncate(20, true) }} / {{ offer.offer.id }}</h3>
                             <p>{{ offer.offer.location }} / {{ offer.offer.contractType.name |trans }}</p>
-                            <p class="offer-thumb-description">{{ offer.offer.description |truncate(300, true)}}</p>
+                            <p class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)}}</p>
                         </div>
                     </div>
                 </a>
             {% endfor %}
         </div>
 
-        <div class="row featured-employer animated">
-            {% if featuredEmployer|length > 1 %}
+        <div class="row featured-employer fade-in-left animated">
+            {% if featuredEmployer|length > 0 %}
                 <h1>Featured Employer</h1>
             {% endif %}
             {% if featuredEmployer|length == 1 %}
@@ -71,7 +71,7 @@
                         {% if employer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
                         <h3>{{ employer.employer.name }}</h3>
                     </div>
-                    <div class="caption" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
+                    <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
                     </div>
                     <div class="thumb-employer-info">
                         {{ employer.employer.description |truncate(300, true)}}

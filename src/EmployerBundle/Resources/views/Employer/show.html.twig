@@ -7,7 +7,7 @@
 {% block body %}
 
     <div class="container">
-        <div class="row well" style="background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
+        <div class="row well" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
             <img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="250" width="250"/>
         </div>
         <div class="row">

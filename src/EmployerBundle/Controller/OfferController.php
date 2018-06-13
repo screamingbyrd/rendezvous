@@ -185,6 +185,12 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
+        $offer->setCountView($offer->getCountView() +1);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($offer);
+        $em->flush();
+
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
         ));
@@ -423,6 +429,9 @@ class OfferController extends Controller
         $now =  new \DateTime();
         $postulatedOffer->setDate($now);
 
+        $offer->setCountContact($offer->getCountContact() +1);
+
+        $em->merge($offer);
         $em->persist($postulatedOffer);
         $em->flush();
 
