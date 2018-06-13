@@ -176,6 +176,17 @@ class EmployerController extends Controller
 
         $employer = $repository->find($id);
 
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer');
+
+        $offers = $offerRepository->findBy(
+            array('employer' => $employer),
+            array('startDate' => 'DESC'),
+            2
+        );
+
         $map = new Map();
 
 
@@ -214,21 +225,15 @@ class EmployerController extends Controller
         }
 
         $map->setStylesheetOption('width', 1100);
+        $map->setStylesheetOption('min-height', 1100);
         $map->setMapOption('zoom', 10);
-
-
-
-
-
-
 
 
         return $this->render('EmployerBundle:Employer:show.html.twig', array(
             'employer' => $employer,
             'map' => $map,
-            'status' => $status
-
-
+            'status' => $status,
+            'offers' => $offers
         ));
 
     }
