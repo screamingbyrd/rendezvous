@@ -387,6 +387,19 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
+        $postulatedOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers')
+        ;
+        $postulatedOffer = $postulatedOfferRepository->findBy(array('candidate' => $candidate, 'offer' => $offer));
+
+        if(isset($postulatedOffer) && count($postulatedOffer) > 0){
+            $translated = $this->get('translator')->trans('offer.apply.already');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('dashboard_candidate');
+        }
+
         $userRepository = $this
             ->getDoctrine()
             ->getManager()

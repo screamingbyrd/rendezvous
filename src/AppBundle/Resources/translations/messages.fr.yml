@@ -145,6 +145,7 @@ offer:
     addCV: Ajouter votre CV :
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
+    already: Vous avez déja postuler à cette offre
   countView: Nombre de vue
   countContact: Nombre de contact
 

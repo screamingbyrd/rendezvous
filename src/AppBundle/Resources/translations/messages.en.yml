@@ -131,6 +131,7 @@ offer:
     addCV: Add your resume:
     coverLetter: Cover letter (optional)
     send: Send your CV
+    already: You already applied to this offer
   applied:
     success: You applied to the offer %title% !
   countView: View count

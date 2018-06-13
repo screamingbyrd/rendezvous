@@ -22,12 +22,12 @@ class PostulatedOffers
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Candidate", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Candidate", cascade={"persist"})
      */
     private $candidate;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
     private $offer;
 
