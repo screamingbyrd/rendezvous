@@ -47,7 +47,12 @@ class OfferType extends AbstractType
 
             ->add('location', PlaceAutocompleteType::class)
 
-            ->add('availableDate',      DateType::class, array('required' => false, 'attr' => ['class' => 'js-datepicker'], 'html5' => false,))
+            ->add('availableDate',      DateType::class, array('required' => false,'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                'attr' => [
+                    'class' => 'form-control input-inline datepicker',
+                    'data-provide' => 'datepicker',
+                    'data-date-format' => 'dd-mm-yyyy']))
 
             ->add('contractType', EntityType::class, array(
                 'required' => false,
