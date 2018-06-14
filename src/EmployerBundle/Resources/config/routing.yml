@@ -68,3 +68,21 @@ featured_offer_page:
 reserve_featured_offer:
     path:     /reserve-featured-offer
     defaults: { _controller: EmployerBundle:Employer:reserveFeaturedOffer }
+buy_slot:
+    path:     /buy-slot
+    defaults: { _controller: EmployerBundle:Employer:buySlot }
+add_to_slot:
+    path:     /add-to-slot/{id}
+    defaults: { _controller: EmployerBundle:Employer:addToSlot }
+    requirements:
+      id: \d+
+remove_from_slot:
+    path:     /remove-from-slot/{id}
+    defaults: { _controller: EmployerBundle:Employer:removeFromSlot }
+    requirements:
+      id: \d+
+empty_slot:
+    path:     /empty-slot/{id}
+    defaults: { _controller: EmployerBundle:Employer:EmptySlot }
+    requirements:
+      id: \d+

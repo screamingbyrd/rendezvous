@@ -173,7 +173,7 @@ class OfferController extends Controller
         $em->merge($offer);
         $em->flush();
 
-        $translated = $this->get('translator')->trans('form.offer.delete.success');
+        $translated = $this->get('translator')->trans(!$bool?'form.offer.archived.success':'form.offer.unarchived.success');
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));

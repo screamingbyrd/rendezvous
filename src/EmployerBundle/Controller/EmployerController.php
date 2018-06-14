@@ -5,6 +5,7 @@ namespace EmployerBundle\Controller;
 use AppBundle\Entity\Employer;
 use AppBundle\Entity\FeaturedEmployer;
 use AppBundle\Entity\FeaturedOffer;
+use AppBundle\Entity\Slot;
 use AppBundle\Form\EmployerType;
 use AppBundle\Form\OfferType;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -246,7 +247,12 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-
+        $slotRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Slot')
+        ;
+        $currentSlot = $slotRepository->getCurrentSlotEmployer($user->getEmployer()->getId());
         $searchArray = array('employer' => $user->getEmployer());
 
         if($archived == 0){
@@ -255,11 +261,7 @@ class EmployerController extends Controller
 
         $_SESSION['archived'] = $archived;
 
-
-
         $offers = $OfferRepository->findBy($searchArray);
-
-
 
         $creditInfo = $this->container->get('app.credit_info');
 
@@ -267,6 +269,8 @@ class EmployerController extends Controller
             'offers' => $offers,
             'publishedOffer' => $creditInfo->getPublishOffer(),
             'boostOffers' => $creditInfo->getBoostOffers(),
+            'buySlot' => $creditInfo->getBuySlot(),
+            'slots' => $currentSlot
         ));
     }
 
@@ -421,6 +425,172 @@ class EmployerController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('featured_offer_page');
+    }
+
+    public function buySlotAction(Request $request){
+        $session = $request->getSession();
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $employer = $user->getEmployer();
+
+        $creditInfo = $this->container->get('app.credit_info');
+
+        $creditEmployer = $employer->getCredit();
+        $buySlot = $creditInfo->getBuySlot();
+
+        if($creditEmployer < $buySlot){
+            $translated = $this->get('translator')->trans('form.offer.activate.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        }
+
+        $employer->setCredit($creditEmployer - $buySlot);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($employer);
+        $em->flush();
+
+        $slot = new Slot();
+
+        $slot->setEmployer($employer);
+        $now =  new \DateTime();
+        $next = new \DateTime();
+        $slot->setStartDate($now);
+        $slot->setEndDate($next->modify( '+ 1 year' ));
+
+        $em->persist($slot);
+        $em->flush();
+
+
+        $translated = $this->get('translator')->trans('slot.buy.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+    }
+
+    public function addToSlotAction(Request $request){
+        $session = $request->getSession();
+        $id = $request->get('id');
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $currentOffer = $offerRepository->findOneBy(array('id' => $id));
+
+        $slotRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Slot')
+        ;
+        $currentSlot = $slotRepository->getCurrentSlotEmployer($user->getEmployer()->getId());
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($currentSlot as $slot){
+            $offer = $slot->getOffer();
+            if(!isset($offer)){
+                $slot->setOffer($currentOffer);
+                $currentOffer->setSlot($slot);
+                $em->merge($slot);
+                $em->merge($currentOffer);
+                $em->flush();
+
+                $translated = $this->get('translator')->trans('slot.add.success');
+                $session->getFlashBag()->add('info', $translated);
+
+                return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+            }
+        }
+
+        $translated = $this->get('translator')->trans('slot.add.error');
+        $session->getFlashBag()->add('danger', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+    }
+
+    public function removeFromSlotAction(Request $request){
+        $session = $request->getSession();
+        $id = $request->get('id');
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $slotRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Slot')
+        ;
+        $slot = $slotRepository->findOneBy(array('offer' => $offer));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $slot->setOffer(null);
+        $offer->setSlot(null);
+        $em->merge($slot);
+        $em->merge($offer);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('slot.remove.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+    }
+
+    public function EmptySlotAction(Request $request){
+        $session = $request->getSession();
+        $id = $request->get('id');
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $slotRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Slot')
+        ;
+        $slot = $slotRepository->findOneBy(array('id' => $id));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('slot' => $slot));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $slot->setOffer(null);
+        $offer->setSlot(null);
+        $em->merge($slot);
+        $em->merge($offer);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('slot.empty.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
 }

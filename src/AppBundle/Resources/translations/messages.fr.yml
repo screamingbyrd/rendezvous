@@ -111,8 +111,10 @@ form:
     edition:
       success: L'offre a bien été éditée !
       error: Vous ne pouvez pas modifier cette offre !
-    delete:
-      success: L'offre a bien été supprimé !
+    archived:
+      success: L'offre a bien été archivé !
+    unarchived:
+      success: L'offre a bien été désarchivé !
     activate:
       success: L'offre a bien été activée !
       error: Vous n'avez pas assez de credit pour l'activée !
@@ -139,13 +141,29 @@ dashboard:
     searchTitle: Chercher un titre
     boostOffers: Booster vos offres
 
+slot:
+  buy:
+    title: Acheter un slot
+    sure: Etes vous sure de vouloir acheter un slot? Cela vous coutera %credit% crédits.
+    success: Le slot a bien été acheté
+  add:
+    title: Ajouter à un slot
+    success: L'offre a bien été ajouté au slot
+    error: Vous n'avez pas de slot de libre
+  remove:
+    title: Retirer du slot
+    success: L'offre a bien été retiré du slot
+  empty:
+    title: Vider le slot
+    success: Le slot à bien été vidé
+
 offer:
   delete:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:
-      sure: Etes vous sure de vouloir activer cette offre, cela vous coutera %credit% crédit?
+      sure: Etes vous sure de vouloir activer cette offre? Cela vous coutera %credit% crédit.
   boost:
-      sure: Etes vous sure de vouloir booster vos offres, cela vous coutera %credit% crédits?
+      sure: Etes vous sure de vouloir booster vos offres? Cela vous coutera %credit% crédits.
   endDate: Date de fin :
   archived: Archivée
   apply:

@@ -98,8 +98,10 @@ form:
     edition:
       success: The offer has been modified !
       error: You can't modify this offer !
-    delete:
-      success: The offer has been deleted !
+    archived:
+      success: The offer has been archived !
+    unarchived:
+      success: The offer has been unarchived !
     activate:
       success: The offer has benn activated !
       error: You do not have enough credit !
@@ -123,13 +125,28 @@ dashboard:
     searchTitle: Search a title
     boostOffers: Boost you offers
 
+slot:
+  buy:
+    title: Acheter un slot
+    sure: Etes vous sure de vouloir acheter un slot? Cela vous coutera %credit% crédits.
+    success: Le slot a bien été acheté
+  add:
+    success: The offer has been added to the slot
+    error: You do not have any empty slot
+  remove:
+    title: Remove from the slot
+    success: The offer has been removed from the slot
+  empty:
+    title: Empty the slot
+    success: The slot has been emptied
+
 offer:
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:
-      sure: Are you sure that you want to activate this offer?This will cost you %credit% credit?
+      sure: Are you sure that you want to activate this offer? This will cost you %credit% credit.
   boost:
-      sure: Are you sure that you want to boost yout offers?This will cost you %credit% credits?
+      sure: Are you sure that you want to boost yout offers?This will cost you %credit% credits.
   endDate: End date:
   archived: Archived
   apply:

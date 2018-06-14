@@ -1,5 +1,5 @@
 {% for offer in data %}
-    {% if offer.isActive() %}
+    {% if offer.isActive() or offer.slot is not null %}
         <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
         <li>
             <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">

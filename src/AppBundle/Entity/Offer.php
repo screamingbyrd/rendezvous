@@ -156,6 +156,13 @@ class Offer
     private $availableDate;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Slot")
+     * @ORM\JoinColumn(name="slot_id", referencedColumnName="id", nullable=true)
+     *
+     */
+    private $slot;
+
+    /**
      * Get id
      *
      * @return int
@@ -618,5 +625,24 @@ class Offer
         $this->availableDate = $availableDate;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlot()
+    {
+        return $this->slot;
+    }
+
+    /**
+     * @param mixed $slot
+     * @return Offer
+     */
+    public function setSlot($slot)
+    {
+        $this->slot = $slot;
+        return $this;
+    }
+
 
 }

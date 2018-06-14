@@ -17,6 +17,7 @@ class CreditInfo
     private $boostOffers = 3;
     private $featuredOffer = 11;
     private $featuredEmployer = 10;
+    private $buySlot = 20;
 
     public function __construct()
     {
@@ -91,6 +92,24 @@ class CreditInfo
     public function setFeaturedEmployer($featuredEmployer)
     {
         $this->featuredEmployer = $featuredEmployer;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBuySlot()
+    {
+        return $this->buySlot;
+    }
+
+    /**
+     * @param int $buySlot
+     * @return CreditInfo
+     */
+    public function setBuySlot($buySlot)
+    {
+        $this->buySlot = $buySlot;
         return $this;
     }
 

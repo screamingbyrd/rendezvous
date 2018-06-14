@@ -29,10 +29,40 @@
 
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
+        <h4>Slot</h4>
+        <div>Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un ans.</div>
+        {% if slots is defined and slots|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Offer</th>
+                <th scope="col">end date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for i in 1..slots|length %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                    {% if slots[i-1].offer is not null %}
+                        <td>{{ slots[i-1].offer.title }}</td>
+                    {% else %}
+                        <td>Empty offer</td>
+                    {% endif %}
+                        <td>{{ slots[i-1].endDate|date("d/m/Y") }}</td>
+                        <td><a href="{{ path('empty_slot', {'id':slots[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'slot.remove.title' | trans }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <br>
+        <button class="btn btn-primary modal-open"  data-trad="{{ 'slot.buy.sure'|trans({'%credit%': buySlot}) }}"  data-href="{{ path('buy_slot') }}">{{ 'slot.buy.title' | trans }}</button>
+        <br>
         <a href="{{ path('featured_offer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.offer.title' | trans }}</a>
         <a href="{{ path('featured_employer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.employer.title' | trans }}</a>
 
-        <button class="btn btn-primary element-offer-list  boost-offer" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
+        <button class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
 
 
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
@@ -44,9 +74,9 @@
                         <div class='offer-element {% if offer.archived %}archived-offer{% endif %}'>
                             <span>{{ offer.title |truncate(45, true)}}</span>
                             {% if offer.archived %}
-                                <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
+                                <button class="btn btn-danger element-offer-list unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
                             {% else %}
-                                <button class="btn btn-danger element-offer-list delete-offer" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
+                                <button class="btn btn-danger element-offer-list modal-open" data-trad="{{ 'offer.delete.sure'|trans }}" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
                             {% endif %}
                             <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">{{ 'dashboard.employer.editOffer' | trans }}</a>
                             <div class="element-offer-list">
@@ -56,7 +86,12 @@
                                     {% if date(offer.endDate) > date() %}
                                         <button type="button" class="btn btn-success element-offer-list">{{ 'offer.endDate' | trans }} {{ offer.endDate|date("m/d/Y")}}</button>
                                     {% else %}
-                                        <button class="btn btn-primary element-offer-list  activate-offer" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                                        <button class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                                    {% endif %}
+                                    {% if offer.slot is null  %}
+                                        <a class="btn btn-primary element-offer-list" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a>
+                                    {% else %}
+                                        <a class="btn btn-primary element-offer-list" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -81,45 +116,15 @@
                 {% endif %}
             </a>
 
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-delete">
-                <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-dashboard">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.delete.sure'|trans }}</h4>
+                            <h4 class="modal-title" id="myModalLabel"></h4>
                         </div>
                         <div class="modal-footer">
-                            <a type="button" class="btn btn-default" id="modal-btn-yes-delete">{{ 'yes'|trans }}</a>
-                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-activate">
-                <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}</h4>
-                        </div>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-default" id="modal-btn-yes-activate">{{ 'yes'|trans }}</a>
-                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-boost">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}</h4>
-                        </div>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-default" id="modal-btn-yes-boost">{{ 'yes'|trans }}</a>
+                            <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
                             <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
                         </div>
                     </div>
@@ -131,19 +136,15 @@
                     $(this).children(".collapse-offer-info").slideToggle("medium");
                 });
 
-                $(".delete-offer").on("click", function(e){
-                    $('#modal-btn-yes-delete').attr("href", $(this).data('href'));
-                    $("#modal-delete").modal('show');
+                $(".unarchived").click(function() {
+                    window.location.replace($(this).data('href'));
                 });
 
-                $(".activate-offer").on("click", function(e){
-                    $('#modal-btn-yes-activate').attr("href", $(this).data('href'));
-                    $("#modal-activate").modal('show');
-                });
-
-                $(".boost-offer").on("click", function(e){
-                    $('#modal-btn-yes-boost').attr("href", $(this).data('href'));
-                    $("#modal-boost").modal('show');
+                $(".modal-open").on("click", function(e){
+                    $('#modal-btn-yes').attr("href", $(this).data('href'));
+                    console.log($(this).data('trad'));
+                    $('#myModalLabel').html($(this).data('trad'));
+                    $("#modal-dashboard").modal('show');
                 });
 
                 $(".modal-btn-no").on("click", function(){
