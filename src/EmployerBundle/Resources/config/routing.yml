@@ -13,7 +13,9 @@ show_employer:
     defaults: { _controller: EmployerBundle:Employer:show }
     requirements:
         id: \d+
-
+list_employer:
+    path:     /list-employer
+    defaults: { _controller: EmployerBundle:Employer:list }
 dashboard_employer:
     path:     /dashboard/{archived}
     defaults: { _controller: EmployerBundle:Employer:dashboard , archived: 0}

@@ -31,27 +31,29 @@ $(document).ready(function() {
 
     //main page
 
-    if( $('.fade-in-right').visible(true)){
-        $('.fade-in-right').addClass('fadeInRight');
-    }
-    if( $('.fade-in-left').visible(true)){
-        $('.fade-in-left').addClass('fadeInLeft');
-    }
+    $( '.fade-in-right' ).each(function(  ) {
+        if( $(this).visible(true)){
+            $(this).addClass('fadeInRight');
+        }
+    });
+    $( '.fade-in-left' ).each(function(  ) {
+        if( $(this).visible(true)){
+            $(this).addClass('fadeInLeft');
+        }
+    });
 
-    if( $('.jobnow-description').visible(true)){
-        $('.jobnow-description').addClass('fadeInRight');
-    }
 
     $(window).scroll(function() {
-        if( $('.fade-in-right').visible(true)){
-            $('.fade-in-right').addClass('fadeInRight');
-        }
-        if( $('.fade-in-left').visible(true)){
-            $('.fade-in-left').addClass('fadeInLeft');
-        }
-        if( $('.jobnow-description').visible(true)){
-            $('.jobnow-description').addClass('fadeInRight');
-        }
+        $( '.fade-in-right' ).each(function(  ) {
+            if( $(this).visible(true)){
+                $(this).addClass('fadeInRight');
+            }
+        });
+        $( '.fade-in-left' ).each(function(  ) {
+            if( $(this).visible(true)){
+                $(this).addClass('fadeInLeft');
+            }
+        });
     });
 
 

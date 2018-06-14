@@ -239,6 +239,19 @@ class EmployerController extends Controller
 
     }
 
+    public function listAction(){
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+
+        $employers = $repository->findAll();
+
+        return $this->render('EmployerBundle:Employer:list.html.twig', array(
+            'employers' => $employers
+        ));
+    }
+
     public function dashboardAction($archived = 0){
         $user = $this->getUser();
 

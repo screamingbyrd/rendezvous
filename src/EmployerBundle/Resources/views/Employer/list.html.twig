@@ -1,0 +1,80 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Register - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<script>
+
+    function myFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("span")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+
+            }
+        }
+    }
+</script>
+
+
+
+    <div class="container">
+        <h2>My Phonebook</h2>
+
+        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name">
+
+        <ul id="myUL">
+            {% for employer in employers %}
+                <div class="row featured-employer {{ cycle(['fade-in-right','fade-in-left'],loop.index) }} animated">
+                    <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-sm-6 col-md-12 row featured-offer zoom  thump-employer">
+                        <div class="thumbnail" >
+                            <div class="header-thumb-employer">
+                                {% if employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
+                                <h3 class="employer-title">{{ employer.name }}</h3>
+                            </div>
+                            <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
+                            </div>
+                            <div class="thumb-employer-info">
+                                {{ employer.description}}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        function showEmployer() {
+            let input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            a = ul.getElementsByTagName("a");
+            for (i = 0; i < a.length; i++) {
+                a[i].style.display = "none";
+            }
+            for (i = 0; i < a.length; i++) {
+                let h = a[i].getElementsByClassName("employer-title")[0];
+                if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+
+                }
+            }
+        }
+    </script>
+
+
+{% endblock %}
