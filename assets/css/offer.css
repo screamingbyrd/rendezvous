@@ -286,3 +286,28 @@
 .tag-offer i{
     margin-right: 3px;
 }
+.floating-employer{
+    border: black solid 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-right: 0;
+    padding-left: 0;
+}
+.header-floating-employer{
+    background: #ea3222;
+    color: white;
+    padding: 15px;
+    font-size: 26px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.floating-employer-logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 27%;
+}
+.floating-employer-description{
+    padding: 20px;
+}
