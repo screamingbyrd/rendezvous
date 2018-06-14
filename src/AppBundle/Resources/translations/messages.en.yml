@@ -86,11 +86,10 @@ form:
     wag9: Up to 80,000 €
     wag10: Up to 90,000 €
 
-    searchedtag: Wanted Skills area
-    searchedtagPH: -- List your wanted skills --
+    searchedtag: List your wanted skills area
+    tag: Your skills
 
-
-
+    age: How old are you?
 
   offer:
     creation:

@@ -57,7 +57,8 @@ class EmployerType extends AbstractType
                 'choice_label' =>  'name',
                 'placeholder' => 'Category',
                 'multiple' => true,
-                'expanded' => true,
+                'attr' => array('class' => 'select2'),
+
             ))
 
             ->add('location', PlaceAutocompleteType::class)

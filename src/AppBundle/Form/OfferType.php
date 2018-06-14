@@ -38,8 +38,7 @@ class OfferType extends AbstractType
                 'class' => Tag::class,
                 'choice_label' =>  'name',
                 'attr' => array('class' => 'select2'),
-                'choices_as_values' => true,
-                'multiple' => true,
+                'multiple' => true,php
             ))
 
 
@@ -100,7 +99,7 @@ class OfferType extends AbstractType
                 'attr' => array('class' => 'select2'),
                 'required' => false,
                 'multiple' => true,
-                'expanded' => true,
+                
 
                 'placeholder' => 'form.registration.ben0',
             ))
@@ -122,7 +121,6 @@ class OfferType extends AbstractType
                 'form.registration.lis14' => 'form.registration.lis14',
             ),
                 'attr' => array('class' => 'select2'),
-                'choices_as_values' => true,
                 'multiple' => true,
                 'required' => false,
             ))
