@@ -149,6 +149,13 @@ class Offer
     private $license;
 
     /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="availableDate", type="datetime")
+     */
+    private $availableDate;
+
+    /**
      * Get id
      *
      * @return int
@@ -593,4 +600,23 @@ class Offer
 
         return $this;
     }
+
+    /**
+     * @return \datetime
+     */
+    public function getAvailableDate()
+    {
+        return $this->availableDate;
+    }
+
+    /**
+     * @param \datetime $availableDate
+     * @return Offer
+     */
+    public function setAvailableDate($availableDate)
+    {
+        $this->availableDate = $availableDate;
+        return $this;
+    }
+
 }

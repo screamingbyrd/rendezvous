@@ -155,4 +155,12 @@ h1{
     color:#333;
 }
 
+.logo-jobnow{
+    position: absolute;
+    left: 5px;
+    top: -40px;
+    width: 187px;
+    height: 131px;
+}
+
 

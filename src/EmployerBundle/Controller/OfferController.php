@@ -45,6 +45,7 @@ class OfferController extends Controller
             $offer = new Offer();
             $offer->setEmployer($employer);
             $offer->setDescription($data->getDescription());
+            $offer->setAvailableDate($data->getAvailableDate());
             $offer->setLocation($data->getLocation());
             $offer->setContractType($data->getContractType());
             $offer->setImage($data->getImage());
@@ -114,6 +115,7 @@ class OfferController extends Controller
             $offer->setDescription($data->getDescription());
             $offer->setImage($data->getImage());
             $offer->setTitle($data->getTitle());
+            $offer->setAvailableDate($data->getAvailableDate());
             $offer->setLocation($data->getLocation());
             $offer->setWage($data->getWage());
             $offer->setExperience($data->getExperience());
