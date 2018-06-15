@@ -16,16 +16,22 @@
 
 #myUL li .offer-element {
     border: 1px solid #ddd;
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6;
-    padding: 12px;
     text-decoration: none;
     font-size: 18px;
     color: black;
+    -webkit-transition: ease-out 0.7s;
+    -moz-transition: ease-out 0.7s;
+    transition: ease-out 0.7s;
+    margin: 3%;
+    margin-bottom: 10px;
+    width: 91%;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
 }
 
 #myUL li .offer-element:hover:not(.header) {
-    background-color: #eee;
+    transform: translate(1em,0);
 }
 .offer-element{
     display: table;
@@ -57,19 +63,22 @@
 #keyword-input, #location-input {
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 40%;
+    width: 33%;
     font-size: 16px;
     padding: 12px 20px 12px 13px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
+    margin-right: -4px;
+    min-width: 130px;
 }
 
 .searchOffer{
     margin-left: 10px;
+    min-width: 120px;
 }
 
 .offer-search-element{
-    width: 90%;
+    width: 94%;
     margin-left: 3%;
     display: inline-block;
 }
@@ -90,7 +99,14 @@
     padding: 0;
 }
 #number-of-offer {
-    margin: 14px 16px;
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 10px 20px 10px 13px;
+    border: 1px solid #ddd;
+    margin-top: 4px;
+    color: #333
 }
 .contract-type {
     float: left;
@@ -98,6 +114,8 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    width: 11%;
+    min-width: 140px;
 }
 .selected-page {
     background-color: #dedede !important;
@@ -105,7 +123,8 @@
 #paginator-offer {
     display: table;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #paginator-offer a {
@@ -310,4 +329,64 @@
 }
 .floating-employer-description{
     padding: 20px;
+}
+#employer-input{
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 16%;
+    font-size: 16px;
+    padding: 12px 20px 12px 13px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    color: #333;
+    min-width: 130px;
+}
+
+.searchOffer{
+    height: 45px;
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 13%;
+    font-size: 16px;
+    padding: 11px 20px 12px 13px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+.background-employer-in-offer-search{
+    min-height: 133px;
+    width: 30%;
+    margin-left: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.background-employer-in-offer-search .layer{
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 3px;
+}
+.logo-employer-in-offer-search{
+    width: 13%;
+    max-width: 66px;
+    margin-left: -31px;
+    z-index: 1;
+}
+.searchpage-jumbotron{
+    margin-bottom: 0;
+}
+.searchpage-jumbotron .homepage-search-bar{
+    width: 72%;
+    padding-bottom: 10px;
+    min-width: 290px;
+}
+.searchpage-jumbotron #keyword-input{
+    color: #333;
+}
+.searchpage-jumbotron #location-input{
+    color: #333;
 }

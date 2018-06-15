@@ -51,12 +51,13 @@ h1{
     width: 50%;
     margin: auto;
     padding-top: 10px;
+    min-width: 300px;
 }
 
 .jumbotron{
     text-align: center;
 }
-.homepage-jumbotron, .offer-jumbotron{
+.homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron{
     text-align: center;
     overflow: hidden;
     padding: 95px  0;
@@ -67,6 +68,15 @@ h1{
     position:relative;
     color: orange;
     margin-top: -14px;
+}
+
+@media screen and (max-device-width: 480px){
+    .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron{
+        padding: 0;
+    }
+    body{
+        padding-bottom: 0;
+    }
 }
 
 .homepage-jumbotron #keyword-input{

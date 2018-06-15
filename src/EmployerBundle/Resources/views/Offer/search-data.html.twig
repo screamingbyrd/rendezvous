@@ -1,9 +1,19 @@
+{% if data is not defined or data|length == 0%}
+<li class="search-result animated fadeIn">
+    <a class='offer-element'>Sorry but there is no offer for this search</a>
+</li>
+{% endif %}
+<span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
 {% for offer in data %}
     {% if offer.isActive() or offer.slot is not null %}
-        <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
-        <li>
+
+        <li class="search-result animated fadeIn">
             <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
-                {% if offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
+                    <div class="layer layer-offer-element animated">
+                    </div>
+                </div>
+                {% if offer.employer.logo is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
                 <div class="offer-search-element">
                     <div class="job-title-employer">
                         <div>{{ offer.title }}</div>
@@ -17,3 +27,12 @@
         </li>
     {% endif %}
 {% endfor %}
+
+<script>
+    $(".offer-element").on("mouseenter ", function(){
+        $(this).find('.layer-offer-element').removeClass('fadeIn').addClass('fadeOut');
+    });
+    $(".offer-element").on("mouseleave ", function(){
+        $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
+    });
+</script>

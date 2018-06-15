@@ -25,6 +25,22 @@ $.fn.visible = function(partial) {
 
 };
 
+function detectmob() {
+    if( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+    ){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 $(document).ready(function() {
 
     $('.select2').select2();
@@ -55,6 +71,10 @@ $(document).ready(function() {
             }
         });
     });
+
+    if(detectmob()){
+        $('.navbar-fixed-bottom').removeClass('navbar-fixed-bottom').addClass('navbar-static-bottom');
+    }
 
 
 });

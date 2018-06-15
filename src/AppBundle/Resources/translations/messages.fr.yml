@@ -158,6 +158,8 @@ slot:
     success: Le slot à bien été vidé
 
 offer:
+  search:
+    title: Recherche d'offres
   delete:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:

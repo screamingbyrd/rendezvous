@@ -141,6 +141,8 @@ slot:
     success: The slot has been emptied
 
 offer:
+  search:
+    title: Search offers
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:

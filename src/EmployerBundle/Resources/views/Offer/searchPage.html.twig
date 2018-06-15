@@ -6,12 +6,10 @@
 
 {% block body %}
 
-    <div class="container well">
+    <div class="jumbotron searchpage-jumbotron">
+        <h2>{{ 'offer.search.title' | trans }}</h2>
 
-        <h3>{{ 'dashboard.title' | trans }}</h3>
-
-        <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
-        <form method="post" action="" id="search-offer-form">
+        <form method="post" action="" id="search-offer-form" class="homepage-search-bar">
             <div>
                 <input value="{{ keyword }}" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 <input value="{{ location }}" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
@@ -21,7 +19,7 @@
                         <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" class="btn btn-primary searchOffer" value="Search">
+                <input type="submit" class="job-see-all searchOffer" value="Search">
                 <ul class="contractType-list">
                     {% for type in contractType %}
                         <li class="contract-type">
@@ -31,12 +29,32 @@
                     {% endfor %}
                 </ul>
                 <select id="number-of-offer">
-                    <option value="1" selected>1</option>
-                    <option value="2">2</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
             </div>
         </form>
+    </div>
+
+    <style>
+        .searchpage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/jobnow-home.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+    </style>
+
+
+    <div class="container">
+
         <ul id="myUL">
 
         </ul>
@@ -65,7 +83,8 @@
                 let loader = '<div id="loading">\n' +
                     '                <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>\n' +
                     '            </div>';
-                $("#myUL").html(loader);
+                $(".search-result").removeClass('fadeIn').addClass('fadeOut');
+                //$("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let employer = $("#employer-input").val();
@@ -79,6 +98,13 @@
                     url: url,
                     data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem}
                 }).done(function( data ) {
+                    if(detectmob()){
+                        let $el = $('.searchpage-jumbotron');  //record the elem so you don't crawl the DOM everytime
+                        let bottom = $el.position().top + $el.outerHeight(true) - 50;
+                        $('html, body').animate({
+                            scrollTop: bottom
+                        }, 500);
+                    }
                     $('#loading').hide();
 
                     $("#myUL").html(data);
@@ -92,7 +118,6 @@
 
                     str += '<a onClick="onPage('+(page==total?total:(page+1))+')" href="#">&raquo;</a>';
                     document.getElementById("paginator-offer").innerHTML = str;
-
                 });
             }
 
@@ -132,6 +157,22 @@
             $(".modal-btn-no").on("click", function(){
                 $(".modal").modal('hide');
             });
+
+            function detectmob() {
+                if( navigator.userAgent.match(/Android/i)
+                    || navigator.userAgent.match(/webOS/i)
+                    || navigator.userAgent.match(/iPhone/i)
+                    || navigator.userAgent.match(/iPad/i)
+                    || navigator.userAgent.match(/iPod/i)
+                    || navigator.userAgent.match(/BlackBerry/i)
+                    || navigator.userAgent.match(/Windows Phone/i)
+                ){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
 
         </script>
 
