@@ -260,6 +260,7 @@ class OfferController extends Controller
     public function searchAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
+        $employer = $request->get('employer');
         $type =  $request->get('type');
         $currentPage = $request->get('row');
         $numberOfItem =  $request->get('number');
@@ -275,6 +276,12 @@ class OfferController extends Controller
         if($location != ''){
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('location', $location);
+            $boolQuery->addMust($fieldQuery);
+        }
+
+        if($employer != ''){
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('employer.name', $employer);
             $boolQuery->addMust($fieldQuery);
         }
 
@@ -305,6 +312,7 @@ class OfferController extends Controller
     public function searchPageAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
+        $chosenEmployer = $request->get('employer');
 
         $contractTypeRepository = $this
             ->getDoctrine()
@@ -313,7 +321,14 @@ class OfferController extends Controller
         ;
         $contractType = $contractTypeRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location));
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employers = $employerRepository->findAll();
+
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer));
     }
 
     public function boostAction(Request $request){

@@ -82,6 +82,10 @@ fos_elastica:
                               type: object
                               properties:
                                 name: { type: text }
+                            employer:
+                              type: object
+                              properties:
+                                name: { type: text }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm

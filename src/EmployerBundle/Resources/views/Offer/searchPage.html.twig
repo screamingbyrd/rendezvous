@@ -15,6 +15,12 @@
             <div>
                 <input value="{{ keyword }}" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 <input value="{{ location }}" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                <select title="Employer" id="employer-input">
+                    <option value="">Employer</option>
+                    {% for employer in employers %}
+                        <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
+                    {% endfor %}
+                </select>
                 <input type="submit" class="btn btn-primary searchOffer" value="Search">
                 <ul class="contractType-list">
                     {% for type in contractType %}
@@ -62,6 +68,7 @@
                 $("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
+                let employer = $("#employer-input").val();
 
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
@@ -70,7 +77,7 @@
                 url = url.replace("search-page-offer", 'search-offer');
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location,type:type,row:row,number:totalItem}
+                    data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem}
                 }).done(function( data ) {
                     $('#loading').hide();
 
@@ -101,6 +108,11 @@
             });
 
             $(".type-contract-checkbox").change(function() {
+                let total = $('#number-of-offer').val();
+                searchOffer(1,total);
+            });
+
+            $("#employer-input").change(function() {
                 let total = $('#number-of-offer').val();
                 searchOffer(1,total);
             });

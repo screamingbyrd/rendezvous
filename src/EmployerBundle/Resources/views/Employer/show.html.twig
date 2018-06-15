@@ -30,7 +30,7 @@
                 <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
                 <ul class="last-job-list">
                     <li>
-                        <a class="link-offer-employer" href="{{ path('featured_offer_page') }}">
+                        <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id}) }}">
                             <div class="slide-button">
                                 <div><b>{{ offers[0].title }}</b></div>
                                 <div class="job-meta"><span>{{ offers[0].contractType.name |trans }}</span> - <span>{{ offers[0].location }}</span></div>
@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="link-offer-employer" href="{{ path('featured_offer_page') }}">
+                        <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id}) }}">
                             <div class="slide-button">
                                 <div><b>{{ offers[1].title }}</b></div>
                                 <div class="job-meta"><span>{{ offers[1].contractType.name |trans }}</span> - <span>{{ offers[1].location }}</span></div>
@@ -46,7 +46,7 @@
                         </a>
                     </li>
                 </ul>
-                <a class="job-see-all">Toute nos offres</a>
+                <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="job-see-all">Toute nos offres</a>
             </div>
             {% endif %}
         </div>
