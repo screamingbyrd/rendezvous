@@ -194,3 +194,17 @@ featured:
   offer:
     title: Featured Offer
     reserve: Book
+
+
+email:
+  sent: You message has been sent !
+  send: Send
+
+contact:
+  form: Contact form
+  us:
+   title: Contact us
+  location: Our location
+  openingHours: Opening hours:
+  monday: Monday – Friday / 9am – 7pm (non-stop)
+  saturday: Saturday / 10am – 5pm (non-stop)</strong>

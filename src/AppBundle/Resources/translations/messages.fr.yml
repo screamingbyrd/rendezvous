@@ -208,3 +208,16 @@ featured:
   offer:
     title: Offres en avant
     reserve: Réserver
+
+email:
+  sent: Votre message à bien été envoyé !
+  send: Envoyer
+
+contact:
+  form: Formulaire de contact
+  us:
+    title: Contactez nous
+  location: Notre localisation
+  openingHours: Heures d'ouverture:
+  monday: Lundi – Vendredi / 9h – 19h (non-stop)
+  saturday: Samedi / 10h – 17h (non-stop)

@@ -11,3 +11,6 @@ jobnow_credit:
 jobnow_payment:
     path:     /employer/payment/{id}
     defaults: { _controller: AppBundle:Credit:credit }
+contact_us_page:
+    path:     /contact-us-page
+    defaults: { _controller: AppBundle:Contact:contactUsPage }

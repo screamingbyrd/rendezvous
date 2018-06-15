@@ -1,0 +1,59 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron homepage-jumbotron">
+        <h2>{{ 'contact.us.title' | trans }}</h2>
+    </div>
+    <div class="container">
+        <div class="slideInLeft animated">
+            <h3>{{ 'contact.form' | trans }}</h3>
+            <hr>
+            {{ render(controller(
+                'AppBundle\\Controller\\ContactController::contactAction'
+            )) }}
+        </div>
+
+        <div class="slideInRight animated">
+            <h3>{{ 'contact.location' |trans }}</h3>
+            <div class="location-info">
+                <strong>Altea Immobilière</strong><br>
+                228 Route d’Esch<br>
+                L-1471 Luxembourg<br><br>
+                <strong>{{ 'contact.openingHours' |trans }}<br>
+                {{ 'contact.monday' |trans }}<br>
+                <strong>{{ 'contact.saturday' |trans }}</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/contact.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+        .location-info{
+            text-align: center;
+            font-size: 17px;
+        }
+    </style>
+
+{% endblock %}
+
+
+
+
