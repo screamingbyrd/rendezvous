@@ -12,6 +12,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    min-height: 350px;
 }
 
 #myUL li .offer-element {
@@ -28,6 +29,24 @@
     display: flex;
     align-items: center;
     border-radius: 3px;
+}
+#myUL li .offer-element-dashboard {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: table;
+    width: 100%;
+}
+
+#myUL li .offer-element-dashboard:hover:not(.header) {
+    background-color: #eee;
+}
+.candidat-dashboard .offer-element-dashboard{
+    display: flex !important;
 }
 
 #myUL li .offer-element:hover:not(.header) {
@@ -330,6 +349,19 @@
 .floating-employer-description{
     padding: 20px;
 }
+
+@media screen and (max-device-width: 480px){
+    .header-floating-employer{
+        margin-top: 20px;
+    }
+    .apply-div-form {
+        position: static;
+    }
+    .apply-button{
+        width: 100%;
+    }
+}
+
 #employer-input{
     line-height: inherit;
     background-position: 10px 12px;

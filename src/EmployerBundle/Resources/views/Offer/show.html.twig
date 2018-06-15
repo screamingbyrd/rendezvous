@@ -42,6 +42,23 @@
             </div>
         </div>-->
 
+        <div class="apply-div-form">
+            <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
+
+            <div class="container">
+                <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
+                    <div class="inside-offer-apply">
+                        <div class="inside-offer-apply-cv">
+                            {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
+                        </div>
+                        <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+                        <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
         <div class="col-sm-6 col-md-8">
             <div class="row about-the-offer fade-in-right animated">
                 <h1>About the offer</h1>
@@ -64,23 +81,6 @@
             <div class="row job-description fade-in-left animated">
                 <h1>Job description</h1>
                 {{ offer.description|nl2br }}
-            </div>
-
-            <div class="apply-div-form">
-                <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
-
-                <div class="container">
-                    <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
-                        <div class="inside-offer-apply">
-                            <div class="inside-offer-apply-cv">
-                                {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
-                            </div>
-                            <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
-                            <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
 

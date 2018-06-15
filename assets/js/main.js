@@ -47,19 +47,7 @@ $(document).ready(function() {
 
     //main page
 
-    $( '.fade-in-right' ).each(function(  ) {
-        if( $(this).visible(true)){
-            $(this).addClass('fadeInRight');
-        }
-    });
-    $( '.fade-in-left' ).each(function(  ) {
-        if( $(this).visible(true)){
-            $(this).addClass('fadeInLeft');
-        }
-    });
-
-
-    $(window).scroll(function() {
+    if(detectmob() == false ){
         $( '.fade-in-right' ).each(function(  ) {
             if( $(this).visible(true)){
                 $(this).addClass('fadeInRight');
@@ -70,7 +58,23 @@ $(document).ready(function() {
                 $(this).addClass('fadeInLeft');
             }
         });
-    });
+
+
+        $(window).scroll(function() {
+            $( '.fade-in-right' ).each(function(  ) {
+                if( $(this).visible(true)){
+                    $(this).addClass('fadeInRight');
+                }
+            });
+            $( '.fade-in-left' ).each(function(  ) {
+                if( $(this).visible(true)){
+                    $(this).addClass('fadeInLeft');
+                }
+            });
+        });
+    }
+
+
 
     if(detectmob()){
         $('.navbar-fixed-bottom').removeClass('navbar-fixed-bottom').addClass('navbar-static-bottom');

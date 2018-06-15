@@ -78,5 +78,11 @@ h3.box{
     color: white;
 }
 
+@media screen and (max-device-width: 480px){
+    .last-offers{
+        margin: 10px;
+    }
+
+}
 
 

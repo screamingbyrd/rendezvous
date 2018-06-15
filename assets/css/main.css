@@ -77,6 +77,10 @@ h1{
     body{
         padding-bottom: 0;
     }
+    .thumbnail{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 .homepage-jumbotron #keyword-input{

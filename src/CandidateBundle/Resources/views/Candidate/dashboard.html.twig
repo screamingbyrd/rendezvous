@@ -9,10 +9,10 @@
         <h3>Dashboard</h3>
 
         <h4>Vous avez postulé à ces offres:</h4>
-        <ul id="myUL">
+        <ul id="myUL" class="candidat-dashboard">
             {% for offer in appliedOffer %}
                 <li>
-                    <a class='offer-element' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                    <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
                         {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
                         <div class="offer-search-element">
                             <div class="job-title-employer">
