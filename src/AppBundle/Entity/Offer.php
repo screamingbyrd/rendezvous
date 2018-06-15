@@ -151,7 +151,7 @@ class Offer
     /**
      * @var \datetime
      *
-     * @ORM\Column(name="availableDate", type="datetime")
+     * @ORM\Column(name="availableDate", type="datetime", nullable=true)
      */
     private $availableDate;
 
@@ -424,7 +424,12 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->creationDate =  new \datetime();
+        $this->creationDate =  new \Datetime();
+        $this->startDate = new \DateTime();
+        $this->endDate = new \DateTime();
+        $this->updateDate = new \DateTime();
+
+
     }
 
     /**

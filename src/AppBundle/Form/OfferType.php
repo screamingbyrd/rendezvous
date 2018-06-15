@@ -19,7 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class OfferType extends AbstractType
@@ -30,21 +29,31 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',      TextType::class, array('required' => false))
-            ->add('description', TextareaType::class, array(
-                'required' => false,
+            ->add('title',      TextType::class, array(
+                'required' => true,
+                'label' => 'offer.title'
             ))
 
             ->add('tag', EntityType::class, array(
-                'required' => false,
+                'required' => true,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
                 'attr' => array('class' => 'select2'),
-                'multiple' => true,php
+                'multiple' => true,
             ))
 
+            ->add('location', PlaceAutocompleteType::class,array(
+                'required' => true,
+                'attr' => array(
+                    'class' => 'form-control'),
+            ))
 
-            ->add('location', PlaceAutocompleteType::class)
+            ->add('description', TextareaType::class, array(
+                'required' => true,
+                'label' => 'offer.description',
+                'attr' => array(
+                    'style' => 'height: 40vh'),
+            ))
 
             ->add('availableDate',      DateType::class, array('required' => false,'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
@@ -69,7 +78,6 @@ class OfferType extends AbstractType
             ),
                 'placeholder' => 'form.registration.exp0',
             ))
-
 
             ->add('diploma', ChoiceType::class, array('choices' => array(
                 'form.registration.dip1' => 'form.registration.dip1',
@@ -133,7 +141,6 @@ class OfferType extends AbstractType
                 'multiple' => true,
                 'required' => false,
             ))
-
 
             ->add('image', ImageType::class, array(
                 'required' => false,

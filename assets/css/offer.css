@@ -286,3 +286,24 @@
 .tag-offer i{
     margin-right: 3px;
 }
+
+.optionnal-div-form {
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
+    color: white;
+    background: #333;
+    padding: 8px;
+    left: 0;
+    text-align: center;
+}
+
+.slider{
+    display: none;
+}
+
+.container.post-offer{
+
+
+
+}

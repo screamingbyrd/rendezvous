@@ -61,9 +61,16 @@ class EmployerType extends AbstractType
 
             ))
 
-            ->add('location', PlaceAutocompleteType::class)
+            ->add('location', PlaceAutocompleteType::class,array(
+                'attr' => array('class' => 'form-control'),
+
+
+                ))
+
             ->add('phone', TelType::class)
+
             ->add('logo', ImageType::class)
+
             ->add('coverImage', ImageType::class)
 
             ->add('Enregistrer',      SubmitType::class)

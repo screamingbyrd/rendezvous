@@ -21,7 +21,7 @@
 }
 
 body {
-    padding-top: 65px;
+    padding-top: 51px;
     padding-bottom: 65px;
 }
 
@@ -161,6 +161,11 @@ h1{
     top: -40px;
     width: 187px;
     height: 131px;
+}
+
+.label-form{
+
+    color: #e8471b;
 }
 
 

@@ -123,6 +123,14 @@ dashboard:
     boostOffers: Boost you offers
 
 offer:
+  title: Title
+  description: Descritpion
+  optionnal: More Options
+  submit: Submit
+
+
+
+
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:
