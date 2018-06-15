@@ -422,3 +422,8 @@
 .searchpage-jumbotron #location-input{
     color: #333;
 }
+.no-offer{
+    margin-top: 80px;
+    font-size: 26px;
+    text-align: center;
+}

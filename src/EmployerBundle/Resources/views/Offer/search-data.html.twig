@@ -1,6 +1,6 @@
 {% if data is not defined or data|length == 0%}
-<li class="search-result animated fadeIn">
-    <a class='offer-element'>Sorry but there is no offer for this search</a>
+<li class="no-offer search-result animated fadeIn">
+    Sorry but there is no offer for this search
 </li>
 {% endif %}
 <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
