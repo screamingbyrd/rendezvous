@@ -68,5 +68,32 @@ class AppController extends Controller
 
     }
 
+    public function AboutPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:about.html.twig');
+
+    }
+
+    public function faqPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:faq.html.twig');
+
+    }
+
+    public function privacyPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:privacy.html.twig');
+
+    }
+
+    public function legalPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:legal.html.twig');
+
+    }
 
 }
