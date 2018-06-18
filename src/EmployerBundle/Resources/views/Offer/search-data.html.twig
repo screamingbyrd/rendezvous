@@ -18,7 +18,7 @@
                     <div class="offer-element-details">
                         <div class="offer-element-name">{{ offer.employer.name }}</div>
                         <div class="offer-element-title">{{ offer.title |truncate(130, true)}}</div>
-                        <div class="offer-element-other"><span class="other-element"><i class="fa fa-tag"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.location }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
+                        <div class="offer-element-other"><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.location }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
                     </div>
                 </div>
             </a>

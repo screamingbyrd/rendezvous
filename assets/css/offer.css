@@ -464,9 +464,13 @@
 }
 .logo-employer-in-offer-search{
     width: 13%;
-    max-width: 66px;
+    max-width: 73px;
     margin-left: -31px;
     z-index: 1;
+    padding: 10px;
+    border: 1px #ddd solid;
+    border-radius: 3px;
+    background-color: white;
 }
 .searchpage-jumbotron{
     margin-bottom: 0;

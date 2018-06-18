@@ -72,7 +72,7 @@
                 {% for offer in offers %}
                     <li>
                         <div class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
-                            <span>{{ offer.title |truncate(45, true)}}</span>
+                            <span>{{ offer.title |truncate(33, true)}}</span>
                             {% if offer.archived %}
                                 <button class="btn btn-danger element-offer-list unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
                             {% else %}

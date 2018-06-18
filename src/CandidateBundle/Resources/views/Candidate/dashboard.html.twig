@@ -1,27 +1,27 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    Register - {{ parent() }}
+    {{ 'dashboard.title' | trans }}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h3>Dashboard</h3>
+        <h3>{{ 'dashboard.title' | trans }}</h3>
 
-        <h4>Vous avez postulé à ces offres:</h4>
+        <h4>{{ 'dashboard.candidate.list' | trans }}</h4>
         <ul id="myUL" class="candidat-dashboard">
             {% for offer in appliedOffer %}
                 <li>
                     <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
-                        {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
+                        {% if offer.offer.employer.logo is not null %}<img class="dashboard-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
                         <div class="offer-search-element">
                             <div class="job-title-employer">
                                 <div>{{ offer.offer.title }}</div>
-                                <div>{{ offer.offer.employer.name }}</div>
+                                <div class="offer-element-name">{{ offer.offer.employer.name }}</div>
                             </div>
 
-                            <span>{{ offer.offer.location }}</span>
-                            <span class="applied-date">Postulé le {{ offer.date | date("d/m/Y")  }}</span>
+                            <span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span>
+                            <span class="applied-date">{{ 'dashboard.candidate.appliedThe' | trans }}{{ offer.date | date("d/m/Y")  }}</span>
                         </div>
                     </a>
                 </li>

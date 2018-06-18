@@ -140,6 +140,9 @@ dashboard:
     typeTitle: Entrer un titre
     searchTitle: Chercher un titre
     boostOffers: Booster vos offres
+  candidate:
+    list: Vous avez postulez à ces offres
+    appliedThe: Postulé le
 
 slot:
   buy:
@@ -174,8 +177,8 @@ offer:
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
     already: Vous avez déja postulé à cette offre
-  countView: Nombre de vue
-  countContact: Nombre de contact
+  countView: Vues
+  countContact: Contactés
 
   applied:
     success: Vous avez bien postulé à l'offre %title% !

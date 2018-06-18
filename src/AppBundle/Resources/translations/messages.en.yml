@@ -124,6 +124,9 @@ dashboard:
     typeTitle: Type in a title
     searchTitle: Search a title
     boostOffers: Boost you offers
+  candidate:
+    list: You applied to those offers
+    appliedThe: Applied the
 
 slot:
   buy:
@@ -159,8 +162,8 @@ offer:
     already: You already applied to this offer
   applied:
     success: You applied to the offer %title% !
-  countView: View count
-  countContact: Contact count
+  countView: Views
+  countContact: Applyed
 
 candidate:
   delete:

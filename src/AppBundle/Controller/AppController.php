@@ -32,6 +32,16 @@ class AppController extends Controller
         ;
 
         $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
+
+        $sql = " 
+        SELECT t.name, count(o.offer_id) as 'countOffer' FROM `tag` t left join offer_tag o on o.tag_id = t.id GROUP BY NAME
+        ";
+
+        $em = $this->getDoctrine()->getManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $tagArray = $stmt->fetchAll();
+
         $em = $this->getDoctrine()->getManager();
 
         foreach ($featuredOffer as $offer){
@@ -52,7 +62,8 @@ class AppController extends Controller
         shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer,
-            'featuredOffer' => $featuredOffer
+            'featuredOffer' => $featuredOffer,
+            'tags' => $tagArray
         ));
 
     }

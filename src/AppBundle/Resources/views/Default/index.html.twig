@@ -44,8 +44,8 @@
                         </div>
 
                         <div class="caption">
-                            <h3>{{ offer.offer.title|truncate(20, true) }} / {{ offer.offer.id }}</h3>
-                            <p>{{ offer.offer.location }} / {{ offer.offer.contractType.name |trans }}</p>
+                            <h3>{{ offer.offer.title|truncate(20, true) }} # {{ offer.offer.id }}</h3>
+                            <p><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
                             <p class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)}}</p>
                         </div>
                     </div>
@@ -81,6 +81,19 @@
             {% endfor %}
         </div>
 
+        <h1 >Category</h1>
+        <div class="row">
+            {% for row  in tags|batch(2, null) %}
+                <div class="{{ cycle(['color-row',''],loop.index) }}">
+                    {% for tag in row %}
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="#">{{ tag.name }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
+                    {% endfor %}
+                </div>
+
+            {% endfor %}
+        </div>
+
+
         <hr>
 
         <div class="jumbotron jobnow-description fade-in-right animated">
@@ -91,6 +104,14 @@
     </div>
 
     <style>
+        .homepage-href-row{
+            padding: 10px;
+            padding-right: 25px;
+            font-size:20px;
+        }
+        .homepage-href-tag{
+            text-decoration: none !important;
+        }
         .homepage-jumbotron::after{
             content: '';
             background-image:url({{asset('images/jobnow-home.jpg')}});
