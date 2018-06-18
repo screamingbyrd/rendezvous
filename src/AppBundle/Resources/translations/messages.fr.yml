@@ -210,7 +210,14 @@ contact:
   form: Formulaire de contact
   us:
     title: Contactez nous
+    smallTitle: Contact
   location: Notre localisation
   openingHours: Heures d'ouverture:
   monday: Lundi – Vendredi / 9h – 19h (non-stop)
   saturday: Samedi / 10h – 17h (non-stop)
+
+footer:
+  about: À propos
+  faq: FAQ
+  privacy: Vie privée
+  legal: Mentions légales

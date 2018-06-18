@@ -217,7 +217,14 @@ contact:
   form: Contact form
   us:
    title: Contact us
+   smallTitle: Contact
   location: Our location
   openingHours: Opening hours:
   monday: Monday – Friday / 9am – 7pm (non-stop)
   saturday: Saturday / 10am – 5pm (non-stop)</strong>
+
+footer:
+  about: About us
+  faq: FAQ
+  privacy: Privacy
+  legal: Legal
