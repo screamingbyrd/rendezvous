@@ -1,44 +1,33 @@
 <form method="post" action="{{ path('jobnow_contact') }}" class="form-horizontal clearfix">
 
-    <div class="col-sm-6 col-md-2">
-        <div class="label-contact-us">
-            <label>Votre nom</label>
-        </div>
-        <div class="label-contact-us">
-            <label>Votre email</label>
-        </div>
-        <div class="label-contact-us">
-            <label>Votre message</label>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-10">
-        <div><input class="input-contact" name="name" type="text" id="name-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-        <div><input class="input-contact"name="email" type="text" id="email-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}"></div>
-        <div><textarea  class="input-contact" name="message" id="message-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}"></textarea></div>
 
-    </div>
-    <input type="submit" class="job-see-all send-contact" value="{{ 'email.send' | trans }}">
+    <table>
+        <tr>
+            <th class="label-contact-us">
+                <label>Votre nom</label>
+            </th>
+            <td class="td-contact-us">
+                <input class="input-contact" name="name" type="text" id="name-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+            </td>
+        </tr>
+        <tr>
+            <th class="label-contact-us">
+                <label>Votre email</label>
+            </th>
+            <td class="td-contact-us">
+                <input class="input-contact" name="email" type="text" id="email-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+            </td>
+        </tr>
+        <tr>
+            <th class="label-contact-us">
+                <label>Votre message</label>
+            </th>
+            <td class="td-contact-us">
+                <textarea  class="input-contact" name="message" id="message-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}"></textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" class="jobnow-button send-contact" value="{{ 'email.send' | trans }}">
 
 </form>
 
-<style>
-    .label-contact-us{
-        text-align: right;
-        padding: 16px;
-    }
-    .send-contact{
-        width: 20%;
-        float: right;
-    }
-    .input-contact{
-        background-position: 10px 12px;
-        background-repeat: no-repeat;
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 20px 12px 13px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-        margin-right: -4px;
-        min-width: 130px;
-        }
-</style>

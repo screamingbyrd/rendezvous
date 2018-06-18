@@ -19,7 +19,7 @@
                         <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
                     {% endfor %}
                 </select>
-                <input type="submit" class="job-see-all searchOffer" value="Search">
+                <input type="submit" class="jobnow-button searchOffer" value="Search">
                 <ul class="contractType-list">
                     {% for type in contractType %}
                         <li class="contract-type">

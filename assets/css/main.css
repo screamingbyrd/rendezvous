@@ -29,6 +29,29 @@ h1{
     color: #f0b245;
 }
 
+.jobnow-button{
+    color: #fbfef5;
+    border-radius: 0px;
+    padding: 18px 19px;
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: #f45721;
+    box-shadow: inset 0 0 0 0 #d84a24;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+    text-align: center;
+    text-decoration: none !important;
+    margin-top: -10px;
+    min-width: 100px;
+}
+.jobnow-button:hover{
+    box-shadow: inset 400px 0 0 0 #ff6940;
+    color: white;
+}
+
 .credit-total{
     background-color: #ff9600;
     border-radius: 5px;
@@ -80,6 +103,13 @@ h1{
     .thumbnail{
         margin-left: 10px;
         margin-right: 10px;
+    }
+    .send-contact{
+        width: 100% !important;
+    }
+    .jobnow-button{
+        border-radius: 8px;
+        padding: 10px 19px;
     }
 }
 
@@ -176,5 +206,24 @@ h1{
     width: 187px;
     height: 131px;
 }
-
+.td-contact-us{
+    width: 88%;
+}
+.label-contact-us{
+    text-align: right;
+    padding: 16px;
+}
+.send-contact{
+    width: 20%;
+    float: right;
+}
+.input-contact{
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 13px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
 
