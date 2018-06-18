@@ -203,7 +203,12 @@ class EmployerController extends Controller
         $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
 
         //try to match string location to get Object with lat long info
-        $request = new GeocoderAddressRequest($employer->getLocation());
+        if($employer->getLocation()){
+            $request = new GeocoderAddressRequest($employer->getLocation());
+        }else{
+            $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
+        }
+
         $response = $geocoder->geocode($request);
 
 

@@ -86,11 +86,10 @@ form:
     wag9: Up to 80,000 €
     wag10: Up to 90,000 €
 
-    searchedtag: Wanted Skills area
-    searchedtagPH: -- List your wanted skills --
+    searchedtag: List your wanted skills area
+    tag: Your skills
 
-
-
+    age: How old are you?
 
   offer:
     creation:
@@ -141,8 +140,19 @@ slot:
     success: The slot has been emptied
 
 offer:
+
   search:
     title: Search offers
+
+  title: Title
+  description: Descritpion
+  optionnal: More Options
+  submit: Submit
+
+
+
+
+
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:

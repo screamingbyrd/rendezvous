@@ -25,6 +25,7 @@
         "doctrine/orm": "^2.5",
         "egeloen/google-map-bundle": "^3.0",
         "egeloen/serializer-bundle": "^1.0",
+        "friendsofsymfony/ckeditor-bundle": "^1.1",
         "friendsofsymfony/elastica-bundle": "^5.0",
         "friendsofsymfony/user-bundle": "^2.1",
         "incenteev/composer-parameter-handler": "^2.0",

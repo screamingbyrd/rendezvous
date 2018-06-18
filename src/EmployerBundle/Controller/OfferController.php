@@ -26,40 +26,19 @@ class OfferController extends Controller
 
         $session = $request->getSession();
 
-        $user = $this->getUser();
-        $employerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Employer')
-        ;
-        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+        $offer = new Offer();
 
-        $form = $this->get('form.factory')->create(OfferType::class);
+        $form = $this->get('form.factory')->create(OfferType::class, $offer);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-            $data = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
 
-            $offer = new Offer();
-            $offer->setEmployer($employer);
-            $offer->setDescription($data->getDescription());
-            $offer->setAvailableDate($data->getAvailableDate());
-            $offer->setLocation($data->getLocation());
-            $offer->setContractType($data->getContractType());
-            $offer->setImage($data->getImage());
-            $offer->setTitle($data->getTitle());
-            $offer->setWage($data->getWage());
-            $offer->setExperience($data->getExperience());
-            $offer->setDiploma($data->getDiploma());
-            $offer->setBenefits($data->getBenefits());
+            $offer->setEmployer($this->getUser()->getEmployer());
+
             $offer->setCountView(0);
             $offer->setCountContact(0);
-            $past = new \DateTime('01-01-1900');
-            $offer->setStartDate($past);
-            $offer->setEndDate($past);
-            $offer->setUpdateDate($past);
 
             $em->persist($offer);
             $em->flush();
@@ -84,12 +63,7 @@ class OfferController extends Controller
 
         $user = $this->getUser();
 
-        $employerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Employer')
-        ;
-        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+        $employer = $user->getEmployer();
 
         $offerRepository = $this
             ->getDoctrine()
@@ -108,21 +82,10 @@ class OfferController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-            $data = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
 
-            $offer->setDescription($data->getDescription());
-            $offer->setImage($data->getImage());
-            $offer->setTitle($data->getTitle());
-            $offer->setAvailableDate($data->getAvailableDate());
-            $offer->setLocation($data->getLocation());
-            $offer->setWage($data->getWage());
-            $offer->setExperience($data->getExperience());
-            $offer->setDiploma($data->getDiploma());
-            $offer->setBenefits($data->getBenefits());
-            $offer->setCountView(0);
-            $offer->setCountContact(0);
+            $offer->setCountView($offer->getCountView());
+            $offer->setCountContact($offer->getCountContact());
 
             $em->merge($offer);
             $em->flush();

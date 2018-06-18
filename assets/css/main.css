@@ -206,6 +206,7 @@ h1{
     width: 187px;
     height: 131px;
 }
+
 .td-contact-us{
     width: 88%;
 }
@@ -226,4 +227,11 @@ h1{
     border: 1px solid #ddd;
     margin-bottom: 12px;
 }
+
+
+.label-form{
+
+    color: #e8471b;
+}
+
 

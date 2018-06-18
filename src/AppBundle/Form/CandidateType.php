@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -55,14 +56,14 @@ class CandidateType extends AbstractType
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
 
-            ->add('description',      TextType::class, array(
+            ->add('description',      TextareaType::class, array(
                 'required' => false,
                 'label' => 'form.registration.description'
                 ))
 
             ->add('age',      TextType::class, array(
                 'required' => false,
-                'label' => 'form.registration.description'
+                'label' => 'form.registration.age'
             ))
 
             ->add('experience', ChoiceType::class, array('choices' => array(
@@ -70,7 +71,8 @@ class CandidateType extends AbstractType
                 'form.registration.exp2' => 'form.registration.exp2',
                 'form.registration.exp3' => 'form.registration.exp3',
             ),
-                'placeholder' => 'form.registration.exp0',
+                'required' => false,
+                'attr' => array('class' => 'select2'),
             ))
             ->add('license', ChoiceType::class, array('choices' => array(
                 'form.registration.lis1' => 'form.registration.lis1',
@@ -93,7 +95,6 @@ class CandidateType extends AbstractType
                 'required' => false,
                 'attr' => array('class' => 'select2'),
                 'label' => 'form.registration.license',
-                'placeholder' => 'form.registration.lis0'
             ))
 
             ->add('searchedtag', EntityType::class, array(
@@ -110,10 +111,12 @@ class CandidateType extends AbstractType
             ->add('tag', EntityType::class, array(
                 'required' => false,
                 'class' => Tag::class,
+                'label' => 'form.registration.tag',
                 'choice_label' =>  'name',
-                'placeholder' => 'Category',
                 'multiple' => true,
-                'expanded' => true,
+                'attr' => array('class' => 'select2'),
+                'placeholder' => 'form.registration.tagPH',
+
             ))
 
 
