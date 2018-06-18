@@ -57,12 +57,20 @@ class EmployerType extends AbstractType
                 'choice_label' =>  'name',
                 'placeholder' => 'Category',
                 'multiple' => true,
-                'expanded' => true,
+                'attr' => array('class' => 'select2'),
+
             ))
 
-            ->add('location', PlaceAutocompleteType::class)
+            ->add('location', PlaceAutocompleteType::class,array(
+                'attr' => array('class' => 'form-control'),
+
+
+                ))
+
             ->add('phone', TelType::class)
+
             ->add('logo', ImageType::class)
+
             ->add('coverImage', ImageType::class)
 
             ->add('Enregistrer',      SubmitType::class)

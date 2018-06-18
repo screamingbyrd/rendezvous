@@ -15,7 +15,7 @@
         });
     </script>
 
-    <div class="container well">
+    <div class="container post-offer">
 
         <h3>Post offer</h3>
 
@@ -23,6 +23,93 @@
 
         {# Les erreurs générales du formulaire. #}
         {{ form_errors(form) }}
+
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_label (form.title, null, { 'label_attr': {'class': 'label-form'} })  }}
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_label (form.tag, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.tag) }}
+                {{ form_errors(form.tag) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_label (form.location, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.location) }}
+                {{ form_errors(form.location) }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_label (form.description, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.description) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+        <br>
+
+        <div class="slider">
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label (form.contractType, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.contractType) }}
+                {{ form_errors(form.contractType) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.experience, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.experience) }}
+                {{ form_errors(form.experience) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.diploma, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.diploma) }}
+                {{ form_errors(form.diploma) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.availableDate, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.availableDate) }}
+                {{ form_errors(form.availableDate) }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label (form.wage, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.wage) }}
+                {{ form_errors(form.wage) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.benefits, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.benefits) }}
+                {{ form_errors(form.benefits) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.license, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.license) }}
+                {{ form_errors(form.license) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.image) }}
+                {{ form_errors(form.image) }}
+            </div>
+        </div>
+        </div>
+
+        <div class="optionnal-div-form">
+
+            <button class="btn btn-primary apply-button slider-button">{{ 'offer.optionnal' | trans }}</button>
+            {{ form_widget(form.submit, { 'label': 'offer.submit','class': 'btn btn-primary apply-button' }) }}
+
+
+
+
+        </div>
+        </div>
+
 
 
         {# Génération automatique des champs pas encore écrits.
@@ -35,4 +122,17 @@
 
 
     </div>
+
+    <script>
+
+        $(".slider-button").click(function() {
+
+            $(".slider").slideToggle("slow");
+
+
+        });
+    </script>
+
+
+
 {% endblock %}

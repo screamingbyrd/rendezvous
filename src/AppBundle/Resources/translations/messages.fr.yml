@@ -65,10 +65,7 @@ form:
     lis13: Permis D1E
     lis14: Permis F
 
-
-
-
-    dip0: -- Diploma --
+    dip0: -- Diplôme --
     dip1: BTS
     dip2: Master
     dip3: Doctor
@@ -94,16 +91,9 @@ form:
     wag10: Up to 90,000 €
 
     searchedtag: Domaine de compétences désirées
-    searchedtagPH: -- Listez vos compétences désirées --
+    tag: Vos domaines de compétences
 
-    tag: Domaine de compétences
-    tagPH: -- Listez vos compétences désirées --
-
-
-
-
-
-
+    age: Age
 
   offer:
     creation:
