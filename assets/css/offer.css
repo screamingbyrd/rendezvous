@@ -98,7 +98,7 @@
 
 .offer-search-element{
     width: 94%;
-    margin-left: 3%;
+    margin-left: 2%;
     display: inline-block;
 }
 .applied-date {
@@ -391,6 +391,36 @@
         padding-left: 0;
         padding-top: 10px;
     }
+    .offer-element{
+        display: inline-table !important;
+        font-size: 16px !important;
+        width: 100% !important;
+        margin: 10px 0 !important;
+    }
+    .background-employer-in-offer-search{
+        width: 100% !important;
+        min-height: 90px !important;
+    }
+    .offer-search-element{
+        padding: 15px;
+        padding-top: 5px;
+    }
+    .offer-element-title{
+        font-size: 21px !important;
+    }
+    .logo-employer-in-offer-search{
+        margin-top: -50px !important;
+        width: 24% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: flex !important;
+        padding: 10px;
+        border: 1px #ddd solid;
+        border-radius: 3px;
+        background-color: white;
+        z-index: 1000;
+        position: relative;
+    }
 }
 
 #employer-input{
@@ -421,7 +451,6 @@
 .background-employer-in-offer-search{
     min-height: 140px;
     width: 30%;
-    margin-left: -1px;
     position: relative;
     display: flex;
     align-items: center;
