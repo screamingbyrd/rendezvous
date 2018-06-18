@@ -10,6 +10,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\ContractType;
 use AppBundle\Entity\Tag;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -48,11 +49,12 @@ class OfferType extends AbstractType
                     'class' => 'form-control'),
             ))
 
-            ->add('description', TextareaType::class, array(
+            ->add('description', CKEditorType::class, array(
                 'required' => true,
                 'label' => 'offer.description',
                 'attr' => array(
-                    'style' => 'height: 40vh'),
+                    'style' => 'height: 60vh'),
+                'config' => array('toolbar' => 'basic'),
             ))
 
             ->add('availableDate',      DateType::class, array('required' => false,'widget' => 'single_text',
