@@ -156,6 +156,41 @@ class CandidateController extends Controller
         ;
         $candidate = $candidateRepository->findOneBy(array('user' => $user));
 
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $tagRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Tag')
+        ;
+
+        $notificationRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Notification')
+        ;
+        $notifications = $notificationRepository->findBy(array('candidate' => $candidate));
+
+        $notificationsArray = array();
+
+        foreach ($notifications as $notification){
+            $newNotification = array();
+            $newNotification['id'] = $notification->getId();
+            $type = $notification->getTypeNotification();
+            $newNotification['type'] = $type;
+            if($type == 'employer'){
+                $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
+                $newNotification['name'] = $employer->getName();
+            }elseif ($type == 'tag'){
+                $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
+                $newNotification['name'] = $tag->getName();
+            }
+            $notificationsArray[] = $newNotification;
+        }
+
         $postulatedOfferRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -181,7 +216,11 @@ class CandidateController extends Controller
             $finalArray[$offer->getId()]['offer'] = $offer;
         }
 
-        return $this->render('CandidateBundle:Candidate:dashboard.html.twig', array('appliedOffer' => $finalArray));
+        return $this->render('CandidateBundle:Candidate:dashboard.html.twig',
+            array(
+                'appliedOffer' => $finalArray,
+                'notifications' => $notificationsArray
+            ));
     }
 
     public function deleteAction(Request $request){

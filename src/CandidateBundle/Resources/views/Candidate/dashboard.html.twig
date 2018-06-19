@@ -8,6 +8,29 @@
     <div class="container">
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
+        {% if notifications is defined and notifications|length > 0 %}
+            <h4>{{ 'notification.mine' | trans }}</h4>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">type</th>
+                    <th scope="col">name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in 1..notifications|length %}
+                    <tr>
+                        <td>{{ notifications[i-1].type }}</td>
+                        <td>{{ notifications[i-1].name }}</td>
+                        <td><a href="{{ path('delete_notification', {'id':notifications[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'notification.delete' | trans }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
         <h4>{{ 'dashboard.candidate.list' | trans }}</h4>
         <ul id="myUL" class="candidat-dashboard">
             {% for offer in appliedOffer %}

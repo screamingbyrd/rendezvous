@@ -221,3 +221,10 @@ footer:
   faq: FAQ
   privacy: Vie privée
   legal: Mentions légales
+
+notification:
+  created: Notification crée !
+  deleted: Notification supprimé !
+  delete: Supprimer cette notification
+  mine: Mes notifications
+  already: La notification existe déjà !

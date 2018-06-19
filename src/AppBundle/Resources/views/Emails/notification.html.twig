@@ -1,0 +1,26 @@
+{% extends "::layout.html.twig" %}
+
+<div>
+    New jobs are available for this parameter {{ subject }}
+</div>
+
+<ul id="myUL" class="candidat-dashboard">
+    {% for offer in offers %}
+        <li class="search-result animated fadeIn">
+            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
+                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
+                    <div class="layer layer-offer-element animated">
+                    </div>
+                </div>
+                {% if offer.employer.logo is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                <div class="offer-search-element">
+                    <div class="offer-element-details">
+                        <div class="offer-element-name">{{ offer.employer.name }}</div>
+                        <div class="offer-element-title">{{ offer.title |truncate(130, true)}}</div>
+                        <div class="offer-element-other"><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.location }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+</ul>

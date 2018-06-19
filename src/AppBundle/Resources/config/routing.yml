@@ -26,3 +26,12 @@ privacy_page:
 legal_page:
     path:     /legal
     defaults: { _controller: AppBundle:App:legalPage }
+create_notification:
+    path:     /create-notification
+    defaults: { _controller: AppBundle:Notification:create }
+delete_notification:
+    path:     /delete-notification
+    defaults: { _controller: AppBundle:Notification:delete }
+send_notification:
+    path:     /send-notification
+    defaults: { _controller: AppBundle:Notification:send }

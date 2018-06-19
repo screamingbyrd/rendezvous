@@ -18,4 +18,23 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
                 .$employerId.' AND o.startDate < CURRENT_TIMESTAMP() AND o.endDate > CURRENT_TIMESTAMP()'
             )->execute();
     }
+
+    public function getNotificationOffers($notification)
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->andWhere('o.startDate > :date OR (o.creationDate > :date AND o.slot is not null)')
+            ->setParameter('date', $notification->getDate());
+
+        if($notification->getTypeNotification() == 'employer'){
+            $query->andWhere('o.employer = :employer')
+            ->setParameter('employer', $notification->getElementId());
+        }elseif ($notification->getTypeNotification() == 'tag'){
+            $query->andWhere(':tag MEMBER OF o.tag')
+            ->setParameter('tag', $notification->getElementId());
+        }
+
+        $offers = $query->getQuery()->getResult();
+
+        return $offers;
+    }
 }

@@ -228,3 +228,10 @@ footer:
   faq: FAQ
   privacy: Privacy
   legal: Legal
+
+notification:
+  created: Notification created !
+  deleted: Notification deleted !
+  delete: Delete this notification
+  mine: My notifications
+  already: Notification already exist !
