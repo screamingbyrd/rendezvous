@@ -295,10 +295,6 @@
 .nav-candidate{
     display: inline-block;
 }
-.candidate-content{
-    display: inline-flex;
-    width: 80%;
-}
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
     color: #ea3222;
     background-color: #fff;

@@ -9,7 +9,11 @@ header:
     findJob: Trouver un travail
     companies: Entreprise
     submit: Envoyer votre cv
-    dashboard: Tableau de bord
+    profile: Mon profile
+    dashboard:
+      alert: Mes alertes
+      applied: Mes candidatures
+      favorites: Mes favoris
     register: Candidat
   employers:
     title: Employeurs
@@ -228,3 +232,9 @@ notification:
   delete: Supprimer cette notification
   mine: Mes notifications
   already: La notification existe déjà !
+
+favorite:
+  created: Ajouté au favoris !
+  deleted: Favori supprimé !
+  delete: Supprimer ce favoris
+  already: La favoris existe déjà !

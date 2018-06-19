@@ -6,7 +6,11 @@ header:
     findJob: Find a job
     companies: Companies
     submit: Submit your resume
-    dashboard: Dashboard
+    profile: Mon profile
+    dashboard:
+      alert: Mes alertes
+      applied: Mes candidatures
+      favorites: Mes favoris
     register: Candidate
   employers:
     title: Employers
@@ -235,3 +239,9 @@ notification:
   delete: Delete this notification
   mine: My notifications
   already: Notification already exist !
+
+favorite:
+  created: Added to favorites !
+  deleted: Favorite deleted !
+  delete: Delete this favorite
+  already: This favorite already exist !

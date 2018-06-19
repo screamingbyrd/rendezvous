@@ -35,3 +35,9 @@ delete_notification:
 send_notification:
     path:     /send-notification
     defaults: { _controller: AppBundle:Notification:send }
+create_favorite:
+    path:     /create-favorite
+    defaults: { _controller: AppBundle:Favorite:create }
+delete_favorite:
+    path:     /delete-favorite
+    defaults: { _controller: AppBundle:Favorite:delete }

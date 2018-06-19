@@ -119,6 +119,15 @@ h1{
         width: 82% !important;
         overflow: hidden;
     }
+
+    .favorite-element{
+        display: list-item !important;
+    }
+    .favorite-element .element-offer-list{
+        width: 100%;
+        margin: auto !important;
+        margin-bottom: 10px !important;
+    }
 }
 
 .homepage-jumbotron #keyword-input{
@@ -244,6 +253,16 @@ h1{
     height: 100px;
 }
 
+.favorite-element{
+    display: flex;
+    align-items: center;
+}
+.favorite-element .element-offer-list{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .label-form{
 

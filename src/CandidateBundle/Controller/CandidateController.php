@@ -161,6 +161,11 @@ class CandidateController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Employer')
         ;
+        $favoriteRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Favorite')
+        ;
         $tagRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -173,6 +178,7 @@ class CandidateController extends Controller
             ->getRepository('AppBundle:Notification')
         ;
         $notifications = $notificationRepository->findBy(array('candidate' => $candidate));
+        $favorites = $favoriteRepository->findBy(array('candidate' => $candidate));
 
         $notificationsArray = array();
 
@@ -219,7 +225,8 @@ class CandidateController extends Controller
         return $this->render('CandidateBundle:Candidate:dashboard.html.twig',
             array(
                 'appliedOffer' => $finalArray,
-                'notifications' => $notificationsArray
+                'notifications' => $notificationsArray,
+                'favorites' => $favorites
             ));
     }
 
