@@ -150,7 +150,7 @@ class NotificationController extends Controller
 
         foreach ($notifications as $notification){
             $offers = $offerRepository->getNotificationOffers($notification);
-            var_dump($offers);exit;
+
             if(!empty($offers)){
                 $candidate = $candidateRepository->findOneBy(array('id' => $notification->getCandidate()));
 
@@ -179,7 +179,7 @@ class NotificationController extends Controller
 
                 $mailer->send($message);
             }
-var_dump('rr');exit;
+
             $notification->setDate($now);
             $em->merge($notification);
         }
