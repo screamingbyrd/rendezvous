@@ -1,8 +1,8 @@
 .header-navbar {
     background-color: #272f3b;
     border-color: #080808;
-    height: 7%;
-    font-size: medium;
+    height: 75px;
+    font-size: 16px;
     display: flex;
     align-items: center;
 
@@ -14,14 +14,32 @@
 
 }
 
-#navbartop{
-
-    margin: 1%;
+.dropdown-menu{
+    padding: 5px 5px 10px 5px;
+    font-size: 14px;
 
 }
 
+.dropdown-menu>li>a{
+    background-color: #272f3b;
+    color: white;
 
 
+}
+
+.open>.dropdown-menu{
+    background-color: #272f3b ;
+}
+
+
+.logo-jobnow{
+    position: absolute;
+    left: 5%;
+    top: 10px;
+    width: 200px;
+    height: 61px;
+
+}
 
 
 .header-text{
@@ -34,7 +52,7 @@
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-    background-color: #a51010;
+    background-color: #272f3b;
 }
 
 .content-block{
@@ -241,14 +259,6 @@ h1{
     -webkit-transform: scale(1.1); /* Safari 3-8 */
     transform: scale(1.1);
     color:#333;
-}
-
-.logo-jobnow{
-    position: absolute;
-    left: 5%;
-    top: -68px;
-    width: 200px;
-    height: 200px;
 }
 
 .td-contact-us{

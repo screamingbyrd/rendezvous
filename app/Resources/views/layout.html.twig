@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Altea{% endblock %}</title>
+    <title>{% block title %}JobNow{% endblock %}</title>
 
     {% block stylesheets %}
         {# On charge le CSS de bootstrap depuis le site directement #}
@@ -42,8 +42,11 @@
             </button>
             <a class="navbar-brand  header-text" href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
         </div>
-        <div id="navbartop" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+
+
+                <li><a href="">{{ 'header.how'|trans }}</a></li>
                 <li><a href="{{ path('list_employer') }}">{{ 'header.candidates.companies'|trans }}</a></li>
 
 

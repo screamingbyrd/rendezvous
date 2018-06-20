@@ -1,6 +1,7 @@
 header:
   findjob: Find a job
   register: Register
+  how: How It works
   candidates:
     title: Candidates
     findJob: Find a job
