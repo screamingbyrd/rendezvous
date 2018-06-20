@@ -362,7 +362,7 @@
 }
 .hr-floating-employer{
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 11px;
     border-top: 1px solid #d4d3d3;
 }
 .floating-employer-logo{
@@ -370,6 +370,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 27%;
+    margin-top: 10px;
 }
 .floating-employer-description{
     padding: 20px;
