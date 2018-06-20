@@ -58,7 +58,19 @@ a{
 
 .featured-offer.text-center{
     margin-bottom: 15px;
+    margin-top: 5px;
+    color: #f0b245;
 }
+
+
+.post-offer.text-center{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    color: #e84921;
+}
+
+
+
 
 
 
@@ -176,7 +188,7 @@ h1{
     padding: 95px  0;
     background: transparent;
     background:rgba(0,0,0,0.6);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     display: block;
     position:relative;
     color: orange;
