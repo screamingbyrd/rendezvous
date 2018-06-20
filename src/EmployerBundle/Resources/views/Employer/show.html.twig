@@ -57,7 +57,7 @@
                     </div>
                 {% endif %}
 
-                {% if employer.tag is defined %}
+                {% if employer.tag is defined and employer.tag|length >0 %}
                     <div class="last-offers">
                         <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
                         <ul class="last-job-list">

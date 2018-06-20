@@ -128,6 +128,8 @@ h3.box{
 }
 .add-employer-notification{
     float: right;
+    font-size: 1em !important;
+    padding: .5em 1em !important;
 }
 .title-employer{
     font-size: 36px;
