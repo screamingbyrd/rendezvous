@@ -512,6 +512,7 @@
     height: inherit;
 }
 .featured-offer-search{
-    border: 1px #333 solid;
+    border-radius: 5px;
+    border: 1px #ddd solid;
     margin-top: 2%;
 }
