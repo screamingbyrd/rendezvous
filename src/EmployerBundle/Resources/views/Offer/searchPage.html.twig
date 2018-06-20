@@ -97,8 +97,8 @@
 
                                     <div class="caption">
                                         <h3>{{ offer.offer.title|truncate(20, true) }} # {{ offer.offer.id }}</h3>
-                                        <p><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
-                                        <p class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)}}</p>
+                                        <p><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location|truncate(20, true) }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
+                                        <p class="offer-thumb-description">{{ offer.offer.description |truncate(250, true) | raw}}</p>
                                     </div>
                                 </div>
                             </a>

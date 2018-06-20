@@ -81,13 +81,13 @@
 
             <div class="row job-description fade-in-left animated">
                 <h1>Job description</h1>
-                {{ offer.description|nl2br }}
+                {{ offer.description| raw }}
             </div>
         </div>
 
         <div class="col-sm-6 col-md-4 floating-employer fade-in-right animated">
             <div class="header-floating-employer ">
-                {{ offer.employer.name }}
+                {{ offer.employer.name|upper }}
             </div>
             <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
             <div class="floating-employer-description">
