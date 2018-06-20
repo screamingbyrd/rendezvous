@@ -92,7 +92,9 @@
             <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
             <div class="floating-employer-description">
                 {{ offer.employer.whyUs }}
+                <hr class="hr-floating-employer">
             </div>
+
             <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">Voir la page de l'entreprise</a>
         </div>
 

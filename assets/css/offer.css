@@ -335,23 +335,35 @@
 }
 
 .floating-employer{
-    border: black solid 1px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    -webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false;
+    -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+    -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     padding-right: 0;
     padding-left: 0;
+    text-align: center;
 }
 .floating-employer .jobnow-button{
-    width: 100%;
+    margin-bottom: 20px;
+    width: 88%;
 }
 .header-floating-employer{
-    background: #ea3222;
+    background: #272f3b;
     color: white;
     padding: 15px;
     font-size: 26px;
     text-align: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+.hr-floating-employer{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-top: 1px solid #d4d3d3;
 }
 .floating-employer-logo{
     display: block;
