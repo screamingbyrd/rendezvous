@@ -17,7 +17,6 @@
 
 #myUL li .offer-element {
     border: 1px solid #ddd;
-    text-decoration: none;
     font-size: 18px;
     color: black;
     -webkit-transition: ease-out 0.7s;
@@ -35,7 +34,6 @@
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6;
     padding: 12px;
-    text-decoration: none;
     font-size: 18px;
     color: black;
     display: table;
@@ -149,7 +147,6 @@
     display: block;
     text-align: center;
     padding: 14px 16px;
-    text-decoration: none;
     width: 11%;
     min-width: 140px;
 }
@@ -167,7 +164,6 @@
     color: black;
     float: left;
     padding: 8px 16px;
-    text-decoration: none;
 }
 
 #paginator-offer a.active {

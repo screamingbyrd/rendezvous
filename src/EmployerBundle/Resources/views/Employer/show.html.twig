@@ -37,6 +37,7 @@
                             </div>
                         </a>
                     </li>
+                    {% if offers[1] is defined %}
                     <li>
                         <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id}) }}">
                             <div class="slide-button">
@@ -45,6 +46,7 @@
                             </div>
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
                 <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">Toute nos offres</a>
             </div>

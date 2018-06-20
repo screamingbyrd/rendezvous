@@ -33,9 +33,10 @@
         <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name">
 
         <ul id="myUL">
+
             {% for employer in employers %}
-                <div class="row featured-employer {{ cycle(['fade-in-right','fade-in-left'],loop.index) }} animated">
-                    <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-sm-6 col-md-12 row featured-offer zoom  thump-employer">
+
+                    <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
                         <div class="thumbnail" >
                             <div class="header-thumb-employer">
                                 {% if employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
@@ -48,9 +49,8 @@
                             </div>
                         </div>
                     </a>
-                </div>
 
-            {% endfor %}
+            {% endfor %}</div>
         </ul>
     </div>
 
