@@ -295,7 +295,15 @@ class OfferController extends Controller
         ;
         $employers = $employerRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer));
+        $featuredOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedOffer')
+        ;
+
+        $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
+
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer, 'featuredOffer' => $featuredOffer));
     }
 
     public function boostAction(Request $request){

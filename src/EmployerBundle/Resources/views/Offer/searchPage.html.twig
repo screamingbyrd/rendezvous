@@ -50,32 +50,58 @@
             position:absolute;
             z-index: -1;
         }
+        .featured-offer-search ul{
+            list-style: none;
+            padding-left: 0;
+        }
+        .featured-offer-search a{
+            text-decoration: none;
+        }
+        .featured-offer-search a .offer-thumb-image-div{
+            position: absolute;
+            bottom: -14px;
+        }
     </style>
 
 
     <div class="container">
 
-        <ul id="myUL">
+        <div class="row">
+            <div class="col-md-9">
+                <ul id="myUL">
 
-        </ul>
+                </ul>
+            </div>
+            <div class="col-md-3 featured-offer-search">
+                <h1>Featured Offer</h1>
+                <ul >
+                    {% for offer in featuredOffer %}
+                        <li class="zoom">
+                            <a href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                                <div class="thumbnail">
+                                    <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 110px;">
+                                        <div class="layer">
+                                        </div>
+                                        <div class="offer-thumb-image-div">
+                                            {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="offer-thumb-logo" />{% endif %}
+                                        </div>
+                                    </div>
+
+                                    <div class="caption">
+                                        <h3>{{ offer.offer.title|truncate(20, true) }} # {{ offer.offer.id }}</h3>
+                                        <p><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
+                                        <p class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
         <div id="paginator-offer">
 
-        </div>
-
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-activate">
-            <input type="hidden" name="offerDeleteId" id="offerId" value=""/>
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-default" id="modal-btn-yes-activate">{{ 'yes'|trans }}</a>
-                        <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <script>
@@ -153,10 +179,6 @@
                 let total = $('#number-of-offer').val();
                 searchOffer(page,total);
             }
-
-            $(".modal-btn-no").on("click", function(){
-                $(".modal").modal('hide');
-            });
 
             function detectmob() {
                 if( navigator.userAgent.match(/Android/i)
