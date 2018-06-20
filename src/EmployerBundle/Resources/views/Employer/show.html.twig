@@ -6,54 +6,79 @@
 
 {% block body %}
 
-    <div class="container">
-        <div class="row well" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
-            <img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="250" width="250"/>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <h1>{{ employer.name }} {{ 'employer.show.title'|trans }}</h1>
-                <hr>
-                <p>{{ employer.description }}</p>
-                <h3>{{ 'employer.show.whyus'|trans }}</h3>
-                <p>{{ employer.whyUs }}</p>
-            </div>
-            <div class="col-md-6">
-                <!--{{ dump(status) }}-->
-
-                {{ ivory_google_map(map) }}
-                {{ ivory_google_api([map]) }}
-
-            </div>
-            {% if offers[0] is defined %}
-            <div class="col-md-4 last-offers">
-                <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
-                <ul class="last-job-list">
-                    <li>
-                        <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id}) }}">
-                            <div class="slide-button">
-                                <div><b>{{ offers[0].title }}</b></div>
-                                <div class="job-meta"><span>{{ offers[0].contractType.name |trans }}</span> - <span>{{ offers[0].location }}</span></div>
-                            </div>
-                        </a>
-                    </li>
-                    {% if offers[1] is defined %}
-                    <li>
-                        <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id}) }}">
-                            <div class="slide-button">
-                                <div><b>{{ offers[1].title }}</b></div>
-                                <div class="job-meta"><span>{{ offers[1].contractType.name |trans }}</span> - <span>{{ offers[1].location }}</span></div>
-                            </div>
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">Toute nos offres</a>
-            </div>
-            {% endif %}
-        </div>
-
-        <a href="{{ path('create_notification', {'type':'employer', 'id':employer.id}) }}" class="jobnow-button">ajouter au notificaions</a>
+    <div class="jumbotron offer-jumbotron">
+        <span class="title-employer">{{ employer.name }}</span>
+        <img class="logo-employer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div style="height: 35px;">
+                <a href="{{ path('create_notification', {'type':'employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
+            </div>
+            <hr>
+            <div class="col-md-8">
+
+                <p class="description-employer">{{ employer.description }}</p>
+                <h3>{{ 'employer.show.whyus'|trans }}</h3>
+                <p class="whyus-employer">{{ employer.whyUs }}</p>
+            </div>
+            <div class="col-md-4">
+                {% if offers[0] is defined %}
+                    <div class="last-offers">
+                        <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
+                        <ul class="last-job-list">
+                            <li>
+                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id}) }}">
+                                    <div class="slide-button">
+                                        <div><b>{{ offers[0].title }}</b></div>
+                                        <div class="job-meta"><span>{{ offers[0].contractType.name |trans }}</span> - <span>{{ offers[0].location }}</span></div>
+                                    </div>
+                                </a>
+                            </li>
+                            {% if offers[1] is defined %}
+                                <li>
+                                    <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id}) }}">
+                                        <div class="slide-button">
+                                            <div><b>{{ offers[1].title }}</b></div>
+                                            <div class="job-meta"><span>{{ offers[1].contractType.name |trans }}</span> - <span>{{ offers[1].location }}</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">Toute nos offres</a>
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+        <!--{{ dump(status) }}-->
+
+        {{ ivory_google_map(map) }}
+        {{ ivory_google_api([map]) }}
+    </div>
+
+    <style>
+        .offer-jumbotron{
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .offer-jumbotron::after{
+            content: '';
+            background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+    </style>
 
 {% endblock %}
