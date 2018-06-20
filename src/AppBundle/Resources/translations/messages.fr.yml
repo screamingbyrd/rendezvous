@@ -119,6 +119,7 @@ form:
     search:
       keyword: Mots clefs
       location: Lieu de travail
+      search: 
     contractType: -- Choisissez le type de contrat --
 
 dashboard:

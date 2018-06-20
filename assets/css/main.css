@@ -16,7 +16,8 @@
 
     .dropdown-menu>li>a{
         color: white;
-        font-size: 16px;
+        font-size: 14px;
+        padding: 10px;
 
     }
 
@@ -29,7 +30,7 @@
         background-color: #272f3b;
         border-color: #080808;
         height: 75px;
-        font-size: 16px;
+        font-size: 20px;
         display: flex;
         align-items: center;
 
@@ -41,10 +42,15 @@ a{
     text-decoration: none !important;
 }
 
+.navbar-toggle{
+    margin-top: 17px;
+}
+
+
 .header-navbar {
     background-color: #272f3b;
     border-color: #080808;
-    height: 80px;
+    height: 75px;
     font-size: 16px;
 }
 
@@ -52,12 +58,11 @@ a{
 
 .featured-offer.text-center{
     margin-bottom: 15px;
-
 }
 
+
+
 #login{
-
-
 
 
 }
