@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block body %}
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
     <script>
         jQuery(function($) {
             $( ".myDatePickerInput" ).datepicker();
@@ -17,7 +19,7 @@
 
     <div class="container post-offer">
 
-        <h3>Post offer</h3>
+        <h3 style="text-align: center">Post your offer</h3>
 
         {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
@@ -51,7 +53,7 @@
         </div>
         <br>
 
-        <div class="slider">
+        <h4>More options (not mandatory)</h4>
         <div class="row">
             <div class="col-md-3">
                 {{ form_label (form.contractType, null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -101,11 +103,8 @@
 
         <div class="optionnal-div-form">
 
-            <button class="btn btn-primary apply-button slider-button">{{ 'offer.optionnal' | trans }}</button>
-            {{ form_widget(form.submit, { 'label': 'offer.submit','class': 'btn btn-primary apply-button' }) }}
 
-
-
+            {{ form_widget(form.submit, { 'label': 'offer.submit','class': 'btn' }) }}
 
         </div>
         </div>
@@ -125,8 +124,8 @@
 
     <script>
 
-        $(".slider-button").click(function() {
-
+        $(".slider-button").click(function(e) {
+            e.preventDefault();
             $(".slider").slideToggle("slow");
 
 

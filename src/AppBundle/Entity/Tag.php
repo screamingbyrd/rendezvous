@@ -39,11 +39,19 @@ class Tag
      */
     private $candidate;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", cascade={"persist"})
      */
     private $offer;
 
+
+
+
+    public function __toString()
+    {
+        return (string)$this->getOffer();
+    }
 
     /**
      * Get id

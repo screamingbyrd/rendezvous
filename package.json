@@ -5,6 +5,7 @@
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
-    "animate.css": "^3.6.1"
+    "animate.css": "^3.6.1",
+    "select2-bootstrap-theme": "^0.1.0-beta.10"
   }
 }

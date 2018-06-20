@@ -162,6 +162,12 @@ class Offer
      */
     private $slot;
 
+
+    public function __toString()
+    {
+        return (string)$this->getTag();
+    }
+
     /**
      * Get id
      *

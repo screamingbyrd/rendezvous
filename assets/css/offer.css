@@ -499,6 +499,10 @@
     padding: 8px;
     left: 0;
     text-align: center;
+    height: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slider{
@@ -507,5 +511,11 @@
 
 .container.post-offer{
 
+}
+
+
+.offer-submit{
+
+    margin: 1%;
 
 }

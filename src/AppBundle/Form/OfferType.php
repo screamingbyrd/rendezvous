@@ -15,7 +15,6 @@ use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,15 +45,20 @@ class OfferType extends AbstractType
             ->add('location', PlaceAutocompleteType::class,array(
                 'required' => true,
                 'attr' => array(
-                    'class' => 'form-control'),
+                    'class' => 'form-control',
+                ),
+
+
             ))
 
             ->add('description', CKEditorType::class, array(
                 'required' => true,
                 'label' => 'offer.description',
-                'attr' => array(
-                    'style' => 'height: 60vh'),
-                'config' => array('toolbar' => 'basic'),
+
+                'config' => array(
+                    'toolbar' => 'basic',
+                    'height' => '35vh'
+                ),
             ))
 
             ->add('availableDate',      DateType::class, array('required' => false,'widget' => 'single_text',
@@ -70,6 +74,7 @@ class OfferType extends AbstractType
                 'choice_label' =>  'name',
                 'placeholder' => 'form.offer.contractType',
                 'choice_translation_domain' => 'messages',
+                'attr' => array('class' => 'select2'),
             ))
 
             ->add('experience', ChoiceType::class, array('choices' => array(
@@ -79,6 +84,7 @@ class OfferType extends AbstractType
 
             ),
                 'placeholder' => 'form.registration.exp0',
+                'attr' => array('class' => 'select2'),
             ))
 
             ->add('diploma', ChoiceType::class, array('choices' => array(
@@ -89,6 +95,7 @@ class OfferType extends AbstractType
                 'form.registration.dip5' => 'form.registration.dip5',
             ),
                 'placeholder' => 'form.registration.dip0',
+                'attr' => array('class' => 'select2'),
             ))
 
             ->add('wage', ChoiceType::class, array('choices' => array(
@@ -106,6 +113,7 @@ class OfferType extends AbstractType
             ),
                 'required' => false,
                 'placeholder' => 'form.registration.wag0',
+                'attr' => array('class' => 'select2'),
             ))
 
             ->add('benefits', ChoiceType::class, array('choices' => array(
@@ -149,7 +157,12 @@ class OfferType extends AbstractType
             ))
 
 
-            ->add('submit',      SubmitType::class)
+            ->add('submit',      SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'jobnow-button offer-submit'
+                )
+
+            ))
             ->getForm()
         ;
     }/**

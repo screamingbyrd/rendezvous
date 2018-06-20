@@ -19,6 +19,14 @@
                         <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
                     {% endfor %}
                 </select>
+
+                <select title="Category" id="category-input" multiple class="select2">
+                    <option value="">Category</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.name }}">{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+
                 <input type="submit" class="jobnow-button searchOffer" value="Search">
                 <ul class="contractType-list">
                     {% for type in contractType %}
@@ -80,23 +88,29 @@
 
         <script>
             function searchOffer(row, totalItem) {
-                let loader = '<div id="loading">\n' +
-                    '                <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>\n' +
-                    '            </div>';
+
                 $(".search-result").removeClass('fadeIn').addClass('fadeOut');
                 //$("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#location-input").val();
                 let employer = $("#employer-input").val();
+                let tags = $("#category-input").val();
+
+                console.log(tags);
+
+
 
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
                     return this.value;
                 }).get();
+
+                console.log(type);
+
                 url = url.replace("search-page-offer", 'search-offer');
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem}
+                    data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem,tags:tags}
                 }).done(function( data ) {
                     if(detectmob()){
                         let $el = $('.searchpage-jumbotron');  //record the elem so you don't crawl the DOM everytime

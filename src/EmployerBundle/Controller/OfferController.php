@@ -224,11 +224,13 @@ class OfferController extends Controller
         $keywords = $request->get('keyword');
         $location = $request->get('location');
         $employer = $request->get('employer');
+        $tags = $request->get('tags');
         $type =  $request->get('type');
         $currentPage = $request->get('row');
         $numberOfItem =  $request->get('number');
         $finder = $this->container->get('fos_elastica.finder.app.offer');
         $boolQuery = new \Elastica\Query\BoolQuery();
+
 
         if($keywords != ''){
             $fieldQuery = new \Elastica\Query\Match();
@@ -248,6 +250,14 @@ class OfferController extends Controller
             $boolQuery->addMust($fieldQuery);
         }
 
+        if(isset($tags)){
+
+            $fieldQuery = new \Elastica\Query\Terms();
+            $fieldQuery->setTerms('tag.name', $tags);
+            $boolQuery->addMust($fieldQuery);
+
+        }
+
         if(isset($type)){
             $categoryQuery = new \Elastica\Query\Terms();
             $categoryQuery->setTerms('contractType.name', $type);
@@ -261,6 +271,7 @@ class OfferController extends Controller
         $boolQuery->addMust($fieldQuery);
 
         $query = new \Elastica\Query($boolQuery);
+
 
         $query->setSort(array('updateDate' => 'desc'));
         $data = $finder->find($query);
@@ -277,6 +288,8 @@ class OfferController extends Controller
         $location = $request->get('location');
         $chosenEmployer = $request->get('employer');
 
+
+
         $contractTypeRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -291,7 +304,21 @@ class OfferController extends Controller
         ;
         $employers = $employerRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer));
+        $tagRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Tag')
+        ;
+        $tags = $tagRepository->findAll();
+
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array(
+            'contractType' => $contractType,
+            'keyword' => $keywords,
+            'location' => $location,
+            'employers' => $employers,
+            'chosenEmployer'=>$chosenEmployer,
+            'tags' => $tags
+        ));
     }
 
     public function boostAction(Request $request){

@@ -1,13 +1,36 @@
 .header-navbar {
-    background-color: #ea3222;
+    background-color: #272f3b;
     border-color: #080808;
+    height: 7%;
+    font-size: medium;
+
+
+
 }
+
+.navbar-inverse{
+
+    background-color: #272f3b;
+
+}
+
+#navbartop{
+
+    margin: 1%;
+
+}
+
+
+
+
+
 .header-text{
     color: #fff !important;
+
 }
 
 .navbar-default .navbar-nav>li>a{
-    color: #fff !important;
+    color: #fffbff !important;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
@@ -37,7 +60,7 @@ h1{
     font-size: 12px;
     letter-spacing: 1px;
     cursor: pointer;
-    background: #f45721;
+    background: #e8471b;
     box-shadow: inset 0 0 0 0 #d84a24;
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
@@ -201,10 +224,10 @@ h1{
 
 .logo-jobnow{
     position: absolute;
-    left: 5px;
-    top: -40px;
-    width: 187px;
-    height: 131px;
+    left: 5%;
+    top: -68px;
+    width: 200px;
+    height: 200px;
 }
 
 .td-contact-us{
@@ -228,9 +251,7 @@ h1{
     margin-bottom: 12px;
 }
 
-
 .label-form{
-
     color: #e8471b;
 }
 

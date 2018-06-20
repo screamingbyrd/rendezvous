@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new Http\HttplugBundle\HttplugBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

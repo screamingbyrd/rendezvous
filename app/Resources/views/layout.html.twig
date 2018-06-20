@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('build/main.css') }}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
@@ -41,7 +42,7 @@
             </button>
             <a class="navbar-brand  header-text" href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbartop" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
                 <li><a href="{{ path('list_employer') }}">{{ 'header.candidates.companies'|trans }}</a></li>
@@ -127,7 +128,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand header-text" href="#"> © 2017 Altea Immobilère. All rights reserved</a>
+            <a class="navbar-brand header-text" href="#"> © 2017 JobNow. All rights reserved</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

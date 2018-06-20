@@ -48,6 +48,9 @@ fos_user:
                 type: AppBundle\Form\RegistrationType
 
 fos_elastica:
+#    serializer:
+#        serializer: jms_serializer
+
     clients:
         default: { host: localhost, port: 9200 }
     indexes:
