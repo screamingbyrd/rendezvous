@@ -256,10 +256,17 @@ class OfferController extends Controller
 
         if(isset($tags)){
 
-            $fieldQuery = new \Elastica\Query\Terms();
-            $fieldQuery->setTerms('tag.name', $tags);
-            $boolQuery->addMust($fieldQuery);
+            $newBool = new \Elastica\Query\BoolQuery();
 
+
+           foreach($tags as $tag){
+
+               $tagQuery = new \Elastica\Query\Match();
+               $tagQuery->setFieldQuery('tag.name', $tag);
+               $newBool->addShould($tagQuery);
+           }
+
+            $boolQuery->addMust($newBool);
         }
 
         if(isset($type)){
@@ -308,7 +315,7 @@ class OfferController extends Controller
         ;
         $employers = $employerRepository->findAll();
 
-<<<<<<< HEAD
+
         $tagRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -316,15 +323,7 @@ class OfferController extends Controller
         ;
         $tags = $tagRepository->findAll();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array(
-            'contractType' => $contractType,
-            'keyword' => $keywords,
-            'location' => $location,
-            'employers' => $employers,
-            'chosenEmployer'=>$chosenEmployer,
-            'tags' => $tags
-        ));
-=======
+
         $featuredOfferRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -333,8 +332,16 @@ class OfferController extends Controller
 
         $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
 
-        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer, 'featuredOffer' => $featuredOffer));
->>>>>>> develop
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array(
+            'contractType' => $contractType,
+            'keyword' => $keywords,
+            'location' => $location,
+            'employers' => $employers,
+            'chosenEmployer'=>$chosenEmployer,
+            'tags' => $tags,
+            'featuredOffer' => $featuredOffer
+        ));
+
     }
 
     public function boostAction(Request $request){
