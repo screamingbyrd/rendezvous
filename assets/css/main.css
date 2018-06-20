@@ -2,6 +2,39 @@
     .container {
         width: 72% !important;
     }
+
+    .navbar-default .navbar-nav > li.dropdown:hover > a,
+    .navbar-default .navbar-nav > li.dropdown:hover > a:hover,
+    .navbar-default .navbar-nav > li.dropdown:hover > a:focus {
+        background-color: rgb(39, 47, 59);
+        color: #ffffff;
+    }
+    li.dropdown:hover > .dropdown-menu {
+        display: block;
+
+    }
+
+    .dropdown-menu>li>a{
+        color: white;
+        font-size: 16px;
+
+    }
+
+    ul.dropdown-menu{
+        background-color: #272f3b;
+        color: #ffffff;
+    }
+
+    .header-navbar {
+        background-color: #272f3b;
+        border-color: #080808;
+        height: 75px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+
+    }
+
 }
 
 a{
@@ -11,36 +44,28 @@ a{
 .header-navbar {
     background-color: #272f3b;
     border-color: #080808;
-    height: 75px;
+    height: 80px;
     font-size: 16px;
-    display: flex;
-    align-items: center;
+}
+
+
+
+.featured-offer.text-center{
+    margin-bottom: 15px;
 
 }
+
+#login{
+
+
+
+
+}
+
 
 .navbar-inverse{
-
     background-color: #272f3b;
-
 }
-
-.dropdown-menu{
-    padding: 5px 5px 10px 5px;
-    font-size: 14px;
-
-}
-
-.dropdown-menu>li>a{
-    background-color: #272f3b;
-    color: white;
-
-
-}
-
-.open>.dropdown-menu{
-    background-color: #272f3b ;
-}
-
 
 .logo-jobnow{
     position: absolute;
