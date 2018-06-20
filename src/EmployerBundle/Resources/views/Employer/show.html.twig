@@ -6,14 +6,20 @@
 
 {% block body %}
 
-    <div class="jumbotron offer-jumbotron">
-        <span class="title-employer">{{ employer.name }}</span>
-        <img class="logo-employer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+    <div class="jumbotron employer-jumbotron">
+        <div>
+            <div class="container-logo-employer">
+                <img class="logo-employer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+            </div>
+
+            <div class="title-employer">{{ employer.name }}</div>
+        </div>
+
     </div>
 
     <div class="container">
         <div class="row">
-            <div style="height: 35px;">
+            <div style="height: 38px;">
                 <a href="{{ path('create_notification', {'type':'employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
             </div>
             <hr>
@@ -61,13 +67,8 @@
     </div>
 
     <style>
-        .offer-jumbotron{
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .offer-jumbotron::after{
+
+        .employer-jumbotron::after{
             content: '';
             background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
             background-size: cover;

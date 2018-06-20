@@ -62,15 +62,38 @@ h3.box{
     .last-offers{
         margin: 10px;
     }
-}
+    .logo-employer{
+        width: 85px !important;
+        margin-bottom: 20px;
+    }
+    .container-logo-employer{
+        position: static !important;
 
-.logo-employer{
+    }
+    .title-employer {
+        font-size: 26px !important;
+    }
+    .container-tag-employer{
+        left: auto !important;
+        bottom: -74px !important;
+        width: 275px !important;
+    }
+}
+.container-logo-employer{
     position: fixed;
     left: 14%;
     z-index: 1000;
-    display: flex;
+    top: 225px;
+    display: grid;
+}
+.container-tag-employer{
+    position: relative;
+    left: 242px;
+    bottom: 37px;
+    width: 600px;
+}
+.logo-employer{
     width: 207px;
-    top: 218px;
     -webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
@@ -91,4 +114,11 @@ h3.box{
 }
 .title-employer{
     font-size: 36px;
+}
+.employer-jumbotron{
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: initial !important;
 }
