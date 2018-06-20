@@ -3,8 +3,8 @@
     border-color: #080808;
     height: 7%;
     font-size: medium;
-
-
+    display: flex;
+    align-items: center;
 
 }
 
