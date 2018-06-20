@@ -15,7 +15,7 @@
                 <div class="homepage-search-bar">
                     <input name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                     <input name="location" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
-                    <input type="submit" class="jobnow-button searchOffer" value="{{ 'form.offer.search.keyword' | trans }}">
+                    <input type="submit" class="jobnow-button searchOffer" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
             </form>
         </p>
@@ -55,7 +55,7 @@
 
         <div class="row featured-employer fade-in-left animated">
             {% if featuredEmployer|length > 0 %}
-                <h1>Featured Employer</h1>
+                <h1 class="featured-offer text-center">Featured Employer</h1>
             {% endif %}
             {% if featuredEmployer|length == 1 %}
                 {% set blocEmployer = 12 %}
@@ -81,7 +81,7 @@
             {% endfor %}
         </div>
 
-        <h1 >Category</h1>
+        <h1 class="text-center featured-offer" >Category</h1>
         <div class="row">
             {% for row  in tags|batch(2, null) %}
                 <div class="{{ cycle(['color-row',''],loop.index) }}">

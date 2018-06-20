@@ -69,9 +69,12 @@
                        aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('post_offer') }}">{{ 'header.employers.post'|trans }}</a></li>
-                        <li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>
+                        {#<li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>#}
                         <li><a href="{{ path('jobnow_credit') }}">{{ 'header.employers.pricing'|trans }}</a></li>
+                        {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
                         <li><a href="{{ path('dashboard_employer') }}">{{ 'header.employers.dashboard'|trans }}</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('contact_us_page') }}">{{ 'contact.us.employer'|trans }}</a></li>
                     </ul>
                 </li>
             </ul>

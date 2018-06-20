@@ -89,11 +89,6 @@
     min-width: 130px;
 }
 
-.searchOffer{
-    margin-left: 10px;
-    min-width: 120px;
-}
-
 .offer-search-element{
     width: 94%;
     margin-left: 2%;
@@ -447,6 +442,8 @@
 }
 
 .searchOffer{
+    margin-left: 10px;
+    min-width: 120px;
     height: 45px;
     line-height: inherit;
     background-position: 10px 12px;
@@ -454,8 +451,7 @@
     width: 13%;
     font-size: 16px;
     padding: 11px 20px 12px 13px;
-    border: 1px solid #ddd;
-    margin-left: 10px;
+    border: 1px solid #000000;
 }
 .background-employer-in-offer-search{
     min-height: 140px;

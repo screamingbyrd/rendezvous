@@ -68,6 +68,13 @@ a{
 }
 
 
+
+.navbar-collapse{
+
+    background-color: #272f3b;
+
+}
+
 .navbar-inverse{
     background-color: #272f3b;
 }
@@ -78,6 +85,7 @@ a{
     top: 5px;
     width: 200px;
     height: 61px;
+    z-index: -1;
 
 }
 
@@ -155,6 +163,8 @@ h1{
     margin: auto;
     padding-top: 10px;
     min-width: 300px;
+    border-radius: 10px;
+
 }
 
 .jumbotron{
@@ -214,10 +224,15 @@ h1{
 
 .homepage-jumbotron #keyword-input{
     color: #333;
-    margin-right: 9px
+    margin-right: 9px;
+    border-radius: 7px;
+    height:45px;
 }
 .homepage-jumbotron #location-input{
     color: #333;
+    margin-right: 1%;
+    border-radius: 7px;
+    height: 45px;
 }
 .homepage-subtitle{
     margin-bottom: 60px !important;

@@ -112,6 +112,8 @@ form:
     search:
       keyword: Keywords
       location: Location
+      search: Search
+
     contractType: -- Choose the type of contract --
 
 dashboard:
@@ -223,6 +225,7 @@ contact:
   us:
    title: Contact us
    smallTitle: Contact
+   employer: Contact an advisor
   location: Our location
   openingHours: Opening hours:
   monday: Monday – Friday / 9am – 7pm (non-stop)

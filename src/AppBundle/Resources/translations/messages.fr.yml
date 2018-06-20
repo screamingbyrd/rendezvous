@@ -119,7 +119,7 @@ form:
     search:
       keyword: Mots clefs
       location: Lieu de travail
-      search: 
+      search: Recherche
     contractType: -- Choisissez le type de contrat --
 
 dashboard:
@@ -217,6 +217,7 @@ contact:
   us:
     title: Contactez nous
     smallTitle: Contact
+    employer: Contacter un conseiller
   location: Notre localisation
   openingHours: Heures d'ouverture:
   monday: Lundi – Vendredi / 9h – 19h (non-stop)
