@@ -11,7 +11,6 @@
             <div class="container-logo-employer">
                 <img class="logo-employer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
             </div>
-
             <div class="title-employer">{{ employer.name }}</div>
         </div>
 
@@ -53,7 +52,23 @@
                                 </li>
                             {% endif %}
                         </ul>
+                        <hr class="hr-last-offer">
                         <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">Toute nos offres</a>
+                    </div>
+                {% endif %}
+
+                {% if employer.tag is defined %}
+                    <div class="last-offers">
+                        <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
+                        <ul class="last-job-list">
+                            {% for tag in employer.tag %}
+                                <li>
+                                    <a  href="{{ path('create_candidate') }}">
+                                        {{ tag.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 {% endif %}
 
