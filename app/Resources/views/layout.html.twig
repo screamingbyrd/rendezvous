@@ -51,7 +51,7 @@
 
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a id="cand" href="#" class="dropdown-toggle c" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
@@ -62,7 +62,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a id="emp" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('post_offer') }}">{{ 'header.employers.post'|trans }}</a></li>
@@ -101,7 +101,7 @@
                 {% else %}
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        <a id="register" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ 'header.register'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('create_employer') }}">{{ 'header.employers.register'|trans }}</a></li>
@@ -109,11 +109,11 @@
                         </ul>
                     </li>
 
-                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
+                    <li><a id="login" href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
                 {% endif %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">{{ 'header.language.title'|trans }}<span class="caret"></span></a>
+                <li id="langover" class="dropdown">
+                    <a id="lang" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fa fa-globe"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li>
                         <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
@@ -132,7 +132,7 @@
         <div class="navbar-header">
             <a class="navbar-brand header-text" href="#"> © 2017 JobNow. All rights reserved</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbarfooter" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('about_us') }}">{{ 'footer.about'|trans }}</a></li>
                 <li><a href="{{ path('contact_us_page') }}">{{ 'contact.us.smallTitle'|trans }}</a></li>

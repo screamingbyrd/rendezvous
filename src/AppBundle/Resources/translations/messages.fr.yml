@@ -3,6 +3,7 @@ no: non
 
 header:
   register: S'inscrire
+  how: Guide d'utilisation
   findjob: Trouver un travail
   candidates:
     title: Candidats

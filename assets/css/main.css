@@ -7,6 +7,7 @@
 a{
     text-decoration: none !important;
 }
+
 .header-navbar {
     background-color: #272f3b;
     border-color: #080808;
@@ -43,8 +44,8 @@ a{
 
 .logo-jobnow{
     position: absolute;
-    left: 5%;
-    top: 10px;
+    left: 2%;
+    top: 5px;
     width: 200px;
     height: 61px;
 
@@ -71,7 +72,7 @@ a{
 }
 
 body {
-    padding-top: 65px;
+    padding-top: 74px;
     padding-bottom: 65px;
 }
 
