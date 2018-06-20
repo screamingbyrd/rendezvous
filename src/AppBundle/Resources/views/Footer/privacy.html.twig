@@ -1,0 +1,28 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ 'footer.privacy'|trans }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron homepage-jumbotron">
+        <h2>{{ 'footer.privacy'|trans }}</h2>
+    </div>
+
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/jobnow-home.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+    </style>
+{% endblock %}

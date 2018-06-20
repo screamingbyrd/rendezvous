@@ -39,6 +39,10 @@ class OfferController extends Controller
 
             $offer->setCountView(0);
             $offer->setCountContact(0);
+            $past = new \DateTime('01-01-1900');
+            $offer->setStartDate($past);
+            $offer->setEndDate($past);
+            $offer->setUpdateDate($past);
 
             $em->persist($offer);
             $em->flush();
@@ -304,6 +308,7 @@ class OfferController extends Controller
         ;
         $employers = $employerRepository->findAll();
 
+<<<<<<< HEAD
         $tagRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -319,6 +324,17 @@ class OfferController extends Controller
             'chosenEmployer'=>$chosenEmployer,
             'tags' => $tags
         ));
+=======
+        $featuredOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedOffer')
+        ;
+
+        $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
+
+        return $this->render('EmployerBundle:Offer:searchPage.html.twig', array('contractType' => $contractType, 'keyword' => $keywords, 'location' => $location, 'employers' => $employers,'chosenEmployer'=>$chosenEmployer, 'featuredOffer' => $featuredOffer));
+>>>>>>> develop
     }
 
     public function boostAction(Request $request){
@@ -429,8 +445,7 @@ class OfferController extends Controller
             ->setCc(array_shift($arrayEmail))
             ->setBody(
                 $this->renderView(
-                // templates/emails/registration.html.twig
-                    'Emails/apply.html.twig',
+                    'AppBundle:Emails:apply.html.twig',
                     array('comment' => $comment)
                 ),
                 'text/html'

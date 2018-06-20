@@ -44,20 +44,20 @@
         </div>
         <div id="navbartop" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
                 <li><a href="{{ path('list_employer') }}">{{ 'header.candidates.companies'|trans }}</a></li>
 
-                {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('dashboard_candidate') }}">{{ 'header.candidates.dashboard'|trans }}</a></li>
+                        <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
+                        <li><a href="{{ path('dashboard_candidate') }}#applied">{{ 'header.candidates.dashboard.applied'|trans }}</a></li>
+                        <li><a href="{{ path('dashboard_candidate') }}#alerts">{{ 'header.candidates.dashboard.alert'|trans }}</a></li>
+                        <li><a href="{{ path('dashboard_candidate') }}#favorites">{{ 'header.candidates.dashboard.favorites'|trans }}</a></li>
                     </ul>
                 </li>
-                {% endif %}
 
-                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
@@ -68,7 +68,6 @@
                         <li><a href="{{ path('dashboard_employer') }}">{{ 'header.employers.dashboard'|trans }}</a></li>
                     </ul>
                 </li>
-                {% endif %}
             </ul>
 
 
@@ -132,12 +131,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">À propos</a></li>
-                <li><a href="{{ path('contact_us_page') }}">Contact</a></li>
-                <li><a href="">{{ 'header.about.faq'|trans }}</a></li>
-                <li><a href="">{{ 'header.about.privacy'|trans }}</a></li>
-                <li><a href="">{{ 'header.about.terms'|trans }}</a></li>
-
+                <li><a href="{{ path('about_us') }}">{{ 'footer.about'|trans }}</a></li>
+                <li><a href="{{ path('contact_us_page') }}">{{ 'contact.us.smallTitle'|trans }}</a></li>
+                <li><a href="{{ path('faq_page') }}">{{ 'footer.faq'|trans }}</a></li>
+                <li><a href="{{ path('privacy_page') }}">{{ 'footer.privacy'|trans }}</a></li>
+                <li><a href="{{ path('legal_page') }}">{{ 'footer.legal'|trans }}</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right"></ul>

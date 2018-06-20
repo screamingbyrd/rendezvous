@@ -50,8 +50,7 @@ class ContactController extends Controller
             ->setTo('test@test.com')
             ->setBody(
                 $this->renderView(
-                // templates/emails/registration.html.twig
-                    'Emails/'.$template.'.html.twig',
+                    'AppBundle:Emails:'.$template.'.html.twig',
                     array('data' => $data)
                 ),
                 'text/html'

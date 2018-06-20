@@ -25,7 +25,7 @@
     transition: ease-out 0.7s;
     margin: 3%;
     margin-bottom: 10px;
-    width: 91%;
+    width: 96%;
     display: flex;
     align-items: center;
     border-radius: 3px;
@@ -295,10 +295,6 @@
 .nav-candidate{
     display: inline-block;
 }
-.candidate-content{
-    display: inline-flex;
-    width: 80%;
-}
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
     color: #ea3222;
     background-color: #fff;
@@ -422,6 +418,10 @@
         z-index: 1000;
         position: relative;
     }
+    .featured-offer-search{
+        margin-left: 4% !important;
+        margin-right: 4% !important;
+    }
 }
 
 #employer-input{
@@ -465,9 +465,13 @@
 }
 .logo-employer-in-offer-search{
     width: 13%;
-    max-width: 66px;
+    max-width: 73px;
     margin-left: -31px;
     z-index: 1;
+    padding: 10px;
+    border: 1px #ddd solid;
+    border-radius: 3px;
+    background-color: white;
 }
 .searchpage-jumbotron{
     margin-bottom: 0;
@@ -509,13 +513,20 @@
     display: none;
 }
 
-.container.post-offer{
+
+.offer-submit {
+
+    margin: 1%;
 
 }
 
 
-.offer-submit{
-
-    margin: 1%;
+.featured-offer-search .offer-thumb-description{
+    height: inherit;
+}
+.featured-offer-search{
+    border-radius: 5px;
+    border: 1px #ddd solid;
+    margin-top: 2%;
 
 }

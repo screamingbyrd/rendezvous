@@ -14,3 +14,30 @@ jobnow_payment:
 contact_us_page:
     path:     /contact-us-page
     defaults: { _controller: AppBundle:Contact:contactUsPage }
+about_us:
+    path:     /about-us
+    defaults: { _controller: AppBundle:App:aboutPage }
+faq_page:
+    path:     /faq
+    defaults: { _controller: AppBundle:App:faqPage }
+privacy_page:
+    path:     /privacy
+    defaults: { _controller: AppBundle:App:privacyPage }
+legal_page:
+    path:     /legal
+    defaults: { _controller: AppBundle:App:legalPage }
+create_notification:
+    path:     /create-notification
+    defaults: { _controller: AppBundle:Notification:create }
+delete_notification:
+    path:     /delete-notification
+    defaults: { _controller: AppBundle:Notification:delete }
+send_notification:
+    path:     /send-notification
+    defaults: { _controller: AppBundle:Notification:send }
+create_favorite:
+    path:     /create-favorite
+    defaults: { _controller: AppBundle:Favorite:create }
+delete_favorite:
+    path:     /delete-favorite
+    defaults: { _controller: AppBundle:Favorite:delete }

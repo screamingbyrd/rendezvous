@@ -32,6 +32,16 @@ class AppController extends Controller
         ;
 
         $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
+
+        $sql = " 
+        SELECT t.name, count(o.offer_id) as 'countOffer' FROM `tag` t left join offer_tag o on o.tag_id = t.id GROUP BY NAME
+        ";
+
+        $em = $this->getDoctrine()->getManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $tagArray = $stmt->fetchAll();
+
         $em = $this->getDoctrine()->getManager();
 
         foreach ($featuredOffer as $offer){
@@ -52,10 +62,38 @@ class AppController extends Controller
         shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer,
-            'featuredOffer' => $featuredOffer
+            'featuredOffer' => $featuredOffer,
+            'tags' => $tagArray
         ));
 
     }
 
+    public function AboutPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:about.html.twig');
+
+    }
+
+    public function faqPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:faq.html.twig');
+
+    }
+
+    public function privacyPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:privacy.html.twig');
+
+    }
+
+    public function legalPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Footer:legal.html.twig');
+
+    }
 
 }

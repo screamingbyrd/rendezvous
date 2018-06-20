@@ -1,33 +1,117 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    Register - {{ parent() }}
+    {{ 'dashboard.title' | trans }}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h3>Dashboard</h3>
+        <h3>{{ 'dashboard.title' | trans }}</h3>
 
-        <h4>Vous avez postulé à ces offres:</h4>
-        <ul id="myUL" class="candidat-dashboard">
-            {% for offer in appliedOffer %}
-                <li>
-                    <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
-                        {% if offer.offer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" height="50" width="50"/>{% endif %}
-                        <div class="offer-search-element">
-                            <div class="job-title-employer">
-                                <div>{{ offer.offer.title }}</div>
-                                <div>{{ offer.offer.employer.name }}</div>
+        <div class="container">
+            <div class="navbar-dashboard">
+                <ul class="nav nav-tabs nav-candidate">
+                    <li class="active">
+                        <a  href="#applied" data-toggle="tab">Offre postulé</a>
+                    </li>
+                    <li><a href="#alerts" data-toggle="tab">Notifications</a>
+                    </li>
+                    <li><a href="#favorites" data-toggle="tab">Favoris</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="tab-content candidate-content">
+                <div class="tab-pane active fade in" id="applied">
+                    <h4>{{ 'dashboard.candidate.list' | trans }}</h4>
+                    <ul id="myUL" class="candidat-dashboard">
+                        {% for offer in appliedOffer %}
+                            <li>
+                                <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                                    {% if offer.offer.employer.logo is not null %}<img class="dashboard-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                                    <div class="offer-search-element">
+                                        <div class="job-title-employer">
+                                            <div>{{ offer.offer.title }}</div>
+                                            <div class="offer-element-name">{{ offer.offer.employer.name }}</div>
+                                        </div>
+
+                                        <span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span>
+                                        <span class="applied-date">{{ 'dashboard.candidate.appliedThe' | trans }}{{ offer.date | date("d/m/Y")  }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="alerts">
+                    {% if notifications is defined and notifications|length > 0 %}
+                        <h4>{{ 'notification.mine' | trans }}</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">type</th>
+                                <th scope="col">name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in 1..notifications|length %}
+                                <tr>
+                                    <td>{{ notifications[i-1].type }}</td>
+                                    <td>{{ notifications[i-1].name }}</td>
+                                    <td><a href="{{ path('delete_notification', {'id':notifications[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'notification.delete' | trans }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="favorites">
+                    {% if notifications is defined and notifications|length > 0 %}
+                        <h4>{{ 'header.candidates.dashboard.favorites' | trans }}</h4>
+
+                            <div class="tab-pane active fade in" id="applied">
+                                <ul id="myUL" class="candidat-dashboard">
+                                {% for favorite in favorites %}
+                                    <li class="favorite-element">
+                                        <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': favorite.offer.id}) }}">
+                                            {% if favorite.offer.employer.logo is not null %}<img class="dashboard-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(favorite.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                                            <div class="offer-search-element">
+                                                <div class="job-title-employer">
+                                                    <div>{{ favorite.offer.title }}</div>
+                                                    <div class="offer-element-name">{{ favorite.offer.employer.name }}</div>
+                                                </div>
+
+                                                <span class="other-element"><i class="fa fa-map-marker"></i>{{ favorite.offer.location }}</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'favorite.delete' | trans }}</a>
+                                    </li>
+
+                                {% endfor %}
+                                </ul>
                             </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 
-                            <span>{{ offer.offer.location }}</span>
-                            <span class="applied-date">Postulé le {{ offer.date | date("d/m/Y")  }}</span>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
 
     </div>
+
+    <style>
+        .navbar-dashboard{
+            text-align: center;
+        }
+    </style>
+    <script>
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+    </script>
 
 {% endblock %}

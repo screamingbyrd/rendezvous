@@ -438,8 +438,6 @@ class Offer
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate =  new \Datetime();
-        $this->startDate = new \DateTime();
-        $this->endDate = new \DateTime();
         $this->updateDate = new \DateTime();
 
 

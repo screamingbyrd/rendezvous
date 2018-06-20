@@ -6,7 +6,11 @@ header:
     findJob: Find a job
     companies: Companies
     submit: Submit your resume
-    dashboard: Dashboard
+    profile: Mon profile
+    dashboard:
+      alert: Mes alertes
+      applied: Mes candidatures
+      favorites: Mes favoris
     register: Candidate
   employers:
     title: Employers
@@ -123,6 +127,9 @@ dashboard:
     typeTitle: Type in a title
     searchTitle: Search a title
     boostOffers: Boost you offers
+  candidate:
+    list: You applied to those offers
+    appliedThe: Applied the
 
 slot:
   buy:
@@ -169,8 +176,8 @@ offer:
     already: You already applied to this offer
   applied:
     success: You applied to the offer %title% !
-  countView: View count
-  countContact: Contact count
+  countView: Views
+  countContact: Applyed
 
 candidate:
   delete:
@@ -214,7 +221,27 @@ contact:
   form: Contact form
   us:
    title: Contact us
+   smallTitle: Contact
   location: Our location
   openingHours: Opening hours:
   monday: Monday – Friday / 9am – 7pm (non-stop)
   saturday: Saturday / 10am – 5pm (non-stop)</strong>
+
+footer:
+  about: About us
+  faq: FAQ
+  privacy: Privacy
+  legal: Legal
+
+notification:
+  created: Notification created !
+  deleted: Notification deleted !
+  delete: Delete this notification
+  mine: My notifications
+  already: Notification already exist !
+
+favorite:
+  created: Added to favorites !
+  deleted: Favorite deleted !
+  delete: Delete this favorite
+  already: This favorite already exist !
