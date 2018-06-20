@@ -13,7 +13,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('build/main.css') }}" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
     {% endblock %}
 
     {% block javascripts %}
@@ -21,6 +22,7 @@
         {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
         {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>#}
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/919c9c113d.js"></script>
 
         {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
 
@@ -51,7 +53,7 @@
 
 
                 <li class="dropdown">
-                    <a id="cand" href="#" class="dropdown-toggle c" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" class="dropdown-toggle c" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
@@ -62,7 +64,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a id="emp" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('post_offer') }}">{{ 'header.employers.post'|trans }}</a></li>
@@ -101,7 +103,7 @@
                 {% else %}
 
                     <li class="dropdown">
-                        <a id="register" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ 'header.register'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('create_employer') }}">{{ 'header.employers.register'|trans }}</a></li>
@@ -111,9 +113,9 @@
 
                     <li><a id="login" href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
                 {% endif %}
-                <li id="langover" class="dropdown">
-                    <a id="lang" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa fa-globe"></i><span class="caret"></span></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fas fa-globe"></i></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li>
                         <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>

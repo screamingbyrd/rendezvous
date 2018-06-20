@@ -78,43 +78,6 @@ $(document).ready(function() {
         });
     }
 
-
-    $( '#cand' )
-        .mouseover(function() {
-            $('#cand').click()
-        })
-        .mouseout(function() {
-            $('#cand').click()
-        });
-
-    $( '#emp' )
-        .mouseover(function() {
-            $('#emp').click()
-        })
-        .mouseout(function() {
-            $('#emp').click()
-        });
-
-    $( '#register' )
-        .mouseover(function() {
-            $('#register').click()
-        })
-        .mouseout(function() {
-            $('#register').click()
-        });
-
-    $( '#lang' )
-        .mouseover(function() {
-            $('#lang').click()
-        })
-        .mouseout(function() {
-            $('#langover').click()
-        });
-
-
-
-
-
     if(detectmob()){
         $('.navbar-fixed-bottom').removeClass('navbar-fixed-bottom').addClass('navbar-static-bottom');
     }
