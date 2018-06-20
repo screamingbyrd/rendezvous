@@ -40,7 +40,6 @@ h3.box{
     position: relative;
     overflow: hidden;
     z-index: 1;
-    text-decoration: none !important;
     cursor: pointer;
     color: #333;
     -webkit-transition: ease-out 0.7s;
