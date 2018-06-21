@@ -359,6 +359,7 @@
     padding: 8px;
     left: 0;
     text-align: center;
+    z-index: 10;
 }
 .inside-offer-apply{
     display: inline-block;
@@ -489,6 +490,20 @@
         font-size: 1.75rem;
         margin-bottom: 0 !important;
         text-align: center;
+    }
+    .background-employer-in-offer-search .layer{
+        border-top-right-radius: 3px !important;
+        border-bottom-left-radius: 0 !important;
+    }
+    .background-employer-in-offer-search{
+        border-top-right-radius: 3px !important;
+        border-bottom-left-radius: 0 !important;
+    }
+    #myUL li .offer-element:hover:not(.header) {
+        transform: none !important;
+    }
+    .zoom:hover{
+        transform: none !important;
     }
 }
 

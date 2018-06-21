@@ -19,7 +19,7 @@
                 {% if offer.employer.logo is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
                 <div class="offer-search-element">
                     <div class="offer-element-details">
-                        <div class="offer-element-name">{{ offer.employer.name }}<span class="offer-item-experience">{{ offer.experience | trans }} d'experience</span></div>
+                        <div class="offer-element-name">{{ offer.employer.name }}<span class="offer-item-experience other-element"><i class="fa fa-address-book" aria-hidden="true"></i>{{ offer.experience | trans }}</span></div>
                         <div class="offer-element-title">{{ offer.title |truncate(80, true)}}</div>
                         <div class="offer-element-other">
                             <span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}">{{ offer.contractType.name | trans }}</span>
