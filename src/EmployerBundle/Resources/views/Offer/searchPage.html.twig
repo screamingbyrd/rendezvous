@@ -121,19 +121,12 @@
                 let location = $("#location-input").val();
                 let employer = $("#employer-input").val();
                 let tags = $("#category-input").val();
-
-                console.log(tags);
-
-
-
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
                     return this.value;
                 }).get();
 
-                console.log(type);
-
-                url = url.replace("search-page-offer", 'search-offer');
+                url = "{{ path('search_offer') }}";
                 $.ajax({
                     url: url,
                     data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem,tags:tags}
@@ -162,6 +155,14 @@
             }
 
             window.onload = function() {
+                let arrayTags = {{ chosenTags|json_encode|raw }};
+                arrayTags.forEach(function(element) {
+                    let option = new Option(element, element);
+                    option.selected = true;
+
+                    $("#category-input").append(option);
+                });
+
                 let total = $('#number-of-offer').val();
                 searchOffer(1,total);
             };

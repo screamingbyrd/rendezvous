@@ -130,6 +130,7 @@ h3.box{
     float: right;
     font-size: 1em !important;
     padding: .5em 1em !important;
+    margin-top: 10px;
 }
 .title-employer{
     font-size: 36px;

@@ -4,6 +4,9 @@
 </li>
 {% endif %}
 <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
+<div class="display-number">
+    Displaying <b>{{ numberOfItem }}</b> of <b>{{ countResult }}</b> Jobs
+</div>
 {% for offer in data %}
     {% if offer.isActive() or offer.slot is not null %}
 

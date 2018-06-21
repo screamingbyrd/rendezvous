@@ -63,7 +63,7 @@
                         <ul class="last-job-list">
                             {% for tag in employer.tag %}
                                 <li>
-                                    <a  href="{{ path('create_candidate') }}">
+                                    <a  href="{{ path('search_page_offer', {'tags':[tag.name], 'employer':employer.name}) }}">
                                         {{ tag.name }}
                                     </a>
                                 </li>

@@ -74,7 +74,7 @@
                     {{ offer.diploma |trans }}
                     <h4>Tags</h4>
                     {% for tag in  offer.tag %}
-                        <a class="tag-offer" href="#"><i class="fa fa-tag"></i>{{ tag.name }}</a>
+                        <a class="tag-offer" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}"><i class="fa fa-tag"></i>{{ tag.name }}</a>
                     {% endfor %}
                 </div>
             </div>

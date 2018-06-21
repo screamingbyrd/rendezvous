@@ -286,20 +286,28 @@ class OfferController extends Controller
 
         $query->setSort(array('updateDate' => 'desc'));
         $data = $finder->find($query);
+        $countResult = count($data);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
-        $totalPage = ceil (count($data) / $numberOfItem);
+        $totalPage = ceil ($countResult / $numberOfItem);
 
-        return $this->render('EmployerBundle:Offer:search-data.html.twig', array('data' => $finalArray, 'page' => $currentPage, 'total' => $totalPage));
+        return $this->render('EmployerBundle:Offer:search-data.html.twig',
+            array(
+                'data' => $finalArray,
+                'page' => $currentPage,
+                'total' => $totalPage,
+                'numberOfItem' =>($numberOfItem > $countResult? $countResult:$numberOfItem),
+                'countResult' => $countResult
+            )
+        );
     }
 
     public function searchPageAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
         $chosenEmployer = $request->get('employer');
-
-
+        $chosenTags = $request->get('tags');
 
         $contractTypeRepository = $this
             ->getDoctrine()
@@ -339,9 +347,9 @@ class OfferController extends Controller
             'employers' => $employers,
             'chosenEmployer'=>$chosenEmployer,
             'tags' => $tags,
+            'chosenTags' => $chosenTags,
             'featuredOffer' => $featuredOffer
         ));
-
     }
 
     public function boostAction(Request $request){
