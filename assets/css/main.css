@@ -1,6 +1,6 @@
 @font-face {
     font-family: myFirstFont;
-    src: url(VarelaRound.otf);
+    src: url(font.otf);
 }
 
 @media (min-width: 1200px){
