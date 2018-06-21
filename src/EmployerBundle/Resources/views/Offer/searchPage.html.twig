@@ -86,7 +86,7 @@
                     {% for offer in featuredOffer %}
                         <li class="zoom">
                             <a href="{{ path('show_offer', {'id': offer.offer.id}) }}">
-                                <div class="thumbnail">
+                                <div class="thumbnail  featured-offer-item">
                                     <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 110px;">
                                         <div class="layer">
                                         </div>
@@ -133,7 +133,7 @@
                 }).done(function( data ) {
                     if(detectmob()){
                         let $el = $('.searchpage-jumbotron');  //record the elem so you don't crawl the DOM everytime
-                        let bottom = $el.position().top + $el.outerHeight(true) - 50;
+                        let bottom = $el.position().top + $el.outerHeight(true) - 60;
                         $('html, body').animate({
                             scrollTop: bottom
                         }, 500);
@@ -156,12 +156,15 @@
 
             window.onload = function() {
                 let arrayTags = {{ chosenTags|json_encode|raw }};
-                arrayTags.forEach(function(element) {
-                    let option = new Option(element, element);
-                    option.selected = true;
+                if(arrayTags != null){
+                    arrayTags.forEach(function(element) {
+                        let option = new Option(element, element);
+                        option.selected = true;
 
-                    $("#category-input").append(option);
-                });
+                        $("#category-input").append(option);
+                    });
+                }
+
 
                 let total = $('#number-of-offer').val();
                 searchOffer(1,total);

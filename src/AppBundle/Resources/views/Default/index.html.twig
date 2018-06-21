@@ -34,7 +34,7 @@
             {% endif %}
             {%  for offer in featuredOffer %}
                 <a class="col-sm-6 col-md-{{ blocOffer }} zoom" href="{{ path('show_offer', {'id': offer.offer.id}) }}">
-                    <div class="thumbnail">
+                    <div class="thumbnail featured-offer-item">
                         <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
                             <div class="layer">
                             </div>
@@ -66,7 +66,7 @@
             {% endif %}
             {%  for employer in featuredEmployer %}
             <a class="col-sm-6 col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
-                <div class="thumbnail" >
+                <div class="thumbnail featured-employer-item" >
                     <div class="header-thumb-employer">
                         {% if employer.employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
                         <h3>{{ employer.employer.name }}</h3>

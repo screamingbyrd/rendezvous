@@ -37,7 +37,7 @@
             {% for employer in employers %}
 
                     <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
-                        <div class="thumbnail" >
+                        <div class="thumbnail featured-offer-item" >
                             <div class="header-thumb-employer">
                                 {% if employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
                                 <h3 class="employer-title">{{ employer.name }}</h3>
