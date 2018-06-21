@@ -86,7 +86,7 @@
 #keyword-input, #location-input {
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 37%;
+    width: 100%;
     font-size: 16px;
     padding: 12px 20px 12px 13px;
     border: 1px solid #ddd;
@@ -94,6 +94,8 @@
     margin-right: -4px;
     min-width: 130px;
 }
+
+
 
 .offer-search-element{
     width: 94%;
@@ -511,7 +513,7 @@
     line-height: inherit;
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 16%;
+    width: 100%;
     font-size: 16px;
     padding: 12px 20px 12px 13px;
     border: 1px solid #ddd;

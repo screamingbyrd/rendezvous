@@ -43,11 +43,26 @@ function detectmob() {
 
 $(document).ready(function() {
 
-    $('.select2').select2({
-        width: '100%',
-        theme: 'bootstrap'
+    // $('.select2').select2({
+    //     width: '100%',
+    //     theme: 'bootstrap'
+    //
+    //
+    // });
 
-    });
+
+    $('.select2').each(function () {
+            $(this).select2({
+                width: '100%',
+                theme: 'bootstrap',
+                placeholder: $(this).data('placeholder')
+            });
+        });
+
+
+
+
+
 
     //main page
 
