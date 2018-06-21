@@ -5,15 +5,18 @@
 {% endblock %}
 
 {% block body %}
+    <div class="jumbotron homepage-jumbotron">
+        <span style="font-size: 42px">{{ 'dashboard.title' | trans }}</span>
+    </div>
+
     <div class="navbar-dashboard">
-        <h3>{{ 'dashboard.title' | trans }}</h3>
-        <ul class="nav nav-tabs nav-candidate">
+        <ul class="nav nav-tabs nav-candidate navbar-dashboard">
             <li class="active">
-                <a  href="#applied" data-toggle="tab">Offre postulé</a>
+                <a  data-target="#applied" data-toggle="tab">{{ 'dashboard.candidate.appliedOffers'|trans }}</a>
             </li>
-            <li><a href="#alerts" data-toggle="tab">Notifications</a>
+            <li><a data-target="#alerts" data-toggle="tab">{{ 'dashboard.candidate.notifications'|trans }}</a>
             </li>
-            <li><a href="#favorites" data-toggle="tab">Favoris</a>
+            <li><a data-target="#favorites" data-toggle="tab">{{ 'dashboard.candidate.favorites'|trans }}</a>
             </li>
         </ul>
     </div>
@@ -21,27 +24,40 @@
         <div class="tab-content candidate-content">
             <div class="tab-pane active fade in" id="applied">
                 <h4>{{ 'dashboard.candidate.list' | trans }}</h4>
-                <ul id="myUL" class="candidat-dashboard">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">name</th>
+                        <th scope="col">date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {% for offer in appliedOffer %}
-                        <li>
-                            <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': offer.offer.id}) }}">
-                                {% if offer.offer.employer.logo is not null %}<img class="dashboard-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
-                                <div class="offer-search-element">
-                                    <div class="job-title-employer">
-                                        <div>{{ offer.offer.title }}</div>
-                                        <div class="offer-element-name">{{ offer.offer.employer.name }}</div>
-                                    </div>
-
-                                    <span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location }}</span>
-                                    <span class="applied-date">{{ 'dashboard.candidate.appliedThe' | trans }}{{ offer.date | date("d/m/Y")  }}</span>
-                                </div>
-                            </a>
-                        </li>
+                        <tr>
+                            <td><a href="{{ path('show_offer', {'id': offer.offer.id}) }}">{{ offer.offer.title |trans }}</a></td>
+                            <td>{{ offer.date|date }}</td>
+                        </tr>
                     {% endfor %}
-                </ul>
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane fade" id="alerts">
+                <div class="add-notification">
+                    <h4>{{ 'notification.create' |trans}}</h4>
+                    <form method="post" action="{{ path('create_notification') }}" id="search-offer-homepage">
+                        <input name="type" type="hidden" id="type-input" value="notification.tag">
+                        <select title="Category" id="id-input" name="id"  class="jobnow-dropdown">
+                            {% for tag in tags %}
+                                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" class="jobnow-button " value="{{ 'add' | trans }}">
+                    </form>
+                </div>
+
+
                 {% if notifications is defined and notifications|length > 0 %}
+
                     <h4>{{ 'notification.mine' | trans }}</h4>
                     <table class="table">
                         <thead>
@@ -53,9 +69,9 @@
                         <tbody>
                         {% for i in 1..notifications|length %}
                             <tr>
-                                <td>{{ notifications[i-1].type }}</td>
+                                <td>{{ notifications[i-1].type |trans }}</td>
                                 <td>{{ notifications[i-1].name }}</td>
-                                <td><a href="{{ path('delete_notification', {'id':notifications[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'notification.delete' | trans }}</a></td>
+                                <td><a href="{{ path('delete_notification', {'id':notifications[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -67,25 +83,22 @@
                     <h4>{{ 'header.candidates.dashboard.favorites' | trans }}</h4>
 
                         <div class="tab-pane active fade in" id="applied">
-                            <ul id="myUL" class="candidat-dashboard">
-                            {% for favorite in favorites %}
-                                <li class="favorite-element">
-                                    <a class='offer-element-dashboard' href="{{ path('show_offer', {'id': favorite.offer.id}) }}">
-                                        {% if favorite.offer.employer.logo is not null %}<img class="dashboard-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(favorite.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
-                                        <div class="offer-search-element">
-                                            <div class="job-title-employer">
-                                                <div>{{ favorite.offer.title }}</div>
-                                                <div class="offer-element-name">{{ favorite.offer.employer.name }}</div>
-                                            </div>
-
-                                            <span class="other-element"><i class="fa fa-map-marker"></i>{{ favorite.offer.location }}</span>
-                                        </div>
-                                    </a>
-                                    <a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'favorite.delete' | trans }}</a>
-                                </li>
-
-                            {% endfor %}
-                            </ul>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">name</th>
+                                    <th scope="col">date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for favorite in favorites %}
+                                    <tr>
+                                        <td><a href="{{ path('show_offer', {'id': favorite.offer.id}) }}">{{ favorite.offer.title |trans }}</a></td>
+                                        <td><a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                 {% endif %}
             </div>
@@ -101,5 +114,19 @@
             window.location.hash = e.target.hash;
         })
     </script>
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/jobnow-home.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+    </style>
 
 {% endblock %}

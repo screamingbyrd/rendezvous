@@ -133,6 +133,9 @@ dashboard:
   candidate:
     list: You applied to those offers
     appliedThe: Applied the
+    appliedOffers: My offers
+    notifications: Notifications
+    favorites: Favorites
 
 slot:
   buy:
@@ -238,14 +241,18 @@ footer:
   legal: Legal
 
 notification:
+  create: Add a new notification
   created: Notification created !
   deleted: Notification deleted !
-  delete: Delete this notification
   mine: My notifications
   already: Notification already exist !
+  tag: Tag
+  employer: Employer
 
 favorite:
   created: Added to favorites !
   deleted: Favorite deleted !
-  delete: Delete this favorite
   already: This favorite already exist !
+
+add: Add
+delete: Delete
