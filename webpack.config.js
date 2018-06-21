@@ -6,7 +6,7 @@ Encore
     .setOutputPath('web/build/')
 
     // the public path used by the web server to access the previous directory
-    .setPublicPath('/build')
+    .setPublicPath('../build')
 
     // will create web/build/app.js and web/build/app.css
     .addEntry('main', './assets/js/main.js')
@@ -22,7 +22,7 @@ Encore
 
     // show OS notifications when builds finish/fail
     .enableBuildNotifications()
-
+    .setManifestKeyPrefix('build');
 // create hashed filenames (e.g. app.abc123.css)
 // .enableVersioning()
 

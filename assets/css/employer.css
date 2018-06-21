@@ -96,6 +96,12 @@ h3.box{
         justify-content: center;
         float: inherit !important;
     }
+    .search-employer{
+        margin-bottom: 0 !important;
+    }
+    .search-employer-page #myUL{
+        margin-top: -20px;
+    }
 }
 .container-logo-employer{
     position: absolute;
@@ -141,4 +147,7 @@ h3.box{
     align-items: center;
     justify-content: center;
     overflow: initial !important;
+}
+.search-employer{
+    margin-bottom: 20px !important;
 }

@@ -187,10 +187,10 @@ class CandidateController extends Controller
             $newNotification['id'] = $notification->getId();
             $type = $notification->getTypeNotification();
             $newNotification['type'] = $type;
-            if($type == 'employer'){
+            if($type == 'notification.employer'){
                 $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
                 $newNotification['name'] = $employer->getName();
-            }elseif ($type == 'tag'){
+            }elseif ($type == 'notification.tag'){
                 $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
                 $newNotification['name'] = $tag->getName();
             }
@@ -218,6 +218,13 @@ class CandidateController extends Controller
         ;
         $offers = $offerRepository->findById($offerIdArray);
 
+        $tagRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Tag')
+        ;
+        $tags = $tagRepository->findAll();
+
         foreach ($offers as $offer){
             $finalArray[$offer->getId()]['offer'] = $offer;
         }
@@ -226,7 +233,8 @@ class CandidateController extends Controller
             array(
                 'appliedOffer' => $finalArray,
                 'notifications' => $notificationsArray,
-                'favorites' => $favorites
+                'favorites' => $favorites,
+                'tags' => $tags
             ));
     }
 

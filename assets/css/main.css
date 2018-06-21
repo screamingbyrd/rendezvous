@@ -1,3 +1,8 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(VarelaRound.otf);
+}
+
 @media (min-width: 1200px){
     .container {
         width: 72% !important;
@@ -124,6 +129,7 @@ a{
 body {
     padding-top: 74px;
     padding-bottom: 65px;
+    font-family: myFirstFont;
 }
 
 h1{
@@ -182,7 +188,7 @@ h1{
 }
 
 .jumbotron{
-    text-align: center;
+    text-align: center
 }
 .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
     text-align: center;
@@ -236,6 +242,21 @@ h1{
     }
     .navbar-dashboard{
         margin-top: 0 !important;
+    }
+    .add-notification .jobnow-dropdown{
+        width: 100%;
+        margin-left: 0 !important;
+    }
+    .add-notification .jobnow-button{
+        width: 100%;
+    }
+    .nav-candidate{
+        display: inline-block !important;
+        padding-left: 11px;
+        margin-bottom: 10px !important;
+    }
+    .nav-candidate li{
+        float: left !important;
     }
 }
 
@@ -378,6 +399,34 @@ h1{
 
 .navbar-dashboard{
     text-align: center;
-    margin-top: 50px;
+    margin-top: 22px;
+}
+.add-notification h4{
+    margin-bottom: 20px;
+}
+.jobnow-dropdown{
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 13px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    color: #333;
+    min-width: 130px;
 }
 
+.nav-candidate{
+    display: table !important;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+}
+.nav-candidate li{
+    float: none;
+    display: table-cell;
+}
+.nav-candidate a{
+    margin-bottom: -1px;
+}

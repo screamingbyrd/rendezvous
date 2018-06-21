@@ -12,7 +12,7 @@ header:
     submit: Envoyer votre cv
     profile: Mon profile
     dashboard:
-      alert: Mes alertes
+      alert: Mes Notifications
       applied: Mes candidatures
       favorites: Mes favoris
     register: Candidat
@@ -139,6 +139,9 @@ dashboard:
   candidate:
     list: Vous avez postulez à ces offres
     appliedThe: Postulé le
+    appliedOffers: Mes offres
+    notifications: Notifications
+    favorites: Favoris
 
 slot:
   buy:
@@ -230,14 +233,18 @@ footer:
   legal: Mentions légales
 
 notification:
+  create: Ajouter une nouvelle notification
   created: Notification crée !
   deleted: Notification supprimé !
-  delete: Supprimer cette notification
   mine: Mes notifications
   already: La notification existe déjà !
+  tag: Categorie
+  employer: Employeur
 
 favorite:
   created: Ajouté au favoris !
   deleted: Favori supprimé !
-  delete: Supprimer ce favoris
   already: La favoris existe déjà !
+
+add: Ajouter
+delete: Supprimer

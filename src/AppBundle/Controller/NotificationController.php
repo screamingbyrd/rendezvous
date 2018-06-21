@@ -13,6 +13,7 @@ use AppBundle\Entity\Notification;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class NotificationController extends Controller
 {
@@ -71,7 +72,9 @@ class NotificationController extends Controller
         $translated = $this->get('translator')->trans('notification.created');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_candidate');
+        $url = $this->generateUrl('dashboard_candidate');
+
+        return $this->redirect($url.'#alerts');
 
     }
 
