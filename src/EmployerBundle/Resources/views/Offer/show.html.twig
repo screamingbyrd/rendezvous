@@ -91,7 +91,7 @@
             </div>
             <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
             <div class="floating-employer-description">
-                {{ offer.employer.whyUs }}
+                {{ offer.employer.whyUs| raw }}
                 <hr class="hr-floating-employer">
             </div>
 
