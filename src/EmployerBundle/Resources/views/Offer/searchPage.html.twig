@@ -10,37 +10,55 @@
         <h2>{{ 'offer.search.title' | trans }}</h2>
 
         <form method="post" action="" id="search-offer-form" class="homepage-search-bar">
-            <div>
-                <input value="{{ keyword }}" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
-                <input value="{{ location }}" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
-                <select title="Employer" id="employer-input">
-                    <option value="">Employer</option>
-                    {% for employer in employers %}
-                        <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
-                    {% endfor %}
-                </select>
+            <div class="row">
+                <div class="col-md-3">
+                    <input value="{{ keyword }}" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                </div>
+                <div class="col-md-3">
+                    <input value="{{ location }}" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                </div>
+                <div class="col-md-2">
+                    <select title="Employer" id="employer-input" class="select2" data-placeholder="Employer">
+                        <option></option>
+                        {% for employer in employers %}
+                            <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
 
-                <select title="Category" id="category-input" multiple class="select2">
-                    <option value="">Category</option>
-                    {% for tag in tags %}
-                        <option value="{{ tag.name }}">{{ tag.name }}</option>
-                    {% endfor %}
-                </select>
+                    <select title="Category" id="category-input" multiple class="select2" data-placeholder="Select tag(s)">
+                        <option></option>
+                        {% for tag in tags %}
+                            <option value="{{ tag.name }}">{{ tag.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="jobnow-button searchOffer" value="Search">
+                </div>
+            </div>
 
-                <input type="submit" class="jobnow-button searchOffer" value="Search">
-                <ul class="contractType-list">
-                    {% for type in contractType %}
-                        <li class="contract-type">
-                            <input type="checkbox" name="filter_job_type[]" class="type-contract-checkbox" value="{{ type.name }}" checked="checked" id="job_type_{{ type.name }}">
-                            {{  type.name | trans }}
-                        </li>
-                    {% endfor %}
-                </ul>
-                <select id="number-of-offer">
-                    <option value="20" selected>20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="contractType-list">
+                            {% for type in contractType %}
+                                <li class="contract-type">
+                                    <input type="checkbox" name="filter_job_type[]" class="type-contract-checkbox" value="{{ type.name }}" checked="checked" id="job_type_{{ type.name }}">
+                                    {{  type.name | trans }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <select id="number-of-offer">
+                            <option value="20" selected>20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
             </div>
         </form>
     </div>
