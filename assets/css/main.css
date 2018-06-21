@@ -234,6 +234,9 @@ h1{
         margin: auto !important;
         margin-bottom: 10px !important;
     }
+    .navbar-dashboard{
+        margin-top: 0 !important;
+    }
 }
 
 .homepage-jumbotron #keyword-input{
@@ -373,4 +376,8 @@ h1{
     color: #e8471b;
 }
 
+.navbar-dashboard{
+    text-align: center;
+    margin-top: 50px;
+}
 
