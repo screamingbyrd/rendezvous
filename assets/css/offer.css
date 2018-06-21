@@ -103,6 +103,60 @@
     display: inline-block;
     margin-right: 3%;
     margin-bottom: 0;
+    width: 100%;
+}
+.offer-item-experience{
+    float: right;
+    margin: 10px;
+}
+.offer-item-contract{
+    float: right;
+    margin: 10px;
+}
+.item-contract-temporary{
+    background: red;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 10px;
+}
+.item-contract-freelance{
+    background: orange;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 10px;
+}
+.item-contract-parttime{
+    background: greenyellow;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 10px;
+}
+.item-contract-fulltime{
+    background: blue;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 10px;
+}
+.item-contract-internship{
+    background: yellow;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 10px;
 }
 .offer-element-name{
     color: #929292;
