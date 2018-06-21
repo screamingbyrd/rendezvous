@@ -1,6 +1,6 @@
 @font-face {
     font-family: myFirstFont;
-    src: url(VarelaRound.otf);
+    src: url(coolveticarg.ttf);
 }
 
 @media (min-width: 1200px){
@@ -130,6 +130,7 @@ body {
     padding-top: 74px;
     padding-bottom: 65px;
     font-family: myFirstFont;
+
 }
 
 h1{
@@ -265,12 +266,14 @@ h1{
     margin-right: 1%;
     border-radius: 4px;
     height:43px;
+    width: 37%;
 }
 .homepage-jumbotron #location-input{
     color: #333;
     margin-right: 1%;
     border-radius: 4px;
     height: 43px;
+    width: 37%;
 }
 .homepage-subtitle{
     margin-bottom: 60px !important;
