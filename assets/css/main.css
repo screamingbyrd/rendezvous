@@ -1,6 +1,6 @@
 @font-face {
     font-family: myFirstFont;
-    src: url(coolveticarg.ttf);
+    src: url(font.otf);
 }
 
 @media (min-width: 1200px){
@@ -21,7 +21,7 @@
 
     .dropdown-menu>li>a{
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px;
 
     }
@@ -55,8 +55,8 @@ a{
 .header-navbar {
     background-color: #272f3b;
     border-color: #080808;
-    height: 75px;
-    font-size: 16px;
+    height: 88px;
+    font-size: 18px;
 }
 
 
@@ -75,16 +75,10 @@ a{
 }
 
 
-
-
-
-
 #login{
 
 
 }
-
-
 
 .navbar-collapse{
 
@@ -130,7 +124,7 @@ body {
     padding-top: 74px;
     padding-bottom: 65px;
     font-family: myFirstFont;
-
+    font-size: 18px !important;
 }
 
 h1{
@@ -189,7 +183,11 @@ h1{
 }
 
 .jumbotron{
-    text-align: center
+    text-align: center;
+    font-weight: 600 !important;
+}
+.jumbotron h2{
+    font-weight: 600;
 }
 .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
     text-align: center;
