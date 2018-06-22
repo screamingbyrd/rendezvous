@@ -23,7 +23,7 @@
     <div class="container">
         <div class="tab-content candidate-content">
             <div class="tab-pane active fade in" id="applied">
-                <h4>{{ 'dashboard.candidate.list' | trans }}</h4>
+                <h3>{{ 'dashboard.candidate.list' | trans }}</h3>
                 <table class="table">
                     <thead>
                     <tr>
@@ -42,8 +42,9 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="alerts">
+                <div>{{ 'notification.title'|trans }}</div>
                 <div class="add-notification">
-                    <h4>{{ 'notification.create' |trans}}</h4>
+                    <h3>{{ 'notification.create' |trans}}</h3>
                     <form method="post" action="{{ path('create_notification') }}" id="search-offer-homepage">
                         <input name="type" type="hidden" id="type-input" value="notification.tag">
                         <select title="Category" id="id-input" name="id"  class="jobnow-dropdown">
@@ -58,7 +59,7 @@
 
                 {% if notifications is defined and notifications|length > 0 %}
 
-                    <h4>{{ 'notification.mine' | trans }}</h4>
+                    <h3>{{ 'notification.mine' | trans }}</h3>
                     <table class="table">
                         <thead>
                         <tr>
@@ -79,8 +80,9 @@
                 {% endif %}
             </div>
             <div class="tab-pane fade" id="favorites">
+                <div>{{ 'favorite.title'|trans }}</div>
                 {% if notifications is defined and notifications|length > 0 %}
-                    <h4>{{ 'header.candidates.dashboard.favorites' | trans }}</h4>
+                    <h3>{{ 'header.candidates.dashboard.favorites' | trans }}</h3>
 
                         <div class="tab-pane active fade in" id="applied">
                             <table class="table">

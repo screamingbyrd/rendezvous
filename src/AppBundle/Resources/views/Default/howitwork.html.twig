@@ -2,13 +2,13 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'footer.faq'|trans }}
+    {{ 'footer.about'|trans }}
 {% endblock %}
 
 {% block body %}
 
     <div class="jumbotron homepage-jumbotron">
-        <h2>{{ 'footer.faq'|trans }}</h2>
+        <h2>{{ 'header.how'|trans }}</h2>
     </div>
 
     <div class="container">
@@ -54,15 +54,17 @@
         </head>
         <body>
 
-        {% for i in range(1,3) %}
-            <p></p>
-            <button class="accordion">{{('faq.employer.'~i~'.question')|trans}}</button>
-            <div class="panel">
-                <p>{{('faq.employer.'~i~'.answer')|trans}}</p>
-            </div>
-        {%- endfor %}
+        <h2>{{ 'how.title'|trans }}</h2>
+        <br>
+        <button class="accordion">{{ 'header.employers.title'|trans }}</button>
+        <div class="panel">
+            <p>{{ 'how.employers'|trans }}</p>
+        </div>
 
-
+        <button class="accordion">{{ 'header.candidates.title'|trans }}</button>
+        <div class="panel">
+            <p>{{ 'how.candidates'|trans }}</p>
+        </div>
 
         <script>
             var acc = document.getElementsByClassName("accordion");
@@ -82,7 +84,6 @@
         </script>
         </body>
     </div>
-
     <style>
         .homepage-jumbotron::after{
             content: '';

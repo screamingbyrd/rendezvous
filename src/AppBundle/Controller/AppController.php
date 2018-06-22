@@ -96,4 +96,11 @@ class AppController extends Controller
 
     }
 
+    public function howitworkPageAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Default:howitwork.html.twig');
+
+    }
+
 }
