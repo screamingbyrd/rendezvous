@@ -1,6 +1,14 @@
 yes: oui
 no: non
 
+homepage:
+  ourMission: Our mission is to empower locally implanted companies to find the perfect candidate for them when the time is right. We also work for the candidates to help them find and get their ideal job in Luxembourg. Our dedicated team of recruiting experts work everyday to offer the best customer service and match for both employers and candidates. Our brand new website offers a continued development for a better experience every day.
+
+how:
+  title: An explanation is always better
+  employers: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+  candidates: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+
 header:
   register: S'inscrire
   how: Guide d'utilisation
@@ -39,6 +47,10 @@ form:
   registration:
     title:
       candidate: S'incrire en tant que candidat
+    subTitle:
+      candidate: Your hunt for the perfect job position starts here!
+      employer: Your lookout for the perfect candidate starts now!
+
     email: Email
     firstname: Prénom
     lastname: Nom
@@ -195,6 +207,7 @@ employer:
     tags: Catégories principales
   credit:
     title: Crédits
+    subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: Vous avez actuellement %credit% credits !
 
 freelance: Freelance
@@ -219,6 +232,7 @@ contact:
   form: Formulaire de contact
   us:
     title: Contactez nous
+    subTitle: The best way to reach us is to call us
     smallTitle: Contact
     employer: Contacter un conseiller
   location: Notre localisation
@@ -233,6 +247,7 @@ footer:
   legal: Mentions légales
 
 notification:
+  title: Because sometimes it takes hearing about the right position at the right time
   create: Ajouter une nouvelle notification
   created: Notification crée !
   deleted: Notification supprimé !
@@ -242,9 +257,35 @@ notification:
   employer: Employeur
 
 favorite:
+  title: Wishlist aren’t simply for Christmas or shopping anymore
   created: Ajouté au favoris !
   deleted: Favori supprimé !
   already: La favoris existe déjà !
 
 add: Ajouter
 delete: Supprimer
+
+searchEmployer:
+  title: Our very own directory of the best companies for hiring
+  discover: Discover our very own directory of companies hiring in Luxembourg. You can explore here the companies registered with us, their size and their employee benefits. Start browsing now!
+
+about:
+  let: Let us present ourselves
+  text: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
+        The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
+        Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
+
+privacy:
+  title: Our privacy policy… yes the one that protects all the information we have about you
+
+faq:
+  employer:
+    1:
+      question: My dashboard
+      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once.
+    2:
+      question: What are credits?
+      answer: Each job posting is worth a credit so that you can keep track of your spendings easily.
+    3:
+      question: How much are they worth?
+      answer: Once you have registered yourself as an employer, you’ll find a section detailing the packages.

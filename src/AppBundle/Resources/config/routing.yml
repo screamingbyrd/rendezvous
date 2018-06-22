@@ -26,6 +26,9 @@ privacy_page:
 legal_page:
     path:     /legal
     defaults: { _controller: AppBundle:App:legalPage }
+howitwork_page:
+    path:     /how-it-work
+    defaults: { _controller: AppBundle:App:howitworkPage }
 create_notification:
     path:     /create-notification
     defaults: { _controller: AppBundle:Notification:create }
