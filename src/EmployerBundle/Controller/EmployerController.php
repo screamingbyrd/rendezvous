@@ -333,7 +333,8 @@ class EmployerController extends Controller
 
         foreach ($featuredEmployer as $item) {
 
-            $featuredArray[$item->getStartDate()->format('d/m/Y')][] = $item->getEmployer()->getId();
+            $featuredArray[$item->getStartDate()->format('d/m/Y')]['id'][] = $item->getEmployer()->getId();
+            $featuredArray[$item->getStartDate()->format('d/m/Y')]['featured'][] = $item;
         }
 
         $creditInfo = $this->container->get('app.credit_info');
@@ -386,6 +387,32 @@ class EmployerController extends Controller
         return $this->redirectToRoute('featured_employer_page');
     }
 
+    public function deleteFeaturedEmployerAction(Request $request){
+
+        $session = $request->getSession();
+        $featuredId = $request->get('id');
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_ADMIN', $user->getRoles())){
+            return $this->redirectToRoute('create_candidate');
+        }
+
+        $featuredEmployerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedEmployer')
+        ;
+        $featuredEmployer = $featuredEmployerRepository->findOneBy(array('id' => $featuredId));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($featuredEmployer);
+        $em->flush();
+
+        $session->getFlashBag()->add('info', 'featured employer deleted');
+
+        return $this->redirectToRoute('featured_employer_page');
+    }
+
     public function featuredOfferPageAction(Request $request){
         $user = $this->getUser();
         $employer = $user->getEmployer();
@@ -408,7 +435,7 @@ class EmployerController extends Controller
         foreach ($featuredOffer as $item) {
             $featuredArray[$item->getStartDate()->format('d/m/Y')]['ids'][] = $item->getOffer()->getId();
             if($item->getOffer()->getEmployer() == $employer){
-                $featuredArray[$item->getStartDate()->format('d/m/Y')]['titles'][] = $item->getOffer()->getTitle();
+                $featuredArray[$item->getStartDate()->format('d/m/Y')]['features'][] = $item;
             }
         }
 
@@ -468,6 +495,32 @@ class EmployerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($featuredOffer);
         $em->flush();
+
+        return $this->redirectToRoute('featured_offer_page');
+    }
+
+    public function deleteFeaturedOfferAction(Request $request){
+
+        $session = $request->getSession();
+        $featuredId = $request->get('id');
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_ADMIN', $user->getRoles())){
+            return $this->redirectToRoute('create_candidate');
+        }
+
+        $featuredOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedOffer')
+        ;
+        $featuredOffer = $featuredOfferRepository->findOneBy(array('id' => $featuredId));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($featuredOffer);
+        $em->flush();
+
+        $session->getFlashBag()->add('info', 'featured offer deleted');
 
         return $this->redirectToRoute('featured_offer_page');
     }

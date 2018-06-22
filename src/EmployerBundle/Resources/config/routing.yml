@@ -64,12 +64,18 @@ featured_employer_page:
 reserve_featured_employer:
     path:     /reserve-featured-employer
     defaults: { _controller: EmployerBundle:Employer:reserveFeaturedEmployer }
+delete_featured_employer:
+    path:     /delete-featured-employer
+    defaults: { _controller: EmployerBundle:Employer:deleteFeaturedEmployer }
 featured_offer_page:
     path:     /featured-offer
     defaults: { _controller: EmployerBundle:Employer:featuredOfferPage }
 reserve_featured_offer:
     path:     /reserve-featured-offer
     defaults: { _controller: EmployerBundle:Employer:reserveFeaturedOffer }
+delete_featured_offer:
+    path:     /delete-featured-offer
+    defaults: { _controller: EmployerBundle:Employer:deleteFeaturedOffer }
 buy_slot:
     path:     /buy-slot
     defaults: { _controller: EmployerBundle:Employer:buySlot }
