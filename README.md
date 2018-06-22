@@ -18,6 +18,7 @@ composer install
 (make a git status, if web/ckeditor had been deleted then checkout them)
 
 yarn install
+
 yarn run encore dev
 
 php bin/console doctrine:database:create
