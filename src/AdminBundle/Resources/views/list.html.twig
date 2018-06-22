@@ -21,12 +21,19 @@
 
             {% for employer in employers %}
                 <tr>
-                    <td>{{ employer.employer.name }} </td>
+                    <td>
+                        <a href="{{ path('dashboard_employer', { 'id': employer.employer.id }) }}">
+                            {{ employer.employer.name }}
+                        </a>
+                    </td>
                     <td>{{ employer.email }}</td>
 
                     <td>{{ employer.employer.credit }}</td>
                     <td>{{ employer.employer.location }}</td>
                     <td>
+                        <a href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
+                            <button type="button" class="btn btn-primary">Editer</button>
+                        </a>
                         <a href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
                             <button type="button" class="btn btn-danger">Supprimer</button>
                         </a>
@@ -34,5 +41,14 @@
                 </tr>
             {% endfor %}
         </table>
+
+        <div>
+            <a href="{{ path('featured_offer_page') }}">
+                <button type="button" class="btn btn-primary">Featured offer</button>
+            </a>
+            <a href="{{ path('featured_employer_page') }}">
+                <button type="button" class="btn btn-primary">Featured employer</button>
+            </a>
+        </div>
     </div>
 {%  endblock %}

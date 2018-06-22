@@ -91,8 +91,16 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Employer')
         ;
-        $employer = $repository->findOneBy(array('id' => $user->getEmployer()));
 
+        $idEmployer = $request->get('id');
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+
+        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+        $user = $userRepository->findOneBy(array('employer' => $employer));
         $session = $request->getSession();
 
         $employer->setFirstName($user->getFirstName());
@@ -134,7 +142,7 @@ class EmployerController extends Controller
                 $em->merge($employer);
                 $em->flush();
 
-                $session->getFlashBag()->add('info', 'Candidat modifié !');
+                $session->getFlashBag()->add('info', 'Employer modifié !');
 
                 return $this->redirectToRoute('jobnow_home');
             }
@@ -257,8 +265,27 @@ class EmployerController extends Controller
         ));
     }
 
-    public function dashboardAction($archived = 0){
+    public function dashboardAction(Request $request, $archived = 0){
         $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $idEmployer = $request->get('id');
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+
+        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+        $user = $userRepository->findOneBy(array('employer' => $employer));
 
         $OfferRepository = $this
             ->getDoctrine()
@@ -518,8 +545,10 @@ class EmployerController extends Controller
         foreach ($currentSlot as $slot){
             $offer = $slot->getOffer();
             if(!isset($offer)){
+                $now =  new \DateTime();
                 $slot->setOffer($currentOffer);
                 $currentOffer->setSlot($slot);
+                $currentOffer->setUpdateDate($now);
                 $em->merge($slot);
                 $em->merge($currentOffer);
                 $em->flush();

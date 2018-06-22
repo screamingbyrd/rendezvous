@@ -36,9 +36,6 @@ class AdminController extends Controller
         return $this->render('AdminBundle::list.html.twig', array(
             'employers' => $employers,
         ));
-
     }
-
-
 
 }
