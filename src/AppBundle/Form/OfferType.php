@@ -31,15 +31,23 @@ class OfferType extends AbstractType
         $builder
             ->add('title',      TextType::class, array(
                 'required' => true,
-                'label' => 'offer.title'
+                'label' => 'offer.title',
+                'attr' => array(
+                    'placeholder' => 'offer.titlePH',
+                )
+
+
             ))
 
             ->add('tag', EntityType::class, array(
                 'required' => true,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
-                'attr' => array('class' => 'select2'),
+                'attr' => array(
+                    'class' => 'select2'),
                 'multiple' => true,
+
+
             ))
 
             ->add('location', PlaceAutocompleteType::class,array(

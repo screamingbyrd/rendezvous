@@ -112,7 +112,6 @@ form:
     age: How old are you?
 
   offer:
-    title: Your offer title here
     creation:
       success: The offer has been created !
     edition:
@@ -132,6 +131,8 @@ form:
       keyword: Keywords
       location: Location
       search: Search
+      employerPH: So
+      categoryPH: Select tag(s)
 
     contractType: -- Choose the type of contract --
 
@@ -177,6 +178,10 @@ offer:
     title: Search offers
 
   title: Title
+  titlePH: Your offer title here
+
+  tagPH: Domaine(s) de compétence(s)
+
   description: Descritpion
   optionnal: More Options
   submit: Submit

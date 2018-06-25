@@ -113,7 +113,6 @@ form:
     age: Age
 
   offer:
-    title: Indiquez le titre de votre offre d'emploi
     creation:
       success: L'offre a bien été crée !
     edition:
@@ -133,6 +132,8 @@ form:
       keyword: Mots clefs
       location: Lieu de travail
       search: Recherche
+      employerPH: Indiquez une société
+      categoryPH: Indiquez un ou des domaines d'activités
     contractType: -- Choisissez le type de contrat --
 
 dashboard:
@@ -173,6 +174,10 @@ slot:
     success: Le slot à bien été vidé
 
 offer:
+  title: Titre
+  titlePH: Votre titre ici
+  description: Description
+  tagPH: Domaine(s) de compétence(s)
   search:
     title: Recherche d'offres
   delete:
