@@ -24,6 +24,13 @@ class AdminController extends Controller
         ;
         $users = $repository->findAll();
 
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidates = $candidateRepository->findAll();
+
         $employers = [];
         foreach($users as $user)
         {
@@ -35,6 +42,7 @@ class AdminController extends Controller
 
         return $this->render('AdminBundle::list.html.twig', array(
             'employers' => $employers,
+            'candidates' => $candidates
         ));
     }
 

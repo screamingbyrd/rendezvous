@@ -42,6 +42,35 @@
             {% endfor %}
         </table>
 
+        <h2> Liste des candidats </h2>
+
+        <table class="table table-bordered table-striped well">
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Action(s)</th>
+            </tr>
+
+            {% for candidate in candidates %}
+                <tr>
+                    <td>
+                        <a href="{{ path('dashboard_candidate', { 'id': candidate.id }) }}">
+                            {{ candidate.user.firstName }} {{ candidate.user.lastName }}
+                        </a>
+                    </td>
+                    <td>{{ candidate.user.email }}</td>
+                    <td>
+                        <a href="{{ path('edit_candidate', { 'id': candidate.id }) }}">
+                            <button type="button" class="btn btn-primary">Editer</button>
+                        </a>
+                        <a href="{{ path('delete_candidate', { 'id': candidate.id }) }}">
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
         <div>
             <a href="{{ path('featured_offer_page') }}">
                 <button type="button" class="btn btn-primary">Featured offer</button>

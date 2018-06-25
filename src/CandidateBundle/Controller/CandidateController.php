@@ -82,22 +82,32 @@ class CandidateController extends Controller
 
     public function editAction(Request $request ){
         $user = $this->getUser();
-        if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
-            return $this->redirectToRoute('create_candidate');
-        }
+
+        $idCandidate = $request->get('id');
 
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Candidate')
         ;
-        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+        $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
+
+        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('create_candidate');
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $user = $userRepository->findOneBy(array('id' => $candidate->getUser()));
 
         $session = $request->getSession();
 
-        $candidate->setFirstName($user->getFirstName());
-        $candidate->setLastName($user->getLastName());
-        $candidate->setEmail($user->getEmail());
+        $candidate->setFirstName($candidate->getUser()->getFirstName());
+        $candidate->setLastName($candidate->getUser()->getLastName());
+        $candidate->setEmail($candidate->getUser()->getEmail());
 
         $form = $this->get('form.factory')->create(CandidateType::class, $candidate);
 
@@ -143,18 +153,21 @@ class CandidateController extends Controller
         ));
     }
 
-    public function dashboardAction(){
+    public function dashboardAction(Request $request){
         $user = $this->getUser();
-        if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
-            return $this->redirectToRoute('create_candidate');
-        }
+
+        $idCandidate = $request->get('id');
 
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Candidate')
         ;
-        $candidate = $candidateRepository->findOneBy(array('user' => $user));
+        $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
+
+        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('create_candidate');
+        }
 
         $employerRepository = $this
             ->getDoctrine()
@@ -242,13 +255,17 @@ class CandidateController extends Controller
 
         $session = $request->getSession();
         $user = $this->getUser();
-
+        $idCandidate = $request->get('id');
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Candidate')
         ;
-        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+        $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
+
+        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('create_candidate');
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($candidate);

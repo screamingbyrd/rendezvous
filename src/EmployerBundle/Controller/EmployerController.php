@@ -82,9 +82,6 @@ class EmployerController extends Controller
 
     public function editAction(Request $request ){
         $user = $this->getUser();
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_employer');
-        }
 
         $repository = $this
             ->getDoctrine()
@@ -100,6 +97,11 @@ class EmployerController extends Controller
         ;
 
         $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+
+        if(!((isset($user) and $user->getEmployer() == $employer) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('create_candidate');
+        }
+
         $user = $userRepository->findOneBy(array('employer' => $employer));
         $session = $request->getSession();
 
@@ -155,7 +157,8 @@ class EmployerController extends Controller
 
     public function deleteAction(Request $request, $id)
     {
-
+        $user = $this->getUser();
+        $idEmployer = $request->get('id');
         $session = $request->getSession();
 
         $repository = $this
@@ -163,7 +166,11 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Employer');
 
-        $employer = $repository->find($id);
+        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+
+        if(!((isset($user) and $user->getEmployer() == $employer) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('create_candidate');
+        }
 
         $em = $this->getDoctrine()->getManager();
 
