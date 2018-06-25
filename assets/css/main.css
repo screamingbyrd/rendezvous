@@ -68,13 +68,6 @@ a{
 }
 
 
-.post-offer.text-center{
-    margin-bottom: 15px;
-    margin-top: 15px;
-    color: #e84921;
-}
-
-
 #login{
 
 
@@ -91,13 +84,13 @@ a{
 }
 
 .logo-jobnow{
+
     position: absolute;
     left: 2%;
-    top: 5px;
+    top: 12px;
     width: 200px;
     height: 61px;
     z-index: -1;
-
 }
 
 
@@ -396,6 +389,7 @@ h1{
 
 .label-form{
     color: #e8471b;
+    font-size: 16px;
 }
 
 .navbar-dashboard{
@@ -431,3 +425,5 @@ h1{
 .nav-candidate a{
     margin-bottom: -1px;
 }
+
+

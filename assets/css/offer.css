@@ -629,3 +629,12 @@
     -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
     -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
 }
+
+
+/*Formulaire post offer*/
+
+.container.post-offer{
+    width: 60% !important;
+}
+
+

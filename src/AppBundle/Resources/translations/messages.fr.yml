@@ -113,6 +113,7 @@ form:
     age: Age
 
   offer:
+    title: Indiquez le titre de votre offre d'emploi
     creation:
       success: L'offre a bien été crée !
     edition:

@@ -28,12 +28,25 @@
 
         <div class="row">
             <div class="col-md-4">
-                {{ form_label (form.title, null, { 'label_attr': {'class': 'label-form'} })  }}
+                {{ form_label (form.title, null, { 'label_attr': {
+                    'class': 'label-form',
+                    'placeholder': 'offer.title'
+
+
+                } })  }}
+
                 {{ form_widget(form.title) }}
                 {{ form_errors(form.title) }}
             </div>
             <div class="col-md-4">
-                {{ form_label (form.tag, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_label (form.tag, null, { 'label_attr': {
+
+                    'class': 'label-form',
+                    ''
+
+                }
+
+                }) }}
                 {{ form_widget(form.tag) }}
                 {{ form_errors(form.tag) }}
             </div>
