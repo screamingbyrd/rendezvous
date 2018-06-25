@@ -112,6 +112,7 @@ form:
     age: How old are you?
 
   offer:
+    title: Your offer title here
     creation:
       success: The offer has been created !
     edition:

@@ -57,7 +57,7 @@ class OfferType extends AbstractType
 
                 'config' => array(
                     'toolbar' => 'basic',
-                    'height' => '35vh'
+                    'height' => '30vh'
                 ),
             ))
 

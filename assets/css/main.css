@@ -68,13 +68,6 @@ a{
 }
 
 
-.post-offer.text-center{
-    margin-bottom: 15px;
-    margin-top: 15px;
-    color: #e84921;
-}
-
-
 #login{
 
 
@@ -396,6 +389,7 @@ h1{
 
 .label-form{
     color: #e8471b;
+    font-size: 16px;
 }
 
 .navbar-dashboard{
@@ -432,18 +426,4 @@ h1{
     margin-bottom: -1px;
 }
 
-.form-control{
-    height: 45px;
-}
 
-.select2-choices {
-
-    min-height: 45px;
-    overflow-y: auto;
-}
-
-.select2-container--bootstrap .select2-selection--single{
-
-    min-height:45px;
-
-}
