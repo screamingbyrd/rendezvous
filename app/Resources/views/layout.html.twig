@@ -58,9 +58,11 @@
                        aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('search_page_offer') }}">{{ 'header.candidates.findJob'|trans }}</a></li>
-                        <li><a href="{{ path('dashboard_candidate') }}#applied">{{ 'header.candidates.dashboard.applied'|trans }}</a></li>
-                        <li><a href="{{ path('dashboard_candidate') }}#alerts">{{ 'header.candidates.dashboard.alert'|trans }}</a></li>
-                        <li><a href="{{ path('dashboard_candidate') }}#favorites">{{ 'header.candidates.dashboard.favorites'|trans }}</a></li>
+                        {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+                            <li><a href="{{ path('dashboard_candidate') }}#applied">{{ 'header.candidates.dashboard.applied'|trans }}</a></li>
+                            <li><a href="{{ path('dashboard_candidate') }}#alerts">{{ 'header.candidates.dashboard.alert'|trans }}</a></li>
+                            <li><a href="{{ path('dashboard_candidate') }}#favorites">{{ 'header.candidates.dashboard.favorites'|trans }}</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 

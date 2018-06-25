@@ -322,7 +322,8 @@ class EmployerController extends Controller
             'publishedOffer' => $creditInfo->getPublishOffer(),
             'boostOffers' => $creditInfo->getBoostOffers(),
             'buySlot' => $creditInfo->getBuySlot(),
-            'slots' => $currentSlot
+            'slots' => $currentSlot,
+            'employer' => $employer
         ));
     }
 
@@ -373,7 +374,7 @@ class EmployerController extends Controller
         if($creditEmployer < $creditFeaturedEmployer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $creditFeaturedEmployer);
@@ -487,7 +488,7 @@ class EmployerController extends Controller
         if($creditEmployer < $creditFeaturedOffer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $creditFeaturedOffer);
@@ -554,7 +555,7 @@ class EmployerController extends Controller
         if($creditEmployer < $buySlot){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+            return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $buySlot);

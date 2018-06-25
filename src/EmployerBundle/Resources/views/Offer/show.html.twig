@@ -14,7 +14,7 @@
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">Postée le {{ offer.creationDate |date('Y-m-d')}}</div>
             <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
-            <a data-toggle="tooltip" data-placement="top" title="Tooltip on top" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
+            <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
         </h3>
     </div>
 

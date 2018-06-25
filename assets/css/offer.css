@@ -444,7 +444,8 @@
         position: static;
     }
     .apply-button, .submit-apply{
-        width: 100%;
+        width: 100% !important;
+        height: initial !important;
     }
     .inside-offer-apply-cv{
         display: block;
@@ -637,4 +638,7 @@
     width: 60% !important;
 }
 
-
+.apply-button{
+    width: 150px;
+    height: 50px;
+}

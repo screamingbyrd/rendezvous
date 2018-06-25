@@ -200,7 +200,7 @@ class OfferController extends Controller
         if($creditEmployer < $creditOffer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $creditOffer);
@@ -384,7 +384,7 @@ class OfferController extends Controller
         if($creditEmployer < $creditBoost){
             $translated = $this->get('translator')->trans('form.offer.boost.error');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $creditBoost);

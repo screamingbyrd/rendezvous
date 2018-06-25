@@ -21,20 +21,23 @@ class CreditController extends Controller
 
     public function creditAction(Request $request, $id = 0)
     {
+
+        $creditInfo = $this->container->get('app.credit_info');
+
         switch ($id) {
 
             case 1: {
 
-                return $this->buyPack($request,290,1);
+                return $this->buyPack($request,$creditInfo->getOneCredit(),1);
                 break;
             }
             case 2: {
-                return $this->buyPack($request,2500,10);
+                return $this->buyPack($request,$creditInfo->getTenCredit(),10);
                 break;
 
             }
             case 3: {
-                return $this->buyPack($request,12000,50);
+                return $this->buyPack($request,$creditInfo->getFiftyCredit(),50);
                 break;
 
             }
@@ -54,7 +57,7 @@ class CreditController extends Controller
                 return $this->render('AppBundle:Credit:credit.html.twig', array(
                     'credit' => $creditEmployer,
                     'logsCredit' => $logsCredit,
-
+                    'creditService' => $creditInfo
                 ));
             }
 

@@ -50,6 +50,8 @@ $(document).ready(function() {
     //
     // });
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     $('.select2').each(function () {
             $(this).select2({
                 width: '100%',

@@ -123,8 +123,11 @@ form:
     unarchived:
       success: The offer has been unarchived !
     activate:
-      success: The offer has benn activated !
-      error: You do not have enough credit !
+      success: The offer has been activated !
+      error: You do not have enought credit !
+    boost:
+      success: Your offers had been boosted !
+      error: You do not have enought credit !
     search:
       keyword: Keywords
       location: Location
@@ -217,6 +220,7 @@ employer:
     title: Credits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
+    buy: Buy some credits
 
 
 
@@ -273,6 +277,7 @@ favorite:
   created: Added to favorites !
   deleted: Favorite deleted !
   already: This favorite already exist !
+  add: Add to favorites
 
 add: Add
 delete: Delete

@@ -19,18 +19,23 @@
     <div class="container">
         <div class="row">
             <div style="height: 38px;">
-                <a href="{{ path('create_notification', {'type':'notification.employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
+                {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                    <a href="{{ path('create_notification', {'type':'notification.employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
+                {% endif %}
             </div>
             <hr>
             <div class="col-md-8">
 
-                <p class="description-employer">{{ employer.description }}</p>
-                <h3>{{ 'employer.show.whyus'|trans }}</h3>
-                <p class="whyus-employer">{{ employer.whyUs }}</p>
+                <p class="description-employer shadow-box">{{ employer.description }}</p>
+                <div class="shadow-box">
+                    <div class="article-title">{{ 'employer.show.whyus'|trans }}</div>
+                    <p class="whyus-employer">{{ employer.whyUs }}</p>
+                </div>
+
             </div>
             <div class="col-md-4">
                 {% if offers[0] is defined %}
-                    <div class="last-offers">
+                    <div class="shadow-box">
                         <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
                         <ul class="last-job-list">
                             <li>
@@ -58,7 +63,7 @@
                 {% endif %}
 
                 {% if employer.tag is defined and employer.tag|length >0 %}
-                    <div class="last-offers">
+                    <div class="shadow-box">
                         <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
                         <ul class="last-job-list">
                             {% for tag in employer.tag %}

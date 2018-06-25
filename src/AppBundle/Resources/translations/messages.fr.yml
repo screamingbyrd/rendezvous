@@ -125,7 +125,7 @@ form:
       success: L'offre a bien été désarchivé !
     activate:
       success: L'offre a bien été activée !
-      error: Vous n'avez pas assez de credit pour l'activée !
+      error: Vous n'avez pas assez de credit !
     boost:
       success: Vos annonces ont bien été boostées !
       error: Vous n'avez pas assez de credit pour booster vos offres !
@@ -210,6 +210,7 @@ employer:
     title: Crédits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: Vous avez actuellement %credit% credits !
+    buy: Acheter des crédits
 
 freelance: Freelance
 fulltime: CDI
@@ -262,6 +263,7 @@ favorite:
   created: Ajouté au favoris !
   deleted: Favori supprimé !
   already: La favoris existe déjà !
+  add: Ajouter aux favoris
 
 add: Ajouter
 delete: Supprimer

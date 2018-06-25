@@ -29,6 +29,11 @@
 
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
+        <h4>{{ 'employer.credit.have'|trans({'%credit%': employer.credit}) }}</h4>
+        <a href="{{ path('jobnow_credit') }}" class="btn btn-primary">{{ 'employer.credit.buy' | trans }}</a>
+        <br>
+        <br>
+
         <h4>Slot</h4>
         <div>Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un ans.</div>
         {% if slots is defined and slots|length > 0 %}
