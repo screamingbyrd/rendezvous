@@ -138,8 +138,8 @@ h1{
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
     text-align: center;
-    margin-top: -10px;
     min-width: 100px;
+    margin-top: 0;
 }
 .jobnow-button:hover{
     box-shadow: inset 1000px 0 0 0 #ff6940;
