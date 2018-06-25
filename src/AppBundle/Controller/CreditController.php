@@ -42,17 +42,21 @@ class CreditController extends Controller
 
             }
             default: {
-                $employer = $this->getUser()->getEmployer();
+                $creditEmployer = 0;
+                $logsCredit = 0;
+                $user =$this->getUser();
+                if(isset($user)){
+                    $employer = $this->getUser()->getEmployer();
 
-                $creditEmployer = $employer->getCredit();
+                    $creditEmployer = $employer->getCredit();
 
-                $repository = $this
-                    ->getDoctrine()
-                    ->getManager()
-                    ->getRepository('AppBundle:LogCredit')
-                ;
-                $logsCredit = $repository->findBy(array('employer' => $employer));
-
+                    $repository = $this
+                        ->getDoctrine()
+                        ->getManager()
+                        ->getRepository('AppBundle:LogCredit')
+                    ;
+                    $logsCredit = $repository->findBy(array('employer' => $employer));
+                }
 
                 return $this->render('AppBundle:Credit:credit.html.twig', array(
                     'credit' => $creditEmployer,
@@ -60,12 +64,20 @@ class CreditController extends Controller
                     'creditService' => $creditInfo
                 ));
             }
-
         }
-
     }
 
     private function buyPack(Request $request, $price, $nbrCredit ){
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
 
         $form = $this->get('form.factory')
             ->createNamedBuilder('payment-form')

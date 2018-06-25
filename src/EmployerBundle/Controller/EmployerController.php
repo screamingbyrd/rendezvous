@@ -83,6 +83,7 @@ class EmployerController extends Controller
     public function editAction(Request $request ){
         $user = $this->getUser();
 
+        $session = $request->getSession();
         $repository = $this
             ->getDoctrine()
             ->getManager()
@@ -98,8 +99,10 @@ class EmployerController extends Controller
 
         $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
 
-        if(!((isset($user) and $user->getEmployer() == $employer) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('create_candidate');
+        if(!((isset($user) and $user->getEmployer() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
         }
 
         $user = $userRepository->findOneBy(array('employer' => $employer));
@@ -168,8 +171,10 @@ class EmployerController extends Controller
 
         $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
 
-        if(!((isset($user) and $user->getEmployer() == $employer) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('create_candidate');
+        if(!((isset($user) and $user->getEmployer() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -274,8 +279,11 @@ class EmployerController extends Controller
 
     public function dashboardAction(Request $request, $archived = 0){
         $user = $this->getUser();
+        $session = $request->getSession();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_employer');
         }
 
@@ -637,6 +645,8 @@ class EmployerController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_employer');
         }
 

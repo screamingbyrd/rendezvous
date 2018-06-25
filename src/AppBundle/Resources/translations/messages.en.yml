@@ -311,3 +311,7 @@ faq:
     3:
       question: How much are they worth?
       answer: Once you have registered yourself as an employer, you’ll find a section detailing the packages.
+
+redirect:
+  candidate: Please register as a candidate
+  employer: Please register as an employer
