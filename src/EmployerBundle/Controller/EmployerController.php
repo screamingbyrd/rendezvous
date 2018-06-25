@@ -231,6 +231,7 @@ class EmployerController extends Controller
 
 
 
+
         foreach ($response->getResults() as $result) {
 
             $coord = $result->getGeometry()->getLocation();

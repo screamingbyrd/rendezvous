@@ -21,13 +21,19 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
+
 class OfferType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $translator = $options['translator'];
+
         $builder
             ->add('title',      TextType::class, array(
                 'required' => true,
@@ -43,8 +49,15 @@ class OfferType extends AbstractType
                 'required' => true,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
+                'label' => 'Tag(s)',
+
                 'attr' => array(
-                    'class' => 'select2'),
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.tagPH'),
+
+
+                    ),
+
                 'multiple' => true,
 
 
@@ -54,7 +67,10 @@ class OfferType extends AbstractType
                 'required' => true,
                 'attr' => array(
                     'class' => 'form-control',
+                    'placeholder' =>  $translator->trans('offer.locationPH')
                 ),
+                'label' => 'offer.location',
+
 
 
             ))
@@ -71,39 +87,55 @@ class OfferType extends AbstractType
 
             ->add('availableDate',      DateType::class, array('required' => false,'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
+                'label' => 'offer.available',
+
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-provide' => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy']))
+                    'data-date-format' => 'dd-mm-yyyy',
+                    'placeholder' => 'offer.availablePH']))
 
             ->add('contractType', EntityType::class, array(
                 'required' => false,
                 'class' => ContractType::class,
                 'choice_label' =>  'name',
-                'placeholder' => 'form.offer.contractType',
-                'choice_translation_domain' => 'messages',
-                'attr' => array('class' => 'select2'),
+                'label' => 'offer.contract',
+
+
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.contractPH'))
             ))
 
-            ->add('experience', ChoiceType::class, array('choices' => array(
+            ->add('experience', ChoiceType::class, array(
+                'choices' => array(
+
                 'form.registration.exp1' => 'form.registration.exp1',
                 'form.registration.exp2' => 'form.registration.exp2',
                 'form.registration.exp3' => 'form.registration.exp3',
+                ),
 
-            ),
-                'placeholder' => 'form.registration.exp0',
-                'attr' => array('class' => 'select2'),
+
+
+                'required' => false,
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.expPH')),
             ))
 
-            ->add('diploma', ChoiceType::class, array('choices' => array(
+            ->add('diploma', ChoiceType::class, array(
+                'choices' => array(
                 'form.registration.dip1' => 'form.registration.dip1',
                 'form.registration.dip2' => 'form.registration.dip2',
                 'form.registration.dip3' => 'form.registration.dip3',
                 'form.registration.dip4' => 'form.registration.dip4',
                 'form.registration.dip5' => 'form.registration.dip5',
-            ),
-                'placeholder' => 'form.registration.dip0',
-                'attr' => array('class' => 'select2'),
+                 ),
+                'required' => false,
+                'label' => 'offer.diploma',
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.diplomaPH')),
             ))
 
             ->add('wage', ChoiceType::class, array('choices' => array(
@@ -120,8 +152,11 @@ class OfferType extends AbstractType
 
             ),
                 'required' => false,
-                'placeholder' => 'form.registration.wag0',
-                'attr' => array('class' => 'select2'),
+                'label' => 'offer.wage',
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.wagePH')
+                    ),
             ))
 
             ->add('benefits', ChoiceType::class, array('choices' => array(
@@ -131,12 +166,18 @@ class OfferType extends AbstractType
                 'form.registration.ben4' => 'form.registration.ben4',
 
             ),
-                'attr' => array('class' => 'select2'),
+
                 'required' => false,
                 'multiple' => true,
+                'label' => 'offer.benefits',
+
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.benefitsPH')
+                    ),
                 
 
-                'placeholder' => 'form.registration.ben0',
+
             ))
 
             ->add('license', ChoiceType::class, array('choices' => array(
@@ -155,13 +196,20 @@ class OfferType extends AbstractType
                 'form.registration.lis13' => 'form.registration.lis13',
                 'form.registration.lis14' => 'form.registration.lis14',
             ),
-                'attr' => array('class' => 'select2'),
+
                 'multiple' => true,
                 'required' => false,
+                'label' => 'offer.license',
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.licensePH')
+                    ),
             ))
 
             ->add('image', ImageType::class, array(
                 'required' => false,
+                'label' => 'offer.image',
+
             ))
 
 
@@ -181,6 +229,8 @@ class OfferType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Offer'
         ));
+
+        $resolver->setRequired('translator');
     }
 
     /**

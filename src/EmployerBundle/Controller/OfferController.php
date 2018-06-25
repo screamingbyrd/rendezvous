@@ -26,9 +26,13 @@ class OfferController extends Controller
 
         $session = $request->getSession();
 
+        $translator = $this->get('translator');
+
         $offer = new Offer();
 
-        $form = $this->get('form.factory')->create(OfferType::class, $offer);
+        $form = $this->get('form.factory')->create(OfferType::class, $offer, array(
+            'translator' => $translator,
+        ));
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

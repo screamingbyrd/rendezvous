@@ -60,12 +60,12 @@ form:
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: E-mail adress already used !
     exp0: -- Your experience --
-    exp00: -- Experience requierement --
+
     exp1: 0 to 2 years
     exp2: 2 to 5 years
     exp3: 6 years and more
 
-    lis0: -- License requirement --
+
     lis1: License A
     lis2: License A1
     lis3: License A2
@@ -81,20 +81,20 @@ form:
     lis13: License D1E
     lis14: License F
 
-    dip0: -- Diploma --
+
     dip1: BTS
     dip2: Master
     dip3: Doctor
     dip4: Bachelor
     dip5: License
 
-    ben0: -- Benefits you offer --
+
     ben1: Parking
     ben2: Lunch pass
     ben3: 13th month
     ben4: Company car
 
-    wag0: -- Salary wage --
+
     wag1: Up to 20,000 €
     wag2: Up to 25,000 €
     wag3: Up to 30,000 €
@@ -131,10 +131,8 @@ form:
       keyword: Keywords
       location: Location
       search: Search
-      employerPH: So
+      employerPH: Select a company
       categoryPH: Select tag(s)
-
-    contractType: -- Choose the type of contract --
 
 dashboard:
   title: Dashboard
@@ -173,23 +171,33 @@ slot:
     success: The slot has been emptied
 
 offer:
+  title: Title
+  titlePH: Your offer title
+  tag: Tag(s)
+  tagPH: Skills area
+  location: Location
+  locationPH: Indicate a place
+  description: Descritpion
+  contract: Type de contrat
+  contractPH: Choose contract type
+  exp: Experience
+  expPH: Requested experience
+  diploma: Diploma
+  dilomaPH: Requested study level
+  available: Available date
+  availablePH: Choose a start date
+  wage: Wage
+  wagePH: Choose salary wage
+  benefits: Benefits
+  benefitsPH: Benefits you offer
+  license: License
+  licensePH: Requested license
+  image: Offer image
+  submit: Submit
+  option: More options (not mandatory)
 
   search:
-    title: Search offers
-
-  title: Title
-  titlePH: Your offer title here
-
-  tagPH: Domaine(s) de compétence(s)
-
-  description: Descritpion
-  optionnal: More Options
-  submit: Submit
-
-
-
-
-
+      title: Search offers
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:

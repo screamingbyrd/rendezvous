@@ -132,9 +132,9 @@ form:
       keyword: Mots clefs
       location: Lieu de travail
       search: Recherche
-      employerPH: Indiquez une société
+      employerPH:  Société
       categoryPH: Indiquez un ou des domaines d'activités
-    contractType: -- Choisissez le type de contrat --
+
 
 dashboard:
   title: Tableau de bord
@@ -175,9 +175,30 @@ slot:
 
 offer:
   title: Titre
-  titlePH: Votre titre ici
-  description: Description
+  titlePH: Votre titre
+  tag: Tag(s)
   tagPH: Domaine(s) de compétence(s)
+  location: Emplacement
+  locationPH: Indiquez un lieu
+  description: Description
+  contract: Type de contrat
+  contractPH:  Choisissez le type de contrat
+  exp: Expérience professionel
+  expPH: Expérience requise
+  available: Date de disponibilité
+  availablePH: Date de début souhaitée
+  diploma: Diplôme
+  diplomaPH:  Niveau d'études requis
+  wage: Salaire
+  wagePH: Choisissez un salaire
+  benefits: Avantages
+  benefitsPH: Avantage(s) offert(s)
+  license: Permis
+  licensePH: Permis de conduire requis
+  image: Image pour votre offre
+  submit: Soumettre
+  option: Plus de précision (faculatatif)
+
   search:
     title: Recherche d'offres
   delete:

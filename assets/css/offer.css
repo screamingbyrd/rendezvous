@@ -638,6 +638,9 @@
 .container.post-offer{
     width: 60% !important;
 }
+h3.post-offer{
+    margin-top: 0;
+}
 
 .apply-button{
     width: 150px;
