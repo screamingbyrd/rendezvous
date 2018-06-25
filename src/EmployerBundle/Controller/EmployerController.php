@@ -411,11 +411,13 @@ class EmployerController extends Controller
         ;
         $featuredEmployer = $featuredEmployerRepository->findOneBy(array('id' => $featuredId));
 
+        $featuredEmployer->setArchived(true);
+
         $em = $this->getDoctrine()->getManager();
-        $em->remove($featuredEmployer);
+        $em->merge($featuredEmployer);
         $em->flush();
 
-        $session->getFlashBag()->add('info', 'featured employer deleted');
+        $session->getFlashBag()->add('info', 'featured employer archived');
 
         return $this->redirectToRoute('featured_employer_page');
     }
@@ -523,8 +525,10 @@ class EmployerController extends Controller
         ;
         $featuredOffer = $featuredOfferRepository->findOneBy(array('id' => $featuredId));
 
+        $featuredOffer->setArchived(true);
+
         $em = $this->getDoctrine()->getManager();
-        $em->remove($featuredOffer);
+        $em->merge($featuredOffer);
         $em->flush();
 
         $session->getFlashBag()->add('info', 'featured offer deleted');
