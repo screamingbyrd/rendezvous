@@ -14,7 +14,9 @@
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">Postée le {{ offer.creationDate |date('Y-m-d')}}</div>
             <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
-            <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
+            {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
+            {% endif %}
         </h3>
     </div>
 
@@ -120,7 +122,7 @@
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 $("#search-offer-homepage").slideToggle("medium");
             {% else %}
-                window.location.replace('{{ path('create_candidate') }}');
+                window.location.replace('{{ path('apply_offer', {'id':0}) }}');
             {% endif %}
 
         });

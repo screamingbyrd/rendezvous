@@ -250,6 +250,9 @@ h1{
     .nav-candidate li{
         float: left !important;
     }
+    .homepage-div .alert{
+        width: 91% !important;
+    }
 }
 
 .homepage-jumbotron #keyword-input{
@@ -426,4 +429,8 @@ h1{
     margin-bottom: -1px;
 }
 
-
+.homepage-div .alert{
+    position: absolute;
+    z-index: 10;
+    width: 70%;
+}

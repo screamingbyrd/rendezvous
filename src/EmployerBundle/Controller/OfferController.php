@@ -81,9 +81,9 @@ class OfferController extends Controller
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
         if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('employer_creation');
         }
 
         $form = $this->get('form.factory')->create(OfferType::class, $offer);
@@ -191,9 +191,9 @@ class OfferController extends Controller
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
-            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('employer_creation');
         }
 
         $creditInfo = $this->container->get('app.credit_info');
@@ -375,9 +375,9 @@ class OfferController extends Controller
         ;
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('employer_creation');
         }
 
         $creditInfo = $this->container->get('app.credit_info');
@@ -408,12 +408,21 @@ class OfferController extends Controller
     public function applyAction(Request $request){
         $session = $request->getSession();
 
+        $user = $this->getUser();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('redirect.candidate');
+            $session->getFlashBag()->add('danger', $translated);
+            var_dump($translated);exit;
+            return $this->redirectToRoute('create_candidate');
+        }
+
         $id = $request->get('id');
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . basename($_FILES["cv"]["name"]);
         move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
-        $user = $this->getUser();
+
 
         $candidateRepository = $this
             ->getDoctrine()

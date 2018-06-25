@@ -82,7 +82,7 @@ class CandidateController extends Controller
 
     public function editAction(Request $request ){
         $user = $this->getUser();
-
+        $session = $request->getSession();
         $idCandidate = $request->get('id');
 
         $candidateRepository = $this
@@ -93,6 +93,8 @@ class CandidateController extends Controller
         $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
 
         if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.candidate');
+            $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_candidate');
         }
 
@@ -103,7 +105,7 @@ class CandidateController extends Controller
         ;
         $user = $userRepository->findOneBy(array('id' => $candidate->getUser()));
 
-        $session = $request->getSession();
+
 
         $candidate->setFirstName($candidate->getUser()->getFirstName());
         $candidate->setLastName($candidate->getUser()->getLastName());
@@ -157,6 +159,7 @@ class CandidateController extends Controller
         $user = $this->getUser();
 
         $idCandidate = $request->get('id');
+        $session = $request->getSession();
 
         $candidateRepository = $this
             ->getDoctrine()
@@ -166,6 +169,8 @@ class CandidateController extends Controller
         $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
 
         if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.candidate');
+            $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_candidate');
         }
 
@@ -264,6 +269,8 @@ class CandidateController extends Controller
         $candidate = $candidateRepository->findOneBy(isset($idCandidate)?array('id' => $idCandidate):array('user' => $user->getId()));
 
         if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.candidate');
+            $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_candidate');
         }
 
