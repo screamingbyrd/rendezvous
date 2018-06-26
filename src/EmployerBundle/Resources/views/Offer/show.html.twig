@@ -39,9 +39,9 @@
 
         </div>
 
-        <div class="col-sm-6 col-md-8" style="padding-right:34px;">
+        <div class="col-sm-6 col-md-9" style="padding-right:24px;">
             <div class="row about-the-offer fade-in-right animated shadow-box">
-                <h1>About the offer</h1>
+                <h1>{{ 'offer.about' | trans }}</h1>
                 <div class="col-sm-6 col-md-6">
                     <h4>Wage</h4>
                     {{ offer.wage |trans }}
@@ -59,23 +59,54 @@
             </div>
 
             <div class="row job-description fade-in-left animated shadow-box">
-                <h1>Job description</h1>
+                <h1>{{ 'offer.jobDescription' | trans }}</h1>
                 {{ offer.description| raw }}
             </div>
         </div>
 
-        <div class="col-sm-6 col-md-4 floating-employer fade-in-right animated">
-            <div class="header-floating-employer ">
-                {{ offer.employer.name|upper }}
-            </div>
-            <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
-            <div class="floating-employer-description">
-                {{ offer.employer.whyUs| raw }}
-                <hr class="hr-floating-employer">
+        <div class="col-sm-6 col-md-3" style="margin-bottom: 50px;">
+            <div class="floating-employer fade-in-right animated">
+                <div class="header-floating-employer ">
+                    {{ offer.employer.name|upper }}
+                </div>
+                <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                <div class="floating-employer-description">
+                    {{ offer.employer.whyUs| raw }}
+                    <hr class="hr-floating-employer">
+                </div>
+
+                <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">Voir la page de l'entreprise</a>
             </div>
 
-            <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">Voir la page de l'entreprise</a>
+            {% if similarOfferArray[0] is defined %}
+                <div class="shadow-box fade-in-left animated">
+                    <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
+                    <ul class="last-job-list">
+                        <li>
+                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id}) }}">
+                                <div class="slide-button">
+                                    <div><b>{{ similarOfferArray[0].title }}</b></div>
+                                    <div class="job-meta"><span>{{ similarOfferArray[0].contractType.name |trans }}</span> - <span>{{ similarOfferArray[0].location }}</span></div>
+                                </div>
+                            </a>
+                        </li>
+                        {% if similarOfferArray[1] is defined %}
+                            <li>
+                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id}) }}">
+                                    <div class="slide-button">
+                                        <div><b>{{ similarOfferArray[1].title }}</b></div>
+                                        <div class="job-meta"><span>{{ similarOfferArray[1].contractType.name |trans }}</span> - <span>{{ similarOfferArray[1].location }}</span></div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <hr class="hr-last-offer">
+                    <a href="{{ path('search_page_offer', {'tags':tags}) }}" class="jobnow-button">Toute nos offres</a>
+                </div>
+            {% endif %}
         </div>
+
 
 
     </div>

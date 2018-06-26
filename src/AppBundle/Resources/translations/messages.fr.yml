@@ -198,6 +198,8 @@ offer:
   image: Image pour votre offre
   submit: Soumettre
   option: Plus de précision (faculatatif)
+  about: À propos de cette offre
+  jobDescription: Description de l'offre
 
   search:
     title: Recherche d'offres

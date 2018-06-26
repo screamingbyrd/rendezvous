@@ -158,6 +158,39 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
+        $tags = $offer->getTag();
+        $similarOfferArray = array();
+        $tagsArray = array();
+        if(isset($tags)){
+            $finder = $this->container->get('fos_elastica.finder.app.offer');
+            $boolQuery = new \Elastica\Query\BoolQuery();
+
+            $newBool = new \Elastica\Query\BoolQuery();
+
+
+            foreach($tags as $tag){
+                $tagsArray[] = $tag->getName();
+                $tagQuery = new \Elastica\Query\Match();
+                $tagQuery->setFieldQuery('tag.name', $tag->getName());
+                $newBool->addShould($tagQuery);
+            }
+
+            $boolQuery->addMust($newBool);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('archived', false);
+            $boolQuery->addMust($fieldQuery);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('id', $offer->getId());
+            $boolQuery->addMustNot($fieldQuery);
+
+            $query = new \Elastica\Query($boolQuery);
+
+            $query->setSort(array('updateDate' => 'desc'));
+            $similarOfferArray = $finder->find($query);
+        }
+
         $offer->setCountView($offer->getCountView() +1);
 
         $em = $this->getDoctrine()->getManager();
@@ -166,6 +199,8 @@ class OfferController extends Controller
 
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
+            'similarOfferArray' => $similarOfferArray,
+            'tags' => $tagsArray
         ));
     }
 
