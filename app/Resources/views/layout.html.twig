@@ -123,8 +123,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><i class="fas fa-globe"></i></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'_locale': 'fr'})) }}">Français</a></li>
-                        <li><a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'_locale': 'en'})) }}">English</a></li>
+                        {% if 'jobnow_home' in app.request.attributes.get('_route') or 'fos_user_security_login' in app.request.attributes.get('_route') %}
+                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'fr'}) }}">Français</a></li>
+                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'en'}) }}">English</a></li>
+                        {% else %}
+                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'fr','locale': 'fr' }) }}">Français</a></li>
+                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'en','locale': 'en' }) }}">English</a></li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>

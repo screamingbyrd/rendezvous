@@ -1,7 +1,5 @@
 jobnow_home:
-    locales:
-        en: "/"
-        fr: "/"
+    path: "/"
     defaults: { _controller: AppBundle:App:index }
 jobnow_contact:
     locales:
