@@ -65,6 +65,8 @@ class OfferController extends Controller
     public function editAction(Request $request)
     {
 
+        $translator = $this->get('translator');
+
         $session = $request->getSession();
 
         $id = $request->get('id');
@@ -86,7 +88,9 @@ class OfferController extends Controller
             return $this->redirectToRoute('employer_creation');
         }
 
-        $form = $this->get('form.factory')->create(OfferType::class, $offer);
+        $form = $this->get('form.factory')->create(OfferType::class, $offer, array(
+            'translator' => $translator,
+        ));
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
