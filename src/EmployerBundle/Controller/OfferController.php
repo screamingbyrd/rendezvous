@@ -410,10 +410,9 @@ class OfferController extends Controller
 
         $user = $this->getUser();
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+        if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
             $translated = $this->get('translator')->trans('redirect.candidate');
             $session->getFlashBag()->add('danger', $translated);
-            var_dump($translated);exit;
             return $this->redirectToRoute('create_candidate');
         }
 

@@ -127,8 +127,8 @@
                             <li><a href="{{ path(app.request.get('_route'), { '_locale': 'fr'}) }}">Français</a></li>
                             <li><a href="{{ path(app.request.get('_route'), { '_locale': 'en'}) }}">English</a></li>
                         {% else %}
-                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'fr','locale': 'fr' }) }}">Français</a></li>
-                            <li><a href="{{ path(app.request.get('_route'), { '_locale': 'en','locale': 'en' }) }}">English</a></li>
+                            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr', 'locale':'fr'})) }}">Français</a></li>
+                            <li><a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en', 'locale':'en'})) }}">English</a></li>
                         {% endif %}
                     </ul>
                 </li>
