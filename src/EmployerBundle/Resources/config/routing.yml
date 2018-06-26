@@ -1,96 +1,146 @@
 create_employer:
-    path:     /register
+    locales:
+        en: "/register"
+        fr: "/inscription"
     defaults: { _controller: EmployerBundle:Employer:create }
 edit_employer:
-    path:     /edit
+    locales:
+        en: "/edit"
+        fr: "/editer"
     defaults: { _controller: EmployerBundle:Employer:edit }
 delete_employer:
-    path:     /delete/{id}
+    locales:
+        en: "/delete/{id}"
+        fr: "/supprimer/{id}"
     defaults: { _controller: EmployerBundle:Employer:delete }
 
 show_employer:
-    path:     /{id}
+    locales:
+        en: "/{id}"
+        fr: "/{id}"
     defaults: { _controller: EmployerBundle:Employer:show }
     requirements:
         id: \d+
 list_employer:
-    path:     /list-employer
+    locales:
+        en: "/list-employer"
+        fr: "/liste-employeur"
     defaults: { _controller: EmployerBundle:Employer:list }
 dashboard_employer:
-    path:     /dashboard/{archived}
+    locales:
+        en: "/dashboard/{archived}"
+        fr: "/tableaux-de-bord/{archived}"
     defaults: { _controller: EmployerBundle:Employer:dashboard , archived: 0}
     requirements:
       archived: 0|1
 post_offer:
-    path:     /post-offer
+    locales:
+        en: "/post-offer"
+        fr: "/creation-offre"
     defaults: { _controller: EmployerBundle:Offer:post }
 edit_offer:
-    path:     /edit-offer/{id}
+    locales:
+        en: "/edit-offer/{id}"
+        fr: "/edition-offre/{id}"
     defaults: { _controller: EmployerBundle:Offer:edit }
     requirements:
       id: \d+
 delete_offer:
-    path:     /delete-offer/{id}
+    locales:
+        en: "/delete-offer/{id}"
+        fr: "/supprimer-offre/{id}"
     defaults: { _controller: EmployerBundle:Offer:delete }
     requirements:
       id: \d+
 activate_offer:
-    path:     /activate-offer/{id}
+    locales:
+        en: "/activate-offer/{id}"
+        fr: "/activer-offre/{id}"
     defaults: { _controller: EmployerBundle:Offer:activate }
     requirements:
       id: \d+
 show_offer:
-    path:     /show-offer/{id}
+    locales:
+        en: "/show-offer/{id}"
+        fr: "/montrer-offre/{id}"
     defaults: { _controller: EmployerBundle:Offer:show }
     requirements:
       id: \d+
 apply_offer:
-    path:     /apply-offer/{id}
+    locales:
+        en: "/apply-offer/{id}"
+        fr: "/postuler-offre/{id}"
     defaults: { _controller: EmployerBundle:Offer:apply }
     requirements:
       id: \d+
 search_offer:
-    path:     /search-offer
+    locales:
+        en: "/search-offer"
+        fr: "/chercher-offre"
     defaults: { _controller: EmployerBundle:Offer:search }
 search_page_offer:
-    path:     /search-page-offer
+    locales:
+        en: "/search-offer-page"
+        fr: "/page-chercher-offre"
     defaults: { _controller: EmployerBundle:Offer:searchPage }
 boost_offers:
-    path:     /boost-offer
+    locales:
+        en: "/boost-offer"
+        fr: "/booster-offre"
     defaults: { _controller: EmployerBundle:Offer:boost }
 featured_employer_page:
-    path:     /featured-employer
+    locales:
+        en: "/featured-employer"
+        fr: "/employeur-en-avant"
     defaults: { _controller: EmployerBundle:Employer:featuredEmployerPage }
 reserve_featured_employer:
-    path:     /reserve-featured-employer
+    locales:
+        en: "/reserve-featured-employer"
+        fr: "/reserver-employeur-en-avant"
     defaults: { _controller: EmployerBundle:Employer:reserveFeaturedEmployer }
 delete_featured_employer:
-    path:     /delete-featured-employer
+    locales:
+        en: "/delete-featured-employer"
+        fr: "/supprimer-employeur-en-avant"
     defaults: { _controller: EmployerBundle:Employer:deleteFeaturedEmployer }
 featured_offer_page:
-    path:     /featured-offer
+    locales:
+        en: "/featured-offer"
+        fr: "/offre-en-avant"
     defaults: { _controller: EmployerBundle:Employer:featuredOfferPage }
 reserve_featured_offer:
-    path:     /reserve-featured-offer
+    locales:
+        en: "/reserve-featured-offer"
+        fr: "/reserver-offre-en-avant"
     defaults: { _controller: EmployerBundle:Employer:reserveFeaturedOffer }
 delete_featured_offer:
-    path:     /delete-featured-offer
+    locales:
+        en: "/delete-featured-offer"
+        fr: "/supprimer-offre-en-avant"
     defaults: { _controller: EmployerBundle:Employer:deleteFeaturedOffer }
 buy_slot:
-    path:     /buy-slot
+    locales:
+        en: "/buy-slot"
+        fr: "/acheter-slot"
     defaults: { _controller: EmployerBundle:Employer:buySlot }
 add_to_slot:
-    path:     /add-to-slot/{id}
+    locales:
+        en: "/add-to-slot/{id}"
+        fr: "/ajouter-aux-slot/{id}"
     defaults: { _controller: EmployerBundle:Employer:addToSlot }
     requirements:
       id: \d+
 remove_from_slot:
-    path:     /remove-from-slot/{id}
+    locales:
+        en: "/remove-from-slot/{id}"
+        fr: "/enlever-du-slot/{id}"
     defaults: { _controller: EmployerBundle:Employer:removeFromSlot }
     requirements:
       id: \d+
 empty_slot:
-    path:     /empty-slot/{id}
+    locales:
+        en: "/empty-slot/{id}"
+        fr: "/vider-slot/{id}"
     defaults: { _controller: EmployerBundle:Employer:EmptySlot }
     requirements:
       id: \d+

@@ -16,15 +16,15 @@ candidate:
     resource: "@CandidateBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-        en: "/{_locale}/candidate"
-        fr: "/{_locale}/candidat"
+        en: "/{_locale}/candidat"
+        fr: "/{_locale}/candidate"
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-        en: "/{_locale}/admin"
-        fr: "/{_locale}/admin"
+        en: /{_locale}/admin
+        fr: /{_locale}/admin
 
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
