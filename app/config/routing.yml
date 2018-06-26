@@ -23,13 +23,15 @@ admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-        en: /{_locale}/admin
-        fr: /{_locale}/admin
+        en: "/{_locale}/admin"
+        fr: "/{_locale}/admin"
 
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
     type: "be_simple_i18n"
-    prefix:   /{_locale}/
+    prefix:
+        en: "/{_locale}/"
+        fr: "/{_locale}/"
     requirements:
       _locale: fr|en
 
