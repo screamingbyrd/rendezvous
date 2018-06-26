@@ -123,8 +123,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><i class="fas fa-globe"></i></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a></li>
-                        <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+                        <li><a href="{{ path(app.request.get('_route'), { 'locale': 'fr' }) }}">Français</a></li>
+                        <li><a href="{{  path(app.request.get('_route'), { 'locale': 'en' })}}">English</a></li>
                     </ul>
                 </li>
             </ul>

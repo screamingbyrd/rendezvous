@@ -1,46 +1,76 @@
 jobnow_home:
-    path:     /
+    locales:
+        en: "/"
+        fr: "/"
     defaults: { _controller: AppBundle:App:index }
 jobnow_contact:
-    path:     /contact
+    locales:
+        en: "/contact"
+        fr: "/contacter"
     defaults: { _controller: AppBundle:Contact:contact }
 jobnow_credit:
-    path:     /employer/credit
+    locales:
+        en: "/employer/credit"
+        fr: "/employeur/credit"
     defaults: { _controller: AppBundle:Credit:credit }
 
 jobnow_payment:
-    path:     /employer/payment/{id}
+    locales:
+        en: "/employer/payment/{id}"
+        fr: "/employeur/paiement/{id}"
     defaults: { _controller: AppBundle:Credit:credit }
 contact_us_page:
-    path:     /contact-us-page
+    locales:
+        en: "/contact-us-page"
+        fr: "/page-contacter-nous"
     defaults: { _controller: AppBundle:Contact:contactUsPage }
 about_us:
-    path:     /about-us
+    locales:
+        en: "/about-us"
+        fr: "/a-propos"
     defaults: { _controller: AppBundle:App:aboutPage }
 faq_page:
-    path:     /faq
+    locales:
+        en: "/faq"
+        fr: "/faq"
     defaults: { _controller: AppBundle:App:faqPage }
 privacy_page:
-    path:     /privacy
+    locales:
+        en: "/privacy"
+        fr: "/vie-privee"
     defaults: { _controller: AppBundle:App:privacyPage }
 legal_page:
-    path:     /legal
+    locales:
+        en: "/legal"
+        fr: "/legale"
     defaults: { _controller: AppBundle:App:legalPage }
 howitwork_page:
-    path:     /how-it-work
+    locales:
+        en: "/how-it-work"
+        fr: "/guide-utilisation"
     defaults: { _controller: AppBundle:App:howitworkPage }
 create_notification:
-    path:     /create-notification
+    locales:
+        en: "/create-notification"
+        fr: "/creation-notification"
     defaults: { _controller: AppBundle:Notification:create }
 delete_notification:
-    path:     /delete-notification
+    locales:
+        en: "/delete-notification"
+        fr: "/supprimer-notification"
     defaults: { _controller: AppBundle:Notification:delete }
 send_notification:
-    path:     /send-notification
+    locales:
+        en: "/send-notification"
+        fr: "/envoyer-notification"
     defaults: { _controller: AppBundle:Notification:send }
 create_favorite:
-    path:     /create-favorite
+    locales:
+        en: "/create-favorite"
+        fr: "/creation-favori"
     defaults: { _controller: AppBundle:Favorite:create }
 delete_favorite:
-    path:     /delete-favorite
+    locales:
+        en: "/delete-favorite"
+        fr: "/supprimer-favori"
     defaults: { _controller: AppBundle:Favorite:delete }

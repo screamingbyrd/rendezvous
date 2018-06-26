@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
 
         ];
 

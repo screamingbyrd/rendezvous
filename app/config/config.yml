@@ -10,6 +10,7 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    locales: en|fr
 
 framework:
     #esi: ~
@@ -161,3 +162,8 @@ httplug:
         acme:
             factory: httplug.factory.guzzle6
 
+be_simple_i18n_routing:
+    locales:
+        supported: ['en', 'fr']
+        filter: true
+        strict: true

@@ -1,18 +1,34 @@
+root:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /%locale%/
+        permanent: true
+
 employer:
     resource: "@EmployerBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/employer
+    type: "be_simple_i18n"
+    prefix:
+         en: "/{_locale}/employer"
+         fr: "/{_locale}/employeur"
 
 candidate:
     resource: "@CandidateBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/candidate
+    type: "be_simple_i18n"
+    prefix:
+        en: "/{_locale}/candidate"
+        fr: "/{_locale}/candidat"
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/admin
+    type: "be_simple_i18n"
+    prefix:
+        en: "/{_locale}/admin"
+        fr: "/{_locale}/admin"
 
 app:
     resource: '@AppBundle/Resources/config/routing.yml'
-
+    type: "be_simple_i18n"
     prefix:   /{_locale}/
     requirements:
       _locale: fr|en
