@@ -1,20 +1,32 @@
 create_candidate:
-    path:     /register
+    locales:
+        en: "/register"
+        fr: "/inscription"
     defaults: { _controller: CandidateBundle:Candidate:create }
 edit_candidate:
-    path:     /edit
+    locales:
+        en: "/edit"
+        fr: "/editer"
     defaults: { _controller: CandidateBundle:Candidate:edit }
 delete_candidate:
-    path:     /delete
+    locales:
+        en: "/delete"
+        fr: "/supprimer"
     defaults: { _controller: CandidateBundle:Candidate:delete }
 show_candidate:
-    path:     /{id}
+    locales:
+        en: "/{id}"
+        fr: "/{id}"
     requirements:
       id: \d+
     defaults: { _controller: CandidateBundle:Candidate:show }
 dashboard_candidate:
-    path:     /dashboard
+    locales:
+        en: "/dashboard"
+        fr: "/tableau-de-bord"
     defaults: { _controller: CandidateBundle:Candidate:dashboard }
 search_candidate:
-    path:     /search
+    locales:
+        en: "/search"
+        fr: "/chercher"
     defaults: { _controller: CandidateBundle:Candidate:search }
