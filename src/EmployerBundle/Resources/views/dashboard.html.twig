@@ -66,13 +66,12 @@
 
         </div>
 
-        <br>
         <a href="{{ path('featured_offer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.offer.title' | trans }}</a>
         <a href="{{ path('featured_employer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.employer.title' | trans }}</a>
 
         <button class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
-
-
+        <br><br>
+        <div class="shadow-box">
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
 
@@ -115,7 +114,7 @@
                     </li>
                 {% endfor %}
             </ul>
-
+        </div>
             <a href="{{ path('dashboard_employer', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
                 {% if app.request.get('archived') %}
                     {{ 'dashboard.employer.hideArchived' | trans }}
