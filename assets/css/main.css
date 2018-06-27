@@ -1,7 +1,46 @@
+/*general*/
+
 @font-face {
     font-family: myFirstFont;
     src: url(font.otf);
 }
+
+
+a{
+    text-decoration: none !important;
+}
+
+.header-text{
+    color: #fff !important;
+
+}
+
+.content-block{
+    max-width:1200px;
+    margin:0 auto;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+body {
+    padding-top: 102px;
+    padding-bottom: 65px;
+    font-family: myFirstFont;
+    font-size: 18px !important;
+}
+
+
+
+/*homepage*/
+
+.featured-offer.text-center{
+    margin-bottom: 15px;
+    margin-top: 5px;
+    color: #f0b245;
+}
+
+
+
+/*Navbars*/
 
 @media (min-width: 1200px){
     .container {
@@ -43,10 +82,6 @@
 
 }
 
-a{
-    text-decoration: none !important;
-}
-
 .navbar-toggle{
     margin-top: 17px;
 }
@@ -60,28 +95,58 @@ a{
 }
 
 
-
-.featured-offer.text-center{
-    margin-bottom: 15px;
-    margin-top: 5px;
-    color: #f0b245;
+.navbar-default .navbar-nav>li>a{
+    color: #fffbff !important;
 }
 
-
-#login{
-
-
-}
-
-.navbar-collapse{
-
-    background-color: #272f3b;
-
-}
-
-.navbar-inverse{
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
     background-color: #272f3b;
 }
+
+
+/*Login page*/
+
+.row.login{
+    margin-top: 100px;
+}
+
+
+
+.login-register{
+    font-size: 16px;
+
+
+}
+
+h3.title{
+
+    color: #f0ab1e;
+    margin-bottom: 20px;
+}
+
+
+.login-login{
+    font-size: 14px;
+
+
+}
+
+.login-login-title{
+
+    font-size: 16px;
+    color: lightgrey;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.jobnow-button.login{
+    width: 100%;
+    margin-top: 15px;
+}
+
+/*Button*/
 
 .logo-jobnow{
 
@@ -93,40 +158,10 @@ a{
     z-index: -1;
 }
 
-
-.header-text{
-    color: #fff !important;
-
-}
-
-.navbar-default .navbar-nav>li>a{
-    color: #fffbff !important;
-}
-
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
-    background-color: #272f3b;
-}
-
-.content-block{
-    max-width:1200px;
-    margin:0 auto;
-    font-family: Verdana, Geneva, sans-serif;
-}
-
-body {
-    padding-top: 102px;
-    padding-bottom: 65px;
-    font-family: myFirstFont;
-    font-size: 18px !important;
-}
-
-h1{
-    color: #f0b245;
-}
-
 .jobnow-button{
     color: #fbfef5;
-    border-radius: 5px;
+    border: solid 1px #e03c14;
+    border-radius: 3px;
     padding: 10px 19px;
     display: inline-block;
     font-size: 16px;
@@ -145,6 +180,9 @@ h1{
     box-shadow: inset 1000px 0 0 0 #ff6940;
     color: white;
 }
+
+
+
 
 .credit-total{
     background-color: #ff9600;
