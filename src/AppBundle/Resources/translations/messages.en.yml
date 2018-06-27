@@ -197,6 +197,10 @@ offer:
   option: More options (not mandatory)
   about: About the offer
   jobDescription: Job description
+  sorry: Sorry, this offer has been closed
+  hereSomeSimilar: Here are some similar offers you might be interested in:
+  similarOffer: Similar offers
+  watchSimilar: Watch all similar offers
 
   search:
       title: Search offers

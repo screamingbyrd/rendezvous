@@ -144,3 +144,8 @@ empty_slot:
     defaults: { _controller: EmployerBundle:Employer:EmptySlot }
     requirements:
       id: \d+
+offer_archived:
+    locales:
+        en: "/offer-archived/{id}"
+        fr: "/offre-archivé/{id}"
+    defaults: { _controller: EmployerBundle:Offer:offerNotFound }

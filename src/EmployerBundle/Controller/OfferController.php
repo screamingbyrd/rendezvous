@@ -166,38 +166,11 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        $tags = $offer->getTag();
-        $similarOfferArray = array();
-        $tagsArray = array();
-        if(isset($tags)){
-            $finder = $this->container->get('fos_elastica.finder.app.offer');
-            $boolQuery = new \Elastica\Query\BoolQuery();
-
-            $newBool = new \Elastica\Query\BoolQuery();
-
-
-            foreach($tags as $tag){
-                $tagsArray[] = $tag->getName();
-                $tagQuery = new \Elastica\Query\Match();
-                $tagQuery->setFieldQuery('tag.name', $tag->getName());
-                $newBool->addShould($tagQuery);
-            }
-
-            $boolQuery->addMust($newBool);
-
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('archived', false);
-            $boolQuery->addMust($fieldQuery);
-
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('id', $offer->getId());
-            $boolQuery->addMustNot($fieldQuery);
-
-            $query = new \Elastica\Query($boolQuery);
-
-            $query->setSort(array('updateDate' => 'desc'));
-            $similarOfferArray = $finder->find($query);
+        if($offer->getArchived() == 1){
+            return $this->redirectToRoute('offer_archived', array('id' => $id));
         }
+
+        $similarOfferArray = $this->getSimilarOffers($offer);
 
         $offer->setCountView($offer->getCountView() +1);
 
@@ -207,8 +180,8 @@ class OfferController extends Controller
 
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
-            'similarOfferArray' => $similarOfferArray,
-            'tags' => $tagsArray
+            'similarOfferArray' => $similarOfferArray['offers'],
+            'tags' => $similarOfferArray['tags']
         ));
     }
 
@@ -546,6 +519,22 @@ class OfferController extends Controller
         return $this->redirectToRoute('dashboard_candidate');
     }
 
+    public function offerNotFoundAction($id)
+    {
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+        $similarOfferArray = $this->getSimilarOffers($offer);
+
+        return $this->render('EmployerBundle:Offer:offerNotFound.html.twig', array(
+            'similarOfferArray' => $similarOfferArray['offers'],
+            'tags' => $similarOfferArray['tags'],
+        ));
+    }
+
     private function generateOfferUrl($offer){
         $url = '';
         $tags = $offer->getTag();
@@ -569,6 +558,43 @@ class OfferController extends Controller
             $url .= '/' . str_replace([' ', '/'], '-', $offer->getTitle());
 
         return strtolower(strtr( $url, $unwanted_array ));
+    }
+
+    private function getSimilarOffers($offer){
+        $tags = $offer->getTag();
+        $similarOfferArray = array();
+        $tagsArray = array();
+        if(isset($tags)){
+            $finder = $this->container->get('fos_elastica.finder.app.offer');
+            $boolQuery = new \Elastica\Query\BoolQuery();
+
+            $newBool = new \Elastica\Query\BoolQuery();
+
+
+            foreach($tags as $tag){
+                $tagsArray[] = $tag->getName();
+                $tagQuery = new \Elastica\Query\Match();
+                $tagQuery->setFieldQuery('tag.name', $tag->getName());
+                $newBool->addShould($tagQuery);
+            }
+
+            $boolQuery->addMust($newBool);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('archived', false);
+            $boolQuery->addMust($fieldQuery);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('id', $offer->getId());
+            $boolQuery->addMustNot($fieldQuery);
+
+            $query = new \Elastica\Query($boolQuery);
+
+            $query->setSort(array('updateDate' => 'desc'));
+            $similarOfferArray = $finder->find($query);
+        }
+
+        return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
     }
 
 }

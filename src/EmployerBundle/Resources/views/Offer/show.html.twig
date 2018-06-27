@@ -109,7 +109,7 @@
 
             {% if similarOfferArray[0] is defined %}
                 <div class="shadow-box fade-in-right animated">
-                    <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
+                    <div class="article-title">{{ 'offer.similarOffer'|trans }}</div>
                     <ul class="last-job-list">
                         <li>
                             <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id, 'url':similarOfferArray[0].offerUrl}) }}">
@@ -131,7 +131,7 @@
                         {% endif %}
                     </ul>
                     <hr class="hr-last-offer">
-                    <a href="{{ path('search_page_offer', {'tags':tags}) }}" class="jobnow-button">Toute nos offres</a>
+                    <a href="{{ path('search_page_offer', {'tags':tags}) }}" class="jobnow-button">{{ 'offer.watchSimilar'|trans }}</a>
                 </div>
             {% endif %}
         </div>
