@@ -156,6 +156,9 @@ h1{
     padding-bottom: 5px;
     margin-top: -5px;
 }
+.credit-total a{
+    color: white;
+}
 
 * {
     box-sizing: border-box;
