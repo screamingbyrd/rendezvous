@@ -112,7 +112,7 @@
                     <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
                     <ul class="last-job-list">
                         <li>
-                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id}) }}">
+                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id, 'url':similarOfferArray[0].offerUrl}) }}">
                                 <div class="slide-button">
                                     <div><b>{{ similarOfferArray[0].title }}</b></div>
                                     <div class="job-meta"><span>{{ similarOfferArray[0].contractType.name |trans }}</span> - <span>{{ similarOfferArray[0].location }}</span></div>
@@ -121,7 +121,7 @@
                         </li>
                         {% if similarOfferArray[1] is defined %}
                             <li>
-                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id}) }}">
+                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id, 'url':similarOfferArray[1].offerUrl}) }}">
                                     <div class="slide-button">
                                         <div><b>{{ similarOfferArray[1].title }}</b></div>
                                         <div class="job-meta"><span>{{ similarOfferArray[1].contractType.name |trans }}</span> - <span>{{ similarOfferArray[1].location }}</span></div>

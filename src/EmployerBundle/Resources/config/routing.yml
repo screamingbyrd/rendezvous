@@ -61,11 +61,11 @@ activate_offer:
       id: \d+
 show_offer:
     locales:
-        en: "/show-offer/{id}"
-        fr: "/montrer-offre/{id}"
+        en: "/offer/{url}/{id}"
+        fr: "/offre/{url}/{id}"
     defaults: { _controller: EmployerBundle:Offer:show }
     requirements:
-      id: \d+
+        url:    .*
 apply_offer:
     locales:
         en: "/apply-offer/{id}"

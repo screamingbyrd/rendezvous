@@ -92,17 +92,18 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="{% if featuredOffer is defined and featuredOffer|length > 0 %}col-md-8{% endif %}">
                 <ul id="myUL">
 
                 </ul>
             </div>
+            {% if featuredOffer is defined and featuredOffer|length > 0 %}
             <div class="col-md-3 featured-offer-search">
                 <h1>Featured Offer</h1>
                 <ul >
                     {% for offer in featuredOffer %}
                         <li class="zoom">
-                            <a href="{{ path('show_offer', {'id': offer.offer.id}) }}">
+                            <a href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">
                                 <div class="thumbnail  featured-offer-item">
                                     <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 110px;">
                                         <div class="layer">
@@ -123,6 +124,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
 
         <div id="paginator-offer">

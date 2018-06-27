@@ -23,6 +23,7 @@ class FeaturedEmployer
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer")
+     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $employer;
 

@@ -23,6 +23,7 @@ class FeaturedOffer
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer")
+     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $offer;
 

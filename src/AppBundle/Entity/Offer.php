@@ -157,10 +157,17 @@ class Offer
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Slot")
-     * @ORM\JoinColumn(name="slot_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="slot_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      *
      */
     private $slot;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="offerUrl", type="string")
+     */
+    private $offerUrl;
 
 
     public function __toString()
@@ -653,5 +660,22 @@ class Offer
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getOfferUrl()
+    {
+        return $this->offerUrl;
+    }
+
+    /**
+     * @param mixed $slot
+     * @return string
+     */
+    public function setOfferUrl($offerUrl)
+    {
+        $this->offerUrl = $offerUrl;
+        return $this;
+    }
 
 }

@@ -14,7 +14,7 @@
     {% if offer.isActive() or offer.slot is not null %}
 
         <li class="search-result animated fadeIn">
-            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
+            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
                 {% if offer.employer.coverImage.imageName is not null %}
                     {% set image = offer.employer.coverImage %}
                 {% else %}
