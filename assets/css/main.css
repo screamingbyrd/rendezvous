@@ -15,10 +15,12 @@ a{
 
 }
 
+/*Used for the sign in form overide from FOSUSER*/
+
 .content-block{
     max-width:1200px;
     margin:0 auto;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: myFirstFont;
 }
 
 
@@ -129,15 +131,15 @@ h3.title{
 
 
 .login-login{
-    font-size: 14px;
+    font-size: 18px;
 
 
 }
 
 .login-login-title{
 
-    font-size: 16px;
-    color: lightgrey;
+    font-size: 18px;
+    color: #b5b5b5;
     margin-bottom: 25px;
     margin-top: 20px;
     text-align: center;
@@ -150,6 +152,20 @@ h3.title{
     margin-top: 15px;
 
 }
+
+/*Register candidate*/
+
+container-candidate-register{
+
+    max-width:1200px;
+    margin:0 auto;
+    font-family: myFirstFont;
+}
+
+
+
+
+
 
 /*Button*/
 

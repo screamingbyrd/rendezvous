@@ -328,12 +328,3 @@ faq:
 redirect:
   candidate: Veuillez vous inscrire en tant que candidat
   employer: Veuillez vous inscrire en tant qu'employer
-
-
-login:
-  title: Bienvenue ! Connectez-vous
-  subtitle: Connectez-vous pour accéder à toutes les fonctionnalités
-  noaccount: Pas encore de compte ?
-  candidate: Candidat
-  employer: Employeur
-  sign: Connectez-vous avec votre compte

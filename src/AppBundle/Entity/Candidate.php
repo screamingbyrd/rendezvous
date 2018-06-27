@@ -43,7 +43,7 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255, nullable=false)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
      */
     private $experience;
 
@@ -57,7 +57,7 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="diploma", type="string", length=255, nullable=false)
+     * @ORM\Column(name="diploma", type="string", length=255, nullable=true)
      */
     private $diploma;
 
@@ -71,7 +71,7 @@ class Candidate
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 

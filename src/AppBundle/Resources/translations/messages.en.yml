@@ -330,12 +330,5 @@ redirect:
   candidate: Please register as a candidate
   employer: Please register as an employer
 
-login:
-  title: Welcome! Sign in
-  subtitle: Sign in to enjoy all services
-  noaccount: Don't have an account yet?
-  candidate: Candidate
-  employer: Employer
-  sign: Please sign in
 
 

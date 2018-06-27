@@ -120,20 +120,27 @@ class CandidateType extends AbstractType
             ))
 
 
-            ->add('diploma', ChoiceType::class, array('choices' => array(
+            ->add('diploma', ChoiceType::class, array(
+                'choices' => array(
                 'form.registration.dip1' => 'form.registration.dip1',
                 'form.registration.dip2' => 'form.registration.dip2',
                 'form.registration.dip3' => 'form.registration.dip3',
                 'form.registration.dip4' => 'form.registration.dip4',
                 'form.registration.dip5' => 'form.registration.dip5',
-            ),
+                 ),
                 'placeholder' => 'form.registration.dip0',
+                'required' => false,
+
             ))
 
 
             ->add('socialMedia',      TextType::class, array('required' => false))
-            ->add('phone',      TextType::class, array('required' => true))
-            ->add('save',      SubmitType::class)
+            ->add('phone',      TextType::class, array('required' => false))
+            ->add('save',      SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'jobnow-button login',
+                )
+            ))
             ->getForm()
         ;
     }/**

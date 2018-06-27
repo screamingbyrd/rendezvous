@@ -5,119 +5,103 @@
 {% endblock %}
 
 {% block content %}
-    <h3>{{ 'form.registration.title.candidate' | trans }}</h3>
-    <div>{{ 'form.registration.subTitle.candidate'|trans }}</div>
 
-    <div class="well">
-            <h3 class="text-center post-offer">Post your offer</h3>
+    <div class="row login">
+        <div class="col-md-6  col-md-offset-3">
+            <h3 class="title">{{ 'form.registration.title.candidate' | trans }}</h3>
+            <div>{{ 'form.registration.subTitle.candidate'|trans }}</div>
+
+            <hr>
+
+            <h3 class="login-login-title">Sign up</h3>
 
             {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
             {# Les erreurs générales du formulaire. #}
             {{ form_errors(form) }}
 
-            <div class="row">
-                <div class="col-md-4">
-                    {{ form_label (form.title, null, { 'label_attr':
-                        {'class': 'label-form'}
-                    })  }}
-
-                    {{ form_widget(form.title) }}
-                    {{ form_errors(form.title) }}
+            <div class="row form-group">
+                <div class="col-md-6 form-group">
+                    {{ form_label (form.firstName) }}
+                    {{ form_widget(form.firstName) }}
+                    {{ form_errors(form.firstName) }}
                 </div>
-                <div class="col-md-4">
-                    {{ form_label (form.tag, null, { 'label_attr': {'class': 'label-form'}
-
-                    }) }}
-
-                    {{ form_widget(form.tag) }}
-                    {{ form_errors(form.tag) }}
+                <div class="col-md-6 form-group">
+                    {{ form_label (form.lastName) }}
+                    {{ form_widget(form.lastName) }}
+                    {{ form_errors(form.lastName) }}
                 </div>
-                <div class="col-md-4">
-                    {{ form_label (form.location, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.location) }}
-                    {{ form_errors(form.location) }}
+
+                <div class="col-md-12 form-group">
+                {{ form_label (form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
                 </div>
-            </div>
-            <br>
-            <div class="row">
+
                 <div class="col-md-12">
-                    {{ form_label (form.description, null, { 'label_attr': {
-                        'class': 'label-form'
-                    } }) }}
-                    {{ form_widget(form.description) }}
-                    {{ form_errors(form.description) }}
+                    {{ form_widget(form.password) }}
+                    {{ form_errors(form.password) }}
                 </div>
-            </div>
-            <br>
 
-            <h4>{{ 'offer.option'|trans }}</h4>
-            <div class="row">
-                <div class="col-md-3">
-                    {{ form_label (form.contractType, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.contractType) }}
-                    {{ form_errors(form.contractType) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.experience, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.experience) }}
-                    {{ form_errors(form.experience) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.diploma, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.diploma) }}
-                    {{ form_errors(form.diploma) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.availableDate, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.availableDate) }}
-                    {{ form_errors(form.availableDate) }}
-                </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-3">
-                    {{ form_label (form.wage, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.wage) }}
-                    {{ form_errors(form.wage) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.benefits, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.benefits) }}
-                    {{ form_errors(form.benefits) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.license, null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.license) }}
-                    {{ form_errors(form.license) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}
-                    {{ form_widget(form.image) }}
-                    {{ form_errors(form.image) }}
-                </div>
+
+            <div style="display: none">
+                {{ form_label (form.description) }}
+                {{ form_widget(form.description) }}
+                {{ form_errors(form.description) }}
+
+
+                {{ form_label (form.age) }}
+                {{ form_widget(form.age) }}
+                {{ form_errors(form.age) }}
+
+
+                {{ form_label (form.experience) }}
+                {{ form_widget(form.experience) }}
+                {{ form_errors(form.experience) }}
+
+                {{ form_label (form.license) }}
+                {{ form_widget(form.license) }}
+                {{ form_errors(form.license) }}
+
+                {{ form_label (form.searchedtag) }}
+                {{ form_widget(form.searchedtag) }}
+                {{ form_errors(form.searchedtag) }}
+
+                {{ form_label (form.tag) }}
+                {{ form_widget(form.tag) }}
+                {{ form_errors(form.tag) }}
+
+                {{ form_label (form.diploma) }}
+                {{ form_widget(form.diploma) }}
+                {{ form_errors(form.diploma) }}
+
+                {{ form_label (form.socialMedia) }}
+                {{ form_widget(form.socialMedia) }}
+                {{ form_errors(form.socialMedia) }}
+
+                {{ form_label (form.phone) }}
+                {{ form_widget(form.phone) }}
+                {{ form_errors(form.phone) }}
             </div>
+
+
+            <div class="col-md-6 col-md-offset-3">
+                {{ form_widget(form.save, { 'label': 'offer.submit' }) }}
+            </div>
+
+
+
+                {# Génération automatique des champs pas encore écrits.
+                   Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+                   et tous les champs cachés (type « hidden »). #}
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+
+
         </div>
-
-        <div class="optionnal-div-form">
-
-
-            {{ form_widget(form.submit, { 'label': 'offer.submit','class': 'btn' }) }}
-
-        </div>
-    </div>
-
-
-
-    {# Génération automatique des champs pas encore écrits.
-       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-       et tous les champs cachés (type « hidden »). #}
-    {{ form_rest(form) }}
-
-    {# Fermeture de la balise <form> du formulaire HTML #}
-    {{ form_end(form) }}
-
-
     </div>
 
 
@@ -126,6 +110,6 @@
 
 
 
-    </div>
+
 
 {% endblock %}
