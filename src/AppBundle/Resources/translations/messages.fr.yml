@@ -47,6 +47,8 @@ form:
   registration:
     title:
       candidate: S'incrire en tant que candidat
+      employer: S'inscrire en tant qu'employeur
+      create: Créer votre compte
     subTitle:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!

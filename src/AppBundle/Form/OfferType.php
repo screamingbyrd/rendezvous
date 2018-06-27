@@ -215,7 +215,7 @@ class OfferType extends AbstractType
 
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(
-                    'class' => 'jobnow-button offer-submit'
+                    'class' => 'jobnow-button offer-submit login'
                 )
 
             ))

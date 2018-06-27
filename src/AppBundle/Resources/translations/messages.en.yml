@@ -48,6 +48,8 @@ form:
   registration:
     title:
       candidate: Register as a candidate
+      employer: Register as an employer
+      create: Create your account
     subTitle:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!
