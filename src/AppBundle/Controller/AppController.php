@@ -34,7 +34,7 @@ class AppController extends Controller
         $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
 
         $sql = " 
-        SELECT t.name, count(o.offer_id) as 'countOffer' FROM `tag` t left join offer_tag o on o.tag_id = t.id GROUP BY NAME
+        SELECT t.name, count(ot.offer_id) as 'countOffer' FROM `tag` t left join offer_tag ot on ot.tag_id = t.id left join offer o on o.id = ot.offer_id  WHERE o.archived = 0 GROUP BY NAME
         ";
 
         $em = $this->getDoctrine()->getManager();

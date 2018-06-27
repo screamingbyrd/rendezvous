@@ -116,6 +116,10 @@ h3.box{
     width: 600px;
 }
 .logo-employer{
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
     width: 207px;
     -webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);

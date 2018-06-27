@@ -7,7 +7,7 @@
 <ul id="myUL" class="candidat-dashboard">
     {% for offer in offers %}
         <li class="search-result animated fadeIn">
-            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id}) }}">
+            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
                 <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
                     <div class="layer layer-offer-element animated">
                     </div>

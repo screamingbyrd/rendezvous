@@ -200,6 +200,10 @@ offer:
   option: Plus de précision (faculatatif)
   about: À propos de cette offre
   jobDescription: Description de l'offre
+  sorry: Désolé, cette offre à été archivé
+  hereSomeSimilar: Voici quelques offre similaire qui pourraient vous interessé:
+  similarOffer: Offres similaires
+  watchSimilar: Voir toutes les offres similaires
 
   search:
     title: Recherche d'offres

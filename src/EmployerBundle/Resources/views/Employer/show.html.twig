@@ -9,7 +9,12 @@
     <div class="jumbotron employer-jumbotron">
         <div>
             <div class="container-logo-employer">
-                <img class="logo-employer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                {% if employer.logo.imageName is not null %}
+                    {% set image =  'uploads' ~ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                {% else %}
+                    {% set image = 'images/logo-default.png' %}
+                {% endif %}
+                <img class="logo-employer" src="/jobnowlu/web/{{ image }}"/>
             </div>
             <div class="title-employer">{{ employer.name }}</div>
         </div>
@@ -39,7 +44,7 @@
                         <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
                         <ul class="last-job-list">
                             <li>
-                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id}) }}">
+                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id, 'url':offers[0].offerUrl}) }}">
                                     <div class="slide-button">
                                         <div><b>{{ offers[0].title }}</b></div>
                                         <div class="job-meta"><span>{{ offers[0].contractType.name |trans }}</span> - <span>{{ offers[0].location }}</span></div>
@@ -48,7 +53,7 @@
                             </li>
                             {% if offers[1] is defined %}
                                 <li>
-                                    <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id}) }}">
+                                    <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id, 'url':offers[1].offerUrl}) }}">
                                         <div class="slide-button">
                                             <div><b>{{ offers[1].title }}</b></div>
                                             <div class="job-meta"><span>{{ offers[1].contractType.name |trans }}</span> - <span>{{ offers[1].location }}</span></div>
@@ -87,10 +92,14 @@
     </div>
 
     <style>
-
+        {% if employer.coverImage.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% else %}
+            {% set image = 'images/default_cover_image6.jpg' %}
+        {% endif %}
         .employer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
+            background-image:url('/jobnowlu/web/{{ image }}');
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

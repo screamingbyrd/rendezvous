@@ -42,19 +42,33 @@
         <div class="col-sm-6 col-md-9" style="padding-right:24px;">
             <div class="row about-the-offer fade-in-right animated shadow-box">
                 <h1>{{ 'offer.about' | trans }}</h1>
-                <div class="col-sm-6 col-md-6">
-                    <h4>Wage</h4>
+                <div class="col-sm-4 col-md-4">
+                    <h3>Wage</h3>
                     {{ offer.wage |trans }}
-                    <h4>Experience</h4>
-                    {{ offer.experience |trans }}
+                    {% if offer.benefits|length > 0 %}
+                        <h3>Benefice</h3>
+                        {% for benefits in  offer.benefits %}
+                            <span>{{ benefits |trans }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+
                 </div>
-                <div class="col-sm-6 col-md-6">
-                    <h4>Diploma</h4>
+                <div class="col-sm-4 col-md-4">
+                    <h3>Experience</h3>
+                    {{ offer.experience |trans }}
+                    <h3>Diploma</h3>
                     {{ offer.diploma |trans }}
-                    <h4>Tags</h4>
-                    {% for tag in  offer.tag %}
-                        <a class="tag-offer" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}"><i class="fa fa-tag"></i>{{ tag.name }}</a>
-                    {% endfor %}
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <h3>Date de démarage</h3>
+                    {{ offer.availableDate |date('d/m/Y')}}
+                    {% if offer.license|length > 0 %}
+                        <h3>Permis</h3>
+                        {% for license in  offer.license %}
+                            <span>{{ license |trans }}</span>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
 
@@ -69,7 +83,12 @@
                 <div class="header-floating-employer ">
                     {{ offer.employer.name|upper }}
                 </div>
-                <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                {% if offer.employer.logo.imageName is not null %}
+                    {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                {% else %}
+                    {% set image = 'images/logo-default.png' %}
+                {% endif %}
+                <img class="floating-employer-logo" src="/jobnowlu/web/{{ image }}"/>
                 <div class="floating-employer-description">
                     {{ offer.employer.whyUs| raw }}
                     <hr class="hr-floating-employer">
@@ -78,12 +97,27 @@
                 <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">Voir la page de l'entreprise</a>
             </div>
 
-            {% if similarOfferArray[0] is defined %}
+            {% if offer.tag is defined and offer.tag|length >0 %}
                 <div class="shadow-box fade-in-left animated">
-                    <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
+                    <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
+                    <ul class="last-job-list">
+                        {% for tag in offer.tag %}
+                            <li>
+                                <a  href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">
+                                    {{ tag.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if similarOfferArray[0] is defined %}
+                <div class="shadow-box fade-in-right animated">
+                    <div class="article-title">{{ 'offer.similarOffer'|trans }}</div>
                     <ul class="last-job-list">
                         <li>
-                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id}) }}">
+                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id, 'url':similarOfferArray[0].offerUrl}) }}">
                                 <div class="slide-button">
                                     <div><b>{{ similarOfferArray[0].title }}</b></div>
                                     <div class="job-meta"><span>{{ similarOfferArray[0].contractType.name |trans }}</span> - <span>{{ similarOfferArray[0].location }}</span></div>
@@ -92,7 +126,7 @@
                         </li>
                         {% if similarOfferArray[1] is defined %}
                             <li>
-                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id}) }}">
+                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id, 'url':similarOfferArray[1].offerUrl}) }}">
                                     <div class="slide-button">
                                         <div><b>{{ similarOfferArray[1].title }}</b></div>
                                         <div class="job-meta"><span>{{ similarOfferArray[1].contractType.name |trans }}</span> - <span>{{ similarOfferArray[1].location }}</span></div>
@@ -102,7 +136,7 @@
                         {% endif %}
                     </ul>
                     <hr class="hr-last-offer">
-                    <a href="{{ path('search_page_offer', {'tags':tags}) }}" class="jobnow-button">Toute nos offres</a>
+                    <a href="{{ path('search_page_offer', {'tags':tags}) }}" class="jobnow-button">{{ 'offer.watchSimilar'|trans }}</a>
                 </div>
             {% endif %}
         </div>
@@ -111,9 +145,16 @@
 
     </div>
     <style>
+        {% if offer.image is not null and offer.image.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% elseif offer.employer.coverImage.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% else %}
+            {% set image = 'images/default_cover_image2.jpg' %}
+        {% endif %}
         .offer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
+            background-image:url('/jobnowlu/web/{{ image }}');
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

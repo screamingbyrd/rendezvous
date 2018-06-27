@@ -47,6 +47,7 @@ class OfferController extends Controller
             $offer->setStartDate($past);
             $offer->setEndDate($past);
             $offer->setUpdateDate($past);
+            $offer->setOfferUrl($this->generateOfferUrl($offer));
 
             $em->persist($offer);
             $em->flush();
@@ -98,6 +99,9 @@ class OfferController extends Controller
 
             $offer->setCountView($offer->getCountView());
             $offer->setCountContact($offer->getCountContact());
+
+
+            $offer->setOfferUrl($this->generateOfferUrl($offer));
 
             $em->merge($offer);
             $em->flush();
@@ -162,38 +166,11 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        $tags = $offer->getTag();
-        $similarOfferArray = array();
-        $tagsArray = array();
-        if(isset($tags)){
-            $finder = $this->container->get('fos_elastica.finder.app.offer');
-            $boolQuery = new \Elastica\Query\BoolQuery();
-
-            $newBool = new \Elastica\Query\BoolQuery();
-
-
-            foreach($tags as $tag){
-                $tagsArray[] = $tag->getName();
-                $tagQuery = new \Elastica\Query\Match();
-                $tagQuery->setFieldQuery('tag.name', $tag->getName());
-                $newBool->addShould($tagQuery);
-            }
-
-            $boolQuery->addMust($newBool);
-
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('archived', false);
-            $boolQuery->addMust($fieldQuery);
-
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('id', $offer->getId());
-            $boolQuery->addMustNot($fieldQuery);
-
-            $query = new \Elastica\Query($boolQuery);
-
-            $query->setSort(array('updateDate' => 'desc'));
-            $similarOfferArray = $finder->find($query);
+        if($offer->getArchived() == 1){
+            return $this->redirectToRoute('offer_archived', array('id' => $id));
         }
+
+        $similarOfferArray = $this->getSimilarOffers($offer);
 
         $offer->setCountView($offer->getCountView() +1);
 
@@ -203,8 +180,8 @@ class OfferController extends Controller
 
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
-            'similarOfferArray' => $similarOfferArray,
-            'tags' => $tagsArray
+            'similarOfferArray' => $similarOfferArray['offers'],
+            'tags' => $similarOfferArray['tags']
         ));
     }
 
@@ -540,6 +517,84 @@ class OfferController extends Controller
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_candidate');
+    }
+
+    public function offerNotFoundAction($id)
+    {
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+        $similarOfferArray = $this->getSimilarOffers($offer);
+
+        return $this->render('EmployerBundle:Offer:offerNotFound.html.twig', array(
+            'similarOfferArray' => $similarOfferArray['offers'],
+            'tags' => $similarOfferArray['tags'],
+        ));
+    }
+
+    private function generateOfferUrl($offer){
+        $url = '';
+        $tags = $offer->getTag();
+        $unwanted_array = array(    'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+            'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
+            'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
+            'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
+            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
+
+        $url .= 'job/' . str_replace([' ', '/'], '-', $offer->getLocation()) . '/';
+
+        if(isset($tags) && count($tags)>0){
+            foreach ($tags as $tag){
+                $translated = $this->get('translator')->trans($tag->getName());
+                $translated = str_replace([' ', '/'], '-', $translated);
+                $url .= strtolower($translated) . '-';
+            }
+            $url = rtrim($url,'-') . '/';
+        }
+            $url .= str_replace([' ', '/'], '-', $offer->getEmployer()->getName());
+            $url .= '/' . str_replace([' ', '/'], '-', $offer->getTitle());
+
+        return strtolower(strtr( $url, $unwanted_array ));
+    }
+
+    private function getSimilarOffers($offer){
+        $tags = $offer->getTag();
+        $similarOfferArray = array();
+        $tagsArray = array();
+        if(isset($tags)){
+            $finder = $this->container->get('fos_elastica.finder.app.offer');
+            $boolQuery = new \Elastica\Query\BoolQuery();
+
+            $newBool = new \Elastica\Query\BoolQuery();
+
+
+            foreach($tags as $tag){
+                $tagsArray[] = $tag->getName();
+                $tagQuery = new \Elastica\Query\Match();
+                $tagQuery->setFieldQuery('tag.name', $tag->getName());
+                $newBool->addShould($tagQuery);
+            }
+
+            $boolQuery->addMust($newBool);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('archived', false);
+            $boolQuery->addMust($fieldQuery);
+
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('id', $offer->getId());
+            $boolQuery->addMustNot($fieldQuery);
+
+            $query = new \Elastica\Query($boolQuery);
+
+            $query->setSort(array('updateDate' => 'desc'));
+            $similarOfferArray = $finder->find($query);
+        }
+
+        return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
     }
 
 }

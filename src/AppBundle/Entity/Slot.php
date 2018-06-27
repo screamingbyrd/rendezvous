@@ -29,7 +29,7 @@ class Slot
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer")
-     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      *
      */
     private $offer;

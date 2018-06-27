@@ -34,7 +34,7 @@
                     <tbody>
                     {% for offer in appliedOffer %}
                         <tr>
-                            <td><a href="{{ path('show_offer', {'id': offer.offer.id}) }}">{{ offer.offer.title |trans }}</a></td>
+                            <td><a href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">{{ offer.offer.title |trans }}</a></td>
                             <td>{{ offer.date|date }}</td>
                         </tr>
                     {% endfor %}
@@ -95,7 +95,7 @@
                                 <tbody>
                                 {% for favorite in favorites %}
                                     <tr>
-                                        <td><a href="{{ path('show_offer', {'id': favorite.offer.id}) }}">{{ favorite.offer.title |trans }}</a></td>
+                                        <td><a href="{{ path('show_offer', {'id': favorite.offer.id, 'url':favorite.offer.offerUrl}) }}">{{ favorite.offer.title |trans }}</a></td>
                                         <td><a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
                                     </tr>
                                 {% endfor %}
