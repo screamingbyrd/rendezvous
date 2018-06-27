@@ -10,28 +10,27 @@
     <div class="container">
         <h1>{{ 'employer.credit.title' | trans }}</h1>
 
-        <div>{{ 'employer.credit.subTitle'|trans }}</div>
         <h3>{{ 'employer.credit.have'|trans({'%credit%': credit}) }}</h3>
 
         <h3>Our packages</h3>
-        <h4>Save money and get free bonus credits when you buy in bulk</h4>
         <div class="row">
             <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
+                <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
                         <h3>1 Credit</h3>
-                        <h4>{{ creditService.getOneCredit }}€</h4>
+                        <h4 class="no-bonus">{{ creditService.getOneCredit }}€</h4>
                         <p>No Bonus</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="btn btn-primary" role="button">Buy</a></p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
+                <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
                         <h3>10 Credits</h3>
+                        <h4 class="strike">{{ creditService.getTenCredit + 10}}€</h4>
                         <h4>{{ creditService.getTenCredit }}€</h4>
                         <p>+ 10€ Bonus</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="btn btn-primary" role="button">Buy</a> </p>
@@ -39,10 +38,11 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
+                <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
                         <h3>50 Credits</h3>
+                        <h4 class="strike">{{ creditService.getFiftyCredit + 100}}€</h4>
                         <h4>{{ creditService.getFiftyCredit }}€</h4>
                         <p>+ 100 € Bonus</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="btn btn-primary" role="button">Buy</a></p>
@@ -72,5 +72,25 @@
                 </div>
             </div>
     </div>
+    <style>
+        .no-bonus{
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+        .strike {
+            position: relative;
+            display: inline-block;
+        }
+        .strike:before {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 120%;
+            background: #333;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(165deg);
+        }
+    </style>
 
 {% endblock %}

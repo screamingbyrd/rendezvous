@@ -83,7 +83,12 @@
                 <div class="header-floating-employer ">
                     {{ offer.employer.name|upper }}
                 </div>
-                <img class="floating-employer-logo" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                {% if offer.employer.logo.imageName is not null %}
+                    {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                {% else %}
+                    {% set image = 'images/logo-default.png' %}
+                {% endif %}
+                <img class="floating-employer-logo" src="/jobnowlu/web/{{ image }}"/>
                 <div class="floating-employer-description">
                     {{ offer.employer.whyUs| raw }}
                     <hr class="hr-floating-employer">
@@ -140,9 +145,16 @@
 
     </div>
     <style>
+        {% if offer.image is not null and offer.image.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% elseif offer.employer.coverImage.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% else %}
+            {% set image = 'images/default_cover_image2.jpg' %}
+        {% endif %}
         .offer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');
+            background-image:url('/jobnowlu/web/{{ image }}');
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;
