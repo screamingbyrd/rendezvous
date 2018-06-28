@@ -114,7 +114,6 @@
                     </li>
                 {% endfor %}
             </ul>
-        </div>
             <a href="{{ path('dashboard_employer', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
                 {% if app.request.get('archived') %}
                     {{ 'dashboard.employer.hideArchived' | trans }}
@@ -122,6 +121,10 @@
                     {{ 'dashboard.employer.showArchived' | trans }}
                 {% endif %}
             </a>
+            <br>
+            <br>
+        </div>
+
 
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-dashboard">
                 <div class="modal-dialog modal-sm">

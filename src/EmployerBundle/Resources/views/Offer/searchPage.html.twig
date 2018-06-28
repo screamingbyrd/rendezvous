@@ -233,6 +233,25 @@
                 }
             }
 
+            let featuredOfferTop = $('.featured-offer-search').offset().top;
+            let featuredOfferLeft = $('.featured-offer-search').offset().left;
+            let featuredOfferWidth = $('.featured-offer-search').outerWidth();
+            $(window).scroll(function() {
+                let currentScroll = $(window).scrollTop();
+                if (currentScroll +160 >= featuredOfferTop && detectmob() == false) {
+                    $('.featured-offer-search').css({
+                        position: 'fixed',
+                        top: '55px',
+                        left: featuredOfferLeft,
+                        width: featuredOfferWidth,
+                    });
+                } else {
+                    $('.featured-offer-search').css({
+                        position: 'static'
+                    });
+                }
+            });
+
         </script>
 
     </div>

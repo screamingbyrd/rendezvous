@@ -98,7 +98,14 @@ body {
     height: 88px;
     font-size: 18px;
 }
+.navbar-collapse{
+    background-color: #272f3b;
+    border-color: #080808;
+}
 
+.navbar-fixed-bottom{
+    background-color: #272f3b;
+}
 
 .navbar-default .navbar-nav>li>a{
     color: #fffbff !important;
@@ -315,6 +322,9 @@ container-candidate-register{
     .homepage-div .alert{
         width: 91% !important;
     }
+    .container{
+        margin-bottom: 30px;
+    }
 }
 
 .homepage-jumbotron #keyword-input{
@@ -495,4 +505,10 @@ container-candidate-register{
     position: absolute;
     z-index: 10;
     width: 70%;
+}
+.language-selector .fa-globe{
+    margin-right: 6px;
+}
+.language-selector .caret{
+    margin-left: 7px;
 }

@@ -10,7 +10,9 @@
     <div class="container">
         <h1>{{ 'employer.credit.title' | trans }}</h1>
 
-        <h3>{{ 'employer.credit.have'|trans({'%credit%': credit}) }}</h3>
+        {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+            <h3>{{ 'employer.credit.have'|trans({'%credit%': credit}) }}</h3>
+        {% endif %}
 
         <h3>Our packages</h3>
         <div class="row">
@@ -51,7 +53,8 @@
             </div>
         </div>
 
-        <h3>History</h3>
+        {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+            <h3>History</h3>
             <div class="row">
                 <div class="col-md-8">
                     <table style="width:100%">
@@ -71,6 +74,9 @@
                     </table>
                 </div>
             </div>
+        {% endif %}
+
+
     </div>
     <style>
         .no-bonus{
