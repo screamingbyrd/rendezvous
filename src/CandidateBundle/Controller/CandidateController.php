@@ -17,6 +17,11 @@ class CandidateController extends Controller
 {
     public function createAction(Request $request)
     {
+        $idOffer = $request->get('offerId');
+        if(isset($idOffer)){
+            $_SESSION['offerId'] = $idOffer;
+        }
+
         $session = $request->getSession();
 
         $candidate = new Candidate();
@@ -60,7 +65,21 @@ class CandidateController extends Controller
                 $translated = $this->get('translator')->trans('form.registration.successCandidate');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('jobnow_home');
+                if(isset($_SESSION['offerId'])){
+                    $id = $_SESSION['offerId'];
+                    unset($_SESSION['offerId']);
+                    $offerRepository = $this
+                        ->getDoctrine()
+                        ->getManager()
+                        ->getRepository('AppBundle:Offer')
+                    ;
+                    $offer = $offerRepository->find($id);
+                    return $this->redirectToRoute('show_offer', array('id' => $id, 'url' => $offer->getOfferUrl()));
+                }else{
+                    return $this->redirectToRoute('edit_candidate');
+                }
+
+
 
                 }else{
                     $translated = $this->get('translator')->trans('form.registration.error');
@@ -146,7 +165,7 @@ class CandidateController extends Controller
 
                 $session->getFlashBag()->add('info', 'Candidat modifié !');
 
-                return $this->redirectToRoute('jobnow_home');
+                return $this->redirectToRoute('dashboard_candidate');
             }
         }
 

@@ -30,6 +30,7 @@ class EmployerController extends Controller
     public function createAction(Request $request)
     {
 
+        $postAnOffer = $request->get('postOffer');
         $session = $request->getSession();
 
         $employer = new Employer();
@@ -65,7 +66,13 @@ class EmployerController extends Controller
                 $translated = $this->get('translator')->trans('form.registration.successEmployer');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('jobnow_home');
+                if(isset($postAnOffer) and $postAnOffer){
+                    return $this->redirectToRoute('post_offer');
+                }else{
+                    return $this->redirectToRoute('edit_employer');
+                }
+
+
 
             }else{
 
@@ -149,7 +156,9 @@ class EmployerController extends Controller
 
                 $session->getFlashBag()->add('info', 'Employer modifié !');
 
+
                 return $this->redirectToRoute('show_employer',array('id' => $employer->getId()));
+
             }
         }
 

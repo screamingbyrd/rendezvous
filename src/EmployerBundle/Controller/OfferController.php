@@ -28,7 +28,15 @@ class OfferController extends Controller
 
         $translator = $this->get('translator');
 
+        $user = $this->getUser();
+
+        if(isset($_SESSION['request'])){
+            $request = $_SESSION['request'];
+            unset($_SESSION['request']);
+        }
+
         $offer = new Offer();
+
 
         $form = $this->get('form.factory')->create(OfferType::class, $offer, array(
             'translator' => $translator,
@@ -37,9 +45,14 @@ class OfferController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
+            if(!isset($user)){
+                $_SESSION['request'] = $request;
+                return $this->redirectToRoute('create_employer', array('postOffer' => true));
+            }
+
             $em = $this->getDoctrine()->getManager();
 
-            $offer->setEmployer($this->getUser()->getEmployer());
+            $offer->setEmployer($user->getEmployer());
 
             $offer->setCountView(0);
             $offer->setCountContact(0);
@@ -433,14 +446,12 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
+        $id = $request->get('id');
 
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.candidate');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_candidate');
+            return $this->redirectToRoute('create_candidate', array('offerId' => $id));
         }
 
-        $id = $request->get('id');
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . basename($_FILES["cv"]["name"]);
