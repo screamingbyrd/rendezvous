@@ -157,13 +157,13 @@ h3.box{
     min-width: 158px;
 }
 .slot-button{
-    min-width: 120px;
+    min-width: 126px;
 }
 .archived-info{
     padding: 7px;
     color: #333;
     font-size: 14px;
-    min-width: 288px !important;
+    min-width: 295px !important;
     text-align: center;
 }
 .archived-button{

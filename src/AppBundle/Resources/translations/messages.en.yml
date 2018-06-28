@@ -166,7 +166,7 @@ slot:
     success: The offer has been added to the slot
     error: You do not have any empty slot
   remove:
-    title: Remove from the slot
+    title: Remove from slot
     success: The offer has been removed from the slot
   empty:
     title: Empty the slot
