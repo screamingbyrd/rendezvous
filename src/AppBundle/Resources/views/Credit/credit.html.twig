@@ -55,22 +55,26 @@
 
         {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
             <div class="shadow-box">
-            <h3>History</h3>
-            <table class="table" style="width:100%">
-                <tr>
-                    <th>Date</th>
-                    <th>Credit(s)</th>
-                    <th>Price</th>
-                </tr>
-                {% for logCredit in logsCredit %}
+                {% if logsCredit|length > 0 %}
+                <h3>History</h3>
+                <table class="table" style="width:100%">
                     <tr>
-                        <td>{{ logCredit.date|date('d-m-Y H:i:s') }}</td>
-                        <td>{{ logCredit.credit }}</td>
-                        <td>{{ logCredit.price|localizedcurrency('EUR') }}</td>
-
+                        <th>Date</th>
+                        <th>Credit(s)</th>
+                        <th>Price</th>
                     </tr>
-                {% endfor %}
-            </table>
+                    {% for logCredit in logsCredit %}
+                        <tr>
+                            <td>{{ logCredit.date|date('d-m-Y H:i:s') }}</td>
+                            <td>{{ logCredit.credit }}</td>
+                            <td>{{ logCredit.price|localizedcurrency('EUR') }}</td>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                    Credit wil allow you to put your offers online and to improve their visibility
+                {% endif %}
             </div>
         {% endif %}
 

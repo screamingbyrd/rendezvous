@@ -52,7 +52,7 @@
                         <div><b>semaine {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+"~  modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
-                        {% if featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success">Reservé</button></div>{% endif %}
+                        {% if featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<span class="count-info reserved-employer">Reservé</span>{% endif %}
                         {% if featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
                             {% for employer in featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
                                 <div>
@@ -110,7 +110,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ 'offer.boost.sure'|trans({'%credit%': featuredEmployerCredit}) }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'featured.employer.modal'|trans({'%credit%': featuredEmployerCredit}) }}</h4>
                 </div>
                 <div class="modal-footer">
                     <a type="button" class="btn btn-default" id="modal-btn-yes-reserve-featured-employer">{{ 'yes'|trans }}</a>
