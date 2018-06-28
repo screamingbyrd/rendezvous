@@ -255,10 +255,12 @@ temporary: CDD
 featured:
   employer:
     title: Employeurs en avant
+    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
     reserve: Réserver
   offer:
     title: Offres en avant
     reserve: Réserver
+    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
 
 email:
   sent: Votre message à bien été envoyé !

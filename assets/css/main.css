@@ -533,3 +533,37 @@ container-candidate-register{
 .shadow-box h3{
     margin-top: 0!important;
 }
+.featured-offer-table td{
+    max-width: 200px;
+}
+.container-featured-offer-title{
+    margin-top: 15px;
+    text-align: center;
+}
+.title-featured-offer{
+    margin-top: 5px;
+}
+.reserved-employer{
+    float: right;padding: 7px 12px !important;
+    width: 85px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.choose-featured-offer{
+    width: 35%;
+}
+#featured-offer-id{
+    margin-left: 2%;
+    margin-right: 2%;
+    display: block;
+    width: 96%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
