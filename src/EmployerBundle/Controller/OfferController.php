@@ -433,14 +433,12 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
+        $id = $request->get('id');
 
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.candidate');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_candidate');
+            return $this->redirectToRoute('create_candidate', array('offerId' => $id));
         }
 
-        $id = $request->get('id');
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . basename($_FILES["cv"]["name"]);

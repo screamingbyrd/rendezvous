@@ -171,7 +171,7 @@
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 $("#search-offer-homepage").slideToggle("medium");
             {% else %}
-                window.location.replace('{{ path('apply_offer', {'id':0}) }}');
+                window.location.replace('{{ path('apply_offer', {'id':offer.id}) }}');
             {% endif %}
 
         });

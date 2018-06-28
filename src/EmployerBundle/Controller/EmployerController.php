@@ -65,7 +65,7 @@ class EmployerController extends Controller
                 $translated = $this->get('translator')->trans('form.registration.successEmployer');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('jobnow_home');
+                return $this->redirectToRoute('edit_employer');
 
             }else{
 
@@ -149,7 +149,7 @@ class EmployerController extends Controller
 
                 $session->getFlashBag()->add('info', 'Employer modifié !');
 
-                return $this->redirectToRoute('jobnow_home');
+                return $this->redirectToRoute('dashboard_employer');
             }
         }
 
