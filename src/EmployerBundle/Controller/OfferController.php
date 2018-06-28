@@ -305,7 +305,7 @@ class OfferController extends Controller
 
 
         $query->setSort(array('updateDate' => 'desc'));
-        $data = $finder->find($query);
+        $data = $finder->find($query,3000);
         $countResult = count($data);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
@@ -409,9 +409,17 @@ class OfferController extends Controller
 
         $employer->setCredit($creditEmployer - $creditBoost);
 
-        $offerRepository->boostOffer($employer->getId());
-
+        $offers = $offerRepository->findBy(array('employer' => $employer, 'archived' => false));
         $em = $this->getDoctrine()->getManager();
+        if(count($offers) > 0){
+            $now =  new \DateTime();
+            foreach ($offers as $offer){
+                $offer->setUpdateDate($now);
+                $em->merge($offer);
+            }
+        }
+
+
         $em->merge($employer);
         $em->flush();
 
