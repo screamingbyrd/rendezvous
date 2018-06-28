@@ -94,7 +94,9 @@ form:
 login:
   title: Welcome! Sign in
   subtitle: Sign in to enjoy all services
-  noaccount: Don't have an account yet?
+  noaccount: Don't have an account yet? Register as
   candidate: Candidate
   employer: Employer
   sign: Please sign in
+
+or: or

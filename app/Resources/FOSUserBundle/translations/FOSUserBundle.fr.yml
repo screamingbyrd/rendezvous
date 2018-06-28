@@ -1,3 +1,4 @@
+
 group:
     edit:
         submit: 'Mettre à jour le groupe'
@@ -89,7 +90,9 @@ form:
 login:
   title: Bienvenue ! Connectez-vous
   subtitle: Connectez-vous pour accéder à toutes les fonctionnalités
-  noaccount: Pas encore de compte ?
+  noaccount: Pas encore de compte ? S'inscrire :
   candidate: Candidat
   employer: Employeur
   sign: Connectez-vous avec votre compte
+
+or: ou

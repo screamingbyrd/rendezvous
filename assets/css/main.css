@@ -160,19 +160,15 @@ h3.title{
 
 }
 
-/*Register candidate*/
+/*Register candidate / employer*/
 
-container-candidate-register{
-
-    max-width:1200px;
-    margin:0 auto;
-    font-family: myFirstFont;
+.row.register-employer{
+    margin-top: 75px;
 }
 
-
-
-
-
+.row.register-candidate{
+    margin-top: 100px;
+}
 
 /*Button*/
 

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -25,7 +26,10 @@ class EmployerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array(
+                'required' => true,
+                'label' => 'form.registration.email'
+            ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'options' => array(
@@ -38,16 +42,28 @@ class EmployerType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName',TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.firstname'
+            ))
+            ->add('lastName', TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.lastname'
+            ))
 
-            ->add('name')
+            ->add('name', TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.companyName'
+            ))
+
             ->add('description', TextareaType::class, array(
                 'required' => false,
+                'label' => 'form.registration.description',
 
             ))
             ->add('whyUs', TextareaType::class, array(
                 'required' => false,
+
 
             ))
 
@@ -63,19 +79,30 @@ class EmployerType extends AbstractType
 
             ->add('location', PlaceAutocompleteType::class,array(
                 'attr' => array('class' => 'form-control'),
+                'required' => false,
+
 
 
                 ))
 
-            ->add('phone', TelType::class)
+            ->add('phone', TelType::class, array(
+                'required' => false,
+                'label' => 'form.registration.phone'
+            ))
 
             ->add('logo', ImageType::class)
 
             ->add('coverImage', ImageType::class)
 
-            ->add('Enregistrer',      SubmitType::class)
+            ->add('submit',      SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'jobnow-button login',
+                )
+            ))
         ;
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

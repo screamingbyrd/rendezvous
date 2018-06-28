@@ -84,14 +84,14 @@ class Offer
     /**
      * @var string
      *
-     * @ORM\Column(name="wage", type="string")
+     * @ORM\Column(name="wage", type="string", nullable=true)
      */
     private $wage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
      */
     private $experience;
 
@@ -105,7 +105,7 @@ class Offer
     /**
      * @var string
      *
-     * @ORM\Column(name="diploma", type="string", length=255)
+     * @ORM\Column(name="diploma", type="string", length=255, nullable=true)
      */
     private $diploma;
 

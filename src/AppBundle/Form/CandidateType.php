@@ -136,7 +136,7 @@ class CandidateType extends AbstractType
 
             ->add('socialMedia',      TextType::class, array('required' => false))
             ->add('phone',      TextType::class, array('required' => false))
-            ->add('save',      SubmitType::class, array(
+            ->add('submit',      SubmitType::class, array(
                 'attr' => array(
                     'class' => 'jobnow-button login',
                 )
