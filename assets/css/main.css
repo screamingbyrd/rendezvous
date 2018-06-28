@@ -170,6 +170,18 @@ h3.title{
     margin-top: 100px;
 }
 
+.edit-text{
+
+    min-height: 200px;
+}
+
+legend{
+    margin-top: 10px;
+    color: #b5b5b5;
+}
+
+
+
 /*Button*/
 
 .logo-jobnow{

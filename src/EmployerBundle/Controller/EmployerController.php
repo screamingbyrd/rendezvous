@@ -149,12 +149,13 @@ class EmployerController extends Controller
 
                 $session->getFlashBag()->add('info', 'Employer modifié !');
 
-                return $this->redirectToRoute('jobnow_home');
+                return $this->redirectToRoute('show_employer',array('id' => $employer->getId()));
             }
         }
 
         return $this->render('EmployerBundle:form:editEmployer.html.twig', array(
             'form' => $form->createView(),
+            'user' => $user
         ));
     }
 
