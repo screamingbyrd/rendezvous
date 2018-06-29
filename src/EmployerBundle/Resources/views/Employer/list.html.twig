@@ -40,10 +40,20 @@
                     <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
                         <div class="thumbnail featured-offer-item" >
                             <div class="header-thumb-employer">
-                                {% if employer.logo is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="employer-thumb-logo" />{% endif %}
+                                {% if employer.logo.imageName is not null %}
+                                    {% set image =  'uploads' ~ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                {% else %}
+                                    {% set image = 'images/logo-default.png' %}
+                                {% endif %}
+                                <img src="/jobnowlu/web/{{ image }}" class="employer-thumb-logo" />
                                 <h3 class="employer-title">{{ employer.name }}</h3>
                             </div>
-                            <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');min-height: 185px;">
+                            {% if employer.coverImage.imageName is not null %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            {% else %}
+                                {% set image = 'images/default_cover_image6.jpg' %}
+                            {% endif %}
+                            <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');min-height: 185px;">
                             </div>
                             <div class="thumb-employer-info">
                                 {{ employer.description}}
