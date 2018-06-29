@@ -459,7 +459,7 @@ class EmployerController extends Controller
             ->getRepository('AppBundle:Offer')
         ;
 
-        $offers = $offerRepository->findBy(array('employer' => $user->getEmployer()));
+        $offers = $offerRepository->findBy(array('employer' => $user->getEmployer(), 'archived' => false));
 
         foreach ($featuredOffer as $item) {
             $featuredArray[$item->getStartDate()->format('d/m/Y')]['ids'][] = $item->getOffer()->getId();
