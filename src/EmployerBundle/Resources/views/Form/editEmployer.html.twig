@@ -29,6 +29,28 @@
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
 
+            <script>
+                $(function() {
+                    $(".meter > span").each(function() {
+                        $(this)
+                            .data("origWidth", $(this).width())
+                            .width(0)
+                            .animate({
+                                width: $(this).data("origWidth")
+                            }, 1200);
+                    });
+                });
+            </script>
+
+            <div class="completion-container">
+                <div class="meter red">
+                    <span class="completion-bar" style="width: {{ completion }}%"></span>
+                </div>
+            </div>
+
+            <div class="completion-success animated fadeIn">
+                Profile complété
+            </div>
 
             {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
@@ -118,6 +140,66 @@
 
         </div>
     </div>
+    <script>
+        $('input, textarea').each(function(){
+            if( !$(this).val().length ) {
+                $(this).addClass('empty');
+                $(this).removeClass('not-empty');
+            } else {
+                $(this).addClass('not-empty');
+                $(this).removeClass('empty');
+            }
+        });
+        $('input, textarea').blur(function()
+        {
+            let empty = $('.empty').length;
+            let full = $('.not-empty').length;
+            console.log(empty);
+            console.log(full);
+            if( !$(this).val().length ) {
+                $(this).addClass('empty');
+                $(this).removeClass('not-empty');
+            } else {
+                $(this).addClass('not-empty');
+                $(this).removeClass('empty');
+            }
+             empty = $('.empty').length;
+             full = $('.not-empty').length;
+             let percent = (full-1) / ((full-1) + empty) * 100;
+            $('.completion-bar').animate({'width' :percent + '%'});
+            if(percent >= 100){
+                $('.completion-container').fadeOut("slow", function () {
+                    $(this).css({display:"none"});
+                    $('.completion-success').css({'display' :'block'});
+                });
+            }else{
+                $('.completion-container').css({'display' :'block'});
+                $('.completion-success').css({'display' :'none'});
+            }
+        });
+        $('#appbundle_employer_tag').on("change", function(e) {
+            if($(this).val().length != 0){
+                $('#appbundle_employer_tag').addClass('not-empty');
+                $('#appbundle_employer_tag').removeClass('empty');
+            }else{
+                $('#appbundle_employer_tag').addClass('empty');
+                $('#appbundle_employer_tag').removeClass('not-empty');
+            }
+            let empty = $('.empty').length;
+            let full = $('.not-empty').length;
+            let percent = full / ((full-1) + empty) * 100;
+            $('.completion-bar').animate({'width' :percent + '%'});
+            if(percent >= 100){
+                $('.completion-container').fadeOut("slow", function () {
+                    $(this).css({display:"none"});
+                    $('.completion-success').css({'display' :'block'});
+                });
+            }else{
+                $('.completion-container').css({'display' :'block'});
+                $('.completion-success').css({'display' :'none'});
+            }
+        });
+    </script>
 
     <style>
         {% if user.employer.coverImage.imageName is not null %}

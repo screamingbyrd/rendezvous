@@ -162,9 +162,38 @@ class EmployerController extends Controller
             }
         }
 
+        $completion = 5;
+
+        if(isset($employer->getTag()[0])){
+            $completion += 1;
+        }
+        $location = $employer->getLocation();
+        if(isset($location)){
+            $completion += 1;
+        }
+        $description = $employer->getDescription();
+        if(isset($description)){
+            $completion += 1;
+        }
+        $whyUs = $employer->getWhyUs();
+        if(isset($whyUs)){
+            $completion += 1;
+        }
+        $logo = $employer->getLogo()->getImageName();
+        if(isset($logo)){
+            $completion += 1;
+        }
+        $cover = $employer->getCoverImage()->getImageName();
+        if(isset($cover)){
+            $completion += 1;
+        }
+
+        $completion = $completion/11 * 100;
+
         return $this->render('EmployerBundle:form:editEmployer.html.twig', array(
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'completion' => $completion
         ));
     }
 

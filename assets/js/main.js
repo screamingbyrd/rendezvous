@@ -54,6 +54,11 @@ $(document).ready(function() {
                 theme: 'bootstrap',
                 placeholder: $(this).data('placeholder')
             });
+        if($('.select2-selection__choice').length > 0){
+            $('#appbundle_employer_tag').addClass('not-empty');
+        }else{
+            $('#appbundle_employer_tag').addClass('empty');
+        }
         });
 
     //main page
