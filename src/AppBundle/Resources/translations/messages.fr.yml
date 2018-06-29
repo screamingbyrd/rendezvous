@@ -56,6 +56,7 @@ form:
       employer: Your lookout for the perfect candidate starts now!
 
     email: Email
+    passwordValidation : Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule et un nombre.
     firstname: Prénom
     lastname: Nom
     companyName: Nom de la société

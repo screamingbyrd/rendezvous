@@ -56,6 +56,7 @@ form:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!
     email: Email
+    passwordValidation : The password must contain a least 8 character an uppercase, a lowercase and a number.
     firstname: First name
     lastname: Last name
     companyName: Company name

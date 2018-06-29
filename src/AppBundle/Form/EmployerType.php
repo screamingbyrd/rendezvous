@@ -16,6 +16,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 
 
 class EmployerType extends AbstractType
@@ -28,7 +31,10 @@ class EmployerType extends AbstractType
         $builder
             ->add('email', EmailType::class, array(
                 'required' => true,
-                'label' => 'form.registration.email'
+                'label' => 'form.registration.email',
+                'constraints' => array(
+                    new EMail(),
+                )
             ))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
@@ -37,6 +43,10 @@ class EmployerType extends AbstractType
                     'attr' => array(
                         'autocomplete' => 'new-password',
                     ),
+                ),
+                'constraints' => array(
+                    new Length(array('min' => 6)),
+                    new Regex('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*).*$/'),
                 ),
                 'first_options' => array('label' => 'form.password'),
                 'second_options' => array('label' => 'form.password_confirmation'),
