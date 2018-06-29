@@ -239,7 +239,8 @@ employer:
   show:
     title: Presentation of the company
     whyus: Why us?
-    lastoffers: Last offers
+    lastOffers: Last offers
+    allOffers: All our offers
     tags: Main categories
   credit:
     title: Credits

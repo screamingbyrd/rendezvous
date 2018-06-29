@@ -213,7 +213,7 @@ class EmployerController extends Controller
             ->getRepository('AppBundle:Offer');
 
         $offers = $offerRepository->findBy(
-            array('employer' => $employer),
+            array('employer' => $employer, 'archived' => false),
             array('startDate' => 'DESC'),
             2
         );

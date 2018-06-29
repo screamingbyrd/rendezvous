@@ -13,10 +13,15 @@ class FeaturedOfferRepository extends \Doctrine\ORM\EntityRepository
 
     public function getCurrentFeaturedOffer()
     {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT fo FROM AppBundle:featuredOffer fo WHERE fo.archived = 0 AND  fo.startDate <= CURRENT_TIMESTAMP() AND fo.endDate > CURRENT_TIMESTAMP()'
-            )->execute();
+
+        $query = $this->createQueryBuilder('fo')->select("fo")
+            ->leftJoin('AppBundle:offer', 'o', 'WITH', 'o = fo.offer');
+        $query->andWhere('o.archived = 0 AND fo.archived = 0 AND fo.startDate <= CURRENT_TIMESTAMP() AND fo.endDate > CURRENT_TIMESTAMP()');
+
+
+        $offers = $query->getQuery()->getResult();
+
+        return $offers;
     }
 
 }

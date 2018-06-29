@@ -89,5 +89,8 @@ $(document).ready(function() {
         $('.navbar-fixed-bottom').removeClass('navbar-fixed-bottom').addClass('navbar-static-bottom');
     }
 
+    setTimeout(function() {
+        $('.alert').fadeOut('slow');
+    }, 2000);
 
 });

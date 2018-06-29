@@ -390,7 +390,7 @@ legend{
 .thumb-employer-info{
     font-size: 16px;
     margin: 10px;
-    height: 100px;
+    height: 91px;
     overflow: hidden;
 }
 .employer-thumb-logo{
@@ -512,7 +512,7 @@ legend{
     margin-bottom: -1px;
 }
 
-.homepage-div .alert{
+.alert{
     position: absolute;
     z-index: 10;
     width: 70%;

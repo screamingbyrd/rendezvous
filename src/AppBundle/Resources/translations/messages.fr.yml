@@ -242,7 +242,8 @@ employer:
   show:
     title: Présentation de l'entreprise
     whyus: Pourquoi nous choisir ?
-    lastoffers: Dernières offres
+    lastOffers: Dernières offres
+    allOffers: Toute nos offres
     tags: Catégories principales
   credit:
     title: Crédits

@@ -31,17 +31,17 @@
             <hr>
             <div class="col-md-8">
 
-                <p class="description-employer shadow-box">{{ employer.description }}</p>
+                <p class="description-employer shadow-box">{{ employer.description |nl2br}}</p>
                 <div class="shadow-box">
                     <div class="article-title">{{ 'employer.show.whyus'|trans }}</div>
-                    <p class="whyus-employer">{{ employer.whyUs }}</p>
+                    <p class="whyus-employer">{{ employer.whyUs|nl2br }}</p>
                 </div>
 
             </div>
             <div class="col-md-4">
                 {% if offers[0] is defined %}
                     <div class="shadow-box">
-                        <div class="article-title">{{ 'employer.show.lastoffers'|trans }}</div>
+                        <div class="article-title">{{ 'employer.show.lastOffers'|trans }}</div>
                         <ul class="last-job-list">
                             <li>
                                 <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id, 'url':offers[0].offerUrl}) }}">
@@ -63,7 +63,7 @@
                             {% endif %}
                         </ul>
                         <hr class="hr-last-offer">
-                        <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">Toute nos offres</a>
+                        <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">{{ 'employer.show.allOffers'|trans }}</a>
                     </div>
                 {% endif %}
 
