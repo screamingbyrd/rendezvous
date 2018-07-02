@@ -324,9 +324,17 @@ class OfferController extends Controller
 
 
         if($keywords != ''){
+            $keywordBool = new \Elastica\Query\BoolQuery();
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('title', $keywords);
-            $boolQuery->addMust($fieldQuery);
+            $keywordBool->addShould($fieldQuery);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('description', $keywords);
+            $keywordBool->addShould($fieldQuery);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('location', $keywords);
+            $keywordBool->addShould($fieldQuery);
+            $boolQuery->addMust($keywordBool);
         }
 
         if($location != ''){

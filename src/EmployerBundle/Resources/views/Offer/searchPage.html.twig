@@ -203,6 +203,11 @@
                 searchOffer(1,total);
             });
 
+            $("#category-input").change(function() {
+                let total = $('#number-of-offer').val();
+                searchOffer(1,total);
+            });
+
             $('#number-of-offer').change(function() {
                 let page = $('#hidden-search-info').data('page');
                 let total = this.value;
