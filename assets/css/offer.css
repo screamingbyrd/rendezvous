@@ -361,7 +361,7 @@
     padding: 8px;
     left: 0;
     text-align: center;
-    z-index: 10;
+    z-index: 1040;
 }
 .inside-offer-apply{
     display: inline-block;
@@ -443,7 +443,7 @@
         border-bottom-right-radius: 8px;
     }
     .apply-div-form {
-        position: static;
+        bottom: 0 !important;
     }
     .apply-button, .submit-apply{
         width: 100% !important;
@@ -509,6 +509,12 @@
     }
     .zoom:hover{
         transform: none !important;
+    }
+    .sticky{
+        position: sticky;
+    }
+    .container-offer-page{
+        margin-bottom: 0;
     }
 }
 

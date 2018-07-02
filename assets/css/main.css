@@ -336,6 +336,9 @@ legend{
     .shadow-box{
         margin-bottom: 15px;
     }
+    .navbar-fixed-bottom{
+        position: relative !important;
+    }
 }
 
 .homepage-jumbotron #keyword-input{

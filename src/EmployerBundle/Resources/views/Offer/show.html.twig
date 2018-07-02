@@ -20,26 +20,8 @@
         </h3>
     </div>
 
-    <div class="container">
-
-        <div class="apply-div-form">
-            <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
-
-            <div class="container">
-                <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
-                    <div class="inside-offer-apply">
-                        <div class="inside-offer-apply-cv">
-                            {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
-                        </div>
-                        <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
-                        <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
-                    </div>
-                </form>
-            </div>
-
-        </div>
-
-        <div class="col-sm-6 col-md-9" style="padding-right:24px;">
+    <div class="container container-offer-page">
+        <div class="col-sm-6 col-md-9 ">
             <div class="row about-the-offer fade-in-right animated shadow-box">
                 <h2>{{ 'offer.about' | trans }}</h2>
                 <div class="col-sm-4 col-md-4">
@@ -148,7 +130,21 @@
             {% endif %}
         </div>
 
+    </div>
+    <div class="apply-div-form">
+        <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
 
+        <div class="container">
+            <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
+                <div class="inside-offer-apply">
+                    <div class="inside-offer-apply-cv">
+                        {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
+                    </div>
+                    <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+                    <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
+                </div>
+            </form>
+        </div>
 
     </div>
     <style>
@@ -182,6 +178,40 @@
             {% endif %}
 
         });
+        function detectmob() {
+            if( navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)
+            ){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        if(detectmob){
+            window.onscroll = function() {myFunction()};
+
+            // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+            function myFunction() {
+                if(!$('#search-offer-homepage').is(':visible')){
+                    if (($(".navbar-header").offset().top) <= ($(window).scrollTop() + $(window).height()) ) {
+                        if(!$(".apply-div-form").hasClass('sticky')){
+                            $(".apply-div-form").addClass("sticky");
+                        }
+
+                    }else{
+                        $(".apply-div-form").removeClass("sticky");
+                    }
+                }
+
+            }
+        }
+
     </script>
 
 {% endblock %}
