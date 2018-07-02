@@ -169,3 +169,9 @@ h3.box{
 .archived-button{
     min-width: 120px;
 }
+.no-recent-offers{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}

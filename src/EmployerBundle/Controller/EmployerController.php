@@ -242,11 +242,25 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Offer');
 
+
         $offers = $offerRepository->findBy(
             array('employer' => $employer, 'archived' => false),
-            array('startDate' => 'DESC'),
-            2
+            array('startDate' => 'DESC')
         );
+
+        $arrayOffer = array();
+
+        foreach ($offers as $offer){
+            if($offer->isActive()){
+                $arrayOffer[] = $offer;
+            }
+        }
+
+        $tagArray  = $employer->getTag();
+
+        if(count($tagArray) == 0){
+            $tagArray = $offerRepository->getOfferTags($employer->getId());
+        }
 
         $map = new Map();
 
@@ -274,9 +288,6 @@ class EmployerController extends Controller
 
         $status = $response->getStatus();
 
-
-
-
         foreach ($response->getResults() as $result) {
 
             $coord = $result->getGeometry()->getLocation();
@@ -284,15 +295,9 @@ class EmployerController extends Controller
 
         }
 
-
         if(isset($coord)) {
             $marker = new Marker($coord);
             $marker->setVariable('marker');
-            $infoWindow = new InfoWindow('<p>my content</p>');
-            $infoWindow->setAutoOpen(true);
-            $infoWindow->setAutoClose(true);
-            $infoWindow->setOption('maxWidth', 400);
-            $marker->setInfoWindow($infoWindow);
             $map->setCenter($coord);
             $map->getOverlayManager()->addMarker($marker);
         }
@@ -306,7 +311,8 @@ class EmployerController extends Controller
             'employer' => $employer,
             'map' => $map,
             'status' => $status,
-            'offers' => $offers
+            'offers' => $arrayOffer,
+            'tags' => $tagArray
         ));
 
     }

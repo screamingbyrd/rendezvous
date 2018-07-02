@@ -244,6 +244,8 @@ employer:
     title: Présentation de l'entreprise
     whyus: Pourquoi nous choisir ?
     lastOffers: Dernières offres
+    noOffer: Il n'y a aucune offre actives
+    noTag: Il n'y a aucune tag
     allOffers: Toute nos offres
     tags: Catégories principales
   credit:

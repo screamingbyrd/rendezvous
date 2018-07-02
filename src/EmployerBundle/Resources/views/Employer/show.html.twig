@@ -39,9 +39,9 @@
 
             </div>
             <div class="col-md-4">
-                {% if offers[0] is defined %}
-                    <div class="shadow-box">
-                        <div class="article-title">{{ 'employer.show.lastOffers'|trans }}</div>
+                <div class="shadow-box">
+                    <div class="article-title">{{ 'employer.show.lastOffers'|trans }}</div>
+                    {% if offers[0] is defined %}
                         <ul class="last-job-list">
                             <li>
                                 <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id, 'url':offers[0].offerUrl}) }}">
@@ -64,14 +64,18 @@
                         </ul>
                         <hr class="hr-last-offer">
                         <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">{{ 'employer.show.allOffers'|trans }}</a>
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <div class="no-recent-offers">
+                            {{ 'employer.show.noOffer'|trans }}
+                        </div>
+                    {% endif %}
+                </div>
 
-                {% if employer.tag is defined and employer.tag|length >0 %}
-                    <div class="shadow-box">
-                        <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
+                <div class="shadow-box">
+                    <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
+                    {% if tags is defined and tags|length >0 %}
                         <ul class="last-job-list">
-                            {% for tag in employer.tag %}
+                            {% for tag in tags %}
                                 <li>
                                     <a  href="{{ path('search_page_offer', {'tags':[tag.name], 'employer':employer.name}) }}">
                                         {{ tag.name }}
@@ -79,8 +83,12 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <div class="no-recent-offers">
+                            {{ 'employer.show.noTag'|trans }}
+                        </div>
+                    {% endif %}
+                </div>
 
             </div>
 

@@ -29,4 +29,16 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
 
         return $offers;
     }
+
+    public function getOfferTags($id)
+    {
+        $query = $this->createQueryBuilder('o')->select('t.name')->distinct();
+        $query->innerJoin('o.tag', 't')->andWhere('o.archived  = false and o.employer = :employer')
+            ->setParameter('employer', $id)
+            ->orderBy('t.name', 'asc');
+
+        $tags = $query->getQuery()->getResult();
+
+        return $tags;
+    }
 }
