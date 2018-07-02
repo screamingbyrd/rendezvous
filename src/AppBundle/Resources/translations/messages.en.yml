@@ -140,6 +140,7 @@ form:
       search: Search
       employerPH: Select a company
       categoryPH: Select tag(s)
+      empty: empty
 
 dashboard:
   title: Dashboard

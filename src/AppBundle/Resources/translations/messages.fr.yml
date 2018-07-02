@@ -141,6 +141,7 @@ form:
       search: Recherche
       employerPH:  Société
       categoryPH: Indiquez un ou des domaines d'activités
+      empty: vide
 
 
 dashboard:

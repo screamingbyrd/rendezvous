@@ -22,6 +22,7 @@
                 <div class="col-md-2">
                     <select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">
                         <option></option>
+                        <option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>
                         {% for employer in employers %}
                             <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
                         {% endfor %}

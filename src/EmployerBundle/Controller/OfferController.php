@@ -335,7 +335,7 @@ class OfferController extends Controller
             $boolQuery->addMust($fieldQuery);
         }
 
-        if($employer != ''){
+        if($employer != '' and $employer != (string)0){
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('employer.name', $employer);
             $boolQuery->addMust($fieldQuery);
