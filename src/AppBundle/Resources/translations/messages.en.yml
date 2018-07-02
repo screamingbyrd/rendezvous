@@ -342,4 +342,74 @@ redirect:
   employer: Please register as an employer
 
 
-
+tag:
+  accounting: Accounting/Finance
+  admin: Admin/Secretarial
+  advertising: Advertising
+  automotive: Automotive
+  banking: Banking
+  biotech: Biotech/Pharmaceutical
+  customerService: Customer Service
+  education: Education
+  engineering: Engineering
+  environmental: Environmental Science
+  events: Events
+  facilities: Facilities/Maintenance
+  gov: Gov/Military
+  hr: HR & Recruiting
+  hospitality: Hospitality/Restaurant
+  insurance: Insurance
+  legal: Legal
+  marketing: Marketing/PR
+  nonprofit: Nonprofit & Fund
+  oil: Oil/Energy/Power
+  real: Real Estate
+  retail: Retail
+  salon: Salon/Beauty/Fitness
+  telecommunications: Telecommunications
+  tv: TV/Film/Musicians
+  vet: Vet & Animal Care
+  work: Work from Home
+  analysis: Analysis / Project Management
+  aviation: Aviation
+  call: Call-Centre
+  consulting: Consulting / Audit / Fiscality
+  financial: Financial Services
+  freelance: Freelance
+  graduate: Graduate
+  investments: Investments funds
+  media: Media / New Media
+  miscellaneous: Miscellaneous
+  multi: Multi-lingual / Linguistic Services
+  property: Property / Auctioneering
+  purchasing: Purchasing
+  security: Security
+  senior: Senior Management / Executive
+  travel: Travel / Tourism
+  warehouse: Warehouse / Logistics / Shipping
+  internship: Internship
+  building: Building Construction/Skilled Trades
+  busniess: Business/Strategic Management
+  customerSupport: Customer Support/Client Care
+  creative: Creative/Design
+  editorial: Editorial/Writing
+  it: IT/Software Development
+  installation: Installation/Maintenance/Repair
+  medical: Medical/Health
+  production: Production/Operations
+  project: Project/Program Management
+  quality: Quality Assurance/Safety
+  rd: R&D/Science
+  sales: Sales/Business Development
+  security: Security/Protective Services
+  training: Training/Instruction
+  other: Other
+  architecture: Architecture and Engineering
+  arts: Arts, Design, and Media
+  businessFinance: Business and Financial Operations
+  community: Community and Social Service
+  farming: Farming, Fishing, and Forestry
+  life: Life, Physical, and Social Science
+  personal: Personal Care and Service
+  technology: Technology
+  transportation: Transportation and Moving

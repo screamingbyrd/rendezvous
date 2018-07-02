@@ -341,3 +341,77 @@ faq:
 redirect:
   candidate: Veuillez vous inscrire en tant que candidat
   employer: Veuillez vous inscrire en tant qu'employer
+
+tag:
+  accounting: Comptabilité et Finance
+  admin: Admin / Secrétariat
+  advertising: Publicité
+  automotive: Automobile
+  banking: Bancaire
+  biotech: Biotech / Pharmaceutique
+  customerService: Service Clients
+  education: Éducation
+  engineering: Ingénierie
+  environmental: Science environnementale
+  events: Événements
+  facilities: Entretien des installations
+  gov: Gov / Militaire
+  hr: RH et recrutement
+  hospitality: Hôtellerie / Restaurant
+  insurance: Assurance
+  legal: Légal
+  marketing: Marketing / PR
+  nonprofit: Non-lucratif et Fonds
+  oil: Pétrole / Energie
+  real: Immobilier
+  retail: Vente au détail
+  salon: Salon / Beauté / Fitness
+  telecommunications: Télécommunications
+  tv: TV / Film / Musiciens
+  vet: Vétérinaire et soin des animaux
+  work: Travail à domicile
+  analysis: Analyse / Gestion de projet
+  aviation: Aviation
+  call: Centre d'appel
+  consulting: Conseil / Audit / Fiscalité
+  financial: Services financiers
+  freelance: Free-lance
+  graduate: Diplômé
+  investments: Fonds d'investissement
+  media: Médias / nouveaux médias
+  miscellaneous: Divers
+  multi: Services multilingues / linguistiques
+  property: Propriété / Auctioneering
+  purchasing: Achat
+  security: Sécurité
+  senior: Management exécutif
+  travel: Voyage / Tourisme
+  warehouse: Entrepôt / Logistique / Livraison
+  internship: Stage
+  building: Construction de bâtiments / métiers spécialisés
+  busniess: Business / Gestion stratégique
+  customerSupport: Soutien à la clientèle / Service à la clientèle
+  creative: Design créatif
+  editorial: Éditorial / Rédaction
+  it: Informatique / Développement de logiciels
+  installation: Installation / Maintenance / Réparation
+  medical: Médical / Santé
+  production: Production / Opérations
+  project: Gestion de projet / software
+  quality: Assurance qualité / sécurité
+  rd: R&D/Science
+  sales: Ventes / Développement des affaires
+  security: Sécurité / Services de protection
+  training: Formation / Instruction
+  other: Autre
+  architecture: Architecture et Ingénierie
+  arts: Arts, design et médias
+  businessFinance: Opérations commerciales et financières
+  community: Service communautaire et social
+  farming: Agriculture, pêche et foresterie
+  life: Vie, physique et sciences sociales
+  personal: Soins personnels et service
+  technology: Technologie
+  transportation: Transport et déménagement
+
+
