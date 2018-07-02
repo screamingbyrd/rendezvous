@@ -662,3 +662,33 @@ h3.post-offer{
 .job-description{
     margin-bottom: 80px;
 }
+
+.featured-offer-search ul{
+    list-style: none;
+    padding-left: 0;
+}
+.featured-offer-search a{
+    text-decoration: none;
+}
+.featured-offer-search a .offer-thumb-image-div{
+    position: absolute;
+    bottom: -14px;
+}
+.offer-location{
+    max-width: 50% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-map{
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+.map-offer-container{
+    max-height: 80px;
+    display: inline-grid;
+    font-size: 14px;
+}
+.map-offer{
+    margin: 5px;
+}

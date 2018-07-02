@@ -16,6 +16,15 @@ use AppBundle\Form\OfferType;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
+use Ivory\GoogleMap\Overlay\InfoWindow;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Event\Event;
 
 
 class OfferController extends Controller
@@ -320,6 +329,81 @@ class OfferController extends Controller
         $query->setSort(array('updateDate' => 'desc'));
         $data = $finder->find($query,3000);
         $countResult = count($data);
+
+//        $locationArray =array();
+//        foreach ($data as $offer){
+//            $locationArray[$offer->getLocation()][] = $offer;
+//        }
+//
+//        $map = new Map();
+//
+//        //workarround to ssl certificat pb curl error 60
+//
+//        $config = [
+//            'verify' => false,
+//        ];
+//
+//        $adapter = GuzzleAdapter::createWithConfig($config);
+//
+//        // GeoCoder API
+//        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
+//        $markers = array();
+//        $i = 1;
+//
+//        foreach ($locationArray as $location => $offers){
+//
+//            //try to match string location to get Object with lat long info
+//            if($location){
+//                $request = new GeocoderAddressRequest($location);
+//            }else{
+//                $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
+//            }
+//
+//            $response = $geocoder->geocode($request);
+//
+//            $status = $response->getStatus();
+//
+//            foreach ($response->getResults() as $result) {
+//
+//                $coord = $result->getGeometry()->getLocation();
+//                continue;
+//
+//            }
+//
+//            if(isset($coord)) {
+//                $marker = new Marker($coord);
+//
+//                $marker->setVariable('marker' . $i);
+//                $content = '<p class="map-offer-container">';
+//                foreach ($offers as $offer){
+//                    $content .=  '<a class="map-offer" href="'.$this->generateUrl('show_offer', array('id' => $offer->getId(),'url' => $this->generateOfferUrl($offer))).'">'.$offer->getTitle().'</a>';
+//                }
+//                $content .= '</p>';
+//                $infoWindow = new InfoWindow($content);
+//                $infoWindow->setAutoOpen(true);
+//                $infoWindow->setAutoClose(true);
+//                $infoWindow->setOption('maxWidth', 400);
+//                $marker->setInfoWindow($infoWindow);
+//
+//                $markers[] = $marker;
+//            }
+//            $i++;
+//        }
+//        $map->getOverlayManager()->addMarkers($markers);
+//
+//        $event = new Event(
+//            $map->getVariable(),
+//            'zoom_changed',
+//            'function(){'.
+//            $marker->getVariable().'.setMap(null)'
+//            .'}'
+//        );
+//        $map->getEventManager()->addEvent($event);
+//        $map->setCenter($coord);
+//        $map->setStylesheetOption('width', 1000);
+//        $map->setStylesheetOption('min-height', 1100);
+//        $map->setMapOption('zoom', 2);
+
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 

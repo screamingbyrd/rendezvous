@@ -75,17 +75,6 @@
             position:absolute;
             z-index: -1;
         }
-        .featured-offer-search ul{
-            list-style: none;
-            padding-left: 0;
-        }
-        .featured-offer-search a{
-            text-decoration: none;
-        }
-        .featured-offer-search a .offer-thumb-image-div{
-            position: absolute;
-            bottom: -14px;
-        }
     </style>
 
 
@@ -124,7 +113,7 @@
 
                                     <div class="caption">
                                         <h3>{{ offer.offer.title|truncate(20, true) }} # {{ offer.offer.id }}</h3>
-                                        <p><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location|truncate(20, true) }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
+                                        <p><span class="other-element offer-location"><i class="fa fa-map-marker"></i>{{ offer.offer.location|truncate(20, true) }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
                                     </div>
                                 </div>
                             </a>

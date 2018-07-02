@@ -17,6 +17,7 @@ use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
+use Ivory\GoogleMap\Overlay\InfoWindow;
 
 
 
@@ -286,6 +287,12 @@ class EmployerController extends Controller
 
         if(isset($coord)) {
             $marker = new Marker($coord);
+            $marker->setVariable('marker');
+            $infoWindow = new InfoWindow('<p>my content</p>');
+            $infoWindow->setAutoOpen(true);
+            $infoWindow->setAutoClose(true);
+            $infoWindow->setOption('maxWidth', 400);
+            $marker->setInfoWindow($infoWindow);
             $map->setCenter($coord);
             $map->getOverlayManager()->addMarker($marker);
         }
