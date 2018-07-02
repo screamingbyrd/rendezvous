@@ -264,7 +264,6 @@ class EmployerController extends Controller
 
         $map = new Map();
 
-
         //workarround to ssl certificat pb curl error 60
 
         $config = [

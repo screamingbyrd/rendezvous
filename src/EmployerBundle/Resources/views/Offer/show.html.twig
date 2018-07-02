@@ -41,7 +41,7 @@
 
         <div class="col-sm-6 col-md-9" style="padding-right:24px;">
             <div class="row about-the-offer fade-in-right animated shadow-box">
-                <h1>{{ 'offer.about' | trans }}</h1>
+                <h2>{{ 'offer.about' | trans }}</h2>
                 <div class="col-sm-4 col-md-4">
                     <h3>Wage</h3>
                     {{ offer.wage |trans }}
@@ -72,9 +72,16 @@
                 </div>
             </div>
 
-            <div class="row job-description fade-in-left animated shadow-box">
-                <h1>{{ 'offer.jobDescription' | trans }}</h1>
+            <div class="row fade-in-left animated shadow-box">
+                <h2>{{ 'offer.jobDescription' | trans }}</h2>
                 {{ offer.description| raw }}
+            </div>
+
+            <div class="row fade-in-right animated shadow-box">
+                <!--{{ dump(status) }}-->
+
+                {{ ivory_google_map(map) }}
+                {{ ivory_google_api([map]) }}
             </div>
         </div>
 
