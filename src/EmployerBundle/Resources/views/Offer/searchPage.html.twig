@@ -9,7 +9,7 @@
     <div class="jumbotron searchpage-jumbotron">
         <h2>{{ 'offer.search.title' | trans }}</h2>
 
-        <form method="post" action="" id="search-offer-form" class="homepage-search-bar">
+        <form method="post" action="" id="search-offer-form" class="search-bar">
 
 
             <div class="row form-group">
@@ -150,7 +150,7 @@
                 }).done(function( data ) {
                     if(detectmob()){
                         let $el = $('.searchpage-jumbotron');  //record the elem so you don't crawl the DOM everytime
-                        let bottom = $el.position().top + $el.outerHeight(true) - 60;
+                        let bottom = $el.position().top + $el.outerHeight(true) - 40;
                         $('html, body').animate({
                             scrollTop: bottom
                         }, 500);

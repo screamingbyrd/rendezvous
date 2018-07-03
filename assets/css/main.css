@@ -84,7 +84,9 @@ body {
         align-items: center;
 
     }
-
+    .homepage-subtitle{
+        margin-bottom: 60px !important;
+    }
 }
 
 .navbar-toggle{
@@ -245,8 +247,12 @@ legend{
 * {
     box-sizing: border-box;
 }
-
 .homepage-search-bar{
+    display: inline-flex;
+    height: 65px;
+    justify-content: center;
+}
+.search-bar{
     text-align: center;
     border: 1px solid black;
     background: rgba(0, 0, 0, 0.5);
@@ -258,7 +264,6 @@ legend{
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 4px;
-
 }
 
 .jumbotron{
@@ -344,6 +349,7 @@ legend{
     }
     .navbar-fixed-bottom{
         position: relative !important;
+        margin-top: 20px;
     }
     .register-candidate, .register-employer, .login{
         margin-top: 0 !important;
@@ -352,7 +358,7 @@ legend{
     .jobnow-button.login {
         margin-top: 0 !important;
     }
-    .navbar-brand{
+    .navbar-brand-header{
         margin-bottom: 38px;
     }
     .logo-jobnow{
@@ -363,24 +369,57 @@ legend{
         top: 88px;
         width: 100%;
     }
+    .homepage-search-bar{
+        display: block;
+        height: 170px;
+    }
+    .div-keyword-input{
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-bottom: 10px !important;
+    }
+    .div-location-input{
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+    .homepage-jumbotron .searchOffer-home{
+        margin-left: 0 !important;
+        width: 100%;
+    }
+    .featured-offer.text-center{
+        margin-bottom: 0 !important;
+    }
+    .homepage-container .row{
+        margin-bottom: -30px;
+    }
 }
 
-.homepage-jumbotron #keyword-input{
+.homepage-jumbotron .div-keyword-input{
     color: #333;
     margin-right: 1%;
     border-radius: 4px;
     height:43px;
     width: 37%;
 }
-.homepage-jumbotron #location-input{
+.homepage-jumbotron .div-location-input{
     color: #333;
     margin-right: 1%;
     border-radius: 4px;
     height: 43px;
     width: 37%;
 }
-.homepage-subtitle{
-    margin-bottom: 60px !important;
+.homepage-jumbotron .form-control{
+    height: 43px !important;
+}
+.homepage-jumbotron .searchOffer-home{
+    min-width: 140px;
+    height: 44px;
+    line-height: inherit;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 11px 20px 12px 13px;
+    border: 1px solid #000000;
 }
 .background-offer{
     border-top-left-radius: 3px;

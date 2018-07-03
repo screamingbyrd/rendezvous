@@ -87,7 +87,7 @@
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
                     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-                        <li class="navbar-brand header-text"><div class="credit-total"><a href="{{ path('jobnow_credit') }}">Credits : {{ app.user.employer.credit  }}</a></div></li>
+                        <li class="navbar-brand-header header-text"><div class="credit-total"><a href="{{ path('jobnow_credit') }}">Credits : {{ app.user.employer.credit  }}</a></div></li>
                     {% endif %}
 
                     <li class="dropdown">

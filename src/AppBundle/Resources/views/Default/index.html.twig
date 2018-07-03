@@ -11,17 +11,17 @@
         <p class="homepage-subtitle">Your job search starts and ends with us</p>
         <p>
             <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
-                <div class="homepage-search-bar">
-                    <input name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
-                    <input name="location" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
-                    <input type="submit" class="jobnow-button searchOffer" value="{{ 'form.offer.search.search' | trans }}">
+                <div class="homepage-search-bar search-bar">
+                    <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
+                    <div class="div-location-input"><input class="form-control" name="location" type="text" id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}"></div>
+                    <input type="submit" class="jobnow-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
             </form>
         </p>
     </div>
-    <div class="container">
+    <div class="container homepage-container">
         {% if featuredOffer|length > 0 %}
-            <div class="row featured-offer fade-in-right animated">
+            <div class="row fade-in-right animated">
                 <h1 class="featured-offer text-center">Featured Offer</h1>
                 {% if featuredOffer|length == 1 %}
                     {% set blocOffer = 12 %}
