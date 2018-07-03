@@ -31,15 +31,15 @@
             <hr>
             <div class="col-md-8">
 
-                <p class="description-employer shadow-box">{{ employer.description |nl2br}}</p>
-                <div class="shadow-box">
+                <p class="description-employer shadow-box fade-in-left animated">{{ employer.description |nl2br}}</p>
+                <div class="shadow-box fade-in-right animated">
                     <div class="article-title">{{ 'employer.show.whyus'|trans }}</div>
                     <p class="whyus-employer">{{ employer.whyUs|nl2br }}</p>
                 </div>
 
             </div>
             <div class="col-md-4">
-                <div class="shadow-box">
+                <div class="shadow-box fade-in-right animated">
                     <div class="article-title">{{ 'employer.show.lastOffers'|trans }}</div>
                     {% if offers[0] is defined %}
                         <ul class="last-job-list">
@@ -71,7 +71,7 @@
                     {% endif %}
                 </div>
 
-                <div class="shadow-box">
+                <div class="shadow-box fade-in-left animated">
                     <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
                     {% if tags is defined and tags|length >0 %}
                         <ul class="last-job-list">
@@ -93,11 +93,16 @@
             </div>
 
         </div>
-        <!--{{ dump(status) }}-->
-
-        {{ ivory_google_map(map) }}
-        {{ ivory_google_api([map]) }}
     </div>
+    <div class="container">
+        <div class="shadow-box fade-in-left animated">
+            <!--{{ dump(status) }}-->
+
+            {{ ivory_google_map(map) }}
+            {{ ivory_google_api([map]) }}
+        </div>
+    </div>
+
 
     <style>
         {% if employer.coverImage.imageName is not null %}
