@@ -88,7 +88,7 @@ body {
 }
 
 .navbar-toggle{
-    margin-top: 17px;
+    margin-top: 26px;
 }
 
 
@@ -351,6 +351,17 @@ legend{
     }
     .jobnow-button.login {
         margin-top: 0 !important;
+    }
+    .navbar-brand{
+        margin-bottom: 38px;
+    }
+    .logo-jobnow{
+        position: inherit !important;
+    }
+    #navbar{
+        position: absolute;
+        top: 88px;
+        width: 100%;
     }
 }
 
