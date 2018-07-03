@@ -44,9 +44,12 @@ class AppController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $generateUrlService = $this->get('app.offer_generate_url');
+
         foreach ($featuredOffer as $offer){
             $now = new \DateTime();
             $next = new \DateTime();
+            $offer->getOffer()->setOfferUrl($generateUrlService->generateOfferUrl($offer->getOffer()));
             if($offer->getOffer()->getEndDate() < $now){
                 $offer->getOffer()->setStartDate($now);
                 $offer->getOffer()->setUpdateDate($now);

@@ -32,7 +32,7 @@
                     <select title="Category" id="category-input" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
                         <option></option>
                         {% for tag in tags %}
-                            <option value="{{ tag.name }}">{{ tag.name }}</option>
+                            <option value="{{ tag.name }}">{{ tag.name|trans }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -175,7 +175,7 @@
                 let arrayTags = {{ chosenTags|json_encode|raw }};
                 if(arrayTags != null){
                     arrayTags.forEach(function(element) {
-                        let option = new Option(element, element);
+                        let option = new Option(element.text, element.value);
                         option.selected = true;
 
                         $("#category-input").append(option);

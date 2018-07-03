@@ -78,6 +78,7 @@ class EmployerType extends AbstractType
             ))
 
             ->add('tag', EntityType::class, array(
+                'choice_translation_domain' => true,
                 'required' => false,
                 'class' => Tag::class,
                 'choice_label' =>  'name',

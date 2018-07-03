@@ -174,7 +174,7 @@ class NotificationController extends Controller
                         $this->renderView(
                             'AppBundle:Emails:notification.html.twig',
                             array('offers' => $offers,
-                                'subject' => $subject)
+                                'subject' => $translated = $this->get('translator')->trans($subject))
                         ),
                         'text/html'
                     )

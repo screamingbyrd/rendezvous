@@ -249,9 +249,13 @@ class EmployerController extends Controller
         );
 
         $arrayOffer = array();
+        $generateUrlService = $this->get('app.offer_generate_url');
 
         foreach ($offers as $offer){
             if($offer->isActive()){
+
+                $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+
                 $arrayOffer[] = $offer;
             }
         }

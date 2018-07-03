@@ -46,6 +46,7 @@ class OfferType extends AbstractType
             ))
 
             ->add('tag', EntityType::class, array(
+                'choice_translation_domain' => true,
                 'required' => true,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
@@ -96,6 +97,7 @@ class OfferType extends AbstractType
                     'placeholder' => 'offer.availablePH']))
 
             ->add('contractType', EntityType::class, array(
+                'choice_translation_domain' => true,
                 'required' => false,
                 'class' => ContractType::class,
                 'choice_label' =>  'name',

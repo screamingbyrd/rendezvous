@@ -10,6 +10,9 @@ services:
   app.client.stripe:
       class: AppBundle\Service\StripeClient
       arguments: ['%stripe_secret_key%', '%payment%', '@doctrine.orm.entity_manager', '@logger']
+  app.offer_generate_url:
+        class: AppBundle\Service\GenerateUrl
+        arguments: ['@translator']
 
 
 

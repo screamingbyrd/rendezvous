@@ -105,7 +105,7 @@
             {% for row  in tags|batch(2, null) %}
                 <div class="{{ cycle(['color-row',''],loop.index) }}">
                     {% for tag in row %}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
                     {% endfor %}
                 </div>
 

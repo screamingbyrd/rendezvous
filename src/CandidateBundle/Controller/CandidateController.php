@@ -180,6 +180,8 @@ class CandidateController extends Controller
         $idCandidate = $request->get('id');
         $session = $request->getSession();
 
+        $generateUrlService = $this->get('app.offer_generate_url');
+
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -216,6 +218,10 @@ class CandidateController extends Controller
         ;
         $notifications = $notificationRepository->findBy(array('candidate' => $candidate));
         $favorites = $favoriteRepository->findBy(array('candidate' => $candidate));
+
+        foreach ($favorites as &$favorite){
+            $favorite->getOffer()->setOfferUrl($generateUrlService->generateOfferUrl($favorite->getOffer()));
+        }
 
         $notificationsArray = array();
 
@@ -262,7 +268,8 @@ class CandidateController extends Controller
         ;
         $tags = $tagRepository->findAll();
 
-        foreach ($offers as $offer){
+        foreach ($offers as &$offer){
+            $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
             $finalArray[$offer->getId()]['offer'] = $offer;
         }
 

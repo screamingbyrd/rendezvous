@@ -49,7 +49,7 @@
                         <input name="type" type="hidden" id="type-input" value="notification.tag">
                         <select title="Category" id="id-input" name="id"  class="jobnow-dropdown">
                             {% for tag in tags %}
-                                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                <option value="{{ tag.id }}">{{ tag.name|trans }}</option>
                             {% endfor %}
                         </select>
                         <input type="submit" class="jobnow-button " value="{{ 'add' | trans }}">
@@ -71,7 +71,7 @@
                         {% for i in 1..notifications|length %}
                             <tr>
                                 <td>{{ notifications[i-1].type |trans }}</td>
-                                <td>{{ notifications[i-1].name }}</td>
+                                <td>{{ notifications[i-1].name|trans }}</td>
                                 <td><a href="{{ path('delete_notification', {'id':notifications[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
                             </tr>
                         {% endfor %}

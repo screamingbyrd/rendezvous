@@ -21,66 +21,77 @@ class AppFixtures extends Fixture
         $array = array('freelance','temporary','parttime','fulltime','internship');
 
         $mainTags = array(
-            'Accountancy / Finance',
-            'Analysis / Project Management',
-            'Architecture / Design',
-            'Aviation',
-            'Banking',
-            'Call-Centre',
-            'Construction / Trades',
-            'Consulting / Audit / Fiscality',
-            'Education / Training',
-            'Environement / Renewable energy',
-            'Financial Services',
-            'Fitness and Leisure',
-            'Freelance',
-            'Graduate',
-            'Healthcare / Childcare / Nursing',
-            'Hotels / Restaurants / Cafés',
-            'HR / Recruitment',
-            'Industry',
-            'Insurance',
-            'Investments funds',
-            'IT / Programming',
-            'Legal',
-            'Manufacturing / Engineering',
-            'Marketing / Market research',
-            'Media / New Media',
-            'Miscellaneous',
-            'Multi-lingual / Linguistic Services',
-            'Operative / Manual / Labouring',
-            'Pharmaceutical / Science',
-            'Property / Auctioneering',
-            'Purchasing',
-            'Sales',
-            'Sales Management',
-            'Secretarial / Admin / Clerical',
-            'Security',
-            'Senior Management / Executive',
-            'Technical Support',
-            'Telecom',
-            'Travel / Tourism',
-            'Warehouse / Logistics / Shipping',
-            'Work Experience / Internship'
+            'tag.accounting',
+            'tag.admin',
+            'tag.advertising',
+            'tag.automotive',
+            'tag.banking',
+            'tag.biotech',
+            'tag.customerService',
+            'tag.education',
+            'tag.engineering',
+            'tag.environmental',
+            'tag.events',
+            'tag.facilities',
+            'tag.gov',
+            'tag.hr',
+            'tag.hospitality',
+            'tag.insurance',
+            'tag.legal',
+            'tag.marketing',
+            'tag.nonprofit',
+            'tag.oil',
+            'tag.real',
+            'tag.retail',
+            'tag.salon',
+            'tag.telecommunications',
+            'tag.tv',
+            'tag.vet',
+            'tag.work',
+            'tag.analysis',
+            'tag.aviation',
+            'tag.call',
+            'tag.consulting',
+            'tag.financial',
+            'tag.freelance',
+            'tag.graduate',
+            'tag.investments',
+            'tag.media',
+            'tag.miscellaneous',
+            'tag.multi',
+            'tag.property',
+            'tag.purchasing',
+            'tag.security',
+            'tag.senior',
+            'tag.travel',
+            'tag.warehouse',
+            'tag.internship',
+            'tag.building',
+            'tag.business',
+            'tag.customerSupport',
+            'tag.creative',
+            'tag.editorial',
+            'tag.it',
+            'tag.installation',
+            'tag.medical',
+            'tag.production',
+            'tag.project',
+            'tag.quality',
+            'tag.rd',
+            'tag.sales',
+            'tag.security',
+            'tag.training',
+            'tag.other',
+            'tag.architecture',
+            'tag.arts',
+            'tag.businessFinance',
+            'tag.community',
+            'tag.farming',
+            'tag.life',
+            'tag.personal',
+            'tag.technology',
+            'tag.transportation'
         );
-
-        $subTag = array();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         foreach ($array as $name){
             $contract = new ContractType();

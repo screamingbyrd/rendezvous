@@ -78,7 +78,7 @@
                             {% for tag in tags %}
                                 <li>
                                     <a  href="{{ path('search_page_offer', {'tags':[tag.name], 'employer':employer.name}) }}">
-                                        {{ tag.name }}
+                                        {{ tag.name|trans }}
                                     </a>
                                 </li>
                             {% endfor %}
