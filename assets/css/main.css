@@ -118,8 +118,11 @@ body {
 
 /*Login page*/
 
-.row.login{
+.login{
     margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -162,12 +165,18 @@ h3.title{
 
 /*Register candidate / employer*/
 
-.row.register-employer{
-    margin-top: 75px;
+.register-employer{
+    margin-top: 49px;
 }
 
-.row.register-candidate{
-    margin-top: 100px;
+.register-candidate{
+    margin-top: 66px;
+}
+
+.register-candidate, .register-employer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .edit-text{
@@ -335,6 +344,13 @@ legend{
     }
     .navbar-fixed-bottom{
         position: relative !important;
+    }
+    .register-candidate, .register-employer, .login{
+        margin-top: 0 !important;
+        margin-bottom: 20px;
+    }
+    .jobnow-button.login {
+        margin-top: 0 !important;
     }
 }
 
