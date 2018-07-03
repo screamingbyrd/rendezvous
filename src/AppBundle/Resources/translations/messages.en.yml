@@ -209,6 +209,7 @@ offer:
   hereSomeSimilar: Here are some similar offers you might be interested in:
   similarOffer: Similar offers
   watchSimilar: Watch all similar offers
+  experience: Experience
 
   search:
       title: Search offers

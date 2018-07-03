@@ -23,43 +23,42 @@
     <div class="container container-offer-page">
         <div class="col-sm-6 col-md-9 ">
             <div class="row about-the-offer fade-in-left animated shadow-box">
-                <h2>{{ 'offer.about' | trans }}</h2>
+                <h3>{{ 'offer.about' | trans }}</h3>
                 <div class="col-sm-4 col-md-4">
-                    <h3>Wage</h3>
+                    <h4><b>{{ 'offer.wage'|trans }}</b></h4>
                     {{ offer.wage |trans }}
                     {% if offer.benefits|length > 0 %}
-                        <h3>Benefice</h3>
+                        <h4><b>{{ 'offer.benefits'|trans }}</b></h4>
                         {% for benefits in  offer.benefits %}
-                            <span>{{ benefits |trans }}</span>
+                            <div>{{ benefits |trans }}</div>
                         {% endfor %}
                     {% endif %}
-
-
                 </div>
                 <div class="col-sm-4 col-md-4">
-                    <h3>Experience</h3>
+                    <h4><b>{{ 'offer.experience'|trans }}</b></h4>
                     {{ offer.experience |trans }}
-                    <h3>Diploma</h3>
+                    <h4><b>{{ 'offer.diploma'|trans }}</b></h4>
                     {{ offer.diploma |trans }}
                 </div>
                 <div class="col-sm-4 col-md-4">
-                    <h3>Date de démarage</h3>
+                    <h4><b>Date de démarage</b></h4>
                     {{ offer.availableDate |date('d/m/Y')}}
                     {% if offer.license|length > 0 %}
-                        <h3>Permis</h3>
+                        <h4><b>{{ 'offer.license'|trans }}</b></h4>
                         {% for license in  offer.license %}
-                            <span>{{ license |trans }}</span>
+                            <div>{{ license |trans }}</div>
                         {% endfor %}
                     {% endif %}
                 </div>
             </div>
 
             <div class="row fade-in-left animated shadow-box">
-                <h2>{{ 'offer.jobDescription' | trans }}</h2>
+                <h3>{{ 'offer.jobDescription' | trans }}</h3>
                 {{ offer.description| raw }}
             </div>
 
             <div class="row fade-in-right animated shadow-box">
+                <h3>{{ offer.location }}</h3>
                 <!--{{ dump(status) }}-->
 
                 {{ ivory_google_map(map) }}
