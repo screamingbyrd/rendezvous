@@ -56,12 +56,12 @@
         {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
             <div class="shadow-box">
                 {% if logsCredit|length > 0 %}
-                <h3>History</h3>
+                <h3>{{ 'price.history'|trans }}</h3>
                 <table class="table" style="width:100%">
                     <tr>
                         <th>Date</th>
-                        <th>Credit(s)</th>
-                        <th>Price</th>
+                        <th>{{ 'price.credits'|trans }}</th>
+                        <th>{{ 'price.price'|trans }}</th>
                     </tr>
                     {% for logCredit in logsCredit %}
                         <tr>

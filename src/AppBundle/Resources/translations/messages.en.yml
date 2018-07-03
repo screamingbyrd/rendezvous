@@ -343,10 +343,13 @@ redirect:
 
 price:
   credit: Credit
+  credits: Credit(s)
+  price: Price
   ourPackages: Our packages
   noBonus: No bonus
   buy: Buy
   allow: Credit wil allow you to put your offers online and to improve their visibility
+  history: History
   payment:
     title: Buy credits
     chose: You have chose to buy %nbrCredits% credits for a total of %price%€
