@@ -17,6 +17,12 @@ class AdminController extends Controller
 
     public function listEmployerAction(){
 
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
         $repository = $this
             ->getDoctrine()
             ->getManager()
