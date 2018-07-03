@@ -213,6 +213,7 @@ offer:
   similarOffer: Offres similaires
   watchSimilar: Voir toutes les offres similaires
   experience: Expérience
+  startDate: Date de début
 
   search:
     title: Recherche d'offres

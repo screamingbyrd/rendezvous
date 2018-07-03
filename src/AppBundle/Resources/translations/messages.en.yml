@@ -210,6 +210,7 @@ offer:
   similarOffer: Similar offers
   watchSimilar: Watch all similar offers
   experience: Experience
+  startDate: Start date
 
   search:
       title: Search offers

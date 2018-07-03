@@ -24,30 +24,43 @@
         <div class="col-sm-6 col-md-9 ">
             <div class="row about-the-offer fade-in-left animated shadow-box">
                 <h3>{{ 'offer.about' | trans }}</h3>
-                <div class="col-sm-4 col-md-4">
-                    <h4><b>{{ 'offer.wage'|trans }}</b></h4>
-                    {{ offer.wage |trans }}
+                <div class="col-sm-4 col-md-4 about-offer-elements">
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.wage'|trans }}</b></h4>
+                        {{ offer.wage |trans }}
+                    </div>
                     {% if offer.benefits|length > 0 %}
-                        <h4><b>{{ 'offer.benefits'|trans }}</b></h4>
-                        {% for benefits in  offer.benefits %}
-                            <div>{{ benefits |trans }}</div>
-                        {% endfor %}
+                        <div class="about-offer-item">
+                            <h4><b>{{ 'offer.benefits'|trans }}</b></h4>
+                            {% for benefits in  offer.benefits %}
+                                <div>{{ benefits |trans }}</div>
+                            {% endfor %}
+                        </div>
+
                     {% endif %}
                 </div>
-                <div class="col-sm-4 col-md-4">
-                    <h4><b>{{ 'offer.experience'|trans }}</b></h4>
-                    {{ offer.experience |trans }}
-                    <h4><b>{{ 'offer.diploma'|trans }}</b></h4>
-                    {{ offer.diploma |trans }}
+                <div class="col-sm-4 col-md-4 about-offer-elements">
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.experience'|trans }}</b></h4>
+                        {{ offer.experience |trans }}
+                    </div>
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.diploma'|trans }}</b></h4>
+                        {{ offer.diploma |trans }}
+                    </div>
                 </div>
-                <div class="col-sm-4 col-md-4">
-                    <h4><b>Date de démarage</b></h4>
-                    {{ offer.availableDate |date('d/m/Y')}}
+                <div class="col-sm-4 col-md-4 about-offer-elements">
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.startDate'|trans }}</b></h4>
+                        {{ offer.availableDate |date('d/m/Y')}}
+                    </div>
                     {% if offer.license|length > 0 %}
-                        <h4><b>{{ 'offer.license'|trans }}</b></h4>
-                        {% for license in  offer.license %}
-                            <div>{{ license |trans }}</div>
-                        {% endfor %}
+                        <div class="about-offer-item">
+                            <h4><b>{{ 'offer.license'|trans }}</b></h4>
+                            {% for license in  offer.license %}
+                                <div>{{ license |trans }}</div>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                 </div>
             </div>
