@@ -8,18 +8,50 @@
 
     <div class="container">
 
-
-
-        {{ form_start(form, {attr: {id: form.vars.id}}) }}
-        <div class="form-group">
-            <label for="card-element">
-                Credit or Debit Card
-            </label>
-            <div id="card-element" class="form-control"></div>
-            <div id="card-errors" class="help-block" role="alert"></div>
+        <h1>{{ 'price.payment.title'|trans }}</h1>
+        <div class="shadow-box">
+            {{ 'price.payment.chose'|trans({'%nbrCredits%': nbrCredit, '%price%': price}) }}
         </div>
-        {{ form_widget(form.token) }}
+        <div class="shadow-box">
+            {{ form_start(form, {attr: {id: form.vars.id}}) }}
+            <div class="form-group">
+                <label for="card-element">
+                    Credit or Debit Card
+                </label>
+                <div id="card-element" class="form-control"></div>
+                <div id="card-errors" class="help-block" role="alert"></div>
+            </div>
+            {{ form_widget(form.token) }}
+
+            <button class="btn btn-default" id="btn-confirm">{{ 'price.payment.validate'|trans }}</button>
+        </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'price.payment.sure'|trans({'%nbrCredits%': nbrCredit}) }}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        {{ form_widget(form.submit, { 'label': 'price.buy' }) }}
+                        <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{ form_end(form) }}
+        <script>
+            $("#btn-confirm").on("click", function(e){
+                e.preventDefault();
+                $("#mi-modal").modal('show');
+            });
+
+            $("#modal-btn-no").on("click", function(e){
+                e.preventDefault();
+                $("#mi-modal").modal('hide');
+            });
+        </script>
 
     </div>
 

@@ -119,6 +119,8 @@ class CreditController extends Controller
         return $this->render('AppBundle:Credit:stripePayment.html.twig', [
             'form' => $form->createView(),
             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            'price' => $price,
+            'nbrCredit' => $nbrCredit
         ]);
 
     }

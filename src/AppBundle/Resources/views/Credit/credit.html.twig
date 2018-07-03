@@ -14,16 +14,16 @@
             <h3>{{ 'employer.credit.have'|trans({'%credit%': credit}) }}</h3>
         {% endif %}
 
-        <h3>Our packages</h3>
+        <h3>{{ 'price.ourPackages' | trans }}</h3>
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
-                        <h3>1 Credit</h3>
+                        <h3>1 {{ 'price.credit' | trans }}</h3>
                         <h4 class="no-bonus">{{ creditService.getOneCredit }}€</h4>
-                        <p>No Bonus</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="btn btn-primary" role="button">Buy</a></p>
+                        <p>{{ 'price.noBonus' | trans }}</p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="btn btn-primary" role="button">{{ 'price.buy' | trans }}</a></p>
                     </div>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                 <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
-                        <h3>10 Credits</h3>
+                        <h3>10 {{ 'employer.credit.title' | trans }}</h3>
                         <h4 class="strike">{{ creditService.getTenCredit + 10}}€</h4>
                         <h4>{{ creditService.getTenCredit }}€</h4>
                         <p>+ 10€ Bonus</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="btn btn-primary" role="button">Buy</a> </p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="btn btn-primary" role="button">{{ 'price.buy' | trans }}</a> </p>
                     </div>
                 </div>
             </div>
@@ -43,11 +43,11 @@
                 <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
-                        <h3>50 Credits</h3>
+                        <h3>50 {{ 'employer.credit.title' | trans }}</h3>
                         <h4 class="strike">{{ creditService.getFiftyCredit + 100}}€</h4>
                         <h4>{{ creditService.getFiftyCredit }}€</h4>
                         <p>+ 100 € Bonus</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="btn btn-primary" role="button">Buy</a></p>
+                        <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="btn btn-primary" role="button">{{ 'price.buy' | trans }}</a></p>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     {% endfor %}
                 </table>
                 {% else %}
-                    Credit wil allow you to put your offers online and to improve their visibility
+                    {{ 'price.allow' | trans }}
                 {% endif %}
             </div>
         {% endif %}

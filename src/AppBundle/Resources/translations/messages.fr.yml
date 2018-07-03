@@ -342,6 +342,18 @@ redirect:
   candidate: Veuillez vous inscrire en tant que candidat
   employer: Veuillez vous inscrire en tant qu'employer
 
+price:
+  credit: Crédit
+  ourPackages: Nos offres
+  noBonus: Aucun bonus
+  buy: Acheter
+  allow: Les crédits vous permettent de mettre en ligne vos offres ainsi que d'augmenter elur visibilitées
+  payment:
+    title: Achat de crédits
+    chose: Vous avez choisit d'acheter %nbrCredits% crédits pour un prix total de %price%€
+    validate: Valider mon paiement
+    sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
+
 tag:
   accounting: Comptabilité et Finance
   admin: Admin / Secrétariat

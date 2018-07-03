@@ -341,6 +341,17 @@ redirect:
   candidate: Please register as a candidate
   employer: Please register as an employer
 
+price:
+  credit: Credit
+  ourPackages: Our packages
+  noBonus: No bonus
+  buy: Buy
+  allow: Credit wil allow you to put your offers online and to improve their visibility
+  payment:
+    title: Buy credits
+    chose: You have chose to buy %nbrCredits% credits for a total of %price%€
+    validate: Validate my payment
+    sure: Are you sure you want to buy %nbrCredits% credits ?
 
 tag:
   accounting: Accounting/Finance
