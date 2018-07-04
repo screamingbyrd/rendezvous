@@ -14,7 +14,7 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
     public function getNotificationOffers($notification)
     {
         $query = $this->createQueryBuilder('o');
-        $query->andWhere('o.startDate > :date OR (o.creationDate > :date AND o.slot is not null)')
+        $query->andWhere('o.archived = 0 and (o.startDate > :date OR (o.creationDate > :date AND o.slot is not null))')
             ->setParameter('date', $notification->getDate());
 
         if($notification->getTypeNotification() == 'employer'){
@@ -40,5 +40,15 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
         $tags = $query->getQuery()->getResult();
 
         return $tags;
+    }
+
+    public function getActiveOffers()
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->andWhere('o.archived = 0 and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))');
+
+        $offers = $query->getQuery()->getResult();
+
+        return $offers;
     }
 }

@@ -162,11 +162,6 @@ class Offer
      */
     private $slot;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="offerUrl", type="string", nullable=true)
-     */
     private $offerUrl;
 
 

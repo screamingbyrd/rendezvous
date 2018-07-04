@@ -72,3 +72,7 @@ delete_favorite:
         en: "/delete-favorite"
         fr: "/supprimer-favori"
     defaults: { _controller: AppBundle:Favorite:delete }
+jobnow_sitemap:
+    path: "/sitemap.xml"
+    defaults: { _controller: AppBundle:Sitemap:sitemap }
+    requirements: {_format: "xml"}
