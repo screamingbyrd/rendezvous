@@ -51,7 +51,7 @@ form:
       candidate: Register as a candidate
       employer: Register as an employer
       create: Create your account
-      edit: Edit your company informations
+      edit: Edit your informations
     subTitle:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!
@@ -253,6 +253,9 @@ employer:
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
     buy: Buy some credits
+  edit:
+    personalData: Private data
+    companyData: Company information
 
 
 

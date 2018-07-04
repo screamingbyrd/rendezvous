@@ -81,6 +81,7 @@ class CandidateType extends AbstractType
             ),
                 'required' => false,
                 'attr' => array('class' => 'select2'),
+                'label' => 'form.registration.firstname',
             ))
             ->add('license', ChoiceType::class, array('choices' => array(
                 'form.registration.lis1' => 'form.registration.lis1',
@@ -106,6 +107,7 @@ class CandidateType extends AbstractType
             ))
 
             ->add('searchedtag', EntityType::class, array(
+                'choice_translation_domain' => true,
                 'required' => false,
                 'label' => 'form.registration.searchedtag',
                 'class' => Tag::class,
@@ -117,6 +119,7 @@ class CandidateType extends AbstractType
             ))
 
             ->add('tag', EntityType::class, array(
+                'choice_translation_domain' => true,
                 'required' => false,
                 'class' => Tag::class,
                 'label' => 'form.registration.tag',
