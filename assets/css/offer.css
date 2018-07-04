@@ -714,6 +714,14 @@ h3.post-offer{
 }
 @media (min-width: 1200px){
     .container-offer-page{
-        margin-bottom: 30px;
+        margin-bottom: 60px;
+    }
+}
+@media (max-width: 991px) {
+    .apply-div-form{
+        bottom: 0 !important;
+    }
+    .sticky{
+        position: sticky;
     }
 }

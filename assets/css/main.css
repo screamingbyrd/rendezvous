@@ -196,13 +196,12 @@ legend{
 /*Button*/
 
 .logo-jobnow{
-
     position: absolute;
     left: 2%;
     top: 12px;
     width: 200px;
     height: 61px;
-    z-index: -1;
+    z-index: 200;
 }
 
 .jobnow-button{
@@ -790,4 +789,77 @@ legend{
 .container-edit{
     display: flex;
     justify-content: center;
+}
+@media (max-width: 991px) {
+    .navbar-nav .open .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .navbar-nav .open .dropdown-menu a{
+        color: white;
+    }
+    #navbar{
+        position: absolute;
+        top: 88px;
+        width: 100%;
+        padding-left: 20px;
+        overflow: auto !important;
+    }
+    .credit-total{
+        width: fit-content;
+        margin-top: 0 !important;
+        margin-left: 7px;
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+    .navbar-fixed-bottom{
+        position: relative !important;
+    }
+    body{
+        padding-bottom: 0!important;
+    }
+    .jobnow-container{
+        min-height: 378px;
+        margin-bottom: 20px;
+    }
 }
