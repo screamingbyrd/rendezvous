@@ -28,9 +28,7 @@ about_us:
         fr: "/a-propos"
     defaults: { _controller: AppBundle:App:aboutPage }
 faq_page:
-    locales:
-        en: "/faq"
-        fr: "/faq"
+    path: "/faq"
     defaults: { _controller: AppBundle:App:faqPage }
 privacy_page:
     locales:

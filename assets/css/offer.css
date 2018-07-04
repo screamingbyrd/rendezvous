@@ -712,3 +712,8 @@ h3.post-offer{
 .map-offer{
     margin: 5px;
 }
+@media (min-width: 1200px){
+    .container-offer-page{
+        margin-bottom: 30px;
+    }
+}

@@ -395,6 +395,10 @@ legend{
         padding-left: 7px !important;
         padding-right: 7px !important;
     }
+    .jobnow-container{
+        min-height: 270px;
+        margin-bottom: 20px;
+    }
 }
 
 .homepage-jumbotron .div-keyword-input{
