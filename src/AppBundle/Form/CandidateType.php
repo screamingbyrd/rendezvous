@@ -81,7 +81,7 @@ class CandidateType extends AbstractType
             ),
                 'required' => false,
                 'attr' => array('class' => 'select2'),
-                'label' => 'form.registration.firstname',
+                'label' => 'offer.experience',
             ))
             ->add('license', ChoiceType::class, array('choices' => array(
                 'form.registration.lis1' => 'form.registration.lis1',
