@@ -771,4 +771,43 @@ class EmployerController extends Controller
         return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
     }
 
+    public function listAppliedCandidatePageAction(Request $request){
+        $id = $request->get('id');
+
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        $employer = $user->getEmployer();
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $generateUrlService = $this->get('app.offer_generate_url');
+        $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+
+        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('employer_creation');
+        }
+
+        $postulatedOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers')
+        ;
+
+        $postulatedOffers = $postulatedOfferRepository->findBy(array('offer' => $offer, 'archived' => 0));
+
+        return $this->render('EmployerBundle::appliedCandidateList.html.twig', array(
+            'postulatedOffers' => $postulatedOffers,
+            'offer' => $offer
+        ));
+    }
+
 }

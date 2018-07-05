@@ -149,3 +149,8 @@ offer_archived:
         en: "/offer-archived/{id}"
         fr: "/offre-archivé/{id}"
     defaults: { _controller: EmployerBundle:Offer:offerNotFound }
+applied_candidate_page:
+    locales:
+        en: "/candidates-for-offer/{id}"
+        fr: "/candidats-a-offre/{id}"
+    defaults: { _controller: EmployerBundle:Employer:listAppliedCandidatePage }

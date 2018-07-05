@@ -211,6 +211,7 @@ offer:
   watchSimilar: Watch all similar offers
   experience: Experience
   startDate: Start date
+  candidatesList: Candidates who applied to this offer:
 
   search:
       title: Search offers

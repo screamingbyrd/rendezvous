@@ -103,7 +103,7 @@
                                 {% endif %}
                             </div>
                             <span class="element-offer-list count-info"><i class="fas fa-eye"></i>{{ offer.countView}}</span>
-                            <span class="element-offer-list count-info">{{ 'offer.countContact' | trans }} {{ offer.countContact}}</span>
+                            <a href="{{ path('applied_candidate_page', {'id': offer.id}) }}" class="btn btn-success element-offer-list">{{ 'offer.countContact' | trans }} {{ offer.countContact}}</a>
                             <div id="collapse{{ offer.id }}" class="collapse-offer-info">
                                 <div class="description-offer-dashboard">
                                     Description:

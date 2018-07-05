@@ -214,6 +214,7 @@ offer:
   watchSimilar: Voir toutes les offres similaires
   experience: Expérience
   startDate: Date de début
+  candidatesList: Candidats qui ont postulé à cette offre :
 
   search:
     title: Recherche d'offres
