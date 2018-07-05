@@ -24,6 +24,12 @@
             position:absolute;
             z-index: -1;
         }
+        .contact-modal-conatainer{
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-bottom: 20px;
+        }
     </style>
 
     <div class="container container-offer-page">
@@ -104,16 +110,19 @@
         {% endif %}
     </div>
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'contact.us.smallTitle'|trans }}</h4>
                 </div>
-                {{ render(controller(
-                    'AppBundle:Contact:contact',
-                    { 'email': candidate.user.email }
-                )) }}
+                <div class="contact-modal-conatainer">
+                    {{ render(controller(
+                        'AppBundle:Contact:contact',
+                        { 'email': candidate.user.email }
+                    )) }}
+                </div>
+
             </div>
         </div>
     </div>
