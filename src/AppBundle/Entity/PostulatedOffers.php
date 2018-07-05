@@ -32,6 +32,12 @@ class PostulatedOffers
     private $offer;
 
     /**
+     *
+     * @ORM\Column(name="coverLetter", type="text")
+     */
+    private $coverLetter;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -145,6 +151,26 @@ class PostulatedOffers
         $this->archived = $archived;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCoverLetter()
+    {
+        return $this->coverLetter;
+    }
+
+    /**
+     * @param mixed $coverLetter
+     * @return PostulatedOffers
+     */
+    public function setCoverLetter($coverLetter)
+    {
+        $this->coverLetter = $coverLetter;
+        return $this;
+    }
+
+
 
     /**
      * Constructor

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Candidate
@@ -116,6 +117,13 @@ class Candidate
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "application/pdf" })
+     */
+    private $cv;
 
     private $firstName;
 
@@ -692,6 +700,25 @@ class Candidate
         $this->title = $title;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
+     * @param mixed $cv
+     * @return Candidate
+     */
+    public function setCv($cv)
+    {
+        $this->cv = $cv;
+        return $this;
+    }
+
 
 
 

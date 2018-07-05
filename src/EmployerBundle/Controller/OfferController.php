@@ -610,9 +610,8 @@ class OfferController extends Controller
 
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
-        $target_file = $target_dir . basename($_FILES["cv"]["name"]);
+        $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
         move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
-
 
         $candidateRepository = $this
             ->getDoctrine()
@@ -672,7 +671,12 @@ class OfferController extends Controller
         ;
 
         $mailer->send($message);
-        unlink($target_file);
+
+        $cv = $candidate->getCv();
+        if(isset($cv) && $cv != ''){
+            unlink($cv);
+        }
+        $candidate->setCv($target_file);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -681,11 +685,14 @@ class OfferController extends Controller
         $postulatedOffer->setOffer($offer);
         $now =  new \DateTime();
         $postulatedOffer->setDate($now);
+        $postulatedOffer->setCoverLetter($comment);
+
 
         $offer->setCountContact($offer->getCountContact() +1);
 
         $em->merge($offer);
         $em->persist($postulatedOffer);
+        $em->merge($candidate);
         $em->flush();
 
         $translated = $this->get('translator')->trans('offer.applied.success', array('title' => $offer->getTitle()));

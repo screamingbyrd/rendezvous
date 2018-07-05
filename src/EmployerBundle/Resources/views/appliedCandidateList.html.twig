@@ -13,17 +13,25 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">date</th>
                         <th scope="col">nom</th>
                         <th scope="col">mail</th>
-                        <th scope="col">date</th>
+                        <th scope="col">message</th>
+                        <th scope="col">cv</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for postulated in postulatedOffers %}
                         <tr>
+                            <td>{{ postulated.date|date('d/m/Y') }}</td>
                             <td><a href="{{ path('show_candidate', {'id':postulated.candidate.id}) }}">{{ postulated.candidate.user.firstname }} {{ postulated.candidate.user.lastName }}</a></td>
                             <td>{{ postulated.candidate.user.email }}</td>
-                            <td>{{ postulated.date|date('d/m/Y') }}</td>
+                            <td>{{ postulated.coverLetter|nl2br }}</td>
+                            <td>
+                                <a href="/jobnowlu/web/{{ postulated.candidate.cv }}" download>
+                                    <i class="fas fa-file"></i>
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

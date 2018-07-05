@@ -50,7 +50,6 @@ class Offer
 
     /**
      *
-     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
