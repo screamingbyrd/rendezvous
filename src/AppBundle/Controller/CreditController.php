@@ -48,14 +48,17 @@ class CreditController extends Controller
                 if(isset($user)){
                     $employer = $this->getUser()->getEmployer();
 
-                    $creditEmployer = $employer->getCredit();
+                    if(isset($employer)){
+                        $creditEmployer = $employer->getCredit();
 
-                    $repository = $this
-                        ->getDoctrine()
-                        ->getManager()
-                        ->getRepository('AppBundle:LogCredit')
-                    ;
-                    $logsCredit = $repository->findBy(array('employer' => $employer));
+                        $repository = $this
+                            ->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:LogCredit')
+                        ;
+                        $logsCredit = $repository->findBy(array('employer' => $employer));
+                    }
+
                 }
 
                 return $this->render('AppBundle:Credit:credit.html.twig', array(
