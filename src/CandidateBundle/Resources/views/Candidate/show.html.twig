@@ -1,11 +1,14 @@
-{% extends "::layout.html.twig" %}
+{% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
 
-{% block content %}
+{% block body %}
     <div class="jumbotron offer-jumbotron">
-        <h2>{{ candidate.user.firstName }}</h2>
-        <h3 class="page-subtitle">
-            <div class="updated-date">dernière modification le {{ candidate.modifiedDate |date('d/m/Y')}}</div>
+        <h2>{{ candidate.user.firstName }} {{ candidate.user.lastName }}</h2>
+        <h3>
+            <div class="updated-date">{{ candidate.title}}</div>
         </h3>
     </div>
     <style>
@@ -23,28 +26,97 @@
         }
     </style>
 
-
-        <div class="container candidate-body">
-            <div class="candidate-action">
-                <div class="link-social"><a href="{{  candidate.socialMedia }} }}">{{ candidate.socialMedia }}</a></div>
-                <button class="btn btn-default contact-button" id="btn-confirm">Contact</button>
-
-                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
-                            </div>
-                            {{ render(controller(
-                                'AppBundle:Contact:contact',
-                                { 'email': candidate.user.email }
-                            )) }}
-                        </div>
+    <div class="container container-offer-page">
+    <div class="col-sm-6 col-md-9 ">
+        <div class="row about-the-offer fade-in-left animated shadow-box">
+            <h3>{{ 'candidate.about' | trans }}</h3>
+            <div class="col-sm-4 col-md-4 about-offer-elements">
+                {% if candidate.age is not null %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'candidate.age'|trans }}</b></h4>
+                        {{ candidate.age |trans }}
                     </div>
-                </div>
+                {% endif %}
+                {% if candidate.license|length > 0 %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.license'|trans }}</b></h4>
+                        {% for license in  candidate.license %}
+                            <div>{{ license |trans }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-sm-4 col-md-4 about-offer-elements">
+                {% if candidate.diploma is not null %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.diploma'|trans }}</b></h4>
+                        {{ candidate.diploma |trans }}
+                    </div>
+                {% endif %}
+                {% if candidate.experience is not null %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.experience'|trans }}</b></h4>
+                        {{ candidate.experience |trans }}
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="col-sm-4 col-md-4 about-offer-elements">
+                {% if candidate.diploma is not null %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'form.registration.socialMedia'|trans }}</b></h4>
+                        <a href="{{  candidate.socialMedia }} }}">{{ candidate.socialMedia }}</a>
+                    </div>
+                {% endif %}
+                {% if candidate.language|length > 0 %}
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'form.registration.language'|trans }}</b></h4>
+                        {% for language in  candidate.language %}
+                            <span>- {{ language }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
             </div>
         </div>
+
+        <div class="row fade-in-left animated shadow-box">
+            <h3>{{ 'form.registration.description' | trans }}</h3>
+            {{ candidate.description| raw }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3" style="margin-bottom: 50px;">
+        <div class="shadow-box">
+            <button class="jobnow-button" id="btn-confirm">Contact</button>
+        </div>
+        {% if candidate.tag is defined and candidate.tag|length >0 %}
+            <div class="shadow-box fade-in-left animated">
+                <div class="article-title"><i class="fa fa-tag"></i> {{ 'candidate.tag'|trans }}</div>
+                <ul class="last-job-list">
+                    {% for tag in candidate.tag %}
+                        <li>
+                            {{ tag.name|trans }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
+                </div>
+                {{ render(controller(
+                    'AppBundle:Contact:contact',
+                    { 'email': candidate.user.email }
+                )) }}
+            </div>
+        </div>
+    </div>
 
     <script>
 

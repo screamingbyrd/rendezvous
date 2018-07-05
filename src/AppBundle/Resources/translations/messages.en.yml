@@ -48,6 +48,7 @@ header:
 form:
   registration:
     title:
+      title: Title
       candidate: Register as a candidate
       employer: Register as an employer
       create: Create your account
@@ -61,11 +62,13 @@ form:
     lastname: Last name
     companyName: Company name
     phone: Phone number
+    socialMedia: Link social media
     description: Description
-    license: Permis de conduire
-    successEmployer: You successfully register as an employer !
-    successCandidate: Vous êtes à présent inscrit en temps que candidat !
+    license: Driving Licence(s)
+    successEmployer: You successfully registered as an employer !
+    successCandidate: You successfully registered as a candidate !
     error: E-mail adress already used !
+    language: Languages
     exp0: -- Your experience --
 
     exp1: 0 to 2 years
@@ -238,6 +241,9 @@ candidate:
   delete:
     delete: Delete my account
     sure: Are you sure that you want to delete your account?
+  age: Age
+  tag: Skills
+  about: About this candidate
 
 
 employer:

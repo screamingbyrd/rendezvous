@@ -47,6 +47,7 @@ header:
 form:
   registration:
     title:
+      title: Titre
       candidate: S'incrire en tant que candidat
       employer: S'inscrire en tant qu'employeur
       create: Créer votre compte
@@ -61,13 +62,15 @@ form:
     lastname: Nom
     companyName: Nom de la société
     phone: N° de téléphone
+    socialMedia: Lien réseaux social
     description: Description
-    license: Driving Licence(s)
+    license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
+    language: Langues
     exp0: -- Indiquez votre expérience --
     exp00: -- Experience requierement --
     exp1: 0 à 2 ans
@@ -242,6 +245,9 @@ candidate:
   delete:
     delete: Supprimer mon compte
     sure: Etes vous sûre de vouloir supprimer votre compte
+  age: Âge
+  tag: Domaines de compétence
+  about: A propos de ce candidat
 
 employer:
   show:

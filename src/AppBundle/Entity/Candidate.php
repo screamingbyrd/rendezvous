@@ -103,6 +103,19 @@ class Candidate
      */
     private $favorite;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="language", type="array", nullable=true)
+     */
+    private $language;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
 
     private $firstName;
 
@@ -643,6 +656,44 @@ class Candidate
         $this->modifiedDate = $modifiedDate;
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param array $language
+     * @return Candidate
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Candidate
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+
 
 
 }

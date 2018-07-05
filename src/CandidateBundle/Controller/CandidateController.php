@@ -310,7 +310,17 @@ class CandidateController extends Controller
         return $this->redirectToRoute('jobnow_home');
     }
 
-    public function showAction($id){
+    public function showAction(Request $request, $id){
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()

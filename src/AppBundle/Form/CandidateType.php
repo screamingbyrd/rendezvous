@@ -45,6 +45,11 @@ class CandidateType extends AbstractType
                 'label' => 'form.registration.lastname'
 
             ))
+            ->add('title',      TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.title.title'
+
+            ))
 
 
             ->add('password', RepeatedType::class, array(
@@ -71,7 +76,7 @@ class CandidateType extends AbstractType
 
             ->add('age',      TextType::class, array(
                 'required' => false,
-                'label' => 'form.registration.age'
+                'label' => 'candidate.age'
             ))
 
             ->add('experience', ChoiceType::class, array('choices' => array(
@@ -82,6 +87,17 @@ class CandidateType extends AbstractType
                 'required' => false,
                 'attr' => array('class' => 'select2'),
                 'label' => 'offer.experience',
+            ))
+            ->add('language', ChoiceType::class, array('choices' => array(
+                'fr' => 'fr',
+                'en' => 'en',
+                'de' => 'de',
+                'lu' => 'lu',
+            ),
+                'multiple' => true,
+                'required' => false,
+                'attr' => array('class' => 'select2'),
+                'label' => 'form.registration.language',
             ))
             ->add('license', ChoiceType::class, array('choices' => array(
                 'form.registration.lis1' => 'form.registration.lis1',
@@ -141,12 +157,19 @@ class CandidateType extends AbstractType
                  ),
                 'placeholder' => 'form.registration.dip0',
                 'required' => false,
+                'label' => 'offer.diploma',
 
             ))
 
 
-            ->add('socialMedia',      TextType::class, array('required' => false))
-            ->add('phone',      TextType::class, array('required' => false))
+            ->add('socialMedia',      TextType::class, array(
+                'required' => false,
+                'label' => 'form.registration.socialMedia',
+            ))
+            ->add('phone',      TextType::class, array(
+                'required' => false,
+                'label' => 'form.registration.phone',
+            ))
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(
                     'class' => 'jobnow-button login',

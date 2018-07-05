@@ -107,7 +107,7 @@ class OfferController extends Controller
         if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('employer_creation');
+            return $this->redirectToRoute('create_employer');
         }
 
         $form = $this->get('form.factory')->create(OfferType::class, $offer, array(
@@ -273,7 +273,7 @@ class OfferController extends Controller
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('employer_creation');
+            return $this->redirectToRoute('create_employer');
         }
 
         $creditInfo = $this->container->get('app.credit_info');
@@ -562,7 +562,7 @@ class OfferController extends Controller
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('employer_creation');
+            return $this->redirectToRoute('create_employer');
         }
 
         $creditInfo = $this->container->get('app.credit_info');

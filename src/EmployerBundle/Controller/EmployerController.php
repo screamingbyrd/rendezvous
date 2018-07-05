@@ -793,7 +793,7 @@ class EmployerController extends Controller
         if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('employer_creation');
+            return $this->redirectToRoute('create_employer');
         }
 
         $postulatedOfferRepository = $this
