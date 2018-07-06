@@ -150,6 +150,12 @@ form:
 dashboard:
   title: Dashboard
   employer:
+    slot:
+      title: Slot
+      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un an.
+      empty: Empty
+      endDate: End date
+      offer: Offer
     edit: Edit your company information
     showArchived: Show archived offers
     hideArchived: Hide archived offers

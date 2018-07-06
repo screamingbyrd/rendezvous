@@ -152,6 +152,12 @@ form:
 dashboard:
   title: Tableau de bord
   employer:
+    slot:
+      title: Slot
+      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un an.
+      empty: vide
+      endDate: Date de fin
+      offer: Offre
     edit: Modifier les informations de votre société
     showArchived: Montrer les offres archivées
     hideArchived: Cacher les offres archivées

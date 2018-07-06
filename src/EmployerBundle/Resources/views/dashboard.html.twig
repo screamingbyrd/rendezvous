@@ -35,15 +35,15 @@
         <br>
 
         <div class="shadow-box">
-            <h4>Slot</h4>
-            <div>Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un ans.</div>
+            <h4>{{ 'dashboard.employer.slot.title'|trans }}</h4>
+            <div>{{ 'dashboard.employer.slot.use'|trans }}</div>
             {% if slots is defined and slots|length > 0 %}
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Offer</th>
-                        <th scope="col">end date</th>
+                        <th scope="col">{{ 'dashboard.employer.slot.offer'|trans }}</th>
+                        <th scope="col">{{ 'dashboard.employer.slot.endDate'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@
                             {% if slots[i-1].offer is not null %}
                                 <td>{{ slots[i-1].offer.title }}</td>
                             {% else %}
-                                <td>Empty offer</td>
+                                <td>{{ 'dashboard.employer.slot.empty'|trans }}</td>
                             {% endif %}
                             <td>{{ slots[i-1].endDate|date("d/m/Y") }}</td>
                             <td><a href="{{ path('empty_slot', {'id':slots[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'slot.remove.title' | trans }}</a></td>
