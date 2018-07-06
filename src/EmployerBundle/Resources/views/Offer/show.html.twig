@@ -25,7 +25,9 @@
             <div class="row about-the-offer fade-in-left animated shadow-box">
                 <div class="offer-about">
                     <span>{{ 'offer.about' | trans }}</span>
-                    <button class="jobnow-button second-apply-button">{{ 'offer.apply.title' | trans }}</button>
+                    {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}
+                        <button class="jobnow-button second-apply-button">{{ 'offer.apply.title' | trans }}</button>
+                    {% endif %}
                 </div>
                 <div class="col-sm-3 col-md-3 about-offer-elements">
                     <div class="about-offer-item">
@@ -156,22 +158,22 @@
         </div>
 
     </div>
-    <div class="apply-div-form">
-        <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
-
-        <div class="container">
-            <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
-                <div class="inside-offer-apply">
-                    <div class="inside-offer-apply-cv">
-                        {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
+    {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}
+        <div class="apply-div-form">
+            <button class="btn btn-primary apply-button">{{ 'offer.apply.title' | trans }}</button>
+            <div class="container">
+                <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
+                    <div class="inside-offer-apply">
+                        <div class="inside-offer-apply-cv">
+                            {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" id="cv">
+                        </div>
+                        <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+                        <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
                     </div>
-                    <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
-                    <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-
-    </div>
+    {% endif %}
     <style>
         {% if offer.image is not null and offer.image.imageName is not null %}
             {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
