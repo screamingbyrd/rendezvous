@@ -228,6 +228,7 @@ offer:
   archived: Archived
   apply:
     title: Apply
+    close: Close
     addCV: Add your resume:
     coverLetter: Cover letter (optional)
     send: Send your CV

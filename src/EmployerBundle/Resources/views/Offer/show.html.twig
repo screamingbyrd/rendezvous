@@ -23,7 +23,10 @@
     <div class="container container-offer-page">
         <div class="col-sm-6 col-md-9 ">
             <div class="row about-the-offer fade-in-left animated shadow-box">
-                <h3>{{ 'offer.about' | trans }}</h3>
+                <div class="offer-about">
+                    <span>{{ 'offer.about' | trans }}</span>
+                    <button class="jobnow-button second-apply-button">{{ 'offer.apply.title' | trans }}</button>
+                </div>
                 <div class="col-sm-3 col-md-3 about-offer-elements">
                     <div class="about-offer-item">
                         <h4><b>{{ 'offer.wage'|trans }}</b></h4>
@@ -192,8 +195,9 @@
     </style>
     <script>
 
-        $(".apply-button").click(function() {
+        $(".apply-button, .second-apply-button").click(function() {
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                $(".apply-button").text(($(".apply-button").text() == "{{ 'offer.apply.title' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'offer.apply.title' | trans }}").fadeIn();
                 $("#search-offer-homepage").slideToggle("medium");
             {% else %}
                 window.location.replace('{{ path('apply_offer', {'id':offer.id}) }}');

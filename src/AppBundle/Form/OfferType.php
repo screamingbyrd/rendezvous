@@ -98,7 +98,7 @@ class OfferType extends AbstractType
 
             ->add('contractType', EntityType::class, array(
                 'choice_translation_domain' => true,
-                'required' => false,
+                'required' => true,
                 'class' => ContractType::class,
                 'choice_label' =>  'name',
                 'label' => 'offer.contract',

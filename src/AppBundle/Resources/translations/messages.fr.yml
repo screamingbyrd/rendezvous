@@ -231,6 +231,7 @@ offer:
   archived: Archivée
   apply:
     title: Postuler
+    close: Fermer
     addCV: Ajouter votre CV :
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
