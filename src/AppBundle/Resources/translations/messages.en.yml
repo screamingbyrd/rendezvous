@@ -92,11 +92,11 @@ form:
     lis14: License F
 
 
-    dip1: BTS
-    dip2: Master
-    dip3: Doctor
-    dip4: Bachelor
-    dip5: License
+    dip1: Bachelor
+    dip2: BTS
+    dip3: License
+    dip4: Master
+    dip5: Doctor
 
 
     ben1: Parking

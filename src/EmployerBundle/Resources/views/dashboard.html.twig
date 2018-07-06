@@ -93,7 +93,7 @@
                                     {% if date(offer.endDate) > date() %}
                                         <span class="element-offer-list count-info end-date-activation">{{ 'offer.endDate' | trans }} {{ offer.endDate|date("m/d/Y")}}</span>
                                     {% else %}
-                                        <button style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                                        <button {% if offer.slot is not null %}disabled{% endif %} style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
                                     {% endif %}
                                     {% if offer.slot is null  %}
                                         <a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a>

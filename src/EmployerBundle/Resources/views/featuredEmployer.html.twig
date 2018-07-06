@@ -16,6 +16,7 @@
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
+            position: relative;
         }
 
         tr:nth-child(even) {
@@ -32,6 +33,9 @@
 
                 <tr>
                     <td>
+                        {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
+                            <div class="layer layer-offer-element"></div>
+                        {% endif %}
                         <div><b>semaine {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}
                         {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
@@ -49,6 +53,9 @@
                     </td>
                     {% set modify = modify+ 1  %}
                     <td>
+                        {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
+                            <div class="layer layer-offer-element"></div>
+                        {% endif %}
                         <div><b>semaine {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+"~  modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
@@ -66,6 +73,9 @@
                     </td>
                     {% set modify = modify+ 1  %}
                     <td>
+                        {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
+                            <div class="layer layer-offer-element"></div>
+                        {% endif %}
                         <div><b>semaine {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+"~ modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
@@ -83,6 +93,9 @@
                     </td>
                     {% set modify = modify+ 1  %}
                     <td>
+                        {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
+                            <div class="layer layer-offer-element"></div>
+                        {% endif %}
                         <div><b>semaine {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+" ~ modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredEmployerArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button class="btn btn-primary element-offer-list reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}

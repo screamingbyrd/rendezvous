@@ -183,6 +183,7 @@ class OfferType extends AbstractType
             ))
 
             ->add('license', ChoiceType::class, array('choices' => array(
+                'no' => 'no',
                 'form.registration.lis1' => 'form.registration.lis1',
                 'form.registration.lis2' => 'form.registration.lis2',
                 'form.registration.lis3' => 'form.registration.lis3',

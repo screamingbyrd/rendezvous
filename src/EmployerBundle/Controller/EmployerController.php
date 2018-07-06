@@ -410,11 +410,13 @@ class EmployerController extends Controller
         }
 
         $creditInfo = $this->container->get('app.credit_info');
+        $now = new \DateTime();
 
         return $this->render('EmployerBundle::featuredEmployer.html.twig', array(
             'featuredEmployerArray' => $featuredArray,
             'user' => $user,
             'featuredEmployerCredit' => $creditInfo->getFeaturedEmployer(),
+            'now' => $now
         ));
     }
 
@@ -515,11 +517,15 @@ class EmployerController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
 
+        $now = new \DateTime();
+        $now->modify( '- 1 week' );
+
         return $this->render('EmployerBundle::featuredOffer.html.twig', array(
             'featuredOfferArray' => $featuredArray,
             'user' => $user,
             'featuredOfferCredit' => $creditInfo->getFeaturedOffer(),
-            'offers' => $offers
+            'offers' => $offers,
+            'now' => $now
         ));
     }
 
