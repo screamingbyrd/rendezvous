@@ -229,6 +229,7 @@ class CandidateController extends Controller
         foreach ($notifications as $notification){
             $newNotification = array();
             $newNotification['id'] = $notification->getId();
+            $newNotification['elementId'] = $notification->getElementId();
             $type = $notification->getTypeNotification();
             $newNotification['type'] = $type;
             if($type == 'notification.employer'){
