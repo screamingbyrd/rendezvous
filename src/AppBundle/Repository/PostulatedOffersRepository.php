@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class PostulatedOffersRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getRecentPostulatedOffers($candidate)
+    {
+        $query = $this->createQueryBuilder('po');
+        $query->andWhere('po.archived = 0 and po.date > :date and po.candidate = :candidate')
+            ->setParameter('date', new \DateTime('-3 month'))
+            ->setParameter('candidate', $candidate);
+
+        $offers = $query->getQuery()->getResult();
+
+        return $offers;
+    }
+
 }

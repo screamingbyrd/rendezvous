@@ -117,6 +117,7 @@ class NotificationController extends Controller
         return $this->redirectToRoute('dashboard_candidate');
     }
 
+    //@TODO put in CRON
     public function sendAction(Request $request){
 
         $session = $request->getSession();

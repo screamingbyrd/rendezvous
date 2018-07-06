@@ -12,6 +12,7 @@ use AppBundle\Entity\Candidate;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\CandidateType;
+use Symfony\Component\HttpFoundation\Response;
 
 class CandidateController extends Controller
 {
@@ -345,4 +346,36 @@ class CandidateController extends Controller
             'candidates' => $candidates,
         ));
     }
+
+    //@TODO put in CRON
+    public function eraseUnusedCvsAction(){
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $postulatedOfferRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers')
+        ;
+        $candidates = $candidateRepository->findAll();
+        $em = $this->getDoctrine()->getManager();
+        foreach ($candidates as $candidate){
+            $recentOffers = $postulatedOfferRepository->getRecentPostulatedOffers($candidate);
+            if(empty($recentOffers)){
+                $cvLink = $candidate->getCv();
+                if(isset($cvLink) and $cvLink != ''){
+                    if(file_exists($cvLink)){
+                        unlink($cvLink);
+                    }
+                    $candidate->setCv(null);
+                    $em->merge($candidate);
+                }
+            }
+        }
+        $em->flush();
+        return new Response();
+    }
+
 }
