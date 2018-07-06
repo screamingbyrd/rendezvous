@@ -214,6 +214,18 @@ class OfferType extends AbstractType
 
             ))
 
+            ->add('language', ChoiceType::class, array('choices' => array(
+                'fr' => 'fr',
+                'en' => 'en',
+                'de' => 'de',
+                'lu' => 'lu',
+            ),
+                'multiple' => true,
+                'required' => false,
+                'attr' => array('class' => 'select2'),
+                'label' => 'form.registration.language',
+            ))
+
 
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(

@@ -54,6 +54,13 @@
         </div>
 
         {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+            {% if credit >0 %}
+                <div class="shadow-box">
+                    {{ 'price.go'|trans }}
+                    <a href="{{ path('dashboard_employer') }}" class="btn btn-primary" style="float: right;" role="button">{{ 'dashboard.title'|trans }}</a>
+                </div>
+            {% endif %}
+
             <div class="shadow-box">
                 {% if logsCredit|length > 0 %}
                 <h3>{{ 'price.history'|trans }}</h3>

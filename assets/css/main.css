@@ -271,6 +271,7 @@ legend{
 }
 .jumbotron h2{
     font-weight: 600;
+    font-size: 42px;
 }
 .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
     text-align: center;
@@ -648,10 +649,11 @@ legend{
     border: 1px solid #ccc;
 }
 .meter {
+    text-align: center;
     box-sizing: initial !important;
     height: 20px;  /* Can be anything */
     position: relative;
-    margin: 60px 0 20px 0; /* Just for demo spacing */
+    margin: 18px 0 20px 0;
     background: #555;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
@@ -731,8 +733,6 @@ legend{
     -webkit-background-size: 50px 50px;
     -moz-background-size: 50px 50px;
     background-size: 50px 50px;
-    -webkit-animation: move 2s linear infinite;
-    -moz-animation: move 2s linear infinite;
     -webkit-border-top-right-radius: 8px;
     -webkit-border-bottom-right-radius: 8px;
     -moz-border-radius-topright: 8px;

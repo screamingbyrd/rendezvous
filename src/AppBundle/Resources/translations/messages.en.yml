@@ -235,7 +235,7 @@ offer:
   applied:
     success: You applied to the offer %title% !
   countView: Views
-  countContact: Applyed
+  countContact: Applications
 
 candidate:
   delete:
@@ -361,6 +361,7 @@ price:
   noBonus: No bonus
   buy: Buy
   allow: Credit wil allow you to put your offers online and to improve their visibility
+  go: Use your credits to put your offers online and to improve their visibility
   history: History
   payment:
     title: Buy credits

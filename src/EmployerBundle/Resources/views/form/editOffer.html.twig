@@ -102,6 +102,11 @@
                 {{ form_errors(form.license) }}
             </div>
             <div class="col-md-3">
+                {{ form_label (form.language, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.language) }}
+                {{ form_errors(form.language) }}
+            </div>
+            <div class="col-md-3" style="display: none;">
                 {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}
                 {{ form_widget(form.image) }}
                 {{ form_errors(form.image) }}

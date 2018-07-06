@@ -42,11 +42,14 @@
                 });
             </script>
 
-            <div class="completion-container">
-                <div class="meter red">
-                    <span class="completion-bar" style="width: {{ completion }}%"></span>
+            {% if completion < 100 %}
+                <div class="completion-container">
+                    Completer vos informations
+                    <div class="meter red">
+                        <span class="completion-bar" style="width: {{ completion }}%"></span>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
 
             <div class="completion-success animated fadeIn">
                 Profile complété
@@ -154,8 +157,6 @@
         {
             let empty = $('.empty').length;
             let full = $('.not-empty').length;
-            console.log(empty);
-            console.log(full);
             if( !$(this).val().length ) {
                 $(this).addClass('empty');
                 $(this).removeClass('not-empty');

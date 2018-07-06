@@ -161,6 +161,13 @@ class Offer
      */
     private $slot;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="language", type="array", nullable=true)
+     */
+    private $language;
+
     private $offerUrl;
 
 
@@ -669,6 +676,24 @@ class Offer
     public function setOfferUrl($offerUrl)
     {
         $this->offerUrl = $offerUrl;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param array $language
+     * @return Offer
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
         return $this;
     }
 

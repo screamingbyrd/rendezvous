@@ -236,7 +236,7 @@ offer:
     send: Envoyer votre CV
     already: Vous avez déja postulé à cette offre
   countView: Vues
-  countContact: Contactés
+  countContact: Candidatures
 
   applied:
     success: Vous avez bien postulé à l'offre %title% !
@@ -358,7 +358,8 @@ price:
   ourPackages: Nos offres
   noBonus: Aucun bonus
   buy: Acheter
-  allow: Les crédits vous permettent de mettre en ligne vos offres ainsi que d'augmenter elur visibilitées
+  allow: Les crédits vous permettent de mettre en ligne vos offres ainsi que d'augmenter leur visibilitées
+  go: Utiliser vos crédits pour mettre en ligne vos offres ainsi que d'augmenter leur visibilitées
   history: Historique
   payment:
     title: Achat de crédits
