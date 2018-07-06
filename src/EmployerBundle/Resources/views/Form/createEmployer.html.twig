@@ -43,6 +43,7 @@
                     {{ form_label (form.email) }}
                     {{ form_widget(form.email) }}
                     {{ form_errors(form.email) }}
+                    <div class="error-already-exist">{{ 'form.registration.mailAlreadyExist'|trans }}</div>
                 </div>
 
                 <div class="col-md-6 form-group">
@@ -111,5 +112,45 @@
 
         </div>
     </div>
+    <script>
+        $('#appbundle_employer_email').on('blur', function () {
+            let mail = this.value;
+            url = "{{ path('user_already_exist') }}";
+            $.ajax({
+                url: url,
+                data: {mail:mail}
+            }).done(function( data ) {
+                if(data != ''){
+                    $('.error-already-exist').css({'display':'block'});
+                    $("#appbundle_employer_submit").prop("disabled",true);
+                }else{
+                    $('.error-already-exist').css({'display':'none'});
+                    $("#appbundle_employer_submit").prop("disabled",false);
+                }
+
+            });
+        });
+        $('#appbundle_employer_email').on('keyup', function () {
+            let mail = this.value;
+            url = "{{ path('user_already_exist') }}";
+            $.ajax({
+                url: url,
+                data: {mail:mail}
+            }).done(function( data ) {
+                if(data == ''){
+                    $('.error-already-exist').css({'display':'none'});
+                    $("#appbundle_candidate_submit").prop("disabled",false);
+                }
+
+            });
+        });
+    </script>
+    <style>
+        .error-already-exist{
+            display: none;
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
 
 {% endblock %}

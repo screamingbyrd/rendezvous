@@ -122,6 +122,8 @@ form:
 
     age: Age
 
+    mailAlreadyExist: Cet email existe déjà
+
   offer:
     creation:
       success: L'offre a bien été crée !

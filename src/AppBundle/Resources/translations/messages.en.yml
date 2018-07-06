@@ -121,6 +121,8 @@ form:
 
     age: How old are you?
 
+    mailAlreadyExist: This mail already exist
+
   offer:
     creation:
       success: The offer has been created !

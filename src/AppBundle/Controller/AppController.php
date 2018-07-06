@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class AppController extends Controller
@@ -103,6 +104,20 @@ class AppController extends Controller
     {
 
         return $this->render('AppBundle:Default:howitwork.html.twig');
+
+    }
+
+    public function checkUserAlreadyExistAction(Request $request)
+    {
+        $mail = $request->get('mail');
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $user = $userRepository->findOneBy(array('email' => $mail));
+
+        return new Response($user);
 
     }
 

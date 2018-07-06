@@ -74,3 +74,8 @@ jobnow_sitemap:
     path: "/sitemap.xml"
     defaults: { _controller: AppBundle:Sitemap:sitemap }
     requirements: {_format: "xml"}
+user_already_exist:
+    locales:
+        en: "/user-already-exist"
+        fr: "/utilisateur-existe-deja"
+    defaults: { _controller: AppBundle:App:checkUserAlreadyExist }
