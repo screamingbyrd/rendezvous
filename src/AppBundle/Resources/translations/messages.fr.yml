@@ -169,6 +169,9 @@ dashboard:
     appliedOffers: Mes offres
     notifications: Notifications
     favorites: Favoris
+    name: Nom
+    date: Date
+    type: Type
 
 slot:
   buy:

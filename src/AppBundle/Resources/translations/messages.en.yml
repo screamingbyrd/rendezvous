@@ -167,12 +167,15 @@ dashboard:
     appliedOffers: My offers
     notifications: Notifications
     favorites: Favorites
+    name: Name
+    date: Date
+    type: Type
 
 slot:
   buy:
-    title: Acheter un slot
-    sure: Etes vous sure de vouloir acheter un slot? Cela vous coutera %credit% crédits.
-    success: Le slot a bien été acheté
+    title: Buy a slot
+    sure: Are you sure that you want to buy a slot? It will cost you %credit% credits.
+    success: A slot has been bought
   add:
     success: The offer has been added to the slot
     error: You do not have any empty slot
