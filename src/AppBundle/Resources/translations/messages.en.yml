@@ -367,6 +367,7 @@ price:
   payment:
     title: Buy credits
     chose: You have chose to buy %nbrCredits% credits for a total of %price%€
+    enter: Enter your payment information
     validate: Validate my payment
     sure: Are you sure you want to buy %nbrCredits% credits ?
 

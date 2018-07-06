@@ -365,6 +365,7 @@ price:
   payment:
     title: Achat de crédits
     chose: Vous avez choisit d'acheter %nbrCredits% crédits pour un prix total de %price%€
+    enter: Entrer vos informations de paiement
     validate: Valider mon paiement
     sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
 
