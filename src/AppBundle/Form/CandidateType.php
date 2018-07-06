@@ -46,7 +46,7 @@ class CandidateType extends AbstractType
 
             ))
             ->add('title',      TextType::class, array(
-                'required' => true,
+                'required' => false,
                 'label' => 'form.registration.title.title'
 
             ))
