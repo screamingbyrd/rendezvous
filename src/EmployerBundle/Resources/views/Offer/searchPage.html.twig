@@ -17,7 +17,8 @@
                     <input value="{{ keyword }}" class="form-control" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 </div>
                 <div class="col-md-3">
-                    <input value="{{ location }}" class="form-control" type="text"  id="location-input" placeholder="{{ 'form.offer.search.location' | trans }}" title="{{ 'form.offer.search.location' | trans }}">
+                    {{ autoComplete|raw  }}
+                    {{ autoCompleteScript|raw  }}
                 </div>
                 <div class="col-md-2">
                     <select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">
@@ -135,7 +136,7 @@
                 $(".search-result").removeClass('fadeIn').addClass('fadeOut');
                 //$("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
-                let location = $("#location-input").val();
+                let location = $("#place_input").val();
                 let employer = $("#employer-input").val();
                 let tags = $("#category-input").val();
                 let url = window.location.href;

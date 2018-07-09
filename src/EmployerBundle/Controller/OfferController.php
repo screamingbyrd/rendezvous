@@ -25,6 +25,10 @@ use Ivory\GoogleMap\Overlay\InfoWindow;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Overlay\Marker;
 use Ivory\GoogleMap\Event\Event;
+use Ivory\GoogleMap\Place\Autocomplete;
+use Ivory\GoogleMap\Place\AutocompleteType;
+use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
+use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 
 
 class OfferController extends Controller
@@ -528,16 +532,44 @@ class OfferController extends Controller
             }
         }
 
+        $autoComplete = new Autocomplete();
+        $autoComplete->setInputId('place_input');
+
+        $autoComplete->setInputAttributes(array(
+            'class' => 'form-control',
+            'name' => 'location',
+            'placeholder' =>  $this->get('translator')->trans('form.offer.search.location')
+        ));
+
+        if(isset($location) && $location != ''){
+            $autoComplete->setInputAttributes(array(
+                'class' => 'form-control',
+                'name' => 'location',
+                'placeholder' =>  $this->get('translator')->trans('form.offer.search.location'),
+                'value' => $location
+            ));
+        }
+
+        $autoComplete->setTypes(array(AutocompleteType::CITIES));
+        $autoCompleteHelperBuilder = new PlaceAutocompleteHelperBuilder();
+
+        $autoCompleteHelper = $autoCompleteHelperBuilder->build();
+        $apiHelperBuilder = ApiHelperBuilder::create();
+        $apiHelperBuilder->setKey('AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc');
+        $apiHelperBuilder->setLanguage($request->getLocale());
+
+        $apiHelper = $apiHelperBuilder->build();
 
         return $this->render('EmployerBundle:Offer:searchPage.html.twig', array(
             'contractType' => $contractType,
             'keyword' => $keywords,
-            'location' => $location,
             'employers' => $employers,
             'chosenEmployer'=>$chosenEmployer,
             'tags' => $tags,
             'chosenTags' => $chosenTags,
-            'featuredOffer' => $featuredOffers
+            'featuredOffer' => $featuredOffers,
+            'autoComplete' => $autoCompleteHelper->render($autoComplete),
+            'autoCompleteScript' => $apiHelper->render([$autoComplete])
         ));
     }
 

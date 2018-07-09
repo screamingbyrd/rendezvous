@@ -11,7 +11,10 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Ivory\GoogleMap\Place\Autocomplete;
+use Ivory\GoogleMap\Place\AutocompleteType;
+use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
+use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 
 class AppController extends Controller
 {
@@ -62,12 +65,29 @@ class AppController extends Controller
             }
         }
 
+        $autoComplete = new Autocomplete();
+        $autoComplete->setInputId('place_input');
+
+        $autoComplete->setInputAttributes(array('class' => 'form-control', 'name' => 'location','placeholder' =>  $this->get('translator')->trans('form.offer.search.location')));
+
+        $autoComplete->setTypes(array(AutocompleteType::CITIES));
+        $autoCompleteHelperBuilder = new PlaceAutocompleteHelperBuilder();
+
+        $autoCompleteHelper = $autoCompleteHelperBuilder->build();
+        $apiHelperBuilder = ApiHelperBuilder::create();
+        $apiHelperBuilder->setKey('AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc');
+        $apiHelperBuilder->setLanguage($request->getLocale());
+
+        $apiHelper = $apiHelperBuilder->build();
+
         shuffle ($featuredEmployer);
         shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer,
             'featuredOffer' => $featuredOffer,
-            'tags' => $tagArray
+            'tags' => $tagArray,
+            'autoComplete' => $autoCompleteHelper->render($autoComplete),
+            'autoCompleteScript' => $apiHelper->render([$autoComplete])
         ));
 
     }

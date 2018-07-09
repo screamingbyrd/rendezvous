@@ -64,10 +64,18 @@ fos_elastica:
                                     type: custom
                                     tokenizer: autocomplete_tokenizer
                                     filter: [lowercase, asciifolding]
+                                location_tokenizer:
+                                    type: custom
+                                    tokenizer: location_tokenizer
+                                    filter: [lowercase, asciifolding]
                             tokenizer:
                                 autocomplete_tokenizer:
                                     type: nGram
                                     min_gram: 3
+                                    max_gram: 20
+                                location_tokenizer:
+                                    type: nGram
+                                    min_gram: 6
                                     max_gram: 20
                 types:
                     offer:
@@ -76,7 +84,7 @@ fos_elastica:
                             description: ~
                             title: { type: text, analyzer: autocomplete_analyzer }
                             updateDate: { type: date }
-                            location: { type: text, analyzer: autocomplete_analyzer }
+                            location: { type: text, analyzer: location_tokenizer }
                             archived: ~
                             contractType:
                               type: object
