@@ -486,7 +486,7 @@ class OfferController extends Controller
     public function searchPageAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
-        $chosenEmployer = $request->get('employer');
+        //$chosenEmployer = $request->get('employer');
         $chosenTags = $request->get('tags');
 
         $contractTypeRepository = $this
@@ -567,7 +567,7 @@ class OfferController extends Controller
             'contractType' => $contractType,
             'keyword' => $keywords,
             'employers' => $employers,
-            'chosenEmployer'=>$chosenEmployer,
+//            'chosenEmployer'=>$chosenEmployer,
             'tags' => $tags,
             'chosenTags' => $chosenTags,
             'featuredOffer' => $featuredOffers,

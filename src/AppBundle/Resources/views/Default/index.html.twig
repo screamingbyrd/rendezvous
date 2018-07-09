@@ -12,9 +12,15 @@
         <p>
             <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
                 <div class="homepage-search-bar search-bar">
+                    <select title="Category" id="tags-input" name="tags[]" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
+                        <option></option>
+                        {% for tag in tags %}
+                            <option value="{{ tag.name }}">{{ tag.name|trans }}</option>
+                        {% endfor %}
+                    </select>
                     <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
-                    <div class="div-location-input">{{ autoComplete|raw  }}
-                        {{ autoCompleteScript|raw  }}</div>
+                    {#<div class="div-location-input">{{ autoComplete|raw  }}#}
+                        {#{{ autoCompleteScript|raw  }}</div>#}
                     <input type="submit" class="jobnow-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
             </form>
@@ -102,7 +108,7 @@
         {% endif %}
         <h1 class="text-center featured-offer" >Category</h1>
         <div class="row">
-            {% for row  in tags|batch(2, null) %}
+            {% for row  in tagArray|batch(2, null) %}
                 <div class="{{ cycle(['color-row',''],loop.index) }}">
                     {% for tag in row %}
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>

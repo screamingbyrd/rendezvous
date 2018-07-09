@@ -80,12 +80,20 @@ class AppController extends Controller
 
         $apiHelper = $apiHelperBuilder->build();
 
+        $tagRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Tag')
+        ;
+        $tags = $tagRepository->findAll();
+
         shuffle ($featuredEmployer);
         shuffle ($featuredOffer);
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer,
             'featuredOffer' => $featuredOffer,
-            'tags' => $tagArray,
+            'tagArray' => $tagArray,
+            'tags' => $tags,
             'autoComplete' => $autoCompleteHelper->render($autoComplete),
             'autoCompleteScript' => $apiHelper->render([$autoComplete])
         ));

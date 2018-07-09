@@ -13,23 +13,7 @@
 
 
             <div class="row form-group">
-                <div class=" col-md-3">
-                    <input value="{{ keyword }}" class="form-control" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
-                </div>
                 <div class="col-md-3">
-                    {{ autoComplete|raw  }}
-                    {{ autoCompleteScript|raw  }}
-                </div>
-                <div class="col-md-2">
-                    <select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">
-                        <option></option>
-                        <option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>
-                        {% for employer in employers %}
-                            <option value="{{ employer.name }}" {% if employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-4">
                     <select title="Category" id="category-input" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
                         <option></option>
                         {% for tag in tags %}
@@ -37,10 +21,29 @@
                         {% endfor %}
                     </select>
                 </div>
+                <div class=" col-md-3">
+                    <input value="{{ keyword }}" class="form-control" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
+                </div>
+                <div class="col-md-3">
+                    {{ autoComplete|raw  }}
+                    {{ autoCompleteScript|raw  }}
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" class="jobnow-button searchOffer" value="Search">
+                </div>
+                {#<div class="col-md-2">#}
+                    {#<select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">#}
+                        {#<option></option>#}
+                        {#<option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>#}
+                        {#{% for employer in employers %}#}
+                            {#<option value="{{ employer.name }}" {% if chosenEmployer is defined and employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>#}
+                        {#{% endfor %}#}
+                    {#</select>#}
+                {#</div>#}
             </div>
 
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <ul class="contractType-list">
                             {% for type in contractType %}
                                 <li class="contract-type">
@@ -49,9 +52,6 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="submit" class="jobnow-button searchOffer" value="Search">
                     </div>
                     <div class="col-md-1" style="display: none">
                         <select id="number-of-offer" class="col-md-1 col-md-offset-3 form-control">

@@ -158,7 +158,7 @@ class EmployerController extends Controller
                 $session->getFlashBag()->add('info', 'Employer modifié !');
 
 
-                return $this->redirectToRoute('show_employer',array('id' => $employer->getId()));
+                return $this->redirectToRoute('dashboard_employer');
 
             }
         }
