@@ -87,6 +87,7 @@
                         {{ form_label (form.socialMedia,null, { 'label_attr': {'class': 'label-form'} }) }}
                         {{ form_widget(form.socialMedia) }}
                         {{ form_errors(form.socialMedia) }}
+                        <div class="error-wrong-url">{{ 'form.registration.invalid'|trans }}</div>
                     </div>
                     <div class="col-md-4 form-group">
                         {{ form_label (form.phone,null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -132,8 +133,41 @@
             </div>
         </div>
     </div>
-
+    <style>
+        .error-wrong-url{
+            display: none;
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
     <script>
+        function isUrlValid(url) {
+            return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+        }
+
+        $('#appbundle_candidate_socialMedia').on('blur', function () {
+            let url = this.value;
+
+            if(!isUrlValid(url)){
+                $('.error-wrong-url').css({'display':'block'});
+                $("#appbundle_candidate_submit").prop("disabled",true);
+            }else{
+                $('.error-wrong-url').css({'display':'none'});
+                $("#appbundle_candidate_submit").prop("disabled",false);
+            }
+        });
+        $('#appbundle_candidate_socialMedia').on('keyup', function () {
+            let url = this.value;
+
+            if(!isUrlValid(url)){
+                $('.error-wrong-url').css({'display':'block'});
+                $("#appbundle_candidate_submit").prop("disabled",true);
+            }else{
+                $('.error-wrong-url').css({'display':'none'});
+                $("#appbundle_candidate_submit").prop("disabled",false);
+            }
+        });
+
 
         $('input, textarea').each(function(){
             if($(this).attr('id') != 'appbundle_candidate__token'){
@@ -162,7 +196,6 @@
             full = $('.not-empty').length;
             let percent = full / (full + empty) * 100;
             $('.completion-bar').animate({'width' :percent + '%'});
-            console.log(percent);
             if(percent >= 100){
                 $('.completion-container').fadeOut("slow", function () {
                     $(this).css({display:"none"});

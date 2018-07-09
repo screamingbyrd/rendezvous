@@ -125,6 +125,7 @@ form:
     age: Age
 
     mailAlreadyExist: Cet email existe déjà
+    invalid: Lien invalide
 
   offer:
     creation:
