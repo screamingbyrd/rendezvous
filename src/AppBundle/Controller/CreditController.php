@@ -32,12 +32,12 @@ class CreditController extends Controller
                 break;
             }
             case 2: {
-                return $this->buyPack($request,$creditInfo->getTenCredit(),10);
+                return $this->buyPack($request,$creditInfo->getFiveCredit(),5);
                 break;
 
             }
             case 3: {
-                return $this->buyPack($request,$creditInfo->getFiftyCredit(),50);
+                return $this->buyPack($request,$creditInfo->getTenCredit(),10);
                 break;
 
             }

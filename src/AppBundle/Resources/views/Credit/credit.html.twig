@@ -31,9 +31,9 @@
                 <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
-                        <h3>10 {{ 'employer.credit.title' | trans }}</h3>
-                        <h4 class="strike">{{ creditService.getTenCredit + 10}}€</h4>
-                        <h4>{{ creditService.getTenCredit }}€</h4>
+                        <h3>5 {{ 'employer.credit.title' | trans }}</h3>
+                        <h4 class="strike">{{ creditService.getfiveCredit + 10}}€</h4>
+                        <h4>{{ creditService.getfiveCredit }}€</h4>
                         <p>+ 10€ Bonus</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="btn btn-primary" role="button">{{ 'price.buy' | trans }}</a> </p>
                     </div>
@@ -43,9 +43,9 @@
                 <div class=" shadow-box">
                     {#<img src="..." alt="...">#}
                     <div class="caption">
-                        <h3>50 {{ 'employer.credit.title' | trans }}</h3>
-                        <h4 class="strike">{{ creditService.getFiftyCredit + 100}}€</h4>
-                        <h4>{{ creditService.getFiftyCredit }}€</h4>
+                        <h3>10 {{ 'employer.credit.title' | trans }}</h3>
+                        <h4 class="strike">{{ creditService.getTenCredit + 100}}€</h4>
+                        <h4>{{ creditService.getTenCredit }}€</h4>
                         <p>+ 100 € Bonus</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="btn btn-primary" role="button">{{ 'price.buy' | trans }}</a></p>
                     </div>

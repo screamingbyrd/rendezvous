@@ -19,8 +19,8 @@ class CreditInfo
     private $featuredEmployer = 10;
     private $buySlot = 20;
     private $oneCredit = 200;
-    private $tenCredit = 1950;
-    private $fiftyCredit = 19900;
+    private $fiveCredit = 950;
+    private $tenCredit = 1900;
 
     public function __construct()
     {
@@ -137,6 +137,24 @@ class CreditInfo
     /**
      * @return int
      */
+    public function getFiveCredit()
+    {
+        return $this->fiveCredit;
+    }
+
+    /**
+     * @param int $fiveCredit
+     * @return CreditInfo
+     */
+    public function setFiveCredit($fiveCredit)
+    {
+        $this->fiveCredit = $fiveCredit;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
     public function getTenCredit()
     {
         return $this->tenCredit;
@@ -152,23 +170,7 @@ class CreditInfo
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getFiftyCredit()
-    {
-        return $this->fiftyCredit;
-    }
 
-    /**
-     * @param int $fiftyCredit
-     * @return CreditInfo
-     */
-    public function setFiftyCredit($fiftyCredit)
-    {
-        $this->fiftyCredit = $fiftyCredit;
-        return $this;
-    }
 
 
 

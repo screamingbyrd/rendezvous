@@ -13,6 +13,9 @@ services:
   app.offer_generate_url:
         class: AppBundle\Service\GenerateUrl
         arguments: ['@translator']
+  app.redirect.after.login:
+        class: AppBundle\Service\AfterLoginRedirect
+        arguments: ['@router']
 
 
 
