@@ -51,4 +51,26 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
 
         return $offers;
     }
+
+    public function countOffersInSlot($employer)
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->andWhere('o.employer = :employer and o.archived = 0 and o.slot is not null')
+            ->setParameter('employer', $employer);
+
+        $offers = $query->getQuery()->getResult();
+
+        return count($offers);
+    }
+
+    public function countActiveOffer($employer)
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->andWhere('o.employer = :employer and o.archived = 0 and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))')
+            ->setParameter('employer', $employer);
+
+        $offers = $query->getQuery()->getResult();
+
+        return count($offers);
+    }
 }

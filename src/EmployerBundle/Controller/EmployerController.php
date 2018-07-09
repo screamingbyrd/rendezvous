@@ -379,6 +379,10 @@ class EmployerController extends Controller
 
         $offers = $OfferRepository->findBy($searchArray);
 
+        $countOfferInSlot = $OfferRepository->countOffersInSlot($employer);
+
+        $countActiveOffer = $OfferRepository->countActiveOffer($employer);
+
         $creditInfo = $this->container->get('app.credit_info');
 
         return $this->render('EmployerBundle::dashboard.html.twig', array(
@@ -387,7 +391,9 @@ class EmployerController extends Controller
             'boostOffers' => $creditInfo->getBoostOffers(),
             'buySlot' => $creditInfo->getBuySlot(),
             'slots' => $currentSlot,
-            'employer' => $employer
+            'employer' => $employer,
+            'countOfferInSlot' => $countOfferInSlot,
+            'countActiveOffer' => $countActiveOffer
         ));
     }
 
