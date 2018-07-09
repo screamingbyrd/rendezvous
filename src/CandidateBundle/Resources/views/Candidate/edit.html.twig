@@ -10,6 +10,20 @@
         <div class="col-md-8">
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
+
+            {% if completion < 100 %}
+                <div class="completion-container">
+                    {{ 'form.registration.complete'|trans }}
+                    <div class="meter red">
+                        <span class="completion-bar" style="width: {{ completion }}%"></span>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="completion-success animated fadeIn">
+                {{ 'form.registration.completed'|trans }}
+            </div>
+
             {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
             {# Les erreurs générales du formulaire. #}
@@ -120,6 +134,67 @@
     </div>
 
     <script>
+
+        $('input, textarea').each(function(){
+            if($(this).attr('id') != 'appbundle_candidate__token'){
+                if( !$(this).val().length ) {
+                    $(this).addClass('empty');
+                    $(this).removeClass('not-empty');
+                } else {
+                    $(this).addClass('not-empty');
+                    $(this).removeClass('empty');
+                }
+            }
+
+        });
+        $('input, textarea').blur(function()
+        {
+            let empty = $('.empty').length;
+            let full = $('.not-empty').length;
+            if( !$(this).val().length ) {
+                $(this).addClass('empty');
+                $(this).removeClass('not-empty');
+            } else {
+                $(this).addClass('not-empty');
+                $(this).removeClass('empty');
+            }
+            empty = $('.empty').length;
+            full = $('.not-empty').length;
+            let percent = full / (full + empty) * 100;
+            $('.completion-bar').animate({'width' :percent + '%'});
+            console.log(percent);
+            if(percent >= 100){
+                $('.completion-container').fadeOut("slow", function () {
+                    $(this).css({display:"none"});
+                    $('.completion-success').css({'display' :'block'});
+                });
+            }else{
+                $('.completion-container').css({'display' :'block'});
+                $('.completion-success').css({'display' :'none'});
+            }
+        });
+        $('select').on("change", function(e) {
+            if($(this).val().length != 0){
+                $(this).addClass('not-empty');
+                $(this).removeClass('empty');
+            }else{
+                $(this).addClass('empty');
+                $(this).removeClass('not-empty');
+            }
+            let empty = $('.empty').length;
+            let full = $('.not-empty').length;
+            let percent = full / (full + empty) * 100;
+            $('.completion-bar').animate({'width' :percent + '%'});
+            if(percent >= 100){
+                $('.completion-container').fadeOut("slow", function () {
+                    $(this).css({display:"none"});
+                    $('.completion-success').css({'display' :'block'});
+                });
+            }else{
+                $('.completion-container').css({'display' :'block'});
+                $('.completion-success').css({'display' :'none'});
+            }
+        });
 
         $("#btn-confirm").on("click", function(e){
             e.preventDefault();

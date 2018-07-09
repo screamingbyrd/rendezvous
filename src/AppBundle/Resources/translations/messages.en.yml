@@ -56,6 +56,9 @@ form:
     subTitle:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!
+    complete: Complet your profile
+    completed: Profile completed
+
     email: Email
     passwordValidation : The password must contain a least 8 character an uppercase, a lowercase and a number.
     firstname: First name

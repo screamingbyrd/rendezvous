@@ -153,7 +153,7 @@ class CandidateController extends Controller
 
                 $candidate->setDescription($data->getDescription());
                 $candidate->setAge($data->getAge());
-                $candidate->setExperience($this->get('translator')->trans($data->getExperience()));
+                $candidate->setExperience($data->getExperience());
                 $candidate->setLicense($data->getLicense());
                 $candidate->setDiploma($data->getDiploma());
                 $candidate->setSocialMedia($data->getSocialMedia());
@@ -170,8 +170,54 @@ class CandidateController extends Controller
             }
         }
 
+        $completion = 3;
+
+        $title = $candidate->getTitle();
+        if(isset($title)){
+            $completion += 1;
+        }
+        $description = $candidate->getDescription();
+        if(isset($description)){
+            $completion += 1;
+        }
+        $age = $candidate->getAge();
+        if(isset($age)){
+            $completion += 1;
+        }
+        $experience = $candidate->getExperience();
+        if(isset($experience)){
+            $completion += 1;
+        }
+        $diploma = $candidate->getDiploma();
+        if(isset($diploma)){
+            $completion += 1;
+        }
+        $socialMedia = $candidate->getSocialMedia();
+        if(isset($socialMedia)){
+            $completion += 1;
+        }
+        $phone = $candidate->getPhone();
+        if(isset($phone)){
+            $completion += 1;
+        }
+        if(isset($candidate->getLicense()[0])){
+            $completion += 1;
+        }
+        if(isset($candidate->getLanguage()[0])){
+            $completion += 1;
+        }
+        if(isset($candidate->getTag()[0])){
+            $completion += 1;
+        }
+        if(isset($candidate->getSearchedTag()[0])){
+            $completion += 1;
+        }
+
+        $completion = $completion/14 * 100;
+
         return $this->render('CandidateBundle:Candidate:edit.html.twig', array(
             'form' => $form->createView(),
+            'completion' => $completion
         ));
     }
 

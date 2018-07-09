@@ -155,6 +155,7 @@ class CandidateType extends AbstractType
                 'form.registration.dip4' => 'form.registration.dip4',
                 'form.registration.dip5' => 'form.registration.dip5',
                  ),
+                'attr' => array('class' => 'select2'),
                 'placeholder' => 'form.registration.dip0',
                 'required' => false,
                 'label' => 'offer.diploma',

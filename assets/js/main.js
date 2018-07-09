@@ -43,6 +43,17 @@ function detectmob() {
 
 $(document).ready(function() {
 
+    $(function() {
+        $(".meter > span").each(function() {
+            $(this)
+                .data("origWidth", $(this).width())
+                .width(0)
+                .animate({
+                    width: $(this).data("origWidth")
+                }, 1200);
+        });
+    });
+
     $('[data-toggle="tooltip"]').tooltip();
 
 
@@ -54,10 +65,10 @@ $(document).ready(function() {
                 theme: 'bootstrap',
                 placeholder: $(this).data('placeholder')
             });
-        if($('.select2-selection__choice').length > 0){
-            $('#appbundle_employer_tag').addClass('not-empty');
+        if($(this).parent().find('.select2-selection__choice').length > 0){
+            $(this).addClass('not-empty');
         }else{
-            $('#appbundle_employer_tag').addClass('empty');
+            $(this).addClass('empty');
         }
         });
 

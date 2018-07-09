@@ -29,19 +29,6 @@
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
 
-            <script>
-                $(function() {
-                    $(".meter > span").each(function() {
-                        $(this)
-                            .data("origWidth", $(this).width())
-                            .width(0)
-                            .animate({
-                                width: $(this).data("origWidth")
-                            }, 1200);
-                    });
-                });
-            </script>
-
             {% if completion < 100 %}
                 <div class="completion-container">
                     Completer vos informations
@@ -145,12 +132,14 @@
     </div>
     <script>
         $('input, textarea').each(function(){
-            if( !$(this).val().length ) {
-                $(this).addClass('empty');
-                $(this).removeClass('not-empty');
-            } else {
-                $(this).addClass('not-empty');
-                $(this).removeClass('empty');
+            if($(this).attr('id') != 'appbundle_employer__token') {
+                if (!$(this).val().length) {
+                    $(this).addClass('empty');
+                    $(this).removeClass('not-empty');
+                } else {
+                    $(this).addClass('not-empty');
+                    $(this).removeClass('empty');
+                }
             }
         });
         $('input, textarea').blur(function()
@@ -166,7 +155,7 @@
             }
              empty = $('.empty').length;
              full = $('.not-empty').length;
-             let percent = (full-1) / ((full-1) + empty) * 100;
+             let percent = full / (full + empty) * 100;
             $('.completion-bar').animate({'width' :percent + '%'});
             if(percent >= 100){
                 $('.completion-container').fadeOut("slow", function () {
@@ -188,7 +177,7 @@
             }
             let empty = $('.empty').length;
             let full = $('.not-empty').length;
-            let percent = full / ((full-1) + empty) * 100;
+            let percent = full / (full + empty) * 100;
             $('.completion-bar').animate({'width' :percent + '%'});
             if(percent >= 100){
                 $('.completion-container').fadeOut("slow", function () {
