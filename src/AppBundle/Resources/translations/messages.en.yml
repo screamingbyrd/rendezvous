@@ -60,7 +60,7 @@ form:
     completed: Profile completed
 
     email: Email
-    passwordValidation : The password must contain a least 8 character an uppercase, a lowercase and a number.
+    passwordValidation : The password must contain a least 6 character an uppercase, a lowercase and a number.
     firstname: First name
     lastname: Last name
     companyName: Company name

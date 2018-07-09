@@ -335,6 +335,9 @@ class OfferController extends Controller
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('location', $keywords);
             $keywordBool->addShould($fieldQuery);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('employer.name', $keywords);
+            $keywordBool->addShould($fieldQuery);
             $boolQuery->addMust($keywordBool);
         }
 
