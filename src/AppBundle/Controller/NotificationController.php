@@ -202,19 +202,79 @@ class NotificationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         foreach ($notifications as $notification){
-            $offers = $offerRepository->getNotificationOffers($notification);
+            if($notification->getType != 'search'){
+                $offers = $offerRepository->getNotificationOffers($notification);
+
+                if(!empty($offers)){
+                    $candidate = $candidateRepository->findOneBy(array('id' => $notification->getCandidate()));
+
+                    if($notification->getTypeNotification() == 'employer'){
+                        $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
+                        $subject = $employer->getName();
+                    }elseif ($notification->getTypeNotification() == 'tag'){
+                        $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
+                        $subject = $tag->getName();
+                    }
+                    $mail = $candidate->getUser()->getEmail();
+                    $mailer = $this->container->get('swiftmailer.mailer');
+
+                    $message = (new \Swift_Message('New offers could interest you'))
+                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setTo($mail)
+                        ->setBody(
+                            $this->renderView(
+                                'AppBundle:Emails:notification.html.twig',
+                                array('offers' => $offers,
+                                    'subject' => $translated = $this->get('translator')->trans($subject))
+                            ),
+                            'text/html'
+                        )
+                    ;
+
+                    $mailer->send($message);
+                }
+
+                $notification->setDate($now);
+                $em->merge($notification);
+            }
+        }
+
+        $em->flush();
+
+        return new Response();
+    }
+
+    //@TODO put in CRON
+    public function sendSearchAction(Request $request){
+
+        $session = $request->getSession();
+
+        $now =  new \DateTime();
+
+        $notificationRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Notification')
+        ;
+        $notifications = $notificationRepository->findBy(array('typeNotification' => 'notification.search'));
+        $em = $this->getDoctrine()->getManager();
+
+        $searchService = $this->get('app.search.offer');
+
+        foreach ($notifications as $notification){
+            $notifiDate = $notification->getDate();
+            $finalArray = array();
+            $offers = $searchService->searchOffer($notification->getElementId());
+            foreach ($offers as $offer){
+                $slot = $offer->getSlot();
+                if($offer->getStartDate() > $notifiDate || ($offer->getCreationDate() > $notifiDate && isset($slot))){
+                    $finalArray[] = $offer;
+                }
+            }
 
             if(!empty($offers)){
-                $candidate = $candidateRepository->findOneBy(array('id' => $notification->getCandidate()));
-
-                if($notification->getTypeNotification() == 'employer'){
-                    $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
-                    $subject = $employer->getName();
-                }elseif ($notification->getTypeNotification() == 'tag'){
-                    $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
-                    $subject = $tag->getName();
-                }
-                $mail = $candidate->getUser()->getEmail();
+                $subject = 'Offer that might interest you';
+                $mail = $notification->getMail();
                 $mailer = $this->container->get('swiftmailer.mailer');
 
                 $message = (new \Swift_Message('New offers could interest you'))
@@ -240,7 +300,6 @@ class NotificationController extends Controller
         $em->flush();
 
         return new Response();
-
     }
 
 }

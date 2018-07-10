@@ -65,6 +65,11 @@ send_notification:
         en: "/send-notification"
         fr: "/envoyer-notification"
     defaults: { _controller: AppBundle:Notification:send }
+send_search_notification:
+    locales:
+        en: "/send-search-notification"
+        fr: "/envoyer-notification-recherche"
+    defaults: { _controller: AppBundle:Notification:sendSearch }
 create_favorite:
     locales:
         en: "/create-favorite"

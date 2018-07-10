@@ -320,8 +320,6 @@ class OfferController extends Controller
         $type =  $request->get('type');
         $currentPage = $request->get('row');
         $numberOfItem =  $request->get('number');
-        $finder = $this->container->get('fos_elastica.finder.app.offer');
-        $boolQuery = new \Elastica\Query\BoolQuery();
 
         $searchParam = array(
             'keywords' => $keywords,
@@ -332,67 +330,10 @@ class OfferController extends Controller
         );
         $searchParam = json_encode($searchParam);
 
-        if($keywords != ''){
-            $keywordBool = new \Elastica\Query\BoolQuery();
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('title', $keywords);
-            $keywordBool->addShould($fieldQuery);
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('description', $keywords);
-            $keywordBool->addShould($fieldQuery);
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('location', $keywords);
-            $keywordBool->addShould($fieldQuery);
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('employer.name', $keywords);
-            $keywordBool->addShould($fieldQuery);
-            $boolQuery->addMust($keywordBool);
-        }
+        $searchService = $this->get('app.search.offer');
 
-        if($location != ''){
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('location', $location);
-            $boolQuery->addMust($fieldQuery);
-        }
+        $data = $searchService->searchOffer($searchParam);
 
-        if($employer != '' and $employer != (string)0){
-            $fieldQuery = new \Elastica\Query\Match();
-            $fieldQuery->setFieldQuery('employer.name', $employer);
-            $boolQuery->addMust($fieldQuery);
-        }
-
-        if(isset($tags)){
-
-            $newBool = new \Elastica\Query\BoolQuery();
-
-
-           foreach($tags as $tag){
-
-               $tagQuery = new \Elastica\Query\Match();
-               $tagQuery->setFieldQuery('tag.name', $tag);
-               $newBool->addShould($tagQuery);
-           }
-
-            $boolQuery->addMust($newBool);
-        }
-
-        if(isset($type)){
-            $categoryQuery = new \Elastica\Query\Terms();
-            $categoryQuery->setTerms('contractType.name', $type);
-            $boolQuery->addMust($categoryQuery);
-        }
-
-        $fieldQuery = new \Elastica\Query\Match();
-        $fieldQuery->setFieldQuery('archived', false);
-        $boolQuery->addMust($fieldQuery);
-
-        $boolQuery->addMust($fieldQuery);
-
-        $query = new \Elastica\Query($boolQuery);
-
-
-        $query->setSort(array('updateDate' => 'desc'));
-        $data = $finder->find($query,3000);
         $countResult = count($data);
 
         $generateUrlService = $this->get('app.offer_generate_url');

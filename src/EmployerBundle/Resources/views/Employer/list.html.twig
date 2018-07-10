@@ -37,7 +37,7 @@
 
             {% for employer in employers %}
 
-                    <a href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
+                    <a target="_blank" href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
                         <div class="thumbnail featured-offer-item" >
                             <div class="header-thumb-employer">
                                 {% if employer.logo.imageName is not null %}
