@@ -10,10 +10,10 @@
     <div class="jumbotron offer-jumbotron">
         <h2>{{ offer.title }}</h2>
         <h3 class="page-subtitle">
+            <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
             <div class="job-title">{{ offer.contractType.name |trans }}</div>
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">Postée le {{ offer.creationDate |date('Y-m-d')}}</div>
-            <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
             {% endif %}
@@ -106,7 +106,9 @@
                 {% endif %}
                 <img class="floating-employer-logo" src="/jobnowlu/web/{{ image }}"/>
                 <div class="floating-employer-description">
-                    {{ offer.employer.whyUs| raw }}
+                    <div class="offer-employer-description">
+                        {{ offer.employer.description| raw }}
+                    </div>
                     <hr class="hr-floating-employer">
                 </div>
 

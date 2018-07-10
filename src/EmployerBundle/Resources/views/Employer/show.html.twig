@@ -30,13 +30,10 @@
             </div>
             <hr>
             <div class="col-md-8">
-
-                <p class="description-employer shadow-box fade-in-left animated">{{ employer.description |nl2br}}</p>
                 <div class="shadow-box fade-in-right animated">
-                    <div class="article-title">{{ 'employer.show.whyus'|trans }}</div>
-                    <p class="whyus-employer">{{ employer.whyUs|nl2br }}</p>
+                    <div class="article-title">{{ 'form.registration.description'|trans }}</div>
+                    <p class="description-employer">{{ employer.description |nl2br}}</p>
                 </div>
-
             </div>
             <div class="col-md-4">
                 <div class="shadow-box fade-in-right animated">
@@ -62,8 +59,10 @@
                                 </li>
                             {% endif %}
                         </ul>
-                        <hr class="hr-last-offer">
-                        <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">{{ 'employer.show.allOffers'|trans }}</a>
+                        {% if offers|length > 2 %}
+                            <hr class="hr-last-offer">
+                            <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="jobnow-button">{{ 'employer.show.allOffers'|trans }}</a>
+                        {% endif %}
                     {% else %}
                         <div class="no-recent-offers">
                             {{ 'employer.show.noOffer'|trans }}

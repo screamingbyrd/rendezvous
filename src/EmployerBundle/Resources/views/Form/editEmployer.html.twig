@@ -94,15 +94,11 @@
                             {{ form_widget(form.location) }}
                             {{ form_errors(form.location) }}
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             {{ form_label (form.description,null, { 'label_attr': {'class': 'label-form'} }) }}
                             {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
                             {{ form_errors(form.description) }}
                         </div>
-                        <div class="col-md-6 form-group">
-                            {{ form_label (form.whyUs,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.whyUs, { 'attr': {'class':'edit-text'} }) }}
-                            {{ form_errors(form.whyUs) }}
                         </div>
                         <div class="col-md-6 form-group">
                             {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}

@@ -83,12 +83,12 @@
     <div class="container">
 
         <div class="row">
-            <div class="{% if featuredOffer is defined and featuredOffer|length > 0 %}col-md-8{% endif %}">
+            <div class="{% if featuredOffer is defined and featuredOffer|length > 0 and chosenEmployer is null %}col-md-8{% endif %}">
                 <ul id="myUL">
 
                 </ul>
             </div>
-            {% if featuredOffer is defined and featuredOffer|length > 0 %}
+            {% if featuredOffer is defined and featuredOffer|length > 0 and chosenEmployer is null %}
             <div class="col-md-3 featured-offer-search">
                 <h1>Featured Offer</h1>
                 <ul >

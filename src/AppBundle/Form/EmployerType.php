@@ -71,11 +71,6 @@ class EmployerType extends AbstractType
                 'label' => 'form.registration.description',
 
             ))
-            ->add('whyUs', TextareaType::class, array(
-                'required' => false,
-
-
-            ))
 
             ->add('tag', EntityType::class, array(
                 'choice_translation_domain' => true,

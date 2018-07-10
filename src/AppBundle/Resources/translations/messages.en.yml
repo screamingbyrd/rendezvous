@@ -267,7 +267,6 @@ candidate:
 employer:
   show:
     title: Presentation of the company
-    whyus: Why us?
     lastOffers: Last offers
     noOffer: Threr is no active offersnoTag
     noTag: Threr is no tag

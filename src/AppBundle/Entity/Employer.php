@@ -61,13 +61,6 @@ class Employer
     /**
      * @var string
      *
-     * @ORM\Column(name="whyUs", type="text", nullable=true)
-     */
-    private $whyUs;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
@@ -312,30 +305,6 @@ class Employer
     public function getCoverImage()
     {
         return $this->coverImage;
-    }
-
-    /**
-     * Set whyUs
-     *
-     * @param string $whyUs
-     *
-     * @return Employer
-     */
-    public function setWhyUs($whyUs)
-    {
-        $this->whyUs = $whyUs;
-
-        return $this;
-    }
-
-    /**
-     * Get whyUs
-     *
-     * @return string
-     */
-    public function getWhyUs()
-    {
-        return $this->whyUs;
     }
 
     /**

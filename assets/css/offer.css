@@ -434,6 +434,11 @@
 .floating-employer-description{
     padding: 20px;
 }
+.offer-employer-description{
+    max-height: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 @media screen and (max-device-width: 480px){
     .floating-employer{

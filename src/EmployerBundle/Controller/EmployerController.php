@@ -54,7 +54,6 @@ class EmployerController extends Controller
                 $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
                 $employer->setCredit(0);
-                $employer->setWhyUs($data->getWhyUs());
                 $employer->setLocation($data->getLocation());
                 $employer->setPhone($data->getPhone());
                 $employer->addUser($user);
@@ -144,7 +143,6 @@ class EmployerController extends Controller
 
                 $employer->setName($data->getName());
                 $employer->setDescription($data->getDescription());
-                $employer->setWhyUs($data->getWhyUs());
                 $employer->setLocation($data->getLocation());
                 $employer->setPhone($data->getPhone());
                 $employer->addUser($user);
@@ -176,10 +174,6 @@ class EmployerController extends Controller
         if(isset($description)){
             $completion += 1;
         }
-        $whyUs = $employer->getWhyUs();
-        if(isset($whyUs)){
-            $completion += 1;
-        }
         $logo = $employer->getLogo()->getImageName();
         if(isset($logo)){
             $completion += 1;
@@ -189,7 +183,7 @@ class EmployerController extends Controller
             $completion += 1;
         }
 
-        $completion = $completion/11 * 100;
+        $completion = $completion/10 * 100;
 
         return $this->render('EmployerBundle:form:editEmployer.html.twig', array(
             'form' => $form->createView(),
