@@ -273,6 +273,10 @@ employer:
     noTag: Threr is no tag
     allOffers: All our offers
     tags: Main categories
+    spontaenous:
+      title: Spontaneous application
+      send: A candidate send you a spontaneous application
+      sent: You application has been sent.
   credit:
     title: Credits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!

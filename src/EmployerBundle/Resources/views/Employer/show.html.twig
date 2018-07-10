@@ -90,6 +90,21 @@
                     {% endif %}
                 </div>
 
+                {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}
+                    <div class="shadow-box">
+                        <button class="spontaneous-button jobnow-button">{{ 'employer.show.spontaenous.title'|trans }}</button>
+                        <form method="post" action="{{ path('apply_spontaneous', {'id':employer.id}) }}" id="spontaneous-form" enctype="multipart/form-data" style="display:none;">
+                            <div class="inside-offer-apply">
+                                <div>
+                                    {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" class="spontaneous-cv">
+                                </div>
+                                <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
+                                <input type="submit" class="jobnow-button submit-apply" value="{{ 'offer.apply.send' | trans }}">
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+
             </div>
 
         </div>
@@ -106,8 +121,21 @@
         </div>
     {% endif %}
 
-
+    <script>
+        $(".spontaneous-button").click(function() {
+            $(".spontaneous-button").text(($(".spontaneous-button").text() == "{{ 'employer.show.spontaenous' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'employer.show.spontaenous' | trans }}").fadeIn();
+            $("#spontaneous-form").slideToggle("medium");
+        });
+    </script>
     <style>
+        #spontaneous-form{
+            margin-top: 10px;
+        }
+        .spontaneous-cv{
+            margin-top: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
         {% if employer.coverImage.imageName is not null %}
             {% set image =  'uploads' ~ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
         {% else %}

@@ -154,3 +154,8 @@ applied_candidate_page:
         en: "/candidates-for-offer/{id}"
         fr: "/candidats-a-offre/{id}"
     defaults: { _controller: EmployerBundle:Employer:listAppliedCandidatePage }
+apply_spontaneous:
+    locales:
+        en: "/spontaneous-application/{id}"
+        fr: "/candidature-spontane/{id}"
+    defaults: { _controller: EmployerBundle:Employer:sendSearch }

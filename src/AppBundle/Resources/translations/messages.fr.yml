@@ -275,6 +275,10 @@ employer:
     noTag: Il n'y a aucune tag
     allOffers: Toute nos offres
     tags: Catégories principales
+    spontaenous:
+      title: Candidature spontanée
+      send: Vous avez reçu une candidature spontanée
+      sent: Votre candidature à bien été envoyé
   credit:
     title: Crédits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!

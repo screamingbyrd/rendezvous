@@ -822,4 +822,55 @@ class EmployerController extends Controller
         ));
     }
 
+    public function sendSearchAction(Request $request, $id){
+        $session = $request->getSession();
+        $emloyerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $emloyerRepository->findOneBy(array('id' => $id));
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $users = $userRepository->findBy(array('employer' => $employer));
+
+        $arrayEmail = array();
+
+        foreach ($users as $user){
+            $arrayEmail[] = $user->getEmail();
+        }
+        $firstUser = $arrayEmail[0];
+
+        $comment = $request->get('comment');
+        $target_dir = "uploads/images/candidate/";
+        $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
+        move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $message = (new \Swift_Message($this->get('translator')->trans('employer.show.spontaenous.send')))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($firstUser)
+            ->setCc(array_shift($arrayEmail))
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:apply.html.twig',
+                    array('comment' => $comment)
+                ),
+                'text/html'
+            )
+            ->attach(\Swift_Attachment::fromPath($target_file));
+        ;
+
+        $mailer->send($message);
+        unlink($target_file);
+
+        $translated = $this->get('translator')->trans('employer.show.spontaenous.sent');
+        $session->getFlashBag()->add('info', $translated);
+        return $this->redirectToRoute('show_employer', array('id' => $id));
+    }
+
 }
