@@ -78,6 +78,55 @@ class NotificationController extends Controller
 
     }
 
+    public function createSearchAction(Request $request)
+    {
+        $session = $request->getSession();
+        $type = $request->get('type');
+        $elementId = $request->get('id');
+        $mail = $request->get('mail');
+
+        $session = $request->getSession();
+
+        $notification = new Notification();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $notification->setCandidate(null);
+
+        $now =  new \DateTime();
+        $notification->setDate($now);
+        $notification->setTypeNotification($type);
+        $notification->setElementId($elementId);
+        $notification->setMail($mail);
+
+        $em->persist($notification);
+        $em->flush();
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $message = (new \Swift_Message('A new alert email has been created'))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($mail)
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:notificationCreated.html.twig',
+                    array()
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+
+        $translated = $this->get('translator')->trans('notification.created');
+        $session->getFlashBag()->add('info', $translated);
+
+        $url = $this->generateUrl('search_page_offer');
+
+        return $this->redirect($url.'#alerts');
+
+    }
+
     public function deleteAction(Request $request){
 
         $session = $request->getSession();
@@ -170,7 +219,7 @@ class NotificationController extends Controller
 
                 $message = (new \Swift_Message('New offers could interest you'))
                     ->setFrom('jobnowlu@noreply.lu')
-                    ->setTo('arthur.regnault@altea.lu')
+                    ->setTo($mail)
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:notification.html.twig',

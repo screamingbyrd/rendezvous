@@ -34,11 +34,18 @@ class Notification
     private $typeNotification;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="elementId", type="integer", nullable=true)
+     * @ORM\Column(name="elementId", type="string", length=255, nullable=true)
      */
     private $elementId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
+     */
+    private $mail;
 
     /**
      * @var \DateTime
@@ -147,6 +154,25 @@ class Notification
         $this->date = $date;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param string $mail
+     * @return Notification
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+        return $this;
+    }
+
 
 }
 

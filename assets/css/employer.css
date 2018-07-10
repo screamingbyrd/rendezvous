@@ -175,3 +175,13 @@ h3.box{
     justify-content: center;
     height: 150px;
 }
+.dashboard-total-offer{
+    color: #fff;
+    background-color: #337ab7;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

@@ -50,6 +50,11 @@ create_notification:
         en: "/create-notification"
         fr: "/creation-notification"
     defaults: { _controller: AppBundle:Notification:create }
+create_search_notification:
+    locales:
+        en: "/create-search-notification"
+        fr: "/creation-notification-recherche"
+    defaults: { _controller: AppBundle:Notification:createSearch }
 delete_notification:
     locales:
         en: "/delete-notification"

@@ -323,6 +323,14 @@ class OfferController extends Controller
         $finder = $this->container->get('fos_elastica.finder.app.offer');
         $boolQuery = new \Elastica\Query\BoolQuery();
 
+        $searchParam = array(
+            'keywords' => $keywords,
+            'location' => $location,
+            'employer' => $employer,
+            'tags' => $tags,
+            'type' => $type
+        );
+        $searchParam = json_encode($searchParam);
 
         if($keywords != ''){
             $keywordBool = new \Elastica\Query\BoolQuery();
@@ -478,7 +486,8 @@ class OfferController extends Controller
                 'page' => $currentPage,
                 'total' => $totalPage,
                 'numberOfItem' =>($numberOfItem > $countResult? $countResult:$numberOfItem),
-                'countResult' => $countResult
+                'countResult' => $countResult,
+                'searchParam' => $searchParam
             )
         );
     }

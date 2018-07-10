@@ -171,6 +171,8 @@ dashboard:
     typeTitle: Type in a title
     searchTitle: Search a title
     boostOffers: Boost you offers
+    totalOnline: Total online offers
+    totalInSlot: Total offers in slot
   candidate:
     list: A quick summary of which job posting you’ve applied to
     appliedThe: Applied the

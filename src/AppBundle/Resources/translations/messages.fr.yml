@@ -172,6 +172,8 @@ dashboard:
     typeTitle: Entrer un titre
     searchTitle: Chercher un titre
     boostOffers: Booster vos offres
+    totalOnline: Total offre en ligne
+    totalInSlot: Total offre dans un slot
   candidate:
     list: Vous avez postulez à ces offres
     appliedThe: Postulé le
@@ -326,6 +328,7 @@ notification:
   already: La notification existe déjà !
   tag: Categorie
   employer: Employeur
+  search: Recherche
 
 favorite:
   title: Wishlist aren’t simply for Christmas or shopping anymore
