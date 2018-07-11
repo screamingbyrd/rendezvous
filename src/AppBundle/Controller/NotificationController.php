@@ -127,10 +127,9 @@ class NotificationController extends Controller
 
     }
 
-    public function deleteAction(Request $request){
+    public function deleteAction(Request $request, $notificationId){
 
         $session = $request->getSession();
-        $notificationId = $request->get('id');
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
@@ -225,7 +224,9 @@ class NotificationController extends Controller
                             $this->renderView(
                                 'AppBundle:Emails:notification.html.twig',
                                 array('offers' => $offers,
-                                    'subject' => $translated = $this->get('translator')->trans($subject))
+                                    'subject' => $translated = $this->get('translator')->trans($subject),
+                                    'id' =>$notification->getId()
+                                )
                             ),
                             'text/html'
                         )
@@ -284,7 +285,9 @@ class NotificationController extends Controller
                         $this->renderView(
                             'AppBundle:Emails:notification.html.twig',
                             array('offers' => $offers,
-                                'subject' => $translated = $this->get('translator')->trans($subject))
+                                'subject' => $translated = $this->get('translator')->trans($subject),
+                                'id' =>$notification->getId()
+                            )
                         ),
                         'text/html'
                     )

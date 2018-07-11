@@ -332,6 +332,8 @@ notification:
   tag: Categorie
   employer: Employeur
   search: Recherche
+  if: Si vous ne souhaitez plus reçevoir cette alert email clickez
+  here: ici
 
 favorite:
   title: Wishlist aren’t simply for Christmas or shopping anymore

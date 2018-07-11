@@ -334,6 +334,8 @@ notification:
   already: Notification already exist !
   tag: Tag
   employer: Employer
+  if: If you  wish to stop receiving this notification click
+  here: here
 
 favorite:
   title: Wishlist aren’t simply for Christmas or shopping anymore
