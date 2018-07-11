@@ -12,8 +12,8 @@
         <p>
             <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
                 <div class="homepage-search-bar search-bar">
-                    <select title="Category" id="tags-input" name="tags[]" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
-                        <option></option>
+                    <select title="Category" id="tags-input" name="tags[]"  class="selectpicker homepage-tag" title="Choose one of the following...">
+                        <option value="" disabled selected>{{ 'employer.show.tags'|trans }}</option>
                         {% for tag in tags %}
                             <option value="{{ tag.name }}">{{ tag.name|trans }}</option>
                         {% endfor %}

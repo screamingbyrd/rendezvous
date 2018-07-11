@@ -148,7 +148,7 @@ form:
       location: Lieu de travail
       search: Recherche
       employerPH:  Société
-      categoryPH: Indiquez un ou des domaines d'activités
+      categoryPH: Catégorie
       empty: vide
 
 
@@ -273,7 +273,7 @@ employer:
     noOffer: Il n'y a aucune offre actives
     noTag: Il n'y a aucune tag
     allOffers: Toute nos offres
-    tags: Catégories principales
+    tags: Catégories
     spontaenous:
       title: Candidature spontanée
       send: Vous avez reçu une candidature spontanée

@@ -12,7 +12,7 @@
         <form method="post" action="" id="search-offer-form" class="search-bar">
 
 
-            <div class="row form-group">
+            <div class="row form-group search-input-container">
                 <div class="col-md-3">
                     <select title="Category" id="category-input" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
                         <option></option>
@@ -21,14 +21,14 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class=" col-md-3">
+                <div class=" col-md-4">
                     <input value="{{ keyword }}" class="form-control" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 </div>
                 <div class="col-md-3">
                     {{ autoComplete|raw  }}
                     {{ autoCompleteScript|raw  }}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="submit" class="jobnow-button searchOffer" value="Search">
                 </div>
                 {#<div class="col-md-2">#}
@@ -131,6 +131,7 @@
         </div>
 
         <script>
+            let searchedTags = [];
             function searchOffer(row, totalItem) {
 
                 $(".search-result").removeClass('fadeIn').addClass('fadeOut');
@@ -150,11 +151,14 @@
                     data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem,tags:tags}
                 }).done(function( data ) {
                     if(detectmob()){
-                        let $el = $('.searchpage-jumbotron');  //record the elem so you don't crawl the DOM everytime
-                        let bottom = $el.position().top + $el.outerHeight(true) - 40;
-                        $('html, body').animate({
-                            scrollTop: bottom
-                        }, 500);
+                        if(tags.length >= searchedTags.length){
+                            let $el = $('.searchpage-jumbotron');
+                            let bottom = $el.position().top + $el.outerHeight(true) - 40;
+                            $('html, body').animate({
+                                scrollTop: bottom
+                            }, 500);
+                        }
+                        searchedTags = tags;
                     }
                     $('#loading').hide();
 

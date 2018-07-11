@@ -12,7 +12,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    min-height: 350px;
+    min-height: 283px;
 }
 
 #myUL li .offer-element {
@@ -89,7 +89,7 @@
     font-size: 16px;
     padding: 12px 20px 12px 13px;
     border: 1px solid #ddd;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     margin-right: -4px;
     min-width: 130px;
 }
@@ -538,6 +538,30 @@
     .second-apply-button{
         display: none;
     }
+    .homepage-tag{
+        width: 100% !important;
+    }
+    .search-input-container .col-md-3, .search-input-container .col-md-4{
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+        margin-bottom: 8px;
+    }
+    .search-input-container .col-md-2{
+        padding-left: 15px !important;
+    }
+    .searchOffer{
+        margin-left: 0!important;
+    }
+    .search-alert-email-container{
+        width: 100% !important;
+        margin-bottom: 0 !important;
+    }
+    .search-alert-email-container #mail-input{
+        margin-bottom: 8px;
+    }
+    .no-offer {
+        margin-top: 30px !important;
+    }
 }
 
 #employer-input{
@@ -553,18 +577,30 @@
     color: #333;
     min-width: 130px;
 }
-
+.search-input-container{
+    margin-bottom: 0!important;
+}
 .searchOffer{
     margin-left: 10px;
-    min-width: 120px;
-    height: 45px;
+    height: 37px;
     line-height: inherit;
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 13%;
+    width: -webkit-fill-available;
     font-size: 16px;
-    padding: 11px 20px 12px 13px;
+    padding: 6px 13px 10px 13px;
     border: 1px solid #000000;
+    margin-top: -1px;
+}
+.search-input-container .col-md-3, .search-input-container .col-md-4{
+    padding-right: 0;
+    padding-left: 12px;
+}
+.search-input-container .col-md-2{
+    padding-left: 0;
+}
+.no-offer-alert{
+    margin-top: 20px;
 }
 .background-employer-in-offer-search{
     min-height: 140px;
