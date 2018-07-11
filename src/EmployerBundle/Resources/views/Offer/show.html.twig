@@ -29,10 +29,10 @@
                         <button class="jobnow-button second-apply-button">{{ 'offer.apply.title' | trans }}</button>
                     {% endif %}
                 </div>
-                <div class="col-sm-3 col-md-3 about-offer-elements">
+                <div class="col-sm-4 col-md-4 about-offer-elements">
                     <div class="about-offer-item">
-                        <h4><b>{{ 'offer.wage'|trans }}</b></h4>
-                        {{ offer.wage |trans }}
+                        <h4><b>{{ 'offer.experience'|trans }}</b></h4>
+                        {{ offer.experience |trans }}
                     </div>
                     {% if offer.benefits|length > 0 %}
                         <div class="about-offer-item">
@@ -44,20 +44,23 @@
 
                     {% endif %}
                 </div>
-                <div class="col-sm-3 col-md-3 about-offer-elements">
+                <div class="col-sm-4 col-md-4 about-offer-elements">
                     <div class="about-offer-item">
-                        <h4><b>{{ 'offer.experience'|trans }}</b></h4>
-                        {{ offer.experience |trans }}
+                        <h4><b>{{ 'offer.startDate'|trans }}</b></h4>
+                        {{ offer.availableDate |date('d/m/Y')}}
                     </div>
+                    {% if offer.diploma is not null and offer.diploma != '' %}
                     <div class="about-offer-item">
                         <h4><b>{{ 'offer.diploma'|trans }}</b></h4>
                         {{ offer.diploma |trans }}
                     </div>
+                    {% endif %}
                 </div>
-                <div class="col-sm-3 col-md-3 about-offer-elements">
+                <div class="col-sm-4 col-md-4 about-offer-elements">
                     <div class="about-offer-item">
-                        <h4><b>{{ 'offer.startDate'|trans }}</b></h4>
-                        {{ offer.availableDate |date('d/m/Y')}}
+                        <h4><b>{{ 'offer.wage'|trans }}</b></h4>
+
+                        {{ offer.wage |trans }}
                     </div>
                     {% if offer.license|length > 0 %}
                         <div class="about-offer-item">
@@ -67,8 +70,6 @@
                             {% endfor %}
                         </div>
                     {% endif %}
-                </div>
-                <div class="col-sm-3 col-md-3 about-offer-elements">
                     {% if offer.language|length > 0 %}
                         <div class="about-offer-item">
                             <h4><b>{{ 'form.registration.language'|trans }}</b></h4>
@@ -80,12 +81,12 @@
                 </div>
             </div>
 
-            <div class="row fade-in-left animated shadow-box">
+            <div class="row fade-in-right animated shadow-box">
                 <h3>{{ 'offer.jobDescription' | trans }}</h3>
                 {{ offer.description| raw }}
             </div>
 
-            <div class="row fade-in-right animated shadow-box">
+            <div class="row fade-in-left animated shadow-box">
                 <h3>{{ offer.location }}</h3>
                 <!--{{ dump(status) }}-->
 

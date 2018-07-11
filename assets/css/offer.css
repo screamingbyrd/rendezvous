@@ -188,6 +188,9 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #number-of-offer {
     line-height: inherit;
@@ -562,6 +565,13 @@
     .no-offer {
         margin-top: 30px !important;
     }
+    .offer-jumbotron h2{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .contractType-list{
+        display: inherit !important;
+    }
 }
 
 #employer-input{
@@ -775,5 +785,29 @@ h3.post-offer{
     }
     .sticky{
         position: sticky;
+    }
+    .search-input-container .col-md-3, .search-input-container .col-md-4{
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+        margin-bottom: 8px;
+    }
+    .search-input-container .col-md-2{
+        padding-left: 15px !important;
+    }
+    .searchOffer{
+        margin-left: 0!important;
+    }
+    .search-alert-email-container{
+        width: 100% !important;
+    }
+    .search-alert-email-container #mail-input{
+        margin-bottom: 8px;
+    }
+    .no-offer {
+        margin-top: 30px !important;
+    }
+    .offer-element{
+        width: 100% !important;
+        margin: 10px 0 !important;
     }
 }

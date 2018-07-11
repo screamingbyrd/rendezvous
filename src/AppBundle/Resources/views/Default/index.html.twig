@@ -38,7 +38,7 @@
                     {% set blocOffer = 4 %}
                 {% endif %}
                 {%  for offer in featuredOffer %}
-                    <a class="col-sm-6 col-md-{{ blocOffer }} zoom" href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">
+                    <a class="col-sm-{{ blocOffer }} col-md-{{ blocOffer }} zoom" href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">
                         <div class="thumbnail featured-offer-item">
                             {% if offer.offer.image is not null and offer.offer.image.imageName is not null %}
                                 {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
@@ -79,7 +79,7 @@
                     {% set blocEmployer = 4 %}
                 {% endif %}
                 {%  for employer in featuredEmployer %}
-                <a class="col-sm-6 col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
+                <a class="col-sm-{{ blocOffer }} col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
                     <div class="thumbnail featured-employer-item" >
                         <div class="header-thumb-employer">
                             {% if employer.employer.logo.imageName is not null %}
@@ -106,21 +106,24 @@
             </div>
             <hr>
         {% endif %}
-        <h1 class="text-center featured-offer" >Category</h1>
-        <div class="row">
-            {% for row  in tagArray|batch(2, null) %}
-                <div class="{{ cycle(['color-row',''],loop.index) }}">
-                    {% for tag in row %}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
-                    {% endfor %}
-                </div>
+        <div class="fade-in-right animated">
+            <h1 class="text-center featured-offer" >Category</h1>
+            <div class="row">
+                {% for row  in tagArray|batch(2, null) %}
+                    <div class="{{ cycle(['color-row',''],loop.index) }}">
+                        {% for tag in row %}
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
+                        {% endfor %}
+                    </div>
 
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
+
 
         <hr>
 
-        <div class="shadow-box jobnow-description fade-in-right animated">
+        <div class="shadow-box jobnow-description fade-in-left animated">
             <h3>{{ 'header.about.title'|trans }}</h3>
             <p>{{ 'homepage.ourMission' |trans}}</p>
         </div>
