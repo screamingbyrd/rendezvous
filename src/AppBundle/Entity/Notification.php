@@ -54,6 +54,13 @@ class Notification
      */
     private $date;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uid", type="string", length=255)
+     */
+    private $uid;
+
 
     /**
      * Get id
@@ -172,6 +179,25 @@ class Notification
         $this->mail = $mail;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    /**
+     * @param string $uid
+     * @return Notification
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+        return $this;
+    }
+
 
 
 }

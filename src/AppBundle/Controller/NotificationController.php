@@ -65,6 +65,7 @@ class NotificationController extends Controller
         $notification->setDate($now);
         $notification->setTypeNotification($type);
         $notification->setElementId($elementId);
+        $notification->setUid(md5((string)$elementId));
 
         $em->persist($notification);
         $em->flush();
@@ -98,6 +99,7 @@ class NotificationController extends Controller
         $notification->setTypeNotification($type);
         $notification->setElementId($elementId);
         $notification->setMail($mail);
+        $notification->setUid(md5((string)$elementId));
 
         $em->persist($notification);
         $em->flush();
@@ -127,42 +129,30 @@ class NotificationController extends Controller
 
     }
 
-    public function deleteAction(Request $request, $notificationId){
-
-        $session = $request->getSession();
+    public function deleteAction(Request $request, $id){
         $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_CANDIDATE', $user->getRoles())){
-            return $this->redirectToRoute('create_candidate');
-        }
-
-        $candidateRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Candidate')
-        ;
-        $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+        $session = $request->getSession();
 
         $notificationRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Notification')
         ;
-        $notification = $notificationRepository->findOneBy(array('id' => $notificationId));
-
-        if(!isset($notification) || $candidate != $notification->getCandidate()){
-            return $this->redirectToRoute('create_candidate');
-        }
+        $notification = $notificationRepository->findOneBy(array('uid' => $id));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($notification);
         $em->flush();
 
-        $translated = $this->get('translator')->trans('notification.deleted');
-
-        $session->getFlashBag()->add('info', $translated);
-
-        return $this->redirectToRoute('dashboard_candidate');
+        if(isset($user)){
+            $translated = $this->get('translator')->trans('notification.deleted');
+            $session->getFlashBag()->add('info', $translated);
+            return $this->redirectToRoute('dashboard_candidate');
+        }else{
+            $translated = $this->get('translator')->trans('notification.deleted');
+            $session->getFlashBag()->add('info', $translated);
+            return $this->redirectToRoute('jobnow_home');
+        }
     }
 
     //@TODO put in CRON
@@ -201,16 +191,16 @@ class NotificationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         foreach ($notifications as $notification){
-            if($notification->getType != 'search'){
+            if($notification->getTypeNotification() != 'search'){
                 $offers = $offerRepository->getNotificationOffers($notification);
 
                 if(!empty($offers)){
                     $candidate = $candidateRepository->findOneBy(array('id' => $notification->getCandidate()));
 
-                    if($notification->getTypeNotification() == 'employer'){
+                    if($notification->getTypeNotification() == 'notification.employer'){
                         $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
                         $subject = $employer->getName();
-                    }elseif ($notification->getTypeNotification() == 'tag'){
+                    }elseif ($notification->getTypeNotification() == 'notification.tag'){
                         $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
                         $subject = $tag->getName();
                     }
@@ -225,7 +215,7 @@ class NotificationController extends Controller
                                 'AppBundle:Emails:notification.html.twig',
                                 array('offers' => $offers,
                                     'subject' => $translated = $this->get('translator')->trans($subject),
-                                    'id' =>$notification->getId()
+                                    'id' =>$notification->getUid()
                                 )
                             ),
                             'text/html'
@@ -273,7 +263,7 @@ class NotificationController extends Controller
                 }
             }
 
-            if(!empty($offers)){
+            if(!empty($finalArray)){
                 $subject = 'Offer that might interest you';
                 $mail = $notification->getMail();
                 $mailer = $this->container->get('swiftmailer.mailer');
@@ -284,9 +274,9 @@ class NotificationController extends Controller
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:notification.html.twig',
-                            array('offers' => $offers,
+                            array('offers' => $finalArray,
                                 'subject' => $translated = $this->get('translator')->trans($subject),
-                                'id' =>$notification->getId()
+                                'id' =>$notification->getUid()
                             )
                         ),
                         'text/html'
