@@ -461,4 +461,8 @@ tag:
   technology: Technologie
   transportation: Transport et déménagement
 
-
+language:
+  fr: Français
+  en: Anglais
+  de: Allemand
+  lu: Luxembourgeois

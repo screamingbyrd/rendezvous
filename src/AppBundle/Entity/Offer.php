@@ -141,13 +141,6 @@ class Offer
     protected $archived = 0;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="license", type="array", nullable=true)
-     */
-    private $license;
-
-    /**
      * @var \datetime
      *
      * @ORM\Column(name="availableDate", type="datetime", nullable=true)
@@ -599,30 +592,6 @@ class Offer
     public function getArchived()
     {
         return $this->archived;
-    }
-
-    /**
-     * Get tag
-     *
-     * @return array
-     */
-    public function getLicense()
-    {
-        return $this->license;
-    }
-
-    /**
-     * Set license
-     *
-     * @param array
-     *
-     * @return Offer
-     */
-    public function setLicense($license)
-    {
-        $this->license = $license;
-
-        return $this;
     }
 
     /**

@@ -80,7 +80,7 @@
                     <div class="about-offer-item">
                         <h4><b>{{ 'form.registration.language'|trans }}</b></h4>
                         {% for language in  candidate.language %}
-                            <span>- {{ language }}</span>
+                            <div>{{ language|trans }}</div>
                         {% endfor %}
                     </div>
                 {% endif %}

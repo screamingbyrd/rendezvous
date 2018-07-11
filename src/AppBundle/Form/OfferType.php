@@ -182,33 +182,6 @@ class OfferType extends AbstractType
 
             ))
 
-            ->add('license', ChoiceType::class, array('choices' => array(
-                'no' => 'no',
-                'form.registration.lis1' => 'form.registration.lis1',
-                'form.registration.lis2' => 'form.registration.lis2',
-                'form.registration.lis3' => 'form.registration.lis3',
-                'form.registration.lis4' => 'form.registration.lis4',
-                'form.registration.lis5' => 'form.registration.lis5',
-                'form.registration.lis6' => 'form.registration.lis6',
-                'form.registration.lis7' => 'form.registration.lis7',
-                'form.registration.lis8' => 'form.registration.lis8',
-                'form.registration.lis9' => 'form.registration.lis9',
-                'form.registration.lis10' => 'form.registration.lis10',
-                'form.registration.lis11' => 'form.registration.lis11',
-                'form.registration.lis12' => 'form.registration.lis12',
-                'form.registration.lis13' => 'form.registration.lis13',
-                'form.registration.lis14' => 'form.registration.lis14',
-            ),
-
-                'multiple' => true,
-                'required' => false,
-                'label' => 'offer.license',
-                'attr' => array(
-                    'class' => 'select2',
-                    'data-placeholder' =>  $translator->trans('offer.licensePH')
-                    ),
-            ))
-
             ->add('image', ImageType::class, array(
                 'required' => false,
                 'label' => 'offer.image',
@@ -216,10 +189,10 @@ class OfferType extends AbstractType
             ))
 
             ->add('language', ChoiceType::class, array('choices' => array(
-                'fr' => 'fr',
-                'en' => 'en',
-                'de' => 'de',
-                'lu' => 'lu',
+                'language.fr' => 'language.fr',
+                'language.en' => 'language.en',
+                'language.de' => 'language.de',
+                'language.lu' => 'language.lu',
             ),
                 'multiple' => true,
                 'required' => false,

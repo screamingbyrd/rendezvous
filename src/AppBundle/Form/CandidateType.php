@@ -89,10 +89,10 @@ class CandidateType extends AbstractType
                 'label' => 'offer.experience',
             ))
             ->add('language', ChoiceType::class, array('choices' => array(
-                'fr' => 'fr',
-                'en' => 'en',
-                'de' => 'de',
-                'lu' => 'lu',
+                'language.fr' => 'language.fr',
+                'language.en' => 'language.en',
+                'language.de' => 'language.de',
+                'language.lu' => 'language.lu',
             ),
                 'multiple' => true,
                 'required' => false,
