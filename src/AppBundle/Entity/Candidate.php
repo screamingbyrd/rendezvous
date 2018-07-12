@@ -28,9 +28,8 @@ class Candidate
     private $user;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -38,6 +37,12 @@ class Candidate
      * @var int
      *
      * @ORM\Column(name="age", type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 16,
+     *      max = 99,
+     *      minMessage = "candidate.age",
+     *      maxMessage = "candidate.age"
+     * )
      */
     private $age;
 
@@ -63,9 +68,9 @@ class Candidate
     private $diploma;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="socialMedia", type="string", length=255, nullable=true)
+     *
+     * @ORM\Column(name="socialMedia", type="text", nullable=true)
      */
     private $socialMedia;
 
@@ -113,6 +118,13 @@ class Candidate
 
     /**
      * @var string
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 255,
+     *      minMessage = "candidate.minTitle",
+     *      maxMessage = "candidate.maxTitle"
+     * )
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */

@@ -1,2 +1,8 @@
 password:
   require: The password must contain a least 6 character an uppercase, a lowercase and a number.
+
+
+candidate:
+  age: Your current age is not valid!
+  minTitle: Title must be longer than {{ limit }} characters.
+  maxTitle: Title must be smaller than {{ limit }} characters.

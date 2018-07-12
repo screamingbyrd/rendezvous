@@ -39,6 +39,7 @@ class CandidateType extends AbstractType
             ->add('firstName',      TextType::class, array(
                 'required' => true,
                 'label' => 'form.registration.firstname',
+
                 ))
             ->add('lastName',      TextType::class, array(
                 'required' => true,

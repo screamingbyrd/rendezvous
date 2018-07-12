@@ -220,7 +220,8 @@ class CandidateController extends Controller
 
         return $this->render('CandidateBundle:Candidate:edit.html.twig', array(
             'form' => $form->createView(),
-            'completion' => $completion
+            'completion' => $completion,
+            'user' => $user
         ));
     }
 
