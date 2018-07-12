@@ -58,6 +58,8 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Complet your profile
     completed: Profile completed
+    bySubmitting: By submitting you confirm that you read and accepted the %link_start%general terms and conditions%link_end% of our site.
+    consult: Read our %link_start%privacy policy%link_end% to understand your rights.
 
     email: Email
     passwordValidation : The password must contain a least 6 character an uppercase, a lowercase and a number.

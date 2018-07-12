@@ -57,6 +57,8 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Completer votre profile
     completed: Profile complété
+    bySubmitting: En soumettant ce formulaire, vous confirmez avoir consulté et accepté les %link_start%conditions générales%link_end% de notre site.
+    consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
     email: Email
     passwordValidation : Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule et un nombre.
