@@ -57,6 +57,7 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Completer votre profile
     completed: Profile complété
+    already: Déjà inscrit ?
     bySubmitting: En soumettant ce formulaire, vous confirmez avoir consulté et accepté les %link_start%conditions générales%link_end% de notre site.
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
