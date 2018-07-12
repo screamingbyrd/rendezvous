@@ -10,6 +10,7 @@
         <div class="col-md-5">
             <h3 class="title">{{ 'form.registration.title.employer' | trans }}</h3>
             <div>{{ 'form.registration.subTitle.employer'|trans }}</div>
+            <div>{{ 'form.registration.already'|trans }} <a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></div>
 
             <hr>
 
@@ -102,8 +103,16 @@
 
             {# Fermeture de la balise <form> du formulaire HTML #}
             {{ form_end(form) }}
-
-
+            <div class="col-md-12">
+                <div style="margin-top: 10px; font-size: 12px;">
+                    <div>
+                        {{ 'form.registration.bySubmitting'|trans({'%link_start%' : '<a target="_blank" href="'~path('legal_page')~'">', '%link_end%' : '</a>'}) | raw }}
+                    </div>
+                    <div>
+                        {{ 'form.registration.consult'|trans({'%link_start%' : '<a target="_blank" href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) | raw }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
