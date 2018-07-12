@@ -1,0 +1,2 @@
+password:
+  require: The password must contain a least 6 character an uppercase, a lowercase and a number.

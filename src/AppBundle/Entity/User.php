@@ -60,7 +60,7 @@ class User extends BaseUser
     /**
      * @Assert\Regex(
      *  pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*).*$/",
-     *  message="Password must be 6 or more characters long and contain at least one digit, one upper- and one lowercase character."
+     *  message="password.require"
      * )
      */
     protected $plainPassword;
