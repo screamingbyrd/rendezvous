@@ -698,7 +698,7 @@ class OfferController extends Controller
         $em->merge($candidate);
         $em->flush();
 
-        $translated = $this->get('translator')->trans('offer.applied.success', array('title' => $offer->getTitle()));
+        $translated = $this->get('translator')->trans('offer.applied.success', array('%title%' => $offer->getTitle()));
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_candidate');

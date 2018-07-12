@@ -394,6 +394,7 @@ price:
     enter: Enter your payment information
     validate: Validate my payment
     sure: Are you sure you want to buy %nbrCredits% credits ?
+    success: You bought %credits% credits!
 
 tag:
   accounting: Accounting/Finance

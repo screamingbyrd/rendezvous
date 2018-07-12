@@ -110,6 +110,9 @@ class CreditController extends Controller
                     $em->persist($logCredit);
                     $em->flush();
 
+                    $translated = $this->get('translator')->trans('price.payment.success', array('%credits%' => $nbrCredit));
+                    $session->getFlashBag()->add('info', $translated);
+
                     return $this->redirectToRoute('jobnow_credit');
 
                 } catch (\Stripe\Error\Base $e) {

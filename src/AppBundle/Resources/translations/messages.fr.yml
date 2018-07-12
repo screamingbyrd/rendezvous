@@ -392,6 +392,7 @@ price:
     enter: Entrer vos informations de paiement
     validate: Valider mon paiement
     sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
+    success: Vous avez bien acheté %credits% crédits !
 
 tag:
   accounting: Comptabilité et Finance

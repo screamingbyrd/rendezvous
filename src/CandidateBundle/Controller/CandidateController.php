@@ -75,6 +75,9 @@ class CandidateController extends Controller
                         ->getRepository('AppBundle:Offer')
                     ;
                     $offer = $offerRepository->find($id);
+                    $generateUrlService = $this->get('app.offer_generate_url');
+                    $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+
                     return $this->redirectToRoute('show_offer', array('id' => $id, 'url' => $offer->getOfferUrl()));
                 }else{
                     return $this->redirectToRoute('edit_candidate');
