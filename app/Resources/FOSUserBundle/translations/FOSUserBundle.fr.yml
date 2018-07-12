@@ -94,5 +94,10 @@ login:
   candidate: Candidat
   employer: Employeur
   sign: Connectez-vous avec votre compte
+  forgotPassword:
+    title: Mot de passe oublié ?
+    subtitle: Pas de problème ! Indiquez-nous votre adresse e-mail et nous vous enverrons un lien pour le réinitialiser.
+    new: Entrer votre nouveaux mot de passe
+    validation: Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule et un nombre.
 
 or: ou

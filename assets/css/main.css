@@ -355,9 +355,6 @@ legend{
         margin-top: 0 !important;
         margin-bottom: 20px;
     }
-    .jobnow-button.login {
-        margin-top: 0 !important;
-    }
     .logo-jobnow{
         position: inherit !important;
     }
@@ -399,6 +396,12 @@ legend{
     .jobnow-container{
         min-height: 270px;
         margin-bottom: 20px;
+    }
+    .login-button{
+        margin-top: 10px !important;
+    }
+    .reset-button{
+        margin-top: 10px !important;
     }
 }
 

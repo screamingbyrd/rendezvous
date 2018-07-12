@@ -30,7 +30,7 @@
         <h3>{{ 'dashboard.title' | trans }}</h3>
 
         <h4>{{ 'employer.credit.have'|trans({'%credit%': employer.credit}) }}</h4>
-        <a href="{{ path('post_offer') }}" class="btn btn-primary">{{ 'header.employers.post' | trans }}</a> <a href="{{ path('jobnow_credit') }}" class="btn btn-primary">{{ 'employer.credit.buy' | trans }}</a>
+        <a href="{{ path('post_offer') }}" class="btn btn-primary">{{ 'header.employers.post' | trans }}</a> <a href="{{ path('jobnow_credit') }}" class="btn btn-primary">{{ 'employer.credit.buy' | trans }}</a><a style="float: right;" href="{{ path('edit_employer') }}" class="btn btn-primary">{{ 'dashboard.employer.editProfile' | trans }}</a><a style="float: right; margin-right: 10px" href="{{ path('show_employer', {'id':employer.id}) }}" class="btn btn-primary">{{ 'dashboard.employer.watchProfile' | trans }}</a>
         <br>
         <br>
 
@@ -38,6 +38,7 @@
             <h4>{{ 'dashboard.employer.slot.title'|trans }}</h4>
             <div>{{ 'dashboard.employer.slot.use'|trans }}</div>
             {% if slots is defined and slots|length > 0 %}
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -81,7 +82,7 @@
                 {% for offer in offers %}
                     <li>
                         <div class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
-                            <span>{{ offer.title |truncate(33, true)}}</span>
+                            <a target="_blank" href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">{{ offer.title |truncate(33, true)}}</a>
                             {% if offer.archived %}
                                 <button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
                             {% else %}

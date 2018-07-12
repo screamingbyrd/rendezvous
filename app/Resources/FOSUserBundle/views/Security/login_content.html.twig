@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 
-        <div class="container login">
+        <div class="container login jobnow-container">
             <div class="col-md-4">
                 {% if error %}
                     <div style="color: red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -36,13 +36,14 @@
                                 <label for="password">{{ 'security.login.password'|trans }}</label>
                                 <input class="form-control" type="password" id="password" name="_password" required="required" autocomplete="current-password" />
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                                </label>
-                            </div>
-                            <input class="jobnow-button login" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                            {#<div class="checkbox">#}
+                                {#<label>#}
+                                    {#<input type="checkbox" id="remember_me" name="_remember_me" value="on" />#}
+                                    {#<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>#}
+                                {#</label>#}
+                            {#</div>#}
+                            <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forgotPassword.title'|trans }}</a>
+                            <input class="jobnow-button login login-button" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
                         </fieldset>
                     </form>
                 </div>

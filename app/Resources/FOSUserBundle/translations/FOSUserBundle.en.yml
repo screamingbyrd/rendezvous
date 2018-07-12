@@ -98,5 +98,10 @@ login:
   candidate: Candidate
   employer: Employer
   sign: Please sign in
+  forgotPassword:
+    title: Forgot Password ?
+    subtitle: Enter your email address and we'll send you a link to reset your password.
+    new: Enter your new pasword
+    validation: The password must contain a least 6 character an uppercase, a lowercase and a number.
 
 or: or

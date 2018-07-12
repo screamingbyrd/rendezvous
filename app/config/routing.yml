@@ -38,3 +38,13 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     prefix:   /{_locale}/
+
+fos_user_resetting_request:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix:
+        en: "/forgot-password"
+        fr: "/mot-de-passe-oublie"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /

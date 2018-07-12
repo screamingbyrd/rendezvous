@@ -372,6 +372,11 @@ class EmployerController extends Controller
         $_SESSION['archived'] = $archived;
 
         $offers = $OfferRepository->findBy($searchArray);
+        $generateUrlService = $this->get('app.offer_generate_url');
+        foreach ($offers as &$offer){
+            $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+            $finalArray[$offer->getId()]['offer'] = $offer;
+        }
 
         $countOfferInSlot = $OfferRepository->countOffersInSlot($employer);
 

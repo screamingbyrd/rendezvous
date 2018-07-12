@@ -173,6 +173,8 @@ dashboard:
     boostOffers: Boost you offers
     totalOnline: Total online offers
     totalInSlot: Total offers in slot
+    editProfile: Edit my profile
+    watchProfile: Watch my profile
   candidate:
     list: A quick summary of which job posting you’ve applied to
     appliedThe: Applied the
