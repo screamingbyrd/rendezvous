@@ -587,6 +587,7 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
+        $candidateMail = $user->getEmail();
         $id = $request->get('id');
 
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
@@ -612,6 +613,10 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
+        $generateUrlService = $this->get('app.offer_generate_url');
+
+        $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+
         $postulatedOfferRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -634,28 +639,41 @@ class OfferController extends Controller
 
         $arrayEmail = array();
 
-        foreach ($users as $user){
-            $arrayEmail[] = $user->getEmail();
+        foreach ($users as $emplyerUser){
+            $arrayEmail[] = $emplyerUser->getEmail();
         }
         $firstUser = $arrayEmail[0];
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message('A candidate applied to the offer: ' . $offer->getTitle()))
+        $messageEmmployer = (new \Swift_Message('A candidate applied to the offer: ' . $offer->getTitle()))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($firstUser)
             ->setCc(array_shift($arrayEmail))
             ->setBody(
                 $this->renderView(
                     'AppBundle:Emails:apply.html.twig',
-                    array('comment' => $comment)
+                    array('comment' => $comment, 'offer' => $offer)
                 ),
                 'text/html'
             )
             ->attach(\Swift_Attachment::fromPath($target_file));
         ;
 
-        $mailer->send($message);
+        $messageCandidate = (new \Swift_Message('You applied to the offer ' . $offer->getTitle()))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($candidateMail)
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:applied.html.twig',
+                    array('offer' => $offer)
+                ),
+                'text/html'
+            );
+        ;
+
+        $mailer->send($messageCandidate);
+        $mailer->send($messageEmmployer);
 
         $cv = $candidate->getCv();
         if(isset($cv) && $cv != ''){
