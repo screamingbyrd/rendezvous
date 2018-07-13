@@ -403,6 +403,9 @@ legend{
     .reset-button{
         margin-top: 10px !important;
     }
+    .jumbotron{
+        padding: 0 0 !important;
+    }
 }
 
 .homepage-jumbotron .div-keyword-input{

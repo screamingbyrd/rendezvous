@@ -85,6 +85,13 @@ h3.box{
     .search-employer-page #myUL{
         margin-top: -20px;
     }
+    .block-dashboard{
+        width: 40% !important;
+        padding-bottom: 40% !important;
+    }
+    .text-square{
+        margin-top: 0 !important;
+    }
 }
 .container-logo-employer{
     position: absolute;
@@ -180,4 +187,88 @@ h3.box{
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+.square-offers{
+    background-color: #ff9c07;
+}
+.square-profile{
+    background-color: #fd8f14;
+}
+.square-post{
+    background-color: #ffb12d;
+}
+.square-credit{
+    background-color: #ff9e00;
+}
+.square-featured-employers{
+    background-color: #ffc443;
+}
+.square-featured-offers{
+    background-color: #ffaa00;
+}
+.square-bills{
+    background-color: #ffa334;
+}
+.square-contact{
+    background-color: #ffb731;
+}
+.container-square{
+    position: relative;
+    left: 0;
+    top: 0;
+    height: auto;
+    width: 100%;
+    float: left;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.text-square{
+    margin-top: 10px;
+}
+.block-dashboard {
+    position: relative;
+    height: 0;
+    width: 15%;
+    padding-bottom: 15%;
+    float: left;
+    border: 1px #ddd solid;
+    margin: 3%;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false;
+    -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+    -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+}
+.block-dashboard:hover{
+    color: black;
+}
+.content-square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: auto;
+    width: 100%;
+    float: left;
+    padding: 20px;
+    margin: 0;
+}
+.content-square i{
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+.homepage-jumbotron{
+    padding: 63px 0;
+}
+@media (max-width: 991px) {
+    .block-dashboard{
+        width: 24%;
+        padding-bottom: 24%;
+    }
 }
