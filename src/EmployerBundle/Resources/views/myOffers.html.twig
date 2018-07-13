@@ -35,7 +35,7 @@
             <div>{{ 'dashboard.employer.slot.use'|trans }}</div>
             {% if slots is defined and slots|length > 0 %}
 
-                <table class="table">
+                <table class="table slot-table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -72,10 +72,13 @@
 
             <style>
 
-                @media
-                only screen and (max-width: 760px),
-                (min-device-width: 768px) and (max-device-width: 1024px)  {
-
+                @media screen and (max-device-width: 480px)  {
+                    .container-button-offers{
+                        display: grid !important;
+                    }
+                    .element-offer-list{
+                        float: none !important;
+                    }
                     /* Force table to not be like tables anymore */
                     table, thead, tbody, th, td, tr {
                         display: block;
@@ -112,11 +115,16 @@
                     /*
                     Label the data
                     */
-                    td:nth-of-type(1):before { content: "{{ 'offer.title'|trans }}"; }
-                    td:nth-of-type(2):before { content: "{{ 'dashboard.view'|trans }}"; }
-                    td:nth-of-type(3):before { content: "{{ 'dashboard.applied'|trans }}"; }
-                    td:nth-of-type(4):before { content: "{{ 'dashboard.employer.slot.endDate'|trans }}"; }
-                    td:nth-of-type(5):before { content: "{{ 'dashboard.action'|trans }}"; }
+                    .offers-table td:nth-of-type(1):before { content: "{{ 'offer.title'|trans }}"; }
+                    .offers-table td:nth-of-type(2):before { content: "{{ 'dashboard.view'|trans }}"; }
+                    .offers-table td:nth-of-type(3):before { content: "{{ 'dashboard.applied'|trans }}"; }
+                    .offers-table td:nth-of-type(4):before { content: "{{ 'dashboard.employer.slot.endDate'|trans }}"; }
+                    .offers-table td:nth-of-type(5):before { content: "{{ 'dashboard.action'|trans }}"; }
+
+
+                    .slot-table td:nth-of-type(0):before { content: "#"; }
+                    .slot-table td:nth-of-type(1):before { content: "{{ 'dashboard.employer.slot.offer'|trans }}"; }
+                    .slot-table td:nth-of-type(2):before { content: "{{ 'dashboard.employer.slot.endDate'|trans }}"; }
                 }
 
                 .offers-button-menu{
@@ -152,7 +160,7 @@
                 <button disabled style="min-width: 158px;" class="global-modal btn btn-primary element-offer-list modal-open" data-global="1" data-href="{{ path('activate_offer') }}" data-price="1" data-trad="{{ 'offer.activate.sureMultiple'|trans}}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
                 {#<button disabled class="global-a btn btn-primary element-offer-list slot-button" data-href="{{ path('add_to_slot') }}">{{ 'slot.add.title' | trans }}</button>#}
             </div>
-            <table class="table">
+            <table class="table offers-table">
                 <thead>
                 <tr>
                     <th scope="col"><input class="checkbox-myOffers-global" type="checkbox"/></th>
