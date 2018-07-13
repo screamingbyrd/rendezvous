@@ -190,6 +190,11 @@ dashboard:
     name: Nom
     date: Date
     type: Type
+  action: Action
+  view: Vue
+  applied: Candidature
+  viewCandidate: Voir la liste des candidats
+  not: Non activée
 
 slot:
   buy:

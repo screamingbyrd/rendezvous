@@ -189,6 +189,11 @@ dashboard:
     name: Name
     date: Date
     type: Type
+  action: Action
+  view: View
+  applied: Applied
+  viewCandidate: View the list of candidates
+  not: Not activated
 
 slot:
   buy:
