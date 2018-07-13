@@ -11,7 +11,11 @@ jobnow_credit:
         en: "/employer/credit"
         fr: "/employeur/credit"
     defaults: { _controller: AppBundle:Credit:credit }
-
+jobnow_bills:
+    locales:
+        en: "/employer/bills"
+        fr: "/employeur/facture"
+    defaults: { _controller: AppBundle:Credit:bills }
 jobnow_payment:
     locales:
         en: "/employer/payment/{id}"

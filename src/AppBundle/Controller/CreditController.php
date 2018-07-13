@@ -70,6 +70,33 @@ class CreditController extends Controller
         }
     }
 
+    public function billsAction(Request $request){
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $employer = $this->getUser()->getEmployer();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:LogCredit')
+        ;
+        $logsCredit = $repository->findBy(array('employer' => $employer));
+
+        return $this->render('AppBundle:Credit:bills.html.twig', [
+            'logsCredit' => $logsCredit
+        ]);
+
+    }
+
     private function buyPack(Request $request, $price, $nbrCredit ){
 
         $user = $this->getUser();
