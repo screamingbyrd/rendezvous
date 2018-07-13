@@ -69,7 +69,6 @@ class EmployerType extends AbstractType
             ->add('description', TextareaType::class, array(
                 'required' => false,
                 'label' => 'form.registration.description',
-
             ))
 
             ->add('tag', EntityType::class, array(
@@ -92,7 +91,7 @@ class EmployerType extends AbstractType
                 ))
 
             ->add('phone', TelType::class, array(
-                'required' => false,
+                'required' => true,
                 'label' => 'form.registration.phone'
             ))
 

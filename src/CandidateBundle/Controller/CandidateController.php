@@ -169,7 +169,7 @@ class CandidateController extends Controller
 
                 $session->getFlashBag()->add('info', 'Candidat modifié !');
 
-                return $this->redirectToRoute('dashboard_candidate');
+                return $this->redirectToRoute('show_candidate', array('id' => $candidate->getId()) );
             }
         }
 
@@ -220,7 +220,8 @@ class CandidateController extends Controller
 
         return $this->render('CandidateBundle:Candidate:edit.html.twig', array(
             'form' => $form->createView(),
-            'completion' => $completion
+            'completion' => $completion,
+            'user' => $user
         ));
     }
 
@@ -366,7 +367,7 @@ class CandidateController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+        if(!(isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) || in_array('ROLE_ADMIN', $user->getRoles()) || $user->getId() != $id)){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_employer');

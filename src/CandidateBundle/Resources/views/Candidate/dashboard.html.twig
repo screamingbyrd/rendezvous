@@ -23,7 +23,8 @@
     <div class="container jobnow-container">
         <div class="tab-content candidate-content">
             <div class="tab-pane active fade in" id="applied">
-                <h3>{{ 'dashboard.candidate.list' | trans }}</h3>
+                <div class="text-center">{{ 'dashboard.candidate.list' | trans }}</div>
+                <h3>{{ 'header.candidates.dashboard.applied' | trans }}</h3>
                 <table class="table">
                     <thead>
                     <tr>
@@ -49,12 +50,12 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="alerts">
-                <div>{{ 'notification.title'|trans }}</div>
+                <div class="text-center">{{ 'notification.title'|trans }}</div>
                 <div class="add-notification">
                     <h3>{{ 'notification.create' |trans}}</h3>
                     <form method="post" action="{{ path('create_notification') }}" id="search-offer-homepage">
                         <input name="type" type="hidden" id="type-input" value="notification.tag">
-                        <select title="Category" id="id-input" name="id"  class="jobnow-dropdown">
+                        <select title="Category" id="id-input" name="id"  class="jobnow-dropdown alerts">
                             {% for tag in tags %}
                                 <option value="{{ tag.id }}">{{ tag.name|trans }}</option>
                             {% endfor %}
@@ -87,7 +88,7 @@
                 {% endif %}
             </div>
             <div class="tab-pane fade" id="favorites">
-                <div>{{ 'favorite.title'|trans }}</div>
+                <div class="text-center">{{ 'favorite.title'|trans }}</div>
                 {% if notifications is defined and notifications|length > 0 %}
                     <h3>{{ 'header.candidates.dashboard.favorites' | trans }}</h3>
 
