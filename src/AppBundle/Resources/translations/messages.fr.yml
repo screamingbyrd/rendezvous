@@ -172,6 +172,7 @@ dashboard:
     archiveOffer: Archiver
     unarchiveOffer: Désarchiver
     myOffers: Mes offres
+    myBills: Mes factures
     typeTitle: Entrer un titre
     searchTitle: Chercher un titre
     boostOffers: Booster vos offres

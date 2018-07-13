@@ -327,7 +327,38 @@ class EmployerController extends Controller
         ));
     }
 
-    public function dashboardAction(Request $request, $archived = 0){
+    public function dashboardAction(Request $request){
+        $user = $this->getUser();
+        $session = $request->getSession();
+
+        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $idEmployer = $request->get('id');
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+
+        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+        $user = $userRepository->findOneBy(array('employer' => $employer));
+
+
+        return $this->render('EmployerBundle::dashboard.html.twig', array(
+            'employer' => $employer,
+        ));
+    }
+
+    public function myOfferPageAction(Request $request, $archived = 0){
         $user = $this->getUser();
         $session = $request->getSession();
 
@@ -384,7 +415,7 @@ class EmployerController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
 
-        return $this->render('EmployerBundle::dashboard.html.twig', array(
+        return $this->render('EmployerBundle::myOffers.html.twig', array(
             'offers' => $offers,
             'publishedOffer' => $creditInfo->getPublishOffer(),
             'boostOffers' => $creditInfo->getBoostOffers(),
@@ -663,6 +694,7 @@ class EmployerController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+            return $this->redirectToRoute('create_employer');
             return $this->redirectToRoute('create_employer');
         }
 

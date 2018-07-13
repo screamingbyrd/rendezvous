@@ -5,167 +5,118 @@
 {% endblock %}
 
 {% block body %}
-    <script>
 
-        function myFunction() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("span")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
+    <div class="jumbotron homepage-jumbotron">
+        <h2>{{ 'dashboard.title' | trans }}</h2>
+    </div>
 
-                }
-            }
-        }
-    </script>
+    <div class="container jobnow-container" style="text-align: center">
 
-    <div class="container">
-
-        <h3>{{ 'dashboard.title' | trans }}</h3>
-
-        <h4>{{ 'employer.credit.have'|trans({'%credit%': employer.credit}) }}</h4>
-        <a href="{{ path('post_offer') }}" class="btn btn-primary">{{ 'header.employers.post' | trans }}</a> <a href="{{ path('jobnow_credit') }}" class="btn btn-primary">{{ 'employer.credit.buy' | trans }}</a><a style="float: right;" href="{{ path('edit_employer') }}" class="btn btn-primary">{{ 'dashboard.employer.editProfile' | trans }}</a><a style="float: right; margin-right: 10px" href="{{ path('show_employer', {'id':employer.id}) }}" class="btn btn-primary">{{ 'dashboard.employer.watchProfile' | trans }}</a>
-        <br>
-        <br>
-
-        <div class="shadow-box">
-            <h4>{{ 'dashboard.employer.slot.title'|trans }}</h4>
-            <div>{{ 'dashboard.employer.slot.use'|trans }}</div>
-            {% if slots is defined and slots|length > 0 %}
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ 'dashboard.employer.slot.offer'|trans }}</th>
-                        <th scope="col">{{ 'dashboard.employer.slot.endDate'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for i in 1..slots|length %}
-                        <tr>
-                            <th scope="row">{{ i }}</th>
-                            {% if slots[i-1].offer is not null %}
-                                <td>{{ slots[i-1].offer.title }}</td>
-                            {% else %}
-                                <td>{{ 'dashboard.employer.slot.empty'|trans }}</td>
-                            {% endif %}
-                            <td>{{ slots[i-1].endDate|date("d/m/Y") }}</td>
-                            <td><a href="{{ path('empty_slot', {'id':slots[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'slot.remove.title' | trans }}</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
-            <button class="btn btn-primary modal-open"  data-trad="{{ 'slot.buy.sure'|trans({'%credit%': buySlot}) }}"  data-href="{{ path('buy_slot') }}">{{ 'slot.buy.title' | trans }}</button>
-
-        </div>
-
-        <span class="dashboard-total-offer">{{ 'dashboard.employer.totalOnline'|trans }} {{ countActiveOffer }} | {{ 'dashboard.employer.totalInSlot'|trans }} {{ countOfferInSlot }}</span>
-
-        <a href="{{ path('featured_offer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.offer.title' | trans }}</a>
-        <a href="{{ path('featured_employer_page') }}" class="btn btn-primary element-offer-list">{{ 'featured.employer.title' | trans }}</a>
-
-        <button class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
-        <br><br>
-        <div class="shadow-box">
-            <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
-
-            <ul id="myUL">
-                {% for offer in offers %}
-                    <li>
-                        <div class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
-                            <a target="_blank" href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">{{ offer.title |truncate(33, true)}}</a>
-                            {% if offer.archived %}
-                                <button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
-                            {% else %}
-                                <button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
-                            {% endif %}
-                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">{{ 'dashboard.employer.editOffer' | trans }}</a>
-                            <div class="element-offer-list">
-                                {% if offer.archived %}
-                                    <span class="element-offer-list archived-info">{{ 'offer.archived' | trans }}</span>
-                                {% else %}
-                                    {% if date(offer.endDate) > date() %}
-                                        <span class="element-offer-list count-info end-date-activation">{{ 'offer.endDate' | trans }} {{ offer.endDate|date("m/d/Y")}}</span>
-                                    {% else %}
-                                        <button {% if offer.slot is not null %}disabled{% endif %} style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
-                                    {% endif %}
-                                    {% if offer.slot is null  %}
-                                        <a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a>
-                                    {% else %}
-                                        <a class="btn btn-primary element-offer-list slot-button" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                            <span class="element-offer-list count-info"><i class="fas fa-eye"></i>{{ offer.countView}}</span>
-                            <a href="{{ path('applied_candidate_page', {'id': offer.id}) }}" class="btn btn-success element-offer-list">{{ 'offer.countContact' | trans }} {{ offer.countContact}}</a>
-                            <div id="collapse{{ offer.id }}" class="collapse-offer-info">
-                                <div class="description-offer-dashboard">
-                                    Description:
-                                    <div>{{ offer.description }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            <a href="{{ path('dashboard_employer', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
-                {% if app.request.get('archived') %}
-                    {{ 'dashboard.employer.hideArchived' | trans }}
-                {% else %}
-                    {{ 'dashboard.employer.showArchived' | trans }}
-                {% endif %}
-            </a>
-            <br>
-            <br>
-        </div>
-
-
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-dashboard">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel"></h4>
-                        </div>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
-                            <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="dashboard-container">
+            <div class="container-square">
+                <a class="zoom block-dashboard square-profile" href="{{ path('show_employer', {'id':employer.id}) }}"><div class="content-square"><i class="fas fa-user"></i><div class="text-square">{{ 'dashboard.employer.watchProfile' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-offers" href="{{ path('employer_offers') }}"><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">{{ 'dashboard.employer.myOffers' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-credit" href="{{ path('jobnow_credit') }}"><div class="content-square"><i class="fas fa-shopping-cart"></i><div class="text-square">{{ 'employer.credit.buy' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-featured-offers" href="{{ path('featured_offer_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.offer.title' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-bills" href="{{ path('featured_offer_page') }}"><div class="content-square"><i class="fas fa-file"></i><div class="text-square">{{ 'dashboard.employer.myBills' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-post" href="{{ path('post_offer') }}" ><div class="content-square"><i class="fas fa-clipboard"></i><div class="text-square">{{ 'header.employers.post' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-contact" href="{{ path('contact_us_page') }}"><div class="content-square"><i class="fas fa-headphones"></i><div class="text-square">{{ 'contact.us.employer'|trans }}</div></div></a>
+                <a class="zoom block-dashboard square-featured-employers" href="{{ path('featured_employer_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.employer.title' | trans }}</div></div></a>
             </div>
-
-            <script>
-                $(".offer-element").click(function() {
-                    $(this).children(".collapse-offer-info").slideToggle("medium");
-                });
-
-                $(".unarchived").click(function() {
-                    window.location.replace($(this).data('href'));
-                });
-
-                $(".modal-open").on("click", function(e){
-                    $('#modal-btn-yes').attr("href", $(this).data('href'));
-                    console.log($(this).data('trad'));
-                    $('#myModalLabel').html($(this).data('trad'));
-                    $("#modal-dashboard").modal('show');
-                });
-
-                $(".modal-btn-no").on("click", function(){
-                    $(".modal").modal('hide');
-                });
-
-            </script>
+        </div>
 
     </div>
+    <style>
+        .square-offers{
+            background-color: #ff9c07;
+        }
+        .square-profile{
+            background-color: #fd8f14;
+        }
+        .square-post{
+            background-color: #ffb12d;
+        }
+        .square-credit{
+            background-color: #ff9e00;
+        }
+        .square-featured-employers{
+            background-color: #ffc443;
+        }
+        .square-featured-offers{
+            background-color: #ffaa00;
+        }
+        .square-bills{
+            background-color: #ffa334;
+        }
+        .square-contact{
+            background-color: #ffb731;
+        }
+        .container-square{
+            position: relative;
+            left: 0px;
+            top: 0px;
+            height: auto;
+            width: 100%;
+            float: left;
+            padding: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .text-square{
+            margin-top: 10px;
+        }
+        .block-dashboard {
+            position: relative;
+            height: 0;
+            width: 15%;
+            padding-bottom: 15%;
+            float: left;
+            border: 1px #ddd solid;
+            margin: 3%;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+            -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+            -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false;
+            -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+            -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+        }
+        .block-dashboard:hover{
+            color: black;
+        }
+        .content-square {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            height: auto;
+            width: 100%;
+            float: left;
+            padding: 20px;
+            margin: 0;
+        }
+        .content-square i{
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .homepage-jumbotron{
+            padding: 63px 0 !important;
+        }
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/dashboard.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+    </style>
 
 {% endblock %}

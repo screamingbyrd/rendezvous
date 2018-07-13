@@ -28,9 +28,14 @@ list_employer:
     defaults: { _controller: EmployerBundle:Employer:list }
 dashboard_employer:
     locales:
-        en: "/dashboard/{archived}"
-        fr: "/tableaux-de-bord/{archived}"
-    defaults: { _controller: EmployerBundle:Employer:dashboard , archived: 0}
+        en: "/dashboard"
+        fr: "/tableaux-de-bord"
+    defaults: { _controller: EmployerBundle:Employer:dashboard}
+employer_offers:
+    locales:
+        en: "/my-offers/{archived}"
+        fr: "/mes-offres/{archived}"
+    defaults: { _controller: EmployerBundle:Employer:myOfferPage , archived: 0}
     requirements:
       archived: 0|1
 post_offer:
