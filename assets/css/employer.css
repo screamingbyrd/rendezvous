@@ -92,6 +92,18 @@ h3.box{
     .text-square{
         margin-top: 0 !important;
     }
+    .dashboard-total-offer{
+        display: block !important;
+        text-align: center;
+        margin-left: 0!important;
+    }
+    .boost-button{
+        text-align: center;
+        width: 100%;
+        margin-top: 10px;
+         margin-left: 0 !important;
+         margin-right: 0 !important;
+    }
 }
 .container-logo-employer{
     position: absolute;
@@ -166,7 +178,7 @@ h3.box{
     padding: 7px;
     color: #333;
     font-size: 14px;
-    min-width: 295px !important;
+    min-width: 156px !important;
     text-align: center;
 }
 .archived-button{
@@ -187,6 +199,11 @@ h3.box{
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    display: inline-flex;
+}
+.dashboard-total-offer div {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .square-offers{
     background-color: #ff9c07;

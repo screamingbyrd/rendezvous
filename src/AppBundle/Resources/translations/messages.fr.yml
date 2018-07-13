@@ -248,6 +248,7 @@ offer:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:
       sure: Etes vous sure de vouloir activer cette offre? Cela vous coutera %credit% crédit.
+      sureMultiple: Etes vous sure de vouloir activer ces offre? Cela vous coutera %credit% crédit.
   boost:
       sure: Etes vous sure de vouloir booster vos offres? Cela vous coutera %credit% crédits.
   endDate: Date de fin :

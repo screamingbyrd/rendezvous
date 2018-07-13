@@ -52,15 +52,15 @@ edit_offer:
       id: \d+
 delete_offer:
     locales:
-        en: "/delete-offer/{id}"
-        fr: "/supprimer-offre/{id}"
+        en: "/delete-offer"
+        fr: "/supprimer-offre"
     defaults: { _controller: EmployerBundle:Offer:delete }
     requirements:
       id: \d+
 activate_offer:
     locales:
-        en: "/activate-offer/{id}"
-        fr: "/activer-offre/{id}"
+        en: "/activate-offer"
+        fr: "/activer-offre"
     defaults: { _controller: EmployerBundle:Offer:activate }
     requirements:
       id: \d+
@@ -130,8 +130,8 @@ buy_slot:
     defaults: { _controller: EmployerBundle:Employer:buySlot }
 add_to_slot:
     locales:
-        en: "/add-to-slot/{id}"
-        fr: "/ajouter-aux-slot/{id}"
+        en: "/add-to-slot"
+        fr: "/ajouter-aux-slot"
     defaults: { _controller: EmployerBundle:Employer:addToSlot }
     requirements:
       id: \d+

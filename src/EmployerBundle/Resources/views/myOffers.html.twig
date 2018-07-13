@@ -62,15 +62,32 @@
 
         </div>
 
-        <span class="dashboard-total-offer">{{ 'dashboard.employer.totalOnline'|trans }} {{ countActiveOffer }} | {{ 'dashboard.employer.totalInSlot'|trans }} {{ countOfferInSlot }}</span>
+        <span class="dashboard-total-offer"><div>{{ 'dashboard.employer.totalOnline'|trans }} {{ countActiveOffer }} </div><div>{{ 'dashboard.employer.totalInSlot'|trans }} {{ countOfferInSlot }}</div></span>
 
-        <button class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
+        <button class="boost-button btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.boost.sure'|trans({'%credit%': boostOffers}) }}" data-href="{{ path('boost_offers') }}">{{ 'dashboard.employer.boostOffers' | trans }}</button>
         <br><br>
         <div class="shadow-box">
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
 
             <style>
+
+                .offers-button-menu{
+                    background-color: white !important;
+                }
+                .offers-button-menu button{
+                    width: 94% !important;
+                    margin: 5px;
+                }
+                .offers-button-menu a{
+                    width: 94% !important;
+                    margin: 5px;
+                    padding: 6px !important;
+                    font-size: 14px !important;
+                }
+                .btn-group{
+                    float: right; !important;
+                }
                 .checkbox-myOffers, .checkbox-myOffers-global{
                     margin-right: 10px !important;
                 }
@@ -85,11 +102,12 @@
             <div class="container-button-offers">
                 <input class="checkbox-myOffers-global" type="checkbox"/>Select all
                 {% if app.request.get('archived') %}
-                    <button class="btn btn-danger element-offer-list archived-button unarchived">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
+                    <button disabled class="global-a btn btn-danger element-offer-list archived-button unarchived" data-global="1" data-href="{{ path('delete_offer') }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
+                {% else %}
+                    <button disabled class="global-modal btn btn-danger element-offer-list archived-button modal-open" data-global="1" data-trad="{{ 'offer.delete.sure'|trans }} " data-href="{{ path('delete_offer') }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
                 {% endif %}
-                <button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
-                <button style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
-                <a class="btn btn-primary element-offer-list slot-button" href="#">{{ 'slot.add.title' | trans }}</a>
+                <button disabled style="min-width: 158px;" class="global-modal btn btn-primary element-offer-list modal-open" data-global="1" data-href="{{ path('activate_offer') }}" data-price="1" data-trad="{{ 'offer.activate.sureMultiple'|trans}}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                {#<button disabled class="global-a btn btn-primary element-offer-list slot-button" data-href="{{ path('add_to_slot') }}">{{ 'slot.add.title' | trans }}</button>#}
             </div>
             <ul id="myUL">
                 {% for offer in offers %}
@@ -97,11 +115,27 @@
                         <div class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
                             <input class="checkbox-myOffers" type="checkbox" id="{{ offer.id }}"/>
                             <a target="_blank" href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">{{ offer.title |truncate(33, true)}}</a>
-                            {% if offer.archived %}
-                                <button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
-                            {% else %}
-                                <button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
-                            {% endif %}
+
+                            <div class="btn-group dropup">
+                                <button type="button" class="element-offer-list btn btn-primary element-offer-list toggle-buttons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right offers-button-menu">
+                                    {% if offer.archived %}
+                                        <li><button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button></li>
+                                    {% else %}
+                                        <li><button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button></li>
+                                        {% if date(offer.endDate) < date() %}
+                                            <li><button {% if offer.slot is not null %}disabled{% endif %} class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button></li>
+                                        {% endif %}
+                                        {% if offer.slot is null  %}
+                                            <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a></li>
+                                        {% else %}
+                                            <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                </ul>
+                            </div>
                             <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list"><i class="fas fa-pencil-alt"></i></a>
                             <div class="element-offer-list">
                                 {% if offer.archived %}
@@ -109,18 +143,11 @@
                                 {% else %}
                                     {% if date(offer.endDate) > date() %}
                                         <span class="element-offer-list count-info end-date-activation">{{ 'offer.endDate' | trans }} {{ offer.endDate|date("m/d/Y")}}</span>
-                                    {% else %}
-                                        <button {% if offer.slot is not null %}disabled{% endif %} style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
-                                    {% endif %}
-                                    {% if offer.slot is null  %}
-                                        <a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a>
-                                    {% else %}
-                                        <a class="btn btn-primary element-offer-list slot-button" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a>
                                     {% endif %}
                                 {% endif %}
                             </div>
                             <span class="element-offer-list count-info"><i class="fas fa-eye"></i>{{ offer.countView}}</span>
-                            <a href="{{ path('applied_candidate_page', {'id': offer.id}) }}" class="btn btn-success element-offer-list">{{ 'offer.countContact' | trans }} {{ offer.countContact}}</a>
+                            <a href="{{ path('applied_candidate_page', {'id': offer.id}) }}" class="btn btn-success element-offer-list"><i class="fas fa-envelope"></i> {{ offer.countContact}}</a>
                             <div id="collapse{{ offer.id }}" class="collapse-offer-info">
                                 <div class="description-offer-dashboard">
                                     Description:
@@ -169,13 +196,47 @@
 
                 $(".modal-open").on("click", function(e){
                     $('#modal-btn-yes').attr("href", $(this).data('href'));
-                    $('#myModalLabel').html($(this).data('trad'));
+                    $('#modal-btn-yes').attr("data-global", $(this).data('global'));
+                    let trad = $(this).data('trad');
+                    if($(this).data('price') == "1"){
+                        trad = $(this).data('trad').replace('%credit%', $('.checkbox-myOffers:checkbox:checked').length * {{ publishedOffer }});
+                        console.log(trad);
+                    }
+
+                    $('#myModalLabel').html(trad);
                     $("#modal-dashboard").modal('show');
                 });
 
                 $(".modal-btn-no").on("click", function(){
                     $(".modal").modal('hide');
                 });
+
+                $("#modal-btn-yes").on("click", function(e){
+                    if($(this).data('global') == '1'){
+                        e.preventDefault();
+                        globalAction($(this).attr('href'))
+                    }
+                });
+
+                $(".global-a").on("click", function(e){
+                    e.preventDefault();
+                    let url = $(this).data('href');
+                    globalAction(url);
+                });
+
+                function globalAction(url) {
+                    let id = Array();
+                    $('.checkbox-myOffers:checkbox:checked').each(function (i) {
+                        id.push($(this).attr("id"));
+                    });
+                    $.ajax({
+                        url: url,
+                        data: {id:id,ajax:true}
+                    }).done(function( urlFromController ) {
+                        window.location.href = urlFromController;
+                    });
+                }
+
 
                 $(".checkbox-myOffers-global").on("change", function(e){
                     if($(this).prop("checked") == true){
@@ -184,6 +245,15 @@
                         $(".checkbox-myOffers").prop("checked", false);
                     }
                 });
+
+                $(".checkbox-myOffers-global,.checkbox-myOffers").on("change", function(e){
+                    if($('.checkbox-myOffers:checkbox:checked').length == 0){
+                        $('.global-modal, .global-a').prop("disabled",true);
+                    }else{
+                        $('.global-modal, .global-a').prop("disabled",false);
+                    }
+                });
+
 
             </script>
 

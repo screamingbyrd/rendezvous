@@ -18,6 +18,7 @@ use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Ivory\GoogleMap\Overlay\InfoWindow;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -685,16 +686,16 @@ class EmployerController extends Controller
         $translated = $this->get('translator')->trans('slot.buy.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function addToSlotAction(Request $request){
         $session = $request->getSession();
         $id = $request->get('id');
+        $ajax = $request->get('ajax');
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_employer');
             return $this->redirectToRoute('create_employer');
         }
 
@@ -728,14 +729,14 @@ class EmployerController extends Controller
                 $translated = $this->get('translator')->trans('slot.add.success');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+                return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
             }
         }
 
         $translated = $this->get('translator')->trans('slot.add.error');
         $session->getFlashBag()->add('danger', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function removeFromSlotAction(Request $request){
@@ -774,7 +775,7 @@ class EmployerController extends Controller
         $translated = $this->get('translator')->trans('slot.remove.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function EmptySlotAction(Request $request){
@@ -811,7 +812,7 @@ class EmployerController extends Controller
         $translated = $this->get('translator')->trans('slot.empty.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function listAppliedCandidatePageAction(Request $request){

@@ -29,7 +29,7 @@ use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class OfferController extends Controller
 {
@@ -146,6 +146,7 @@ class OfferController extends Controller
 
         $id = $request->get('id');
 
+        $ajax = $request->get('ajax');
         $user = $this->getUser();
 
         $employerRepository = $this
@@ -155,30 +156,39 @@ class OfferController extends Controller
         ;
         $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
 
+        $ids = is_array($id)?$id:array($id);
+
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-        $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('form.offer.edition.error');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        foreach ($ids as $id){
+            $offer = $offerRepository->findOneBy(array('id' => $id));
+
+            if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+                $translated = $this->get('translator')->trans('form.offer.edition.error');
+                $session->getFlashBag()->add('danger', $translated);
+                return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+            }
+
+            $bool = boolval($offer->isArchived());
+            $offer->setArchived(!$bool);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->merge($offer);
         }
 
-        $bool = boolval($offer->isArchived());
-        $offer->setArchived(!$bool);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->merge($offer);
         $em->flush();
 
         $translated = $this->get('translator')->trans(!$bool?'form.offer.archived.success':'form.offer.unarchived.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        if(isset($ajax) && $ajax){
+            return new JsonResponse($this->generateUrl('employer_offers', array('archived' => $_SESSION['archived'])));
+        }
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function showAction($id){
@@ -257,6 +267,7 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $id = $request->get('id');
+        $ajax = $request->get('ajax');
 
         $user = $this->getUser();
 
@@ -266,24 +277,31 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Employer')
         ;
         $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
-
+        $creditEmployer = $employer->getCredit();
+        $creditInfo = $this->container->get('app.credit_info');
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-        $offer = $offerRepository->findOneBy(array('id' => $id));
+        $ids = is_array($id)?$id:array($id);
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
-            $translated = $this->get('translator')->trans('redirect.employer');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+        $creditOffer = 0;
+
+        $offerArray = array();
+
+        foreach ($ids as $id){
+            $offer = $offerRepository->findOneBy(array('id' => $id));
+
+            if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
+                $translated = $this->get('translator')->trans('redirect.employer');
+                $session->getFlashBag()->add('danger', $translated);
+                return $this->redirectToRoute('create_employer');
+            }
+            $creditOffer += $creditInfo->getPublishOffer();
+            $offerArray[] = $offer;
         }
 
-        $creditInfo = $this->container->get('app.credit_info');
-
-        $creditEmployer = $employer->getCredit();
-        $creditOffer = $creditInfo->getPublishOffer();
 
         if($creditEmployer < $creditOffer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
@@ -295,21 +313,29 @@ class OfferController extends Controller
 
         $now =  new \DateTime();
         $next = new \DateTime();
-
-        $offer->setStartDate($now);
-        $offer->setUpdateDate($now);
-
-        $offer->setEndDate($next->modify( '+ 2 month' ));
-
         $em = $this->getDoctrine()->getManager();
-        $em->merge($offer);
+
+        foreach ($offerArray as $offer){
+            $offer->setStartDate($now);
+            $offer->setUpdateDate($now);
+
+            $offer->setEndDate($next->modify( '+ 2 month' ));
+
+
+            $em->merge($offer);
+        }
+
         $em->merge($employer);
         $em->flush();
 
         $translated = $this->get('translator')->trans('form.offer.activate.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        if(isset($ajax) && $ajax){
+            return new JsonResponse($this->generateUrl('employer_offers', array('archived' => $_SESSION['archived'])));
+        }
+
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function searchAction(Request $request){
@@ -580,7 +606,7 @@ class OfferController extends Controller
         $translated = $this->get('translator')->trans('form.offer.boost.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function applyAction(Request $request){

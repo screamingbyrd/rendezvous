@@ -246,6 +246,7 @@ offer:
       sure: Are you sure that you want to archive this offer?
   activate:
       sure: Are you sure that you want to activate this offer? This will cost you %credit% credit.
+      sureMultiple: Are you sure that you want to activate those offers? This will cost you %credit% credit.
   boost:
       sure: Are you sure that you want to boost yout offers?This will cost you %credit% credits.
   endDate: End date:
