@@ -563,7 +563,11 @@ legend{
     height: 100px;
 }
 
-
+.return-to-dashboard{
+    position: absolute;
+    left: 30px;
+    z-index: 200;
+}
 
 .favorite-element{
     display: flex;

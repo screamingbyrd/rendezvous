@@ -180,6 +180,7 @@ dashboard:
     totalInSlot: Total offre dans un slot
     editProfile: Editer mon profile
     watchProfile: Voir mon profile
+    return: Retour au table de bord
   candidate:
     list: Vous avez postulez à ces offres
     appliedThe: Postulé le
