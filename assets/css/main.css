@@ -87,6 +87,13 @@ body {
     .homepage-subtitle{
         margin-bottom: 60px !important;
     }
+    .dashboard-container{
+        display: flex;
+        justify-content: center;
+    }
+    .container-square{
+        width: 83% !important;
+    }
 }
 
 .navbar-toggle{

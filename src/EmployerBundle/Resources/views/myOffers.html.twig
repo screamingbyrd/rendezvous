@@ -48,12 +48,11 @@
                         <tr>
                             <th scope="row">{{ i }}</th>
                             {% if slots[i-1].offer is not null %}
-                                <td>{{ slots[i-1].offer.title }}</td>
+                                <td>{{ slots[i-1].offer.title }}<a href="{{ path('empty_slot', {'id':slots[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'slot.remove.title' | trans }}</a></td>
                             {% else %}
                                 <td>{{ 'dashboard.employer.slot.empty'|trans }}</td>
                             {% endif %}
                             <td>{{ slots[i-1].endDate|date("d/m/Y") }}</td>
-                            <td><a href="{{ path('empty_slot', {'id':slots[i-1].id}) }}" class="btn btn-primary element-offer-list">{{ 'slot.remove.title' | trans }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -71,17 +70,39 @@
             <h3>{{ 'dashboard.employer.myOffers' | trans }}</h3>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
 
+            <style>
+                .checkbox-myOffers, .checkbox-myOffers-global{
+                    margin-right: 10px !important;
+                }
+                .container-button-offers{
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    display: table;
+                    width: 100%;
+                }
+            </style>
+
+            <div class="container-button-offers">
+                <input class="checkbox-myOffers-global" type="checkbox"/>Select all
+                {% if app.request.get('archived') %}
+                    <button class="btn btn-danger element-offer-list archived-button unarchived">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
+                {% endif %}
+                <button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
+                <button style="min-width: 158px;" class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button>
+                <a class="btn btn-primary element-offer-list slot-button" href="#">{{ 'slot.add.title' | trans }}</a>
+            </div>
             <ul id="myUL">
                 {% for offer in offers %}
                     <li>
                         <div class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
+                            <input class="checkbox-myOffers" type="checkbox" id="{{ offer.id }}"/>
                             <a target="_blank" href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">{{ offer.title |truncate(33, true)}}</a>
                             {% if offer.archived %}
                                 <button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
                             {% else %}
                                 <button class="btn btn-danger element-offer-list archived-button modal-open" data-trad="{{ 'offer.delete.sure'|trans }}" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.archiveOffer' | trans }}</button>
                             {% endif %}
-                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">{{ 'dashboard.employer.editOffer' | trans }}</a>
+                            <a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list"><i class="fas fa-pencil-alt"></i></a>
                             <div class="element-offer-list">
                                 {% if offer.archived %}
                                     <span class="element-offer-list archived-info">{{ 'offer.archived' | trans }}</span>
@@ -110,7 +131,7 @@
                     </li>
                 {% endfor %}
             </ul>
-            <a href="{{ path('dashboard_employer', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
+            <a href="{{ path('employer_offers', {'archived':   app.request.get('archived') ? 0:1 }) }}" class="btn btn-primary element-offer-list show-archived">
                 {% if app.request.get('archived') %}
                     {{ 'dashboard.employer.hideArchived' | trans }}
                 {% else %}
@@ -148,13 +169,20 @@
 
                 $(".modal-open").on("click", function(e){
                     $('#modal-btn-yes').attr("href", $(this).data('href'));
-                    console.log($(this).data('trad'));
                     $('#myModalLabel').html($(this).data('trad'));
                     $("#modal-dashboard").modal('show');
                 });
 
                 $(".modal-btn-no").on("click", function(){
                     $(".modal").modal('hide');
+                });
+
+                $(".checkbox-myOffers-global").on("change", function(e){
+                    if($(this).prop("checked") == true){
+                        $(".checkbox-myOffers").prop("checked", true);
+                    }else{
+                        $(".checkbox-myOffers").prop("checked", false);
+                    }
                 });
 
             </script>
