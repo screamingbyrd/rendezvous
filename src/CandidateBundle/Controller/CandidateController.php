@@ -351,11 +351,50 @@ class CandidateController extends Controller
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_candidate');
         }
-
         $em = $this->getDoctrine()->getManager();
+
+        $postulatedRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers')
+        ;
+        $postulated = $postulatedRepository->findBy(array('candidate' => $candidate));
+        foreach ($postulated as $offer){
+            $em->remove($offer);
+        }
+        
+        $favoriteRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Favorite')
+        ;
+        $favorites = $favoriteRepository->findBy(array('candidate' => $candidate));
+        foreach ($favorites as $favorite){
+            $em->remove($favorite);
+        }
+
+        $mail = $user->getEmail();
+
+
         $em->remove($candidate);
         $em->remove($user);
         $em->flush();
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $message = (new \Swift_Message('Your profile has been deleted'))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($mail)
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:userDeleted.html.twig',
+                    array()
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
 
         $session->getFlashBag()->add('info', 'Candidat supprimé !');
 
