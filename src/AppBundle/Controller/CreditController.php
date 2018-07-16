@@ -71,6 +71,12 @@ class CreditController extends Controller
     }
 
     public function billsAction(Request $request){
+        $currentPage = $request->get('row');
+        $sort = $request->get('sort');
+        $currentPage = isset($currentPage)?$currentPage:1;
+        $sort = isset($sort)?$sort:'ASC';
+
+        $numberOfItem = 50;
 
         $user = $this->getUser();
 
@@ -89,10 +95,19 @@ class CreditController extends Controller
             ->getManager()
             ->getRepository('AppBundle:LogCredit')
         ;
-        $logsCredit = $repository->findBy(array('employer' => $employer));
+        $logsCredit = $repository->findBy(array('employer' => $employer),array('date' => $sort));
+
+        $countResult = count($logsCredit);
+
+        $finalArray = array_slice($logsCredit, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
 
         return $this->render('AppBundle:Credit:bills.html.twig', [
-            'logsCredit' => $logsCredit
+            'logsCredit' => $finalArray,
+            'page' => $currentPage,
+            'total' => $totalPage,
+            'sort' => $sort
         ]);
 
     }
