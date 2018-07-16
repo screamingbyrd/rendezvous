@@ -167,7 +167,7 @@ dashboard:
     edit: Modifier les informations de votre société
     showArchived: Montrer les offres archivées
     hideArchived: Cacher les offres archivées
-    activateOffer: Activer
+    activateOffer: Activer/Prolonger
     editOffer: Editer
     archiveOffer: Archiver
     unarchiveOffer: Désarchiver
@@ -252,8 +252,8 @@ offer:
   delete:
       sure: Etes vous sure de vouloir archiver cette offre ?
   activate:
-      sure: Etes vous sure de vouloir activer cette offre? Cela vous coutera %credit% crédit.
-      sureMultiple: Etes vous sure de vouloir activer ces offre? Cela vous coutera %credit% crédit.
+      sure: Etes vous sure de vouloir activer / prolonger cette offre? Cela vous coutera %credit% crédit.
+      sureMultiple: Etes vous sure de vouloir activer / prolonger ces offre? Cela vous coutera %credit% crédit.
   boost:
       sure: Etes vous sure de vouloir booster vos offres? Cela vous coutera %credit% crédits.
   endDate: Date de fin :

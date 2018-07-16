@@ -258,11 +258,11 @@
                     $('#modal-btn-yes').attr("data-global", $(this).data('global'));
                     let trad = $(this).data('trad');
                     if($(this).data('price') == "1"){
-                        let notActive = 0;
-                        $('.checkbox-myOffers:checkbox:checked').each(function () {
-                            notActive += $(this).hasClass('not-active')?1:0;
-                        });
-                        trad = $(this).data('trad').replace('%credit%', notActive * {{ publishedOffer }});
+                        // let notActive = 0;
+                        // $('.checkbox-myOffers:checkbox:checked').each(function () {
+                        //     notActive += $(this).hasClass('not-active')?1:0;
+                        // });
+                        trad = $(this).data('trad').replace('%credit%', $('.checkbox-myOffers:checkbox:checked').length * {{ publishedOffer }});
                         console.log(trad);
                     }
 
@@ -313,16 +313,18 @@
                     if($('.checkbox-myOffers:checkbox:checked').length == 0){
                         $('.global-modal, .global-a, .global-activate').prop("disabled",true);
                     }else{
-                        let notActive = 0;
-                        $('.checkbox-myOffers:checkbox:checked').each(function () {
-                            notActive += $(this).hasClass('not-active')?1:0;
-                        });
+                        // let notActive = 0;
+                        // $('.checkbox-myOffers:checkbox:checked').each(function () {
+                        //     notActive += $(this).hasClass('not-active')?1:0;
+                        // });
+                        //
+                        // if(notActive>0){
+                        //     $('.global-activate').prop("disabled",false);
+                        // }else{
+                        //     $('.global-activate').prop("disabled",true);
+                        // }
 
-                        if(notActive>0){
-                            $('.global-activate').prop("disabled",false);
-                        }else{
-                            $('.global-activate').prop("disabled",true);
-                        }
+                        $('.global-activate').prop("disabled",false);
                         $('.global-modal, .global-a').prop("disabled",false);
                     }
                 });
