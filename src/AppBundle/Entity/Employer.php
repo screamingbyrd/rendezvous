@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Employer
@@ -29,6 +30,14 @@ class Employer
 
     /**
      * @var string
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "employer.minName",
+     *      maxMessage = "employer.maxName"
+     * )
+     *
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
@@ -60,7 +69,7 @@ class Employer
 
     /**
      * @var string
-     *
+     *-
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
@@ -74,6 +83,14 @@ class Employer
 
     /**
      * @var string
+     *
+     *
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "employer.minName",
+     *      maxMessage = "employer.maxName"
+     * )
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
