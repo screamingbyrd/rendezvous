@@ -15,6 +15,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/build/
-/web/uploads/
 /node_modules/
 .idea/
