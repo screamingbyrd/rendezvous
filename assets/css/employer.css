@@ -55,7 +55,14 @@ h3.box{
     transform: translate(0.5em,0);
 }
 
+.global-modal, .global-a, .global-activate{
+    margin-top: 8px;
+}
+
 @media screen and (max-device-width: 480px){
+    #myInput-offer{
+        width: 100% !important;
+    }
     .logo-employer{
         width: 85px !important;
         margin-bottom: 20px;

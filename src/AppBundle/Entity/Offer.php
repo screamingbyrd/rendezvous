@@ -580,7 +580,7 @@ class Offer
     public function isActive()
     {
         $now = new \datetime();
-        return ($now >= $this->startDate) && ($now <= $this->endDate);
+        return (($now >= $this->startDate) && ($now <= $this->endDate) || (isset($this->slot) && $now >= $this->creationDate));
     }
 
 

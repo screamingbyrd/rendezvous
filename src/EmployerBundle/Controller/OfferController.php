@@ -292,14 +292,15 @@ class OfferController extends Controller
 
         foreach ($ids as $id){
             $offer = $offerRepository->findOneBy(array('id' => $id));
-
-            if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
-                $translated = $this->get('translator')->trans('redirect.employer');
-                $session->getFlashBag()->add('danger', $translated);
-                return $this->redirectToRoute('create_employer');
+            if(!$offer->isActive()){
+                if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
+                    $translated = $this->get('translator')->trans('redirect.employer');
+                    $session->getFlashBag()->add('danger', $translated);
+                    return $this->redirectToRoute('create_employer');
+                }
+                $creditOffer += $creditInfo->getPublishOffer();
+                $offerArray[] = $offer;
             }
-            $creditOffer += $creditInfo->getPublishOffer();
-            $offerArray[] = $offer;
         }
 
 

@@ -79,7 +79,7 @@
                     {% set blocEmployer = 4 %}
                 {% endif %}
                 {%  for employer in featuredEmployer %}
-                <a class="col-sm-{{ blocOffer }} col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
+                <a class="col-sm-{{ blocEmployer }} col-md-{{ blocEmployer }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
                     <div class="thumbnail featured-employer-item" >
                         <div class="header-thumb-employer">
                             {% if employer.employer.logo.imageName is not null %}
