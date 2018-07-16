@@ -375,6 +375,11 @@ class CandidateController extends Controller
 
         $mail = $user->getEmail();
 
+        $cv = $candidate->getCv();
+
+        if(isset($cv)){
+            unlink($cv);
+        }
 
         $em->remove($candidate);
         $em->remove($user);
