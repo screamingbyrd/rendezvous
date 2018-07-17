@@ -446,6 +446,13 @@ class OfferController extends Controller
 //        $map->setStylesheetOption('min-height', 1100);
 //        $map->setMapOption('zoom', 2);
 
+        $adRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Ad')
+        ;
+        $ads = $adRepository->getCurrentAds();
+        shuffle($ads);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
@@ -458,7 +465,8 @@ class OfferController extends Controller
                 'total' => $totalPage,
                 'numberOfItem' =>($numberOfItem > $countResult? $countResult:$numberOfItem),
                 'countResult' => $countResult,
-                'searchParam' => $searchParam
+                'searchParam' => $searchParam,
+                'ads' => $ads
             )
         );
     }

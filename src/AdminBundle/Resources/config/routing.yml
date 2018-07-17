@@ -9,3 +9,21 @@ list_employer_admin:
         en: "/employer/list"
         fr: "/employeur/liste"
     defaults: { _controller: AdminBundle:Admin:listEmployer }
+
+list_ad_admin:
+    locales:
+        en: "/ad/list/{archived}"
+        fr: "/pub/liste/{archived}"
+    defaults: { _controller: AdminBundle:Ad:listAd }
+
+create_ad:
+    locales:
+        en: "/ad/create"
+        fr: "/pub/creation"
+    defaults: { _controller: AdminBundle:Ad:create }
+
+edit_ad:
+    locales:
+        en: "/ad/edit"
+        fr: "/pub/edition"
+    defaults: { _controller: AdminBundle:Ad:edit }
