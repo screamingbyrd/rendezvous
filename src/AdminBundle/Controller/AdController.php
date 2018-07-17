@@ -116,7 +116,8 @@ class AdController extends Controller
         $ad = $repository->findOneBy(array('id' => $id));
 
         $em = $this->getDoctrine()->getManager();
-        $ad->setArchived(true);
+        $bool = boolval($ad->isArchived());
+        $ad->setArchived(!$bool);
         $em->merge($ad);
         $em->flush();
 

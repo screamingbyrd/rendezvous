@@ -59,8 +59,11 @@
     display: flex !important;
 }
 
-#myUL li .offer-element:hover:not(.header) {
+#myUL li .offer-element:hover:not(.ad) {
     transform: translate(1em,0);
+}
+.ad {
+    border-color: black !important;
 }
 .offer-element{
     display: table;

@@ -27,3 +27,8 @@ edit_ad:
         en: "/ad/edit"
         fr: "/pub/edition"
     defaults: { _controller: AdminBundle:Ad:edit }
+archive_ad:
+    locales:
+        en: "/ad/archive"
+        fr: "/pub/archiver"
+    defaults: { _controller: AdminBundle:Ad:archive }
