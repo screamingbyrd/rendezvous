@@ -15,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Response;
+use Spipu\Html2Pdf\Html2Pdf;
 
 
 class CreditController extends Controller
@@ -188,6 +190,21 @@ class CreditController extends Controller
             'nbrCredit' => $nbrCredit
         ]);
 
+    }
+
+    public function generateBillAction()
+    {
+        $html2pdf = new Html2Pdf();
+
+        $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
+            //..Send some data to your view if you need to //
+        ));
+
+        $html2pdf->writeHTML($html);
+
+
+        return new Response($html2pdf->output(), 200, array(
+            'Content-Type' => 'application/pdf'));
     }
 
 }
