@@ -16,6 +16,11 @@ jobnow_bills:
         en: "/employer/bills"
         fr: "/employeur/facture"
     defaults: { _controller: AppBundle:Credit:bills }
+jobnow_bills_generate:
+    locales:
+        en: "/employer/bills/pdf"
+        fr: "/employeur/facture/pdf"
+    defaults: { _controller: AppBundle:Credit:generateBill }
 jobnow_payment:
     locales:
         en: "/employer/payment/{id}"

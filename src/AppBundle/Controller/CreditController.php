@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Response;
+use Spipu\Html2Pdf\Html2Pdf;
 
 
 class CreditController extends Controller
@@ -71,6 +74,12 @@ class CreditController extends Controller
     }
 
     public function billsAction(Request $request){
+        $currentPage = $request->get('row');
+        $sort = $request->get('sort');
+        $currentPage = isset($currentPage)?$currentPage:1;
+        $sort = isset($sort)?$sort:'ASC';
+
+        $numberOfItem = 50;
 
         $user = $this->getUser();
 
@@ -89,10 +98,19 @@ class CreditController extends Controller
             ->getManager()
             ->getRepository('AppBundle:LogCredit')
         ;
-        $logsCredit = $repository->findBy(array('employer' => $employer));
+        $logsCredit = $repository->findBy(array('employer' => $employer),array('date' => $sort));
+
+        $countResult = count($logsCredit);
+
+        $finalArray = array_slice($logsCredit, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
 
         return $this->render('AppBundle:Credit:bills.html.twig', [
-            'logsCredit' => $logsCredit
+            'logsCredit' => $finalArray,
+            'page' => $currentPage,
+            'total' => $totalPage,
+            'sort' => $sort
         ]);
 
     }
@@ -114,6 +132,18 @@ class CreditController extends Controller
             ->add('token', HiddenType::class, [
                 'constraints' => [new NotBlank()],
             ])
+            ->add('name',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('phone',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('location',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('zipcode',      TextType::class, array(
+                'required' => true,
+            ))
             ->add('submit', SubmitType::class)
             ->getForm();
         if ($request->isMethod('POST')) {
@@ -133,6 +163,10 @@ class CreditController extends Controller
                     $logCredit->setCredit($nbrCredit);
                     $logCredit->setEmployer($this->getUser()->getEmployer());
                     $logCredit->setPrice($price);
+                    $logCredit->setName($data['name']);
+                    $logCredit->setPhone($data['phone']);
+                    $logCredit->setLocation($data['location']);
+                    $logCredit->setZipcode($data['zipcode']);
 
                     $em->persist($logCredit);
                     $em->flush();
@@ -156,6 +190,21 @@ class CreditController extends Controller
             'nbrCredit' => $nbrCredit
         ]);
 
+    }
+
+    public function generateBillAction()
+    {
+        $html2pdf = new Html2Pdf();
+
+        $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
+            //..Send some data to your view if you need to //
+        ));
+
+        $html2pdf->writeHTML($html);
+
+
+        return new Response($html2pdf->output(), 200, array(
+            'Content-Type' => 'application/pdf'));
     }
 
 }

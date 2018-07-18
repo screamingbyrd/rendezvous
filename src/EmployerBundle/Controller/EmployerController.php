@@ -204,6 +204,21 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Employer');
 
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer');
+
+        $featuredEmployerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:FeaturedEmployer');
+
         $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
 
         if(!((isset($user) and $user->getEmployer() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
@@ -212,11 +227,61 @@ class EmployerController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
+        $userArray = $userRepository->findBy(array('employer' => $employer));
+
+        $featuredEmployerArray = $featuredEmployerRepository->findBy(array('employer' => $employer));
+
+        $offers = $offerRepository->findBy(array('employer' => $employer, 'archived' => false));
+
         $em = $this->getDoctrine()->getManager();
 
-        $em->remove($employer);
-        $em->flush();
+        $employer->setPhone(null);
+        $em->merge($employer);
 
+        foreach ($offers as $offer) {
+            $offer->setArchived(true);
+            $em->merge($offer);
+        }
+
+        foreach ($featuredEmployerArray as $featuredEmployer) {
+            $featuredEmployer->setArchived(true);
+            $em->merge($featuredEmployer);
+        }
+        $mailer = $this->container->get('swiftmailer.mailer');
+        foreach ($userArray as $user){
+            $mail = $user->getEmail();
+            $em->remove($user);
+
+            $message = (new \Swift_Message('Your profile has been deleted'))
+                ->setFrom('jobnowlu@noreply.lu')
+                ->setTo($mail)
+                ->setBody(
+                    $this->renderView(
+                        'AppBundle:Emails:userDeleted.html.twig',
+                        array()
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
+        }
+
+        $message = (new \Swift_Message($employer->getName().' has deleted his account'))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo('commercial@jobnow.lu')
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:userDeleted.html.twig',
+                    array()
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+
+        $em->flush();
         $session->getFlashBag()->add('info', 'Employer supprimé !');
 
         return $this->redirectToRoute('jobnow_home');
@@ -231,6 +296,11 @@ class EmployerController extends Controller
             ->getRepository('AppBundle:Employer');
 
         $employer = $repository->find($id);
+
+        $phone = $employer->getPhone();
+        if(!isset($phone)){
+            return $this->redirectToRoute('jobnow_home');
+        }
 
         $offerRepository = $this
             ->getDoctrine()

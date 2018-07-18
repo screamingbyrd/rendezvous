@@ -164,3 +164,8 @@ apply_spontaneous:
         en: "/spontaneous-application/{id}"
         fr: "/candidature-spontane/{id}"
     defaults: { _controller: EmployerBundle:Employer:sendSearch }
+end_activation_offer_mail:
+    locales:
+        en: "/mail-end-activation/{days}"
+        fr: "/mail-fin-activation/{days}"
+    defaults: { _controller: EmployerBundle:Offer:sendEndActivation }

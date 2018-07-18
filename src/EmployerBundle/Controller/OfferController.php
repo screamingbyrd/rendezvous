@@ -30,6 +30,7 @@ use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class OfferController extends Controller
 {
@@ -292,28 +293,30 @@ class OfferController extends Controller
 
         foreach ($ids as $id){
             $offer = $offerRepository->findOneBy(array('id' => $id));
-            if(!$offer->isActive()){
-                if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
-                    $translated = $this->get('translator')->trans('redirect.employer');
-                    $session->getFlashBag()->add('danger', $translated);
-                    return $this->redirectToRoute('create_employer');
-                }
-                $creditOffer += $creditInfo->getPublishOffer();
-                $offerArray[] = $offer;
+            if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles()) || $offer->getEmployer()->getId() != $employer->getId()){
+                $translated = $this->get('translator')->trans('redirect.employer');
+                $session->getFlashBag()->add('danger', $translated);
+                return $this->redirectToRoute('create_employer');
             }
+            $creditOffer += $creditInfo->getPublishOffer();
+            $offerArray[] = $offer;
         }
 
 
         if($creditEmployer < $creditOffer){
             $translated = $this->get('translator')->trans('form.offer.activate.error');
             $session->getFlashBag()->add('danger', $translated);
+
+            if(isset($ajax) && $ajax){
+                return new JsonResponse($this->generateUrl('employer_offers', array('archived' => $_SESSION['archived'])));
+            }
             return $this->redirectToRoute('jobnow_credit');
         }
 
         $employer->setCredit($creditEmployer - $creditOffer);
 
-        $now =  new \DateTime();
-        $next = new \DateTime();
+        $now =  new \DateTime("midnight");
+        $next = new \DateTime("midnight");
         $em = $this->getDoctrine()->getManager();
 
         foreach ($offerArray as $offer){
@@ -443,6 +446,13 @@ class OfferController extends Controller
 //        $map->setStylesheetOption('min-height', 1100);
 //        $map->setMapOption('zoom', 2);
 
+        $adRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Ad')
+        ;
+        $ads = $adRepository->getCurrentAds();
+        shuffle($ads);
 
         $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
@@ -455,7 +465,8 @@ class OfferController extends Controller
                 'total' => $totalPage,
                 'numberOfItem' =>($numberOfItem > $countResult? $countResult:$numberOfItem),
                 'countResult' => $countResult,
-                'searchParam' => $searchParam
+                'searchParam' => $searchParam,
+                'ads' => $ads
             )
         );
     }
@@ -786,6 +797,55 @@ class OfferController extends Controller
         }
 
         return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
+    }
+    //@TODO put in CRON with 1 and 7 days
+    public function sendEndActivationAction(Request $request, $days){
+
+        $now  =  new \DateTime("midnight");
+
+        $next = $now->modify( '+ '.$days.' day' );
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offers = $offerRepository->findBy(array('endDate' => $next));
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        if(!empty($offers)){
+            $mailer = $this->container->get('swiftmailer.mailer');
+            foreach ($offers as $offer){
+
+                $userArray = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+
+                $subject = 'Your offer will expire in '.$days.' days';
+
+                foreach ($userArray as $user){
+                    $message = (new \Swift_Message($subject))
+                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setTo($user->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'AppBundle:Emails:endOfActivation.html.twig',
+                                array('offer' => $offer,
+                                    'days' => $days
+                                )
+                            ),
+                            'text/html'
+                        )
+                    ;
+
+                    $mailer->send($message);
+                }
+            }
+        }
+
+        return new Response();
     }
 
 }

@@ -1,0 +1,121 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Register - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        jQuery(function($) {
+            $( ".myDatePickerInput" ).datepicker();
+        });
+    </script>
+    <div class="container post-offer">
+
+        <h3 class="text-center post-offer">Post your offer</h3>
+
+        {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_label (form.title, null, { 'label_attr':
+                    {'class': 'label-form'}
+                })  }}
+
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_label (form.link, null, { 'label_attr':
+                    {'class': 'label-form'}
+                })  }}
+
+                {{ form_widget(form.link) }}
+                {{ form_errors(form.link) }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_label (form.description, null, { 'label_attr': {
+                    'class': 'label-form'
+                } }) }}
+                {{ form_widget(form.description) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+        <br>
+
+        <h4>{{ 'offer.option'|trans }}</h4>
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label (form.startDate, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.startDate) }}
+                {{ form_errors(form.startDate) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.endDate, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.endDate) }}
+                {{ form_errors(form.endDate) }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            {{ form_label (form.logo, null, { 'label_attr': {'class': 'label-form'} }) }}
+            {{ form_widget(form.logo) }}
+            {{ form_errors(form.logo) }}
+
+            {{ form_label (form.coverImage, null, { 'label_attr': {'class': 'label-form'} }) }}
+            {{ form_widget(form.coverImage) }}
+            {{ form_errors(form.coverImage) }}
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                {{ form_widget(form.submit, { 'label': 'offer.submit','class': 'btn' }) }}
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    {# Génération automatique des champs pas encore écrits.
+       Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+       et tous les champs cachés (type « hidden »). #}
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
+
+
+    </div>
+
+    {#<script>#}
+
+    {#$(".slider-button").click(function(e) {#}
+    {#e.preventDefault();#}
+    {#$(".slider").slideToggle("slow");#}
+
+
+    {#});#}
+    {#</script>#}
+
+
+
+{% endblock %}
