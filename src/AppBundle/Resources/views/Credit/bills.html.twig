@@ -22,13 +22,18 @@
                             <th><a href="{{ path('jobnow_bills', {'sort':(sort=='ASC'?'DESC':'ASC'), 'row':page}) }}">Date  <i class="fas fa-caret-{% if sort == 'ASC' %}up{% else %}down{% endif %}"></i></a></th>
                             <th>{{ 'price.credits'|trans }}</th>
                             <th>{{ 'price.price'|trans }}</th>
+                            <th>{{ 'price.bills'|trans }}</th>
                         </tr>
                         {% for logCredit in logsCredit %}
                             <tr>
-                                <td>{{ logCredit.date|date('d-m-Y H:i:s') }}</td>
+                                <td>{{ logCredit.date|date('d/m/Y') }}</td>
                                 <td>{{ logCredit.credit }}</td>
                                 <td>{{ logCredit.price|localizedcurrency('EUR') }}</td>
-
+                                <td>
+                                    <a href="" download>
+                                        <i class="fas fa-file"></i>
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>

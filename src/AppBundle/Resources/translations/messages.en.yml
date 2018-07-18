@@ -393,6 +393,7 @@ price:
   credit: Credit
   credits: Credit(s)
   price: Price
+  bills: Bills
   ourPackages: Our packages
   noBonus: No bonus
   buy: Buy

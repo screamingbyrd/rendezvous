@@ -50,6 +50,34 @@ class LogCredit
      */
     private $employer;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="location", type="string", length=255, nullable=true)
+     */
+    private $location;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
+     */
+    private $zipcode;
+
 
     /**
      * Get id
@@ -156,4 +184,78 @@ class LogCredit
     {
         return $this->price;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return LogCredit
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return LogCredit
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $location
+     * @return LogCredit
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param string $zipcode
+     * @return LogCredit
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+        return $this;
+    }
+
+
 }

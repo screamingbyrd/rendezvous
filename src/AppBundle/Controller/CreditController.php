@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class CreditController extends Controller
@@ -129,6 +130,18 @@ class CreditController extends Controller
             ->add('token', HiddenType::class, [
                 'constraints' => [new NotBlank()],
             ])
+            ->add('name',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('phone',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('location',      TextType::class, array(
+                'required' => true,
+            ))
+            ->add('zipcode',      TextType::class, array(
+                'required' => true,
+            ))
             ->add('submit', SubmitType::class)
             ->getForm();
         if ($request->isMethod('POST')) {
@@ -148,6 +161,10 @@ class CreditController extends Controller
                     $logCredit->setCredit($nbrCredit);
                     $logCredit->setEmployer($this->getUser()->getEmployer());
                     $logCredit->setPrice($price);
+                    $logCredit->setName($data['name']);
+                    $logCredit->setPhone($data['phone']);
+                    $logCredit->setLocation($data['location']);
+                    $logCredit->setZipcode($data['zipcode']);
 
                     $em->persist($logCredit);
                     $em->flush();
