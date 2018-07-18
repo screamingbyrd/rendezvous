@@ -123,15 +123,35 @@
 
         <hr>
 
-        <div class="shadow-box jobnow-description fade-in-left animated">
-            <h3>{{ 'header.about.title'|trans }}</h3>
-            <p>{{ 'homepage.ourMission' |trans}}</p>
+    </div>
+    <div class="about-us-container">
+        <div class="container jobnow-container">
+            <div class="jobnow-description fadeIn animated">
+                <div style="display: -webkit-inline-box;">
+                    <img class="about-us-icon" src="/jobnowlu/web/images/search.svg"><h3>{{ 'header.about.title'|trans }}</h3>
+                </div>
+                <p>{{ 'homepage.ourMission' |trans}}</p>
+            </div>
         </div>
-
-
     </div>
 
+
+
     <style>
+        .about-us-icon{
+            width: 70px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+        .jobnow-description{
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .about-us-container{
+            background-color: #272f3b;
+        }
         .homepage-href-row{
             padding: 10px;
             padding-right: 25px;
