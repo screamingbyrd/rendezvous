@@ -89,13 +89,23 @@ class AppController extends Controller
 
         shuffle ($featuredEmployer);
         shuffle ($featuredOffer);
+
+        $adRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Ad')
+        ;
+        $ads = $adRepository->getCurrentAds();
+        shuffle($ads);
+
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredEmployer' => $featuredEmployer,
             'featuredOffer' => $featuredOffer,
             'tagArray' => $tagArray,
             'tags' => $tags,
             'autoComplete' => $autoCompleteHelper->render($autoComplete),
-            'autoCompleteScript' => $apiHelper->render([$autoComplete])
+            'autoCompleteScript' => $apiHelper->render([$autoComplete]),
+            'ads' => $ads,
         ));
 
     }

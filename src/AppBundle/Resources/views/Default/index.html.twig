@@ -120,9 +120,6 @@
             </div>
         </div>
 
-
-        <hr>
-
     </div>
     <div class="about-us-container">
         <div class="container jobnow-container">
@@ -134,10 +131,43 @@
             </div>
         </div>
     </div>
-
+    {% if ads is not empty %}
+        <div class="container jobnow-container container">
+            <h1 class="featured-offer text-center">Nos partenaire</h1>
+            <ul class="ads-list-hompeage" id="myUL">
+                {% for ad in ads %}
+                <li class="search-result animated fadeIn">
+                    <a class='offer-element ad' href="{{ ad.link }}" target="_blank">
+                        {% if ads[0].description is not null and ad.link is not empty %}
+                            {% set image =  'uploads' ~ vich_uploader_asset(ad.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');">
+                                <div class="layer layer-offer-element animated">
+                                </div>
+                            </div>
+                            {% if ad.logo.imageName is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(ad.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                            <div class="offer-search-element">
+                                <div class="offer-element-details">
+                                    <div class="offer-element-name">{{ ad.title }}</div>
+                                    <div class="offer-element-title">{{ ad.description}}</div>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');"></div>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
 
     <style>
+        .ads-list-hompeage{
+            list-style-type: none;
+            margin-top: 20px;
+        }
         .about-us-icon{
             width: 70px;
             margin-right: 20px;
@@ -145,12 +175,14 @@
         }
         .jobnow-description{
             color: white;
-            margin-top: 30px;
-            margin-bottom: 30px;
+            margin-top: 60px;
+            margin-bottom: 60px;
             text-align: center;
         }
         .about-us-container{
             background-color: #272f3b;
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
         .homepage-href-row{
             padding: 10px;
