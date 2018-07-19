@@ -18,9 +18,9 @@ class CreditInfo
     private $featuredOffer = 11;
     private $featuredEmployer = 10;
     private $buySlot = 20;
-    private $oneCredit = 200;
-    private $fiveCredit = 950;
-    private $tenCredit = 1900;
+    private $oneCredit = 234;
+    private $fiveCredit = 1111.5;
+    private $tenCredit = 2223;
 
     public function __construct()
     {

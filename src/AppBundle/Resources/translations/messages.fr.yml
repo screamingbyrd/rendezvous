@@ -217,7 +217,7 @@ offer:
   titlePH: Votre titre
   tag: Tag(s)
   tagPH: Domaine(s) de compétence(s)
-  location: Emplacement
+  location: Adresse
   locationPH: Indiquez un lieu
   description: Description
   contract: Type de contrat
@@ -405,6 +405,22 @@ price:
     validate: Valider mon paiement
     sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
     success: Vous avez bien acheté %credits% crédits !
+    zipcode: Code postale
+
+bill:
+  buyCredit: Achat de crédit
+  numberCredit: Nombre de crédit
+  date: Date
+  to: A l'attention de :
+  object: Objet :
+  vat: TVA
+  tax: Taxe
+  amount: Montant
+  totalExludingTax: Total HT
+  totalIncludingTaxes: Total TTC
+  tex: HT
+
+
 
 tag:
   accounting: Comptabilité et Finance

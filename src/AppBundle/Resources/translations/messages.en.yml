@@ -407,6 +407,20 @@ price:
     validate: Validate my payment
     sure: Are you sure you want to buy %nbrCredits% credits ?
     success: You bought %credits% credits!
+    zipcode: Zipcode
+
+bill:
+  buyCredit: Buy credits
+  numberCredit: Number credits
+  date: Date
+  to: To the attention of:
+  object: Object:
+  vat: VAT
+  tax: Tax
+  amount: Amount
+  totalExludingTax: Total HT
+  totalIncludingTaxes: Total TTC
+  tex: TEX
 
 tag:
   accounting: Accounting/Finance
