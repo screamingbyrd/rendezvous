@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class NotificationController extends Controller
 {
@@ -118,6 +119,11 @@ class NotificationController extends Controller
             )
         ;
 
+//        return $this->render('AppBundle:Emails:notificationCreated.html.twig', array(
+//        ));
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
         $mailer->send($message);
 
         $translated = $this->get('translator')->trans('notification.created');

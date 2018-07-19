@@ -316,6 +316,13 @@ featured:
 email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
+  notification:
+    created:
+      title: Votre alerte email a bien été créée !
+      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+  footer:
+    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
+    consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
 contact:
   form: Formulaire de contact
