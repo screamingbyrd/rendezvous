@@ -1,29 +1,257 @@
+<meta charset="UTF-8">
+<style type="text/css">
+    .logo-jobnow{
+        width: 250px;
+    }
+    .header-mail{
+        background-color: #272f3b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+    }
+    .footer-mail{
+        background-color: #272f3b;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .container{
+        width: 600px;
+        margin: auto;
+        font-family: 'Open Sans','Open Sans',Arial,sans-serif;
+    }
+    .container-mail{
+        width: 100%;
+    }
+    .content-mail{
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 30px;
+    }
+    .social-netwok-container{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    a{
+        color: #ff9600;
+        text-decoration-color: #ff9600 ;
+    }
+    .location{
+        color: white !important;
+        text-decoration: none !important;
+    }
+    .other-footer{
+        margin-top: 20px;
+    }
+    #myUL{
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        min-height: 283px;
+    }
+    .offer-element{
+        width: 80%;
+        margin: auto;
+        border: 1px solid #ddd;
+        font-size: 18px;
+        color: black;
+        -webkit-transition: ease-out 0.7s;
+        -moz-transition: ease-out 0.7s;
+        transition: ease-out 0.7s;
+        margin-bottom: 3%;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+        -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+        box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
+        -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false;
+        -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+        -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
+    }
+    .background-employer-in-offer-search {
+        min-height: 124px;
+        width: 30%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+    .background-employer-in-offer-search .layer {
+         border-top-right-radius: 0;
+         border-bottom-left-radius: 3px;
+     }
+    .layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        opacity: 0.7;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    .logo-employer-in-offer-search {
+        width: 13%;
+        max-width: 73px;
+        margin-left: -31px;
+        z-index: 1;
+        padding: 10px;
+        border: 1px #ddd solid;
+        border-radius: 3px;
+        background-color: white;
+    }
+    .offer-search-element {
+        width: 94%;
+        margin-left: 2%;
+        display: inline-block;
+    }
+    .offer-element-details {
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 3%;
+        margin-bottom: 0;
+        width: 100%;
+    }
+    .other-element {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 23px;
+        vertical-align: middle;
+        margin: 0 10px;
+        color: #87888D;
+        white-space: nowrap;
+    }
+    .offer-element-title {
+        font-size: 24px;
+        width: 98%;
+    }
+    .offer-element-name {
+        color: #929292;
+    }
+    .item-contract-temporary{
+         background: red;
+         color: white !important;
+         text-transform: uppercase;
+         text-align: center;
+         border-radius: 4px;
+         display: inline-block;
+         padding: 3px 10px;
+     }
+    .item-contract-freelance{
+        background: orange;
+        color: white !important;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 3px 10px;
+    }
+    .item-contract-parttime{
+        background: green;
+        color: white !important;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 3px 10px;
+    }
+    .item-contract-fulltime{
+        background: blue;
+        color: white !important;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 3px 10px;
+    }
+    .item-contract-internship{
+        background: brown;
+        color: white !important;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 3px 10px;
+    }
+</style>
+<div class="container">
+    <div class="container-mail">
+        <div class="header-mail">
+            <a href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
+        </div>
 
-<div>
-    New jobs are available for this parameter {{ subject }}
-</div>
+        <div class="content-mail">
+            {% if search %}
+                {% set title = 'email.notification.send.title.search'|trans %}
+            {% else %}
+                {% set title = 'email.notification.send.title.regular'|trans({'subject':subject}) %}
+            {% endif %}
+            <h3>{{ title }}</h3>
 
-<ul id="myUL" class="candidat-dashboard">
-    {% for offer in offers %}
-        <li class="search-result animated fadeIn">
-            <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
-                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') }}');">
-                    <div class="layer layer-offer-element animated">
-                    </div>
-                </div>
-                {% if offer.employer.logo is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
-                <div class="offer-search-element">
-                    <div class="offer-element-details">
-                        <div class="offer-element-name">{{ offer.employer.name }}</div>
-                        <div class="offer-element-title">{{ offer.title |truncate(130, true)}}</div>
-                        <div class="offer-element-other"><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.location }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
-                    </div>
-                </div>
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+            <ul id="myUL" class="candidat-dashboard">
+                {% for offer in offers %}
+                    <li class="search-result animated fadeIn">
+                        <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
+                            {% if offer.image is not null and offer.image.imageName is not null %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            {% elseif offer.employer.coverImage.imageName is not null %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            {% elseif offer.employer.logo.imageName is not null %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            {% else %}
+                                {% set image = 'images/default_cover_image6.jpg' %}
+                            {% endif %}
+                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');">
+                                <div class="layer layer-offer-element animated">
+                                </div>
+                            </div>
+                            {% if offer.employer.logo.imageName is not null and offer.employer.coverImage.imageName is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                            <div class="offer-search-element">
+                                <div class="offer-element-details">
+                                    <div class="offer-element-name">{{ offer.employer.name }}</div>
+                                    <div class="offer-element-title">{{ offer.title |truncate(20, true)}}</div>
+                                    <div><span class="other-element">{{ offer.location }}</span></div>
+                                    <div class="offer-element-other"><span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}"><i class="fa fa-file-text-o"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
 
-<div>
-    {{ 'notification.if'|trans }} <a href="{{ path('delete_notification', {'id': id}) }}">{{ 'notification.here'|trans }}</a>
+            <div class="other-footer">
+                {{ 'notification.if'|trans }} <a href="{{ path('delete_notification', {'id': id}) }}">{{ 'notification.here'|trans }}</a>
+            </div>
+
+
+        </div>
+
+        <div class="footer-mail">
+            <div class="social-netwok-container">
+                <a href="">facebook</a>
+                <a href="">twitter<i class="fab fa-twitter-square"></i></a>
+                <a href="">instagram</a>
+            </div>
+
+            <div class="other-footer">
+                <div>{{ 'email.footer.contact'| trans({'%link_start%' : '<a href="mailto:support@athome.lu">', '%link_end%' : '</a>'}) |raw}}</div>
+                <div>{{ 'email.footer.consult'| trans({'%link_start%' : '<a href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) |raw}}</div>
+            </div>
+            <div class="other-footer">
+                © 2018 Jobnow.lu
+            </div>
+            <div class="other-footer">
+                <div class="location"><a href="" style="text-decoration:none;color: white;">228 Route d’Esch</a></div>
+                <div class="location"><a href="" style="text-decoration:none;color: white;">L-1471 Luxembourg</a></div>
+            </div>
+        </div>
+    </div>
 </div>

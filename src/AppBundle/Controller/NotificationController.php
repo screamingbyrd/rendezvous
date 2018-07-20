@@ -213,7 +213,7 @@ class NotificationController extends Controller
                     $mail = $candidate->getUser()->getEmail();
                     $mailer = $this->container->get('swiftmailer.mailer');
 
-                    $message = (new \Swift_Message('New offers could interest you'))
+                    $message = (new \Swift_Message($this->get('translator')->trans('email.notification.send.title.search')))
                         ->setFrom('jobnowlu@noreply.lu')
                         ->setTo($mail)
                         ->setBody(
@@ -221,7 +221,8 @@ class NotificationController extends Controller
                                 'AppBundle:Emails:notification.html.twig',
                                 array('offers' => $offers,
                                     'subject' => $translated = $this->get('translator')->trans($subject),
-                                    'id' =>$notification->getUid()
+                                    'id' =>$notification->getUid(),
+                                    'search' => false
                                 )
                             ),
                             'text/html'
@@ -285,7 +286,8 @@ class NotificationController extends Controller
                             'AppBundle:Emails:notification.html.twig',
                             array('offers' => $finalArray,
                                 'subject' => $translated = $this->get('translator')->trans($subject),
-                                'id' =>$notification->getUid()
+                                'id' =>$notification->getUid(),
+                                    'search' => true
                             )
                         ),
                         'text/html'
