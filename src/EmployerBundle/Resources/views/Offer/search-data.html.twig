@@ -41,7 +41,7 @@
     {% for offer in data %}
         {% if offer.isActive() or offer.slot is not null %}
             {% set count = count + 1 %}
-            {% if count % 2 and ads is not empty %}
+            {% if count % 2 and ads is not empty and ads[adOrder] is defined %}
 
                 Nos partenaire
                 <li class="search-result animated fadeIn">

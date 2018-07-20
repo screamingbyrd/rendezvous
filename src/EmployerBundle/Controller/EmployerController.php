@@ -19,6 +19,7 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 
 
@@ -264,6 +265,10 @@ class EmployerController extends Controller
                 )
             ;
 
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
             $mailer->send($message);
         }
 
@@ -278,6 +283,10 @@ class EmployerController extends Controller
                 'text/html'
             )
         ;
+
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
 
         $mailer->send($message);
 
@@ -966,6 +975,10 @@ class EmployerController extends Controller
             )
             ->attach(\Swift_Attachment::fromPath($target_file));
         ;
+
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
 
         $mailer->send($message);
         unlink($target_file);

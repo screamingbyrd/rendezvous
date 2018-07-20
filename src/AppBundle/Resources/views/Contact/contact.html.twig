@@ -1,6 +1,7 @@
 <form method="post" action="{{ path('jobnow_contact') }}" class="form-horizontal clearfix">
 
-
+    <input type="hidden" value="{{ type }}" name="type" id="type-input">
+    <input type="hidden" value="{{ emailTo }}" name="emailTo" id="emailTo-input">
     <table style="width: 100%;">
         <tr>
             <th class="label-contact-us">

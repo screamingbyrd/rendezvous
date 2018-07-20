@@ -316,6 +316,17 @@ featured:
 email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
+  application:
+    candidate:  Vous avez postulé à cette offre :
+    employer:
+      applied: A candidate applied to your offer:
+      comment: Comment/ motivation letter:
+      download: Télécharger le cv
+  contact: Vous avre reçu un message de %name%
+  deleted: Your account has been deleted
+  endOfActivation:
+    youOffer: Your offer %title% will arrive at the end of activation in %days% days
+    thinkAbout: Think about extending their activations on your dashboard
   notification:
     created:
       title: Votre alerte email a bien été créée !

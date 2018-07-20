@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\CandidateType;
 use Symfony\Component\HttpFoundation\Response;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class CandidateController extends Controller
 {
@@ -387,7 +388,7 @@ class CandidateController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message('Your profile has been deleted'))
+        $message = (new \Swift_Message($translated = $this->get('translator')->trans('email.deleted')))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($mail)
             ->setBody(
@@ -399,6 +400,9 @@ class CandidateController extends Controller
             )
         ;
 
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
         $mailer->send($message);
 
         $session->getFlashBag()->add('info', 'Candidat supprimé !');
