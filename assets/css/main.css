@@ -546,7 +546,7 @@ legend{
 }
 
 .td-contact-us{
-    width: 88%;
+    width: 82%;
 }
 .label-contact-us{
     text-align: right;
@@ -555,6 +555,7 @@ legend{
 .send-contact{
     width: 20%;
     float: right;
+    margin-top: 14px;
 }
 .input-contact{
     background-position: 10px 12px;
