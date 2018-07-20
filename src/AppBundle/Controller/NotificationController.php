@@ -309,4 +309,26 @@ class NotificationController extends Controller
         return new Response();
     }
 
+    public function checkNotificationExistAction(Request $request)
+    {
+        $type = $request->get('type');
+        $elementId = $request->get('id');
+        $mail = $request->get('mail');
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Notification')
+        ;
+        $user = $userRepository->findOneBy(array('mail' => $mail,'typeNotification' =>$type,'elementId' => $elementId));
+
+        if(is_object($user)){
+            $response = 'true';
+        }else{
+            $response = 'false';
+        }
+
+        return new Response($response);
+    }
+
 }

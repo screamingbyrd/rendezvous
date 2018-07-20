@@ -9,6 +9,7 @@
                 <input type="hidden" name="id" id="id-input" value="{{ searchParam }}">
                 <div class="col-md-8"><input class="form-control" name="mail" type="text" id="mail-input" placeholder="email" title="email"></div>
                 <div class="col-md-4"><input type="submit" class="jobnow-button" value="Créer une alerte"></div>
+                <div class="col-md-4 error-field" style="color: red;display: none;"></div>
             </div>
         </form>
     </div>
@@ -28,6 +29,7 @@
                 <input type="hidden" name="id" id="id-input" value="{{ searchParam }}">
                 <div class="col-md-8"><input class="form-control" name="mail" type="text" id="mail-input" placeholder="email" title="email"></div>
                 <div class="col-md-4"><input type="submit" class="jobnow-button" value="Créer une alerte"></div>
+                <div class="col-md-12 error-field" style="color: red;display: none;"></div>
             </div>
         </form>
     </div>
@@ -107,5 +109,37 @@
     });
     $(".offer-element").on("mouseleave ", function(){
         $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
+    });
+
+    $('#alert-search-offer').submit(function(e) {
+        e.preventDefault();
+        e.returnValue = false;
+        let form = this;
+        let mail = $.trim($('#mail-input').val());
+        let test = new RegExp('^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$');
+
+        if (mail  === '') {
+            $('.error-field').html('empty mail');
+            $('.error-field').show();
+        }else if(!test.test(mail)){
+            $('.error-field').html('email not valid');
+            $('.error-field').show();
+        }else {
+            let url = "{{ path('notification_already_exist') }}";
+
+            $.ajax({
+                url: url,
+                data: {mail:mail,type:'notification.search',id:{{ searchParam |json_encode|raw}}}
+            }).done(function( data ) {
+                if(data == 'true'){
+                    $('.error-field').html('this notification already exist');
+                    $('.error-field').show();
+                }else{
+                    // actually submit the form
+                    form.submit();
+                }
+
+            });
+        }
     });
 </script>

@@ -79,6 +79,11 @@ send_search_notification:
         en: "/send-search-notification"
         fr: "/envoyer-notification-recherche"
     defaults: { _controller: AppBundle:Notification:sendSearch }
+notification_already_exist:
+    locales:
+        en: "/notification-already-exist"
+        fr: "/notification-existe-deja"
+    defaults: { _controller: AppBundle:Notification:checkNotificationExist }
 create_favorite:
     locales:
         en: "/create-favorite"
