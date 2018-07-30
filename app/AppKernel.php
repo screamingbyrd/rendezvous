@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
 
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
