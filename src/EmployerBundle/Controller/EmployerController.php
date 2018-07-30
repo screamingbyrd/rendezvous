@@ -1021,19 +1021,47 @@ class EmployerController extends Controller
 
                 $email = $data['email'];
 
+                $employer = $user->getEmployer();
 
                 $userRegister = $this->get('app.user_register');
-                $collaborator = $userRegister->addCollaborator($email, $user->getEmployer());
+                $collaborator = $userRegister->addCollaborator($email, $employer);
+
+                if(is_bool($collaborator) && !$collaborator){
+                    $translated = $this->get('translator')->trans('form.registration.mailAlreadyExist');
+                    $session->getFlashBag()->add('danger', $translated);
+                    return $this->redirectToRoute('add_collaborator');
+                }
 
                 $em = $this->getDoctrine()->getManager();
 
                 $em->persist($collaborator);
                 $em->flush();
 
+                $mailer = $this->container->get('swiftmailer.mailer');
+
+                $message = (new \Swift_Message('You have been added to' . $employer->getName()))
+                    ->setFrom('jobnowlu@noreply.lu')
+                    ->setTo('arthur.regnault@altea.lu')
+                    ->setBody(
+                        $this->renderView(
+                            'AppBundle:Emails:addedAsCollaborator.html.twig',
+                            array(
+                                'employer' => $employer,
+                            )
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $message->getHeaders()->addTextHeader(
+                    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                );
+                $mailer->send($message);
+
                 $translated = $this->get('translator')->trans('price.payment.success');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('jobnow_credit');
+                return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));
 
             }
         }

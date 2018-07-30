@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+    {% endif %}
     <div class="jumbotron employer-jumbotron">
         <div>
             <div class="container-logo-employer">
@@ -20,7 +23,7 @@
 
     </div>
 
-    <div class="row">
+    <div class="row edit-container">
         <div class="col-md-8 col-md-offset-2">
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
@@ -94,7 +97,6 @@
                             {{ form_label (form.description,null, { 'label_attr': {'class': 'label-form'} }) }}
                             {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
                             {{ form_errors(form.description) }}
-                        </div>
                         </div>
                         <div class="col-md-6 form-group">
                             {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}

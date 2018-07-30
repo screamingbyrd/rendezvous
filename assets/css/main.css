@@ -911,4 +911,12 @@ legend{
         min-height: 378px;
         margin-bottom: 20px;
     }
+    .edit-container{
+        min-height: 378px;
+        margin-bottom: 20px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
