@@ -532,6 +532,7 @@ class EmployerController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
         $now = new \DateTime();
+        $now->modify( '- 1 week' );
 
         return $this->render('EmployerBundle::featuredEmployer.html.twig', array(
             'featuredEmployerArray' => $featuredArray,

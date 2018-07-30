@@ -59,6 +59,7 @@ form:
     complete: Complet your profile
     completed: Profile completed
     already: Already register ?
+    accept: I accept the condition of use
     bySubmitting: By submitting you confirm that you read and accepted the %link_start%general terms and conditions%link_end% of our site.
     consult: Read our %link_start%privacy policy%link_end% to understand your rights.
 
