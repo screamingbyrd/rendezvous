@@ -72,6 +72,9 @@ form:
     socialMedia: Link social media
     description: Description
     license: Driving Licence(s)
+    success: You are now registered as employer !
+    edited: The emplyer has been modified !
+    error: Email already used, try again !
     successEmployer: You successfully registered as an employer !
     successCandidate: You successfully registered as a candidate !
     error: E-mail adress already used !
@@ -273,6 +276,7 @@ candidate:
   delete:
     delete: Delete my account
     sure: Are you sure that you want to delete your account?
+    deleted: Your profile has been deleted
   age: Age
   tag: Skills
   about: About this candidate
@@ -290,14 +294,24 @@ employer:
       title: Spontaneous application
       send: A candidate send you a spontaneous application
       sent: You application has been sent.
+  edit:
+    complete: Complete your information
+    completed: Profile completed
+    personalData: Personal data:
+    companyData: Company data:
+    changePassword: Change password
+    forgotPassword: Forgot password
   credit:
     title: Credits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
     buy: Buy some credits
-  edit:
-    personalData: Private data
-    companyData: Company information
+  addColaborator:
+    title: Add a collaborator
+    type: Type in the mail of a collaborator, a user will be created and he will receive an email to login
+    youHave: You habe been added to
+    added: The collaborator has been added !
+    connect: Connect to your account with your email as a login and 0000 for password, you will then be able to modify your personal information and change you password.
 
 
 
