@@ -19,6 +19,9 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 
@@ -113,7 +116,10 @@ class EmployerController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
-        $user = $userRepository->findOneBy(array('employer' => $employer));
+        if(in_array('ROLE_ADMIN', $user->getRoles())){
+            $user = $userRepository->findOneBy(array('employer' => $employer));
+        }
+
         $session = $request->getSession();
 
         $employer->setFirstName($user->getFirstName());
@@ -264,6 +270,10 @@ class EmployerController extends Controller
                 )
             ;
 
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
             $mailer->send($message);
         }
 
@@ -278,6 +288,10 @@ class EmployerController extends Controller
                 'text/html'
             )
         ;
+
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
 
         $mailer->send($message);
 
@@ -967,12 +981,94 @@ class EmployerController extends Controller
             ->attach(\Swift_Attachment::fromPath($target_file));
         ;
 
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+
         $mailer->send($message);
         unlink($target_file);
 
         $translated = $this->get('translator')->trans('employer.show.spontaenous.sent');
         $session->getFlashBag()->add('info', $translated);
         return $this->redirectToRoute('show_employer', array('id' => $id));
+    }
+
+    public function addCollaboratorAction(Request $request){
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $form = $this->get('form.factory')
+            ->createNamedBuilder('collaborator-form')
+            ->add('email',      EmailType::class, array(
+                'required' => true,
+                'label' => 'form.registration.email'
+            ))
+            ->add('submit', SubmitType::class)
+            ->getForm();
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $email = $data['email'];
+
+                $employer = $user->getEmployer();
+
+                $userRegister = $this->get('app.user_register');
+                $collaborator = $userRegister->addCollaborator($email, $employer);
+
+                if(is_bool($collaborator) && !$collaborator){
+                    $translated = $this->get('translator')->trans('form.registration.mailAlreadyExist');
+                    $session->getFlashBag()->add('danger', $translated);
+                    return $this->redirectToRoute('add_collaborator');
+                }
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($collaborator);
+                $em->flush();
+
+                $mailer = $this->container->get('swiftmailer.mailer');
+
+                $message = (new \Swift_Message('You have been added to' . $employer->getName()))
+                    ->setFrom('jobnowlu@noreply.lu')
+                    ->setTo('arthur.regnault@altea.lu')
+                    ->setBody(
+                        $this->renderView(
+                            'AppBundle:Emails:addedAsCollaborator.html.twig',
+                            array(
+                                'employer' => $employer,
+                            )
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $message->getHeaders()->addTextHeader(
+                    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                );
+                $mailer->send($message);
+
+                $translated = $this->get('translator')->trans('price.payment.success');
+                $session->getFlashBag()->add('info', $translated);
+
+                return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));
+
+            }
+        }
+        return $this->render('EmployerBundle:Employer:addCollaborator.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
     }
 
 }

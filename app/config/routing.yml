@@ -45,6 +45,12 @@ fos_user_resetting_request:
         en: "/forgot-password"
         fr: "/mot-de-passe-oublie"
 
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix:
+        en: "/change-password"
+        fr: "/changer-mot-de-passe"
+
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
     prefix: /

@@ -17,7 +17,7 @@
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="logo-employer" src="/jobnowlu/web/{{ image }}"/>
+                <img class="logo-employer" src="{{ asset(image) }}"/>
             </div>
             <h2>{{ employer.name }}</h2>
         </div>
@@ -29,6 +29,9 @@
             <div style="height: 38px;">
                 {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                     <a href="{{ path('create_notification', {'type':'notification.employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
+                {% endif %}
+                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+                    <a href="{{ path('edit_employer', {'id':employer.id}) }}" class="btn btn-primary add-employer-notification">Editer mon profile</a>
                 {% endif %}
             </div>
             <hr>
@@ -145,7 +148,7 @@
         {% endif %}
         .employer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/{{ image }}');
+            background-image:url({{ asset(image) }});
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

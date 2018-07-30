@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
+        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+    {% endif %}
     <div class="jumbotron employer-jumbotron">
         <div>
             <div class="container-logo-employer">
@@ -13,14 +16,14 @@
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="logo-employer" src="/jobnowlu/web/{{ image }}"/>
+                <img class="logo-employer" src="{{ asset(image) }}"/>
             </div>
             <div class="title-employer">{{ user.employer.name }}</div>
         </div>
 
     </div>
 
-    <div class="row">
+    <div class="row edit-container">
         <div class="col-md-8 col-md-offset-2">
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
@@ -95,7 +98,6 @@
                             {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
                             {{ form_errors(form.description) }}
                         </div>
-                        </div>
                         <div class="col-md-6 form-group">
                             {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}
                             {{ form_widget(form.logo) }}
@@ -122,6 +124,9 @@
 
         </div>
         <button class="btn btn-default" id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
+        <a class="btn btn-default" href="{{ path('add_collaborator') }}">Ajouter un collaborateur</a>
+        <a class="btn btn-default" href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a>
+        <a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
             <div class="modal-dialog modal-sm">
@@ -219,7 +224,7 @@
         {% endif %}
         .employer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/{{ image }}');
+            background-image:url({{ asset(image) }});
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

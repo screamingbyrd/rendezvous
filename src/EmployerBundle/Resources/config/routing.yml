@@ -169,3 +169,8 @@ end_activation_offer_mail:
         en: "/mail-end-activation/{days}"
         fr: "/mail-fin-activation/{days}"
     defaults: { _controller: EmployerBundle:Offer:sendEndActivation }
+add_collaborator:
+    locales:
+        en: "/add-collaborator"
+        fr: "/ajout-collaborateur"
+    defaults: { _controller: EmployerBundle:Employer:addCollaborator }

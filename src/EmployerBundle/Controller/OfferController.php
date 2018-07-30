@@ -31,6 +31,7 @@ use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class OfferController extends Controller
 {
@@ -691,11 +692,10 @@ class OfferController extends Controller
             ->setBody(
                 $this->renderView(
                     'AppBundle:Emails:apply.html.twig',
-                    array('comment' => $comment, 'offer' => $offer)
+                    array('comment' => $comment, 'offer' => $offer, 'link' => $target_file)
                 ),
                 'text/html'
-            )
-            ->attach(\Swift_Attachment::fromPath($target_file));
+            );
         ;
 
         $messageCandidate = (new \Swift_Message('You applied to the offer ' . $offer->getTitle()))
@@ -709,6 +709,12 @@ class OfferController extends Controller
                 'text/html'
             );
         ;
+        $messageEmmployer->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+        $messageCandidate->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
 
         $mailer->send($messageCandidate);
         $mailer->send($messageEmmployer);
@@ -840,6 +846,9 @@ class OfferController extends Controller
                         )
                     ;
 
+                    $message->getHeaders()->addTextHeader(
+                        CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                    );
                     $mailer->send($message);
                 }
             }

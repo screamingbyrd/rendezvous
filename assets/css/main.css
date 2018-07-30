@@ -546,7 +546,7 @@ legend{
 }
 
 .td-contact-us{
-    width: 88%;
+    width: 82%;
 }
 .label-contact-us{
     text-align: right;
@@ -555,6 +555,7 @@ legend{
 .send-contact{
     width: 20%;
     float: right;
+    margin-top: 14px;
 }
 .input-contact{
     background-position: 10px 12px;
@@ -909,5 +910,13 @@ legend{
     .jobnow-container{
         min-height: 378px;
         margin-bottom: 20px;
+    }
+    .edit-container{
+        min-height: 378px;
+        margin-bottom: 20px;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
     }
 }

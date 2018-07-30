@@ -8,18 +8,13 @@
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
         <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
-    <div class="container">
-
-        <h1>{{ 'price.payment.title'|trans }}</h1>
-        <div class="shadow-box">
-            {{ 'price.payment.chose'|trans({'%nbrCredits%': nbrCredit, '%price%': price}) }}
-        </div>
-        <div class="shadow-box">
+    <div class="jumbotron homepage-jumbotron">
+        <h2>{{ 'price.payment.title' | trans }}</h2>
+    </div>
+    <div class="container stripe-container">
+        <div class="shadow-box col-md-8">
             {{ form_start(form, {attr: {id: form.vars.id}}) }}
             <div class="form-group">
-                <label for="card-element">
-                    {{ 'price.payment.enter'|trans }}
-                </label>
                 <div class="row">
                     <div class="col-md-6 info-log-credit">
                         {{ form_label (form.name) }}
@@ -42,6 +37,9 @@
                         <div>
                             CVC: Code de sécurité au dos de la carte
                         </div>
+                        <label for="card-element">
+                            {{ 'price.payment.enter'|trans }}
+                        </label>
                         <div id="card-element" class="form-control"></div>
                         <div id="card-errors" class="help-block" role="alert"></div>
                         {{ form_widget(form.token) }}
@@ -60,6 +58,37 @@
 
             <button class="btn btn-default" id="btn-confirm">{{ 'price.payment.validate'|trans }}</button>
         </div>
+        <div class="col-md-4">
+            <div class="shadow-box">
+                <div>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td scope="row" class="with-line">{{ 'bill.numberCredit'|trans }}</td>
+                            <td class="with-line">{{ nbrCredit }}</td>
+                        </tr>
+                        <tr>
+                            <td class="with-line">{{ 'bill.totalExludingTax'|trans }}</td>
+                            <td class="with-line">{{ (price*100)/(117) }} €</td>
+                        </tr>
+                        <tr>
+                            <td class="with-line">{{ 'bill.vat'|trans }}</td>
+                            <td class="with-line">17%</td>
+                        </tr>
+                        <tr>
+                            <td class="with-line">{{ 'bill.tax'|trans }}</td>
+                            <td class="with-line">{{ (price*100)/(117)*(17/100) }} €</td>
+                        </tr>
+                        <tr>
+                            <td class="with-line">{{ 'bill.totalIncludingTaxes'|trans }}</td>
+                            <td class="with-line"><b>{{ price }} €</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
             <div class="modal-dialog modal-sm">
@@ -127,5 +156,22 @@
             });
         });
     </script>
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/dashboard.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+        }
+        .stripe-container{
+            margin-top: 25px !important;
+        }
+    </style>
 
 {% endblock %}

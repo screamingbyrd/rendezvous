@@ -127,7 +127,7 @@
                 <div class="contact-modal-conatainer">
                     {{ render(controller(
                         'AppBundle:Contact:contact',
-                        { 'email': candidate.user.email }
+                        { 'emailTo': candidate.user.email, 'type':'contact' }
                     )) }}
                 </div>
 

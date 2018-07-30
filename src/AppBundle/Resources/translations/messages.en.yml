@@ -319,6 +319,28 @@ featured:
 email:
   sent: You message has been sent !
   send: Send
+  application:
+    candidate:  You applied to this offer:
+    employer:
+      applied: A candidate applied to your offer:
+      comment: Comment/ motivation letter:
+      download: Télécharger le cv
+  contact: Vous avre reçu un message de %name%
+  deleted: Your account has been deleted
+  endOfActivation:
+    youOffer: Your offer %title% will arrive at the end of activation in %days% days
+    thinkAbout: Think about extending their activations on your dashboard
+  notification:
+    created:
+      title: Votre alerte email a bien été créée !
+      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+    send:
+      title:
+        regular: New jobs are available for this %parameter%
+        search: New jobs are available for you
+  footer:
+    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
+    consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
 contact:
   form: Contact form
@@ -407,6 +429,20 @@ price:
     validate: Validate my payment
     sure: Are you sure you want to buy %nbrCredits% credits ?
     success: You bought %credits% credits!
+    zipcode: Zipcode
+
+bill:
+  buyCredit: Buy credits
+  numberCredit: Number credits
+  date: Date
+  to: To the attention of:
+  object: Object:
+  vat: VAT
+  tax: Tax
+  amount: Amount
+  totalExludingTax: Total HT
+  totalIncludingTaxes: Total TTC
+  tex: TEX
 
 tag:
   accounting: Accounting/Finance

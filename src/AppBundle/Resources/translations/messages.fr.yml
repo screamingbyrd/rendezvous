@@ -217,7 +217,7 @@ offer:
   titlePH: Votre titre
   tag: Tag(s)
   tagPH: Domaine(s) de compétence(s)
-  location: Emplacement
+  location: Adresse
   locationPH: Indiquez un lieu
   description: Description
   contract: Type de contrat
@@ -316,6 +316,28 @@ featured:
 email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
+  application:
+    candidate:  Vous avez postulé à cette offre :
+    employer:
+      applied: A candidate applied to your offer:
+      comment: Comment/ motivation letter:
+      download: Télécharger le cv
+  contact: Vous avre reçu un message de %name%
+  deleted: Your account has been deleted
+  endOfActivation:
+    youOffer: Your offer %title% will arrive at the end of activation in %days% days
+    thinkAbout: Think about extending their activations on your dashboard
+  notification:
+    created:
+      title: Votre alerte email a bien été créée !
+      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+    send:
+      title:
+        regular: New jobs are available for this %parameter%
+        search: New jobs are available for you
+  footer:
+    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
+    consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
 contact:
   form: Formulaire de contact
@@ -405,6 +427,22 @@ price:
     validate: Valider mon paiement
     sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
     success: Vous avez bien acheté %credits% crédits !
+    zipcode: Code postale
+
+bill:
+  buyCredit: Achat de crédit
+  numberCredit: Nombre de crédit
+  date: Date
+  to: A l'attention de :
+  object: Objet :
+  vat: TVA
+  tax: Taxe
+  amount: Montant
+  totalExludingTax: Total HT
+  totalIncludingTaxes: Total TTC
+  tex: HT
+
+
 
 tag:
   accounting: Comptabilité et Finance

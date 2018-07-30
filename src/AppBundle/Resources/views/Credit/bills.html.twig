@@ -30,7 +30,7 @@
                                 <td>{{ logCredit.credit }}</td>
                                 <td>{{ logCredit.price|localizedcurrency('EUR') }}</td>
                                 <td>
-                                    <a href="{{ path('jobnow_bills_generate') }}" download>
+                                    <a href="{{ path('jobnow_bills_generate', {'id':logCredit.id}) }}" download>
                                         <i class="fas fa-file"></i>
                                     </a>
                                 </td>

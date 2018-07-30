@@ -26,11 +26,11 @@
                                 {% else %}
                                     {% set image = 'images/default_cover_image6.jpg' %}
                                 {% endif %}
-                                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');">
+                                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
                                     <div class="layer layer-offer-element animated">
                                     </div>
                                 </div>
-                                {% if offer.employer.logo.imageName is not null and offer.employer.coverImage.imageName is not null %}<img class="logo-employer-in-offer-search" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>{% endif %}
+                                {% if offer.employer.logo.imageName is not null and offer.employer.coverImage.imageName is not null %}<img class="logo-employer-in-offer-search" src="{{asset('uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
                                 <div class="offer-search-element">
                                     <div class="offer-element-details">
                                         <div class="offer-element-name">{{ offer.employer.name }}<span class="offer-item-experience other-element"><i class="fa fa-address-book" aria-hidden="true"></i>{{ offer.experience | trans }}</span></div>

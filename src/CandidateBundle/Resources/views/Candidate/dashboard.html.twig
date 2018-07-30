@@ -38,8 +38,12 @@
                             <td>
                                 <a href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">
                                     {% if offer.offer.employer.logo.imageName is not null %}
-                                        <img class="logo-employer-in-applied-offer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                    {% else %}
+                                        {% set image = 'images/logo-default.png' %}
                                     {% endif %}
+                                        <img class="logo-employer-in-applied-offer" src="{{ asset(image) }}"/>
+
                                     {{ offer.offer.title |trans }}
                                 </a>
                             </td>
@@ -89,7 +93,7 @@
             </div>
             <div class="tab-pane fade" id="favorites">
                 <div class="text-center">{{ 'favorite.title'|trans }}</div>
-                {% if notifications is defined and notifications|length > 0 %}
+                {% if favorites is defined and favorites|length > 0 %}
                     <h3>{{ 'header.candidates.dashboard.favorites' | trans }}</h3>
 
                         <div class="tab-pane active fade in" id="applied">
@@ -105,8 +109,11 @@
                                         <td>
                                             <a href="{{ path('show_offer', {'id': favorite.offer.id, 'url':favorite.offer.offerUrl}) }}">
                                                 {% if favorite.offer.employer.logo.imageName is not null %}
-                                                    <img class="logo-employer-in-applied-offer" src="/jobnowlu/web/uploads{{ vich_uploader_asset(favorite.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}"/>
+                                                    {% set image =  'uploads' ~ vich_uploader_asset(favorite.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                                {% else %}
+                                                    {% set image = 'images/logo-default.png' %}
                                                 {% endif %}
+                                                <img class="logo-employer-in-applied-offer" src="{{ asset(image) }}"/>
                                                 {{ favorite.offer.title |trans }}
                                             </a>
                                         </td><td><a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>

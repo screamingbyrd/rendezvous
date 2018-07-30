@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactType;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class ContactController extends Controller
 {
@@ -20,13 +21,16 @@ class ContactController extends Controller
         $session = $request->getSession();
         $name = $request->get('name');
         $emailSender = $request->get('email');
+        $emailTo = $request->get('emailTo');
+        $emailTo = isset($emailTo)?$emailTo:'test@test.com';
         $message = $request->get('message');
-
+        $type = $request->get('type');
+        $type = isset($type)?$type:'contactUs';
         $data = array('name' => $name, 'emailSender' => $emailSender, 'message' => $message);
 
         if ($request->isMethod('POST')) {
                 // Send mail
-                if($this->sendEmail('',$data, 'contactUs')){
+                if($this->sendEmail($emailTo,$data, $type)){
 
                     $translated = $this->get('translator')->trans('email.sent');
                     $session->getFlashBag()->add('info', $translated);
@@ -39,15 +43,15 @@ class ContactController extends Controller
 
         }
 
-        return $this->render('AppBundle:Contact:contact.html.twig');
+        return $this->render('AppBundle:Contact:contact.html.twig',array('type' => $type, 'emailTo' => $emailTo));
     }
 
     private function sendEmail($email, $data, $template){
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message('Someone contacted us'))
+        $message = (new \Swift_Message('Someone contacted you'))
             ->setFrom('test@test.com')
-            ->setTo('test@test.com')
+            ->setTo($email)
             ->setBody(
                 $this->renderView(
                     'AppBundle:Emails:'.$template.'.html.twig',
@@ -57,6 +61,9 @@ class ContactController extends Controller
             )
         ;
 
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
         $mailer->send($message);
 
         return $this->get('mailer')->send($message);

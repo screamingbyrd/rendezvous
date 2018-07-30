@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class NotificationController extends Controller
 {
@@ -118,6 +119,11 @@ class NotificationController extends Controller
             )
         ;
 
+//        return $this->render('AppBundle:Emails:notificationCreated.html.twig', array(
+//        ));
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
         $mailer->send($message);
 
         $translated = $this->get('translator')->trans('notification.created');
@@ -207,7 +213,7 @@ class NotificationController extends Controller
                     $mail = $candidate->getUser()->getEmail();
                     $mailer = $this->container->get('swiftmailer.mailer');
 
-                    $message = (new \Swift_Message('New offers could interest you'))
+                    $message = (new \Swift_Message($this->get('translator')->trans('email.notification.send.title.search')))
                         ->setFrom('jobnowlu@noreply.lu')
                         ->setTo($mail)
                         ->setBody(
@@ -215,13 +221,17 @@ class NotificationController extends Controller
                                 'AppBundle:Emails:notification.html.twig',
                                 array('offers' => $offers,
                                     'subject' => $translated = $this->get('translator')->trans($subject),
-                                    'id' =>$notification->getUid()
+                                    'id' =>$notification->getUid(),
+                                    'search' => false
                                 )
                             ),
                             'text/html'
                         )
                     ;
 
+                    $message->getHeaders()->addTextHeader(
+                        CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                    );
                     $mailer->send($message);
                 }
 
@@ -276,13 +286,17 @@ class NotificationController extends Controller
                             'AppBundle:Emails:notification.html.twig',
                             array('offers' => $finalArray,
                                 'subject' => $translated = $this->get('translator')->trans($subject),
-                                'id' =>$notification->getUid()
+                                'id' =>$notification->getUid(),
+                                    'search' => true
                             )
                         ),
                         'text/html'
                     )
                 ;
 
+                $message->getHeaders()->addTextHeader(
+                    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                );
                 $mailer->send($message);
             }
 
@@ -293,6 +307,28 @@ class NotificationController extends Controller
         $em->flush();
 
         return new Response();
+    }
+
+    public function checkNotificationExistAction(Request $request)
+    {
+        $type = $request->get('type');
+        $elementId = $request->get('id');
+        $mail = $request->get('mail');
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Notification')
+        ;
+        $user = $userRepository->findOneBy(array('mail' => $mail,'typeNotification' =>$type,'elementId' => $elementId));
+
+        if(is_object($user)){
+            $response = 'true';
+        }else{
+            $response = 'false';
+        }
+
+        return new Response($response);
     }
 
 }

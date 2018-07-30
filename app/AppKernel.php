@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
+            new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
 
         ];
 

@@ -77,7 +77,7 @@ class CreditController extends Controller
         $currentPage = $request->get('row');
         $sort = $request->get('sort');
         $currentPage = isset($currentPage)?$currentPage:1;
-        $sort = isset($sort)?$sort:'ASC';
+        $sort = isset($sort)?$sort:'DESC';
 
         $numberOfItem = 50;
 
@@ -134,15 +134,19 @@ class CreditController extends Controller
             ])
             ->add('name',      TextType::class, array(
                 'required' => true,
+                'label' => 'dashboard.candidate.name'
             ))
             ->add('phone',      TextType::class, array(
                 'required' => true,
+                'label' => 'form.registration.phone'
             ))
             ->add('location',      TextType::class, array(
                 'required' => true,
+                'label' => 'offer.location',
             ))
             ->add('zipcode',      TextType::class, array(
                 'required' => true,
+                'label' => 'price.payment.zipcode'
             ))
             ->add('submit', SubmitType::class)
             ->getForm();
@@ -192,16 +196,36 @@ class CreditController extends Controller
 
     }
 
-    public function generateBillAction()
+    public function generateBillAction(Request $request)
     {
+        $id = $request->get('id');
+        $session = $request->getSession();
+        $user = $this->getUser();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:LogCredit')
+        ;
+        $logsCredit = $repository->findOneBy(array('id' => $id));
+
+        if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles()) and $logsCredit->getEmployer() == $user->getEmployer()) or in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
         $html2pdf = new Html2Pdf();
 
         $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
-            //..Send some data to your view if you need to //
+            'logCredit' => $logsCredit
         ));
 
-        $html2pdf->writeHTML($html);
+//        return $this->render('AppBundle:Credit:billsPdf.html.twig', array(
+//            'logCredit' => $logsCredit
+//        ));
 
+        $html2pdf->writeHTML($html);
 
         return new Response($html2pdf->output(), 200, array(
             'Content-Type' => 'application/pdf'));

@@ -25,7 +25,7 @@
                                     {% else %}
                                         {% set image = 'images/logo-default.png' %}
                                     {% endif %}
-                                    <img src="/jobnowlu/web/{{ image }}" class="employer-thumb-logo" />
+                                    <img src="{{ asset(image) }}" class="employer-thumb-logo" />
                                     <h3 class="employer-title">{{ employer.name }}</h3>
                                 </div>
                                 {% if employer.coverImage.imageName is not null %}
@@ -33,7 +33,7 @@
                                 {% else %}
                                     {% set image = 'images/default_cover_image6.jpg' %}
                                 {% endif %}
-                                <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');min-height: 185px;">
+                                <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});min-height: 185px;">
                                 </div>
                                 <div class="thumb-employer-info">
                                     {{ employer.description}}
