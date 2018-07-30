@@ -7,8 +7,8 @@
 {% block body %}
 
     <div class="jumbotron homepage-jumbotron">
-        <h2>Find the career you deserve</h2>
-        <h3 class="homepage-subtitle">Your job search starts and ends with us</h3>
+        <h2>{{ 'homepage.title'|trans }}</h2>
+        <h3 class="homepage-subtitle">{{ 'homepage.title'|trans }}</h3>
         <p>
             <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
                 <div class="homepage-search-bar search-bar">
@@ -29,7 +29,7 @@
     <div class="container homepage-container">
         {% if featuredOffer|length > 0 %}
             <div class="row fade-in-right animated">
-                <h1 class="featured-offer text-center">Featured Offer</h1>
+                <h1 class="featured-offer text-center">{{ 'featured.offer.title'|trans }}</h1>
                 {% if featuredOffer|length == 1 %}
                     {% set blocOffer = 12 %}
                 {% elseif featuredOffer|length == 2 %}
@@ -70,7 +70,7 @@
         {% endif %}
         {% if featuredEmployer|length > 0 %}
             <div class="row featured-employer fade-in-left animated">
-                <h1 class="featured-offer text-center">Featured Employer</h1>
+                <h1 class="featured-offer text-center">{{ 'featured.employer.title'|trans }}</h1>
                 {% if featuredEmployer|length == 1 %}
                     {% set blocEmployer = 12 %}
                 {% elseif featuredEmployer|length == 2 %}
@@ -107,7 +107,7 @@
             <hr>
         {% endif %}
         <div class="fade-in-right animated">
-            <h1 class="text-center featured-offer" >Category</h1>
+            <h1 class="text-center featured-offer" >{{ 'homepage.category'|trans }}</h1>
             <div class="row">
                 {% for row  in tagArray|batch(2, null) %}
                     <div class="{{ cycle(['color-row',''],loop.index) }}">
@@ -133,7 +133,7 @@
     </div>
     {% if ads is not empty %}
         <div class="container jobnow-container container">
-            <h1 class="featured-offer text-center">Nos partenaire</h1>
+            <h1 class="featured-offer text-center">{{ 'homepage.ourPartners'|trans }}</h1>
             <ul class="ads-list-hompeage" id="myUL">
                 {% for ad in ads %}
                 <li class="search-result animated fadeIn">
