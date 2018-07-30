@@ -138,6 +138,7 @@ class CandidateController extends Controller
         $form = $this->get('form.factory')->create(CandidateType::class, $candidate);
 
         $form->remove('password');
+        $form->remove('terms');
 
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
@@ -405,7 +406,8 @@ class CandidateController extends Controller
         );
         $mailer->send($message);
 
-        $session->getFlashBag()->add('info', 'Candidat supprimé !');
+        $translated = $this->get('translator')->trans('candidate.delete.deleted');
+        $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('jobnow_home');
     }

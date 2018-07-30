@@ -30,7 +30,7 @@
 
             {% if completion < 100 %}
                 <div class="completion-container">
-                    Completer vos informations
+                    {{ 'employer.edit.complete'|trans }}
                     <div class="meter red">
                         <span class="completion-bar" style="width: {{ completion }}%"></span>
                     </div>
@@ -38,7 +38,7 @@
             {% endif %}
 
             <div class="completion-success animated fadeIn">
-                Profile complété
+                {{ 'employer.edit.completed'|trans }}
             </div>
 
             {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
@@ -50,7 +50,7 @@
 
 
                 <fieldset>
-                    <legend>Données personnelles:</legend>
+                    <legend>{{ 'employer.edit.personalData'|trans }}</legend>
 
                     <div class="col-md-3 form-group">
                         {{ form_label (form.email,null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -77,7 +77,7 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Données sur la société</legend>
+                    <legend>{{ 'employer.edit.companyData'|trans }}</legend>
                         <div class="col-md-4 form-group">
                             {{ form_label (form.name,null, { 'label_attr': {'class': 'label-form'} }) }}
                             {{ form_widget(form.name) }}
@@ -122,22 +122,24 @@
                 {# Fermeture de la balise <form> du formulaire HTML #}
                 {{ form_end(form) }}
 
-        </div>
-        <button class="btn btn-default" id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
-        <a class="btn btn-default" href="{{ path('add_collaborator') }}">Ajouter un collaborateur</a>
-        <a class="btn btn-default" href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a>
-        <a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
-
-        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</button>
-                        <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+            </div>
+            <div class="button-profile">
+                <button class="btn btn-primary " id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
+                <a class="btn btn-primary" href="{{ path('add_collaborator') }}">{{ 'employer.addColaborator.title'|trans }}</a>
+                <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">{{ 'employer.edit.changePassword'|trans }}</a>
+                <a class="btn btn-primary" href="{{ path('fos_user_resetting_request') }}">{{ 'employer.edit.forgotPassword'|trans }}</a>
+            </div>
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ 'candidate.delete.sure'|trans }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</button>
+                            <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                        </div>
                     </div>
                 </div>
             </div>

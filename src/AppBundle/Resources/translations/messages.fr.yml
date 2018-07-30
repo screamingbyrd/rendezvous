@@ -58,6 +58,7 @@ form:
     complete: Completer votre profile
     completed: Profile complété
     already: Déjà inscrit ?
+    accept: J'accepte les condition générale d'utilisation
     bySubmitting: En soumettant ce formulaire, vous confirmez avoir consulté et accepté les %link_start%conditions générales%link_end% de notre site.
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
@@ -71,6 +72,7 @@ form:
     description: Description
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
+    edited: L'employeur a bien été modifé !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
@@ -274,7 +276,8 @@ offer:
 candidate:
   delete:
     delete: Supprimer mon compte
-    sure: Etes vous sûre de vouloir supprimer votre compte
+    sure: Etes vous sûre de vouloir supprimer votre compte ?
+    deleted: Your profile has been deleted
   age: Âge
   tag: Domaines de compétence
   about: A propos de ce candidat
@@ -291,11 +294,24 @@ employer:
       title: Candidature spontanée
       send: Vous avez reçu une candidature spontanée
       sent: Votre candidature à bien été envoyé
+  edit:
+    complete: Completer vos informations
+    completed: Profile complété
+    personalData: Données personnelles :
+    companyData: Données sur la société :
+    changePassword: Changer de mot de passe
+    forgotPassword: Mot de passe oublié
   credit:
     title: Crédits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: Vous avez actuellement %credit% credits !
     buy: Acheter des crédits
+  addColaborator:
+    title: Ajouter un collaborateur
+    type: Entrer l'email d'un collaborateur, il lui sera créer un utilisateur relié à votre société
+    youHave: Vous avrz été ajouter à
+    added: Collaborateur ajouté
+    connect: Connectez vous a votre compte avec votre email comme identifiant et 0000 comme mot de passe, vous pourez ensuite modifier vos informations personelles et votre mot de passe.
 
 freelance: Freelance
 fulltime: CDI

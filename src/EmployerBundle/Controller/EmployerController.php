@@ -129,6 +129,7 @@ class EmployerController extends Controller
         $form = $this->get('form.factory')->create(EmployerType::class, $employer);
 
         $form->remove('password');
+        $form->remove('terms');
 
         // Si la requête est en POST
         if ($request->isMethod('POST')) {
@@ -160,7 +161,8 @@ class EmployerController extends Controller
                 $em->merge($employer);
                 $em->flush();
 
-                $session->getFlashBag()->add('info', 'Employer modifié !');
+                $translated = $this->get('translator')->trans('form.registration.edited');
+                $session->getFlashBag()->add('info', $translated);
 
 
                 return $this->redirectToRoute('dashboard_employer');
@@ -258,7 +260,8 @@ class EmployerController extends Controller
             $mail = $user->getEmail();
             $em->remove($user);
 
-            $message = (new \Swift_Message('Your profile has been deleted'))
+            $translated = $this->get('translator')->trans('candidate.delete.deleted');
+            $message = (new \Swift_Message($translated))
                 ->setFrom('jobnowlu@noreply.lu')
                 ->setTo($mail)
                 ->setBody(
@@ -277,7 +280,7 @@ class EmployerController extends Controller
             $mailer->send($message);
         }
 
-        $message = (new \Swift_Message($employer->getName().' has deleted his account'))
+        $message = (new \Swift_Message($employer->getName().' has archived his account'))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo('commercial@jobnow.lu')
             ->setBody(
@@ -296,7 +299,8 @@ class EmployerController extends Controller
         $mailer->send($message);
 
         $em->flush();
-        $session->getFlashBag()->add('info', 'Employer supprimé !');
+        $translated = $this->get('translator')->trans('candidate.delete.deleted');
+        $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('jobnow_home');
 
@@ -532,6 +536,7 @@ class EmployerController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
         $now = new \DateTime();
+        $now->modify( '- 1 week' );
 
         return $this->render('EmployerBundle::featuredEmployer.html.twig', array(
             'featuredEmployerArray' => $featuredArray,
@@ -1039,7 +1044,9 @@ class EmployerController extends Controller
 
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $message = (new \Swift_Message('You have been added to' . $employer->getName()))
+                $translated = $this->get('translator')->trans('employer.addColaborator.youHave');
+
+                $message = (new \Swift_Message($translated . $employer->getName()))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo('arthur.regnault@altea.lu')
                     ->setBody(
@@ -1058,7 +1065,7 @@ class EmployerController extends Controller
                 );
                 $mailer->send($message);
 
-                $translated = $this->get('translator')->trans('price.payment.success');
+                $translated = $this->get('translator')->trans('employer.addColaborator.added');
                 $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));
