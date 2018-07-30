@@ -122,6 +122,9 @@
 
         </div>
         <button class="btn btn-default" id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
+        <a class="btn btn-default" href="{{ path('add_collaborator') }}">Ajouter un collaborateur</a>
+        <a class="btn btn-default" href="{{ path('fos_user_change_password') }}">Changer de mot de passe</a>
+        <a class="btn btn-default" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
             <div class="modal-dialog modal-sm">

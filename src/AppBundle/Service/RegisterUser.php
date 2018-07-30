@@ -55,4 +55,34 @@ class RegisterUser
 
         return $user;
     }
+
+    /**
+     * This method adds a collaborator to an existing employer.
+     *
+     * @return User
+     **/
+    public function addCollaborator($email, $employer){
+
+        $email_exist = $this->userManager->findUserByEmail($email);
+
+        if($email_exist){
+            return false;
+        }
+
+        $user = $this->userManager->createUser();
+        $user->setEnabled(true);
+        $user->setUsername($email);
+        $user->setEmail($email);
+        $user->setEmailCanonical($email);
+        $user->setFirstName('');
+        $user->SetLastName('');
+        $user->setPlainPassword('0000');
+        $user->addRole('ROLE_EMPLOYER');
+        $user->setEmployer($employer);
+        $this->userManager->updateUser($user);
+
+
+
+        return $user;
+    }
 }

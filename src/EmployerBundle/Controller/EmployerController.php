@@ -20,6 +20,8 @@ use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 
@@ -114,7 +116,10 @@ class EmployerController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
-        $user = $userRepository->findOneBy(array('employer' => $employer));
+        if(in_array('ROLE_ADMIN', $user->getRoles())){
+            $user = $userRepository->findOneBy(array('employer' => $employer));
+        }
+
         $session = $request->getSession();
 
         $employer->setFirstName($user->getFirstName());
@@ -986,6 +991,56 @@ class EmployerController extends Controller
         $translated = $this->get('translator')->trans('employer.show.spontaenous.sent');
         $session->getFlashBag()->add('info', $translated);
         return $this->redirectToRoute('show_employer', array('id' => $id));
+    }
+
+    public function addCollaboratorAction(Request $request){
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $form = $this->get('form.factory')
+            ->createNamedBuilder('collaborator-form')
+            ->add('email',      EmailType::class, array(
+                'required' => true,
+                'label' => 'form.registration.email'
+            ))
+            ->add('submit', SubmitType::class)
+            ->getForm();
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $data = $form->getData();
+
+                $email = $data['email'];
+
+
+                $userRegister = $this->get('app.user_register');
+                $collaborator = $userRegister->addCollaborator($email, $user->getEmployer());
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($collaborator);
+                $em->flush();
+
+                $translated = $this->get('translator')->trans('price.payment.success');
+                $session->getFlashBag()->add('info', $translated);
+
+                return $this->redirectToRoute('jobnow_credit');
+
+            }
+        }
+        return $this->render('EmployerBundle:Employer:addCollaborator.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
     }
 
 }
