@@ -295,4 +295,22 @@ h3.box{
         width: 24%;
         padding-bottom: 24%;
     }
+    .logo-employer{
+        width: 160px;
+    }
+}
+@media (min-width: 1200px){
+    .button-profile{
+        position: absolute;
+        right: -196px;
+        top: 50px;
+        display: grid;
+    }
+    .button-profile .btn{
+        margin-top: 0 !important;
+    }
+}
+.button-profile .btn{
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
