@@ -42,7 +42,7 @@
                                     {% else %}
                                         {% set image = 'images/logo-default.png' %}
                                     {% endif %}
-                                        <img class="logo-employer-in-applied-offer" src="/jobnowlu/web/{{ image }}"/>
+                                        <img class="logo-employer-in-applied-offer" src="{{ asset(image) }}"/>
 
                                     {{ offer.offer.title |trans }}
                                 </a>
@@ -113,7 +113,7 @@
                                                 {% else %}
                                                     {% set image = 'images/logo-default.png' %}
                                                 {% endif %}
-                                                <img class="logo-employer-in-applied-offer" src="/jobnowlu/web/{{ image }}"/>
+                                                <img class="logo-employer-in-applied-offer" src="{{ asset(image) }}"/>
                                                 {{ favorite.offer.title |trans }}
                                             </a>
                                         </td><td><a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>

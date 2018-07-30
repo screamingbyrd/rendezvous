@@ -108,7 +108,7 @@
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="floating-employer-logo" src="/jobnowlu/web/{{ image }}"/>
+                <img class="floating-employer-logo" src="{{ asset(image) }}"/>
                 <div class="floating-employer-description">
                     <div class="offer-employer-description">
                         {{ offer.employer.description| raw }}
@@ -190,7 +190,7 @@
         {% endif %}
         .offer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/{{ image }}');
+            background-image:url({{ asset(image) }});
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

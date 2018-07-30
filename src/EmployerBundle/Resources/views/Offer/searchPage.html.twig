@@ -105,11 +105,11 @@
                                     {% else %}
                                         {% set image = 'images/default_cover_image6.jpg' %}
                                     {% endif %}
-                                    <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url('/jobnowlu/web/{{ image }}');min-height: 110px;">
+                                    <div class="caption background-offer" style="display: flex; justify-content: center;align-items: center;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});min-height: 110px;">
                                         <div class="layer">
                                         </div>
                                         <div class="offer-thumb-image-div">
-                                            {% if offer.offer.employer.logo.imageName is not null and offer.offer.employer.coverImage.imageName is not null %}<img src="/jobnowlu/web/uploads{{ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') }}" class="offer-thumb-logo" />{% endif %}
+                                            {% if offer.offer.employer.logo.imageName is not null and offer.offer.employer.coverImage.imageName is not null %}<img src="{{asset('uploads' ~ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}" class="offer-thumb-logo" />{% endif %}
                                         </div>
                                     </div>
 

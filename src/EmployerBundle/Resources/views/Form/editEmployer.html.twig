@@ -16,7 +16,7 @@
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="logo-employer" src="/jobnowlu/web/{{ image }}"/>
+                <img class="logo-employer" src="{{ asset(image) }}"/>
             </div>
             <div class="title-employer">{{ user.employer.name }}</div>
         </div>
@@ -224,7 +224,7 @@
         {% endif %}
         .employer-jumbotron::after{
             content: '';
-            background-image:url('/jobnowlu/web/{{ image }}');
+            background-image:url({{ asset(image) }});
             background-size: cover;
             background-repeat: no-repeat;
             width: 100%;

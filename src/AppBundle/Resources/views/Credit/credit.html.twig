@@ -28,7 +28,7 @@
                         <h3>1 {{ 'price.credit' | trans }}</h3>
                     </div>
                     <div class="caption">
-                        <img class="logo-choice-coin" src="/jobnowlu/web/images/coin.svg">
+                        <img class="logo-choice-coin" src="{{asset('images/coin.svg')}}">
                         <div class="no-bonus">{{ (creditService.getOneCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p>{{ 'price.noBonus' | trans }}</p>
                         <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a></p>
@@ -42,7 +42,7 @@
                         <h3>5 {{ 'employer.credit.title' | trans }}</h3>
                     </div>
                     <div class="caption">
-                        <img class="logo-choice" src="/jobnowlu/web/images/bill.svg">
+                        <img class="logo-choice" src="{{asset('images/bill.svg')}}">
                         <div class="strike">{{ (creditService.getfiveCredit*100)/(117) + 10}}€</div>
                         <div>{{ (creditService.getfiveCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p class="bonus-discount">+ 10€ Bonus</p>
@@ -57,7 +57,7 @@
                         <h3>10 {{ 'employer.credit.title' | trans }}</h3>
                     </div>
                     <div class="caption">
-                        <img class="logo-choice" src="/jobnowlu/web/images/stack.svg">
+                        <img class="logo-choice" src="{{asset('images/stack.svg')}}">
                         <div class="strike">{{ (creditService.getTenCredit*100)/(117) + 100}}€</div>
                         <div>{{ (creditService.getTenCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p class="bonus-discount">+ 100 € Bonus</p>
