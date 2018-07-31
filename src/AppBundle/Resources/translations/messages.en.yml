@@ -313,8 +313,16 @@ employer:
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
     buy: Buy some credits
-  addColaborator:
+  addCollaborator:
     title: Add a collaborator
+    list: List of collaborators
+    access:
+      title: Access
+      simple: Simple
+      total: Total
+      changeAccess: Change access
+      changed: Access of the collaborator has been changed
+    deleted: Collaborator deleted !
     type: Type in the mail of a collaborator, a user will be created and he will receive an email to login
     youHave: You habe been added to
     added: The collaborator has been added !

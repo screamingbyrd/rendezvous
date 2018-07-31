@@ -174,3 +174,18 @@ add_collaborator:
         en: "/add-collaborator"
         fr: "/ajout-collaborateur"
     defaults: { _controller: EmployerBundle:Employer:addCollaborator }
+list_collaborator:
+    locales:
+        en: "/collaborator-list/{id}"
+        fr: "/liste-collaborateur/{id}"
+    defaults: { _controller: EmployerBundle:Employer:listCollaborator }
+archive_collaborator:
+    locales:
+        en: "/archive-collaborator/{id}"
+        fr: "/archiver-collaborateur/{id}"
+    defaults: { _controller: EmployerBundle:Employer:archiveCollaborator }
+change_access_collaborator:
+    locales:
+        en: "/change-access-collaborator/{id}"
+        fr: "/changer-acces-collaborateur/{id}"
+    defaults: { _controller: EmployerBundle:Employer:changeAccessCollaborator }
