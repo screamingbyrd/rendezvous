@@ -21,6 +21,8 @@ header:
   register: S'inscrire
   how: Guide d'utilisation
   findjob: Trouver un travail
+  profile: Mon compte
+  logout: Déconnexion
   candidates:
     title: Candidats
     findJob: Trouver un travail

@@ -47,6 +47,19 @@ body {
 
 /*Navbars*/
 
+.navbar .fas{
+    margin-right: 10px;
+}
+
+.logo-credit{
+    width: 25px;
+}
+.dropdown-menu .logo-credit{
+    margin-left: -4px;
+    width: 23px !important;
+}
+
+
 @media (min-width: 1200px){
     .container {
         width: 72% !important;

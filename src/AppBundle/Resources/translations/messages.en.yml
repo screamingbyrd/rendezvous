@@ -19,6 +19,8 @@ how:
 
 
 header:
+  profile: Mon compte
+  logout: Déconnexion
   findjob: Find a job
   register: Register
   how: How It works
