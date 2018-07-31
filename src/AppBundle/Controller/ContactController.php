@@ -49,7 +49,8 @@ class ContactController extends Controller
     private function sendEmail($email, $data, $template){
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message('Someone contacted you'))
+        $translated = $this->get('translator')->trans('email.contacted');
+        $message = (new \Swift_Message($translated))
             ->setFrom('test@test.com')
             ->setTo($email)
             ->setBody(

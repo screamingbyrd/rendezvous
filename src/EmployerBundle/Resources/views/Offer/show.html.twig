@@ -13,7 +13,7 @@
             <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
             <div class="job-title">{{ offer.contractType.name |trans }}</div>
             <div class="job-title">{{ offer.location }}</div>
-            <div class="updated-date">Postée le {{ offer.creationDate |date('Y-m-d')}}</div>
+            <div class="updated-date">{{ 'offer.posted' | trans }} {{ offer.creationDate |date('d/m/Y')}}</div>
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
             {% endif %}
@@ -116,12 +116,12 @@
                     <hr class="hr-floating-employer">
                 </div>
 
-                <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">Voir la page de l'entreprise</a>
+                <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="jobnow-button">{{ 'offer.companyPage'|trans }}</a>
             </div>
 
             {% if offer.tag is defined and offer.tag|length >0 %}
                 <div class="shadow-box fade-in-left animated">
-                    <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
+                    <div class="article-title"><i class="fa fa-tag"></i> {{ 'employer.show.tags'|trans }}</div>
                     <ul class="last-job-list">
                         {% for tag in offer.tag %}
                             <li>

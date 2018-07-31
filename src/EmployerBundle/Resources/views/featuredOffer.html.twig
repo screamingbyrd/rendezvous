@@ -38,7 +38,7 @@
                         {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
                             <div class="layer layer-offer-element"></div>
                         {% endif %}
-                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}
                         {% if (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is not defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids']|length < 3) and (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is  not defined or featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features']|length < offers|length))%}<button class="btn btn-primary element-offer-list reserve-featured-offer" data-list="{% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is defined%}{{ featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] |json_encode() }}{% endif %}" data-date="{{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}" data-href="{{ path('reserve_featured_offer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.offer.reserve' | trans }}</button>{% endif %}
                         {% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles))%}
@@ -47,7 +47,7 @@
                                     <div class="count-info title-featured-offer">{{ feature.offer.title }}
                                         {% if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
                                             <a href="{{ path('delete_featured_offer', { 'id': feature.id }) }}">
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                                <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                             </a>
                                         {% endif %}
                                     </div>
@@ -60,7 +60,7 @@
                         {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
                             <div class="layer layer-offer-element"></div>
                         {% endif %}
-                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+"~  modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is not defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids']|length < 3) and (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is not defined or featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features']|length < offers|length))%}<button class="btn btn-primary element-offer-list reserve-featured-offer" data-list="{% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is defined%}{{ featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] |json_encode() }}{% endif %}" data-date="{{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}" data-href="{{ path('reserve_featured_offer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.offer.reserve' | trans }}</button>{% endif %}
                         {% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles))%}
@@ -69,7 +69,7 @@
                                     <div class="count-info title-featured-offer">{{ feature.offer.title }}
                                         {% if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
                                             <a href="{{ path('delete_featured_offer', { 'id': feature.id }) }}">
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                                <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                             </a>
                                         {% endif %}
                                     </div>
@@ -83,7 +83,7 @@
                         {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
                             <div class="layer layer-offer-element"></div>
                         {% endif %}
-                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+"~ modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is not defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids']|length < 3) and (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is not defined or featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features']|length < offers|length))%}<button class="btn btn-primary element-offer-list reserve-featured-offer" data-list="{% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is defined%}{{ featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] |json_encode() }}{% endif %}" data-date="{{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}" data-href="{{ path('reserve_featured_offer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.offer.reserve' | trans }}</button>{% endif %}
                         {% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles))%}
@@ -92,7 +92,7 @@
                                     <div class="count-info title-featured-offer">{{ feature.offer.title }}
                                         {% if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
                                             <a href="{{ path('delete_featured_offer', { 'id': feature.id }) }}">
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                                <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                             </a>
                                         {% endif %}
                                     </div>
@@ -105,7 +105,7 @@
                         {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}
                             <div class="layer layer-offer-element"></div>
                         {% endif %}
-                        <div><b>semaine {{ modify + 1 }}</b></div>
+                        <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         {{ firstWeekStart|date_modify("+" ~ modify  ~"week")|date("d/m/Y") }}
                         {% if (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is not defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids']|length < 3 and (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is not defined or featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features']|length < offers|length)))%}<button class="btn btn-primary element-offer-list reserve-featured-offer" data-list="{% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] is defined%}{{ featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['ids'] |json_encode() }}{% endif %}" data-date="{{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }}" data-href="{{ path('reserve_featured_offer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.offer.reserve' | trans }}</button>{% endif %}
                         {% if featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined or (featuredOfferArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['features'] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles))%}
@@ -114,7 +114,7 @@
                                     <div class="count-info title-featured-offer">{{ feature.offer.title }}
                                         {% if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
                                             <a href="{{ path('delete_featured_offer', { 'id': feature.id }) }}">
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                                <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                             </a>
                                         {% endif %}
                                     </div>

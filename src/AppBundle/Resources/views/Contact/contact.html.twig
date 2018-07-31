@@ -5,26 +5,26 @@
     <table style="width: 100%;">
         <tr>
             <th class="label-contact-us">
-                <label>Votre nom</label>
+                <label>{{ 'contact.name'|trans }}</label>
             </th>
             <td class="td-contact-us">
-                <input class="form-control" name="name" type="text" id="name-input" title="{{ 'form.offer.search.keyword' | trans }}">
+                <input class="form-control" name="name" type="text" id="name-input">
             </td>
         </tr>
         <tr>
             <th class="label-contact-us">
-                <label>Votre email</label>
+                <label>{{ 'contact.email'|trans }}</label>
             </th>
             <td class="td-contact-us">
-                <input class="form-control" name="email" type="text" id="email-input" title="{{ 'form.offer.search.location' | trans }}">
+                <input class="form-control" name="email" type="text" id="email-input">
             </td>
         </tr>
         <tr>
             <th class="label-contact-us">
-                <label>Votre message</label>
+                <label>{{ 'contact.message'|trans }}</label>
             </th>
             <td class="td-contact-us">
-                <textarea  style="resize: vertical" class="form-control" name="message" id="message-input" title="{{ 'form.offer.search.location' | trans }}"></textarea>
+                <textarea  style="resize: vertical" class="form-control" name="message" id="message-input"></textarea>
             </td>
         </tr>
     </table>

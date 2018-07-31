@@ -169,7 +169,8 @@ class CandidateController extends Controller
                 $em->merge($candidate);
                 $em->flush();
 
-                $session->getFlashBag()->add('info', 'Candidat modifié !');
+                $translated = $this->get('translator')->trans('form.registration.editedCandidate');
+                $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('show_candidate', array('id' => $candidate->getId()) );
             }

@@ -1046,7 +1046,7 @@ class EmployerController extends Controller
 
                 $translated = $this->get('translator')->trans('employer.addColaborator.youHave');
 
-                $message = (new \Swift_Message($translated . $employer->getName()))
+                $message = (new \Swift_Message($translated . ' ' . $employer->getName()))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo('arthur.regnault@altea.lu')
                     ->setBody(

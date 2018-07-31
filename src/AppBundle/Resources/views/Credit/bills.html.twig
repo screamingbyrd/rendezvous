@@ -19,7 +19,7 @@
                     <h3>{{ 'price.history'|trans }}</h3>
                     <table class="table" style="width:100%">
                         <tr>
-                            <th><a href="{{ path('jobnow_bills', {'sort':(sort=='ASC'?'DESC':'ASC'), 'row':page}) }}">Date  <i class="fas fa-caret-{% if sort == 'ASC' %}up{% else %}down{% endif %}"></i></a></th>
+                            <th><a href="{{ path('jobnow_bills', {'sort':(sort=='ASC'?'DESC':'ASC'), 'row':page}) }}">{{ 'bill.date'|trans }}  <i class="fas fa-caret-{% if sort == 'ASC' %}up{% else %}down{% endif %}"></i></a></th>
                             <th>{{ 'price.credits'|trans }}</th>
                             <th>{{ 'price.price'|trans }}</th>
                             <th>{{ 'price.bills'|trans }}</th>

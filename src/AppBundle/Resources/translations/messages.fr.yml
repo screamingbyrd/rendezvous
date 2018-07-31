@@ -80,6 +80,7 @@ form:
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
     edited: L'employeur a bien été modifé !
+    editedCandidate: Votre compté à bien été modifié !
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
@@ -224,7 +225,9 @@ slot:
 offer:
   title: Titre
   titlePH: Votre titre
-  tag: Tag(s)
+  posted: Ajouté le
+  companyPage: Page de l'entreprise
+  tag: Catégorie(s)
   tagPH: Domaine(s) de compétence(s)
   location: Adresse
   locationPH: Indiquez un lieu
@@ -274,11 +277,15 @@ offer:
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
     already: Vous avez déja postulé à cette offre
+    message: Lettre de motivation
+    cv: CV
   countView: Vues
   countContact: Candidatures
 
   applied:
     success: Vous avez bien postulé à l'offre %title% !
+    candidate: Vous avez postulez à l'offre
+    employer: Un candidat à postulé à cette offre :
 
 candidate:
   delete:
@@ -294,7 +301,7 @@ employer:
     title: Présentation de l'entreprise
     lastOffers: Dernières offres
     noOffer: Il n'y a aucune offre actives
-    noTag: Il n'y a aucune tag
+    noTag: Il n'y a aucune catégories
     allOffers: Toute nos offres
     tags: Catégories
     spontaenous:
@@ -306,6 +313,7 @@ employer:
     completed: Profile complété
     personalData: Données personnelles :
     companyData: Données sur la société :
+    professionalData: Données professionelle :
     changePassword: Changer de mot de passe
     forgotPassword: Mot de passe oublié
   credit:
@@ -335,6 +343,8 @@ internship: Stage
 temporary: CDD
 
 featured:
+  week: Semaine
+  reserved: Réservé
   employer:
     title: Employeurs en avant
     modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
@@ -355,10 +365,12 @@ email:
       download: Télécharger le cv
   contact: Vous avre reçu un message de %name%
   deleted: Your account has been deleted
+  contacted: You have received a message !
   endOfActivation:
     youOffer: Your offer %title% will arrive at the end of activation in %days% days
     thinkAbout: Think about extending their activations on your dashboard
   notification:
+    new: Vous avez créé une alerte email
     created:
       title: Votre alerte email a bien été créée !
       now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
@@ -366,12 +378,16 @@ email:
       title:
         regular: New jobs are available for this %parameter%
         search: New jobs are available for you
+      new: New offers could interest you
   footer:
     contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
 contact:
   form: Formulaire de contact
+  name: Votre nom
+  email: Votre email
+  message: Votre message
   us:
     title: Contactez nous
     subTitle: The best way to reach us is to call us
@@ -459,6 +475,9 @@ price:
     sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
     success: Vous avez bien acheté %credits% crédits !
     zipcode: Code postale
+    please: Essayer encore s'il vous plait.
+    unable: Impossible d'accepter le paiement, %s
+    cvc: Code de sécurité au dos de la carte
 
 bill:
   buyCredit: Achat de crédit

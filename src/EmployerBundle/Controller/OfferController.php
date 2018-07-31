@@ -685,7 +685,9 @@ class OfferController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $messageEmmployer = (new \Swift_Message('A candidate applied to the offer: ' . $offer->getTitle()))
+        $translatedEmployer = $this->get('translator')->trans('offer.applied.employer');
+
+        $messageEmmployer = (new \Swift_Message($translatedEmployer . ' ' . $offer->getTitle()))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($firstUser)
             ->setCc(array_shift($arrayEmail))
@@ -698,7 +700,9 @@ class OfferController extends Controller
             );
         ;
 
-        $messageCandidate = (new \Swift_Message('You applied to the offer ' . $offer->getTitle()))
+
+        $translatedCandidate = $this->get('translator')->trans('offer.applied.candidate');
+        $messageCandidate = (new \Swift_Message($translatedCandidate . ' ' . $offer->getTitle()))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($candidateMail)
             ->setBody(
@@ -804,6 +808,7 @@ class OfferController extends Controller
 
         return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
     }
+
     //@TODO put in CRON with 1 and 7 days
     public function sendEndActivationAction(Request $request, $days){
 

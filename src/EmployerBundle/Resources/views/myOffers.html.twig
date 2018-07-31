@@ -200,7 +200,7 @@
                                         <i class="fas fa-pencil-alt"></i> <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right offers-button-menu">
-                                        <li><a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">Editer</a></li>
+                                        <li><a href="{{ path('edit_offer', {'id': offer.id }) }}" class="btn btn-primary element-offer-list">{{ 'dashboard.employer.editOffer'|trans }}</a></li>
                                         {% if offer.archived %}
                                             <li><button class="btn btn-danger element-offer-list archived-button unarchived" data-href="{{ path('delete_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button></li>
                                         {% else %}

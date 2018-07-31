@@ -181,7 +181,7 @@ class CreditController extends Controller
                     return $this->redirectToRoute('jobnow_credit');
 
                 } catch (\Stripe\Error\Base $e) {
-                    $this->addFlash('warning', sprintf('Unable to take payment, %s', $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : 'please try again.'));
+                    $this->addFlash('warning', sprintf($this->get('translator')->trans('price.payment.unable'), $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : $this->get('translator')->trans('price.payment.please')));
                     return $this->redirectToRoute('jobnow_payment', array('id' => 1));
                 }
 
