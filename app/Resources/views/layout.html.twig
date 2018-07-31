@@ -108,7 +108,7 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">{{ 'header.register'|trans }}<span class="caret"></span></a>
+                           aria-expanded="false"><i class="fas fa-user-plus"></i>{{ 'header.register'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('create_candidate') }}"><i class="fas fa-search"></i>{{ 'header.candidates.register'|trans }}</a></li>
                             <li><a href="{{ path('create_employer') }}"><i class="fas fa-clipboard"></i>{{ 'header.employers.register'|trans }}</a></li>
@@ -154,7 +154,11 @@
                 <li><a href="{{ path('legal_page') }}">{{ 'footer.legal'|trans }}</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right"></ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ path('legal_page') }}"><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href="{{ path('legal_page') }}"><i class="fab fa-twitter-square"></i></a></li>
+                <li><a href="{{ path('legal_page') }}"><i class="fab fa-instagram"></i></a></li>
+            </ul>
         </div>
     </div>
 </nav>

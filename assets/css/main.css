@@ -59,6 +59,10 @@ body {
     width: 23px !important;
 }
 
+.navbar-right .fab{
+    font-size: 20px;
+}
+
 
 @media (min-width: 1200px){
     .container {
@@ -150,7 +154,7 @@ body {
 
 
 .login-register{
-    font-size: 16px;
+    font-size: 18px;
 
 
 }
@@ -425,6 +429,9 @@ legend{
     }
     .jumbotron{
         padding: 0 0 !important;
+    }
+    #navbarfooter .navbar-right{
+        display: -webkit-flex;
     }
 }
 
