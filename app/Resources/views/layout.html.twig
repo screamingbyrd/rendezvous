@@ -50,9 +50,9 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle c" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
+                       aria-expanded="false"><i class="fas fa-search"></i>{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('search_page_offer') }}"><i class="fas fa-search"></i>{{ 'header.candidates.findJob'|trans }}</a></li>
+                        <li><a href="{{ path('search_page_offer') }}"><i class="fas fa-search-plus"></i>{{ 'header.candidates.findJob'|trans }}</a></li>
                         <li><a href="{{ path('list_employer') }}"><i class="fas fa-building"></i>{{ 'header.candidates.companies'|trans }}</a></li>
                         {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                             <li><a href="{{ path('dashboard_candidate') }}#applied"><i class="fas fa-clipboard-list"></i>{{ 'header.candidates.dashboard.applied'|trans }}</a></li>
@@ -65,7 +65,7 @@
                 {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_CANDIDATE' not in app.user.roles) %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
+                           aria-expanded="false"><i class="fas fa-clipboard"></i>{{ 'header.employers.title'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('post_offer') }}"><i class="fas fa-edit"></i>{{ 'header.employers.post'|trans }}</a></li>
                             {#<li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>#}
@@ -110,12 +110,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ 'header.register'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('create_employer') }}"><i class="fas fa-search"></i>{{ 'header.employers.register'|trans }}</a></li>
-                            <li><a href="{{ path('create_candidate') }}"><i class="fas fa-clipboard"></i>{{ 'header.candidates.register'|trans }}</a></li>
+                            <li><a href="{{ path('create_candidate') }}"><i class="fas fa-search"></i>{{ 'header.candidates.register'|trans }}</a></li>
+                            <li><a href="{{ path('create_employer') }}"><i class="fas fa-clipboard"></i>{{ 'header.employers.register'|trans }}</a></li>
                         </ul>
                     </li>
 
-                    <li><a id="login" href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></li>
+                    <li><a id="login" href="{{ path('fos_user_security_login') }}"><i class="fas fa-user-circle"></i>{{ 'header.login.title'|trans }}</a></li>
                 {% endif %}
                 {% if app.request.get('_route') is not null %}
                 <li class="dropdown language-selector">
