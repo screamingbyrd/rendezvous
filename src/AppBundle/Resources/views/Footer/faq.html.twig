@@ -70,8 +70,10 @@
 
         <div class="shadow-box faq-choice">
             {#<div class="choose-faq">{{('faq.kind')|trans}}</div>#}
-            <div><button onclick="showTab('tab-employer')" class="jobnow-button faq-button"><i class="fas fa-search"></i>{{ 'header.employers.register'|trans }}</button>
-                <button onclick="showTab('tab-candidate')" class="jobnow-button faq-button"><i class="fas fa-clipboard"></i>{{ 'header.candidates.register'|trans }}</button></div>
+            <div>
+                <button onclick="showTab('tab-candidate')" class="jobnow-button faq-button"><i class="fas fa-search"></i>{{ 'header.candidates.register'|trans }}</button>
+                <button onclick="showTab('tab-employer')" class="jobnow-button faq-button"><i class="fas fa-clipboard"></i>{{ 'header.employers.register'|trans }}</button>
+            </div>
 
         </div>
 

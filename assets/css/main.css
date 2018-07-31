@@ -111,9 +111,6 @@ body {
     .container-square{
         width: 83% !important;
     }
-    .faq-button{
-        width: 200px !important;
-    }
 }
 
 .navbar-toggle{
@@ -945,6 +942,8 @@ legend{
     #navbarfooter .navbar-right{
         display: -webkit-flex;
     }
+}
+@media (min-width: 600px){
     .faq-button{
         width: 200px !important;
     }
