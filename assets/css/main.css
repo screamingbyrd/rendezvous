@@ -111,6 +111,9 @@ body {
     .container-square{
         width: 83% !important;
     }
+    .faq-button{
+        width: 200px !important;
+    }
 }
 
 .navbar-toggle{
@@ -430,8 +433,8 @@ legend{
     .jumbotron{
         padding: 0 0 !important;
     }
-    #navbarfooter .navbar-right{
-        display: -webkit-flex;
+    .faq-button{
+        width: 43% !important;
     }
 }
 
@@ -938,5 +941,11 @@ legend{
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
+    }
+    #navbarfooter .navbar-right{
+        display: -webkit-flex;
+    }
+    .faq-button{
+        width: 200px !important;
     }
 }

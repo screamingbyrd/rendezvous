@@ -445,16 +445,45 @@ privacy:
   title: Our privacy policy… yes the one that protects all the information we have about you
 
 faq:
+  kind: What kind of users are you?
+  subTitle: An explanation is always better
   employer:
+    intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
     1:
-      question: My dashboard
-      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once.
+      question: How & Why register?
+      answer: Registering with us allows you to benefit from all the features that our platform offers. It is super easy to do and free! You simply need to click on register and fill out the information requested. You will then be able to edit your company’s profile and start adding any job opening you have.
     2:
-      question: What are credits?
-      answer: Each job posting is worth a credit so that you can keep track of your spendings easily.
+      question: How does my dashboard work?
+      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once. Simply click on one of the sections to discover what they hide and how they can help you get the perfect candidate.
     3:
+      question: How to post an offer?
+      answer: Posting an offer is super easy! Simply click on “post an offer” under Employers in the menu bar and you will be guided to fill out the information regarding the open position. You will be able to preview your job posting before accepting its layout and content and publishing it.
+    4:
+      question: What are credits?
+      answer: Each job posting is worth a credit so that you can keep track of your spendings easily. You can also use credits for many other features of our job platform such as featured jobs.
+    5:
       question: How much are they worth?
-      answer: Once you have registered yourself as an employer, you’ll find a section detailing the packages.
+      answer: Once you have registered yourself as an employer, you’ll find a section detailing the pricing of credits. Our own experience has taught us that recruiting is expensive so we decided to make these credits affordable to you… and they come with bonuses!
+    6:
+      question: What is a featured job?
+      answer: If you have a job posting you really want to highlight, you will be using the featured job option. This allows you to remain at the top of the search engine and thus be much more visible to potential candidates.
+    7:
+      question: What is a featured employer?
+      answer: Want to promote your company and the many benefits you offer to your employees? That is why we created the featured employer. Your company will be prominently displayed on our home page to offer you the maximum visibility with our candidates. They will be able to browse your company history and description and see any openings you have.
+    8:
+      question: What are slots?
+      answer: Slots are spaces you can “rent” for a whole year and where you can post any job opening you may have.
+  candidate:
+      intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+      1:
+        question: How to create a profile?
+        answer: To create a candidate profile, you will need to register. It is super easy and will only take about a minute. You will be able to complete your profile with your past experiences and apply to jobs opening.
+      2:
+        question: How to apply to a job?
+        answer: Now you are really here because you are looking for a new job, so here’s how to apply to one. Our “find a job” section will show you all the open positions we have. You can refine your search by using the search engine and its filters. Once you have found a job that fits you, you simply need to click on Apply, add your resume and a cover letter if you want. There you go! You have made the first step towards starting an exciting new journey!
+      3:
+        question: How will the company contact me?
+        answer: Through mail via our platform or directly via your cv.
 
 redirect:
   candidate: Please register as a candidate
