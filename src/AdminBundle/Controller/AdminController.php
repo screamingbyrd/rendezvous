@@ -13,7 +13,23 @@ class AdminController extends Controller
 
     public function indexAction()
     {
-        return $this->render('AdminBundle::index.html.twig');
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employerCount = $employerRepository->countTotalDifferentEmployer();
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $totalActiveOffer = $offerRepository->countTotalActiveOffer();
+        return $this->render('AdminBundle::index.html.twig',array(
+            'totalActiveOffer' => $totalActiveOffer,
+            'countEmployer' => $employerCount
+        ));
     }
 
     public function listEmployerAction(){

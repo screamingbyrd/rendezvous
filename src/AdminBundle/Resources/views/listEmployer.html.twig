@@ -27,7 +27,7 @@
                 {% for employer in employers %}
                     <tr>
                         <td>
-                            <a class="employer-title" href="{{ path('dashboard_employer', { 'id': employer.employer.id }) }}">
+                            <a class="employer-title" href="{{ path('employer_offers', { 'id': employer.employer.id }) }}">
                                 {{ employer.employer.name }}
                             </a>
                         </td>

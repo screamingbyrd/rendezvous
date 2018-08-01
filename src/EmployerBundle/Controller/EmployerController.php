@@ -1043,7 +1043,7 @@ class EmployerController extends Controller
 
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $translated = $this->get('translator')->trans('employer.addColaborator.youHave');
+                $translated = $this->get('translator')->trans('employer.addCollaborator.youHave');
 
                 $message = (new \Swift_Message($translated . ' ' . $employer->getName()))
                     ->setFrom('jobnowlu@noreply.lu')
@@ -1064,7 +1064,7 @@ class EmployerController extends Controller
                 );
                 $mailer->send($message);
 
-                $translated = $this->get('translator')->trans('employer.addColaborator.added');
+                $translated = $this->get('translator')->trans('employer.addCollaborator.added');
                 $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));

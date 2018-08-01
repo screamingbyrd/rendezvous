@@ -46,6 +46,11 @@ class RegisterUser
         $user->SetLastName($lastName);
         $user->setPlainPassword($password);
         $user->addRole($role);
+
+        if($role == 'ROLE_EMPLOYER'){
+            $user->setMain(1);
+        }
+
         $this->userManager->updateUser($user);
 
         $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $password, "main", array($role));
