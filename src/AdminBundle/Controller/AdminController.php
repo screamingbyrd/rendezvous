@@ -5,6 +5,7 @@ namespace AdminBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class AdminController extends Controller
@@ -61,6 +62,38 @@ class AdminController extends Controller
 
         return $this->render('AdminBundle::listCandidate.html.twig', array(
             'candidates' => $candidates
+        ));
+    }
+
+    public function listOfferAction(Request $request){
+
+        $archived = $request->get('archived');
+        $archived = isset($archived)?$archived:0;
+        $active = $request->get('active');
+        $active = isset($active)?$active:1;
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $arraySearch = array('archived' => $archived);
+
+        $offers = $offerRepository->findBy($arraySearch);
+
+        $totalActiveOffer = $offerRepository->countTotalActiveOffer();
+
+        return $this->render('AdminBundle::listOffer.html.twig', array(
+            'offers' => $offers,
+            'active' => $active,
+            'archived' => $archived,
+            'totalActiveOffer' => $totalActiveOffer
         ));
     }
 

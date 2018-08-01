@@ -10,36 +10,43 @@
 
         <h2> Liste des employeurs </h2>
 
+        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name" class="search-employer">
+
         <table class="table table-bordered table-striped well">
-            <tr>
-                <th>Société</th>
-                <th>Email</th>
-                <th>Crédits</th>
-                <th>Addresse</th>
-                <th>Action(s)</th>
-            </tr>
-
-            {% for employer in employers %}
+            <thead>
                 <tr>
-                    <td>
-                        <a href="{{ path('dashboard_employer', { 'id': employer.employer.id }) }}">
-                            {{ employer.employer.name }}
-                        </a>
-                    </td>
-                    <td>{{ employer.email }}</td>
-
-                    <td>{{ employer.employer.credit }}</td>
-                    <td>{{ employer.employer.location }}</td>
-                    <td>
-                        <a href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
-                            <button type="button" class="btn btn-primary">Editer</button>
-                        </a>
-                        <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
-                            Supprimer
-                        </button>
-                    </td>
+                    <th>Société</th>
+                    <th>Email</th>
+                    <th>Crédits</th>
+                    <th>Addresse</th>
+                    <th>Action(s)</th>
                 </tr>
-            {% endfor %}
+            </thead>
+
+            <tbody id="table-employer">
+                {% for employer in employers %}
+                    <tr>
+                        <td>
+                            <a class="employer-title" href="{{ path('dashboard_employer', { 'id': employer.employer.id }) }}">
+                                {{ employer.employer.name }}
+                            </a>
+                        </td>
+                        <td>{{ employer.email }}</td>
+
+                        <td>{{ employer.employer.credit }}</td>
+                        <td>{{ employer.employer.location }}</td>
+                        <td>
+                            <a href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
+                                <button type="button" class="btn btn-primary">Editer</button>
+                            </a>
+                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
         </table>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
@@ -56,6 +63,27 @@
                 </div>
             </div>
         </div>
+        <script>
+            function showEmployer() {
+                let input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("table-employer");
+                a = ul.getElementsByTagName("tr");
+                for (i = 0; i < a.length; i++) {
+                    a[i].style.display = "none";
+                }
+                for (i = 0; i < a.length; i++) {
+                    let h = a[i].getElementsByClassName("employer-title")[0];
+                    if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+
+                    }
+                }
+            }
+        </script>
         <script>
             $(".modal-open").on("click", function(e){
                 $('#modal-btn-yes').attr("href", $(this).data('href'));

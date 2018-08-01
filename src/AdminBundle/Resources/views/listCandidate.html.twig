@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    Liste des employeurs - {{ parent() }}
+    Liste des candidats - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -10,31 +10,38 @@
 
         <h2> Liste des candidats </h2>
 
-        <table class="table table-bordered table-striped well">
-            <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Action(s)</th>
-            </tr>
+        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for mail.." title="Type in a name" class="search-employer">
 
-            {% for candidate in candidates %}
+        <table class="table table-bordered table-striped well">
+            <thead>
                 <tr>
-                    <td>
-                        <a href="{{ path('dashboard_candidate', { 'id': candidate.id }) }}">
-                            {{ candidate.user.firstName }} {{ candidate.user.lastName }}
-                        </a>
-                    </td>
-                    <td>{{ candidate.user.email }}</td>
-                    <td>
-                        <a href="{{ path('edit_candidate', { 'id': candidate.id }) }}">
-                            <button type="button" class="btn btn-primary">Editer</button>
-                        </a>
-                        <button class="modal-open btn btn-danger" data-href="{{ path('delete_candidate', { 'id': candidate.id }) }}">
-                            Supprimer
-                        </button>
-                    </td>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Action(s)</th>
                 </tr>
-            {% endfor %}
+            </thead>
+
+            <tbody id="table-candidate">
+                {% for candidate in candidates %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('dashboard_candidate', { 'id': candidate.id }) }}">
+                                {{ candidate.user.firstName }} {{ candidate.user.lastName }}
+                            </a>
+                        </td>
+                        <td class="candidate-mail">{{ candidate.user.email }}</td>
+                        <td>
+                            <a href="{{ path('edit_candidate', { 'id': candidate.id }) }}">
+                                <button type="button" class="btn btn-primary">Editer</button>
+                            </a>
+                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_candidate', { 'id': candidate.id }) }}">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
         </table>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
@@ -51,6 +58,27 @@
                 </div>
             </div>
         </div>
+        <script>
+            function showEmployer() {
+                let input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("table-candidate");
+                a = ul.getElementsByTagName("tr");
+                for (i = 0; i < a.length; i++) {
+                    a[i].style.display = "none";
+                }
+                for (i = 0; i < a.length; i++) {
+                    let h = a[i].getElementsByClassName("candidate-mail")[0];
+                    if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+
+                    }
+                }
+            }
+        </script>
         <script>
             $(".modal-open").on("click", function(e){
                 $('#modal-btn-yes').attr("href", $(this).data('href'));

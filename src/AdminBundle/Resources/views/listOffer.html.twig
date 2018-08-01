@@ -1,0 +1,126 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste des offres - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="dashboard-total-offer">
+            total offre active: {{ totalActiveOffer }}
+        </div>
+
+        <h2> Liste des offres </h2>
+
+        <div class="container-button-offers">
+            <input type="text" id="myInput-offer" onkeyup="showEmployer()" placeholder="Search for name.." title="Type in a name" class="search-employer">
+            <a href="{{ path('list_offer_admin', {'archived':   archived ? 0:1 }) }}" class="element-offer-list btn btn-primary element-offer-list global-a">
+                {% if archived %}
+                    {{ 'dashboard.employer.hideArchived' | trans }}
+                {% else %}
+                    {{ 'dashboard.employer.showArchived' | trans }}
+                {% endif %}
+            </a>
+            <a href="{{ path('list_offer_admin', {'active':   active ? 0:1 }) }}" class="element-offer-list btn btn-primary element-offer-list global-a">
+                {% if active %}
+                    Montrer toute les offres
+                {% else %}
+                    Montrer les offres non activé
+                {% endif %}
+            </a>
+        </div>
+
+        <table class="table table-bordered table-striped well">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Société</th>
+                <th>Action(s)</th>
+            </tr>
+            </thead>
+
+            <tbody id="table-candidate">
+            {% for offer in offers %}
+                {% if active %}
+                    {%  set condition = offer.isActive %}
+                {% else %}
+                    {%  set condition = 1 %}
+                {% endif %}
+                {% if condition %}
+                <tr class="{% if offer.archived %}archived-offer{% endif %}">
+                    <td>
+                        <a href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">
+                            {{ offer.title }}
+                        </a>
+                    </td>
+                    <td>{{ offer.employer.name }}</td>
+                    <td>
+                        <a href="{{ path('edit_offer', { 'id': offer.id }) }}">
+                            <button type="button" class="btn btn-primary">Editer</button>
+                        </a>
+                        <button class="modal-open btn btn-danger" data-href="{{ path('delete_offer', { 'id': offer.id }) }}">
+                            Archiver/unarchive
+                        </button>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Etes vous sûre de vouloir archiver/désarchiver cette offre ?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
+                        <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function showEmployer() {
+                let input, filter, ul, li, a, i;
+                input = document.getElementById("myInput-offer");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("table-candidate");
+                a = ul.getElementsByTagName("tr");
+                for (i = 0; i < a.length; i++) {
+                    a[i].style.display = "none";
+                }
+                for (i = 0; i < a.length; i++) {
+                    let h = a[i].getElementsByClassName("offer-name")[0];
+                    if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+
+                    }
+                }
+            }
+        </script>
+        <script>
+            $(".modal-open").on("click", function(e){
+                $('#modal-btn-yes').attr("href", $(this).data('href'));
+                $("#mi-modal").modal('show');
+            });
+
+            $("#modal-btn-no").on("click", function(e){
+                e.preventDefault();
+                $("#mi-modal").modal('hide');
+            });
+
+            $("#payment-form_submit").on("click", function(){
+                $("#mi-modal").modal('hide');
+            });
+        </script>
+
+    </div>
+{%  endblock %}

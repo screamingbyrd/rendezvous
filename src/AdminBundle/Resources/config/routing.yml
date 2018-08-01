@@ -16,6 +16,12 @@ list_candidate_admin:
         fr: "/candidat/liste"
     defaults: { _controller: AdminBundle:Admin:listCandidate }
 
+list_offer_admin:
+    locales:
+        en: "/offer/list"
+        fr: "/offre/liste"
+    defaults: { _controller: AdminBundle:Admin:listOffer }
+
 list_ad_admin:
     locales:
         en: "/ad/list/{archived}"

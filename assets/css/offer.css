@@ -821,3 +821,30 @@ h3.post-offer{
         margin: 10px 0 !important;
     }
 }
+
+.offers-button-menu{
+    background-color: white !important;
+}
+.offers-button-menu button{
+    width: 94% !important;
+    margin: 5px;
+}
+.offers-button-menu a{
+    width: 94% !important;
+    margin: 5px;
+    padding: 6px !important;
+    font-size: 14px !important;
+}
+.checkbox-myOffers, .checkbox-myOffers-global{
+    margin-right: 10px !important;
+}
+.container-button-offers{
+    padding: 10px;
+    border: 1px solid #ddd;
+    display: table;
+    width: 100%;
+}
+.fist-time-info{
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
