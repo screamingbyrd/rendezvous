@@ -63,6 +63,9 @@
                         <button class="modal-open btn btn-danger" data-href="{{ path('delete_offer', { 'id': offer.id }) }}">
                             Archiver/unarchive
                         </button>
+                        <button class="modal-open btn btn-danger" data-href="{{ path('erase_offer', { 'id': offer.id }) }}">
+                            Delete
+                        </button>
                     </td>
                 </tr>
                 {% endif %}

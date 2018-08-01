@@ -57,6 +57,13 @@ delete_offer:
     defaults: { _controller: EmployerBundle:Offer:delete }
     requirements:
       id: \d+
+erase_offer:
+    locales:
+        en: "/erase-offer"
+        fr: "/effacer-offre"
+    defaults: { _controller: EmployerBundle:Offer:erase }
+    requirements:
+      id: \d+
 activate_offer:
     locales:
         en: "/activate-offer"

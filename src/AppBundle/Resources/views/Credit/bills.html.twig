@@ -19,7 +19,7 @@
                     <h3>{{ 'price.history'|trans }}</h3>
                     <table class="table" style="width:100%">
                         <tr>
-                            <th><a href="{{ path('jobnow_bills', {'sort':(sort=='ASC'?'DESC':'ASC'), 'row':page}) }}">{{ 'bill.date'|trans }}  <i class="fas fa-caret-{% if sort == 'ASC' %}up{% else %}down{% endif %}"></i></a></th>
+                            <th><a href="{{ path('jobnow_bills', {'sort':(sort=='ASC'?'DESC':'ASC'), 'row':page, 'id': id}) }}">{{ 'bill.date'|trans }}  <i class="fas fa-caret-{% if sort == 'ASC' %}up{% else %}down{% endif %}"></i></a></th>
                             <th>{{ 'price.credits'|trans }}</th>
                             <th>{{ 'price.price'|trans }}</th>
                             <th>{{ 'price.bills'|trans }}</th>
@@ -38,11 +38,11 @@
                         {% endfor %}
                     </table>
                     <div id="paginator-offer">
-                        <a href="{{ path('jobnow_bills', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
+                        <a href="{{ path('jobnow_bills', {'row':(page == 1?page:page-1), 'id': id}) }}">&laquo;</a>
                         {% for i in 1..total %}
-                            <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('jobnow_bills', {'row':i}) }}">{{ i }}</a>
+                            <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('jobnow_bills', {'row':i, 'id': id}) }}">{{ i }}</a>
                         {% endfor %}
-                        <a href="{{ path('jobnow_bills', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
+                        <a href="{{ path('jobnow_bills', {'row':(page == total?page:page+1), 'id': id}) }}">&raquo;</a>
                     </div>
                 {% else %}
                     {{ 'price.allow' | trans }}

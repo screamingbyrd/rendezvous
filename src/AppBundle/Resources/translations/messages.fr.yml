@@ -153,6 +153,9 @@ form:
       success: L'offre a bien été archivé !
     unarchived:
       success: L'offre a bien été désarchivé !
+    deleted:
+      subject: Votre offre à été supprimé :
+      mail: Votre offre %title% à été supprimé pour contenu non comforme à notre politique
     activate:
       success: L'offre a bien été activée !
       error: Vous n'avez pas assez de credit !

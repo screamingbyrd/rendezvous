@@ -193,6 +193,83 @@ class OfferController extends Controller
         return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
+    public function eraseAction(Request $request){
+
+        $session = $request->getSession();
+
+        $id = $request->get('id');
+
+        $user = $this->getUser();
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $title = $offer->getTitle();
+
+        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+        $arrayEmail = array();
+
+        foreach ($users as $emplyerUser){
+            $arrayEmail[] = $emplyerUser->getEmail();
+        }
+
+        if(is_array($arrayEmail)){
+            $firstUser = $arrayEmail[0];
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($offer);
+
+            $em->flush();
+
+            $mailer = $this->container->get('swiftmailer.mailer');
+            $translated = $this->get('translator')->trans('form.offer.deleted.subject');
+            $message = (new \Swift_Message($translated . ' ' . $title))
+                ->setFrom('jobnowlu@noreply.lu')
+                ->setTo($firstUser)
+                ->setCc(array_shift($arrayEmail))
+                ->setBody(
+                    $this->renderView(
+                        'AppBundle:Emails:offerDeleted.html.twig',
+                        array('title' => $title,
+                        )
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
+            $mailer->send($message);
+        }
+
+
+        return $this->redirectToRoute('list_offer_admin');
+    }
+
     public function showAction($id){
         $offerRepository = $this
             ->getDoctrine()

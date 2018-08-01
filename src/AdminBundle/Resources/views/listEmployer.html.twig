@@ -18,7 +18,6 @@
                     <th>Société</th>
                     <th>Email</th>
                     <th>Crédits</th>
-                    <th>Addresse</th>
                     <th>Action(s)</th>
                 </tr>
             </thead>
@@ -34,14 +33,16 @@
                         <td>{{ employer.email }}</td>
 
                         <td>{{ employer.employer.credit }}</td>
-                        <td>{{ employer.employer.location }}</td>
                         <td>
-                            <a href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
-                                <button type="button" class="btn btn-primary">Editer</button>
+                            <a class="btn btn-primary" href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
+                                Editer
                             </a>
                             <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
                                 Supprimer
                             </button>
+                            <a class="btn btn-primary" href="{{ path('jobnow_bills', { 'id': employer.employer.id }) }}">
+                                Liste des facture
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

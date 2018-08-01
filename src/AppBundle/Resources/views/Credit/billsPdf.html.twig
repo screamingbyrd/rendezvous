@@ -36,7 +36,8 @@
                     <td class="with-line">{{ logCredit.date|date('d/m/Y') }}</td>
                     <td class="with-line">{{ logCredit.credit }}</td>
                     <td class="with-line">17%</td>
-                    <td class="with-line">€ {{ (logCredit.price*100)/(117) }}</td>
+                    {% set firstPrice = (logCredit.price*100)/(117) %}
+                    <td class="with-line">€ {{ firstPrice |round(2, 'floor')}}</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -48,13 +49,14 @@
                     <td></td>
                     <td class="right-border"></td>
                     <td class="with-line">{{ 'bill.totalExludingTax'|trans }}</td>
-                    <td class="with-line">€ {{ (logCredit.price*100)/(117) }}</td>
+                    <td class="with-line">€ {{ firstPrice |round(2, 'floor') }}</td>
                 </tr>
                 <tr>
                     <td></td>
                     <td class="right-border"></td>
                     <td class="with-line">{{ 'bill.vat'|trans }}</td>
-                    <td class="with-line">€ {{ (logCredit.price*100)/(117)*(17/100) }}</td>
+                    {% set secondPrice = (logCredit.price*100)/(117)*(17/100) %}
+                    <td class="with-line">€ {{ secondPrice |round(2, 'floor') }}</td>
                 </tr>
                 <tr>
                     <td></td>

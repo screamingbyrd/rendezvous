@@ -41,7 +41,6 @@
     a{
         color: #ff9600;
         text-decoration-color: #ff9600 ;
-        text-decoration: none !important;
     }
     .location{
         color: white !important;
@@ -58,17 +57,7 @@
         </div>
 
         <div class="content-mail">
-            <h3>{{ 'employer.addCollaborator.youHave'|trans }} {{ employer.name }}</h3>
-
-            <div>
-                {{ 'employer.addCollaborator.connect'|trans }}
-            </div>
-
-            <div class="other-footer">
-                <a href="{{ path('fos_user_security_login') }}">
-                    {{ 'header.login.title'|trans }}
-                </a>
-            </div>
+            <div>{{ 'form.offer.deleted.mail'| trans({'%title%' : title}) |raw}}</div>
         </div>
 
         <div class="footer-mail">

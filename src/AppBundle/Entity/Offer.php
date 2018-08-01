@@ -36,7 +36,7 @@ class Offer
     private $endDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist"})
      *
      */
     private $employer;
