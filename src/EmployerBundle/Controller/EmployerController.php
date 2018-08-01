@@ -204,7 +204,6 @@ class EmployerController extends Controller
     public function deleteAction(Request $request, $id)
     {
         $user = $this->getUser();
-        $idEmployer = $request->get('id');
         $session = $request->getSession();
 
         $repository = $this
@@ -227,7 +226,7 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:FeaturedEmployer');
 
-        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+        $employer = $repository->findOneBy(array('id' => isset($id)?$id:$user->getEmployer()));
 
         if(!((isset($user) and $user->getEmployer() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
             $translated = $this->get('translator')->trans('redirect.employer');

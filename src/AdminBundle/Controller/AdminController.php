@@ -30,13 +30,6 @@ class AdminController extends Controller
         ;
         $users = $repository->findAll();
 
-        $candidateRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Candidate')
-        ;
-        $candidates = $candidateRepository->findAll();
-
         $employers = [];
         foreach($users as $user)
         {
@@ -46,8 +39,27 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('AdminBundle::list.html.twig', array(
+        return $this->render('AdminBundle::listEmployer.html.twig', array(
             'employers' => $employers,
+        ));
+    }
+
+    public function listCandidateAction(){
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidates = $candidateRepository->findAll();
+
+        return $this->render('AdminBundle::listCandidate.html.twig', array(
             'candidates' => $candidates
         ));
     }

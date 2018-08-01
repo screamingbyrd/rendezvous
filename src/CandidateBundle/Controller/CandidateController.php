@@ -356,6 +356,10 @@ class CandidateController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
 
+        if(in_array('ROLE_ADMIN', $user->getRoles())){
+            $user = $candidate->getUser();
+        }
+
         $postulatedRepository = $this
             ->getDoctrine()
             ->getManager()
