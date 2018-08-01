@@ -67,7 +67,8 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Complet your profile
     completed: Profile completed
-    already: Already register ?
+    already: Already have a profile?
+    connect: Login %link_start%here%link_end%
     accept: I accept the condition of use
     bySubmitting: By submitting you confirm that you read and accepted the %link_start%general terms and conditions%link_end% of our site.
     consult: Read our %link_start%privacy policy%link_end% to understand your rights.
@@ -410,7 +411,7 @@ footer:
   legal: Legal
 
 notification:
-  title: Because sometimes it takes hearing about the right position at the right time
+  title: Parce que parfois il faut entendre parler de la bonne position au bon moment
   create: Add a new notification
   created: Notification created !
   deleted: Notification deleted !
@@ -422,7 +423,7 @@ notification:
   here: here
 
 favorite:
-  title: Wishlist aren’t simply for Christmas or shopping anymore
+  title: Parce qu’elle n’est plus réservé à Noël ou au shopping désormais...
   created: Added to favorites !
   deleted: Favorite deleted !
   already: This favorite already exist !
@@ -437,9 +438,9 @@ searchEmployer:
 
 about:
   let: Let us present ourselves
-  text: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
-        The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
-        Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
+  text1: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
+  text2: The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
+  text3: Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
 
 privacy:
   title: Our privacy policy… yes the one that protects all the information we have about you
@@ -492,11 +493,12 @@ redirect:
 price:
   credit: Credit
   credits: Credit(s)
+  find: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
   price: Price
   bills: Bills
   ourPackages: Our packages
   noBonus: No bonus
-  buy: Buy
+  buy: Buy Now
   allow: Credit wil allow you to put your offers online and to improve their visibility
   go: Use your credits to put your offers online and to improve their visibility
   history: History

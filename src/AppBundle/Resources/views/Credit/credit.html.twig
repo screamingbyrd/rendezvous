@@ -21,6 +21,9 @@
 
         {#<h3>{{ 'price.ourPackages' | trans }}</h3>#}
         <div class="row container-buy-choice">
+            <div class="shadow-box credit-text">
+                {{ 'price.find' | trans }}
+            </div>
             <div class="col-sm-4 col-md-4">
                 <div class="credit-choice">
                     {#<img src="..." alt="...">#}
@@ -110,8 +113,12 @@
             margin-bottom: 57px;
         }
         .container-buy-choice{
-            margin-top: 30px;
             margin-bottom: 20px;
+        }
+        .credit-text{
+            margin-bottom: 10px !important;
+            padding-bottom: 10px !important;
+            padding-top: 10px !important;
         }
         .credit-choice{
             webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);

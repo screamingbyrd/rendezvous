@@ -44,7 +44,7 @@ header:
   about:
     title: A propos de nous
     faq: FAQ
-    privacy: Vie privée
+    privacy: Politique de confidentialité
     terms: Mentions légales
   login:
     title: Connexion
@@ -66,7 +66,8 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Completer votre profile
     completed: Profile complété
-    already: Déjà inscrit ?
+    already: Vous avez déjà un profil ?
+    connect: Connectez-vous %link_start%ici%link_end%
     accept: J'accepte les condition générale d'utilisation
     bySubmitting: En soumettant ce formulaire, vous confirmez avoir consulté et accepté les %link_start%conditions générales%link_end% de notre site.
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
@@ -194,7 +195,7 @@ dashboard:
     watchProfile: Voir mon profile
     return: Retour au table de bord
   candidate:
-    list: Vous avez postulez à ces offres
+    list: Un résumé rapide des postes auxquels vous avez postulé
     appliedThe: Postulé le
     appliedOffers: Mes offres
     notifications: Notifications
@@ -403,7 +404,7 @@ contact:
 footer:
   about: À propos
   faq: FAQ
-  privacy: Vie privée
+  privacy: Politique de confidentialité
   legal: Mentions légales
 
 notification:
@@ -430,17 +431,17 @@ add: Ajouter
 delete: Supprimer
 
 searchEmployer:
-  title: Our very own directory of the best companies for hiring
-  discover: Discover our very own directory of companies hiring in Luxembourg. You can explore here the companies registered with us, their size and their employee benefits. Start browsing now!
+  title: Notre propre annuaire des meilleures entreprises
+  discover: Découvrez notre répertoire d'entreprises qui recrutent au Luxembourg. Vous pourrez explorer ici les entreprises qui offrent des postes chez nous mais aussi leur taille et les avantages qu’elles offrent à leur employés. Commencez à naviguer maintenant!
 
 about:
   let: Let us present ourselves
-  text: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
-        The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
-        Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
+  text1: Jobnow est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
+  text2: L'équipe est également composée de deux développeurs dédiés et quelque peu grincheux, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
+  text3: Enfin, notre équipe dévouée de conseillers est là pour répondre à vos questions et vous guider tout au long du processus d'acquisition de crédits pour vos offres d'emploi.
 
 privacy:
-  title: Our privacy policy… yes the one that protects all the information we have about you
+  title: Notre politique de confidentialité ... oui celle qui protège toutes les informations que nous avons sur vous
 
 faq:
   kind: Quelle type d'utilisateur êtes vous ?
@@ -490,6 +491,7 @@ redirect:
 price:
   credit: Crédit
   credits: Crédit(s)
+  find: Trouver le candidat idéal peut prendre du temps, mais il est plus important encore d’utiliser la bonne plateforme. Parfois, cela est lié à combien vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le candidat idéal à moindre coût!
   price: Prix
   bills: Facture
   ourPackages: Nos offres
