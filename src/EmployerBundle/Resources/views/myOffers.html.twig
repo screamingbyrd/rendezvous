@@ -23,6 +23,25 @@
                 }
             }
         }
+        function showOffer() {
+            let input, filter, ul, li, a, i;
+            input = document.getElementById("myInput-id");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            a = ul.getElementsByTagName("tr");
+            for (i = 0; i < a.length; i++) {
+                a[i].style.display = "none";
+            }
+            for (i = 0; i < a.length; i++) {
+                let h = a[i].getElementsByClassName("offer-id")[0];
+                if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+
+                }
+            }
+        }
     </script>
 
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
@@ -129,6 +148,7 @@
 
             <div class="container-button-offers">
                 <input type="text" id="myInput-offer" onkeyup="myFunction()" placeholder="{{ 'dashboard.employer.searchTitle' | trans }}" title="{{ 'dashboard.employer.typeTitle' | trans }}">
+                <input type="text" id="myInput-id" onkeyup="showOffer()" placeholder="Id" title="Type in a id" class="search-employer">
                 {% if app.request.get('archived') %}
                     <button disabled class="global-a btn btn-danger element-offer-list archived-button unarchived" data-global="1" data-href="{{ path('delete_offer') }}">{{ 'dashboard.employer.unarchiveOffer' | trans }}</button>
                 {% else %}
@@ -141,6 +161,7 @@
                 <thead>
                 <tr>
                     <th scope="col"><input class="checkbox-myOffers-global" type="checkbox"/></th>
+                    <th scope="col">#</th>
                     <th scope="col">{{ 'offer.title'|trans }}</th>
                     <th scope="col"><i class="fas fa-eye"></i></th>
                     <th scope="col"><i class="fas fa-envelope"></i></th>
@@ -152,6 +173,7 @@
                 {% for offer in offers %}
                         <tr class='offer-element-dashboard {% if offer.archived %}archived-offer{% endif %}'>
                             <th><input class="checkbox-myOffers {% if offer.isActive() == false %}not-active{% endif %}" type="checkbox" id="{{ offer.id }}"/></th>
+                            <th class="offer-id">{{ offer.id }}</th>
                             <td><a target="_blank" class="offer-title-link" href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">{{ offer.title |truncate(33, true)}}</a></td>
                             <td>{{ offer.countView}}</td>
                             <td><a data-toggle="tooltip" title="{{ 'dashboard.viewCandidate'|trans }}" href="{{ path('applied_candidate_page', {'id': offer.id}) }}" class="btn btn-primary">{{ offer.countContact}}</a></td>

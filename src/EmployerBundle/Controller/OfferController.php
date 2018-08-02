@@ -462,7 +462,17 @@ class OfferController extends Controller
 
         $searchService = $this->get('app.search.offer');
 
-        $data = $searchService->searchOffer($searchParam);
+        if(preg_match("/[0-9]/",$keywords)){
+            $offerRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Offer')
+            ;
+            $data = $offerRepository->findBy(array('id'=>$keywords));
+        }else{
+            $data = $searchService->searchOffer($searchParam);
+        }
+
 
         $generateUrlService = $this->get('app.offer_generate_url');
 
