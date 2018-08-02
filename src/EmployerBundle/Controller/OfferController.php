@@ -133,7 +133,7 @@ class OfferController extends Controller
 
             if(!$offer->isValidated()){
                 $mailer = $this->container->get('swiftmailer.mailer');
-                $message = (new \Swift_Message('Invalid offer modified: ' . $offer->getTitle()))
+                $message = (new \Swift_Message('Invalid offer modified: ' . $offer->getTitle(). ' id:'. $offer->getId()))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo('moderator@jobnow.lu')
                     ->setBody(

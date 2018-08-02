@@ -36,6 +36,7 @@
             <thead>
             <tr>
                 <th>Date</th>
+                <th>ID</th>
                 <th>Titre</th>
                 <th>Société</th>
                 <th>Action(s)</th>
@@ -52,6 +53,7 @@
                 {% if condition %}
                 <tr class="{% if offer.archived %}archived-offer{% endif %} {% if offer.validated is null %}offer-not-validated{% elseif offer.validated %}offer-validated{% else %}offer-invalid{% endif %}">
                     <td>{{ offer.creationDate|date('d/m/Y') }}</td>
+                    <td>{{ offer.id }}</td>
                     <td>
                         <a target="_blank" href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">
                             {{ offer.title }}
