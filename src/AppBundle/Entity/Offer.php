@@ -170,6 +170,14 @@ class Offer
      */
     private $link;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=true)
+
+     */
+    protected $validated;
+
     public function __toString()
     {
         return (string)$this->getTag();
@@ -689,5 +697,24 @@ class Offer
         $this->link = $link;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param bool $validated
+     * @return Offer
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+        return $this;
+    }
+
 
 }

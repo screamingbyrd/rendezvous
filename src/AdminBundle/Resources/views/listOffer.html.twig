@@ -27,7 +27,7 @@
                 {% if active %}
                     Montrer toute les offres
                 {% else %}
-                    Montrer les offres non activé
+                    Montrer les offres active
                 {% endif %}
             </a>
         </div>
@@ -50,23 +50,41 @@
                     {%  set condition = 1 %}
                 {% endif %}
                 {% if condition %}
-                <tr class="{% if offer.archived %}archived-offer{% endif %}">
+                <tr class="{% if offer.archived %}archived-offer{% endif %} {% if offer.validated is null %}offer-not-validated{% elseif offer.validated %}offer-validated{% else %}offer-invalid{% endif %}">
+                    <td>{{ offer.creationDate|date('d/m/Y') }}</td>
                     <td>
-                        <a href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">
+                        <a target="_blank" href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">
                             {{ offer.title }}
                         </a>
                     </td>
                     <td>{{ offer.employer.name }}</td>
                     <td>
-                        <a href="{{ path('edit_offer', { 'id': offer.id }) }}">
-                            <button type="button" class="btn btn-primary">Editer</button>
-                        </a>
-                        <button class="modal-open btn btn-danger" data-href="{{ path('delete_offer', { 'id': offer.id }) }}">
-                            Archiver/unarchive
+                        <a class="btn btn-success" href="{{ path('change_validation_status', {'id':offer.id, 'status':1}) }}">Valid</a>
+                        <button class="modal-open-invalid btn btn-danger" data-id="{{ offer.id }}">
+                            Invalid
                         </button>
-                        <button class="modal-open btn btn-danger" data-href="{{ path('erase_offer', { 'id': offer.id }) }}">
-                            Delete
-                        </button>
+                        <div class="btn-group dropup">
+                            <button type="button" class="element-offer-list btn btn-primary element-offer-list toggle-buttons dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-pencil-alt"></i> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right offers-button-menu">
+                                <li>
+                                    <a href="{{ path('edit_offer', { 'id': offer.id }) }}" class="btn btn-primary">
+                                        Editer
+                                    </a>
+                                </li>
+                               <li>
+                                   <button class="modal-open btn btn-danger" data-href="{{ path('delete_offer', { 'id': offer.id }) }}">
+                                       Archiver/unarchive
+                                   </button>
+                               </li>
+                                <li>
+                                    <button class="modal-open btn btn-danger" data-href="{{ path('erase_offer', { 'id': offer.id }) }}">
+                                        Delete
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 {% endif %}
@@ -89,6 +107,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="invalid-modal">
+            <div class="modal-dialog modal-bg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Pourquoi cette offre n'est elle pas valide ?</h4>
+                    </div>
+                    <form method="post" action="{{ path('change_validation_status') }}" id="search-offer-homepage">
+                        <input id="invalid-offer-id" type="hidden" name="id">
+                        <input id="invalid-offer-id" type="hidden" name="status" value="0">
+                        <textarea title="message"  name="message"></textarea>
+
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="submit">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <script>
             function showEmployer() {
                 let input, filter, ul, li, a, i;
@@ -115,6 +154,10 @@
                 $('#modal-btn-yes').attr("href", $(this).data('href'));
                 $("#mi-modal").modal('show');
             });
+            $(".modal-open-invalid").on("click", function(e){
+                $('#invalid-offer-id').val($(this).data('id'));
+                $("#invalid-modal").modal('show');
+            });
 
             $("#modal-btn-no").on("click", function(e){
                 e.preventDefault();
@@ -125,6 +168,16 @@
                 $("#mi-modal").modal('hide');
             });
         </script>
-
+        <style>
+            .offer-not-validated{
+                background-color: #ffa500b5 !important;
+            }
+            .offer-validated{
+                background-color: #2fa551b5 !important;
+            }
+            .offer-invalid{
+                background-color: #c74646b5 !important;
+            }
+        </style>
     </div>
 {%  endblock %}

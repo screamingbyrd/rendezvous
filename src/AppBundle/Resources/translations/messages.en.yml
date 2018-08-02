@@ -158,6 +158,10 @@ form:
     deleted:
       subject: Your offre has been deleted:
       mail: Your offer %title% has been deleted because of inapropriate content
+    invalid:
+      subject: Your offer is invalid:
+      mail: You offer %title% is not valid, please modify it.
+      message: Reason of the problem:
     activate:
       success: The offer has been activated !
       error: You do not have enought credit !

@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class AdminController extends Controller
 {
@@ -101,7 +101,7 @@ class AdminController extends Controller
         ;
         $arraySearch = array('archived' => $archived);
 
-        $offers = $offerRepository->findBy($arraySearch);
+        $offers = $offerRepository->findBy($arraySearch, array('creationDate' => 'DESC'));
 
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
 
@@ -111,6 +111,71 @@ class AdminController extends Controller
             'archived' => $archived,
             'totalActiveOffer' => $totalActiveOffer
         ));
+    }
+
+    public function changeValidationStatusAction(Request $request){
+        $id = $request->get('id');
+        $status = $request->get('status');
+        $message = $request->get('message');
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $offer->setValidated($status);
+        $em = $this->getDoctrine()->getManager();
+
+        $em->merge($offer);
+        $em->flush();
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+        $arrayEmail = array();
+
+        foreach ($users as $employerUser){
+            $arrayEmail[] = $employerUser->getEmail();
+        }
+
+        if(is_array($arrayEmail) && !$status){
+            $firstUser = $arrayEmail[0];
+
+            $mailer = $this->container->get('swiftmailer.mailer');
+            $translated = $this->get('translator')->trans('form.offer.invalid.subject');
+            $message = (new \Swift_Message($translated . ' ' . $offer->getTitle()))
+                ->setFrom('jobnowlu@noreply.lu')
+                ->setTo($firstUser)
+                ->setCc(array_shift($arrayEmail))
+                ->setBody(
+                    $this->renderView(
+                        'AppBundle:Emails:offerInvalid.html.twig',
+                        array('offer' => $offer,
+                            'message' => $message
+                        )
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
+            $mailer->send($message);
+        }
+
+        return $this->redirectToRoute('list_offer_admin');
     }
 
 }

@@ -232,8 +232,8 @@ class OfferController extends Controller
         $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
         $arrayEmail = array();
 
-        foreach ($users as $emplyerUser){
-            $arrayEmail[] = $emplyerUser->getEmail();
+        foreach ($users as $employerUser){
+            $arrayEmail[] = $employerUser->getEmail();
         }
 
         if(is_array($arrayEmail)){
@@ -266,7 +266,6 @@ class OfferController extends Controller
             $mailer->send($message);
         }
 
-
         return $this->redirectToRoute('list_offer_admin');
     }
 
@@ -278,7 +277,9 @@ class OfferController extends Controller
         ;
         $offer = $offerRepository->findOneBy(array('id' => $id));
 
-        if($offer->getArchived() == 1){
+        $user = $this->getUser();
+
+        if(!in_array('ROLE_EMPLOYER', $user->getRoles()) && ($offer->getArchived() == 1 || $offer->isValidated() === false)){
             return $this->redirectToRoute('offer_archived', array('id' => $id));
         }
 
@@ -442,13 +443,19 @@ class OfferController extends Controller
 
         $data = $searchService->searchOffer($searchParam);
 
-        $countResult = count($data);
-
         $generateUrlService = $this->get('app.offer_generate_url');
+
+        $offerArray = array();
 
         foreach ($data as &$offer){
             $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+            $validated = $offer->isValidated();
+            if($offer->isActive() && (!isset($validated) || $validated)){
+                $offerArray[] = $offer;
+            }
         }
+
+        $countResult = count($offerArray);
 
 //        $locationArray =array();
 //        foreach ($data as $offer){
@@ -532,7 +539,7 @@ class OfferController extends Controller
         $ads = $adRepository->getCurrentAds();
         shuffle($ads);
 
-        $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+        $finalArray = array_slice($offerArray, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
         $totalPage = ceil ($countResult / $numberOfItem);
 

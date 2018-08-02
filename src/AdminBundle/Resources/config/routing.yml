@@ -22,6 +22,12 @@ list_offer_admin:
         fr: "/offre/liste"
     defaults: { _controller: AdminBundle:Admin:listOffer }
 
+change_validation_status:
+    locales:
+        en: "/change-validation-status"
+        fr: "/changer-status-validation"
+    defaults: { _controller: AdminBundle:Admin:changeValidationStatus }
+
 list_ad_admin:
     locales:
         en: "/ad/list/{archived}"

@@ -156,6 +156,10 @@ form:
     deleted:
       subject: Votre offre à été supprimé :
       mail: Votre offre %title% à été supprimé pour contenu non comforme à notre politique
+    invalid:
+      subject: Votre offre est invalide :
+      mail: Votre offre %title% est invalide, veuillez la modififé.
+      message: Raison du problème:
     activate:
       success: L'offre a bien été activée !
       error: Vous n'avez pas assez de credit !
