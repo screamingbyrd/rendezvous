@@ -154,7 +154,7 @@ class AdminController extends Controller
 
             $mailer = $this->container->get('swiftmailer.mailer');
             $translated = $this->get('translator')->trans('form.offer.invalid.subject');
-            $message = (new \Swift_Message($translated . ' ' . $offer->getTitle()))
+            $message = (new \Swift_Message($translated . ' ' . $offer->getTitle() . "Id" .$offer->getId()))
                 ->setFrom('jobnowlu@noreply.lu')
                 ->setTo($firstUser)
                 ->setCc(array_shift($arrayEmail))
