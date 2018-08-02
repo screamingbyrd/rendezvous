@@ -100,6 +100,11 @@ boost_offers:
         en: "/boost-offer"
         fr: "/booster-offre"
     defaults: { _controller: EmployerBundle:Offer:boost }
+increment_offer:
+    locales:
+        en: "/increment-offer"
+        fr: "/incrementer-offre"
+    defaults: { _controller: EmployerBundle:Offer:increment }
 featured_employer_page:
     locales:
         en: "/featured-employer"

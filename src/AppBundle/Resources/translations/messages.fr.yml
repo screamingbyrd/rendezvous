@@ -264,6 +264,7 @@ offer:
   experience: Expérience
   startDate: Date de début
   candidatesList: Candidats qui ont postulé à cette offre :
+  link: Lien de redirection
 
   search:
     title: Recherche d'offres

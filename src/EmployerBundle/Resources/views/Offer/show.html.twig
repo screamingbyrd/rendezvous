@@ -205,8 +205,17 @@
 
         $(".apply-button, .second-apply-button").click(function() {
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                $(".apply-button").text(($(".apply-button").text() == "{{ 'offer.apply.title' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'offer.apply.title' | trans }}").fadeIn();
-                $("#search-offer-homepage").slideToggle("medium");
+                {% if offer.link |length %}
+                url = "{{ path('increment_offer') }}";
+                $.ajax({
+                    url: url,
+                    data: {id:{{ offer.id }},type:'countContact'}
+                });
+                window.open("{{ offer.link }}");
+                {% else %}
+                    $(".apply-button").text(($(".apply-button").text() == "{{ 'offer.apply.title' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'offer.apply.title' | trans }}").fadeIn();
+                    $("#search-offer-homepage").slideToggle("medium");
+                {% endif %}
             {% else %}
                 window.location.replace('{{ path('apply_offer', {'id':offer.id}) }}');
             {% endif %}

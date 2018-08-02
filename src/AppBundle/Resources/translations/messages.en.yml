@@ -155,6 +155,9 @@ form:
       success: The offer has been archived !
     unarchived:
       success: The offer has been unarchived !
+    deleted:
+      subject: Your offre has been deleted:
+      mail: Your offer %title% has been deleted because of inapropriate content
     activate:
       success: The offer has been activated !
       error: You do not have enought credit !
@@ -261,6 +264,7 @@ offer:
   experience: Experience
   startDate: Start date
   candidatesList: Candidates who applied to this offer:
+  link: Redirection link
 
   search:
       title: Search offers

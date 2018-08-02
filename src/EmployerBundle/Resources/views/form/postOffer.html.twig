@@ -103,6 +103,11 @@
                 {{ form_widget(form.language) }}
                 {{ form_errors(form.language) }}
             </div>
+            <div class="col-md-3">
+                {{ form_label (form.link, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.link) }}
+                {{ form_errors(form.link) }}
+            </div>
             <div class="col-md-3" style="display: none;">
                 {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}
                 {{ form_widget(form.image) }}

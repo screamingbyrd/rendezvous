@@ -200,6 +200,10 @@ class OfferType extends AbstractType
                 'label' => 'form.registration.language',
             ))
 
+            ->add('link',      TextType::class, array(
+                'required' => false,
+                'label' => 'offer.link',
+            ))
 
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(

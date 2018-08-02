@@ -703,13 +703,13 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
-        $candidateMail = $user->getEmail();
+
         $id = $request->get('id');
 
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
             return $this->redirectToRoute('create_candidate', array('offerId' => $id));
         }
-
+        $candidateMail = $user->getEmail();
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
@@ -935,6 +935,33 @@ class OfferController extends Controller
                 }
             }
         }
+
+        return new Response();
+    }
+
+    public function incrementAction(Request $request)
+    {
+        $elementId = $request->get('id');
+        $type = $request->get('type');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $elementId));
+
+        if($type == 'countView'){
+            $offer->setCountView($offer->getCountView() +1);
+        }elseif ($type == 'countContact'){
+            $offer->setCountContact($offer->getCountContact() +1);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->merge($offer);
+        $em->flush();
+
 
         return new Response();
     }
