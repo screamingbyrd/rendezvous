@@ -18,7 +18,7 @@
     <span hidden id="hidden-search-info" data-page="{{ page }}" data-total="{{ total }}"></span>
     <div class="row display-number">
         <div class="col-md-6">
-        Displaying <b>{{ numberOfItem }}</b> of <b>{{ countResult }}</b> Jobs
+            {{ 'searchPage.display'|trans({'%numberOfItem%':'<b>'~numberOfItem~'</b>', '%countResult%':'<b>'~countResult~'</b>'})|raw }}
         </div>
     </div>
 
@@ -45,7 +45,7 @@
             {% set count = count + 1 %}
             {% if count % 2 and ads is not empty and ads[adOrder] is defined %}
 
-                Nos partenaire
+                {{ 'homepage.ourPartners'|trans }}
                 <li class="search-result animated fadeIn">
                     <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
                         {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}

@@ -57,11 +57,7 @@
         </div>
 
         <div class="content-mail">
-            <h3>{{ 'email.contact'|trans({'%name%':data.name}) }}</h3>
-
-            <div>{{ 'form.registration.email' }}: {{ data.emailSender }}</div>
-
-            <div class="other-footer">{{ data.message }}</div>
+            <div>{{ 'form.offer.deleted.mail'| trans({'%title%' : title}) |raw}}</div>
         </div>
 
         <div class="footer-mail">

@@ -21,7 +21,7 @@
     {% endif %}
     <div class="container post-offer">
 
-        <h3 class="text-center post-offer">Post your offer</h3>
+        <h3 class="text-center post-offer">{{ 'header.employers.post'|trans }}</h3>
 
         {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
@@ -102,6 +102,11 @@
                 {{ form_label (form.language, null, { 'label_attr': {'class': 'label-form'} }) }}
                 {{ form_widget(form.language) }}
                 {{ form_errors(form.language) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label (form.link, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.link) }}
+                {{ form_errors(form.link) }}
             </div>
             <div class="col-md-3" style="display: none;">
                 {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}

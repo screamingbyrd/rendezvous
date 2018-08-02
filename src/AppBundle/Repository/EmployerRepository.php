@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class EmployerRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function countTotalDifferentEmployer()
+    {
+        $query = $this->createQueryBuilder('e')->select("e")
+            ->leftJoin('AppBundle:user', 'u', 'WITH', 'e = u.employer');
+        $query->andWhere('u.main = 1');
+
+        $employers = $query->getQuery()->getResult();
+
+        return count($employers);
+    }
 }

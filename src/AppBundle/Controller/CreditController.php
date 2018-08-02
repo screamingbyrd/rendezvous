@@ -85,13 +85,24 @@ class CreditController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles())) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_employer');
         }
 
         $employer = $this->getUser()->getEmployer();
+
+        $idEmployer = $request->get('id');
+
+        if(isset($idEmployer) && in_array('ROLE_ADMIN', $user->getRoles())){
+            $repository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Employer')
+            ;
+            $employer = $repository->findOneBy(array('id' => $idEmployer));
+        }
 
         $repository = $this
             ->getDoctrine()
@@ -110,7 +121,8 @@ class CreditController extends Controller
             'logsCredit' => $finalArray,
             'page' => $currentPage,
             'total' => $totalPage,
-            'sort' => $sort
+            'sort' => $sort,
+            'id' => $idEmployer
         ]);
 
     }
@@ -181,7 +193,7 @@ class CreditController extends Controller
                     return $this->redirectToRoute('jobnow_credit');
 
                 } catch (\Stripe\Error\Base $e) {
-                    $this->addFlash('warning', sprintf('Unable to take payment, %s', $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : 'please try again.'));
+                    $this->addFlash('warning', sprintf($this->get('translator')->trans('price.payment.unable'), $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : $this->get('translator')->trans('price.payment.please')));
                     return $this->redirectToRoute('jobnow_payment', array('id' => 1));
                 }
 

@@ -10,6 +10,18 @@ list_employer_admin:
         fr: "/employeur/liste"
     defaults: { _controller: AdminBundle:Admin:listEmployer }
 
+list_candidate_admin:
+    locales:
+        en: "/candidate/list"
+        fr: "/candidat/liste"
+    defaults: { _controller: AdminBundle:Admin:listCandidate }
+
+list_offer_admin:
+    locales:
+        en: "/offer/list"
+        fr: "/offre/liste"
+    defaults: { _controller: AdminBundle:Admin:listOffer }
+
 list_ad_admin:
     locales:
         en: "/ad/list/{archived}"

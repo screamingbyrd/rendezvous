@@ -193,6 +193,83 @@ class OfferController extends Controller
         return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
     }
 
+    public function eraseAction(Request $request){
+
+        $session = $request->getSession();
+
+        $id = $request->get('id');
+
+        $user = $this->getUser();
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer')
+        ;
+        $employer = $employerRepository->findOneBy(array('id' => $user->getEmployer()));
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+
+        $offer = $offerRepository->findOneBy(array('id' => $id));
+
+        $title = $offer->getTitle();
+
+        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getEmployer()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('form.offer.edition.error');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+        $arrayEmail = array();
+
+        foreach ($users as $emplyerUser){
+            $arrayEmail[] = $emplyerUser->getEmail();
+        }
+
+        if(is_array($arrayEmail)){
+            $firstUser = $arrayEmail[0];
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($offer);
+
+            $em->flush();
+
+            $mailer = $this->container->get('swiftmailer.mailer');
+            $translated = $this->get('translator')->trans('form.offer.deleted.subject');
+            $message = (new \Swift_Message($translated . ' ' . $title))
+                ->setFrom('jobnowlu@noreply.lu')
+                ->setTo($firstUser)
+                ->setCc(array_shift($arrayEmail))
+                ->setBody(
+                    $this->renderView(
+                        'AppBundle:Emails:offerDeleted.html.twig',
+                        array('title' => $title,
+                        )
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
+            $mailer->send($message);
+        }
+
+
+        return $this->redirectToRoute('list_offer_admin');
+    }
+
     public function showAction($id){
         $offerRepository = $this
             ->getDoctrine()
@@ -626,13 +703,13 @@ class OfferController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
-        $candidateMail = $user->getEmail();
+
         $id = $request->get('id');
 
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
             return $this->redirectToRoute('create_candidate', array('offerId' => $id));
         }
-
+        $candidateMail = $user->getEmail();
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
         $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
@@ -685,7 +762,9 @@ class OfferController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $messageEmmployer = (new \Swift_Message('A candidate applied to the offer: ' . $offer->getTitle()))
+        $translatedEmployer = $this->get('translator')->trans('offer.applied.employer');
+
+        $messageEmmployer = (new \Swift_Message($translatedEmployer . ' ' . $offer->getTitle()))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($firstUser)
             ->setCc(array_shift($arrayEmail))
@@ -698,7 +777,9 @@ class OfferController extends Controller
             );
         ;
 
-        $messageCandidate = (new \Swift_Message('You applied to the offer ' . $offer->getTitle()))
+
+        $translatedCandidate = $this->get('translator')->trans('offer.applied.candidate');
+        $messageCandidate = (new \Swift_Message($translatedCandidate . ' ' . $offer->getTitle()))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($candidateMail)
             ->setBody(
@@ -804,6 +885,7 @@ class OfferController extends Controller
 
         return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
     }
+
     //@TODO put in CRON with 1 and 7 days
     public function sendEndActivationAction(Request $request, $days){
 
@@ -853,6 +935,33 @@ class OfferController extends Controller
                 }
             }
         }
+
+        return new Response();
+    }
+
+    public function incrementAction(Request $request)
+    {
+        $elementId = $request->get('id');
+        $type = $request->get('type');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id' => $elementId));
+
+        if($type == 'countView'){
+            $offer->setCountView($offer->getCountView() +1);
+        }elseif ($type == 'countContact'){
+            $offer->setCountContact($offer->getCountContact() +1);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->merge($offer);
+        $em->flush();
+
 
         return new Response();
     }

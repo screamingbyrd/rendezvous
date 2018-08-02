@@ -51,6 +51,14 @@ class User extends BaseUser
      */
     private $employer;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="main", type="boolean")
+
+     */
+    protected $main = 0;
+
 
     /**
      * @ORM\Column(name="charge_id", type="string", length=255, nullable=true)
@@ -162,4 +170,24 @@ class User extends BaseUser
     {
         return $this->chargeId;
     }
+
+    /**
+     * @return bool
+     */
+    public function isMain()
+    {
+        return $this->main;
+    }
+
+    /**
+     * @param bool $main
+     * @return User
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+        return $this;
+    }
+
+
 }

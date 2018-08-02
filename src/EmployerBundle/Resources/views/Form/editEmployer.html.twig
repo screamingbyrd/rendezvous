@@ -125,7 +125,9 @@
             </div>
             <div class="button-profile">
                 <button class="btn btn-primary " id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('add_collaborator') }}">{{ 'employer.addColaborator.title'|trans }}</a>
+                {% if user.main %}
+                    <a class="btn btn-primary" href="{{ path('list_collaborator', {'id':user.employer.id}) }}">{{ 'employer.addCollaborator.list'|trans }}</a>
+                {% endif %}
                 <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">{{ 'employer.edit.changePassword'|trans }}</a>
                 <a class="btn btn-primary" href="{{ path('fos_user_resetting_request') }}">{{ 'employer.edit.forgotPassword'|trans }}</a>
             </div>

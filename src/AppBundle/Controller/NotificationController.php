@@ -107,7 +107,8 @@ class NotificationController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message('A new alert email has been created'))
+        $translated = $this->get('translator')->trans('email.notification.new');
+        $message = (new \Swift_Message($translated))
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($mail)
             ->setBody(
@@ -274,18 +275,18 @@ class NotificationController extends Controller
             }
 
             if(!empty($finalArray)){
-                $subject = 'Offer that might interest you';
                 $mail = $notification->getMail();
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $message = (new \Swift_Message('New offers could interest you'))
+                $translated = $this->get('translator')->trans('email.notification.new');
+                $message = (new \Swift_Message($translated))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo($mail)
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:notification.html.twig',
                             array('offers' => $finalArray,
-                                'subject' => $translated = $this->get('translator')->trans($subject),
+                                'subject' => $translated,
                                 'id' =>$notification->getUid(),
                                     'search' => true
                             )

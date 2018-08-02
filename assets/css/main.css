@@ -47,6 +47,23 @@ body {
 
 /*Navbars*/
 
+.navbar .fas{
+    margin-right: 10px;
+}
+
+.logo-credit{
+    width: 25px;
+}
+.dropdown-menu .logo-credit{
+    margin-left: -4px;
+    width: 23px !important;
+}
+
+.navbar-right .fab{
+    font-size: 20px;
+}
+
+
 @media (min-width: 1200px){
     .container {
         width: 72% !important;
@@ -137,7 +154,7 @@ body {
 
 
 .login-register{
-    font-size: 16px;
+    font-size: 18px;
 
 
 }
@@ -238,7 +255,7 @@ legend{
 
 
 .credit-total{
-    background-color: #ff9600;
+    border: 1px solid;
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -412,6 +429,9 @@ legend{
     }
     .jumbotron{
         padding: 0 0 !important;
+    }
+    .faq-button{
+        width: 43% !important;
     }
 }
 
@@ -918,5 +938,13 @@ legend{
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
+    }
+    #navbarfooter .navbar-right{
+        display: -webkit-flex;
+    }
+}
+@media (min-width: 600px){
+    .faq-button{
+        width: 200px !important;
     }
 }

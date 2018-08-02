@@ -204,7 +204,6 @@ class EmployerController extends Controller
     public function deleteAction(Request $request, $id)
     {
         $user = $this->getUser();
-        $idEmployer = $request->get('id');
         $session = $request->getSession();
 
         $repository = $this
@@ -227,7 +226,7 @@ class EmployerController extends Controller
             ->getManager()
             ->getRepository('AppBundle:FeaturedEmployer');
 
-        $employer = $repository->findOneBy(array('id' => isset($idEmployer)?$idEmployer:$user->getEmployer()));
+        $employer = $repository->findOneBy(array('id' => isset($id)?$id:$user->getEmployer()));
 
         if(!((isset($user) and $user->getEmployer() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
             $translated = $this->get('translator')->trans('redirect.employer');
@@ -1044,9 +1043,9 @@ class EmployerController extends Controller
 
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $translated = $this->get('translator')->trans('employer.addColaborator.youHave');
+                $translated = $this->get('translator')->trans('employer.addCollaborator.youHave');
 
-                $message = (new \Swift_Message($translated . $employer->getName()))
+                $message = (new \Swift_Message($translated . ' ' . $employer->getName()))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo('arthur.regnault@altea.lu')
                     ->setBody(
@@ -1065,7 +1064,7 @@ class EmployerController extends Controller
                 );
                 $mailer->send($message);
 
-                $translated = $this->get('translator')->trans('employer.addColaborator.added');
+                $translated = $this->get('translator')->trans('employer.addCollaborator.added');
                 $session->getFlashBag()->add('info', $translated);
 
                 return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));
@@ -1076,6 +1075,108 @@ class EmployerController extends Controller
             'form' => $form->createView(),
         ]);
 
+    }
+
+    public function listCollaboratorAction(Request $request, $id){
+
+        $session = $request->getSession();
+
+        $currentUser = $this->getUser();
+
+        if(!(isset($currentUser) and  in_array('ROLE_EMPLOYER', $currentUser->getRoles()) and $currentUser->isMain())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+
+        $employer = $employerRepository->findOneBy(array('id' => $id));
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $users = $repository->findBy(array('employer' => $employer, 'enabled' => 1));
+
+        for ($i = 0; $i<= count($users); $i++){
+            if($users[$i] == $currentUser){
+                unset($users[$i]);
+            }
+        }
+
+        return $this->render('EmployerBundle:Employer:collaboratorList.html.twig', array(
+            'collaborators' => $users
+        ));
+    }
+
+    public function archiveCollaboratorAction(Request $request, $id){
+
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $employer = $user->getEmployer();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $collaborator = $repository->findOneBy(array('id' => $id));
+
+        $userManager = $this->container->get('fos_user.user_manager');
+        $collaborator->setEnabled(false);
+        $userManager->updateUser($collaborator);
+
+        $translated = $this->get('translator')->trans('employer.addCollaborator.deleted');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('list_collaborator', array('id' => $employer->getId()));
+    }
+
+    public function changeAccessCollaboratorAction(Request $request, $id){
+
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $employer = $user->getEmployer();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $collaborator = $repository->findOneBy(array('id' => $id));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $collaborator->setMain(!$collaborator->isMain());
+
+        $em->merge($collaborator);
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('employer.addCollaborator.access.changed');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('list_collaborator', array('id' => $employer->getId()));
     }
 
 }

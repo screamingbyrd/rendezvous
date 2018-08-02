@@ -36,7 +36,7 @@ class Offer
     private $endDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist"})
      *
      */
     private $employer;
@@ -163,6 +163,12 @@ class Offer
 
     private $offerUrl;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", nullable=true)
+     */
+    private $link;
 
     public function __toString()
     {
@@ -663,6 +669,24 @@ class Offer
     public function setLanguage($language)
     {
         $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     * @return Offer
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
         return $this;
     }
 

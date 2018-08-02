@@ -3,7 +3,14 @@ no: no
 or: or
 
 homepage:
+  title: Find the career you deserve
+  subtitle: Your job search starts and ends with us
   ourMission: Our mission is to empower locally implanted companies to find the perfect candidate for them when the time is right. We also work for the candidates to help them find and get their ideal job in Luxembourg. Our dedicated team of recruiting experts work everyday to offer the best customer service and match for both employers and candidates. Our brand new website offers a continued development for a better experience every day.
+  category: Catégories
+  ourPartners: Nos partenaire
+
+searchPage:
+  display: Displaying %numberOfItem% of %countResult% Jobs
 
 how:
   title: An explanation is always better
@@ -12,6 +19,8 @@ how:
 
 
 header:
+  profile: Mon compte
+  logout: Déconnexion
   findjob: Find a job
   register: Register
   how: How It works
@@ -58,7 +67,8 @@ form:
       employer: Your lookout for the perfect candidate starts now!
     complete: Complet your profile
     completed: Profile completed
-    already: Already register ?
+    already: Already have a profile?
+    connect: Login %link_start%here%link_end%
     accept: I accept the condition of use
     bySubmitting: By submitting you confirm that you read and accepted the %link_start%general terms and conditions%link_end% of our site.
     consult: Read our %link_start%privacy policy%link_end% to understand your rights.
@@ -73,7 +83,8 @@ form:
     description: Description
     license: Driving Licence(s)
     success: You are now registered as employer !
-    edited: The emplyer has been modified !
+    edited: The employer has been modified !
+    editedCandidate: Your account has been modified !
     error: Email already used, try again !
     successEmployer: You successfully registered as an employer !
     successCandidate: You successfully registered as a candidate !
@@ -144,6 +155,9 @@ form:
       success: The offer has been archived !
     unarchived:
       success: The offer has been unarchived !
+    deleted:
+      subject: Your offre has been deleted:
+      mail: Your offer %title% has been deleted because of inapropriate content
     activate:
       success: The offer has been activated !
       error: You do not have enought credit !
@@ -217,6 +231,8 @@ slot:
 offer:
   title: Title
   titlePH: Your offer title
+  posted: Posted the
+  companyPage: Company page
   tag: Tag(s)
   tagPH: Skills area
   location: Location
@@ -248,6 +264,7 @@ offer:
   experience: Experience
   startDate: Start date
   candidatesList: Candidates who applied to this offer:
+  link: Redirection link
 
   search:
       title: Search offers
@@ -267,8 +284,12 @@ offer:
     coverLetter: Cover letter (optional)
     send: Send your CV
     already: You already applied to this offer
+    message: Cover letter
+    cv: CV
   applied:
     success: You applied to the offer %title% !
+    candidate: You applied to the offer
+    employer: A candidate applied to the offer:
   countView: Views
   countContact: Applications
 
@@ -299,6 +320,7 @@ employer:
     completed: Profile completed
     personalData: Personal data:
     companyData: Company data:
+    professionalData: Professional Data:
     changePassword: Change password
     forgotPassword: Forgot password
   credit:
@@ -306,8 +328,16 @@ employer:
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
     buy: Buy some credits
-  addColaborator:
+  addCollaborator:
     title: Add a collaborator
+    list: List of collaborators
+    access:
+      title: Access
+      simple: Simple
+      total: Total
+      changeAccess: Change access
+      changed: Access of the collaborator has been changed
+    deleted: Collaborator deleted !
     type: Type in the mail of a collaborator, a user will be created and he will receive an email to login
     youHave: You habe been added to
     added: The collaborator has been added !
@@ -323,13 +353,16 @@ internship: Internship
 temporary: Temporary
 
 featured:
+  week: Week
+  reserved: Booked
   empoyer:
     title: Featured Employer
+    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
     reserve: Book
   offer:
     title: Featured Offer
     reserve: Book
-
+    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
 
 email:
   sent: You message has been sent !
@@ -341,11 +374,13 @@ email:
       comment: Comment/ motivation letter:
       download: Télécharger le cv
   contact: Vous avre reçu un message de %name%
-  deleted: Your account has been deleted
+  deleted: Votre compte à bien été éffacé
+  contacted: Vous avez reçu un message !
   endOfActivation:
     youOffer: Your offer %title% will arrive at the end of activation in %days% days
     thinkAbout: Think about extending their activations on your dashboard
   notification:
+    new: Vous avez créé une alerte email
     created:
       title: Votre alerte email a bien été créée !
       now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
@@ -353,12 +388,16 @@ email:
       title:
         regular: New jobs are available for this %parameter%
         search: New jobs are available for you
+      new: New offers could interest you
   footer:
     contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
 contact:
   form: Contact form
+  name: Your name
+  email: Your email
+  message: Your message
   us:
     title: Contact us
     subTitle: The best way to reach us is to call us
@@ -367,7 +406,7 @@ contact:
   location: Our location
   openingHours: Opening hours:
   monday: Monday – Friday / 9am – 7pm (non-stop)
-  saturday: Saturday / 10am – 5pm (non-stop)</strong>
+  saturday: Saturday / 10am – 5pm (non-stop)
 
 footer:
   about: About us
@@ -376,7 +415,7 @@ footer:
   legal: Legal
 
 notification:
-  title: Because sometimes it takes hearing about the right position at the right time
+  title: Parce que parfois il faut entendre parler de la bonne position au bon moment
   create: Add a new notification
   created: Notification created !
   deleted: Notification deleted !
@@ -388,7 +427,7 @@ notification:
   here: here
 
 favorite:
-  title: Wishlist aren’t simply for Christmas or shopping anymore
+  title: Parce qu’elle n’est plus réservé à Noël ou au shopping désormais...
   created: Added to favorites !
   deleted: Favorite deleted !
   already: This favorite already exist !
@@ -403,24 +442,53 @@ searchEmployer:
 
 about:
   let: Let us present ourselves
-  text: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
-        The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
-        Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
+  text1: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
+  text2: The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
+  text3: Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
 
 privacy:
   title: Our privacy policy… yes the one that protects all the information we have about you
 
 faq:
+  kind: What kind of users are you?
+  subTitle: An explanation is always better
   employer:
+    intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
     1:
-      question: My dashboard
-      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once.
+      question: How & Why register?
+      answer: Registering with us allows you to benefit from all the features that our platform offers. It is super easy to do and free! You simply need to click on register and fill out the information requested. You will then be able to edit your company’s profile and start adding any job opening you have.
     2:
-      question: What are credits?
-      answer: Each job posting is worth a credit so that you can keep track of your spendings easily.
+      question: How does my dashboard work?
+      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once. Simply click on one of the sections to discover what they hide and how they can help you get the perfect candidate.
     3:
+      question: How to post an offer?
+      answer: Posting an offer is super easy! Simply click on “post an offer” under Employers in the menu bar and you will be guided to fill out the information regarding the open position. You will be able to preview your job posting before accepting its layout and content and publishing it.
+    4:
+      question: What are credits?
+      answer: Each job posting is worth a credit so that you can keep track of your spendings easily. You can also use credits for many other features of our job platform such as featured jobs.
+    5:
       question: How much are they worth?
-      answer: Once you have registered yourself as an employer, you’ll find a section detailing the packages.
+      answer: Once you have registered yourself as an employer, you’ll find a section detailing the pricing of credits. Our own experience has taught us that recruiting is expensive so we decided to make these credits affordable to you… and they come with bonuses!
+    6:
+      question: What is a featured job?
+      answer: If you have a job posting you really want to highlight, you will be using the featured job option. This allows you to remain at the top of the search engine and thus be much more visible to potential candidates.
+    7:
+      question: What is a featured employer?
+      answer: Want to promote your company and the many benefits you offer to your employees? That is why we created the featured employer. Your company will be prominently displayed on our home page to offer you the maximum visibility with our candidates. They will be able to browse your company history and description and see any openings you have.
+    8:
+      question: What are slots?
+      answer: Slots are spaces you can “rent” for a whole year and where you can post any job opening you may have.
+  candidate:
+      intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+      1:
+        question: How to create a profile?
+        answer: To create a candidate profile, you will need to register. It is super easy and will only take about a minute. You will be able to complete your profile with your past experiences and apply to jobs opening.
+      2:
+        question: How to apply to a job?
+        answer: Now you are really here because you are looking for a new job, so here’s how to apply to one. Our “find a job” section will show you all the open positions we have. You can refine your search by using the search engine and its filters. Once you have found a job that fits you, you simply need to click on Apply, add your resume and a cover letter if you want. There you go! You have made the first step towards starting an exciting new journey!
+      3:
+        question: How will the company contact me?
+        answer: Through mail via our platform or directly via your cv.
 
 redirect:
   candidate: Please register as a candidate
@@ -429,11 +497,12 @@ redirect:
 price:
   credit: Credit
   credits: Credit(s)
+  find: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
   price: Price
   bills: Bills
   ourPackages: Our packages
   noBonus: No bonus
-  buy: Buy
+  buy: Buy Now
   allow: Credit wil allow you to put your offers online and to improve their visibility
   go: Use your credits to put your offers online and to improve their visibility
   history: History
@@ -445,6 +514,9 @@ price:
     sure: Are you sure you want to buy %nbrCredits% credits ?
     success: You bought %credits% credits!
     zipcode: Zipcode
+    please: please try again.
+    unable: Unable to take payment, %s
+    cvc: Security code at the verso of the card
 
 bill:
   buyCredit: Buy credits

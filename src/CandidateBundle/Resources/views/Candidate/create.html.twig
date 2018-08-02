@@ -8,8 +8,8 @@
     <div class="register-candidate container">
         <div class="col-md-5">
             <h3 class="title">{{ 'form.registration.title.candidate' | trans }}</h3>
-            <div>{{ 'form.registration.subTitle.candidate'|trans }} <a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></div>
-            <div>{{ 'form.registration.already'|trans }}</div>
+            <div>{{ 'form.registration.subTitle.candidate'|trans }}</div>
+            <div>{{ 'form.registration.already'|trans }} {{ 'form.registration.connect'|trans({'%link_start%' : '<a href="'~path('fos_user_security_login')~'">', '%link_end%' : '</a>'}) |raw }}</div>
 
             <hr>
 
