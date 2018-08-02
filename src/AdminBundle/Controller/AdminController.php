@@ -87,6 +87,7 @@ class AdminController extends Controller
         $archived = isset($archived)?$archived:0;
         $active = $request->get('active');
         $active = isset($active)?$active:1;
+        $validated = $request->get('validated');
 
         $user = $this->getUser();
 
@@ -101,6 +102,10 @@ class AdminController extends Controller
         ;
         $arraySearch = array('archived' => $archived);
 
+        if(isset($validated)){
+            $arraySearch['validated'] = null;
+        }
+
         $offers = $offerRepository->findBy($arraySearch, array('creationDate' => 'DESC'));
 
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
@@ -109,6 +114,7 @@ class AdminController extends Controller
             'offers' => $offers,
             'active' => $active,
             'archived' => $archived,
+            'validated' => $validated,
             'totalActiveOffer' => $totalActiveOffer
         ));
     }
@@ -154,7 +160,7 @@ class AdminController extends Controller
 
             $mailer = $this->container->get('swiftmailer.mailer');
             $translated = $this->get('translator')->trans('form.offer.invalid.subject');
-            $message = (new \Swift_Message($translated . ' ' . $offer->getTitle() . "Id" .$offer->getId()))
+            $message = (new \Swift_Message($translated . ' ' . $offer->getTitle() . " Id: " .$offer->getId()))
                 ->setFrom('jobnowlu@noreply.lu')
                 ->setTo($firstUser)
                 ->setCc(array_shift($arrayEmail))

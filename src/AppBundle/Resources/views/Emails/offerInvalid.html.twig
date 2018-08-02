@@ -62,6 +62,11 @@
             <div class="other-footer">Id : {{ offer.id }}</div>
             <div class="other-footer">{{ 'form.offer.invalid.message'| trans }}</div>
             <div class="other-footer">{{ message|nl2br }}</div>
+            <div class="other-footer">
+                <a href="{{ path('fos_user_security_login') }}">
+                    {{ 'header.login.title'|trans }}
+                </a>
+            </div>
         </div>
 
         <div class="footer-mail">
