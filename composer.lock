@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "besimple/i18n-routing-bundle",
-            "version": "v2.4.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BeSimple/BeSimpleI18nRoutingBundle.git",
