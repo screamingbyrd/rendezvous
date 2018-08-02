@@ -131,6 +131,27 @@ class OfferController extends Controller
             $em->merge($offer);
             $em->flush();
 
+            if(!$offer->isValidated()){
+                $mailer = $this->container->get('swiftmailer.mailer');
+                $message = (new \Swift_Message('Invalid offer modified: ' . $offer->getTitle()))
+                    ->setFrom('jobnowlu@noreply.lu')
+                    ->setTo('moderator@jobnow.lu')
+                    ->setBody(
+                        $this->renderView(
+                            'AppBundle:Emails:invalidOfferModified.html.twig',
+                            array('offer' => $offer,
+                            )
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $message->getHeaders()->addTextHeader(
+                    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                );
+                $mailer->send($message);
+            }
+
             $translated = $this->get('translator')->trans('form.offer.edition.success');
             $session->getFlashBag()->add('info', $translated);
 

@@ -57,10 +57,14 @@
         </div>
 
         <div class="content-mail">
-            <div>{{ 'form.offer.invalid.mail'| trans({'%title%' : offer.title}) |raw}}</div>
+            <div>
+                The offer <a target="_blank" href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">{{ offer.title }}</a> has been modified, go check it
+            </div>
 
-            <div class="other-footer">{{ 'form.offer.invalid.message'| trans }}</div>
-            <div class="other-footer">{{ message|nl2br }}</div>
+
+            <a href="{{ path('fos_user_security_login') }}">
+                {{ 'header.login.title'|trans }}
+            </a>
         </div>
 
         <div class="footer-mail">

@@ -1047,7 +1047,7 @@ class EmployerController extends Controller
 
                 $message = (new \Swift_Message($translated . ' ' . $employer->getName()))
                     ->setFrom('jobnowlu@noreply.lu')
-                    ->setTo('arthur.regnault@altea.lu')
+                    ->setTo($email)
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:addedAsCollaborator.html.twig',
