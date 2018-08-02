@@ -11,6 +11,9 @@
         <div class="dashboard-total-offer">
             total offre active: {{ totalActiveOffer }}
         </div>
+        <div class="dashboard-total-offer total-not-validated">
+            total offre active non vérifié: {{ totalNotValidatedActiveOffer }}
+        </div>
 
         <h2> Liste des offres </h2>
 
@@ -205,7 +208,7 @@
             .offer-not-validated{
                 background-color: #ffa500b5 !important;
             }
-            .not-validated{
+            .not-validated, .total-not-validated{
                 background-color: #ffa500b5 !important;
                 color: black;
             }

@@ -109,13 +109,15 @@ class AdminController extends Controller
         $offers = $offerRepository->findBy($arraySearch, array('creationDate' => 'DESC'));
 
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
+        $totalNotValidatedActiveOffer = $offerRepository->countTotalNotValidatedActiveOffer();
 
         return $this->render('AdminBundle::listOffer.html.twig', array(
             'offers' => $offers,
             'active' => $active,
             'archived' => $archived,
             'validated' => $validated,
-            'totalActiveOffer' => $totalActiveOffer
+            'totalActiveOffer' => $totalActiveOffer,
+            'totalNotValidatedActiveOffer' => $totalNotValidatedActiveOffer
         ));
     }
 

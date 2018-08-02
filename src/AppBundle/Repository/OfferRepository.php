@@ -83,4 +83,14 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
 
         return count($offers);
     }
+
+    public function countTotalNotValidatedActiveOffer()
+    {
+        $query = $this->createQueryBuilder('o');
+        $query->andWhere('o.archived = 0 and o.validated is null and (o.slot is not null or (o.startDate <= CURRENT_TIMESTAMP() and o.endDate >= CURRENT_TIMESTAMP()))');
+
+        $offers = $query->getQuery()->getResult();
+
+        return count($offers);
+    }
 }
