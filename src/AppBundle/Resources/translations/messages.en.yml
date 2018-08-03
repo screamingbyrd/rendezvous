@@ -378,6 +378,9 @@ email:
       comment: Comment/ motivation letter:
       download: Télécharger le cv
   contact: Vous avre reçu un message de %name%
+  contactedUs: Somebody contacted us
+  message: Message
+  hasBeenModified: has been modified, go check it
   deleted: Votre compte à bien été éffacé
   contacted: Vous avez reçu un message !
   endOfActivation:

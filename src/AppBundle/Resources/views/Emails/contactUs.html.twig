@@ -57,11 +57,11 @@
         </div>
 
         <div class="content-mail">
-            <h3>Someone contacted us</h3>
+            <h3>{{ 'email.contactedUs'|trans }}</h3>
 
-            <div>name: {{ data.name }}</div>
-            <div class="other-footer">email: {{ data.emailSender }}</div>
-            <div class="other-footer">message:</div>
+            <div>{{ 'dashboard.candidate.name'|trans }}: {{ data.name }}</div>
+            <div class="other-footer">{{ 'form.registration.email'|trans }}: {{ data.emailSender }}</div>
+            <div class="other-footer">{{ 'email.message'|trans }}</div>
             <div>
                 {{ data.message }}
             </div>

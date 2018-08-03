@@ -58,7 +58,7 @@
 
         <div class="content-mail">
             <div>
-                The offer <a target="_blank" href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">{{ offer.title }}</a> has been modified, go check it
+                <a target="_blank" href="{{ path('show_offer', { 'id': offer.id, 'url':'' }) }}" class="offer-name">{{ offer.title }}</a> {{ 'email.hasBeenModified'|trans }}
             </div>
 
             <div class="other-footer">
