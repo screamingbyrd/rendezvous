@@ -16,6 +16,24 @@ list_candidate_admin:
         fr: "/candidat/liste"
     defaults: { _controller: AdminBundle:Admin:listCandidate }
 
+list_admin:
+    locales:
+        en: "/admin/list"
+        fr: "/admin/liste"
+    defaults: { _controller: AdminBundle:Admin:listAdmin }
+
+remove_admin:
+    locales:
+        en: "/remove-admin"
+        fr: "/supprimer-admin"
+    defaults: { _controller: AdminBundle:Admin:removeFromAdmin }
+
+promote_admin:
+    locales:
+        en: "/promote-to--admin"
+        fr: "/ajouter-admin"
+    defaults: { _controller: AdminBundle:Admin:promoteToAdmin }
+
 list_offer_admin:
     locales:
         en: "/offer/list"

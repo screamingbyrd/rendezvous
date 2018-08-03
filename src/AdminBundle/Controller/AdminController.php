@@ -81,6 +81,80 @@ class AdminController extends Controller
         ));
     }
 
+    public function listAdminAction(){
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $admins = $userRepository->getAdmins();
+
+        return $this->render('AdminBundle::listAdmin.html.twig', array(
+            'admins' => $admins
+        ));
+    }
+
+    public function removeFromAdminAction(Request $request)
+    {
+        $elementId = $request->get('id');
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $user = $userRepository->findOneBy(array('id' => $elementId));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user->removeRole('ROLE_ADMIN');
+
+        $em->merge($user);
+        $em->flush();
+
+        return $this->redirectToRoute('list_admin');
+    }
+
+    public function promoteToAdminAction(Request $request)
+    {
+        $mail = $request->get('mail');
+
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $user = $userRepository->findOneBy(array('username' => $mail));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user->addRole('ROLE_ADMIN');
+
+        $em->merge($user);
+        $em->flush();
+
+        return $this->redirectToRoute('list_admin');
+    }
+
     public function listOfferAction(Request $request){
 
         $archived = $request->get('archived');

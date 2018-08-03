@@ -300,7 +300,7 @@ class OfferController extends Controller
 
         $user = $this->getUser();
 
-        if(!in_array('ROLE_EMPLOYER', $user->getRoles()) && ($offer->getArchived() == 1 || $offer->isValidated() === false)){
+        if((!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())) && ($offer->getArchived() == 1 || $offer->isValidated() === false)){
             return $this->redirectToRoute('offer_archived', array('id' => $id));
         }
 
