@@ -7,28 +7,28 @@
 {% block body %}
 
     <div class="container">
-        <h2> Ajouter un admin </h2>
+        <h2>{{ 'admin.adminList.addAdmin' | trans }}</h2>
         <div class="shadow-box">
-            Entrer l'email d'un user existant
+            {{ 'admin.adminList.enter' | trans }}
             <form method="post" action="{{ path('promote_admin') }}" id="search-offer-homepage">
-                <input type="text" title="message" name="mail" id="add-admin-mail">
+                <input type="text" title="message" name="mail" id="add-admin-mail" class="form-control"  style="width: 400px !important; display: inline !important;">
 
-                <input disabled type="submit" class="btn btn-primary" value="submit" id="add-admin-submit">
-                <div class="error-do-not-exist">Ce user n'existe pas</div>
+                <input disabled type="submit" class="btn btn-primary" value="{{ 'offer.submit' | trans }}" id="add-admin-submit">
+                <div class="error-do-not-exist">{{ 'admin.adminList.doNotExist' | trans }}</div>
             </form>
         </div>
 
 
-        <h2> Liste des admin </h2>
+        <h2>{{ 'admin.dashboard.adminList' | trans }}</h2>
 
         <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for mail.." title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Action(s)</th>
+                <th>{{ 'dashboard.candidate.name' | trans }}</th>
+                <th>{{ 'form.registration.email' | trans }}</th>
+                <th>{{ 'dashboard.action' | trans }}</th>
             </tr>
             </thead>
 
@@ -46,7 +46,7 @@
                             {#<button type="button" class="btn btn-primary">Editer</button>#}
                         {#</a>#}
                         <button class="modal-open btn btn-danger" data-href="{{ path('remove_admin', { 'id': admin.id }) }}">
-                            Supprimer
+                            {{ 'delete' | trans }}
                         </button>
                     </td>
                 </tr>
@@ -60,7 +60,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Etes vous sûre de vouloir retirer cette administrateur ?</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.adminList.sure' | trans }}</h4>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>

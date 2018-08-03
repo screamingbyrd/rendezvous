@@ -533,6 +533,49 @@ bill:
   totalIncludingTaxes: Total TTC
   tex: HT
 
+admin:
+  title: Administrateur
+  dashboard:
+    employerList: Liste des employeurs
+    candidateList: Liste des candidats
+    adList: Liste des pubs
+    createAd: Créer une pub
+    offerList: Liste des offres
+    adminList: Liste des admins
+    totalActiveOffers: Total offre active:
+    totalEmployers: Total employeurs:
+  adminList:
+    addAdmin:  Ajouter un admin
+    enter: Entrer l'email d'un user existant
+    doNotExist: Ce user n'existe pas
+    sure: Etes vous sure de vouloir effacer cette administrateur ?
+  ads:
+    showArchived: Montrer les pubs archivées
+    hideArchived: Cacher les pubs archivées
+    archiveUnarchive: Archiver / Désarchiver
+    form:
+      edit: Editer la pub
+      title: Titre de la pub
+      link: Lien
+      logo: Logo
+      image: Image
+  enterMail: Entrer un email
+  enterCompnay: Entrer un nom de société
+  enterTitle: Entrer un titre
+  sureCandidate: Etes vous sûre de vouloir effacer ce candidat ?
+  sureEmployer: Etes vous sûre de vouloir effacer cette employeur ?
+  offerList:
+    totalNonVerifiedOffer: Total offre active non vérifié
+    nonArchivedOffers: Offres non archivées
+    archivedOffers: Offres archivées
+    showAll: Toutes les offres
+    showActive: Offres actives
+    showNotValidated: Offres active non validé
+    creationDate: Date de création
+    valid: Valide
+    invalid: Invalide
+    sureArchive: Etes vous sûre de vouloir archiver/désarchiver cette offre ?
+    whyInvalid: Pourquoi cette offre n'est elle pas valide ?
 
 
 tag:

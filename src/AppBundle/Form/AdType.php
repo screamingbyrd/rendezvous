@@ -26,7 +26,7 @@ class AdType extends AbstractType
         $builder
             ->add('title', TextType::class, array(
                 'required' => true,
-                'label' => 'form.registration.companyName'
+                'label' => 'admin.ads.form.title'
             ))
 
             ->add('description', TextareaType::class, array(
@@ -35,30 +35,32 @@ class AdType extends AbstractType
             ))
             ->add('link',      TextType::class, array(
                 'required' => false,
-                'label' => 'form.registration.socialMedia',
+                'label' => 'admin.ads.form.link',
             ))
             ->add('startDate',      DateType::class, array('required' => false,'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
-                'label' => 'offer.available',
+                'label' => 'offer.startDate',
 
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-provide' => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy',
-                    'placeholder' => 'offer.availablePH']))
+                    'data-date-format' => 'dd-mm-yyyy']))
             ->add('endDate',      DateType::class, array('required' => false,'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
-                'label' => 'offer.available',
+                'label' => 'dashboard.employer.slot.endDate',
 
                 'attr' => [
                     'class' => 'form-control input-inline datepicker',
                     'data-provide' => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy',
-                    'placeholder' => 'offer.availablePH']))
+                    'data-date-format' => 'dd-mm-yyyy']))
 
-            ->add('logo', ImageType::class)
+            ->add('logo', ImageType::class, array(
+                'label' => 'admin.ads.form.logo',
+            ))
 
-            ->add('coverImage', ImageType::class)
+            ->add('coverImage', ImageType::class, array(
+                'label' => 'admin.ads.form.image',
+            ))
 
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(

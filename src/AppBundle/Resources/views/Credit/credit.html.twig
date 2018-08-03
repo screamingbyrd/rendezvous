@@ -21,9 +21,6 @@
 
         {#<h3>{{ 'price.ourPackages' | trans }}</h3>#}
         <div class="row container-buy-choice">
-            <div class="shadow-box credit-text">
-                {{ 'price.find' | trans }}
-            </div>
             <div class="col-sm-4 col-md-4">
                 <div class="credit-choice">
                     {#<img src="..." alt="...">#}
@@ -68,6 +65,10 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="shadow-box credit-text">
+            {{ 'price.find' | trans }}
         </div>
 
         {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
@@ -111,9 +112,6 @@
             display: list-item;
             margin-top: 32px;
             margin-bottom: 57px;
-        }
-        .container-buy-choice{
-            margin-bottom: 20px;
         }
         .credit-text{
             margin-bottom: 10px !important;

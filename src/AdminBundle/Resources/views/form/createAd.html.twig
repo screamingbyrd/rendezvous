@@ -19,7 +19,7 @@
 
     <div class="container post-offer">
 
-        <h3 class="text-center post-offer">Post your offer</h3>
+        <h3 class="text-center post-offer">{{ 'admin.dashboard.createAd' | trans }}</h3>
 
         {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
 
@@ -56,7 +56,6 @@
         </div>
         <br>
 
-        <h4>{{ 'offer.option'|trans }}</h4>
         <div class="row">
             <div class="col-md-3">
                 {{ form_label (form.startDate, null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -71,13 +70,16 @@
         </div>
         <br>
         <div class="row">
-            {{ form_label (form.logo, null, { 'label_attr': {'class': 'label-form'} }) }}
-            {{ form_widget(form.logo) }}
-            {{ form_errors(form.logo) }}
-
-            {{ form_label (form.coverImage, null, { 'label_attr': {'class': 'label-form'} }) }}
-            {{ form_widget(form.coverImage) }}
-            {{ form_errors(form.coverImage) }}
+            <div class="col-md-6">
+                {{ form_label (form.logo, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.logo) }}
+                {{ form_errors(form.logo) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label (form.coverImage, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.coverImage) }}
+                {{ form_errors(form.coverImage) }}
+            </div>
         </div>
 
 

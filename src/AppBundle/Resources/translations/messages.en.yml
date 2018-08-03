@@ -535,6 +535,51 @@ bill:
   totalIncludingTaxes: Total TTC
   tex: TEX
 
+
+admin:
+  title: Administrator
+  dashboard:
+    employerList: Employers list
+    candidateList: Candidats list
+    adList: Ads list
+    createAd: Post an ad
+    offerList: Offers list
+    adminList: Admins list
+    totalActiveOffers: Total active offers:
+    totalEmployers: Total Employers:
+  adminList:
+    addAdmin:  Add an admin
+    enter: Type in existing email
+    doNotExist: This user does not exist
+    sure: Are you sure that you want to delete this administator?
+  ads:
+    showArchived: Show archived ads
+    hideArchived: Hide archived ads
+    archiveUnarchive: Archive / Unarchive
+    form:
+      edit: Edit ad
+      title: Title of the ad
+      link: Link
+      logo: Logo
+      image: Image
+  enterMail: Enter an email
+  enterCompnay: Entrer a company name
+  enterTitle: Entrer a title
+  sureCandidate: Are you sure that you want to delete that candidate ?
+  sureEmployer: Are you sure that you want to delete that employer ?
+  offerList:
+    totalNonVerifiedOffer: Total activated unverified offers
+    nonArchivedOffers: Offer not archived
+    archivedOffers: Archived offers
+    showAll: All offers
+    showActive: Active offers
+    showNotValidated: Active offer not verified
+    creationDate: Creation date
+    valid: Valid
+    invalid: Invalid
+    sureArchive: Are you sure that you want to archive / unarchive that offer ?
+    whyInvalid: Why does this offer is invalid ?
+
 tag:
   accounting: Accounting/Finance
   admin: Admin/Secretarial

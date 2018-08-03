@@ -8,16 +8,16 @@
 
     <div class="container">
 
-        <h2> Liste des candidats </h2>
+        <h2>{{ 'admin.dashboard.candidateList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for mail.." title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="{{ 'admin.enterMail'|trans }}" title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Action(s)</th>
+                    <th>{{ 'dashboard.candidate.name' | trans }}</th>
+                    <th>{{ 'form.registration.email' | trans }}</th>
+                    <th>{{ 'dashboard.action' | trans }}</th>
                 </tr>
             </thead>
 
@@ -32,10 +32,10 @@
                         <td class="candidate-mail">{{ candidate.user.email }}</td>
                         <td>
                             <a href="{{ path('edit_candidate', { 'id': candidate.id }) }}">
-                                <button type="button" class="btn btn-primary">Editer</button>
+                                <button type="button" class="btn btn-primary">{{ 'dashboard.employer.editOffer' | trans }}</button>
                             </a>
                             <button class="modal-open btn btn-danger" data-href="{{ path('delete_candidate', { 'id': candidate.id }) }}">
-                                Supprimer
+                                {{ 'delete' | trans }}
                             </button>
                         </td>
                     </tr>
@@ -49,7 +49,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Etes vous sûre de vouloir effacer ce candidat ?</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.sureCandidate'|trans }}</h4>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>

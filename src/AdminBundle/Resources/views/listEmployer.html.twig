@@ -8,17 +8,17 @@
 
     <div class="container">
 
-        <h2> Liste des employeurs </h2>
+        <h2>{{ 'admin.dashboard.employerList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="{{ 'admin.enterCompnay'|trans }}" title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
                 <tr>
-                    <th>Société</th>
-                    <th>Email</th>
-                    <th>Crédits</th>
-                    <th>Action(s)</th>
+                    <th>{{ 'form.offer.search.employerPH' | trans }}</th>
+                    <th>{{ 'form.registration.email' | trans }}</th>
+                    <th>{{ 'employer.credit.title' | trans }}</th>
+                    <th>{{ 'dashboard.action' | trans }}</th>
                 </tr>
             </thead>
 
@@ -35,13 +35,13 @@
                         <td>{{ employer.employer.credit }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
-                                Editer
+                                {{ 'dashboard.employer.editOffer' | trans }}
                             </a>
                             <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
-                                Supprimer
+                                {{ 'delete' | trans }}
                             </button>
                             <a class="btn btn-primary" href="{{ path('jobnow_bills', { 'id': employer.employer.id }) }}">
-                                Liste des facture
+                                {{ 'price.bills' | trans }}
                             </a>
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Etes vous sûre de vouloir effacer cette employeur ?</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.sureEmployer'|trans }}</h4>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
