@@ -8,6 +8,7 @@
 
 namespace EmployerBundle\Controller;
 
+use AppBundle\Entity\ActiveLog;
 use AppBundle\Entity\Employer;
 use AppBundle\Entity\Offer;
 use AppBundle\Entity\PostulatedOffers;
@@ -415,16 +416,42 @@ class OfferController extends Controller
 
         $employer->setCredit($creditEmployer - $creditOffer);
 
-        $now =  new \DateTime("midnight");
-        $next = new \DateTime("midnight");
         $em = $this->getDoctrine()->getManager();
 
         foreach ($offerArray as $offer){
-            $offer->setStartDate($now);
+            $now =  new \DateTime("midnight");
+            $next = new \DateTime("midnight");
             $offer->setUpdateDate($now);
+            $endDate = $offer->getEndDate();
+            if($endDate >= $now){
+                $more = $endDate->modify( '+ 2 month' );
+                $more = new \DateTime($more->format('Y-m-d H:i:s'));
+                $offer->setEndDate($more);
 
-            $offer->setEndDate($next->modify( '+ 2 month' ));
+                $activeLogRepository = $this
+                    ->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:ActiveLog')
+                ;
+                $activeLog = $activeLogRepository->selectCurrentLog($offer->getId());
 
+                if(isset($activeLog) && !empty($activeLog)){
+                    $activeLog[0]->setEndDate($more);
+                    $em->merge($activeLog[0]);
+                }
+
+            }else{
+                $offer->setStartDate($now);
+                $offer->setEndDate($next->modify( '+ 2 month' ));
+
+                $activeLog = new ActiveLog();
+                $activeLog->setOfferId($offer->getId());
+                $activeLog->setStartDate($now);
+                $new = new \DateTime("midnight");
+                $activeLog->setEndDate($new->modify( '+ 2 month' ));
+                $em->persist($activeLog);
+
+            }
 
             $em->merge($offer);
         }

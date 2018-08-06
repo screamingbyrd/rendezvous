@@ -20,6 +20,12 @@ class AdminController extends Controller
         ;
         $employerCount = $employerRepository->countTotalDifferentEmployer();
 
+        $logRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:ActiveLog');
+        $log = $logRepository->countActiveForYearLog();
+        var_dump($log);exit;
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()

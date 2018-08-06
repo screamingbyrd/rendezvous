@@ -2,6 +2,7 @@
 
 namespace EmployerBundle\Controller;
 
+use AppBundle\Entity\ActiveLog;
 use AppBundle\Entity\Employer;
 use AppBundle\Entity\FeaturedEmployer;
 use AppBundle\Entity\FeaturedOffer;
@@ -810,8 +811,15 @@ class EmployerController extends Controller
                 $slot->setOffer($currentOffer);
                 $currentOffer->setSlot($slot);
                 $currentOffer->setUpdateDate($now);
+
+                $activeLog = new ActiveLog();
+                $activeLog->setOfferId($currentOffer->getId());
+                $activeLog->setSlotId($slot->getId());
+                $activeLog->setStartDate($now);
+
                 $em->merge($slot);
                 $em->merge($currentOffer);
+                $em->merge($activeLog);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('slot.add.success');
@@ -856,6 +864,20 @@ class EmployerController extends Controller
 
         $slot->setOffer(null);
         $offer->setSlot(null);
+
+        $activeLogRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:ActiveLog')
+        ;
+        $activeLog = $activeLogRepository->selectCurrentLog($offer->getId(), $slot->getId(), true);
+
+        if(isset($activeLog) && !empty($activeLog)){
+            $now = new \DateTime("midnight");
+            $activeLog[0]->setEndDate($now);
+            $em->merge($activeLog[0]);
+        }
+
         $em->merge($slot);
         $em->merge($offer);
         $em->flush();
@@ -893,6 +915,20 @@ class EmployerController extends Controller
 
         $slot->setOffer(null);
         $offer->setSlot(null);
+
+        $activeLogRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:ActiveLog')
+        ;
+        $activeLog = $activeLogRepository->selectCurrentLog($offer->getId(), $slot->getId(), true);
+
+        if(isset($activeLog) && !empty($activeLog)){
+            $now = new \DateTime("midnight");
+            $activeLog[0]->setEndDate($now);
+            $em->merge($activeLog[0]);
+        }
+
         $em->merge($slot);
         $em->merge($offer);
         $em->flush();
