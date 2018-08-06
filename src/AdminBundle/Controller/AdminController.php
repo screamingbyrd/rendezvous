@@ -26,26 +26,16 @@ class AdminController extends Controller
         ;
         $employerCount = $employerRepository->countTotalDifferentEmployer();
 
-        $logRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:ActiveLog');
-        $log = $logRepository->countActiveForYearLog();
-
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-        $finalLog = array();
-        foreach ($log as $entry){
-            $finalLog[] = array('x'=>(int)$entry['period'], 'y'=>(int)$entry['total']);
-        }
+
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
-            'countEmployer' => $employerCount,
-            'log' => $finalLog
+            'countEmployer' => $employerCount
         ));
     }
 
@@ -290,7 +280,26 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:ActiveLog');
 
-        $finalLog = array();
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate');
+
+        $logCreditRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:LogCredit');
+
+        $finalActiveLog = array();
+        $finalCandidateLog = array();
+        $finalEmployerLog = array();
+        $finalCreditLog = array();
+
         for ($i = 1; $i <= 12; $i++){
             $startDate = new \DateTime();
             $startDate->setDate(2018, $i, 1);
@@ -298,10 +307,17 @@ class AdminController extends Controller
             $lastday = date('t',strtotime($dateToTest));
             $endDate= new \DateTime();
             $endDate->setDate(2018, $i, $lastday);
-            $finalLog[] = array('x'=>$i, 'y'=>(int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total']);
+            $finalActiveLog[] = (int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total'];
+            $finalCandidateLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
+            $finalEmployerLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
+            $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
         }
+
         return $this->render('AdminBundle::logPage.html.twig',array(
-            'log' => $finalLog
+            'activeOfferLog' => $finalActiveLog,
+            'activeEmployerLog' => $finalEmployerLog,
+            'activeCandidateLog' => $finalCandidateLog,
+            'creditLog' => $finalCreditLog
         ));
     }
 

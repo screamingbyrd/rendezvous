@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class LogCreditRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function countTotalBefore($date){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select sum(lc.credit) as total
+                    from AppBundle:logCredit lc
+                    where lc.date <= :date'
+            )->setParameter('date',$date)->execute();
+    }
+
 }

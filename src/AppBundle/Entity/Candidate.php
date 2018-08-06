@@ -153,6 +153,13 @@ class Candidate
     private $modifiedDate;
 
     /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
      * Get id
      *
      * @return int
@@ -411,6 +418,7 @@ class Candidate
         $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
         $this->favorite = new \Doctrine\Common\Collections\ArrayCollection();
         $this->modifiedDate =  new \datetime();
+        $this->creationDate =  new \datetime();
     }
 
     /**
@@ -730,9 +738,6 @@ class Candidate
         $this->cv = $cv;
         return $this;
     }
-
-
-
 
 
 }

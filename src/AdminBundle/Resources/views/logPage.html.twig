@@ -6,38 +6,181 @@
 
 {% block body %}
 
-
+    {%  if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
+        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+    {% endif %}
     <div class="container jobnow-container" style="text-align: center">
 
-        <script>
-            window.onload = function () {
+        <div class="navbar-dashboard">
+            <ul class="nav nav-tabs nav-candidate navbar-dashboard">
+                <li class="active">
+                    <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">offer</a>
+                </li>
+                <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="employer">employer</a>
+                </li>
+                <li><a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="candidate">candidate</a>
+                </li>
+                <li><a class="tab-log" data-target="#credit" data-toggle="tab" data-id="credit">credit</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container jobnow-container">
+            <div class="tab-content candidate-content">
+                <div class="tab-pane active fade in" id="applied">
+                    <div class="shadow-box">
+                        <h2>Number of active offer</h2>
+                        <div class="ct-chart ct-offer ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="point-value"></div>
+                    </div>
 
-                let options = {
-                    title: {
-                        text: "Number of active offer"
-                    },
-                    axisX:{
-                        minimum: 1,
-                        maximum: 12
-                    },
-                    animationEnabled: true,
-                    exportEnabled: true,
-                    data: [
-                        {
-                            type: "line", //change it to line, area, column, pie, etc
-                            dataPoints: {{ log |json_encode|raw}}
-                        }
-                    ]
-                };
-                $("#chartContainer").CanvasJSChart(options);
-
-            }
-        </script>
-
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+                </div>
+                <div class="tab-pane active fade" id="alerts">
+                    <div class="shadow-box">
+                        <h2>Number of employer</h2>
+                        <div class="ct-chart ct-employer ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="point-value"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="favorites">
+                    <div class="shadow-box">
+                        <h2>Number of candidate</h2>
+                        <div class="ct-chart ct-candidate ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="point-value"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="credit">
+                    <div class="shadow-box">
+                        <h2>Number of credit</h2>
+                        <div class="ct-chart ct-credit ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="point-value"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
+    <script>
+        var options = {
+            // Don't draw the line chart points
+            showPoint: true,
+            // Disable line smoothing
+            lineSmooth: false,
+            // X-Axis specific configuration
+            axisY: {
+                onlyInteger: true
+            },
+        };
 
+        var data = {
+            // A labels array that can contain any sort of values
+            labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+            // Our series array that contains series objects or in this case series data arrays
+            series: [
+                {{ activeOfferLog |json_encode|raw}}
+            ]
+        };
+
+        // Create a new line chart object where as first parameter we pass in a selector
+        // that is resolving to our chart container element. The Second parameter
+        // is the actual data object.
+        let chart = new Chartist.Line('.ct-offer', data, options);
+        let addedEvents = false;
+        chart.on('draw', function() {
+            if (!addedEvents) {
+                $('.ct-point').on('mouseover', function() {
+                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                });
+            }
+        });
+        $('.tab-log').on("click", function(e){
+            $('.point-value').html('');
+            switch ($(this).data('id')) {
+                case 'offer':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ activeOfferLog |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-offer', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });}, 500);
+                    break;
+                case 'employer':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ activeEmployerLog |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-employer', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });
+                        }, 500);
+                    break;
+                case 'candidate':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ activeCandidateLog |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-candidate', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });
+                    }, 500);
+                    break;
+                case 'credit':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ creditLog |json_encode|raw}}
+                        ]
+                    };
+                    let chart = new Chartist.Line('.ct-credit', data, options);
+                    let addedEvents = false;
+                    chart.on('draw', function() {
+                        if (!addedEvents) {
+                            $('.ct-point').on('mouseover', function() {
+                                $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                            });
+                        }
+                    });
+                    }, 500);
+
+                    break;
+            }
+
+
+        });
+        $('.ct-point').on('mouseover', function(e){
+            console.log('rr');
+            $('.point-value').html($(this).val());
+        });
+
+    </script>
+    <style>
+        .ct-label{
+            color: black;
+            font-size: 14px;
+        }
+    </style>
 {% endblock %}

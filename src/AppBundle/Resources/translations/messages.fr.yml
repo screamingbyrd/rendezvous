@@ -580,6 +580,8 @@ admin:
     invalid: Invalide
     sureArchive: Etes vous sûre de vouloir archiver/désarchiver cette offre ?
     whyInvalid: Pourquoi cette offre n'est elle pas valide ?
+  log:
+
 
 
 tag:

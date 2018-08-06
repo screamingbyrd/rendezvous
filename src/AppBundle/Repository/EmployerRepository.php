@@ -20,4 +20,13 @@ class EmployerRepository extends \Doctrine\ORM\EntityRepository
 
         return count($employers);
     }
+
+    public function countActiveBetween($endDate){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select count(distinct em.id) as total
+                    from AppBundle:employer em
+                    where em.creationDate <= :endDate'
+            )->setParameter('endDate',$endDate)->execute();
+    }
 }

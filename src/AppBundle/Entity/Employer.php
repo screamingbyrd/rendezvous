@@ -105,6 +105,13 @@ class Employer
     private $lastName;
 
     /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="creationDate", type="datetime")
+     */
+    private $creationDate;
+
+    /**
      * @return mixed
      */
     public function getEmail()
@@ -347,6 +354,7 @@ class Employer
     public function __construct()
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creationDate =  new \datetime();
     }
 
     /**

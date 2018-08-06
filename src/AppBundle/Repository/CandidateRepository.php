@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class CandidateRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function countActiveBetween($endDate){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select count(distinct ca.id) as total
+                    from AppBundle:candidate ca
+                    where ca.creationDate <= :endDate'
+            )->setParameter('endDate',$endDate)->execute();
+    }
+
 }
