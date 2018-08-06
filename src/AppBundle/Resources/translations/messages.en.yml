@@ -546,6 +546,7 @@ admin:
     candidateList: Candidats list
     adList: Ads list
     createAd: Post an ad
+    stat: Statistics
     offerList: Offers list
     adminList: Admins list
     totalActiveOffers: Total active offers:

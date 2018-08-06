@@ -13,6 +13,12 @@ class AdminController extends Controller
 
     public function indexAction()
     {
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
         $employerRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -25,16 +31,21 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:ActiveLog');
         $log = $logRepository->countActiveForYearLog();
-        var_dump($log);exit;
+
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
+        $finalLog = array();
+        foreach ($log as $entry){
+            $finalLog[] = array('x'=>(int)$entry['period'], 'y'=>(int)$entry['total']);
+        }
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
-            'countEmployer' => $employerCount
+            'countEmployer' => $employerCount,
+            'log' => $finalLog
         ));
     }
 
@@ -264,6 +275,34 @@ class AdminController extends Controller
         }
 
         return $this->redirectToRoute('list_offer_admin');
+    }
+
+    public function logPageAction()
+    {
+        $user = $this->getUser();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $logRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:ActiveLog');
+
+        $finalLog = array();
+        for ($i = 1; $i <= 12; $i++){
+            $startDate = new \DateTime();
+            $startDate->setDate(2018, $i, 1);
+            $dateToTest = "2018-'.$i.'-01";
+            $lastday = date('t',strtotime($dateToTest));
+            $endDate= new \DateTime();
+            $endDate->setDate(2018, $i, $lastday);
+            $finalLog[] = array('x'=>$i, 'y'=>(int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total']);
+        }
+        return $this->render('AdminBundle::logPage.html.twig',array(
+            'log' => $finalLog
+        ));
     }
 
 }

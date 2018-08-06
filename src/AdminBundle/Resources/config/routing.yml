@@ -46,6 +46,12 @@ change_validation_status:
         fr: "/changer-status-validation"
     defaults: { _controller: AdminBundle:Admin:changeValidationStatus }
 
+log_page:
+    locales:
+        en: "/log-page"
+        fr: "/page-stat"
+    defaults: { _controller: AdminBundle:Admin:logPage }
+
 list_ad_admin:
     locales:
         en: "/ad/list/{archived}"

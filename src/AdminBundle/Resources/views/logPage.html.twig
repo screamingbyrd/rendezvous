@@ -1,0 +1,43 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    Panneau d'administration - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container jobnow-container" style="text-align: center">
+
+        <script>
+            window.onload = function () {
+
+                let options = {
+                    title: {
+                        text: "Number of active offer"
+                    },
+                    axisX:{
+                        minimum: 1,
+                        maximum: 12
+                    },
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    data: [
+                        {
+                            type: "line", //change it to line, area, column, pie, etc
+                            dataPoints: {{ log |json_encode|raw}}
+                        }
+                    ]
+                };
+                $("#chartContainer").CanvasJSChart(options);
+
+            }
+        </script>
+
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    </div>
+
+{% endblock %}

@@ -543,6 +543,7 @@ admin:
     candidateList: Liste des candidats
     adList: Liste des pubs
     createAd: Créer une pub
+    stat: Statistique
     offerList: Liste des offres
     adminList: Liste des admins
     totalActiveOffers: Total offre active:
