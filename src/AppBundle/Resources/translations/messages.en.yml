@@ -269,6 +269,7 @@ offer:
   startDate: Start date
   candidatesList: Candidates who applied to this offer:
   link: Redirection link
+  inSlot: In slot
 
   search:
       title: Search offers
@@ -583,6 +584,15 @@ admin:
     invalid: Invalid
     sureArchive: Are you sure that you want to archive / unarchive that offer ?
     whyInvalid: Why does this offer is invalid ?
+  log:
+    nbrActive: Number active offer
+    nbrEmployer: Number employer
+    nbrCandidate: Number candidate
+    total: Total
+    monthly: Monthly
+    totalCredit: Number total credit
+    monthlyCredit: Number monthly credit
+    selected: Selected value
 
 tag:
   accounting: Accounting/Finance

@@ -269,6 +269,7 @@ offer:
   startDate: Date de début
   candidatesList: Candidats qui ont postulé à cette offre :
   link: Lien de redirection
+  inSlot: Dans un slot
 
   search:
     title: Recherche d'offres
@@ -581,6 +582,14 @@ admin:
     sureArchive: Etes vous sûre de vouloir archiver/désarchiver cette offre ?
     whyInvalid: Pourquoi cette offre n'est elle pas valide ?
   log:
+    nbrActive: Nombre d'offre active
+    nbrEmployer: Nombre d'employeur
+    nbrCandidate: Nombre de candidat
+    total: Total
+    monthly: Mensuel
+    totalCredit: Nombre total de credit
+    monthlyCredit: Nombre de credit par mois
+    selected: Valeur choisit
 
 
 

@@ -20,4 +20,13 @@ class LogCreditRepository extends \Doctrine\ORM\EntityRepository
             )->setParameter('date',$date)->execute();
     }
 
+    public function countTotalMonthly($month, $year){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select sum(lc.credit) as total
+                    from AppBundle:logCredit lc
+                    where month(lc.date) = :month and year(lc.date) = :year'
+            )->setParameter('month',$month)->setParameter('year',$year)->execute();
+    }
+
 }

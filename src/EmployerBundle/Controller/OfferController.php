@@ -399,8 +399,12 @@ class OfferController extends Controller
                 $session->getFlashBag()->add('danger', $translated);
                 return $this->redirectToRoute('create_employer');
             }
-            $creditOffer += $creditInfo->getPublishOffer();
-            $offerArray[] = $offer;
+            $slot = $offer->getSlot();
+            if(!isset($slot)){
+                $creditOffer += $creditInfo->getPublishOffer();
+                $offerArray[] = $offer;
+            }
+
         }
 
 

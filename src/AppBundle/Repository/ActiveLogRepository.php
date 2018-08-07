@@ -32,11 +32,15 @@ class ActiveLogRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function countActiveBetween($startDate, $endDate){
+
         return $this->getEntityManager()
             ->createQuery(
                 'select count(distinct al.offerId) as total
                     from AppBundle:activeLog al
-                    where al.startDate <= :startDate and al.endDate >= :endDate or al.startDate <= :startDate and al.endDate is NULL'
+                    where al.startDate <= :startDate and al.endDate >= :endDate or
+                    al.startDate <= :startDate and al.endDate is NULL or
+                    (month(al.startDate) = month(:startDate) and year(al.startDate) = year(:startDate)) or
+                    (month(al.endDate) = month(:endDate) and year(al.endDate) = year(:endDate))'
             )->setParameter('startDate',$startDate)->setParameter('endDate',$endDate)->execute();
     }
 }

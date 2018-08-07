@@ -184,6 +184,8 @@
                                 {% else %}
                                     {% if date(offer.endDate) > date() %}
                                         {{ offer.endDate|date("d/m/Y")}}
+                                    {% elseif offer.slot is not null %}
+                                        {{ 'offer.inSlot' | trans }}
                                     {% else %}
                                         {{ 'dashboard.not'|trans }}
                                     {% endif %}
@@ -203,10 +205,12 @@
 
                                             <li><button {% if offer.slot is not null %}disabled{% endif %} class="btn btn-primary element-offer-list  modal-open" data-trad="{{ 'offer.activate.sure'|trans({'%credit%': publishedOffer}) }}" data-href="{{ path('activate_offer', {'id': offer.id }) }}">{{ 'dashboard.employer.activateOffer' | trans }}</button></li>
 
-                                            {% if offer.slot is null  %}
-                                                <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a></li>
-                                            {% else %}
-                                                <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a></li>
+                                            {% if offer.slot is not null or offer.isactive == false %}
+                                                {% if offer.slot is null  %}
+                                                    <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('add_to_slot', {'id': offer.id }) }}">{{ 'slot.add.title' | trans }}</a></li>
+                                                {% else %}
+                                                    <li><a class="btn btn-primary element-offer-list slot-button" href="{{ path('remove_from_slot', {'id': offer.id }) }}">{{ 'slot.remove.title' | trans }}</a></li>
+                                                {% endif %}
                                             {% endif %}
                                         {% endif %}
                                     </ul>

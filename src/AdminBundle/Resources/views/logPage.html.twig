@@ -9,18 +9,24 @@
     {%  if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
         <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
+    <div class="col-md-1 select-year">
+        <select id="log-year" class="col-md-1 col-md-offset-3 form-control">
+            <option value="2018" {% if year == '2018' %}selected{% endif %}>2018</option>
+            <option value="2019" {% if year == '2019' %}selected{% endif %}>2019</option>
+        </select>
+    </div>
     <div class="container jobnow-container" style="text-align: center">
 
         <div class="navbar-dashboard">
             <ul class="nav nav-tabs nav-candidate navbar-dashboard">
                 <li class="active">
-                    <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">offer</a>
+                    <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">{{ 'dashboard.employer.slot.offer'|trans }}</a>
                 </li>
-                <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="employer">employer</a>
+                <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="employer">{{ 'notification.employer'|trans }}</a>
                 </li>
-                <li><a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="candidate">candidate</a>
+                <li><a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="candidate">{{ 'header.candidates.register'|trans }}</a>
                 </li>
-                <li><a class="tab-log" data-target="#credit" data-toggle="tab" data-id="credit">credit</a>
+                <li><a class="tab-log" data-target="#credit" data-toggle="tab" data-id="credit">{{ 'price.credit'|trans }}</a>
                 </li>
             </ul>
         </div>
@@ -28,7 +34,7 @@
             <div class="tab-content candidate-content">
                 <div class="tab-pane active fade in" id="applied">
                     <div class="shadow-box">
-                        <h2>Number of active offer</h2>
+                        <h2>{{ 'admin.log.nbrActive'|trans }}</h2>
                         <div class="ct-chart ct-offer ct-perfect-fourth" style="height: 500px;"></div>
                         <div class="point-value"></div>
                     </div>
@@ -36,23 +42,45 @@
                 </div>
                 <div class="tab-pane active fade" id="alerts">
                     <div class="shadow-box">
-                        <h2>Number of employer</h2>
+                        <h2>{{ 'admin.log.nbrEmployer'|trans }}</h2>
                         <div class="ct-chart ct-employer ct-perfect-fourth" style="height: 500px;"></div>
                         <div class="point-value"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="favorites">
                     <div class="shadow-box">
-                        <h2>Number of candidate</h2>
+                        <h2>{{ 'admin.log.nbrCandidate'|trans }}</h2>
                         <div class="ct-chart ct-candidate ct-perfect-fourth" style="height: 500px;"></div>
                         <div class="point-value"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="credit">
                     <div class="shadow-box">
-                        <h2>Number of credit</h2>
-                        <div class="ct-chart ct-credit ct-perfect-fourth" style="height: 500px;"></div>
-                        <div class="point-value"></div>
+                        <div class="tab-content candidate-content">
+                            <div class="navbar-dashboard">
+                                <ul class="nav nav-tabs nav-candidate navbar-dashboard">
+                                    <li class="active">
+                                        <a class="tab-log" data-target="#total" data-toggle="tab" data-id="total">{{ 'admin.log.total'|trans }}</a>
+                                    </li>
+                                    <li><a class="tab-log" data-target="#monthly" data-toggle="tab" data-id="monthly">{{ 'admin.log.monthly'|trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane active initial fade" id="total">
+                                <div class="shadow-box">
+                                    <h2>{{ 'admin.log.totalCredit'|trans }}</h2>
+                                    <div class="ct-chart ct-credit ct-perfect-fourth" style="height: 500px;"></div>
+                                    <div class="point-value"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="monthly">
+                                <div class="shadow-box">
+                                    <h2>{{ 'admin.log.monthlyCredit'|trans }}</h2>
+                                    <div class="ct-chart ct-credit-monthly ct-perfect-fourth" style="height: 500px;"></div>
+                                    <div class="point-value"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,7 +116,7 @@
         chart.on('draw', function() {
             if (!addedEvents) {
                 $('.ct-point').on('mouseover', function() {
-                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
                 });
             }
         });
@@ -107,7 +135,7 @@
                         chart.on('draw', function() {
                             if (!addedEvents) {
                                 $('.ct-point').on('mouseover', function() {
-                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
                                 });
                             }
                         });}, 500);
@@ -124,7 +152,7 @@
                         chart.on('draw', function() {
                             if (!addedEvents) {
                                 $('.ct-point').on('mouseover', function() {
-                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
                                 });
                             }
                         });
@@ -142,7 +170,7 @@
                         chart.on('draw', function() {
                             if (!addedEvents) {
                                 $('.ct-point').on('mouseover', function() {
-                                    $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
                                 });
                             }
                         });
@@ -160,15 +188,32 @@
                     chart.on('draw', function() {
                         if (!addedEvents) {
                             $('.ct-point').on('mouseover', function() {
-                                $('.point-value').html('<b>Selected Value: </b>' + $(this).attr('ct:value'));
+                                $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
                             });
                         }
                     });
                     }, 500);
-
+                    break;
+                case 'monthly':
+                    $('#total').removeClass('initial');
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ monthlyCreditLog |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-credit-monthly', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });
+                    }, 500);
                     break;
             }
-
 
         });
         $('.ct-point').on('mouseover', function(e){
@@ -176,11 +221,29 @@
             $('.point-value').html($(this).val());
         });
 
+        $("#log-year").change(function() {
+            let year = $(this).val();
+            switch(year){
+                case '2018':
+                    window.location.replace('{{ path('log_page', {'year': 2018}) }}');
+                    break;
+                case '2019':
+                    window.location.replace('{{ path('log_page', {'year': 2019}) }}');
+                    break;
+            }
+        });
     </script>
     <style>
         .ct-label{
             color: black;
             font-size: 14px;
+        }
+        .initial{
+            display: initial !important;
+        }
+        .select-year{
+            position: absolute;
+            top: 150px;
         }
     </style>
 {% endblock %}

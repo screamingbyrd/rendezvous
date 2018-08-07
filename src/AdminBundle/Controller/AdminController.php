@@ -267,8 +267,11 @@ class AdminController extends Controller
         return $this->redirectToRoute('list_offer_admin');
     }
 
-    public function logPageAction()
+    public function logPageAction(Request $request)
     {
+        $now = new \DateTime();
+        $year = $request->get('year');
+        $year = isset($year)?$year:$now->format('Y');
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
@@ -299,25 +302,29 @@ class AdminController extends Controller
         $finalCandidateLog = array();
         $finalEmployerLog = array();
         $finalCreditLog = array();
+        $monthlyCreditLog = array();
 
         for ($i = 1; $i <= 12; $i++){
             $startDate = new \DateTime();
-            $startDate->setDate(2018, $i, 1);
-            $dateToTest = "2018-'.$i.'-01";
-            $lastday = date('t',strtotime($dateToTest));
+            $startDate->setDate($year, $i, 1);
+            $dateToTest = $year."-".$i."-01";
+            $lastDay = date('t',strtotime($dateToTest));
             $endDate= new \DateTime();
-            $endDate->setDate(2018, $i, $lastday);
+            $endDate->setDate($year, $i, $lastDay);
             $finalActiveLog[] = (int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total'];
             $finalCandidateLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
             $finalEmployerLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
             $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
+            $monthlyCreditLog[] = (int)$logCreditRepository->countTotalMonthly($i, $year)[0]['total'];
         }
 
         return $this->render('AdminBundle::logPage.html.twig',array(
             'activeOfferLog' => $finalActiveLog,
             'activeEmployerLog' => $finalEmployerLog,
             'activeCandidateLog' => $finalCandidateLog,
-            'creditLog' => $finalCreditLog
+            'creditLog' => $finalCreditLog,
+            'monthlyCreditLog' => $monthlyCreditLog,
+            'year' => $year
         ));
     }
 
