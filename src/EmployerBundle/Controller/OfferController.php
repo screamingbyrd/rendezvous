@@ -305,6 +305,30 @@ class OfferController extends Controller
             return $this->redirectToRoute('offer_archived', array('id' => $id));
         }
 
+        $titleCV = null;
+        $titleCoverLetter = null;
+        if(isset($user)){
+            $candidateRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Candidate')
+            ;
+
+            $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+
+            if(isset($candidate)){
+                $originalCvPath = $candidate->getCv();
+                if (isset($originalCvPath)){
+                    $titleCV = substr($originalCvPath, strrpos($originalCvPath, '%') + 1);
+                }
+                $originalCoverLetterPath = $candidate->getCoverLetter();
+                if(isset($originalCoverLetterPath)){
+                    $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '%') + 1);
+                }
+            }
+        }
+
+
         $similarOfferArray = $this->getSimilarOffers($offer);
 
         $offer->setCountView($offer->getCountView() +1);
@@ -361,7 +385,9 @@ class OfferController extends Controller
             'similarOfferArray' => $similarOfferArray['offers'],
             'tags' => $similarOfferArray['tags'],
             'map' => $map,
-            'status' => $status
+            'status' => $status,
+            'cvTitle' => $titleCV,
+            'coverLetterTitle' => $titleCoverLetter
         ));
     }
 
