@@ -781,13 +781,13 @@ class OfferController extends Controller
         $candidateMail = $user->getEmail();
         $comment = $request->get('comment');
         $target_dir = "uploads/images/candidate/";
-        $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
+        $target_file = $target_dir . md5(uniqid()) . '%' . basename($_FILES["cv"]["name"]);
         move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
 
         $target_file_cover = null;
         if(isset($_FILES["cover-file"])){
             $target_dir_cover = "uploads/images/candidate/";
-            $target_file_cover = $target_dir_cover . md5(uniqid()) . basename($_FILES["cover-file"]["name"]);
+            $target_file_cover = $target_dir_cover . md5(uniqid()) . '%' . basename($_FILES["cover-file"]["name"]);
             move_uploaded_file($_FILES["cover-file"]["tmp_name"], $target_file_cover);
         }
 

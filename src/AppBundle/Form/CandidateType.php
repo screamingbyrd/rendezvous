@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class CandidateType extends AbstractType
 {
@@ -179,6 +180,17 @@ class CandidateType extends AbstractType
                 'attr' => array(
                     'class' => 'jobnow-button login',
                 )
+            ))
+            ->add('cv', FileType ::class, array(
+                'data_class' => null,
+                'required' => false,
+                'label' => 'offer.apply.cv',
+            ))
+
+            ->add('coverLetter', FileType ::class, array(
+                'data_class' => null,
+                'required' => false,
+                'label' => 'offer.apply.message',
             ))
             ->getForm()
         ;

@@ -129,7 +129,19 @@
                         {{ form_errors(form.description) }}
                     </div>
 
+                    <div class="col-md-6 form-group">
 
+                        {{ form_label (form.cv,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {% if cvTitle is not null %}<div class="upload-title">{{ cvTitle }}</div>{% endif %}
+                        {{ form_widget(form.cv) }}
+                        {{ form_errors(form.cv) }}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {{ form_label (form.coverLetter,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {% if coverLetterTitle is not null %}<div class="upload-title">{{ coverLetterTitle }}</div>{% endif %}
+                        {{ form_widget(form.coverLetter) }}
+                        {{ form_errors(form.coverLetter) }}
+                    </div>
 
 
                 <div class="col-md-4 col-md-offset-4">
@@ -167,6 +179,10 @@
             display: none;
             color: red;
             margin-top: 5px;
+        }
+        .upload-title{
+            font-weight: bold;
+            margin-bottom: 15px;
         }
     </style>
     <script>

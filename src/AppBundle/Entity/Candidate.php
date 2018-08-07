@@ -133,14 +133,12 @@ class Candidate
     /**
      * @ORM\Column(type="string", nullable=true)
      *
-     * @Assert\File(mimeTypes={ "application/pdf"})
      */
     private $cv;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      *
-     * @Assert\File(mimeTypes={ "application/pdf"})
      */
     private $coverLetter;
 
@@ -742,7 +740,9 @@ class Candidate
      */
     public function setCv($cv)
     {
-        $this->cv = $cv;
+        if(isset($cv)) {
+            $this->cv = $cv;
+        }
         return $this;
     }
 
@@ -760,7 +760,10 @@ class Candidate
      */
     public function setCoverLetter($coverLetter)
     {
-        $this->coverLetter = $coverLetter;
+        if(isset($coverLetter)){
+            $this->coverLetter = $coverLetter;
+        }
+
         return $this;
     }
 

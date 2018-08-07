@@ -122,6 +122,19 @@ class CandidateController extends Controller
             return $this->redirectToRoute('create_candidate');
         }
 
+        $originalCvPath = $candidate->getCv();
+        $titleCV = null;
+        if (isset($originalCvPath)){
+            $titleCV = substr($originalCvPath, strrpos($originalCvPath, '%') + 1);
+        }
+
+        $originalCoverLetterPath = $candidate->getCoverLetter();
+        $titleCoverLetter = null;
+        if(isset($originalCoverLetterPath)){
+            $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '%') + 1);
+        }
+
+
         $userRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -164,6 +177,30 @@ class CandidateController extends Controller
                 $candidate->setSocialMedia($data->getSocialMedia());
                 $candidate->setPhone($data->getPhone());
                 $candidate->setModifiedDate( new \datetime());
+
+                $target_dir = "uploads/images/candidate/";
+                $newCv = $data->getCv();
+                if(isset($newCv) && is_object($newCv)){
+
+                    $target_file = $target_dir . md5(uniqid()) . '%' . basename($newCv->getClientOriginalName());
+                    move_uploaded_file($newCv->getPathname(), $target_file);
+
+                    if(isset($originalCvPath) && $originalCvPath != ''){
+                        unlink($originalCvPath);
+                    }
+                    $candidate->setCv($target_file);
+                }
+
+                $newCoverLetter = $data->getCoverLetter();
+                if(isset($newCoverLetter) && is_object($newCoverLetter)){
+                    $target_file_cover = $target_dir . md5(uniqid()) . '%' . basename($newCoverLetter->getClientOriginalName());
+                    move_uploaded_file($newCoverLetter->getPathname(), $target_file_cover);
+
+                    if(isset($originalCoverLetterPath) && $originalCoverLetterPath != ''){
+                        unlink($originalCoverLetterPath);
+                    }
+                    $candidate->setCoverLetter($target_file_cover);
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->merge($candidate);
@@ -224,7 +261,9 @@ class CandidateController extends Controller
         return $this->render('CandidateBundle:Candidate:edit.html.twig', array(
             'form' => $form->createView(),
             'completion' => $completion,
-            'user' => $user
+            'user' => $user,
+            'cvTitle' => $titleCV,
+            'coverLetterTitle' => $titleCoverLetter
         ));
     }
 
