@@ -471,13 +471,20 @@ class CandidateController extends Controller
             $recentOffers = $postulatedOfferRepository->getRecentPostulatedOffers($candidate);
             if(empty($recentOffers)){
                 $cvLink = $candidate->getCv();
+                $coverLink = $candidate->getCoverLetter();
                 if(isset($cvLink) and $cvLink != ''){
                     if(file_exists($cvLink)){
                         unlink($cvLink);
                     }
                     $candidate->setCv(null);
-                    $em->merge($candidate);
                 }
+                if(isset($coverLink) and $coverLink != ''){
+                    if(file_exists($coverLink)){
+                        unlink($coverLink);
+                    }
+                    $candidate->setCoverLetter(null);
+                }
+                $em->merge($candidate);
             }
         }
         $em->flush();

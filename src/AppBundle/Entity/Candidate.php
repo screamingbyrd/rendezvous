@@ -137,6 +137,13 @@ class Candidate
      */
     private $cv;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\File(mimeTypes={ "application/pdf"})
+     */
+    private $coverLetter;
+
     private $firstName;
 
     private $lastName;
@@ -739,5 +746,22 @@ class Candidate
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCoverLetter()
+    {
+        return $this->coverLetter;
+    }
+
+    /**
+     * @param mixed $coverLetter
+     * @return Candidate
+     */
+    public function setCoverLetter($coverLetter)
+    {
+        $this->coverLetter = $coverLetter;
+        return $this;
+    }
 
 }

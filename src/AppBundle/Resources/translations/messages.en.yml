@@ -287,6 +287,7 @@ offer:
     close: Close
     addCV: Add your resume:
     coverLetter: Cover letter (optional)
+    addCoverLetter: Add your cover letter (optionnelle):
     send: Send your CV
     already: You already applied to this offer
     message: Cover letter
@@ -377,8 +378,9 @@ email:
     employer:
       applied: A candidate applied to your offer:
       comment: Comment/ motivation letter:
-      download: Télécharger le cv
-  contact: Vous avre reçu un message de %name%
+      download: Download CV
+      downloadCoverLetter: Download cover letter
+  contact: You have received a message from %name%
   contactedUs: Somebody contacted us
   message: Message
   hasBeenModified: has been modified, go check it

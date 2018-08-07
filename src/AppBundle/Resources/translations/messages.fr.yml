@@ -286,6 +286,7 @@ offer:
     title: Postuler
     close: Fermer
     addCV: Ajouter votre CV :
+    addCoverLetter: Ajouter votre Lettre de motivation (optionnelle) :
     coverLetter: Lettre de motivation (optionelle)
     send: Envoyer votre CV
     already: Vous avez déja postulé à cette offre
@@ -375,6 +376,7 @@ email:
       applied: A candidate applied to your offer:
       comment: Comment/ motivation letter:
       download: Télécharger le cv
+      downloadCoverLetter: Télécharger la lettre de motivation
   contact: Vous avre reçu un message de %name%
   contactedUs: Quelqu'un nous a contacté
   message: Message

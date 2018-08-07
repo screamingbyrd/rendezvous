@@ -784,6 +784,13 @@ class OfferController extends Controller
         $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
         move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
 
+        $target_file_cover = null;
+        if(isset($_FILES["cover-file"])){
+            $target_dir_cover = "uploads/images/candidate/";
+            $target_file_cover = $target_dir_cover . md5(uniqid()) . basename($_FILES["cover-file"]["name"]);
+            move_uploaded_file($_FILES["cover-file"]["tmp_name"], $target_file_cover);
+        }
+
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -840,7 +847,7 @@ class OfferController extends Controller
             ->setBody(
                 $this->renderView(
                     'AppBundle:Emails:apply.html.twig',
-                    array('comment' => $comment, 'offer' => $offer, 'link' => $target_file)
+                    array('comment' => $comment, 'offer' => $offer, 'link' => $target_file, 'linkCover' => $target_file_cover)
                 ),
                 'text/html'
             );
@@ -874,6 +881,12 @@ class OfferController extends Controller
             unlink($cv);
         }
         $candidate->setCv($target_file);
+
+        $coverLetter = $candidate->getCoverLetter();
+        if(isset($coverLetter) && $coverLetter != ''){
+            unlink($coverLetter);
+        }
+        $candidate->setCoverLetter($target_file_cover);
 
         $em = $this->getDoctrine()->getManager();
 

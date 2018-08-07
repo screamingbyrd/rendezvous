@@ -61,13 +61,21 @@
             <div><a href="{{ path('show_offer', {'id':offer.id,'url':offer.offerUrl}) }}">{{ offer.title }}</a></div>
 
             <div class="other-footer">
-                {{ 'email.application.employer.comment'| trans}}
-            </div>
-            <div class="other-footer">
                 <a href="{{ asset(link) }}" download>
                     {{ 'email.application.employer.download'|trans }}
                 </a>
             </div>
+            <div class="other-footer">
+                {{ 'email.application.employer.comment'| trans}}
+            </div>
+            {% if linkCover is not null %}
+                <div class="other-footer">
+                    <a href="{{ asset(linkCover) }}" download>
+                        {{ 'email.application.employer.downloadCoverLetter'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+
             <div class="other-footer">
                 {{ comment|nl2br }}
             </div>
