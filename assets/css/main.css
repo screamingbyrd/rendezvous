@@ -733,6 +733,14 @@ legend{
     background-image: none;
     border: 1px solid #ccc;
 }
+.reserve-feature{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.reserved-button{
+    pointer-events:none;
+}
 .meter {
     text-align: center;
     box-sizing: initial !important;
