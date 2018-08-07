@@ -804,18 +804,6 @@ class OfferController extends Controller
         if(!isset($user) || in_array('ROLE_EMPLOYER', $user->getRoles())){
             return $this->redirectToRoute('create_candidate', array('offerId' => $id));
         }
-        $candidateMail = $user->getEmail();
-        $comment = $request->get('comment');
-        $target_dir = "uploads/images/candidate/";
-        $target_file = $target_dir . md5(uniqid()) . '%' . basename($_FILES["cv"]["name"]);
-        move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
-
-        $target_file_cover = null;
-        if(isset($_FILES["cover-file"])){
-            $target_dir_cover = "uploads/images/candidate/";
-            $target_file_cover = $target_dir_cover . md5(uniqid()) . '%' . basename($_FILES["cover-file"]["name"]);
-            move_uploaded_file($_FILES["cover-file"]["tmp_name"], $target_file_cover);
-        }
 
         $candidateRepository = $this
             ->getDoctrine()
@@ -823,6 +811,36 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Candidate')
         ;
         $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
+
+        $candidateMail = $user->getEmail();
+        $comment = $request->get('comment');
+        $target_dir = "uploads/images/candidate/";
+
+        $cv = $candidate->getCv();
+        if($_FILES["cv"]["size"] != 0){
+            $target_file = $target_dir . md5(uniqid()) . '%' . basename($_FILES["cv"]["name"]);
+            move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
+            if(isset($cv) && $cv != ''){
+                unlink($cv);
+            }
+            $candidate->setCv($target_file);
+        }else{
+            $target_file = $cv;
+        }
+
+        $coverLetter = $candidate->getCoverLetter();
+        if($_FILES["cover-file"]["size"] != 0){
+            $target_file_cover = null;
+            $target_dir_cover = "uploads/images/candidate/";
+            $target_file_cover = $target_dir_cover . md5(uniqid()) . '%' . basename($_FILES["cover-file"]["name"]);
+            move_uploaded_file($_FILES["cover-file"]["tmp_name"], $target_file_cover);
+            if(isset($coverLetter) && $coverLetter != ''){
+                unlink($coverLetter);
+            }
+            $candidate->setCoverLetter($target_file_cover);
+        }else{
+            $target_file_cover = $coverLetter;
+        }
 
         $offerRepository = $this
             ->getDoctrine()
@@ -901,18 +919,6 @@ class OfferController extends Controller
 
         $mailer->send($messageCandidate);
         $mailer->send($messageEmmployer);
-
-        $cv = $candidate->getCv();
-        if(isset($cv) && $cv != ''){
-            unlink($cv);
-        }
-        $candidate->setCv($target_file);
-
-        $coverLetter = $candidate->getCoverLetter();
-        if(isset($coverLetter) && $coverLetter != ''){
-            unlink($coverLetter);
-        }
-        $candidate->setCoverLetter($target_file_cover);
 
         $em = $this->getDoctrine()->getManager();
 

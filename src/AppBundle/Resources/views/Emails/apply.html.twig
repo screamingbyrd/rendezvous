@@ -68,7 +68,7 @@
             <div class="other-footer">
                 {{ 'email.application.employer.comment'| trans}}
             </div>
-            {% if linkCover is not null %}
+            {% if linkCover is not null and linkCover != '' %}
                 <div class="other-footer">
                     <a href="{{ asset(linkCover) }}" download>
                         {{ 'email.application.employer.downloadCoverLetter'|trans }}
