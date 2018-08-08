@@ -555,6 +555,7 @@ admin:
     adminList: Admins list
     totalActiveOffers: Total active offers:
     totalEmployers: Total Employers:
+    totalSlots: Total slot:
   adminList:
     addAdmin:  Add an admin
     enter: Type in existing email

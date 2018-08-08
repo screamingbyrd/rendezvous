@@ -31,11 +31,19 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Offer')
         ;
-
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
+
+        $slotRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Slot')
+        ;
+        $totalSLot = $slotRepository->countTotalActiveSlot();
+
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
-            'countEmployer' => $employerCount
+            'countEmployer' => $employerCount,
+            'totalSLot' => $totalSLot
         ));
     }
 

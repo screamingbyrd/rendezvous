@@ -552,6 +552,7 @@ admin:
     adminList: Liste des admins
     totalActiveOffers: Total offre active:
     totalEmployers: Total employeurs:
+    totalSlots: Total slot:
   adminList:
     addAdmin:  Ajouter un admin
     enter: Entrer l'email d'un user existant

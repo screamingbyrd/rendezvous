@@ -19,4 +19,13 @@ class SlotRepository extends \Doctrine\ORM\EntityRepository
             )->execute();
     }
 
+    public function countTotalActiveSlot()
+    {
+        $query = $this->createQueryBuilder('s');
+        $query->andWhere('s.startDate <= CURRENT_TIMESTAMP() and s.endDate >= CURRENT_TIMESTAMP()');
+
+        $offers = $query->getQuery()->getResult();
+
+        return count($offers);
+    }
 }
