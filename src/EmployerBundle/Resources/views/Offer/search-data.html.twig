@@ -42,8 +42,7 @@
     {% set adOrder = 0 %}
 
     {% for offer in data %}
-        {% set count = count + 1 %}
-        {% if count % 2 and ads is not empty and ads[adOrder] is defined %}
+        {% if count == 1 and ads is not empty and ads[adOrder] is defined and data|length <7 %}
 
             {{ 'homepage.ourPartners'|trans }}
             <li class="search-result animated fadeIn">
@@ -62,7 +61,7 @@
                             </div>
                         </div>
                     {% else %}
-                    {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                        {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
                         <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});"></div>
                     {% endif %}
                 </a>
@@ -70,6 +69,7 @@
 
             {% set adOrder = adOrder + 1 %}
         {% endif %}
+        {% set count = count + 1 %}
         <li class="search-result animated fadeIn">
             <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
                 {% if offer.image is not null and offer.image.imageName is not null %}
@@ -99,6 +99,33 @@
                 </div>
             </a>
         </li>
+        {% if (count-1) % 7 == 0 and ads is not empty and ads[adOrder] is defined %}
+
+            {{ 'homepage.ourPartners'|trans }}
+            <li class="search-result animated fadeIn">
+                <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
+                    {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}
+                        {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                        <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                            <div class="layer layer-offer-element animated">
+                            </div>
+                        </div>
+                        {% if ads[adOrder].logo.imageName is not null %}<img class="logo-employer-in-offer-search" src="{{asset('uploads' ~ vich_uploader_asset(ads[adOrder].logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
+                        <div class="offer-search-element">
+                            <div class="offer-element-details">
+                                <div class="offer-element-name">{{ ads[adOrder].title }}</div>
+                                <div class="offer-element-title">{{ ads[adOrder].description}}</div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                        <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});"></div>
+                    {% endif %}
+                </a>
+            </li>
+
+            {% set adOrder = adOrder + 1 %}
+        {% endif %}
     {% endfor %}
 {% endif %}
 
