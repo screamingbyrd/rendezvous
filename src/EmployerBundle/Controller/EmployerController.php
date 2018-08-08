@@ -519,6 +519,10 @@ class EmployerController extends Controller
     public function featuredEmployerPageAction(Request $request){
         $user = $this->getUser();
 
+        $now = new \DateTime();
+        $year = $request->get('year');
+        $year = isset($year)?$year:$now->format('Y');
+
         $featuredEmployerRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -542,7 +546,8 @@ class EmployerController extends Controller
             'featuredEmployerArray' => $featuredArray,
             'user' => $user,
             'featuredEmployerCredit' => $creditInfo->getFeaturedEmployer(),
-            'now' => $now
+            'now' => $now,
+            'year' => $year
         ));
     }
 
@@ -584,7 +589,7 @@ class EmployerController extends Controller
         $em->persist($featuredEmployer);
         $em->flush();
 
-        return $this->redirectToRoute('featured_employer_page');
+        return $this->redirectToRoute('featured_employer_page', array('year' => substr($date['date'], 0, strpos($date['date'], '-'))));
     }
 
     public function deleteFeaturedEmployerAction(Request $request){
@@ -616,6 +621,9 @@ class EmployerController extends Controller
     }
 
     public function featuredOfferPageAction(Request $request){
+        $now = new \DateTime();
+        $year = $request->get('year');
+        $year = isset($year)?$year:$now->format('Y');
         $user = $this->getUser();
         $employer = $user->getEmployer();
         $featuredOfferRepository = $this
@@ -651,7 +659,8 @@ class EmployerController extends Controller
             'user' => $user,
             'featuredOfferCredit' => $creditInfo->getFeaturedOffer(),
             'offers' => $offers,
-            'now' => $now
+            'now' => $now,
+            'year' => $year
         ));
     }
 
@@ -702,7 +711,7 @@ class EmployerController extends Controller
         $em->persist($featuredOffer);
         $em->flush();
 
-        return $this->redirectToRoute('featured_offer_page');
+        return $this->redirectToRoute('featured_offer_page', array('year' => substr($date['date'], 0, strpos($date['date'], '-'))));
     }
 
     public function deleteFeaturedOfferAction(Request $request){
