@@ -86,7 +86,7 @@ class OfferController extends Controller
             return $this->redirectToRoute('dashboard_employer');
 
         }
-        return $this->render('EmployerBundle:form:postOffer.html.twig', array(
+        return $this->render('EmployerBundle:Form:postOffer.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -159,7 +159,7 @@ class OfferController extends Controller
             return $this->redirectToRoute('dashboard_employer', array('archived' => $_SESSION['archived']));
 
         }
-        return $this->render('EmployerBundle:form:editOffer.html.twig', array(
+        return $this->render('EmployerBundle:Form:editOffer.html.twig', array(
             'form' => $form->createView(),
         ));
     }
