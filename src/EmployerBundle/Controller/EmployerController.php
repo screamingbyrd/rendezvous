@@ -87,7 +87,7 @@ class EmployerController extends Controller
                 return $this->redirectToRoute('jobnow_home');
             }
         }
-        return $this->render('EmployerBundle:form:createEmployer.html.twig', array(
+        return $this->render('EmployerBundle:Form:createEmployer.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -195,7 +195,7 @@ class EmployerController extends Controller
 
         $completion = $completion/10 * 100;
 
-        return $this->render('EmployerBundle:form:editEmployer.html.twig', array(
+        return $this->render('EmployerBundle:Form:editEmployer.html.twig', array(
             'form' => $form->createView(),
             'user' => $user,
             'completion' => $completion
