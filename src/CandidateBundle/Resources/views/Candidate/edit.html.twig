@@ -13,7 +13,7 @@
 
     </div>
 
-    <div class="row">
+    <div class="row edit-container">
         <div class="col-md-8 col-md-offset-2">
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
@@ -130,17 +130,20 @@
                     </div>
 
                     <div class="col-md-6 form-group">
-
-                        {{ form_label (form.cv,null, { 'label_attr': {'class': 'label-form'} }) }}
-                        {% if cvTitle is not null %}<div class="upload-title">{{ cvTitle }}</div>{% endif %}
-                        {{ form_widget(form.cv) }}
-                        {{ form_errors(form.cv) }}
+                        <div class="file-container">
+                            {{ form_label (form.cv,null, { 'label_attr': {'class': 'label-form'} }) }}
+                            {% if cvTitle is not null %}<div class="upload-title">{{ cvTitle }}</div>{% endif %}
+                            {{ form_widget(form.cv) }}
+                            {{ form_errors(form.cv) }}
+                        </div>
                     </div>
                     <div class="col-md-6 form-group">
-                        {{ form_label (form.coverLetter,null, { 'label_attr': {'class': 'label-form'} }) }}
-                        {% if coverLetterTitle is not null %}<div class="upload-title">{{ coverLetterTitle }}</div>{% endif %}
-                        {{ form_widget(form.coverLetter) }}
-                        {{ form_errors(form.coverLetter) }}
+                        <div class="file-container">
+                            {{ form_label (form.coverLetter,null, { 'label_attr': {'class': 'label-form'} }) }}
+                            {% if coverLetterTitle is not null %}<div class="upload-title">{{ coverLetterTitle }}</div>{% endif %}
+                            {{ form_widget(form.coverLetter) }}
+                            {{ form_errors(form.coverLetter) }}
+                        </div>
                     </div>
 
 
@@ -174,17 +177,6 @@
             </div>
         </div>
     </div>
-    <style>
-        .error-wrong-url{
-            display: none;
-            color: red;
-            margin-top: 5px;
-        }
-        .upload-title{
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-    </style>
     <script>
         function isUrlValid(url) {
             return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);

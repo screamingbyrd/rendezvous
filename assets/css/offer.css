@@ -388,6 +388,7 @@
 }
 #cv, #cover-file{
     padding: 15px;
+    max-width: 340px;
 }
 #comment-input{
     width: 100%;
@@ -454,6 +455,11 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+@media screen and (min-device-width: 481px)and (max-device-width: 992px){
+    .cover-letter-offer-title{
+        width: 275px;
+    }
+}
 
 @media screen and (max-device-width: 480px){
     .floating-employer{
@@ -461,6 +467,18 @@
         margin-bottom: 20px;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .offer-tag-container, .similar-offer-container{
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .search-result{
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
     .apply-div-form {
         bottom: 0 !important;
@@ -472,8 +490,14 @@
     .inside-offer-apply-cv{
         display: block;
         margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    #cv{
+    .offer-upload-title{
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    #cv, #cover-file{
         padding-left: 0;
         padding-top: 10px;
     }
@@ -515,6 +539,8 @@
         font-size: 1.75rem;
         margin-bottom: 0 !important;
         text-align: center;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
     }
     .background-employer-in-offer-search .layer{
         border-top-right-radius: 3px !important;

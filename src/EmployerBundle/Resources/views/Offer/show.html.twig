@@ -120,7 +120,7 @@
             </div>
 
             {% if offer.tag is defined and offer.tag|length >0 %}
-                <div class="shadow-box fade-in-left animated">
+                <div class="shadow-box fade-in-left animated offer-tag-container">
                     <div class="article-title"><i class="fa fa-tag"></i> {{ 'employer.show.tags'|trans }}</div>
                     <ul class="last-job-list">
                         {% for tag in offer.tag %}
@@ -135,7 +135,7 @@
             {% endif %}
 
             {% if similarOfferArray[0] is defined %}
-                <div class="shadow-box fade-in-right animated">
+                <div class="shadow-box fade-in-right animated similar-offer-container">
                     <div class="article-title">{{ 'offer.similarOffer'|trans }}</div>
                     <ul class="last-job-list">
                         <li>
@@ -171,10 +171,10 @@
                 <form method="post" action="{{ path('apply_offer', {'id':offer.id}) }}" id="search-offer-homepage" enctype="multipart/form-data" style="display:none;">
                     <div class="inside-offer-apply">
                         <div class="inside-offer-apply-cv">
-                            {{ 'offer.apply.addCV' | trans }} {% if cvTitle is not null %}<div class="upload-title">{{ cvTitle }}</div>{{ 'or'|trans }}{% endif %}<input name="cv" type="file" id="cv">
+                            {{ 'offer.apply.addCV' | trans }} {% if cvTitle is not null %}<div class="offer-upload-title">{{ cvTitle }}</div>{{ 'or'|trans }}{% endif %}<input name="cv" type="file" id="cv">
                         </div>
                         <div class="inside-offer-apply-cv">
-                            {{ 'offer.apply.addCoverLetter' | trans }} {% if coverLetterTitle is not null %}<div class="upload-title">{{ coverLetterTitle }}</div>{{ 'or'|trans }}{% endif %}<input name="cover-file" type="file" id="cover-file">
+                            {{ 'offer.apply.addCoverLetter' | trans }} {% if coverLetterTitle is not null %}<div class="cover-letter-offer-title offer-upload-title">{{ coverLetterTitle }}</div>{{ 'or'|trans }}{% endif %}<input name="cover-file" type="file" id="cover-file">
                         </div>
                         <textarea  name="comment" id="comment-input" placeholder="{{ 'offer.apply.coverLetter' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}" rows="10" cols="70"></textarea>
                         <input type="submit" class="btn btn-primary submit-apply" value="{{ 'offer.apply.send' | trans }}">
@@ -204,9 +204,14 @@
             z-index: -1;
             background-position: center center;
         }
-        .upload-title{
+        .offer-upload-title{
             margin-left: 15px;
             margin-right: 15px;
+            max-width: 170px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-height: 1.6em;
+            line-height: 1.8em;
         }
     </style>
     <script>
@@ -244,7 +249,7 @@
                 return false;
             }
         }
-        if(detectmob){
+        if(false){
             window.onscroll = function() {myFunction()};
 
 

@@ -222,6 +222,20 @@ legend{
     color: #b5b5b5;
 }
 
+.error-wrong-url{
+    display: none;
+    color: red;
+    margin-top: 5px;
+}
+.upload-title{
+    word-wrap: break-word;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.file-container{
+    overflow: hidden;
+    word-wrap: break-word;
+}
 
 
 /*Button*/
@@ -444,6 +458,9 @@ legend{
         width: 100% !important;
         margin-left: 0 !important;
         margin-top: 10px;
+    }
+    #btn-confirm{
+        width: 100%;
     }
 }
 
@@ -900,6 +917,11 @@ legend{
     display: flex;
     justify-content: center;
 }
+
+.navbar-nav .open .dropdown-menu a{
+    color: white !important;
+}
+
 @media (max-width: 991px) {
     .navbar-nav .open .dropdown-menu {
         position: static;
@@ -910,9 +932,6 @@ legend{
         border: 0;
         -webkit-box-shadow: none;
         box-shadow: none;
-    }
-    .navbar-nav .open .dropdown-menu a{
-        color: white;
     }
     #navbar{
         position: absolute;
@@ -1001,5 +1020,8 @@ legend{
 @media (min-width: 600px){
     .faq-button{
         width: 200px !important;
+    }
+    #btn-confirm{
+        margin-top: 10px;
     }
 }

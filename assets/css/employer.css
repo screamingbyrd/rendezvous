@@ -111,6 +111,9 @@ h3.box{
          margin-left: 0 !important;
          margin-right: 0 !important;
     }
+    #appbundle_employer_coverImage, #appbundle_employer_logo{
+        overflow: hidden;
+    }
 }
 .container-logo-employer{
     position: absolute;
@@ -308,6 +311,9 @@ h3.box{
     }
     .button-profile .btn{
         margin-top: 0 !important;
+    }
+    .use-money-button{
+        float: right;
     }
 }
 .button-profile .btn{

@@ -11,14 +11,14 @@
         <br>
         <div>{{ 'searchEmployer.discover'|trans }}</div>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name" class="search-employer">
+        <input style="margin-top: 16px;" type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for names.." title="Type in a name" class="search-employer">
 
         <ul id="myUL">
 
             {% for employer in employers %}
                     {% if employer.phone is not null %}
-                        <a target="_blank" href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 featured-offer zoom  thump-employer">
-                            <div class="thumbnail featured-offer-item" >
+                        <a target="_blank" href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 col-sm-6 featured-offer zoom  thump-employer">
+                            <div class="thumbnail featured-offer-item" style="margin-right: 0;margin-left: 0;">
                                 <div class="header-thumb-employer">
                                     {% if employer.logo.imageName is not null %}
                                         {% set image =  'uploads' ~ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}

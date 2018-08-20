@@ -44,8 +44,9 @@
     {% for offer in data %}
         {% if count == 1 and ads is not empty and ads[adOrder] is defined and data|length <7 %}
 
-            {{ 'homepage.ourPartners'|trans }}
+
             <li class="search-result animated fadeIn">
+                {{ 'homepage.ourPartners'|trans }}
                 <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
                     {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
@@ -101,8 +102,8 @@
         </li>
         {% if (count-1) % 7 == 0 and ads is not empty and ads[adOrder] is defined %}
 
-            {{ 'homepage.ourPartners'|trans }}
             <li class="search-result animated fadeIn">
+                {{ 'homepage.ourPartners'|trans }}
                 <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
                     {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}

@@ -8,7 +8,7 @@
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
         <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
-    <div class="container">
+    <div class="container jobnow-container">
         <a class="btn btn-primary" href="{{ path('add_collaborator') }}">{{ 'employer.addCollaborator.title'|trans }}</a>
 
         <h2>{{ 'employer.addCollaborator.list'|trans }}</h2>
