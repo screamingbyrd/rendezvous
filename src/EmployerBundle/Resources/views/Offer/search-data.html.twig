@@ -49,7 +49,7 @@
                 <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
                     {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                        <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                        <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;">
                             <div class="layer layer-offer-element animated">
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         </div>
                     {% else %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                        <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});"></div>
+                        <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;"></div>
                     {% endif %}
                 </a>
             </li>
@@ -81,7 +81,7 @@
                 {% else %}
                     {% set image = 'images/default_cover_image6.jpg' %}
                 {% endif %}
-                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;">
                     <div class="layer layer-offer-element animated">
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                 <a class='offer-element ad' href="{{ ads[adOrder].link }}" target="_blank">
                     {% if ads[adOrder].description is not null and ads[adOrder].link is not empty %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                        <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                        <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;">
                             <div class="layer layer-offer-element animated">
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                         </div>
                     {% else %}
                         {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                        <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});"></div>
+                        <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;"></div>
                     {% endif %}
                 </a>
             </li>

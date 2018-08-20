@@ -132,7 +132,9 @@ class OfferController extends Controller
             $em->merge($offer);
             $em->flush();
 
-            if(!$offer->isValidated()){
+            $validated = $offer->isValidated();
+
+            if(isset($validated) && !$validated){
                 $mailer = $this->container->get('swiftmailer.mailer');
                 $message = (new \Swift_Message('Invalid offer modified: ' . $offer->getTitle(). ' id:'. $offer->getId()))
                     ->setFrom('jobnowlu@noreply.lu')
