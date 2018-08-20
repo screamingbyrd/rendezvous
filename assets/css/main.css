@@ -462,6 +462,10 @@ legend{
     #btn-confirm{
         width: 100%;
     }
+    .nav>li>a {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
 }
 
 .homepage-jumbotron .div-keyword-input{

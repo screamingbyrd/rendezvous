@@ -25,11 +25,11 @@
             <div class="tab-pane active fade in" id="applied">
                 <div class="text-center">{{ 'dashboard.candidate.list' | trans }}</div>
                 <h3>{{ 'header.candidates.dashboard.applied' | trans }}</h3>
-                <table class="table">
+                <table class="table" style="table-layout: fixed">
                     <thead>
                     <tr>
                         <th scope="col">{{ 'dashboard.candidate.name' | trans }}</th>
-                        <th scope="col" style="    min-width: 200px;">{{ 'dashboard.candidate.date' | trans }}</th>
+                        <th scope="col" style="width: 100px">{{ 'dashboard.candidate.date' | trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,7 +47,7 @@
                                     {{ offer.offer.title |trans }}
                                 </a>
                             </td>
-                            <td>{{ offer.date|date('d/m/Y') }}</td>
+                            <td><div class="date-postulated">{{ offer.date|date('d/m/Y') }}</div></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -101,6 +101,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">{{ 'dashboard.candidate.name' | trans }}</th>
+                                    <th style="width: 100px"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -116,7 +117,12 @@
                                                 <img class="logo-employer-in-applied-offer" src="{{ asset(image) }}"/>
                                                 {{ favorite.offer.title |trans }}
                                             </a>
-                                        </td><td><a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
+                                        </td>
+                                        <td>
+                                            <a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list delete-favorite">
+                                                {{ 'delete' | trans }}
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -142,6 +148,12 @@
         })
     </script>
     <style>
+        .date-postulated{
+            margin-top: 25px;
+        }
+        .delete-favorite{
+            margin-top: 20px;
+        }
         .homepage-jumbotron::after{
             content: '';
             background-image:url({{asset('images/jobnow-home.jpg')}});
