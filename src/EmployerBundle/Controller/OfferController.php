@@ -211,10 +211,16 @@ class OfferController extends Controller
         $translated = $this->get('translator')->trans(!$bool?'form.offer.archived.success':'form.offer.unarchived.success');
         $session->getFlashBag()->add('info', $translated);
 
-        if(isset($ajax) && $ajax){
-            return new JsonResponse($this->generateUrl('employer_offers', array('archived' => $_SESSION['archived'])));
+        $route = 'employer_offers';
+
+        if(in_array('ROLE_ADMIN', $user->getRoles())){
+            $route = 'list_offer_admin';
         }
-        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+
+        if(isset($ajax) && $ajax){
+            return new JsonResponse($this->generateUrl($route, array('archived' => $_SESSION['archived'])));
+        }
+        return $this->redirectToRoute($route, array('archived' => $_SESSION['archived']));
     }
 
     public function eraseAction(Request $request){
