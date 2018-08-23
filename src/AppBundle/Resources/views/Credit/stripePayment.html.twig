@@ -69,15 +69,15 @@
                         </tr>
                         <tr>
                             <td class="with-line">{{ 'bill.totalExludingTax'|trans }}</td>
-                            <td class="with-line">{{ (price*100)/(117) }} €</td>
+                            <td class="with-line">{% if withVat %}{{ (price*100)/(117) }}{% else %}{{ price }}{% endif %} €</td>
                         </tr>
                         <tr>
                             <td class="with-line">{{ 'bill.vat'|trans }}</td>
-                            <td class="with-line">17%</td>
+                            <td class="with-line">{% if withVat %}17%{% else %}0{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="with-line">{{ 'bill.tax'|trans }}</td>
-                            <td class="with-line">{{ (price*100)/(117)*(17/100) }} €</td>
+                            <td class="with-line">{% if withVat %}{{ (price*100)/(117)*(17/100) }} €{% else %}0{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="with-line">{{ 'bill.totalIncludingTaxes'|trans }}</td>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="modal-footer">
                         {{ form_widget(form.submit, { 'label': 'price.buy' }) }}
-                        <button type="button" class="btn btn-primary" id="modal-btn-no">{{ 'no'|trans }}</button>
+                        <button type="button" class="btn" id="modal-btn-no">{{ 'no'|trans }}</button>
                     </div>
                 </div>
             </div>
@@ -157,6 +157,11 @@
         });
     </script>
     <style>
+        #payment-form_submit{
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
         .homepage-jumbotron::after{
             content: '';
             background-image:url({{asset('images/dashboard.jpg')}});

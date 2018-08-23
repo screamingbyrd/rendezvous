@@ -19,8 +19,11 @@ class CreditInfo
     private $featuredEmployer = 10;
     private $buySlot = 20;
     private $oneCredit = 234;
+    private $oneCreditWithoutVAT = 200;
     private $fiveCredit = 1111.5;
+    private $fiveCreditWithoutVAT = 950;
     private $tenCredit = 2223;
+    private $tenCreditWithoutVAT = 1900;
 
     public function __construct()
     {
@@ -167,6 +170,60 @@ class CreditInfo
     public function setTenCredit($tenCredit)
     {
         $this->tenCredit = $tenCredit;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOneCreditWithoutVAT()
+    {
+        return $this->oneCreditWithoutVAT;
+    }
+
+    /**
+     * @param int $oneCreditWithoutVAT
+     * @return CreditInfo
+     */
+    public function setOneCreditWithoutVAT($oneCreditWithoutVAT)
+    {
+        $this->oneCreditWithoutVAT = $oneCreditWithoutVAT;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getFiveCreditWithoutVAT()
+    {
+        return $this->fiveCreditWithoutVAT;
+    }
+
+    /**
+     * @param float $fiveCreditWithoutVAT
+     * @return CreditInfo
+     */
+    public function setFiveCreditWithoutVAT($fiveCreditWithoutVAT)
+    {
+        $this->fiveCreditWithoutVAT = $fiveCreditWithoutVAT;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTenCreditWithoutVAT()
+    {
+        return $this->tenCreditWithoutVAT;
+    }
+
+    /**
+     * @param int $tenCreditWithoutVAT
+     * @return CreditInfo
+     */
+    public function setTenCreditWithoutVAT($tenCreditWithoutVAT)
+    {
+        $this->tenCreditWithoutVAT = $tenCreditWithoutVAT;
         return $this;
     }
 

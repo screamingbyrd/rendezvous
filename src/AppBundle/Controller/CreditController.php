@@ -27,20 +27,42 @@ class CreditController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
 
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if($id != 0 && !(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $withVat = true;
+        if($id != 0){
+            $vatNumber = $user->getEmployer()->getVatNumber();
+            $countryCode = substr($vatNumber, 0, 2);
+
+            $withVat = $countryCode == 'LU';
+        }
+
+
+
         switch ($id) {
 
             case 1: {
-
-                return $this->buyPack($request,$creditInfo->getOneCredit(),1);
+                $price = $withVat ? $creditInfo->getOneCredit() : $creditInfo->getOneCreditWithoutVAT();
+                return $this->buyPack($request,$price,1);
                 break;
             }
             case 2: {
-                return $this->buyPack($request,$creditInfo->getFiveCredit(),5);
+                $price = $withVat ? $creditInfo->getFiveCredit() : $creditInfo->getFiveCreditWithoutVAT();
+                return $this->buyPack($request,$price,5);
                 break;
 
             }
             case 3: {
-                return $this->buyPack($request,$creditInfo->getTenCredit(),10);
+                $price = $withVat ? $creditInfo->getTenCredit() : $creditInfo->getTenCreditWithoutVAT();
+                return $this->buyPack($request,$price,10);
                 break;
 
             }
@@ -133,11 +155,10 @@ class CreditController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
-        }
+        $vatNumber = $user->getEmployer()->getVatNumber();
+        $countryCode = substr($vatNumber, 0, 2);
+
+        $withVat = $countryCode == 'LU';
 
         $form = $this->get('form.factory')
             ->createNamedBuilder('payment-form')
@@ -191,7 +212,8 @@ class CreditController extends Controller
 
                     $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
                         'logCredit' => $logCredit,
-                        'vatNumber' => $logCredit->getEmployer()->getVatNumber()
+                        'vatNumber' => $logCredit->getEmployer()->getVatNumber(),
+                        'withVat' => $withVat
                     ));
                     $html2pdf->writeHTML($html);
                     $pdfContent = $html2pdf->output('facture.pdf', 'S');
@@ -227,7 +249,8 @@ class CreditController extends Controller
             'form' => $form->createView(),
             'stripe_public_key' => $this->getParameter('stripe_public_key'),
             'price' => $price,
-            'nbrCredit' => $nbrCredit
+            'nbrCredit' => $nbrCredit,
+            'withVat' => $withVat
         ]);
 
     }
@@ -251,16 +274,23 @@ class CreditController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
+        $vatNumber = $user->getEmployer()->getVatNumber();
+        $countryCode = substr($vatNumber, 0, 2);
+
+        $withVat = $countryCode == 'LU';
+
         $html2pdf = new Html2Pdf();
 
         $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
             'logCredit' => $logsCredit,
-            'vatNumber' => $user->getEmployer()->getVatNumber()
+            'vatNumber' => $vatNumber,
+            'withVat' => $withVat
         ));
 
 //        return $this->render('AppBundle:Credit:billsPdf.html.twig', array(
 //            'logCredit' => $logsCredit,
-//            'vatNumber' => $user->getEmployer()->getVatNumber()
+//            'vatNumber' => $user->getEmployer()->getVatNumber(),
+//            'withVat' => $withVat
 //        ));
 
         $html2pdf->writeHTML($html);

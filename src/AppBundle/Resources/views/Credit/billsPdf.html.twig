@@ -39,8 +39,12 @@
                 <tr>
                     <td class="with-line">{{ logCredit.date|date('d/m/Y') }}</td>
                     <td class="with-line">{{ logCredit.credit }}</td>
-                    <td class="with-line">17%</td>
-                    {% set firstPrice = (logCredit.price*100)/(117) %}
+                    <td class="with-line">{% if withVat %}17%{% else %}0{% endif %}</td>
+                    {% if withVat %}
+                        {% set firstPrice = (logCredit.price*100)/(117) %}
+                    {% else %}
+                        {% set firstPrice = logCredit.price %}
+                    {% endif %}
                     <td class="with-line">€ {{ firstPrice |round(2, 'floor')}}</td>
                 </tr>
                 <tr>
@@ -59,7 +63,11 @@
                     <td></td>
                     <td class="right-border"></td>
                     <td class="with-line">{{ 'bill.vat'|trans }}</td>
-                    {% set secondPrice = (logCredit.price*100)/(117)*(17/100) %}
+                    {% if withVat %}
+                        {% set secondPrice = (logCredit.price*100)/(117)*(17/100) %}
+                    {% else %}
+                        {% set secondPrice = 0 %}
+                    {% endif %}
                     <td class="with-line">€ {{ secondPrice |round(2, 'floor') }}</td>
                 </tr>
                 <tr>
