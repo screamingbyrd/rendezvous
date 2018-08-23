@@ -159,4 +159,28 @@ class AppController extends Controller
 
     }
 
+    public function checkVatNumberAction(Request $request)
+    {
+        $vat = $request->get('vat');
+
+        $countryCode = substr($vat, 0, 2);
+        $vatNumber = substr($vat, 2);
+
+
+        if(!ctype_alpha($countryCode) || !ctype_digit($vatNumber)){
+            $response = null;
+        }else{
+            $client = new \SoapClient("http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl");
+            $response = $client->checkVat(array(
+                'countryCode' => $countryCode,
+                'vatNumber' => $vatNumber
+            ));
+            $response = $response->valid;
+            $response = $response ? 'true':'false';
+        }
+
+        return new Response($response);
+
+    }
+
 }

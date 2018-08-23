@@ -2,6 +2,9 @@
         <h1>
             JOBNOWLU
         </h1>
+
+        <div>228 Route d’Esch L-1471 Luxembourg</div>
+        <div>TVA LU21691623</div>
         <div class="id-bill">
             <div><h2>{{ 'price.bills'|trans }}</h2></div>
             <div><b>{{ 'price.bills'|trans }} :</b>F-{{ logCredit.id }}</div>
@@ -14,6 +17,7 @@
                 <div>{{ logCredit.name }}</div>
                 <div>{{ logCredit.location }}</div>
                 <div>{{ logCredit.zipcode }}</div>
+                <div>{{ vatNumber }}</div>
             </div>
             <div class="object-bill">
                 <div><b>{{ 'bill.object'|trans }}</b></div>

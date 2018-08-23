@@ -71,6 +71,14 @@ class EmployerType extends AbstractType
                 'label' => 'form.registration.companyName'
             ))
 
+            ->add('vatNumber', TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.vatNumber',
+                'attr' => array(
+                'placeholder' => 'LU49647567'
+                )
+            ))
+
             ->add('description', TextareaType::class, array(
                 'required' => false,
                 'label' => 'form.registration.description',
@@ -90,9 +98,6 @@ class EmployerType extends AbstractType
             ->add('location', PlaceAutocompleteType::class,array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
-
-
-
                 ))
 
             ->add('phone', TelType::class, array(

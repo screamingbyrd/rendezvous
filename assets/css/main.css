@@ -598,6 +598,12 @@ legend{
     color:#333;
 }
 
+.error-already-exist, .error-vat{
+    display: none;
+    color: #f0aa23;
+    margin-top: 5px;
+}
+
 .td-contact-us{
     width: 82%;
 }

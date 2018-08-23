@@ -315,6 +315,12 @@ h3.box{
     .use-money-button{
         float: right;
     }
+    .create-employer-submit{
+        margin-top: -25px;
+    }
+    .create-employer-terms{
+        margin-top: -12px;
+    }
 }
 .button-profile .btn{
     margin-bottom: 10px;

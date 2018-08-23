@@ -103,3 +103,8 @@ user_already_exist:
         en: "/user-already-exist"
         fr: "/utilisateur-existe-deja"
     defaults: { _controller: AppBundle:App:checkUserAlreadyExist }
+vat_exist:
+    locales:
+        en: "/check-vat"
+        fr: "/verifier-tva"
+    defaults: { _controller: AppBundle:App:checkVatNumber }

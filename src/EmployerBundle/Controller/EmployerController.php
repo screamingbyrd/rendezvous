@@ -61,6 +61,7 @@ class EmployerController extends Controller
                 $employer->setCredit(0);
                 $employer->setLocation($data->getLocation());
                 $employer->setPhone($data->getPhone());
+                $employer->setVatNumber($data->getVatNumber());
                 $employer->addUser($user);
                 $employer->setLogo($data->getLogo());
                 $employer->setCoverImage($data->getCoverImage());
@@ -154,6 +155,7 @@ class EmployerController extends Controller
                 $employer->setDescription($data->getDescription());
                 $employer->setLocation($data->getLocation());
                 $employer->setPhone($data->getPhone());
+                $employer->setVatNumber($data->getVatNumber());
                 $employer->addUser($user);
                 $employer->setLogo($data->getLogo());
                 $employer->setCoverImage($data->getCoverImage());

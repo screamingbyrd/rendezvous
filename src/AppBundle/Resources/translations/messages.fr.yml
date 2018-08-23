@@ -78,6 +78,7 @@ form:
     firstname: Prénom
     lastname: Nom
     companyName: Nom de la société
+    vatNumber: Numéro de TVA
     phone: N° de téléphone
     socialMedia: Lien réseaux social
     description: Description
@@ -142,6 +143,8 @@ form:
     age: Age
 
     mailAlreadyExist: Cet email existe déjà
+    invalidVatFormat: Format TVA invalide, respecté la forme LU469464
+    invalidVat: Numéro de TVA invalide
     invalid: Lien invalide
 
   offer:

@@ -79,6 +79,7 @@ form:
     firstname: First name
     lastname: Last name
     companyName: Company name
+    vatNumber: VAT number
     phone: Phone number
     socialMedia: Link social media
     description: Description
@@ -144,6 +145,8 @@ form:
     age: How old are you?
 
     mailAlreadyExist: This mail already exist
+    invalidVatFormat: Invalid VAT format, please respect the shape LU46848
+    invalidVat: Invalid VAT number
     invalid: Lien invalide
 
   offer:

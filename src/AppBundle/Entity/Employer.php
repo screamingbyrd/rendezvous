@@ -96,6 +96,13 @@ class Employer
      */
     private $phone;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vatNumber", type="string", length=255)
+     */
+    private $vatNumber;
+
     private $email;
 
     private $password;
@@ -426,4 +433,23 @@ class Employer
     {
         return $this->tag;
     }
+
+    /**
+     * @return string
+     */
+    public function getVatNumber()
+    {
+        return $this->vatNumber;
+    }
+
+    /**
+     * @param string $vatNumber
+     * @return Employer
+     */
+    public function setVatNumber($vatNumber)
+    {
+        $this->vatNumber = $vatNumber;
+        return $this;
+    }
+
 }

@@ -230,11 +230,13 @@ class CreditController extends Controller
         $html2pdf = new Html2Pdf();
 
         $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
-            'logCredit' => $logsCredit
+            'logCredit' => $logsCredit,
+            'vatNumber' => $user->getEmployer()->getVatNumber()
         ));
 
 //        return $this->render('AppBundle:Credit:billsPdf.html.twig', array(
-//            'logCredit' => $logsCredit
+//            'logCredit' => $logsCredit,
+//            'vatNumber' => $user->getEmployer()->getVatNumber()
 //        ));
 
         $html2pdf->writeHTML($html);
