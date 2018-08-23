@@ -44,8 +44,9 @@ class AdController extends Controller
 
             $data = $form->getData();
 
-            // the user is now registered !
+            $endDate = $data->getEndDate();
 
+            $ad->setEndDate($endDate->modify( '+ 1 day' ));
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($ad);
@@ -83,6 +84,11 @@ class AdController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            $data = $form->getData();
+
+            $endDate = $data->getEndDate();
+
+            $ad->setEndDate($endDate->modify( '+ 1 day' ));
             $em->merge($ad);
             $em->flush();
 
