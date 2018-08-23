@@ -54,11 +54,7 @@ class SitemapController extends Controller
         $urls[] = ['loc' =>
             $this->get('router')->generate('legal_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
-
-        $urls[] = ['loc' =>
-            $this->get('router')->generate('howitwork_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-
+        
         //CandidateBundle routing
 
         $urls[] = ['loc' =>
