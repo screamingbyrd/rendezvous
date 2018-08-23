@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Spipu\Html2Pdf\Html2Pdf;
-
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class CreditController extends Controller
 {
@@ -186,6 +186,30 @@ class CreditController extends Controller
 
                     $em->persist($logCredit);
                     $em->flush();
+
+                    $html2pdf = new Html2Pdf();
+
+                    $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
+                        'logCredit' => $logCredit,
+                        'vatNumber' => $logCredit->getEmployer()->getVatNumber()
+                    ));
+                    $html2pdf->writeHTML($html);
+                    $pdfContent = $html2pdf->output('facture.pdf', 'S');
+
+                    $mailer = $this->container->get('swiftmailer.mailer');
+                    $message = (new \Swift_Message('achat de crédit'))
+                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setTo('comptable@TODO')
+                        ->setBody(
+                            'Someone bought something'
+                        )
+                        ->attach(\Swift_Attachment::newInstance($pdfContent, 'document.pdf','application/pdf'))
+                    ;
+
+                    $message->getHeaders()->addTextHeader(
+                        CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                    );
+                    $mailer->send($message);
 
                     $translated = $this->get('translator')->trans('price.payment.success', array('%credits%' => $nbrCredit));
                     $session->getFlashBag()->add('info', $translated);
