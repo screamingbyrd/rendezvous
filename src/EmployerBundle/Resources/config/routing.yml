@@ -38,6 +38,11 @@ employer_offers:
     defaults: { _controller: EmployerBundle:Employer:myOfferPage , archived: 0}
     requirements:
       archived: 0|1
+delete_image:
+    locales:
+        en: "/delete-image"
+        fr: "/effacer-image"
+    defaults: { _controller: EmployerBundle:Employer:deleteImage }
 post_offer:
     locales:
         en: "/post-offer"

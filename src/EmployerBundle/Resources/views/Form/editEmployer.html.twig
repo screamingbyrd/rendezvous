@@ -105,13 +105,16 @@
                             {{ form_errors(form.description) }}
                         </div>
                         <div class="col-md-6 form-group">
+                            {% form_theme form.logo 'imageEmployerLogoInput.html.twig' %}
                             {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.logo) }}
+                            {{ form_widget(form.logo, {'logo': logo}) }}
                             {{ form_errors(form.logo) }}
                         </div>
                         <div class="col-md-6 form-group">
+
+                            {% form_theme form.coverImage 'imageEmployerCoverInput.html.twig' %}
                             {{ form_label (form.coverImage,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.coverImage) }}
+                            {{ form_widget(form.coverImage, {'coverImage': coverImage}) }}
                             {{ form_errors(form.coverImage) }}
                         </div>
                 </fieldset>
@@ -155,7 +158,7 @@
     </div>
     <script>
         $('input, textarea').each(function(){
-            if($(this).attr('id') != 'appbundle_employer__token') {
+            if($(this).attr('id') != 'appbundle_employer__token' && $(this).attr('id') != 'appbundle_employer_logo_imageFile_file' && $(this).attr('id') != 'appbundle_employer_coverImage_imageFile_file') {
                 if (!$(this).val().length) {
                     $(this).addClass('empty');
                     $(this).removeClass('not-empty');

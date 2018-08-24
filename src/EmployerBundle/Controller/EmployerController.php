@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Response;
 
 
 
@@ -173,7 +174,7 @@ class EmployerController extends Controller
             }
         }
 
-        $completion = 5;
+        $completion = 6;
 
         if(isset($employer->getTag()[0])){
             $completion += 1;
@@ -195,12 +196,14 @@ class EmployerController extends Controller
             $completion += 1;
         }
 
-        $completion = $completion/10 * 100;
+        $completion = $completion/11 * 100;
 
         return $this->render('EmployerBundle:Form:editEmployer.html.twig', array(
             'form' => $form->createView(),
             'user' => $user,
-            'completion' => $completion
+            'completion' => $completion,
+            'logo' => $form->getData()->getLogo(),
+            'coverImage' => $form->getData()->getCoverImage(),
         ));
     }
 
@@ -1226,4 +1229,35 @@ class EmployerController extends Controller
         return $this->redirectToRoute('list_collaborator', array('id' => $employer->getId()));
     }
 
+    public function deleteImageAction(Request $request)
+    {
+//        $imageId = $request->get('id');
+//
+//        $imageRepository = $this
+//            ->getDoctrine()
+//            ->getManager()
+//            ->getRepository('AppBundle:Image')
+//        ;
+//        $image = $imageRepository->findOneBy(array('id' => $imageId));
+//
+//        $employerRepository = $this
+//            ->getDoctrine()
+//            ->getManager()
+//            ->getRepository('AppBundle:Employer')
+//        ;
+//        $employer = $employerRepository->findOneBy(array('id' => $image->getOffer()->getId()));
+//
+//        if(is_object($offer)){
+//            $employer->removeImage($image);
+//        }
+//
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $em->merge($offer);
+//        $em->remove($image);
+//        $em->flush();
+
+
+        return new Response();
+    }
 }
