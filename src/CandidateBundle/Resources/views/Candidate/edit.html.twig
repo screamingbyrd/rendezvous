@@ -132,7 +132,7 @@
                     <div class="col-md-6 form-group">
                         <div class="file-container">
                             {{ form_label (form.cv,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {% if cvTitle is not null %}<div class="upload-title">{{ cvTitle }}</div>{% endif %}
+                            {% if cvTitle is not null %}<div class="upload-title not-empty">{{ cvTitle }}</div>{% endif %}
                             {{ form_widget(form.cv) }}
                             {{ form_errors(form.cv) }}
                         </div>
@@ -140,7 +140,7 @@
                     <div class="col-md-6 form-group">
                         <div class="file-container">
                             {{ form_label (form.coverLetter,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {% if coverLetterTitle is not null %}<div class="upload-title">{{ coverLetterTitle }}</div>{% endif %}
+                            {% if coverLetterTitle is not null %}<div class="upload-title not-empty">{{ coverLetterTitle }}</div>{% endif %}
                             {{ form_widget(form.coverLetter) }}
                             {{ form_errors(form.coverLetter) }}
                         </div>
@@ -210,7 +210,7 @@
 
 
         $('input, textarea').each(function(){
-            if($(this).attr('id') != 'appbundle_candidate__token'){
+            if($(this).attr('id') != 'appbundle_candidate__token' && $(this).attr('id') != 'appbundle_candidate_cv' && $(this).attr('id') != 'appbundle_candidate_coverLetter'){
                 if( !$(this).val().length ) {
                     $(this).addClass('empty');
                     $(this).removeClass('not-empty');
@@ -221,6 +221,7 @@
             }
 
         });
+
         $('input, textarea').blur(function()
         {
             let empty = $('.empty').length;

@@ -65,12 +65,14 @@ $(document).ready(function() {
                 theme: 'bootstrap',
                 placeholder: $(this).data('placeholder')
             });
-        if($(this).parent().find('.select2-selection__choice').length > 0){
-            $(this).addClass('not-empty');
-        }else{
-            $(this).addClass('empty');
+        if($(this).attr('id') != 'appbundle_candidate_experience' && $(this).attr('id') != 'appbundle_candidate_diploma'){
+            if($(this).parent().find('.select2-selection__choice').length > 0){
+                $(this).addClass('not-empty');
+            }else{
+                $(this).addClass('empty');
+            }
         }
-        });
+    });
 
     //main page
 
