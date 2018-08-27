@@ -2,16 +2,24 @@
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                var fileInput = $('#'+input.id);
 
-                reader.onload = function (e) {
-                    fileInput.parent().css('background-image', 'url(' + e.target.result + ')');
-                    fileInput.parent().find('label').hide();
-                    fileInput.parent().find('.remove-image').show();
-                };
+                if(input.files[0].size > 20971520){
+                    alert({{ 'employer.fileToo'|trans }});
+                    this.value = "";
+                }else {
+                    var reader = new FileReader();
+                    var fileInput = $('#'+input.id);
 
-                reader.readAsDataURL(input.files[0]);
+                    reader.onload = function (e) {
+                        fileInput.parent().css('background-image', 'url(' + e.target.result + ')');
+                        fileInput.parent().find('label').hide();
+                        fileInput.parent().find('.remove-image').show();
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+
+
             }
         }
 
@@ -51,7 +59,7 @@
             <div id="appbundle_employer_coverImage_imageFile">
                 <div class="form-group">
                     <div class="cover-label ui-state-default col-md-3 col-sm-3">
-                        <input type="file" onchange="readURL(this);" id="appbundle_employer_coverImage_imageFile_file" name="appbundle_employer[coverImage][imageFile][file]" class="inputfile {% if coverImage is defined and coverImage.imageName is not null %}not-empty{% else %}empty{% endif %}">
+                        <input accept=".png,.jpg" type="file" onchange="readURL(this);" id="appbundle_employer_coverImage_imageFile_file" name="appbundle_employer[coverImage][imageFile][file]" class="inputfile {% if coverImage is defined and coverImage.imageName is not null %}not-empty{% else %}empty{% endif %}">
                         <label for="appbundle_employer_coverImage_imageFile_file"><i class="fas fa-download"></i></label>
                         <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
                     </div>

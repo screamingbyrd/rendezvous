@@ -333,6 +333,7 @@ employer:
     professionalData: Données professionelle :
     changePassword: Changer de mot de passe
     forgotPassword: Mot de passe oublié
+    fileToo: Fichier trop grand. Taille maximum 20 Mb.
   credit:
     title: Crédits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
