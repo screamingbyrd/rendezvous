@@ -19,6 +19,10 @@ services:
   app.search.offer:
         class: AppBundle\Service\Search
         arguments: ['@fos_elastica.finder.app.offer']
+  app.employer_image:
+        class: AppBundle\Service\Namer
+        tags:
+          - { name: namer }
 
 
 
