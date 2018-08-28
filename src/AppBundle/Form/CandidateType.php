@@ -71,9 +71,9 @@ class CandidateType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
-            ->add('terms',CheckboxType::class, array('mapped' => false,
-                'label'    => 'form.registration.accept',
-                'constraints' => array(new NotNull())))
+//            ->add('terms',CheckboxType::class, array('mapped' => false,
+//                'label'    => 'form.registration.accept',
+//                'constraints' => array(new NotNull())))
             ->add('description',      TextareaType::class, array(
                 'required' => false,
                 'label' => 'form.registration.description'

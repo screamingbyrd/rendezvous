@@ -6,10 +6,10 @@ to: au
 job: Emploi
 
 homepage:
-  title: Find the career you deserve
+  title: Trouvez la carrière qui vous correspond
   subtitle: Your job search starts and ends with us
-  ourMission: Notre mission est d'habiliter les entreprises locales à trouver le candidat idéal. Nous travaillons également pour les candidats afin de les aider à trouver et obtenir leur emploi idéal au Luxembourg. Notre équipe dévouée d'experts en recrutement travaille tous les jours pour offrir le meilleur service à la clientèle et le meilleur jumelage pour les employeurs et les candidats. Notre tout nouveau site offre un développement continu pour une meilleure expérience chaque jour.
-  category: Catégories
+  ourMission: Notre mission est double. Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg. Une équipe dévouée. Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises. Une remise en question permanente. Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
+
   ourPartners: Nos partenaire
   discount:
     title: 2 crédits offerts !
@@ -30,9 +30,9 @@ header:
   profile: Mon compte
   logout: Déconnexion
   candidates:
-    title: Candidats
+    title: Espace Candidat
     findJob: Trouver un travail
-    companies: Entreprise
+    companies: Découvrir les entreprises
     submit: Envoyer votre cv
     profile: Mon profile
     dashboard:
@@ -41,10 +41,10 @@ header:
       favorites: Mes favoris
     register: Candidat
   employers:
-    title: Employeurs
+    title: Espace Employeur
     post: Poster une offre
     findCandidate: Trouver un candidat
-    pricing: Prix
+    pricing: Tarifs
     dashboard: Tableau de bord
     register: Employeur
   about:
@@ -74,7 +74,7 @@ form:
     completed: Profile complété
     already: Vous avez déjà un profil ?
     connect: Connectez-vous %link_start%ici%link_end%
-    accept: J'accepte les condition générale d'utilisation
+    accept: J'accepte les conditions générales d'utilisation
     bySubmitting: En soumettant ce formulaire, vous confirmez avoir consulté et accepté les %link_start%conditions générales%link_end% de notre site.
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
@@ -85,7 +85,7 @@ form:
     companyName: Nom de la société
     vatNumber: Numéro de TVA
     phone: N° de téléphone
-    socialMedia: Lien réseaux social
+    socialMedia: Liens réseaux sociaux
     description: Description
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
@@ -94,7 +94,7 @@ form:
     error: Adresse e-mail déjà utilisé, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
-    error: Adresse e-mail déjà utilisé, veuillez réessayer !
+    error: Adresse e-mail déjà utilisée, veuillez réessayer !
     language: Langues
     exp0: -- Indiquez votre expérience --
     exp00: -- Experience requierement --
@@ -119,18 +119,18 @@ form:
 
     dip0: -- Diplôme --
     dip1: Bachelor
-    dip2: BTSM
+    dip2: BTS
     dip3: License
     dip4: Master
-    dip5: Doctor
+    dip5: Doctorat
 
     ben0: -- Benefits you offer --
-    ben1: Parking
-    ben2: Lunch pass
-    ben3: 13th month
-    ben4: Company car
+    ben1: Place de parking
+    ben2: Tickets restaurant
+    ben3: 13ème mois
+    ben4: Voiture de société
 
-    wag0: -- Salary wage --
+    wag0: -- Salary grid --
     wag1: Up to 20,000 €
     wag2: Up to 25,000 €
     wag3: Up to 30,000 €
@@ -154,27 +154,27 @@ form:
 
   offer:
     creation:
-      success: L'offre a bien été crée !
+      success: L'offre a bien été créée !
     edition:
       success: L'offre a bien été éditée !
       error: Vous ne pouvez pas modifier cette offre !
     archived:
-      success: L'offre a bien été archivé !
+      success: L'offre a bien été archivée !
     unarchived:
-      success: L'offre a bien été désarchivé !
+      success: L'offre a bien été désarchivée !
     deleted:
-      subject: Votre offre à été supprimé :
-      mail: Votre offre %title% à été supprimé pour contenu non comforme à notre politique
+      subject: Votre offre à été supprimée :
+      mail: Votre offre %title% à été supprimée pour contenu non-conforme à notre politique
     invalid:
       subject: Votre offre est invalide :
-      mail: Votre offre %title% est invalide, veuillez la modififé.
+      mail: Votre offre %title% est invalide, veuillez la modifier.
       message: Raison du problème:
     activate:
       success: L'offre a bien été activée !
-      error: Vous n'avez pas assez de credit !
+      error: Vous n'avez pas assez de crédit !
     boost:
       success: Vos annonces ont bien été boostées !
-      error: Vous n'avez pas assez de credit pour booster vos offres !
+      error: Vous n'avez pas assez de crédit pour booster vos offres !
     search:
       keyword: Mots clefs
       location: Lieu de travail
@@ -189,7 +189,7 @@ dashboard:
   employer:
     slot:
       title: Slot
-      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un an.
+      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, pendant un an.
       empty: vide
       endDate: Date de fin
       offer: Offre
@@ -256,7 +256,7 @@ offer:
   descriptionInfo: Soyez bref mais précis, mettez en avant les valeurs de l’entreprise et les avantages du poste tout en insistant sur les missions
   contract: Type de contrat
   contractPH:  Choisissez le type de contrat
-  exp: Expérience professionel
+  exp: Expérience professionelle
   expPH: Expérience requise
   available: Date de disponibilité
   availablePH: Date de début souhaitée
@@ -270,11 +270,11 @@ offer:
   licensePH: Permis de conduire requis
   image: Image pour votre offre
   submit: Soumettre
-  option: Plus de précision (faculatatif)
+  option: Plus de précision (facultatif)
   about: À propos de cette offre
   jobDescription: Description de l'offre
   sorry: Désolé, cette offre à été archivé
-  hereSomeSimilar: Voici quelques offre similaire qui pourraient vous interessé:
+  hereSomeSimilar: Voici quelques offres similaires qui pourraient vous intéresser:
   similarOffer: Offres similaires
   watchSimilar: Voir toutes les offres similaires
   experience: Expérience
@@ -335,11 +335,11 @@ employer:
       send: Vous avez reçu une candidature spontanée
       sent: Votre candidature à bien été envoyé
   edit:
-    complete: Completer vos informations
+    complete: Compléter vos informations
     completed: Profile complété
     personalData: Données personnelles :
     companyData: Données sur la société :
-    professionalData: Données professionelle :
+    professionalData: Données professionelles
     changePassword: Changer de mot de passe
     forgotPassword: Mot de passe oublié
     fileToo: Fichier trop grand. Taille maximum 20 Mb.
@@ -421,7 +421,7 @@ contact:
   email: Votre email
   message: Votre message
   us:
-    title: Contactez nous
+    title: Contactez-nous
     subTitle: The best way to reach us is to call us
     smallTitle: Contact
     employer: Contacter un conseiller
@@ -437,10 +437,10 @@ footer:
   legal: Mentions légales
 
 notification:
-  title: Because sometimes it takes hearing about the right position at the right time
+  title: Parce que parfois, il suffit simplement d'être au bon endroit au bon moment
   create: Ajouter une nouvelle notification
-  created: Notification crée !
-  deleted: Notification supprimé !
+  created: Notification créée !
+  deleted: Notification supprimée !
   mine: Mes notifications
   already: La notification existe déjà !
   tag: Categorie
@@ -450,7 +450,7 @@ notification:
   here: ici
 
 favorite:
-  title: Wishlist aren’t simply for Christmas or shopping anymore
+  title: Parce que votre liste de favoris mérite bien plus que le titre de votre musique préférée...
   created: Ajouté au favoris !
   deleted: Favori supprimé !
   already: La favoris existe déjà !
@@ -460,13 +460,12 @@ add: Ajouter
 delete: Supprimer
 
 searchEmployer:
-  title: Notre propre annuaire des meilleures entreprises
-  discover: Découvrez notre répertoire d'entreprises qui recrutent au Luxembourg. Vous pourrez explorer ici les entreprises qui offrent des postes chez nous mais aussi leur taille et les avantages qu’elles offrent à leur employés. Commencez à naviguer maintenant!
-
+  title: Les entreprises luxembourgeoises incontournables
+  discover: "Découvrez sans plus attendre les entreprises luxembourgeoises de notre répertoire. Chacune d'entre elles n'attendent plus que vous pour enrichir leur équipes. Mais avant cela, renseignez-vous sur leurs caractéristiques : taille, avantages pour les employés, horaires, avis, coordonnées. Cet annuaire saura vous fournir toutes les informations nécessaires à votre choix pour votre avenir professionnel. Les entreprises vous choisissent et VOUS les choisissez !"
 about:
-  let: Let us present ourselves
+  let: Laissez nous nous présenter
   text1: Jobnow est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
-  text2: L'équipe est également composée de deux développeurs dédiés et quelque peu grincheux, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
+  text2: L'équipe est également composée de deux développeurs dédiés, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
   text3: Enfin, notre équipe dévouée de conseillers est là pour répondre à vos questions et vous guider tout au long du processus d'acquisition de crédits pour vos offres d'emploi.
 
 privacy:
@@ -476,42 +475,50 @@ faq:
   kind: Quelle type d'utilisateur êtes vous ?
   subTitle: Une explication est toujours mieux
   employer:
-    intro: Parce que nous croyons que le recrutement devrait être une tâche facile, nous avons rendu les choses aussi simples que possible pour vous! Le site est conçu pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour une position ouverte pour votre entreprise, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? Lors de la création de l’annonce vous pourrez choisir des étiquettes (tags) pour affiner votre recherche et vous assurer d'obtenir des candidats correspondant à votre offre d'emploi, ce qui facilite le choix du bon candidat.
+    intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi pour ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le candidat idéal au moment où vous en avez besoin."
     1:
-      question: Pourquoi et comment s'inscrire ?
-      answer: L'inscription auprès de notre site vous permet de bénéficier de toutes les fonctionnalités offertes par notre plateforme. C'est très facile à faire et gratuit! Vous devez simplement cliquer sur s'inscrire et remplir les informations demandées. Vous serez alors en mesure de modifier le profil de votre entreprise et commencer à ajouter toute offre d'emploi que vous avez.
+      question: Comment ça marche ?
+      answer: Après création de votre compte, vous pouvez publier votre annonce de poste à pourvoir au sein de votre entreprise et c’est TOUT ! Asseyez-vous, détendez-vous et laissez-nous faire, les candidats viendront à vous comme par magie.
     2:
-      question: Comment fonctionne mon tableau de bord ?
-      answer: Vous trouverez un tableau de bord réfléchi et conçu pour votre confort. Vous aurez toutes les informations dont vous avez besoin concernant vos profils favoris, vos offres d'emploi, vos factures et vos crédits restants en une seul endroit. Cliquez simplement sur l'une des sections pour découvrir ce qu'ils cachent et comment ils peuvent vous aider à obtenir le candidat idéal.
+      question: Comment obtenir le candidat rêvé pour le poste ?
+      answer: Au moment de la création de votre annonce, choisissez bien les étiquettes (les tags) afin de décrire, avec le plus de justesse possible, les caractéristiques du poste. Vous obtiendrez ainsi avec assurance des candidats au profil en accord avec votre offre d’emploi. Ceci facilitera d’autant plus le choix futur du meilleur candidat.
     3:
-      question: Comment poster une offre ?
-      answer: Publier une offre est extrêmement facile! Il suffit de cliquer sur "publier une offre" sous Employeurs dans la barre de menu et vous serez guidé pour remplir les informations concernant la position ouverte. Vous serez en mesure de prévisualiser votre offre d'emploi avant d'accepter sa mise en page et son contenu et de la publier.
+      question: Pourquoi et comment s'inscrire ?
+      answer: L’inscription sur notre site vous permet de bénéficier de toutes les fonctionnalités proposées sur notre plateforme. C’estsimple et gratuit jusqu’au 15 octobre 2018 ! Pour s’inscrire, il suffit de se rendre dans la rubrique prévue à cet effet et de suivre la procédure. Vous pourrez bien entendu modifier le profil de votre entreprise à tout moment et ajouter toutes les offres d’emplois que vous souhaitez.
     4:
-      question: Quels sont les crédits ?
-      answer: Chaque offre d'emploi vaut un crédit afin que vous puissiez suivre vos dépenses facilement. Vous pouvez également utiliser des crédits pour de nombreuses autres fonctionnalités de notre plate-forme, telles que les offres en vedettes.
+      question: Comment fonctionne mon tableau de bord ?
+      answer: Le tableau de bord est pensé et conçu pour vous. Dessus sont regroupées toutes les informations concernant vos candidats favoris, vos offres d’emplois et vos crédits restants. En un seul coup d’œil, vous retrouvez toutes les éléments clefs ! Cliquez simplement sur l’une des sections pour découvrir ce qui s’y cache.
     5:
-      question: Combien valent-ils ?
-      answer: Une fois que vous vous êtes inscrit en tant qu'employeur, vous trouverez une section détaillant le prix des crédits. Notre propre expérience nous a appris que le recrutement coûte cher, alors nous avons décidé de rendre ces crédits abordables pour vous ... et ils viennent avec des bonus!
+      question: Comment poster une offre ?
+      answer: Allez dans la barre de menu puis dans la rubrique « Employeurs ». A partir de là, cliquez sur « Publier une offre » et remplissez les informations à propos du poste à pourvoir. Vous serez en mesure de prévisualiser votre offre d’emploi avant sa publication et de voir ainsi la mise en page proposée.
     6:
-      question: Qu'est-ce qu'une offre en vedette ?
-      answer: Si vous souhaitez mettre en évidence une offre d'emploi, vous utiliserez l'option d'emploi en vedette. Cela vous permet de rester en tête du moteur de recherche et donc d'être beaucoup plus visible pour les candidats potentiels.
+      question: Quels sont les crédits ?
+      answer: "Le principe est le suivant : 1 offre d’emploi = 1 crédit. Les crédits vous permettent donc de publier des offres mais pas seulement ! Ils peuvent être utilisés pour de nombreuses autres fonctionnalités de notre plateforme."
     7:
-      question: Qu'est-ce qu'un employeur en vedette ?
-      answer: Vous voulez promouvoir votre entreprise et les nombreux avantages que vous offrez à vos employés? C'est pourquoi nous avons créé l'employeur vedette. Votre entreprise sera visible sur notre page d'accueil pour vous offrir le maximum de visibilité auprès de nos candidats. Ils seront en mesure de parcourir l'historique et la description de votre entreprise et de voir tous les postes disponibles que vous avez.
+      question: Combien valent-ils ?
+      answer: Après inscription dans la section employeur, vous trouvez une section détaillant les tarifs des crédits. Le recrutement coûte cher, c’est un fait tiré de notre propre expérience. C’est pourquoi nous avons décidé de mobiliser nos compétences pour vous proposer une solution alternative à moindre coût. L’acquisition de crédits est en plus agrémentée de jolis bonus !
     8:
+      question: Qu'est-ce qu'une offre en vedette ?
+      answer: Vous souhaitez mettre en valeur une offre d’emploi et ainsi rester en tête du moteur de recherche de notre plateforme ? L’option « offre vedette » est faite pour vous ! Cette dernière vous assure d’avoir une visibilité maximale auprès des candidats potentiels.
+    9:
+      question: Qu'est-ce qu'un employeur en vedette ?
+      answer: Vous voulez promouvoir votre entreprise ainsi que les nombreux avantages offerts à vos employés ? Devenez Employeur Premium ! Votre entreprise sera mise en avant sur notre page d’accueil, assurant une forte visibilité. Les candidats pourront alors parcourir l’historique et la description de votre entreprise ainsi que vos postes disponibles.
+    10:
       question: Que sont les slots?
-      answer: Les slots sont des espaces que vous pouvez «louer» pour une année entière et où vous pouvez afficher toute offre d'emploi que vous pourriez avoir.
+      answer: Ce sont des espaces que vous pouvez louez toute une année et permettant d’afficher toutes vos offres d’emploi.
+
   candidate:
-      intro: Parce que nous croyons fermement que le recrutement devrait être une tâche facile, c’est pourquoi nous avons rendu les choses aussi simples que possible pour vous! Le site est conçu pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce sur une position ouverte pour votre entreprise, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L'offre d'emploi vous permet de choisir des étiquettes pour affiner votre bassin de candidats et vous assurer d'obtenir des candidats correspondant à votre offre d'emploi, ce qui facilite le choix du bon candidat.
+      intro: Parce que nous croyons fermement que le recrutement devrait être une tâche facile, nous vous facilitons la vie autant que possible !  Comment ça marche ? Rien de plus simple ! Vous postulez aux emplois qui vous correspondent et l’entreprise entrera en contact avec vous via notre plateforme ou par mail.
       1:
         question: Comment créer un profil ?
-        answer: Pour créer un profil de candidat, vous devrez vous inscrire. C'est super facile et ne prendra qu'une minute environ. Vous serez en mesure de compléter votre profil avec vos expériences passées et de postuler à l'ouverture d'emplois.
+        answer: Pour créer un profil de candidat, il suffit de s’inscrire dans la rubrique prévue à cet effet. En plus, ça vous prendra moins de deux minutes. En complétant votre profil avec vos expériences passées, vous serez en mesure de postuler à tous les emplois dès l’instant de leur mise en ligne.
       2:
         question: Comment postuler à un emploi ?
-        answer: Maintenant vous êtes vraiment ici parce que vous cherchez un nouvel emploi, alors voici comment appliquer à un. Notre section «trouver un emploi» vous montrera toutes les positions ouvertes que nous avons. Vous pouvez affiner votre recherche en utilisant le moteur de recherche et ses filtres. Une fois que vous avez trouvé un emploi qui vous convient, il vous suffit de cliquer sur Appliquer, ajouter votre CV et une lettre de motivation si vous le souhaitez. Voilà! Vous avez fait le premier pas vers un nouveau voyage passionnant!
+        answer: Postulez grâce à notre section « Trouver un emploi » en pensant bien à affiner votre recherche par l’intermédiaire des filtres proposés dans notre moteur de recherche ! Vous avez trouvé le job de vos rêves parmi les annonces ? Il ne vous reste alors plus qu’à appuyer sur « soumettre ma candidature », après avoir ajouté votre CV et une lettre de motivation si l’envie vous dit (bien évidemment, cette dernière étape est fortement conseillée pour augmenter vos chances).
       3:
         question: Comment l'entreprise va-t-elle me contacter ?
-        answer: Par mail en passant par notre plateforme ou directement par votre cv.
+        answer: En passant par notre plateforme, par mail ou bien directement grâce aux coordonnées indiquées dans votre CV.
+
 
 redirect:
   candidate: Veuillez vous inscrire en tant que candidat
@@ -521,7 +528,7 @@ price:
   credit: Crédit
   credits: Crédit(s)
   find: Trouver le candidat idéal peut prendre du temps, mais il est plus important encore d’utiliser la bonne plateforme. Parfois, cela est lié à combien vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le candidat idéal à moindre coût!
-  price: Prix
+  price: Tarif
   bills: Facture
   ourPackages: Nos offres
   noBonus: Aucun bonus

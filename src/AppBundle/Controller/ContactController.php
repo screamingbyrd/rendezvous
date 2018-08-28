@@ -66,6 +66,10 @@ class ContactController extends Controller
             CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
         );
 
+//        if(isset($data['emailSender']) && $data['emailSender']){
+//
+//        }
+
         return $this->get('mailer')->send($message);
     }
 

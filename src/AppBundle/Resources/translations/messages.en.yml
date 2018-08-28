@@ -10,10 +10,10 @@ homepage:
   subtitle: Your job search starts and ends with us
   ourMission: Our mission is to empower locally implanted companies to find the perfect candidate for them when the time is right. We also work for the candidates to help them find and get their ideal job in Luxembourg. Our dedicated team of recruiting experts work everyday to offer the best customer service and match for both employers and candidates. Our brand new website offers a continued development for a better experience every day.
   category: Catégories
-  ourPartners: Nos partenaire
+  ourPartners: Our partners
   discount:
     title: 2 credits offered !
-    description: For any registration as an employer during the month of December you will receive 2 credit to put your offer online for free, for four month in total.
+    description: For any registration as an employer during the month of September you will receive 2 credit to put your offers online for free, for four month in total.
 
 searchPage:
   display: Displaying %numberOfItem% of %countResult% Jobs
@@ -25,8 +25,8 @@ how:
 
 
 header:
-  profile: Mon compte
-  logout: Déconnexion
+  profile: My account
+  logout: Logout
   findjob: Find a job
   register: Register
   how: How It works
@@ -37,9 +37,9 @@ header:
     submit: Submit your resume
     profile: My profil
     dashboard:
-      alert: Mes alertes
-      applied: Mes candidatures
-      favorites: Mes favoris
+      alert: My alerts
+      applied: My candidacies
+      favorites: My favorites
     register: Candidate
   employers:
     title: Employers
@@ -71,16 +71,16 @@ form:
     subTitle:
       candidate: Your hunt for the perfect job position starts here!
       employer: Your lookout for the perfect candidate starts now!
-    complete: Complet your profile
+    complete: Complete your profile
     completed: Profile completed
     already: Already have a profile?
     connect: Login %link_start%here%link_end%
-    accept: I accept the condition of use
-    bySubmitting: By submitting you confirm that you read and accepted the %link_start%general terms and conditions%link_end% of our site.
+    accept: I accept the terms and conditions
+    bySubmitting: By submitting you confirm that you have read and accepted the %link_start%general terms and conditions%link_end% of our site.
     consult: Read our %link_start%privacy policy%link_end% to understand your rights.
 
     email: Email
-    passwordValidation : The password must contain a least 6 character an uppercase, a lowercase and a number.
+    passwordValidation : The password must contain a least 6 characters, an uppercase, a lowercase and a number.
     firstname: First name
     lastname: Last name
     companyName: Company name
@@ -89,7 +89,7 @@ form:
     socialMedia: Link social media
     description: Description
     license: Driving Licence(s)
-    success: You are now registered as employer !
+    success: You are now registered as an employer !
     edited: The employer has been modified !
     editedCandidate: Your account has been modified !
     error: Email already used, try again !
@@ -124,11 +124,11 @@ form:
     dip2: BTS
     dip3: License
     dip4: Master
-    dip5: Doctor
+    dip5: Doctorate
 
 
     ben1: Parking
-    ben2: Lunch pass
+    ben2: Lunch vouchers
     ben3: 13th month
     ben4: Company car
 
@@ -149,10 +149,10 @@ form:
 
     age: How old are you?
 
-    mailAlreadyExist: This mail already exist
-    invalidVatFormat: Invalid VAT format, please respect the shape LU46848
+    mailAlreadyExist: This email address already exists
+    invalidVatFormat: Invalid VAT format, please respect the format LU46848
     invalidVat: Invalid VAT number
-    invalid: Lien invalide
+    invalid: Invalid link
 
   offer:
     creation:
@@ -173,10 +173,10 @@ form:
       message: Reason of the problem:
     activate:
       success: The offer has been activated !
-      error: You do not have enought credit !
+      error: You do not have enough credits !
     boost:
       success: Your offers had been boosted !
-      error: You do not have enought credit !
+      error: You do not have enough credits !
     search:
       keyword: Keywords
       location: Location
@@ -190,7 +190,7 @@ dashboard:
   employer:
     slot:
       title: Slot
-      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, en ligne pendant un an.
+      use: These are spaces that you can rent for a whole year to display all your job offers
       empty: Empty
       endDate: End date
       offer: Offer
@@ -202,7 +202,7 @@ dashboard:
     archiveOffer: Archive
     unarchiveOffer: Unarchive
     myOffers: My offers
-    myBills: Mes factures
+    myBills: My invoices
     typeTitle: Type in a title
     searchTitle: Search a title
     boostOffers: Boost you offers
@@ -213,7 +213,7 @@ dashboard:
     return: Return to dashboard
   candidate:
     list: A quick summary of which job posting you’ve applied to
-    appliedThe: Applied the
+    appliedThe: Applied on the
     appliedOffers: My offers
     notifications: Notifications
     favorites: Favorites
@@ -247,14 +247,14 @@ offer:
   posted: Posted the
   companyPage: Company page
   tag: Tag(s)
-  tagInfo: Sélectionnez tous les domaines d’activité auxquels le poste à pourvoir est rattaché
+  tagInfo: Select all the sectors of activities related to this job offer
   tagPH: Skills area
   location: Location
-  locationInfo: Pas uniquement le siège social de votre entreprise mais bien le lieu où se trouve le poste
-  locationPH: Indicate a place
+  locationInfo: Not only the headquarters of your company but the location of the job offer
+  locationPH: Indicate a location
   description: Descritpion
-  descriptionInfo: Soyez bref mais précis, mettez en avant les valeurs de l’entreprise et les avantages du poste tout en insistant sur les missions
-  contract: Type de contrat
+  descriptionInfo: Be brief but precise, highlight the values of the company and the benefits of the position while emphasizing its key responsibilities
+  contract: Contrat type
   contractPH: Choose contract type
   exp: Experience
   expPH: Requested experience
@@ -263,7 +263,7 @@ offer:
   available: Available date
   availablePH: Choose a start date
   wage: Wage
-  wagePH: Choose salary wage
+  wagePH: Choose a salary grid
   benefits: Benefits
   benefitsPH: Benefits you offer
   license: License
@@ -281,7 +281,7 @@ offer:
   startDate: Start date
   candidatesList: Candidates who applied to this offer:
   link: Redirection link
-  linkInfo: Si vous voulez redirigez vers votre plateforme de recrutement interne
+  linkInfo: If you want to redirect to your internal recruitment platform
   inSlot: In slot
 
   search:
@@ -326,7 +326,7 @@ employer:
   show:
     title: Presentation of the company
     lastOffers: Last offers
-    noOffer: Threr is no active offersnoTag
+    noOffer: Threr is no active offers
     noTag: Threr is no tag
     allOffers: All our offers
     tags: Main categories
@@ -343,28 +343,33 @@ employer:
     changePassword: Change password
     forgotPassword: Forgot password
     fileToo: File size is too large. Maximum size 20 Mb.
+
+
+
+
+
+
+
+
   credit:
     title: Credits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
     have: You actually have %credit% credits!
     buy: Buy some credits
   addCollaborator:
-    title: Add a collaborator
-    list: List of collaborators
+    title: Add a contributor
+    list: List of contributors
     access:
       title: Access
       simple: Simple
       total: Total
       changeAccess: Change access
-      changed: Access of the collaborator has been changed
-    deleted: Collaborator deleted !
-    type: Type in the mail of a collaborator, a user will be created and he will receive an email to login
+      changed: Access of the contributor has been changed
+    deleted: Contributor deleted !
+    type: Type in the mail of a contributor, a user will be created and he will receive an email to login
     youHave: You habe been added to
-    added: The collaborator has been added !
+    added: The contributor has been added !
     connect: Connect to your account with your email as a login and 0000 for password, you will then be able to modify your personal information and change you password.
-
-
-
 
 freelance: Freelance
 fulltime: Full time
@@ -378,12 +383,12 @@ featured:
   reserved: Booked
   empoyer:
     title: Featured Employer
-    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
+    modal: Are you sure you want to book this week? This will cost you %credit% credits.
     reserve: Book
   offer:
     title: Featured Offer
     reserve: Book
-    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
+    modal: Are you sure you want to book this week? This will cost you %credit% credits.
 
 email:
   sent: You message has been sent !
@@ -391,7 +396,7 @@ email:
   application:
     candidate:  You applied to this offer:
     employer:
-      applied: A candidate applied to your offer:
+      applied: A candidate has applied to your offer:
       comment: Comment/ motivation letter:
       download: Download CV
       downloadCoverLetter: Download cover letter
@@ -399,24 +404,24 @@ email:
   contactedUs: Somebody contacted us
   message: Message
   hasBeenModified: has been modified, go check it
-  deleted: Votre compte à bien été éffacé
-  contacted: Vous avez reçu un message !
+  deleted: Your account has been successfully deleted.
+  contacted: You have received a new message!
   endOfActivation:
     youOffer: Your offer %title% will arrive at the end of activation in %days% days
     thinkAbout: Think about extending their activations on your dashboard
   notification:
-    new: Vous avez créé une alerte email
+    new: You have created an email alert
     created:
-      title: Votre alerte email a bien été créée !
-      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+      title: Your email alert has been created!
+      now: You will now be notified by email as soon as a new ad matching your search criteria is posted on Jobnow.lu.
     send:
       title:
         regular: New jobs are available for this %parameter%
         search: New jobs are available for you
       new: New offers could interest you
   footer:
-    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%support@jobnow.lu%link_end%
-    consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
+    contact: If you wish to contact us, you can send an email to %link_start%support@jobnow.lu%link_end%
+    consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
 
 contact:
   form: Contact form
@@ -440,7 +445,7 @@ footer:
   legal: Legal
 
 notification:
-  title: Parce que parfois il faut entendre parler de la bonne position au bon moment
+  title: Because your wishlist is no longer for Christmas or shopping...
   create: Add a new notification
   created: Notification created !
   deleted: Notification deleted !
@@ -452,7 +457,7 @@ notification:
   here: here
 
 favorite:
-  title: Parce qu’elle n’est plus réservé à Noël ou au shopping désormais...
+  title:
   created: Added to favorites !
   deleted: Favorite deleted !
   already: This favorite already exist !
@@ -513,7 +518,7 @@ faq:
         answer: Now you are really here because you are looking for a new job, so here’s how to apply to one. Our “find a job” section will show you all the open positions we have. You can refine your search by using the search engine and its filters. Once you have found a job that fits you, you simply need to click on Apply, add your resume and a cover letter if you want. There you go! You have made the first step towards starting an exciting new journey!
       3:
         question: How will the company contact me?
-        answer: Through mail via our platform or directly via your cv.
+        answer: Through email via our platform or directly via the information mentioned in your resume.
 
 redirect:
   candidate: Please register as a candidate
@@ -533,7 +538,7 @@ price:
   history: History
   payment:
     title: Buy credits
-    chose: You have chose to buy %nbrCredits% credits for a total of %price%€
+    chose: You have chosen to buy %nbrCredits% credits for a total of %price%€
     enter: Enter your payment information
     validate: Validate my payment
     sure: Are you sure you want to buy %nbrCredits% credits ?
@@ -541,7 +546,7 @@ price:
     zipcode: Zipcode
     please: please try again.
     unable: Unable to take payment, %s
-    cvc: Security code at the verso of the card
+    cvc: Security code at the back of the card
 
 bill:
   buyCredit: Buy credits
@@ -552,8 +557,8 @@ bill:
   vat: VAT
   tax: Tax
   amount: Amount
-  totalExludingTax: Total HT
-  totalIncludingTaxes: Total TTC
+  totalExludingTax: Total VAT excluded
+  totalIncludingTaxes: Total VAT inclusive
   tex: TEX
 
 
@@ -572,7 +577,7 @@ admin:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Add an admin
-    enter: Type in existing email
+    enter: Type an existing email
     doNotExist: This user does not exist
     sure: Are you sure that you want to delete this administator?
   ads:
@@ -586,10 +591,10 @@ admin:
       logo: Logo
       image: Image
   enterMail: Enter an email
-  enterCompnay: Entrer a company name
-  enterTitle: Entrer a title
-  sureCandidate: Are you sure that you want to delete that candidate ?
-  sureEmployer: Are you sure that you want to delete that employer ?
+  enterCompnay: Enter a company name
+  enterTitle: Enter a title
+  sureCandidate: Are you sure that you want to delete this candidate ?
+  sureEmployer: Are you sure you want to delete this employer ?
   offerList:
     totalNonVerifiedOffer: Total activated unverified offers
     nonArchivedOffers: Offer not archived
@@ -600,12 +605,12 @@ admin:
     creationDate: Creation date
     valid: Valid
     invalid: Invalid
-    sureArchive: Are you sure that you want to archive / unarchive that offer ?
-    whyInvalid: Why does this offer is invalid ?
+    sureArchive: Are you sure that you want to archive / unarchive this offer ?
+    whyInvalid: Why is this offer is invalid ?
   log:
-    nbrActive: Number active offer
-    nbrEmployer: Number employer
-    nbrCandidate: Number candidate
+    nbrActive: Number of active offers
+    nbrEmployer: Number of employers
+    nbrCandidate: Number of candidates
     total: Total
     monthly: Monthly
     totalCredit: Number total credit
