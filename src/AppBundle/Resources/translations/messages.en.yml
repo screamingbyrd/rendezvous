@@ -561,6 +561,7 @@ bill:
   totalIncludingTaxes: Total VAT inclusive
   tex: TEX
   downloadEstimation: Download an estimation
+  estimation: Estimation
 
 
 admin:

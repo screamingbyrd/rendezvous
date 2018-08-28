@@ -7,7 +7,7 @@ job: Emploi
 
 homepage:
   title: Trouvez la carrière qui vous correspond
-  subtitle: Your job search starts and ends with us
+  subtitle: Votre recherche d'emploi commence et se termine avec nous
   ourMission: Notre mission est double. Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg. Une équipe dévouée. Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises. Une remise en question permanente. Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
   category: Catégories
   ourPartners: Nos partenaire
@@ -561,6 +561,7 @@ bill:
   totalIncludingTaxes: Total TTC
   tex: HT
   downloadEstimation: Télécharger un devis
+  estimation: Devis
 
 admin:
   title: Administrateur
