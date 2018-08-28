@@ -299,4 +299,45 @@ class CreditController extends Controller
             'Content-Type' => 'application/pdf'));
     }
 
+    public function generateEstimationAction(Request $request)
+    {
+        $numberCredit = $request->get('credits');
+        $price = $request->get('price');
+        $session = $request->getSession();
+        $user = $this->getUser();
+
+        if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles())) or in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.employer');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_employer');
+        }
+
+        $vatNumber = $user->getEmployer()->getVatNumber();
+        $countryCode = substr($vatNumber, 0, 2);
+
+        $withVat = $countryCode == 'LU';
+
+        $html2pdf = new Html2Pdf();
+
+        $html = $this->renderView('AppBundle:Credit:estimationPdf.html.twig', array(
+            'numberCredit' => $numberCredit,
+            'price' => $price,
+            'vatNumber' => $vatNumber,
+            'withVat' => $withVat,
+            'name' => $user->getEmployer()->getName()
+        ));
+
+//        return $this->render('AppBundle:Credit:estimationPdf.html.twig', array(
+//            'numberCredit' => $numberCredit,
+//            'price' => $price,
+//            'vatNumber' => $vatNumber,
+//            'withVat' => $withVat
+//        ));
+
+        $html2pdf->writeHTML($html);
+
+        return new Response($html2pdf->output(), 200, array(
+            'Content-Type' => 'application/pdf'));
+    }
+
 }
