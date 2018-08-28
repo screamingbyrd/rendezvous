@@ -9,6 +9,9 @@ homepage:
   ourMission: Our mission is to empower locally implanted companies to find the perfect candidate for them when the time is right. We also work for the candidates to help them find and get their ideal job in Luxembourg. Our dedicated team of recruiting experts work everyday to offer the best customer service and match for both employers and candidates. Our brand new website offers a continued development for a better experience every day.
   category: Catégories
   ourPartners: Nos partenaire
+  discount:
+    title: 2 credits offered !
+    description: For any registration as an employer during the month of December you will receive 2 credit to put your offer online for free, for four month in total.
 
 searchPage:
   display: Displaying %numberOfItem% of %countResult% Jobs

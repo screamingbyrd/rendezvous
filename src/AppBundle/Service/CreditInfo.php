@@ -14,10 +14,10 @@ class CreditInfo
 {
 
     private $publishOffer = 1;
-    private $boostOffers = 3;
-    private $featuredOffer = 11;
-    private $featuredEmployer = 10;
-    private $buySlot = 20;
+    private $boostOffers = 1;
+    private $featuredOffer = 2;
+    private $featuredEmployer = 2;
+    private $buySlot = 5;
     private $oneCredit = 234;
     private $oneCreditWithoutVAT = 200;
     private $fiveCredit = 1111.5;

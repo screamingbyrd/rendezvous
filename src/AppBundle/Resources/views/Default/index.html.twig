@@ -26,6 +26,16 @@
             </form>
         </p>
     </div>
+    <div class="discount-container">
+        <div class="container">
+            <div class="discount-description fadeIn animated">
+                <div style="display: -webkit-inline-box;">
+                    <img class="discount-icon" src="{{asset('images/credit.svg')}}"><span class="discount-title">{{ 'homepage.discount.title'|trans }}</span>
+                </div>
+                <p>{{ 'homepage.discount.description'|trans }}</p>
+            </div>
+        </div>
+    </div>
     <div class="container homepage-container">
         {% if featuredOffer|length > 0 %}
             <div class="row fade-in-right animated">
@@ -95,7 +105,7 @@
                         {% else %}
                             {% set image = 'images/default_cover_image6.jpg' %}
                         {% endif %}
-                        <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});min-height: 185px;">
+                        <div class="caption" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});min-height: 185px;">
                         </div>
                         <div class="thumb-employer-info">
                             {{ employer.employer.description}}

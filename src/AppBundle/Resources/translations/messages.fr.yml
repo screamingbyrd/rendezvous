@@ -9,6 +9,9 @@ homepage:
   ourMission: Notre mission est d'habiliter les entreprises locales à trouver le candidat idéal. Nous travaillons également pour les candidats afin de les aider à trouver et obtenir leur emploi idéal au Luxembourg. Notre équipe dévouée d'experts en recrutement travaille tous les jours pour offrir le meilleur service à la clientèle et le meilleur jumelage pour les employeurs et les candidats. Notre tout nouveau site offre un développement continu pour une meilleure expérience chaque jour.
   category: Catégories
   ourPartners: Nos partenaire
+  discount:
+    title: 2 crédits offerts !
+    description: Pour toute inscription en tant qu'employeur pendant tout le mois de décembre vous reçevrez 2 crédit pour mettre en ligne vos offre gratuitement, pour un total de quatre mois.
 
 searchPage:
   display: Displaying %numberOfItem% of %countResult% Jobs
