@@ -50,7 +50,7 @@ class OfferType extends AbstractType
                 'required' => true,
                 'class' => Tag::class,
                 'choice_label' =>  'name',
-                'label' => 'Tag(s)',
+                'label' => 'offer.tag',
 
                 'attr' => array(
                     'class' => 'select2',

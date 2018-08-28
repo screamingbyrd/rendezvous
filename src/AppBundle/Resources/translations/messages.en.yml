@@ -247,10 +247,13 @@ offer:
   posted: Posted the
   companyPage: Company page
   tag: Tag(s)
+  tagInfo: Sélectionnez tous les domaines d’activité auxquels le poste à pourvoir est rattaché
   tagPH: Skills area
   location: Location
+  locationInfo: Pas uniquement le siège social de votre entreprise mais bien le lieu où se trouve le poste
   locationPH: Indicate a place
   description: Descritpion
+  descriptionInfo: Soyez bref mais précis, mettez en avant les valeurs de l’entreprise et les avantages du poste tout en insistant sur les missions
   contract: Type de contrat
   contractPH: Choose contract type
   exp: Experience
@@ -278,6 +281,7 @@ offer:
   startDate: Start date
   candidatesList: Candidates who applied to this offer:
   link: Redirection link
+  linkInfo: Si vous voulez redirigez vers votre plateforme de recrutement interne
   inSlot: In slot
 
   search:
