@@ -181,6 +181,16 @@
     display: inline-block;
     padding: 3px 10px;
 }
+.item-contract-apprenticeship{
+    background: #53a56f;
+    color: white !important;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 3px 4px;
+    margin-right: 1px;
+}
 .offer-element-name{
     color: #929292;
 }
@@ -225,6 +235,9 @@
     padding: 14px 0;
     width: 11%;
     min-width: 118px;
+}
+.apprentice-li {
+    min-width: 134px !important;
 }
 .selected-page {
     background-color: #dedede !important;
@@ -516,7 +529,7 @@
         min-height: 90px !important;
     }
     .offer-search-element{
-        padding: 15px;
+        padding: 10px;
         padding-top: 5px;
     }
     .offer-element-title{
@@ -614,6 +627,13 @@
     }
     #comment-input{
         height: 160px;
+    }
+    .offer-item-contract{
+        margin-right: -2px !important;
+        margin-left: 0 !important;
+    }
+    .offer-search-element .offer-location,.offer-date{
+        margin-left: 0 !important;
     }
 }
 
@@ -789,7 +809,7 @@ h3.post-offer{
     bottom: -14px;
 }
 .offer-location{
-    max-width: 50% !important;
+    max-width: 57% !important;
     overflow: hidden;
     text-overflow: ellipsis;
 }

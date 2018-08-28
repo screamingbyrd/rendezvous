@@ -46,7 +46,7 @@
                     <div class="col-md-12">
                         <ul class="contractType-list">
                             {% for type in contractType %}
-                                <li class="contract-type">
+                                <li class="contract-type {% if type.name == 'apprenticeship' %}apprentice-li{% endif %}">
                                     <input type="checkbox" name="filter_job_type[]" class="type-contract-checkbox" value="{{ type.name }}" checked="checked" id="job_type_{{ type.name }}">
                                     {{  type.name | trans }}
                                 </li>

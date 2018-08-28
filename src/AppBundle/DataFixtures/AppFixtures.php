@@ -18,7 +18,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $array = array('freelance','temporary','parttime','fulltime','internship');
+        $array = array('freelance','temporary','parttime','fulltime','internship','apprenticeship');
 
         $mainTags = array(
             'tag.accounting',

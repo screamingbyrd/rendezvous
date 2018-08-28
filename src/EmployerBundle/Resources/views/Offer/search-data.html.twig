@@ -94,7 +94,7 @@
                         <div class="offer-element-other">
                             <span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}">{{ offer.contractType.name | trans }}</span>
                             <span class="other-element offer-location"><i class="fa fa-map-marker"></i>{{ offer.location |truncate(20, true)}}</span>
-                            <span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span>
+                            <span class="other-element offer-date"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span>
                         </div>
                     </div>
                 </div>
