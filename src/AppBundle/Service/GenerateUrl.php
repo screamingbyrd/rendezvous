@@ -33,8 +33,7 @@ class GenerateUrl
             'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
             'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
 
-        $url .= 'job/' . str_replace([' ', '/', ','], '-', $offer->getLocation()) . '/';
-
+        $url .= str_replace([' ', '/'], '-', $offer->getEmployer()->getName()) .'/';
         if(isset($tags) && count($tags)>0){
             foreach ($tags as $tag){
                 $translated = $this->translator->trans($tag->getName());
@@ -44,9 +43,9 @@ class GenerateUrl
             }
             $url = rtrim($url,'-') . '/';
         }
-        $url .= str_replace([' ', '/'], '-', $offer->getEmployer()->getName());
-        $url .= '/' . str_replace([' ', '/'], '-', $offer->getTitle());
 
+        $url .=  str_replace([' ', '/'], '-', $offer->getTitle()) . '/';
+        $url .=  str_replace([' ', '/', ','], '-', $offer->getLocation());
         return strtolower($url);
     }
 }

@@ -10,7 +10,7 @@
         <h2>{{ 'homepage.title'|trans }}</h2>
         <h3 class="homepage-subtitle">{{ 'homepage.title'|trans }}</h3>
         <p>
-            <form method="post" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
+            <form method="GET" action="{{ path('search_page_offer') }}" id="search-offer-homepage">
                 <div class="homepage-search-bar search-bar">
                     <select title="Category" id="tags-input" name="tags[]"  class="selectpicker homepage-tag" title="Choose one of the following...">
                         <option value="" disabled selected>{{ 'employer.show.tags'|trans }}</option>

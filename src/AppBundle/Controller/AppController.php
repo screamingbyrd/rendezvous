@@ -22,9 +22,6 @@ class AppController extends Controller
     public function indexAction(Request $request)
     {
 
-        return $this->render('AppBundle:Emails:userDeleted.html.twig', array(
-        ));
-
         $featuredEmployerRepository = $this
             ->getDoctrine()
             ->getManager()
