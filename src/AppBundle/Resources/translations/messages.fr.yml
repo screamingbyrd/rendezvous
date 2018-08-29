@@ -617,6 +617,11 @@ admin:
     totalCredit: Nombre total de credit
     monthlyCredit: Nombre de credit par mois
     selected: Valeur choisit
+  addCredit:
+    title: Ajouter des crédits
+    price: Prix
+    subject: Crédits ajoutés à votre compte
+    creditsAdded: Suite a votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
 
 
 

@@ -618,6 +618,11 @@ admin:
     totalCredit: Number total credit
     monthlyCredit: Number monthly credit
     selected: Selected value
+  addCredit:
+    title: Add credits
+    price: Price
+    subject: Credits have been added to your account
+    creditsAdded: Following your bank transfer %credits% credits have been added to your account, you will find your invoice enclosed to this mail.
 
 tag:
   accounting: Accounting/Finance

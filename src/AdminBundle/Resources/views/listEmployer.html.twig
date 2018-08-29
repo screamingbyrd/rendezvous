@@ -45,6 +45,7 @@
                             <a class="btn btn-primary" href="{{ path('jobnow_bills', { 'id': employer.employer.id }) }}">
                                 {{ 'price.bills' | trans }}
                             </a>
+                            <a href="{{ path('add_credit_admin', {'id':employer.id}) }}" class="btn btn-primary">{{ 'admin.addCredit.title'|trans }}</a>
                         </td>
                     </tr>
                 {% endfor %}

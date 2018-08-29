@@ -16,6 +16,12 @@ list_candidate_admin:
         fr: "/candidat/liste"
     defaults: { _controller: AdminBundle:Admin:listCandidate }
 
+add_credit_admin:
+    locales:
+        en: "/add-credit"
+        fr: "/ajouter-credit"
+    defaults: { _controller: AdminBundle:Admin:addCredit }
+
 list_admin:
     locales:
         en: "/admin/list"
