@@ -427,7 +427,9 @@ legend{
         margin-bottom: 20px;
     }
     .logo-jobnow{
-        position: inherit !important;
+        top: -3px !important;
+        width: 194px !important;
+        height: 91px !important;
     }
     #navbar{
         position: absolute;
@@ -494,6 +496,9 @@ legend{
     }
     .login-login-title{
         margin-bottom: 8px !important;
+    }
+    .faq-button .fas{
+        margin-right: 0!important;
     }
 }
 
