@@ -151,6 +151,9 @@ form:
     invalidVat: Numéro de TVA invalide
     invalid: Lien invalide
 
+    logoInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 180 par 180 pixels
+    coverImageInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 1920 par 400 pixels.
+
   offer:
     creation:
       success: L'offre a bien été créée !
@@ -314,6 +317,9 @@ offer:
     success: Vous avez bien postulé à l'offre %title% !
     candidate: Vous avez postulez à l'offre
     employer: Un candidat à postulé à cette offre :
+
+  carousel:
+    activate: Une fois votre offre créée vous pouvz dépenser 1 crédit pour la mettre en ligne pendant 2 mois en clickant sur Activer/Prolonger.
 
 candidate:
   delete:

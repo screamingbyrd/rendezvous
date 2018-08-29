@@ -82,7 +82,7 @@ class OfferType extends AbstractType
 
                 'config' => array(
                     'toolbar' => 'basic',
-                    
+
                 ),
             ))
 

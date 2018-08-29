@@ -264,11 +264,16 @@ legend{
 /*Button*/
 
 .logo-jobnow{
-    position: absolute;
-    left: 1%;
-    top: -27px;
-    width: 300px;
+    position: inherit;
+    left: 2%;
+    top: -3px;
+    width: 194px;
+    height: 91px;
     z-index: 200;
+}
+
+.user-guide-modal{
+    width: 60% !important;
 }
 
 .jobnow-button{
@@ -421,9 +426,7 @@ legend{
         margin-top: 0 !important;
         margin-bottom: 20px;
     }
-    .logo-jobnow{
-        position: inherit !important;
-    }
+
     #navbar{
         position: absolute;
         top: 88px;
@@ -489,6 +492,9 @@ legend{
     }
     .login-login-title{
         margin-bottom: 8px !important;
+    }
+    .faq-button .fas{
+        margin-right: 0!important;
     }
 }
 

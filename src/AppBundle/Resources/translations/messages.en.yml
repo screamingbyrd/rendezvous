@@ -153,6 +153,9 @@ form:
     invalidVat: Invalid VAT number
     invalid: Invalid link
 
+    logoInfo: The image must be below 20 Mo. The optimal reolution is 180 par 180 pixels
+    coverImageInfo: The image must be below 20 Mo. The optimal resolution is 1920 par 400 pixels.
+
   offer:
     creation:
       success: The offer has been created !
@@ -313,6 +316,9 @@ offer:
     employer: A candidate applied to the offer:
   countView: Views
   countContact: Applications
+
+  carousel:
+    activate: Once your offer is created you can spend 1 credit to put it online for two month by clicking on Activate/Extend.
 
 candidate:
   delete:
