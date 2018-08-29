@@ -221,7 +221,7 @@ class CreditController extends Controller
                     $mailer = $this->container->get('swiftmailer.mailer');
                     $message = (new \Swift_Message('achat de crédit'))
                         ->setFrom('jobnowlu@noreply.lu')
-                        ->setTo('comptable@TODO')
+                        ->setTo('accountant@jobnow.lu')
                         ->setBody(
                             'Someone bought something'
                         )

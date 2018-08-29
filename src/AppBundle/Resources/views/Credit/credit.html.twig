@@ -31,7 +31,7 @@
                         <img class="logo-choice-coin" src="{{asset('images/coin.svg')}}">
                         <div class="no-bonus">{{ (creditService.getOneCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p>{{ 'price.noBonus' | trans }}</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a></p>
+                        {#<p><a href="{{ path('jobnow_payment', {'id': 1}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a></p>#}
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <div class="strike">{{ (creditService.getfiveCredit*100)/(117) + 10}}€</div>
                         <div>{{ (creditService.getfiveCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p class="bonus-discount">+ 10€ Bonus</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a> </p>
+                        {#<p><a href="{{ path('jobnow_payment', {'id': 2}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a> </p>#}
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                         <div class="strike">{{ (creditService.getTenCredit*100)/(117) + 100}}€</div>
                         <div>{{ (creditService.getTenCredit*100)/(117) }}€ <span class="no-tax">{{ 'bill.tex'|trans }}</span></div>
                         <p class="bonus-discount">+ 100 € Bonus</p>
-                        <p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a></p>
+                        {#<p><a href="{{ path('jobnow_payment', {'id': 3}) }}" class="jobnow-button buy-credit" role="button">{{ 'price.buy' | trans }}</a></p>#}
                     </div>
                 </div>
             </div>

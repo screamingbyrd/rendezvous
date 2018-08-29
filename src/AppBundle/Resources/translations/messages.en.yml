@@ -420,7 +420,7 @@ email:
         search: New jobs are available for you
       new: New offers could interest you
   footer:
-    contact: If you wish to contact us, you can send an email to %link_start%support@jobnow.lu%link_end%
+    contact: If you wish to contact us, you can send an email to %link_start%contact@jobnow.lu%link_end%
     consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
 
 contact:
@@ -618,6 +618,11 @@ admin:
     totalCredit: Number total credit
     monthlyCredit: Number monthly credit
     selected: Selected value
+  addCredit:
+    title: Add credits
+    price: Price
+    subject: Credits have been added to your account
+    creditsAdded: Following your bank transfer %credits% credits have been added to your account, you will find your invoice enclosed to this mail.
 
 tag:
   accounting: Accounting/Finance

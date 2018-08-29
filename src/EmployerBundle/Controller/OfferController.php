@@ -138,7 +138,7 @@ class OfferController extends Controller
                 $mailer = $this->container->get('swiftmailer.mailer');
                 $message = (new \Swift_Message('Invalid offer modified: ' . $offer->getTitle(). ' id:'. $offer->getId()))
                     ->setFrom('jobnowlu@noreply.lu')
-                    ->setTo('moderator@jobnow.lu')
+                    ->setTo('contact@jobnow.lu')
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:invalidOfferModified.html.twig',

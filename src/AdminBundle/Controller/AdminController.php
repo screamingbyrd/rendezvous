@@ -7,6 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Entity\LogCredit;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class AdminController extends Controller
 {
@@ -334,6 +339,144 @@ class AdminController extends Controller
             'monthlyCreditLog' => $monthlyCreditLog,
             'year' => $year
         ));
+    }
+
+    public function addCreditAction(Request $request){
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
+            return $this->redirectToRoute('jobnow_home');
+        }
+
+        $employerId = $request->get('id');
+
+        $employerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Employer');
+        $employer = $employerRepository->findOneBy(array('id' => $employerId));
+        $vatNumber = $employer->getVatNumber();
+        $countryCode = substr($vatNumber, 0, 2);
+
+        $withVat = $countryCode == 'LU';
+
+        $form = $this->get('form.factory')
+            ->createNamedBuilder('credit-form')
+            ->add('name',      TextType::class, array(
+                'required' => true,
+                'label' => 'dashboard.candidate.name'
+            ))
+            ->add('phone',      TextType::class, array(
+                'required' => true,
+                'label' => 'form.registration.phone'
+            ))
+            ->add('location',      TextType::class, array(
+                'required' => true,
+                'label' => 'offer.location',
+            ))
+            ->add('zipcode',      TextType::class, array(
+                'required' => true,
+                'label' => 'price.payment.zipcode'
+            ))
+            ->add('credits',      IntegerType::class, array(
+                'required' => true,
+                'label' => 'price.credits'
+            ))
+            ->add('price',      IntegerType::class, array(
+                'required' => true,
+                'label' => 'admin.addCredit.price'
+            ))
+            ->add('submit', SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'jobnow-button',
+                )
+            ))
+            ->getForm();
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+
+                //Logging credit purchase in db
+                $logCredit = new LogCredit();
+                $em = $this->getDoctrine()->getManager();
+
+                $logCredit->setDate(new \DateTime());
+                $logCredit->setCredit($data['credits']);
+                $logCredit->setEmployer($employer);
+                $logCredit->setPrice($data['price']);
+                $logCredit->setName($data['name']);
+                $logCredit->setPhone($data['phone']);
+                $logCredit->setLocation($data['location']);
+                $logCredit->setZipcode($data['zipcode']);
+
+                $employer->setCredit($employer->getCredit() + $data['credits']);
+
+                $em->persist($logCredit);
+                $em->flush();
+
+                $userRepository = $this
+                    ->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:User')
+                ;
+                $users = $userRepository->findBy(array('employer' => $employer));
+                $arrayEmail = array();
+
+                foreach ($users as $employerUser){
+                    $arrayEmail[] = $employerUser->getEmail();
+                }
+
+                if(is_array($arrayEmail)) {
+                    $firstUser = $arrayEmail[0];
+                    $html2pdf = new Html2Pdf();
+
+                    $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
+                        'logCredit' => $logCredit,
+                        'vatNumber' => $logCredit->getEmployer()->getVatNumber(),
+                        'withVat' => $withVat
+                    ));
+
+                    $html2pdf->writeHTML($html);
+                    $pdfContent = $html2pdf->output('facture.pdf', 'S');
+
+                    $mailer = $this->container->get('swiftmailer.mailer');
+                    $translated = $this->get('translator')->trans('admin.addCredit.subject');
+                    $message = (new \Swift_Message($translated))
+                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setTo($firstUser)
+                        ->setCc(array_shift($arrayEmail))
+                        ->setBody(
+                            $this->renderView(
+                                'AppBundle:Emails:creditsAdded.html.twig',
+                                array('credits' => $data['credits'],
+                                )
+                            ),
+                            'text/html'
+                        )
+                        ->attach(\Swift_Attachment::newInstance($pdfContent, 'document.pdf', 'application/pdf'));
+
+                    $message->getHeaders()->addTextHeader(
+                        CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                    );
+                    $mailer->send($message);
+
+                }
+
+                $translated = $this->get('translator')->trans('price.payment.success', array('%credits%' => $data['credits']));
+                $session->getFlashBag()->add('info', $translated);
+
+                return $this->redirectToRoute('list_employer_admin');
+            }
+        }
+        return $this->render('AdminBundle::addCredit.html.twig', [
+            'form' => $form->createView(),
+            'employer' => $employer,
+            'withVat' => $withVat
+        ]);
     }
 
 }
