@@ -51,6 +51,8 @@
 </head>
 
 <body>
+
+
 <nav class="navbar navbar-default navbar-fixed-top header-navbar navbar-expand-lg">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
             aria-expanded="false" aria-controls="navbar">
@@ -60,10 +62,9 @@
         <span class="icon-bar"></span>
     </button>
     <div class="container">
-
-
-            <a class="navbar-brand  header-text" href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
-
+            <a class="navbar-brand  header-text" href="{{ path('jobnow_home') }}">
+                <img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}">
+            </a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
@@ -170,10 +171,14 @@
     </div>
 </nav>
 
-{% block header %}
-{% endblock %}
 
-<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+<div class="content-block">
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+<nav class="navbar navbar-default navbar-bottom navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand header-text" href="{{ path('jobnow_home') }}"> © 2018 JobNow</a>
@@ -194,15 +199,6 @@
         </div>
     </div>
 </nav>
-
-
-
-<div class="content-block">
-    <div style="">
-        {% block content %}
-        {% endblock %}
-    </div>
-</div>
 
 </body>
 </html>

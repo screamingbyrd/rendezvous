@@ -4,7 +4,7 @@
     JobBoard - {{ parent() }}
 {% endblock %}
 
-{% block header %}
+{% block content %}
     
     {% for message in app.session.flashbag.get('info') %}
         <div class="container">
@@ -32,8 +32,13 @@
 
 
 
-        {% block body %}
-        {% endblock %}
+    {% block body %}
+
+    {% endblock %}
+
+
+
+
 
 
 {% endblock %}

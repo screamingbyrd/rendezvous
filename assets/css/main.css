@@ -17,6 +17,10 @@ a{
 
 /*!*Used for the sign in form overide from FOSUSER*!*/
 
+
+
+
+
 /*.content-block{*/
     /*max-width:1200px;*/
     /*margin:0 auto;*/
@@ -26,7 +30,7 @@ a{
 
 body {
     padding-top: 102px;
-    padding-bottom: 65px;
+    padding-bottom: 0px;
     font-family: myFirstFont;
     font-size: 18px !important;
     background-color: #dddddd2b;
@@ -157,8 +161,10 @@ body {
     border-color: #080808;
 }
 
-.navbar-fixed-bottom{
+.navbar-bottom{
     background-color: #272f3b;
+    margin-bottom: 0;
+    border-radius: 0 !important;
 }
 
 .navbar-default .navbar-nav>li>a{
@@ -217,6 +223,35 @@ h3.title{
 
 }
 
+.logo-jobnow{
+    position: absolute;
+    left: 2%;
+    top: -3px;
+    width: 194px;
+    height: 91px;
+    z-index: 200;
+}
+
+
+
+/*@media screen and (min-device-width: 480px) {
+
+
+}
+
+*/
+
+    .content-block {
+        min-height: 992px;
+    }
+
+
+
+
+
+
+
+
 /*Register candidate / employer*/
 
 .register-employer{
@@ -263,14 +298,7 @@ legend{
 
 /*Button*/
 
-.logo-jobnow{
-    position: inherit;
-    left: 2%;
-    top: -3px;
-    width: 194px;
-    height: 91px;
-    z-index: 200;
-}
+
 
 .user-guide-modal{
     width: 60% !important;
