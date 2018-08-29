@@ -272,6 +272,10 @@ legend{
     z-index: 200;
 }
 
+.user-guide-modal{
+    width: 60% !important;
+}
+
 .jobnow-button{
     color: #fbfef5;
     border: solid 1px #e03c14;

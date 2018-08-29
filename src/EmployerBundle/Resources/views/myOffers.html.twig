@@ -248,7 +248,7 @@
             </div>
 
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-first-time">
-                <div class="modal-dialog modal-tl">
+                <div class="modal-dialog modal-tl user-guide-modal">
                     <div class="modal-content">
                         <div class="modal-header">
                             {{ 'header.how'|trans }}
@@ -258,17 +258,17 @@
 
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
+                            {#<ol class="carousel-indicators">#}
+                                {#<li data-target="#myCarousel" data-slide-to="0" class="active"></li>#}
+                                {#<li data-target="#myCarousel" data-slide-to="1"></li>#}
+                                {#<li data-target="#myCarousel" data-slide-to="2"></li>#}
+                            {#</ol>#}
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="{{ asset('images/Capture-fr.PNG') }}" alt="Los Angeles" style="width:100%;">
+                                    <img src="{{ asset('images/capture_activate.png') }}" alt="Los Angeles" style="width:100%;">
                                     <div class="fist-time-info">
-                                        {{ 'offer.carousel.activate' }}
+                                        {{ 'offer.carousel.activate'|trans }}
                                     </div>
                                 </div>
                             </div>

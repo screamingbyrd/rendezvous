@@ -317,7 +317,7 @@ offer:
     employer: Un candidat à postulé à cette offre :
 
   carousel:
-    activate: Une fois votre offre créée vous pouvz dépenser 1 crédit pour la mettre en ligne pendant 2 mois.
+    activate: Une fois votre offre créée vous pouvz dépenser 1 crédit pour la mettre en ligne pendant 2 mois en clickant sur Activer/Prolonger.
 
 candidate:
   delete:

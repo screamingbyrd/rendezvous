@@ -216,6 +216,14 @@
             background-position: center center;
         }
     </style>
+    <script>
+        $(".offer-element").on("mouseenter ", function(){
+            $(this).find('.layer-offer-element').removeClass('fadeIn').addClass('fadeOut');
+        });
+        $(".offer-element").on("mouseleave ", function(){
+            $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
+        });
+    </script>
 
 {% endblock %}
 

@@ -316,7 +316,7 @@ offer:
   countContact: Applications
 
   carousel:
-    activate: Once your offer is created you can spend 1 credit to put it online for two month.
+    activate: Once your offer is created you can spend 1 credit to put it online for two month by clicking on Activate/Extend.
 
 candidate:
   delete:
