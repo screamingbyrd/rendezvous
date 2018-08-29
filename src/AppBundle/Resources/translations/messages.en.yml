@@ -96,7 +96,6 @@ form:
     successEmployer: You successfully registered as an employer !
     successCandidate: You successfully registered as a candidate !
     error: E-mail adress already used !
-    language: Languages
     exp0: -- Your experience --
 
     exp1: 0 to 2 years
@@ -259,7 +258,7 @@ offer:
   exp: Experience
   expPH: Requested experience
   diploma: Diploma
-  dilomaPH: Requested study level
+  diplomaPH: Requested study level
   available: Available date
   availablePH: Choose a start date
   wage: Wage
@@ -268,6 +267,8 @@ offer:
   benefitsPH: Benefits you offer
   license: License
   licensePH: Requested license
+  languages: Languages
+  languagesPH: Select one or more language(s)
   image: Offer image
   submit: Submit
   option: More options (not mandatory)
@@ -279,8 +280,9 @@ offer:
   watchSimilar: Watch all similar offers
   experience: Experience
   startDate: Start date
-  candidatesList: Candidates who applied to this offer:
+  candidatesList: Candidates who applied to this offer
   link: Redirection link
+  linkPH: "ex : www.yourwebsite.com/recruitment"
   linkInfo: If you want to redirect to your internal recruitment platform
   inSlot: In slot
 

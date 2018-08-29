@@ -29,7 +29,7 @@
         {{ form_errors(form) }}
 
         <div class="row">
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 {{ form_label (form.title, null, { 'label_attr':
                     {'class': 'label-form'}
                  })  }}
@@ -37,7 +37,7 @@
                 {{ form_widget(form.title) }}
                 {{ form_errors(form.title) }}
             </div>
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 {{ form_label (form.tag, null, { 'label_attr': {'class': 'label-form'}
 
                 }) }}
@@ -45,12 +45,24 @@
                 {{ form_widget(form.tag) }}
                 {{ form_errors(form.tag) }}
             </div>
-            <div class="col-md-4 col-sm-4">
+
+            <div class="col-md-3 col-sm-3">
                 {{ form_label (form.location, null, { 'label_attr': {'class': 'label-form'} }) }}
                 <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'offer.locationInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
                 {{ form_widget(form.location) }}
                 {{ form_errors(form.location) }}
             </div>
+
+            <div class="col-md-3 col-sm-3">
+                {{ form_label (form.contractType, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.contractType) }}
+                {{ form_errors(form.contractType) }}
+            </div>
+
+
+
+
+
         </div>
         <br>
         <div class="row">
@@ -68,9 +80,9 @@
         <h4>{{ 'offer.option'|trans }}</h4>
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                {{ form_label (form.contractType, null, { 'label_attr': {'class': 'label-form'} }) }}
-                {{ form_widget(form.contractType) }}
-                {{ form_errors(form.contractType) }}
+                {{ form_label (form.language, null, { 'label_attr': {'class': 'label-form'} }) }}
+                {{ form_widget(form.language) }}
+                {{ form_errors(form.language) }}
             </div>
             <div class="col-md-3 col-sm-3">
                 {{ form_label (form.experience, null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -90,32 +102,28 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 {{ form_label (form.wage, null, { 'label_attr': {'class': 'label-form'} }) }}
                 {{ form_widget(form.wage) }}
                 {{ form_errors(form.wage) }}
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 {{ form_label (form.benefits, null, { 'label_attr': {'class': 'label-form'} }) }}
                 {{ form_widget(form.benefits) }}
                 {{ form_errors(form.benefits) }}
             </div>
-            <div class="col-md-3 col-sm-3">
-                {{ form_label (form.language, null, { 'label_attr': {'class': 'label-form'} }) }}
-                {{ form_widget(form.language) }}
-                {{ form_errors(form.language) }}
-            </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 {{ form_label (form.link, null, { 'label_attr': {'class': 'label-form'} }) }}
                 <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'offer.linkInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
                 {{ form_widget(form.link) }}
                 {{ form_errors(form.link) }}
             </div>
-            <div class="col-md-3 col-sm-3" style="display: none;">
-                {{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}
-                {{ form_widget(form.image) }}
-                {{ form_errors(form.image) }}
-            </div>
+
+            {#<div class="col-md-3 col-sm-3" style="display: none;">#}
+                {#{{ form_label (form.image,null, { 'label_attr': {'class': 'label-form'} }) }}#}
+                {#{{ form_widget(form.image) }}#}
+                {#{{ form_errors(form.image) }}#}
+            {#</div>#}
         </div>
 
 

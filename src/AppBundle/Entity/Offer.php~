@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Offer
@@ -36,7 +38,7 @@ class Offer
     private $endDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer", cascade={"persist"})
      *
      */
     private $employer;
@@ -45,11 +47,11 @@ class Offer
      * @var string
      *
      * @ORM\Column(name="location", type="string", length=255)
+     * @Assert\NotNull()
      */
     private $location;
 
     /**
-     *
      *
      * @ORM\Column(name="description", type="text")
      */
@@ -84,28 +86,28 @@ class Offer
     /**
      * @var string
      *
-     * @ORM\Column(name="wage", type="string")
+     * @ORM\Column(name="wage", type="string", nullable=true)
      */
     private $wage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="experience", type="string", length=255)
+     * @ORM\Column(name="experience", type="string", length=255, nullable=true)
      */
     private $experience;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="benefits", type="string", length=255)
+     * @ORM\Column(name="benefits", type="array", nullable=true)
      */
     private $benefits;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="diploma", type="string", length=255)
+     * @ORM\Column(name="diploma", type="string", length=255, nullable=true)
      */
     private $diploma;
 
@@ -142,11 +144,47 @@ class Offer
     protected $archived = 0;
 
     /**
+     * @var \datetime
+     *
+     * @ORM\Column(name="availableDate", type="datetime", nullable=true)
+     */
+    private $availableDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Slot")
+     * @ORM\JoinColumn(name="slot_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
+     */
+    private $slot;
+
+    /**
      * @var array
      *
-     * @ORM\Column(name="license", type="array", nullable=true)
+     * @ORM\Column(name="language", type="array", nullable=true)
      */
-    private $license;
+    private $language;
+
+    private $offerUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", nullable=true)
+     */
+    private $link;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=true)
+
+     */
+    protected $validated;
+
+    public function __toString()
+    {
+        return (string)$this->getTag();
+    }
 
     /**
      * Get id
@@ -417,7 +455,10 @@ class Offer
     public function __construct()
     {
         $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->creationDate =  new \datetime();
+        $this->creationDate =  new \Datetime();
+        $this->updateDate = new \DateTime();
+
+
     }
 
     /**
@@ -556,7 +597,7 @@ class Offer
     public function isActive()
     {
         $now = new \datetime();
-        return ($now >= $this->startDate) && ($now <= $this->endDate);
+        return (($now >= $this->startDate) && ($now <= $this->endDate) || (isset($this->slot) && $now >= $this->creationDate));
     }
 
 
@@ -571,26 +612,112 @@ class Offer
     }
 
     /**
-     * Get tag
-     *
-     * @return array
+     * @return \datetime
      */
-    public function getLicense()
+    public function getAvailableDate()
     {
-        return $this->license;
+        return $this->availableDate;
     }
 
     /**
-     * Set license
-     *
-     * @param array
-     *
+     * @param \datetime $availableDate
      * @return Offer
      */
-    public function setLicense($license)
+    public function setAvailableDate($availableDate)
     {
-        $this->license = $license;
-
+        $this->availableDate = $availableDate;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlot()
+    {
+        return $this->slot;
+    }
+
+    /**
+     * @param mixed $slot
+     * @return Offer
+     */
+    public function setSlot($slot)
+    {
+        $this->slot = $slot;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOfferUrl()
+    {
+        return $this->offerUrl;
+    }
+
+    /**
+     * @param mixed $slot
+     * @return string
+     */
+    public function setOfferUrl($offerUrl)
+    {
+        $this->offerUrl = $offerUrl;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param array $language
+     * @return Offer
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     * @return Offer
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param bool $validated
+     * @return Offer
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+        return $this;
+    }
+
+
 }

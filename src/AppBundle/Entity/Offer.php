@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Offer
@@ -45,12 +47,14 @@ class Offer
      * @var string
      *
      * @ORM\Column(name="location", type="string", length=255)
+     * @Assert\NotNull()
      */
     private $location;
 
     /**
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotNull()
      */
     private $description;
 
@@ -717,4 +721,14 @@ class Offer
     }
 
 
+
+    /**
+     * Get validated
+     *
+     * @return boolean
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
 }

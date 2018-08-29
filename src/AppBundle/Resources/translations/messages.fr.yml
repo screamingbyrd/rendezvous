@@ -95,7 +95,6 @@ form:
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
-    language: Langues
     exp0: -- Indiquez votre expérience --
     exp00: -- Experience requierement --
     exp1: 0 à 2 ans
@@ -268,6 +267,8 @@ offer:
   benefitsPH: Avantage(s) offert(s)
   license: Permis
   licensePH: Permis de conduire requis
+  languages: Langues
+  languagesPH: Langue(s) requise(s)
   image: Image pour votre offre
   submit: Soumettre
   option: Plus de précision (facultatif)
@@ -279,8 +280,9 @@ offer:
   watchSimilar: Voir toutes les offres similaires
   experience: Expérience
   startDate: Date de début
-  candidatesList: Candidats qui ont postulé à cette offre :
+  candidatesList: Candidats qui ont postulé à cette offre
   link: Lien de redirection
+  linkPH: "ex : www.votresiteweb.com/recrutement"
   linkInfo: Si vous voulez redirigez vers votre plateforme de recrutement interne
   inSlot: Dans un slot
 

@@ -20,6 +20,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Valid;
 
 
 class OfferType extends AbstractType
@@ -71,9 +74,6 @@ class OfferType extends AbstractType
                     'placeholder' =>  $translator->trans('offer.locationPH')
                 ),
                 'label' => 'offer.location',
-
-
-
             ))
 
             ->add('description', CKEditorType::class, array(
@@ -82,7 +82,7 @@ class OfferType extends AbstractType
 
                 'config' => array(
                     'toolbar' => 'basic',
-                    'height' => '30vh'
+                    
                 ),
             ))
 
@@ -97,13 +97,13 @@ class OfferType extends AbstractType
                     'placeholder' => 'offer.availablePH']))
 
             ->add('contractType', EntityType::class, array(
-                'choice_translation_domain' => true,
                 'required' => true,
                 'class' => ContractType::class,
                 'choice_label' =>  'name',
                 'label' => 'offer.contract',
-
-
+                'choice_translation_domain' => true,
+                'placeholder' => '',
+                'empty_data'  => null,
                 'attr' => array(
                     'class' => 'select2',
                     'data-placeholder' =>  $translator->trans('offer.contractPH'))
@@ -182,11 +182,11 @@ class OfferType extends AbstractType
 
             ))
 
-            ->add('image', ImageType::class, array(
-                'required' => false,
-                'label' => 'offer.image',
-
-            ))
+//            ->add('image', ImageType::class, array(
+//                'required' => false,
+//                'label' => 'offer.image',
+//
+//            ))
 
             ->add('language', ChoiceType::class, array('choices' => array(
                 'language.fr' => 'language.fr',
@@ -196,13 +196,23 @@ class OfferType extends AbstractType
             ),
                 'multiple' => true,
                 'required' => false,
-                'attr' => array('class' => 'select2'),
-                'label' => 'form.registration.language',
+                'attr' => array(
+                    'class' => 'select2',
+                    'data-placeholder' =>  $translator->trans('offer.languagesPH')
+
+
+                ),
+                'label' => 'offer.languages',
+
+
             ))
 
             ->add('link',      TextType::class, array(
                 'required' => false,
                 'label' => 'offer.link',
+
+                'attr' => array('placeholder' => 'offer.linkPH'),
+
             ))
 
             ->add('submit',      SubmitType::class, array(

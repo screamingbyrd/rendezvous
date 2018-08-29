@@ -58,8 +58,8 @@ class OfferController extends Controller
             'translator' => $translator,
         ));
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
 
             if(!isset($user)){
                 $_SESSION['request'] = $request;
