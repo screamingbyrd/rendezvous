@@ -152,6 +152,9 @@ form:
     invalidVat: Numéro de TVA invalide
     invalid: Lien invalide
 
+    logoInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 180 par 180 pixels
+    coverImageInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 1920 par 400 pixels.
+
   offer:
     creation:
       success: L'offre a bien été créée !

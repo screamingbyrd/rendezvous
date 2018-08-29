@@ -154,6 +154,9 @@ form:
     invalidVat: Invalid VAT number
     invalid: Invalid link
 
+    logoInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 180 par 180 pixels
+    coverImageInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 1920 par 400 pixels.
+
   offer:
     creation:
       success: The offer has been created !

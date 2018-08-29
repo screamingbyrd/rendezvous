@@ -107,6 +107,7 @@
                         <div class="col-md-6 form-group">
                             {% form_theme form.logo 'imageEmployerLogoInput.html.twig' %}
                             {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}
+                            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.logoInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
                             {{ form_widget(form.logo, {'logo': logo}) }}
                             {{ form_errors(form.logo) }}
                         </div>
@@ -114,6 +115,7 @@
 
                             {% form_theme form.coverImage 'imageEmployerCoverInput.html.twig' %}
                             {{ form_label (form.coverImage,null, { 'label_attr': {'class': 'label-form'} }) }}
+                            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.coverImageInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
                             {{ form_widget(form.coverImage, {'coverImage': coverImage}) }}
                             {{ form_errors(form.coverImage) }}
                         </div>
