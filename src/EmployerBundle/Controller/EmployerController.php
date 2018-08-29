@@ -287,7 +287,7 @@ class EmployerController extends Controller
 
         $message = (new \Swift_Message($employer->getName().' has archived his account'))
             ->setFrom('jobnowlu@noreply.lu')
-            ->setTo('commercial@jobnow.lu')
+            ->setTo('contact@jobnow.lu')
             ->setBody(
                 $this->renderView(
                     'AppBundle:Emails:userDeleted.html.twig',

@@ -420,7 +420,7 @@ email:
         search: New jobs are available for you
       new: New offers could interest you
   footer:
-    contact: If you wish to contact us, you can send an email to %link_start%support@jobnow.lu%link_end%
+    contact: If you wish to contact us, you can send an email to %link_start%contact@jobnow.lu%link_end%
     consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
 
 contact:
