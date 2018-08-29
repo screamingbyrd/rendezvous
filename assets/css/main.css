@@ -265,10 +265,9 @@ legend{
 
 .logo-jobnow{
     position: absolute;
-    left: 2%;
-    top: 12px;
-    width: 200px;
-    height: 61px;
+    left: 1%;
+    top: -27px;
+    width: 300px;
     z-index: 200;
 }
 
