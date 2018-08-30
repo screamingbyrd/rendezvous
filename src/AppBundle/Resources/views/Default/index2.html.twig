@@ -2,6 +2,9 @@
 <html>
 <head>
 
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('build/main.css') }}" />
+    {% endblock %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121075792-1"></script>
@@ -26,8 +29,8 @@
 
     <div class="text-home">
 
-    <h1><b>COMING SOON</b></h1>
-    <h1>THE SMARTEST WAY TO HIRE!</h1>
+    <h1>COMING SOON</h1>
+    <h1 class="sub-title">THE SMARTEST WAY TO HIRE!</h1>
 
     </div>
 
@@ -39,6 +42,14 @@
 
 <style>
 
+    @media screen and (max-device-width: 480px) {
+        h1 {
+            font-size: 54px;
+        }
+    }
+    .sub-title{
+        font-weight: initial;
+    }
     .text-home {
         text-align: center;
         margin-bottom: 200px;
