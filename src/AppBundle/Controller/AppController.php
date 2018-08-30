@@ -19,6 +19,17 @@ use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 class AppController extends Controller
 {
 
+
+    public function index2Action(Request $request)
+    {
+
+        return $this->render('AppBundle:Default:index2.html.twig');
+
+    }
+
+
+
+
     public function indexAction(Request $request)
     {
 
