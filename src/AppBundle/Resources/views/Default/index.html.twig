@@ -202,6 +202,24 @@
         .homepage-href-tag{
             text-decoration: none !important;
         }
+
+
+
+
+        @media screen and (max-device-width: 480px) {
+
+            .homepage-jumbotron::after{
+                background-position: center center !important;
+            }
+
+        }
+
+        .homepage-jumbotron{
+
+            background:rgba(0,0,0,0.5) !important;
+        }
+
+
         .homepage-jumbotron::after{
             content: '';
             background-image:url({{asset('images/jobnow-home.jpg')}});
@@ -213,7 +231,7 @@
             left: 0;
             position:absolute;
             z-index: -1;
-            background-position: center center;
+            background-position: center -187px;
         }
     </style>
     <script>
