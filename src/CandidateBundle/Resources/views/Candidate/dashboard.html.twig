@@ -146,6 +146,14 @@
         }
         $('.nav-tabs a').on('shown.bs.tab', function (e) {
             window.location.hash = e.target.hash;
+        });
+        $(window).on('load', () => {
+            let iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+            if (iOS)
+                $('[data-toggle="tab"]').each((i,e) => {
+                    if (!$(e).attr('href'))
+                        $(e).attr('href', $(e).data('target'));
+                })
         })
     </script>
     <style>
