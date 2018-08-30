@@ -136,6 +136,7 @@
     <script>
         var url = document.location.toString();
         $(window).on('hashchange', function(e){
+            $('#navbar').removeClass('in');
             if (document.location.toString().match('#')) {
                 $('.nav-tabs a[data-target="#' + document.location.toString().split('#')[1] + '"]').tab('show');
             }

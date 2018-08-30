@@ -394,6 +394,7 @@ legend{
     }
     body{
         padding-bottom: 0;
+        padding-top: 74px !important;
     }
     .thumbnail{
         margin-left: 10px;
@@ -523,6 +524,23 @@ legend{
     }
     .faq-button .fas{
         margin-right: 0!important;
+    }
+    .header-navbar{
+        height: 60px !important;
+    }
+    .navbar-toggle{
+        margin-top: 13px;
+    }
+    .logo-jobnow{
+        position: absolute;
+        left: 2%;
+        top: -3px;
+        width: 140px;
+        height: 62px;
+        z-index: 200;
+    }
+    #navbar {
+        top: 60px !important;
     }
 }
 
