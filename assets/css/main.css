@@ -143,6 +143,9 @@ body {
     .homepage-search-bar{
         width: 50% !important;
     }
+    .choose-featured-offer{
+        width: 35%;
+    }
 }
 
 .navbar-toggle{
@@ -544,6 +547,14 @@ legend{
     }
 }
 
+@media (max-width: 767px){
+    .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu>li>a {
+        padding: 8px 15px 8px 25px;
+        font-size: 17px;
+    }
+}
+
+
 .panel p{
     padding-top: 6px;
 }
@@ -824,9 +835,7 @@ legend{
     margin-left: 10px;
 }
 
-.choose-featured-offer{
-    width: 35%;
-}
+
 #featured-offer-id{
     margin-left: 2%;
     margin-right: 2%;
