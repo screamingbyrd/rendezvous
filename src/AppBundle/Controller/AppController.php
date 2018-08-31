@@ -203,6 +203,11 @@ class AppController extends Controller
 //        $arrayNewUser = $request->get('list');
 
         $mailer = $this->container->get('swiftmailer.mailer');
+
+        if(empty($arrayNewUser)){
+            var_dump('Array is empty dude!');exit;
+        }
+
         foreach ($arrayNewUser as $mail){
             $message = (new \Swift_Message('Jownow is live !'))
                 ->setFrom('jobnowlu@noreply.lu')
