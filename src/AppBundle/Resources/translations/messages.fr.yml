@@ -7,7 +7,7 @@ job: Emploi
 
 homepage:
   title: Trouvez la carrière qui vous correspond
-  subtitle: Votre recherche d'emploi commence et se termine avec nous
+  subtitle: Votre recherche d’emploi débute et s’achève avec nous
   ourMission:
       1:
         title: Notre mission est double.
@@ -477,7 +477,8 @@ delete: Supprimer
 
 searchEmployer:
   title: Les entreprises luxembourgeoises incontournables
-  discover: "Découvrez sans plus attendre les entreprises luxembourgeoises de notre répertoire. Chacune d'entre elles n'attendent plus que vous pour enrichir leur équipes. Mais avant cela, renseignez-vous sur leurs caractéristiques : taille, avantages pour les employés, horaires, avis, coordonnées. Cet annuaire saura vous fournir toutes les informations nécessaires à votre choix pour votre avenir professionnel. Les entreprises vous choisissent et VOUS les choisissez !"
+  discover: "Découvrez sans plus attendre les entreprises luxembourgeoises de notre répertoire. Elles n'attendent plus que vous pour enrichir leur équipes. Les entreprises vous choisissent et VOUS les choisissez !"
+  type: Chercher une entreprise
 about:
   let: Laissez nous nous présenter
   text1: Jobnow est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.

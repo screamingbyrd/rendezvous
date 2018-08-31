@@ -7,17 +7,17 @@ job: Job
 
 homepage:
   title: Find the career you deserve
-  subtitle: Your job search starts and ends with us
+  subtitle: Your job search begins and ends with us
   ourMission:
-    1:
-      title: Our mission is double.
-      text: We help locally implanted companies to find the perfect candidate for them when the time is right while working for the candidates to help them find and get their ideal job in Luxembourg.
-    2:
-      title: A dedicated team.
-      text: Our recruiting experts work everyday to offer the best customer service and match for both employers and candidates.
-    3:
-      title: A permanent questioning.
-      text: Our brand new website offers a continued development for a better experience every day.
+      1:
+        title: Our mission is double.
+        text: We help locally implanted companies to find the perfect candidate for them when the time is right while working for the candidates to help them find and get their ideal job in Luxembourg.
+      2:
+        title: A dedicated team.
+        text: Our recruiting experts work everyday to offer the best customer service and match for both employers and candidates.
+      3:
+        title: A permanent questioning.
+        text: Our brand new website offers a continued development for a better experience every day.
   category: Tags
   ourPartners: Our partners
   discount:
@@ -38,16 +38,16 @@ header:
   logout: Logout
   findjob: Find a job
   register: Register
-  how: How It works
+  how: How it works
   candidates:
     title: Candidates
     findJob: Find a job
     companies: Companies
     submit: Submit your resume
-    profile: My profil
+    profile: My profile
     dashboard:
       alert: My alerts
-      applied: My candidacies
+      applied: My applications
       favorites: My favorites
     register: Candidate
   employers:
@@ -85,7 +85,7 @@ form:
     already: Already have a profile?
     connect: Login %link_start%here%link_end%
     accept: I accept the terms and conditions
-    bySubmitting: By submitting you confirm that you have read and accepted the %link_start%general terms and conditions%link_end% of our site.
+    bySubmitting: By submitting this form you confirm that you have read and accepted the %link_start%general terms and conditions%link_end% of our site.
     consult: Read our %link_start%privacy policy%link_end% to understand your rights.
 
     email: Email
@@ -104,7 +104,7 @@ form:
     error: Email already used, try again !
     successEmployer: You successfully registered as an employer !
     successCandidate: You successfully registered as a candidate !
-    error: E-mail adress already used !
+    error: Email address already used !
     exp0: -- Your experience --
 
     exp1: 0 to 2 years
@@ -186,7 +186,7 @@ form:
       success: The offer has been activated !
       error: You do not have enough credits !
     boost:
-      success: Your offers had been boosted !
+      success: Your offers has been boosted !
       error: You do not have enough credits !
     search:
       keyword: Keywords
@@ -220,7 +220,7 @@ dashboard:
     totalOnline: Total online offers
     totalInSlot: Total offers in slot
     editProfile: Edit my profile
-    watchProfile: Watch my profile
+    watchProfile: See my profile
     return: Return to dashboard
   candidate:
     list: A quick summary of which job posting you’ve applied to
@@ -278,7 +278,7 @@ offer:
   benefits: Benefits
   benefitsPH: Benefits you offer
   license: License
-  licensePH: Requested license
+  licensePH: Requested licence
   languages: Languages
   languagesPH: Select one or more language(s)
   image: Offer image
@@ -303,10 +303,10 @@ offer:
   delete:
       sure: Are you sure that you want to archive this offer?
   activate:
-      sure: Are you sure that you want to activate / extend this offer? This will cost you %credit% credit.
-      sureMultiple: Are you sure that you want to activate / extend those offers? This will cost you %credit% credit.
+      sure: Are you sure that you want to activate / extend this offer? This will cost you %credit% credit(s).
+      sureMultiple: Are you sure that you want to activate / extend those offers? This will cost you %credit% credit(s).
   boost:
-      sure: Are you sure that you want to boost yout offers?This will cost you %credit% credits.
+      sure: Are you sure that you want to boost yout offers? This will cost you %credit% credit(s).
   endDate: End date:
   archived: Archived
   apply:
@@ -314,7 +314,7 @@ offer:
     close: Close
     addCV: Add your resume:
     coverLetter: Cover letter (optional)
-    addCoverLetter: Add your cover letter (optionnelle):
+    addCoverLetter: Add your cover letter (optional):
     send: Send your CV
     already: You already applied to this offer
     message: Cover letter
@@ -343,8 +343,8 @@ employer:
   show:
     title: Presentation of the company
     lastOffers: Last offers
-    noOffer: Threr is no active offers
-    noTag: Threr is no tag
+    noOffer: There is no active offers
+    noTag: There is no tag
     allOffers: All our offers
     tags: Main categories
     spontaenous:
@@ -371,7 +371,7 @@ employer:
   credit:
     title: Credits
     subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
-    have: You actually have %credit% credits!
+    have: You currently have %credit% credit(s)!
     buy: Buy some credits
   addCollaborator:
     title: Add a contributor
@@ -383,8 +383,8 @@ employer:
       changeAccess: Change access
       changed: Access of the contributor has been changed
     deleted: Contributor deleted !
-    type: Type in the mail of a contributor, a user will be created and he will receive an email to login
-    youHave: You habe been added to
+    type: Type-in the email of a contributor, a user will be created and he will receive an email to login
+    youHave: You have been added to
     added: The contributor has been added !
     connect: Connect to your account with your email as a login and 0000 for password, you will then be able to modify your personal information and change you password.
 
@@ -400,12 +400,12 @@ featured:
   reserved: Booked
   empoyer:
     title: Featured Employer
-    modal: Are you sure you want to book this week? This will cost you %credit% credits.
+    modal: Are you sure you want to book this week? This will cost you %credit% credit(s).
     reserve: Book
   offer:
     title: Featured Offer
     reserve: Book
-    modal: Are you sure you want to book this week? This will cost you %credit% credits.
+    modal: Are you sure you want to book this week? This will cost you %credit% credit(s).
 
 email:
   sent: You message has been sent !
@@ -485,8 +485,8 @@ delete: Delete
 
 searchEmployer:
   title: Our very own directory of the best companies for hiring
-  discover: Discover our very own directory of companies hiring in Luxembourg. You can explore here the companies registered with us, their size and their employee benefits. Start browsing now!
-
+  discover: Discover our very own directory of companies hiring in Luxembourg. Start browsing now!
+  type: Search a company
 about:
   let: Let us present ourselves
   text1: Jobnow is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
@@ -544,7 +544,7 @@ redirect:
 price:
   credit: Credit
   credits: Credit(s)
-  find: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
+  find: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost! 1 credit = 1 job offer posted
   price: Price
   bills: Bills
   ourPackages: Our packages
@@ -562,7 +562,7 @@ price:
     success: You bought %credits% credits!
     zipcode: Zipcode
     please: please try again.
-    unable: Unable to take payment, %s
+    unable: Unable to process payment, %s
     cvc: Security code at the back of the card
 
 bill:
@@ -577,15 +577,15 @@ bill:
   totalExludingTax: Total VAT excluded
   totalIncludingTaxes: Total VAT inclusive
   tex: TEX
-  downloadEstimation: Download an estimation
-  estimation: Estimation
+  downloadEstimation: Download a quote
+  estimation: Quote
 
 
 admin:
   title: Administrator
   dashboard:
     employerList: Employers list
-    candidateList: Candidats list
+    candidateList: Candidates list
     adList: Ads list
     createAd: Post an ad
     stat: Statistics

@@ -40,20 +40,20 @@ class SitemapController extends Controller
         $urls[] = ['loc' =>
             'https://jobnow.lu' . $this->get('router')->generate('contact_us_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
-        $urls[] = ['loc' =>
-            'https://jobnow.lu' . $this->get('router')->generate('about_us',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
+//        $urls[] = ['loc' =>
+//            'https://jobnow.lu' . $this->get('router')->generate('about_us',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+//        ];
         $urls[] = ['loc' =>
             'https://jobnow.lu' . $this->get('router')->generate('faq_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
 
-        $urls[] = ['loc' =>
-            'https://jobnow.lu' . $this->get('router')->generate('privacy_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
-
-        $urls[] = ['loc' =>
-            'https://jobnow.lu' . $this->get('router')->generate('legal_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
-        ];
+//        $urls[] = ['loc' =>
+//            'https://jobnow.lu' . $this->get('router')->generate('privacy_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+//        ];
+//
+//        $urls[] = ['loc' =>
+//            'https://jobnow.lu' . $this->get('router')->generate('legal_page',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+//        ];
         
         //CandidateBundle routing
 
