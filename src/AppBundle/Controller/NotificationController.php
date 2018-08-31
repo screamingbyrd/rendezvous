@@ -119,15 +119,10 @@ class NotificationController extends Controller
                 'text/html'
             )
         ;
-
 //        return $this->render('AppBundle:Emails:notificationCreated.html.twig', array(
 //        ));
         $message->getHeaders()->addTextHeader(
             CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
-        );
-
-        $message->getHeaders()->addTextHeader(
-            'Content-Type: text/plain; charset=UTF-8'
         );
 
         $mailer->send($message);
