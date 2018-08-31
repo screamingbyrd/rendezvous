@@ -345,8 +345,6 @@ class OfferController extends Controller
         $em->merge($offer);
         $em->flush();
 
-        $map = new Map();
-
         //workarround to ssl certificat pb curl error 60
 
         $config = [
@@ -370,23 +368,28 @@ class OfferController extends Controller
 
         $status = $response->getStatus();
 
-        foreach ($response->getResults() as $result) {
+        $map = null;
 
-            $coord = $result->getGeometry()->getLocation();
-            continue;
+        if($status != 'ZERO_RESULTS'){
+            $map = new Map();
+            foreach ($response->getResults() as $result) {
 
+                $coord = $result->getGeometry()->getLocation();
+                continue;
+
+            }
+
+            if(isset($coord)) {
+                $marker = new Marker($coord);
+                $marker->setVariable('marker');
+                $map->setCenter($coord);
+                $map->getOverlayManager()->addMarker($marker);
+            }
+
+            $map->setStylesheetOption('width', 1100);
+            $map->setStylesheetOption('min-height', 1100);
+            $map->setMapOption('zoom', 10);
         }
-
-        if(isset($coord)) {
-            $marker = new Marker($coord);
-            $marker->setVariable('marker');
-            $map->setCenter($coord);
-            $map->getOverlayManager()->addMarker($marker);
-        }
-
-        $map->setStylesheetOption('width', 1100);
-        $map->setStylesheetOption('min-height', 1100);
-        $map->setMapOption('zoom', 10);
 
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
