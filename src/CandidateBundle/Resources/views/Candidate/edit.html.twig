@@ -6,7 +6,7 @@
 
 
 {% block body %}
-    <div class="jumbotron employer-jumbotron">
+    <div class="jumbotron homepage-jumbotron">
         <div>
             <div class="title-employer">{{ user.firstName }} {{ user.lastName }}</div>
         </div>
@@ -284,4 +284,19 @@
         });
 
     </script>
+    <style>
+        .homepage-jumbotron::after{
+            content: '';
+            background-image:url({{asset('images/jobnow-home.jpg')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            position:absolute;
+            z-index: -1;
+            background-position: center center;
+        }
+    </style>
 {% endblock %}

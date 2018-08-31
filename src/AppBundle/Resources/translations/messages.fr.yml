@@ -7,31 +7,30 @@ job: Emploi
 
 homepage:
   title: Trouvez la carrière qui vous correspond
-  subtitle: Votre recherche d’emploi débute et s’achève avec nous
+  subtitle: Votre recherche d'emploi commence et se termine avec nous
   ourMission:
-    1:
-      title: Notre mission est double.
-      text: Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg.
-    2:
-      title: Une équipe dévouée.
-      text: Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises.
-    3:
-      title: Une remise en question permanente.
-      text: Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
+      1:
+        title: Notre mission est double.
+        text: Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg.
+      2:
+        title: Une équipe dévouée.
+        text: Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises.
+      3:
+        title: Une remise en question permanente.
+        text: Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
   category: Catégories
-  ourPartners: Nos partenaire
+  ourPartners: Nos partenaires
   discount:
     title: 2 crédits offerts !
-    description: Pour toute inscription en tant qu’employeur durant le mois de septembre, vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, et ce, pour un total de 4 mois !
+    description: Pour toute inscription en tant qu'employeur pendant tout le mois de Septembre vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, pour un total de quatre mois.
 
 searchPage:
-  display: Displaying %numberOfItem% of %countResult% Jobs
+  display: Affiche %numberOfItem% sur %countResult% offres
 
 how:
-  title: An explanation is always better
-  employers: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
-  candidates: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
-
+  title: Une explication est toujours mieux
+  employers: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de candidats et d’assurer des candidats correspondant à votre offre d’emploi, ce qui facilitera le choix du candidat approprié.
+  candidates: Parce que trouver un nouveau job peut être stressant, nous vous avons simplifié les choses ! Notre plateforme est conçu pour vous aider à trouver le poste idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez complété votre profil, vous n'avez plus qu'à postuler aux offres qui vous correspondent !
 header:
   register: S'inscrire
   how: Guide d'utilisation
@@ -42,7 +41,7 @@ header:
     title: Espace Candidat
     findJob: Trouver un travail
     companies: Découvrir les entreprises
-    submit: Envoyer votre cv
+    submit: Envoyer votre CV
     profile: Mon profil
     dashboard:
       alert: Mes Notifications
@@ -77,10 +76,10 @@ form:
       create: Créer votre compte
       edit: Modifier vos informations
     subTitle:
-      candidate: Your hunt for the perfect job position starts here!
-      employer: Your lookout for the perfect candidate starts now!
-    complete: Completer votre profile
-    completed: Profile complété
+      candidate: Votre recherche du poste idéal commence ici!
+      employer: Votre recherche pour le candidat parfait commence maintenant!
+    complete: Compléter votre profil
+    completed: Profil complété
     already: Vous avez déjà un profil ?
     connect: Connectez-vous %link_start%ici%link_end%
     accept: J'accepte les conditions générales d'utilisation
@@ -88,24 +87,24 @@ form:
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
 
     email: Email
-    passwordValidation : Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule et un nombre.
+    passwordValidation : Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule et un chiffre.
     firstname: Prénom
     lastname: Nom
     companyName: Nom de la société
     vatNumber: Numéro de TVA
-    phone: N° de téléphone
+    phone: Numéro de téléphone
     socialMedia: Liens réseaux sociaux
     description: Description
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
     edited: L'employeur a bien été modifé !
     editedCandidate: Votre compté à bien été modifié !
-    error: Adresse e-mail déjà utilisé, veuillez réessayer !
+    error: Adresse e-mail déjà utilisée, veuillez réessayer !
     successEmployer: Vous êtes à présent inscrit en temps que recruteur !
     successCandidate: Vous êtes à présent inscrit en temps que candidat !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
     exp0: -- Indiquez votre expérience --
-    exp00: -- Experience requierement --
+    exp00: -- Experience requirement --
     exp1: 0 à 2 ans
     exp2: 2 à 5 ans
     exp3: 6 ans et plus
@@ -132,36 +131,36 @@ form:
     dip4: Master
     dip5: Doctorat
 
-    ben0: -- Benefits you offer --
+    ben0: -- Avantages offerts --
     ben1: Place de parking
     ben2: Tickets restaurant
     ben3: 13ème mois
     ben4: Voiture de société
 
-    wag0: -- Salary grid --
-    wag1: Up to 20,000 €
-    wag2: Up to 25,000 €
-    wag3: Up to 30,000 €
-    wag4: Up to 35,000 €
-    wag5: Up to 40,000 €
-    wag6: Up to 50,000 €
-    wag7: Up to 60,000 €
-    wag8: Up to 70,000 €
-    wag9: Up to 80,000 €
-    wag10: Up to 90,000 €
+    wag0: -- Grille salariale --
+    wag1: Jusqu'à 20,000 €
+    wag2: Jusqu'à 25,000 €
+    wag3: Jusqu'à 0,000 €
+    wag4: Jusqu'à 35,000 €
+    wag5: Jusqu'à 40,000 €
+    wag6: Jusqu'à 50,000 €
+    wag7: Jusqu'à 60,000 €
+    wag8: Jusqu'à 70,000 €
+    wag9: Jusqu'à 80,000 €
+    wag10: Jusqu'à 90,000 €
 
     searchedtag: Domaine de compétences désirées
     tag: Vos domaines de compétences
 
-    age: Age
+    age: Âge
 
     mailAlreadyExist: Cet email existe déjà
-    invalidVatFormat: Format TVA invalide, respecté la forme LU469464
+    invalidVatFormat: Format TVA invalide, respecter le format LU469464
     invalidVat: Numéro de TVA invalide
     invalid: Lien invalide
 
-    logoInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 180 par 180 pixels
-    coverImageInfo: L'image doit faire moins de 20 Mo. La meilleur résolution est de 1920 par 400 pixels.
+    logoInfo: L'image doit faire moins de 20 Mo. La meilleure résolution est de 180 par 180 pixels
+    coverImageInfo: L'image doit faire moins de 20 Mo. La meilleure résolution est de 1920 par 400 pixels.
 
   offer:
     creation:
@@ -192,7 +191,7 @@ form:
       search: Recherche
       employerPH:  Société
       categoryPH: Catégorie
-      empty: vide
+      empty: Vide
 
 
 dashboard:
@@ -200,7 +199,7 @@ dashboard:
   employer:
     slot:
       title: Slot
-      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable a volonté, pendant un an.
+      use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable à volonté, pendant un an.
       empty: vide
       endDate: Date de fin
       offer: Offre
@@ -218,8 +217,8 @@ dashboard:
     boostOffers: Booster vos offres
     totalOnline: Total offre en ligne
     totalInSlot: Total offre dans un slot
-    editProfile: Editer mon profile
-    watchProfile: Voir mon profile
+    editProfile: Editer mon profil
+    watchProfile: Voir mon profil
     return: Retour au table de bord
   candidate:
     list: Un résumé rapide des postes auxquels vous avez postulé
@@ -239,7 +238,7 @@ dashboard:
 slot:
   buy:
     title: Acheter un slot
-    sure: Etes vous sure de vouloir acheter un slot? Cela vous coutera %credit% crédits.
+    sure: Êtes-vous sûr de vouloir acheter un slot ? Cela vous coutera %credit% crédit(s).
     success: Le slot a bien été acheté
   add:
     title: Ajouter à un slot
@@ -247,7 +246,7 @@ slot:
     error: Vous n'avez pas de slot de libre
   remove:
     title: Retirer du slot
-    success: L'offre a bien été retiré du slot
+    success: L'offre a bien été retirée du slot
   empty:
     title: Vider le slot
     success: Le slot à bien été vidé
@@ -286,7 +285,7 @@ offer:
   option: Plus de précision (facultatif)
   about: À propos de cette offre
   jobDescription: Description de l'offre
-  sorry: Désolé, cette offre à été archivé
+  sorry: Désolé, cette offre à été archivée
   hereSomeSimilar: Voici quelques offres similaires qui pourraient vous intéresser:
   similarOffer: Offres similaires
   watchSimilar: Voir toutes les offres similaires
@@ -301,12 +300,12 @@ offer:
   search:
     title: Recherche d'offres
   delete:
-      sure: Etes vous sure de vouloir archiver cette offre ?
+      sure: Êtes-vous sûr de vouloir archiver cette offre ?
   activate:
-      sure: Etes vous sure de vouloir activer / prolonger cette offre? Cela vous coutera %credit% crédit.
-      sureMultiple: Etes vous sure de vouloir activer / prolonger ces offre? Cela vous coutera %credit% crédit.
+      sure: Êtes-vous sûr vouloir activer / prolonger cette offre? Cela vous coûtera %credit% crédit(s).
+      sureMultiple: Êtes-vous sûr de vouloir activer / prolonger ces offre ? Cela vous coûtera %credit% crédit(s).
   boost:
-      sure: Etes vous sure de vouloir booster vos offres? Cela vous coutera %credit% crédits.
+      sure: Êtes-vous sûr de vouloir booster vos offres ? Cela vous coûtera %credit% crédit(s).
   endDate: Date de fin :
   archived: Archivée
   apply:
@@ -325,7 +324,7 @@ offer:
   applied:
     success: Vous avez bien postulé à l'offre %title% !
     candidate: Vous avez postulez à l'offre
-    employer: Un candidat à postulé à cette offre :
+    employer: Un candidat a postulé à cette offre :
 
   carousel:
     activate: Une fois votre offre créée vous pouvz dépenser 1 crédit pour la mettre en ligne pendant 2 mois en clickant sur Activer/Prolonger.
@@ -333,8 +332,8 @@ offer:
 candidate:
   delete:
     delete: Supprimer mon compte
-    sure: Etes vous sûre de vouloir supprimer votre compte ?
-    deleted: Your profile has been deleted
+    sure: Êtes-vous sûr de vouloir supprimer votre compte ?
+    deleted: Votre profil été supprimé
   age: Âge
   tag: Domaines de compétence
   about: A propos de ce candidat
@@ -343,8 +342,8 @@ employer:
   show:
     title: Présentation de l'entreprise
     lastOffers: Dernières offres
-    noOffer: Il n'y a aucune offre actives
-    noTag: Il n'y a aucune catégories
+    noOffer: Il n'y a aucune offre active
+    noTag: Il n'y a aucune catégorie
     allOffers: Toute nos offres
     tags: Catégories
     spontaenous:
@@ -352,18 +351,18 @@ employer:
       send: Vous avez reçu une candidature spontanée
       sent: Votre candidature à bien été envoyé
   edit:
-    complete: Compléter vos informations
-    completed: Profile complété
+    complete: Complétez vos informations
+    completed: Profil complété
     personalData: Données personnelles :
     companyData: Données sur la société :
     professionalData: Données professionelles
     changePassword: Changer de mot de passe
     forgotPassword: Mot de passe oublié
-    fileToo: Fichier trop grand. Taille maximum 20 Mb.
+    fileToo: Fichier trop lourd. Taille maximale 20 Mb.
   credit:
     title: Crédits
-    subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
-    have: Vous avez actuellement %credit% credits !
+    subTitle: Trouver le candidat idéal peut prendre du temps, mais il est plus important d'avoir la bonne plateforme. Parfois, cela est lié au montant que vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le candidat idéal à moindre coût! Pour information, 1 crédit est équivalent à 1 annonce.
+    have: Vous avez actuellement %credit% crédits !
     buy: Acheter des crédits
   addCollaborator:
     title: Ajouter un collaborateur
@@ -371,14 +370,14 @@ employer:
     access:
       title: Accès
       simple: Simple
-      total: Totale
+      total: Total
       changeAccess: Changer les accès
-      changed: Les accès du collaborateur ont été changé
+      changed: Les accès du collaborateur ont été changés
     deleted: Collaborateur supprimé !
     type: Entrer l'email d'un collaborateur, il lui sera créer un utilisateur relié à votre société
-    youHave: Vous avrz été ajouter à
+    youHave: Vous avez été ajouter à
     added: Collaborateur ajouté
-    connect: Connectez vous a votre compte avec votre email comme identifiant et 0000 comme mot de passe, vous pourez ensuite modifier vos informations personelles et votre mot de passe.
+    connect: Connectez-vous à votre compte avec votre email comme identifiant et 0000 comme mot de passe, vous pourrez ensuite modifier vos informations personnelles et votre mot de passe.
 
 freelance: Freelance
 fulltime: CDI
@@ -392,12 +391,12 @@ featured:
   reserved: Réservé
   employer:
     title: Employeurs en avant
-    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
+    modal: Êtes-vous sûr de vouloir réserver cette semaine ? Cela vous coûtera %credit% crédits.
     reserve: Réserver
   offer:
     title: Offres en avant
     reserve: Réserver
-    modal: Etes vous sure de vouloir réserver cette semaine? Cela vous coutera %credit% crédits.
+    modal: Êtes-vous sûr de vouloir réserver cette semaine ? Cela vous coûtera %credit% crédits.
 
 email:
   sent: Votre message à bien été envoyé !
@@ -405,19 +404,19 @@ email:
   application:
     candidate:  Vous avez postulé à cette offre :
     employer:
-      applied: A candidate applied to your offer:
-      comment: Comment/ motivation letter:
-      download: Télécharger le cv
+      applied: Un candidat a postulé à votre candidature:
+      comment: Commentaire / Lettre de motivation :
+      download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation
   contact: Vous avre reçu un message de %name%
-  contactedUs: Quelqu'un nous a contacté
+  contactedUs: Quelqu'un vous a contacté
   message: Message
-  hasBeenModified: a été modifié, allé vérifié
-  deleted: Your account has been deleted
-  contacted: You have received a message !
+  hasBeenModified: a été modifié, allez vérifier
+  deleted: Votre compte a été supprimé
+  contacted: Vous avez reçu un message !
   endOfActivation:
-    youOffer: Your offer %title% will arrive at the end of activation in %days% days
-    thinkAbout: Think about extending their activations on your dashboard
+    youOffer: Votre annonce %title% sera désactivée dans %days% jours.
+    thinkAbout: Pensez à prolonger leurs activations sur votre tableau de bord
   notification:
     new: Vous avez créé une alerte email
     created:
@@ -425,9 +424,9 @@ email:
       now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
     send:
       title:
-        regular: New jobs are available for this %parameter%
-        search: New jobs are available for you
-      new: New offers could interest you
+        regular: De nouveaux emplois sont disponibles pour ces %parameter%
+        search: De nouveaux emplois sont disponibles pour vous
+      new: De nouvelles offres pourraient vous intéresser
   footer:
     contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@jobnow.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
@@ -439,7 +438,7 @@ contact:
   message: Votre message
   us:
     title: Contactez-nous
-    subTitle: The best way to reach us is to call us
+    subTitle: N'hésitez pas à nous contacter !
     smallTitle: Contact
     employer: Contacter un conseiller
   location: Notre localisation
@@ -550,18 +549,18 @@ price:
   ourPackages: Nos offres
   noBonus: Aucun bonus
   buy: Acheter
-  allow: Les crédits vous permettent de mettre en ligne vos offres ainsi que d'augmenter leur visibilitées
-  go: Utiliser vos crédits pour mettre en ligne vos offres ainsi que d'augmenter leur visibilitées
+  allow: Les crédits vous permettent de mettre en ligne vos offres ainsi que d'augmenter leur visibilitée
+  go: Utiliser vos crédits pour mettre en ligne vos offres ainsi que d'augmenter leur visibilitée
   history: Historique
   payment:
     title: Achat de crédits
-    chose: Vous avez choisit d'acheter %nbrCredits% crédits pour un prix total de %price%€
+    chose: Vous avez choisi d'acheter %nbrCredits% crédits pour un prix total de %price%€
     enter: Entrer vos informations de paiement
     validate: Valider mon paiement
-    sure: Etes vous sûre de vouloir acheter %nbrCredits% crédits ?
+    sure: Êtes-vous sûr de vouloir acheter %nbrCredits% crédits ?
     success: Vous avez bien acheté %credits% crédits !
-    zipcode: Code postale
-    please: Essayer encore s'il vous plait.
+    zipcode: Code postal
+    please: Essayer encore s'il vous plaît.
     unable: Impossible d'accepter le paiement, %s
     cvc: Code de sécurité au dos de la carte
 
@@ -595,9 +594,9 @@ admin:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Ajouter un admin
-    enter: Entrer l'email d'un user existant
-    doNotExist: Ce user n'existe pas
-    sure: Etes vous sure de vouloir effacer cette administrateur ?
+    enter: Entrer l'email d'un utilisateur existant
+    doNotExist: Cet utilisateur n'existe pas
+    sure: Êtes-vous sûr de vouloir effacer cet administrateur ?
   ads:
     showArchived: Montrer les pubs archivées
     hideArchived: Cacher les pubs archivées
@@ -611,34 +610,34 @@ admin:
   enterMail: Entrer un email
   enterCompnay: Entrer un nom de société
   enterTitle: Entrer un titre
-  sureCandidate: Etes vous sûre de vouloir effacer ce candidat ?
-  sureEmployer: Etes vous sûre de vouloir effacer cette employeur ?
+  sureCandidate: Êtes-vous sûr de vouloir effacer ce candidat ?
+  sureEmployer: Êtes-vous sûr de vouloir effacer cet employeur ?
   offerList:
-    totalNonVerifiedOffer: Total offre active non vérifié
+    totalNonVerifiedOffer: Total offres actives non-vérifiée
     nonArchivedOffers: Offres non archivées
     archivedOffers: Offres archivées
     showAll: Toutes les offres
     showActive: Offres actives
-    showNotValidated: Offres active non validé
+    showNotValidated: Offres actives non-validées
     creationDate: Date de création
     valid: Valide
     invalid: Invalide
-    sureArchive: Etes vous sûre de vouloir archiver/désarchiver cette offre ?
-    whyInvalid: Pourquoi cette offre n'est elle pas valide ?
+    sureArchive: Êtes-vous sûr de vouloir archiver/désarchiver cette offre ?
+    whyInvalid: Pourquoi cette offre n'est-elle pas valide ?
   log:
-    nbrActive: Nombre d'offre active
-    nbrEmployer: Nombre d'employeur
-    nbrCandidate: Nombre de candidat
+    nbrActive: Nombre d'offres actives
+    nbrEmployer: Nombre d'employeurs
+    nbrCandidate: Nombre de candidats
     total: Total
     monthly: Mensuel
-    totalCredit: Nombre total de credit
-    monthlyCredit: Nombre de credit par mois
-    selected: Valeur choisit
+    totalCredit: Nombre total de crédit(s)
+    monthlyCredit: Nombre de crédit(s) par mois
+    selected: Valeur choisie
   addCredit:
     title: Ajouter des crédits
     price: Prix
     subject: Crédits ajoutés à votre compte
-    creditsAdded: Suite a votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
+    creditsAdded: Suite à votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
 
 
 
