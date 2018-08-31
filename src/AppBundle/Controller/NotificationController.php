@@ -109,7 +109,6 @@ class NotificationController extends Controller
 
         $translated = $this->get('translator')->trans('email.notification.new');
         $message = (new \Swift_Message($translated))
-            ->setCharset('iso-8859-2')
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($mail)
             ->setBody(
@@ -125,6 +124,10 @@ class NotificationController extends Controller
 //        ));
         $message->getHeaders()->addTextHeader(
             CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+
+        $message->getHeaders()->addTextHeader(
+            'Content-Type: text/plain; charset=UTF-8'
         );
 
         $mailer->send($message);
