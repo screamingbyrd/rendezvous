@@ -28,7 +28,7 @@ class SitemapController extends Controller
         //AppBundle routing
 
         $urls[] = ['loc' =>
-            'https://jobnow.lu' . $this->get('router')->generate('jobnow_home',array('_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+            'https://jobnow.lu' . $this->get('router')->generate('jobnow_home',array('_locale' => $locale)), 'changefreq' => 'daily', 'priority' => '1.0'
         ];
 
         $urls[] = ['loc' =>
