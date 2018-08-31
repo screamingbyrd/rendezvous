@@ -7,13 +7,22 @@ job: Emploi
 
 homepage:
   title: Trouvez la carrière qui vous correspond
-  subtitle: Votre recherche d'emploi commence et se termine avec nous
-  ourMission: Notre mission est double. Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg. Une équipe dévouée. Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises. Une remise en question permanente. Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
+  subtitle: Votre recherche d’emploi débute et s’achève avec nous
+  ourMission:
+    1:
+      title: Notre mission est double.
+      text: Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg.
+    2:
+      title: Une équipe dévouée.
+      text: Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises.
+    3:
+      title: Une remise en question permanente.
+      text: Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
   category: Catégories
   ourPartners: Nos partenaire
   discount:
     title: 2 crédits offerts !
-    description: Pour toute inscription en tant qu'employeur pendant tout le mois de décembre vous reçevrez 2 crédit pour mettre en ligne vos offre gratuitement, pour un total de quatre mois.
+    description: Pour toute inscription en tant qu’employeur durant le mois de septembre, vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, et ce, pour un total de 4 mois !
 
 searchPage:
   display: Displaying %numberOfItem% of %countResult% Jobs
@@ -34,7 +43,7 @@ header:
     findJob: Trouver un travail
     companies: Découvrir les entreprises
     submit: Envoyer votre cv
-    profile: Mon profile
+    profile: Mon profil
     dashboard:
       alert: Mes Notifications
       applied: Mes candidatures
@@ -178,7 +187,7 @@ form:
       success: Vos annonces ont bien été boostées !
       error: Vous n'avez pas assez de crédit pour booster vos offres !
     search:
-      keyword: Mots clefs
+      keyword: Mots-clefs
       location: Lieu de travail
       search: Recherche
       employerPH:  Société

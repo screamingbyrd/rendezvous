@@ -1,0 +1,15 @@
+{
+  "short_name": "Jobnow",
+  "name": "Jobnow",
+  "icons": [
+    {
+      "src": "images/fav_icon_jn.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "start_url": "/fr",
+  "background_color": "#272f3b",
+  "display": "standalone",
+  "theme_color": "#272f3b"
+}

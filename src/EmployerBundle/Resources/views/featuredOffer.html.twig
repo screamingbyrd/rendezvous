@@ -136,7 +136,7 @@
                     <h4 class="modal-title" id="myModalLabel">{{ 'featured.offer.modal'|trans({'%credit%': featuredOfferCredit}) }}</h4>
                 </div>
                 <select id="featured-offer-id" name="offer">
-                        <option value="0">select a value</option>
+                        <option value="0">select an offer</option>
                     {% for offer in offers %}
                         <option value="{{ offer.id }}">{{ offer.title }}</option>
                     {% endfor %}

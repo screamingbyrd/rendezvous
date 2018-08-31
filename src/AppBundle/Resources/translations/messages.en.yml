@@ -8,7 +8,16 @@ job: Job
 homepage:
   title: Find the career you deserve
   subtitle: Your job search starts and ends with us
-  ourMission: Our mission is to empower locally implanted companies to find the perfect candidate for them when the time is right. We also work for the candidates to help them find and get their ideal job in Luxembourg. Our dedicated team of recruiting experts work everyday to offer the best customer service and match for both employers and candidates. Our brand new website offers a continued development for a better experience every day.
+  ourMission:
+    1:
+      title: Our mission is double.
+      text: We help locally implanted companies to find the perfect candidate for them when the time is right while working for the candidates to help them find and get their ideal job in Luxembourg.
+    2:
+      title: A dedicated team.
+      text: Our recruiting experts work everyday to offer the best customer service and match for both employers and candidates.
+    3:
+      title: A permanent questioning.
+      text: Our brand new website offers a continued development for a better experience every day.
   category: Tags
   ourPartners: Our partners
   discount:

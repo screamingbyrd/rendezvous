@@ -674,10 +674,13 @@ legend{
     overflow: hidden;
 }
 .employer-thumb-logo{
-    width: 62px;
-    height: 45px;
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+    padding: 0;
+    background-color: white;
     margin-right: 10px;
-    margin-left: 10px;
 }
 .offer-thumb-image-div{
     position: relative;
@@ -1125,6 +1128,9 @@ legend{
     }
     #navbarfooter .navbar-right{
         display: -webkit-flex;
+    }
+    #navbarfooter .navbar-right li{
+        margin-right: 20px;
     }
     .feature-box-employer {
         height: 268px;
