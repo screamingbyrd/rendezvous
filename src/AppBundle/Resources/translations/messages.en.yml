@@ -29,7 +29,7 @@ homepage:
     description: For any registration as an employer during the month of September you will receive 2 credit to put your offers online for free, for four month in total.
 
 searchPage:
-  display: Displaying %numberOfItem% of %countResult% Jobs
+  display: Displaying %numberOfItem% of %countResult% Job(s)
 
 how:
   title: An explanation is always better
