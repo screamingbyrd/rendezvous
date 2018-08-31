@@ -89,12 +89,13 @@
                 {{ offer.description| raw }}
             </div>
 
-            <div class="row fade-in-left animated shadow-box">
-                <h3>{{ offer.location }}</h3>
-
-                {{ ivory_google_map(map) }}
-                {{ ivory_google_api([map]) }}
-            </div>
+            {% if map is defined and map is not null %}
+                <div class="row fade-in-left animated shadow-box">
+                    <h3>{{ offer.location }}</h3>
+                    {{ ivory_google_map(map) }}
+                    {{ ivory_google_api([map]) }}
+                </div>
+            {% endif %}
         </div>
 
         <div class="col-sm-6 col-md-3" style="margin-bottom: 50px;">

@@ -114,11 +114,10 @@
 
         </div>
     </div>
-    {% if employer.location is not null %}
+    {% if employer.location is not null and map is defined and map is not null %}
         <div class="container">
             <div class="shadow-box fade-in-left animated">
                 <h3>{{ employer.location }}</h3>
-
                 {{ ivory_google_map(map) }}
                 {{ ivory_google_api([map]) }}
             </div>

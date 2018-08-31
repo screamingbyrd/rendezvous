@@ -354,8 +354,6 @@ class EmployerController extends Controller
             $tagArray = $offerRepository->getOfferTags($employer->getId());
         }
 
-        $map = new Map();
-
         //workarround to ssl certificat pb curl error 60
 
         $config = [
@@ -379,24 +377,29 @@ class EmployerController extends Controller
 
         $status = $response->getStatus();
 
-        foreach ($response->getResults() as $result) {
+        $map = null;
 
-            $coord = $result->getGeometry()->getLocation();
-            continue;
+        if($status != 'ZERO_RESULTS') {
+            $map = new Map();
 
+            foreach ($response->getResults() as $result) {
+
+                $coord = $result->getGeometry()->getLocation();
+                continue;
+
+            }
+
+            if (isset($coord)) {
+                $marker = new Marker($coord);
+                $marker->setVariable('marker');
+                $map->setCenter($coord);
+                $map->getOverlayManager()->addMarker($marker);
+            }
+
+            $map->setStylesheetOption('width', 1100);
+            $map->setStylesheetOption('min-height', 1100);
+            $map->setMapOption('zoom', 10);
         }
-
-        if(isset($coord)) {
-            $marker = new Marker($coord);
-            $marker->setVariable('marker');
-            $map->setCenter($coord);
-            $map->getOverlayManager()->addMarker($marker);
-        }
-
-        $map->setStylesheetOption('width', 1100);
-        $map->setStylesheetOption('min-height', 1100);
-        $map->setMapOption('zoom', 10);
-
 
         return $this->render('EmployerBundle:Employer:show.html.twig', array(
             'employer' => $employer,
