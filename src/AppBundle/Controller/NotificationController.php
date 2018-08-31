@@ -125,6 +125,9 @@ class NotificationController extends Controller
         $message->getHeaders()->addTextHeader(
             CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
         );
+
+        $message->toString();
+        
         $mailer->send($message);
 
         $translated = $this->get('translator')->trans('notification.created');
