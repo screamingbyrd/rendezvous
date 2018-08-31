@@ -1,15 +1,5 @@
-
-
-
-
-jobnow_home_before:
-    path: "/"
-    defaults: { _controller: AppBundle:App:index2 }
-
-
-
 jobnow_home:
-    path: "/home"
+    path: "/"
     defaults: { _controller: AppBundle:App:index }
 jobnow_contact:
     locales:
