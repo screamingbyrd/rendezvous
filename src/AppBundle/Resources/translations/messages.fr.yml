@@ -55,7 +55,7 @@ header:
   employers:
     title: Espace Employeur
     post: Poster une offre
-    edit: Editer une offr*e
+    edit: Editer une offre
     findCandidate: Trouver un candidat
     pricing: Tarifs
     dashboard: Tableau de bord

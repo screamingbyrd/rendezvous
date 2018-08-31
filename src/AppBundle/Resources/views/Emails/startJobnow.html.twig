@@ -29,7 +29,6 @@
         width: 100%;
     }
     .content-mail{
-        text-align: center;
         padding-top: 15px;
         padding-bottom: 30px;
         padding-left: 10px;
@@ -66,13 +65,19 @@
         </div>
 
         <div class="content-mail">
-            <div class="other-footer">
-                {{ 'email.endOfActivation.youOffer'|trans({'%title%':offer.title, '%days%': days}) }}
-            </div>
-            <div>
-                {{ 'email.endOfActivation.thinkAbout'|trans }}
-            </div>
+            <div>Dear applicants and recruiters,</div>
 
+            <div class="other-footer">We are excited to inform that we are <strong>LIVE!</strong></div>
+
+            <div class="other-footer">Our <a href="https://jownow.lu">brand new platform</a>  was launched earlier today by our dedicated team and you can start browsing it now!</div>
+
+            <div class="other-footer">We also have a special welcome gift for recruiters: any new registration as an employer will automatically <strong>add 2 credits to your account</strong>. These credits will allow you to post 2 job ads for free for two months each!</div>
+
+            <div class="other-footer">If you experience any bugs or technical difficulties, don't hesitate to send us an email or <a href="https://jobnow.lu/en/contact-us-page">contact us</a> through our chat!</div>
+
+            <div class="other-footer">We'll hope you'll enjoy Jobnow.lu and wish you the best of luck to find the perfect job or the perfect candidate.</div>
+
+            <div class="other-footer"><strong>The Jobnow.lu  Team</strong></div>
         </div>
 
         <div class="footer-mail">

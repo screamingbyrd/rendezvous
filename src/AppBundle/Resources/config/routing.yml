@@ -123,3 +123,8 @@ vat_exist:
         en: "/check-vat"
         fr: "/verifier-tva"
     defaults: { _controller: AppBundle:App:checkVatNumber }
+send_start:
+    locales:
+        en: "/send-start"
+        fr: "/envoyer-mail-debut"
+    defaults: { _controller: AppBundle:App:sendStartMail }

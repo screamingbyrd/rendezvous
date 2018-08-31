@@ -15,6 +15,7 @@ use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
+use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 
 class AppController extends Controller
 {
@@ -195,4 +196,34 @@ class AppController extends Controller
 
     }
 
+    public function sendStartMailAction(Request $request){
+
+        $arrayNewUser = array();
+
+//        $arrayNewUser = $request->get('list');
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+        foreach ($arrayNewUser as $mail){
+            $message = (new \Swift_Message('Jownow is live !'))
+                ->setFrom('jobnowlu@noreply.lu')
+                ->setTo($mail)
+                ->setBody(
+                    $this->renderView(
+                        'AppBundle:Emails:startJobnow.html.twig',
+                        array()
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $message->getHeaders()->addTextHeader(
+                CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+            );
+            $mailer->send($message);
+        }
+
+        var_dump('send');
+
+        return new Response();
+    }
 }
