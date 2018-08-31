@@ -139,10 +139,12 @@
             $('#navbar').removeClass('in');
             if (document.location.toString().match('#')) {
                 $('.nav-tabs a[data-target="#' + document.location.toString().split('#')[1] + '"]').tab('show');
+                window.scrollTo(0,0);
             }
         });
         if (url.match('#')) {
             $('.nav-tabs a[data-target="#' + url.split('#')[1] + '"]').tab('show');
+            window.scrollTo(0,0);
         }
         $('.nav-tabs a').on('shown.bs.tab', function (e) {
             window.location.hash = e.target.hash;
