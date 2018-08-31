@@ -44,7 +44,7 @@ jobnow_payment:
 contact_us_page:
     locales:
         en: "/contact-us-page"
-        fr: "/page-contacter-nous"
+        fr: "/page-contactez-nous"
     defaults: { _controller: AppBundle:Contact:contactUsPage }
 about_us:
     locales:

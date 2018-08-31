@@ -288,6 +288,7 @@ offer:
   languagesPH: Select one or more language(s)
   image: Offer image
   submit: Submit
+  save: Save
   option: More options (not mandatory)
   about: About the offer
   jobDescription: Job description

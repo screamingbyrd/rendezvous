@@ -139,6 +139,7 @@ body {
         position: absolute;
         left: 30px;
         z-index: 200;
+        margin-top: 20px;
     }
     .homepage-search-bar{
         width: 50% !important;
@@ -1137,8 +1138,8 @@ legend{
     }
     .return-to-dashboard{
         position: absolute;
-        top: 98px;
-        right: 20px;
+        top: 69px;
+        left: 10px;
         z-index: 200;
     }
     .select-year{

@@ -29,7 +29,7 @@ homepage:
     description: Pour toute inscription en tant qu'employeur pendant tout le mois de Septembre vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, pour un total de quatre mois.
 
 searchPage:
-  display: Affiche %numberOfItem% sur %countResult% offres
+  display: Affiche %numberOfItem% sur %countResult% offre(s)
 
 how:
   title: Une explication est toujours mieux
@@ -55,7 +55,7 @@ header:
   employers:
     title: Espace Employeur
     post: Poster une offre
-    edit: Editer une offre
+    edit: Editer une offr*e
     findCandidate: Trouver un candidat
     pricing: Tarifs
     dashboard: Tableau de bord
@@ -287,6 +287,7 @@ offer:
   languagesPH: Langue(s) requise(s)
   image: Image pour votre offre
   submit: Soumettre
+  save: Enregistrer
   option: Plus de précision (facultatif)
   about: À propos de cette offre
   jobDescription: Description de l'offre
@@ -332,7 +333,7 @@ offer:
     employer: Un candidat a postulé à cette offre :
 
   carousel:
-    activate: Une fois votre offre créée vous pouvz dépenser 1 crédit pour la mettre en ligne pendant 2 mois en clickant sur Activer/Prolonger.
+    activate: Une fois votre offre créée vous pouvez dépenser 1 crédit pour la mettre en ligne pendant 2 mois en cliquant sur Activer/Prolonger.
 
 candidate:
   delete:

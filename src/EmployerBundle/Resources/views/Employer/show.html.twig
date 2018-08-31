@@ -31,7 +31,7 @@
                     <a href="{{ path('create_notification', {'type':'notification.employer', 'id':employer.id}) }}" class="jobnow-button add-employer-notification">ajouter au notificaions</a>
                 {% endif %}
                 {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-                    <a href="{{ path('edit_employer', {'id':employer.id}) }}" class="btn btn-primary add-employer-notification">Editer mon profile</a>
+                    <a href="{{ path('edit_employer', {'id':employer.id}) }}" class="btn btn-primary add-employer-notification">{{ 'dashboard.employer.editProfile'|trans }}</a>
                 {% endif %}
             </div>
             <hr>

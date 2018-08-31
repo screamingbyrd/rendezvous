@@ -6,6 +6,9 @@
 {% endblock %}
 
 {% block body %}
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and (offer.employer == app.user.employer) %}
+        <a href="{{ path('edit_offer', {'id':offer.id}) }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.editOffer' | trans }}</a>
+    {% endif %}
 
     <div class="jumbotron offer-jumbotron">
         <h2>{{ offer.title }}</h2>
