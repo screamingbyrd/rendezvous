@@ -105,13 +105,11 @@ class NotificationController extends Controller
         $em->persist($notification);
         $em->flush();
 
-
-        Swift_Preferences::getInstance()->setCharset('UTF-8');
-
         $mailer = $this->container->get('swiftmailer.mailer');
 
         $translated = $this->get('translator')->trans('email.notification.new');
         $message = (new \Swift_Message($translated))
+
             ->setFrom('jobnowlu@noreply.lu')
             ->setTo($mail)
             ->setBody(
