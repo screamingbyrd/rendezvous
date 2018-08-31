@@ -60,15 +60,15 @@
 <div class="container">
     <div class="container-mail">
         <div class="header-mail">
-            <a href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
+            <a href="https://jobnow.lu{{ path('jobnow_home') }}"><img  style="width: 190px;" class="logo-jobnow" src="https://jobnow.lu/images/logo_jobnow.png"></a>
         </div>
 
         <div class="content-mail">
             <h3>{{ 'email.application.employer.applied'| trans}}</h3>
-            <div><a href="{{ path('show_offer', {'id':offer.id,'url':offer.offerUrl}) }}">{{ offer.title }}</a></div>
+            <div><a href="https://jobnow.lu{{ path('show_offer', {'id':offer.id,'url':offer.offerUrl}) }}">{{ offer.title }}</a></div>
 
             <div class="other-footer">
-                <a href="{{ asset(link) }}" download>
+                <a href="https://jobnow.lu{{ asset(link) }}" download>
                     {{ 'email.application.employer.download'|trans }}
                 </a>
             </div>
@@ -77,7 +77,7 @@
             </div>
             {% if linkCover is not null and linkCover != '' %}
                 <div class="other-footer">
-                    <a href="{{ asset(linkCover) }}" download>
+                    <a href="https://jobnow.lu{{ asset(linkCover) }}" download>
                         {{ 'email.application.employer.downloadCoverLetter'|trans }}
                     </a>
                 </div>
@@ -91,8 +91,8 @@
 
         <div class="footer-mail">
             <div class="social-netwok-container">
-                <a href="https://www.facebook.com/jobnow.lu/"><img class="logo-facebook" src="{{asset('images/logo-facebook.png')}}"></a>
-                <a href="https://www.linkedin.com/company/jobnow-luxembourg/"><img class="logo-linkedin" src="{{asset('images/logo-linkedin.png')}}"></a>
+                <a href="https://www.facebook.com/jobnow.lu/"><img class="logo-facebook" src="https://jobnow.lu/images/logo-facebook.png"></a>
+                <a href="https://www.linkedin.com/company/jobnow-luxembourg/"><img class="logo-linkedin" src="https://jobnow.lu/images/logo-linkedin.png"></a>
             </div>
 
             <div class="other-footer">

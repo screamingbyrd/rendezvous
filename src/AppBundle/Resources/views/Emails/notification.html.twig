@@ -194,7 +194,7 @@
 <div class="container">
     <div class="container-mail">
         <div class="header-mail">
-            <a href="{{ path('jobnow_home') }}"><img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}"></a>
+            <a href="https://jobnow.lu{{ path('jobnow_home') }}"><img  style="width: 190px;" class="logo-jobnow" src="https://jobnow.lu/images/logo_jobnow.png"></a>
         </div>
 
         <div class="content-mail">
@@ -218,7 +218,7 @@
                             {% else %}
                                 {% set image = 'images/default_cover_image6.jpg' %}
                             {% endif %}
-                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});background-position: center center;">
+                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('https://jobnow.lu'{{ image }});background-position: center center;">
                                 <div class="layer layer-offer-element animated">
                                 </div>
                             </div>
@@ -228,7 +228,7 @@
                                     <div class="offer-element-name">{{ offer.employer.name }}</div>
                                     <div class="offer-element-title">{{ offer.title |truncate(20, true)}}</div>
                                     <div><span class="other-element">{{ offer.location }}</span></div>
-                                    <div class="offer-element-other"><span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}"><i class="fa fa-file-text-o"></i>{{ offer.contractType.name | trans }}</span><span class="other-element"><i class="fa fa-clock-o"></i>{{ offer.startDate|time_diff }}</span></div>
+                                    <div class="offer-element-other"><span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}">{{ offer.contractType.name | trans }}</span><span class="other-element">{{ offer.startDate|time_diff }}</span></div>
                                 </div>
                             </div>
                         </a>
@@ -237,7 +237,7 @@
             </ul>
 
             <div class="other-footer">
-                {{ 'notification.if'|trans }} <a href="{{ path('delete_notification', {'id': id}) }}">{{ 'notification.here'|trans }}</a>
+                {{ 'notification.if'|trans }} <a href="https://jobnow.lu{{ path('delete_notification', {'id': id}) }}">{{ 'notification.here'|trans }}</a>
             </div>
 
 
@@ -245,8 +245,8 @@
 
         <div class="footer-mail">
             <div class="social-netwok-container">
-                <a href="https://www.facebook.com/jobnow.lu/"><img class="logo-facebook" src="{{asset('images/logo-facebook.png')}}"></a>
-                <a href="https://www.linkedin.com/company/jobnow-luxembourg/"><img class="logo-linkedin" src="{{asset('images/logo-linkedin.png')}}"></a>
+                <a href="https://www.facebook.com/jobnow.lu/"><img class="logo-facebook" src="https://jobnow.lu/images/logo-facebook.png"></a>
+                <a href="https://www.linkedin.com/company/jobnow-luxembourg/"><img class="logo-linkedin" src="https://jobnow.lu/images/logo-linkedin.png"></a>
             </div>
 
             <div class="other-footer">
