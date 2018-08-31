@@ -5,6 +5,10 @@ to: to
 
 job: Job
 
+title:
+  home: Jobs, internship and Apprenticeship in Luxembourg
+  listEmployer: List of companies
+
 homepage:
   title: Find the career you deserve
   subtitle: Your job search begins and ends with us
@@ -53,6 +57,7 @@ header:
   employers:
     title: Employers
     post: Post a job
+    edit: Edit a job
     findCandidate: Find a candidate
     pricing: Pricing
     dashboard: Dashborard

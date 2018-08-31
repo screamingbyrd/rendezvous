@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'dashboard.title' | trans }}
+    {{ parent() }} - {{ 'dashboard.title' | trans }}
 {% endblock %}
 
 {% block body %}

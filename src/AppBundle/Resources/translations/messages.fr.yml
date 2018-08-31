@@ -5,6 +5,10 @@ to: au
 
 job: Emploi
 
+title:
+  home: Emplois, jobs, stages et missions d'intérim au Luxembourg
+  listEmployer: Répertoire des entreprise
+
 homepage:
   title: Trouvez la carrière qui vous correspond
   subtitle: Votre recherche d’emploi débute et s’achève avec nous
@@ -51,6 +55,7 @@ header:
   employers:
     title: Espace Employeur
     post: Poster une offre
+    edit: Editer une offre
     findCandidate: Trouver un candidat
     pricing: Tarifs
     dashboard: Tableau de bord

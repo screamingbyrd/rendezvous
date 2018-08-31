@@ -1,17 +1,16 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'employer.credit.title' | trans }}  - {{ parent() }}
+    {{ parent() }} - {{ 'employer.addCollaborator.title' | trans }}
 {% endblock %}
 
 {% block body %}
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
         <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
-    <div class="jumbotron homepage-jumbotron">
-        <h2>{{ 'employer.addCollaborator.title'|trans }}</h2>
-    </div>
-    <div class="container stripe-container">
+
+    <div class="container jobnow-container">
+
         <div class="shadow-box col-md-12">
             {{ 'employer.addCollaborator.type'|trans }}
             {{ form_start(form, {attr: {id: form.vars.id}}) }}
@@ -27,7 +26,7 @@
                 </div>
                 {{ form_end(form) }}
             </div>
-
+        </div>
     </div>
 
 

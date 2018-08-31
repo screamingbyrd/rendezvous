@@ -2,7 +2,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'footer.faq'|trans }}
+    {{ parent() }} - {{ 'footer.faq'|trans }}
 {% endblock %}
 
 {% block body %}

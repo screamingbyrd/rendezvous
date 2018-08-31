@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    Accueil - {{ parent() }}
+    {{ parent() }} - {{ candidate.user.firstName }} {{ candidate.user.lastName }}
 {% endblock %}
 
 {% block body %}
