@@ -974,6 +974,7 @@ class OfferController extends Controller
         $tags = $offer->getTag();
         $similarOfferArray = array();
         $tagsArray = array();
+        $finalArray = array();
         if(isset($tags)){
             $finder = $this->container->get('fos_elastica.finder.app.offer');
             $boolQuery = new \Elastica\Query\BoolQuery();
@@ -1006,6 +1007,9 @@ class OfferController extends Controller
         $generateUrlService = $this->get('app.offer_generate_url');
         foreach ($similarOfferArray as &$offer){
             $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
+            if($offer->isActive()){
+                $finalArray[] = $offer;
+            }
         }
 
         return array('offers' => $similarOfferArray, 'tags' => $tagsArray);
