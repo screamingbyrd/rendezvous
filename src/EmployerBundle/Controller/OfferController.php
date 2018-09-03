@@ -370,7 +370,7 @@ class OfferController extends Controller
 
         $map = null;
 
-        if($status != 'ZERO_RESULTS'){
+        if($status == 'OK'){
             $map = new Map();
             foreach ($response->getResults() as $result) {
 
