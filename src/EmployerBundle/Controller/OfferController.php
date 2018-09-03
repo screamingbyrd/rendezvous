@@ -660,6 +660,7 @@ class OfferController extends Controller
         $location = $request->get('location');
         $chosenEmployer = $request->get('employer');
         $chosenTags = $request->get('tags');
+        $chosenContract  = $request->get('contracts');
 
         $contractTypeRepository = $this
             ->getDoctrine()
@@ -740,6 +741,7 @@ class OfferController extends Controller
             'keyword' => $keywords,
             'employers' => $employers,
             'chosenEmployer'=>$chosenEmployer,
+            'chosenContracts' => $chosenContract,
             'tags' => $tags,
             'chosenTags' => $chosenTags,
             'featuredOffer' => $featuredOffers,
