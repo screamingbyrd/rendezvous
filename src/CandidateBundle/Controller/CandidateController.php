@@ -125,13 +125,13 @@ class CandidateController extends Controller
         $originalCvPath = $candidate->getCv();
         $titleCV = null;
         if (isset($originalCvPath)){
-            $titleCV = substr($originalCvPath, strrpos($originalCvPath, '%') + 1);
+            $titleCV = substr($originalCvPath, strrpos($originalCvPath, '-job42-') + 7);
         }
 
         $originalCoverLetterPath = $candidate->getCoverLetter();
         $titleCoverLetter = null;
         if(isset($originalCoverLetterPath)){
-            $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '%') + 1);
+            $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '-job42-') + 7);
         }
 
 
