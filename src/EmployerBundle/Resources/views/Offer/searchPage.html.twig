@@ -31,15 +31,15 @@
                 <div class="col-md-2">
                     <input type="submit" class="jobnow-button searchOffer" value="Search">
                 </div>
-                {#<div class="col-md-2">#}
-                    {#<select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">#}
-                        {#<option></option>#}
-                        {#<option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>#}
-                        {#{% for employer in employers %}#}
-                            {#<option value="{{ employer.name }}" {% if chosenEmployer is defined and employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>#}
-                        {#{% endfor %}#}
-                    {#</select>#}
-                {#</div>#}
+                <div class="col-md-2" style="display: none;">
+                    <select title="Employer" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">
+                        <option></option>
+                        <option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>
+                        {% for employer in employers %}
+                            <option value="{{ employer.name }}" {% if chosenEmployer is defined and employer.name == chosenEmployer %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
 
                 <div class="row">
@@ -183,7 +183,7 @@
                             url += 'tags%5B%5D='+tags[i]+'&';
                         }
                     }
-                    url += 'keyword='+keyword+'&location='+location;
+                    url += 'keyword='+keyword+'&location='+location+'&employer='+employer;
 
                     window.history.replaceState('object or string', 'Title', url);
                 });

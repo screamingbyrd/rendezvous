@@ -83,7 +83,7 @@ class OfferController extends Controller
             $translated = $this->get('translator')->trans('form.offer.creation.success');
             $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('dashboard_employer');
+            return $this->redirectToRoute('employer_offers');
 
         }
         return $this->render('EmployerBundle:Form:postOffer.html.twig', array(
