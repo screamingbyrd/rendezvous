@@ -995,7 +995,7 @@ class EmployerController extends Controller
         ));
     }
 
-    public function sendSearchAction(Request $request, $id){
+    public function spontaneousApplyAction(Request $request, $id){
         $session = $request->getSession();
         $emloyerRepository = $this
             ->getDoctrine()

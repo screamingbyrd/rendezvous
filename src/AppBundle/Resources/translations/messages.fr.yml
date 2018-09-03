@@ -410,7 +410,7 @@ email:
   application:
     candidate:  Vous avez postulé à cette offre :
     employer:
-      applied: Un candidat a postulé à votre candidature:
+      applied: Un candidat a postulé à votre offre:
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation

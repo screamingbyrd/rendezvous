@@ -180,7 +180,7 @@ apply_spontaneous:
     locales:
         en: "/spontaneous-application/{id}"
         fr: "/candidature-spontane/{id}"
-    defaults: { _controller: EmployerBundle:Employer:sendSearch }
+    defaults: { _controller: EmployerBundle:Employer:spontaneousApply }
 end_activation_offer_mail:
     locales:
         en: "/mail-end-activation/{days}"
