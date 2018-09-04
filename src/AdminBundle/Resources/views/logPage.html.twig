@@ -22,6 +22,8 @@
                 <li class="active">
                     <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">{{ 'dashboard.employer.slot.offer'|trans }}</a>
                 </li>
+                <li><a class="tab-log" data-target="#application" data-toggle="tab" data-id="application">Application</a>
+                </li>
                 <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="employer">{{ 'notification.employer'|trans }}</a>
                 </li>
                 <li><a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="candidate">{{ 'header.candidates.register'|trans }}</a>
@@ -77,6 +79,35 @@
                                 <div class="shadow-box">
                                     <h2>{{ 'admin.log.monthlyCredit'|trans }}</h2>
                                     <div class="ct-chart ct-credit-monthly ct-perfect-fourth" style="height: 500px;"></div>
+                                    <div class="point-value"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="application">
+                    <div class="shadow-box">
+                        <div class="tab-content candidate-content">
+                            <div class="navbar-dashboard">
+                                <ul class="nav nav-tabs nav-candidate navbar-dashboard">
+                                    <li class="active">
+                                        <a class="tab-log" data-target="#total-application" data-toggle="tab" data-id="total-application">{{ 'admin.log.total'|trans }}</a>
+                                    </li>
+                                    <li><a class="tab-log" data-target="#monthly-application" data-toggle="tab" data-id="monthly-application">{{ 'admin.log.monthly'|trans }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane active initial fade" id="total-application">
+                                <div class="shadow-box">
+                                    <h2>Total application</h2>
+                                    <div class="ct-chart ct-application ct-perfect-fourth" style="height: 500px;"></div>
+                                    <div class="point-value"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="monthly-application">
+                                <div class="shadow-box">
+                                    <h2>Nombre d'application par mois</h2>
+                                    <div class="ct-chart ct-application-monthly ct-perfect-fourth" style="height: 500px;"></div>
                                     <div class="point-value"></div>
                                 </div>
                             </div>
@@ -203,6 +234,43 @@
                         ]
                     };
                         let chart = new Chartist.Line('.ct-credit-monthly', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });
+                    }, 500);
+                    break;
+                case 'application':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ application |json_encode|raw}}
+                        ]
+                    };
+                    let chart = new Chartist.Line('.ct-application', data, options);
+                    let addedEvents = false;
+                    chart.on('draw', function() {
+                        if (!addedEvents) {
+                            $('.ct-point').on('mouseover', function() {
+                                $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
+                            });
+                        }
+                    });
+                    }, 500);
+                    break;
+                case 'monthly-application':
+                    $('#total-application').removeClass('initial');
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ monthlyApplication |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-application-monthly', data, options);
                         let addedEvents = false;
                         chart.on('draw', function() {
                             if (!addedEvents) {
