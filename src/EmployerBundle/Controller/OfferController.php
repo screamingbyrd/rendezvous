@@ -391,6 +391,14 @@ class OfferController extends Controller
             $map->setMapOption('zoom', 10);
         }
 
+        $seoPage = $this->container->get('sonata.seo.page');
+
+        $seoPage
+            ->addMeta('property', 'og:title', $offer->getTitle())
+            ->addMeta('property', 'og:type', 'article')
+            ->addMeta('property', 'og:image', 'https://jobnow.lu/web/uploads/images/employer/'.$offer->getEmployer()->getCoverImage()->getImageName())
+            ->addMeta('property', 'og:description', $offer->getDescription());
+
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
             'similarOfferArray' => $similarOfferArray['offers'],

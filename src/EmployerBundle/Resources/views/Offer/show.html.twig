@@ -28,15 +28,16 @@
             {% else %}
                 {% set image = 'images/default_cover_image2.jpg' %}
             {% endif %}
-            {#<button class="btn btn-success" type="button" onclick="share();">{{ 'offer.share'|trans }}</button>#}
-            {#<script>#}
-                {#function share() {#}
-                    {#FB.ui({#}
-                        {#method: 'share',#}
-                        {#href: '{{ app.request.uri }}',#}
-                    {#}, function(response){});#}
-                {#}#}
-            {#</script>#}
+            <div id="shareBtn" class="btn btn-success clearfix">{{ 'offer.share'|trans }}</div>
+            <script>
+                document.getElementById('shareBtn').onclick = function() {
+                    FB.ui({
+                        method: 'share',
+                        display: 'popup',
+                        href: '{{ app.request.uri }}',
+                    }, function(response){});
+                }
+            </script>
 
         </h3>
     </div>

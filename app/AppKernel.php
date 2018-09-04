@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
 
 
         ];
