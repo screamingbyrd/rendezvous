@@ -163,7 +163,7 @@ ivory_google_map:
     map:
         debug: "%kernel.debug%"
         language: "%locale%"
-        api_key: "AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc"
+        api_key: "AIzaSyB_mt43fWT1l6hneIIuLQkFzd13BqFzafY"
     geocoder:
         client: httplug.client.default
         message_factory: httplug.message_factory.default
