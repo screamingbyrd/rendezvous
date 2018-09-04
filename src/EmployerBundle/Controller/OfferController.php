@@ -395,7 +395,7 @@ class OfferController extends Controller
 
         $seoPage
             ->addMeta('property', 'og:title', $offer->getTitle())
-            ->addMeta('property', 'og:type', 'article')
+            ->addMeta('property', 'og:type', 'website')
             ->addMeta('property', 'og:image', 'https://jobnow.lu/uploads/images/employer/'.$offer->getEmployer()->getCoverImage()->getImageName())
             ->addMeta('property', 'og:description', $offer->getDescription())
             ->addMeta('property', 'og:url', $requestPrime->getUri());
