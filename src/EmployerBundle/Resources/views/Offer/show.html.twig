@@ -33,7 +33,7 @@
                 function share() {
                     FB.ui({
                         method: 'share',
-                        href: '{{ path(app.request.attributes.get("_route"),app.request.attributes.get("_route_params")) }}',
+                        href: '{{ app.request.uri }}',
                     }, function(response){});
                 }
             </script>
