@@ -15,6 +15,13 @@
                     <p style="margin-bottom: 15px;">{{ 'login.noaccount'|trans }} <a href="{{ path('create_candidate') }}">  {{ 'login.candidate'|trans }}</a> {{ 'or'|trans }} <a href="{{ path('create_employer') }}">{{ 'login.employer'|trans }}</a> </p>
 
 
+                    <div>
+                        {#<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">#}
+                        {#</fb:login-button>#}
+
+                        <div id="status">
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
@@ -50,6 +57,46 @@
             </div>
         </div>
 
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '1225236684282099',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.1'
+            });
+
+
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            window.fbAsyncInit = function () {
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+
+                FB.ui({
+                    method: 'share',
+                    href: 'https://developers.facebook.com/docs/',
+                }, function (response) {
+                });
+            };
+        }
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                console.log(response);
+            });
+        }
+    </script>
 
 
 
