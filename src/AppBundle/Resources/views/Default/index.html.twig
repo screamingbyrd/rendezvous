@@ -15,7 +15,7 @@
                     <select title="Category" id="tags-input" name="tags[]"  class="selectpicker homepage-tag" title="Choose one of the following...">
                         <option value="" disabled selected>{{ 'employer.show.tags'|trans }}</option>
                         {% for tag in tags %}
-                            <option value="{{ tag.name }}">{{ tag.name|trans }}</option>
+                            <option value="{{ tag }}">{{ tag|trans }}</option>
                         {% endfor %}
                     </select>
                     <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
@@ -37,8 +37,21 @@
         </div>
     </div>
     <div class="container homepage-container">
+        <div class="fade-in-right animated">
+            <h1 class="text-center featured-offer" >{{ 'homepage.category'|trans }}</h1>
+            <div class="row">
+                {% for row  in tagArray|batch(2, null) %}
+                    <div class="{{ cycle(['color-row',''],loop.index) }}">
+                        {% for tag in row %}
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
+                        {% endfor %}
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
         {% if featuredOffer|length > 0 %}
-            <div class="row fade-in-right animated">
+            <div class="row fade-in-left animated">
                 <h1 class="featured-offer text-center">{{ 'featured.offer.title'|trans }}</h1>
                 {% if featuredOffer|length == 1 %}
                     {% set blocOffer = 12 %}
@@ -79,7 +92,7 @@
             <hr>
         {% endif %}
         {% if featuredEmployer|length > 0 %}
-            <div class="row featured-employer fade-in-left animated">
+            <div class="row featured-employer fade-in-right animated">
                 <h1 class="featured-offer text-center">{{ 'featured.employer.title'|trans }}</h1>
                 {% if featuredEmployer|length == 1 %}
                     {% set blocEmployer = 12 %}
@@ -116,19 +129,6 @@
             </div>
             <hr>
         {% endif %}
-        <div class="fade-in-right animated">
-            <h1 class="text-center featured-offer" >{{ 'homepage.category'|trans }}</h1>
-            <div class="row">
-                {% for row  in tagArray|batch(2, null) %}
-                    <div class="{{ cycle(['color-row',''],loop.index) }}">
-                        {% for tag in row %}
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 homepage-href-row"><a class="homepage-href-tag" href="{{ path('search_page_offer', {'tags':[tag.name]}) }}">{{ tag.name|trans }}</a><span style="float: right;">{{ tag.countOffer }}</span></div>
-                        {% endfor %}
-                    </div>
-
-                {% endfor %}
-            </div>
-        </div>
 
     </div>
     <div class="about-us-container">

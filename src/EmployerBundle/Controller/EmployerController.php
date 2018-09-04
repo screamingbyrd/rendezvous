@@ -379,7 +379,7 @@ class EmployerController extends Controller
 
         $map = null;
 
-        if($status != 'ZERO_RESULTS') {
+        if($status == 'OK') {
             $map = new Map();
 
             foreach ($response->getResults() as $result) {
@@ -995,7 +995,7 @@ class EmployerController extends Controller
         ));
     }
 
-    public function sendSearchAction(Request $request, $id){
+    public function spontaneousApplyAction(Request $request, $id){
         $session = $request->getSession();
         $emloyerRepository = $this
             ->getDoctrine()

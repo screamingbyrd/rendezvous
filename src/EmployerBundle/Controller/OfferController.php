@@ -83,7 +83,7 @@ class OfferController extends Controller
             $translated = $this->get('translator')->trans('form.offer.creation.success');
             $session->getFlashBag()->add('info', $translated);
 
-            return $this->redirectToRoute('dashboard_employer');
+            return $this->redirectToRoute('employer_offers');
 
         }
         return $this->render('EmployerBundle:Form:postOffer.html.twig', array(
@@ -327,11 +327,11 @@ class OfferController extends Controller
             if(isset($candidate)){
                 $originalCvPath = $candidate->getCv();
                 if (isset($originalCvPath)){
-                    $titleCV = substr($originalCvPath, strrpos($originalCvPath, '%') + 1);
+                    $titleCV = substr($originalCvPath, strrpos($originalCvPath, '-job42-') + 7);
                 }
                 $originalCoverLetterPath = $candidate->getCoverLetter();
                 if(isset($originalCoverLetterPath)){
-                    $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '%') + 1);
+                    $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '-job42-') + 7);
                 }
             }
         }
@@ -370,7 +370,7 @@ class OfferController extends Controller
 
         $map = null;
 
-        if($status != 'ZERO_RESULTS'){
+        if($status == 'OK'){
             $map = new Map();
             foreach ($response->getResults() as $result) {
 
@@ -660,6 +660,7 @@ class OfferController extends Controller
         $location = $request->get('location');
         $chosenEmployer = $request->get('employer');
         $chosenTags = $request->get('tags');
+        $chosenContract  = $request->get('contracts');
 
         $contractTypeRepository = $this
             ->getDoctrine()
@@ -740,6 +741,7 @@ class OfferController extends Controller
             'keyword' => $keywords,
             'employers' => $employers,
             'chosenEmployer'=>$chosenEmployer,
+            'chosenContracts' => $chosenContract,
             'tags' => $tags,
             'chosenTags' => $chosenTags,
             'featuredOffer' => $featuredOffers,
@@ -829,7 +831,7 @@ class OfferController extends Controller
 
         $cv = $candidate->getCv();
         if($_FILES["cv"]["size"] != 0){
-            $target_file = $target_dir . md5(uniqid()) . '%' . basename($_FILES["cv"]["name"]);
+            $target_file = $target_dir . md5(uniqid()) . '-job42-' . basename($_FILES["cv"]["name"]);
             move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
             if(isset($cv) && $cv != ''){
                 unlink($cv);
@@ -843,7 +845,7 @@ class OfferController extends Controller
         if($_FILES["cover-file"]["size"] != 0){
             $target_file_cover = null;
             $target_dir_cover = "uploads/images/candidate/";
-            $target_file_cover = $target_dir_cover . md5(uniqid()) . '%' . basename($_FILES["cover-file"]["name"]);
+            $target_file_cover = $target_dir_cover . md5(uniqid()) . '-job42-' . basename($_FILES["cover-file"]["name"]);
             move_uploaded_file($_FILES["cover-file"]["tmp_name"], $target_file_cover);
             if(isset($coverLetter) && $coverLetter != ''){
                 unlink($coverLetter);

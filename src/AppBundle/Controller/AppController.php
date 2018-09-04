@@ -83,12 +83,10 @@ class AppController extends Controller
 
         $apiHelper = $apiHelperBuilder->build();
 
-        $tagRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Tag')
-        ;
-        $tags = $tagRepository->findAll();
+        $tags = array();
+        foreach ($tagArray as $tag){
+            $tags[] = $tag['name'];
+        }
 
         shuffle ($featuredEmployer);
         shuffle ($featuredOffer);

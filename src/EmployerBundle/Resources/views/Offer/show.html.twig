@@ -14,7 +14,7 @@
         <h2>{{ offer.title }}</h2>
         <h3 class="page-subtitle">
             <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
-            <div class="job-title">{{ offer.contractType.name |trans }}</div>
+            <div class="job-title"><a class="button-company-name" href="{{ path('search_page_offer', {'contracts':[offer.contractType.name]}) }}">{{ offer.contractType.name |trans }}</a></div>
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">{{ 'offer.posted' | trans }} {{ offer.creationDate |date('d/m/Y')}}</div>
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}

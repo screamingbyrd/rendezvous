@@ -29,4 +29,21 @@ class LogCreditRepository extends \Doctrine\ORM\EntityRepository
             )->setParameter('month',$month)->setParameter('year',$year)->execute();
     }
 
+    public function countTotalMoneyBefore($date){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select sum(lc.price) as total
+                    from AppBundle:logCredit lc
+                    where lc.date <= :date'
+            )->setParameter('date',$date)->execute();
+    }
+
+    public function countTotalMoneyMonthly($month, $year){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select sum(lc.price) as total
+                    from AppBundle:logCredit lc
+                    where month(lc.date) = :month and year(lc.date) = :year'
+            )->setParameter('month',$month)->setParameter('year',$year)->execute();
+    }
 }

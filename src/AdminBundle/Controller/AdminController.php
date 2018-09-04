@@ -311,11 +311,20 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:LogCredit');
 
+        $applicationRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:PostulatedOffers');
+
         $finalActiveLog = array();
         $finalCandidateLog = array();
         $finalEmployerLog = array();
         $finalCreditLog = array();
         $monthlyCreditLog = array();
+        $finalPriceLog = array();
+        $monthlyPriceLog = array();
+        $finalApplicationLog = array();
+        $monthlyApplicationLog = array();
 
         for ($i = 1; $i <= 12; $i++){
             $startDate = new \DateTime();
@@ -326,9 +335,13 @@ class AdminController extends Controller
             $endDate->setDate($year, $i, $lastDay);
             $finalActiveLog[] = (int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total'];
             $finalCandidateLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
+            $finalApplicationLog[] = (int)$applicationRepository->countTotalBefore($endDate)[0]['total'];
+            $monthlyApplicationLog[] = (int)$applicationRepository->countTotalMonthly($i, $year)[0]['total'];
             $finalEmployerLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
             $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
             $monthlyCreditLog[] = (int)$logCreditRepository->countTotalMonthly($i, $year)[0]['total'];
+            $finalPriceLog[] =(int)$logCreditRepository->countTotalMoneyBefore($endDate)[0]['total'];
+            $monthlyPriceLog[] = (int)$logCreditRepository->countTotalMoneyMonthly($i, $year)[0]['total'];
         }
 
         return $this->render('AdminBundle::logPage.html.twig',array(
@@ -337,6 +350,10 @@ class AdminController extends Controller
             'activeCandidateLog' => $finalCandidateLog,
             'creditLog' => $finalCreditLog,
             'monthlyCreditLog' => $monthlyCreditLog,
+            'finalPriceLog' => $finalPriceLog,
+            'monthlyPriceLog' => $monthlyPriceLog,
+            'application' => $finalApplicationLog,
+            'monthlyApplication' => $monthlyApplicationLog,
             'year' => $year
         ));
     }

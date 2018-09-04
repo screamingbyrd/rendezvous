@@ -22,4 +22,22 @@ class PostulatedOffersRepository extends \Doctrine\ORM\EntityRepository
         return $offers;
     }
 
+    public function countTotalBefore($date){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select count(distinct po.id) as total
+                    from AppBundle:postulatedOffers po
+                    where po.date <= :date'
+            )->setParameter('date',$date)->execute();
+    }
+
+    public function countTotalMonthly($month, $year){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select count(distinct po.id) as total
+                    from AppBundle:postulatedOffers po
+                    where month(po.date) = :month and year(po.date) = :year'
+            )->setParameter('month',$month)->setParameter('year',$year)->execute();
+    }
+
 }
