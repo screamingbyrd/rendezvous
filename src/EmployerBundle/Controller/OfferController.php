@@ -299,7 +299,7 @@ class OfferController extends Controller
         return $this->redirectToRoute('list_offer_admin');
     }
 
-    public function showAction($id){
+    public function showAction(Request $requestPrime, $id){
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -397,7 +397,8 @@ class OfferController extends Controller
             ->addMeta('property', 'og:title', $offer->getTitle())
             ->addMeta('property', 'og:type', 'article')
             ->addMeta('property', 'og:image', 'https://jobnow.lu/web/uploads/images/employer/'.$offer->getEmployer()->getCoverImage()->getImageName())
-            ->addMeta('property', 'og:description', $offer->getDescription());
+            ->addMeta('property', 'og:description', $offer->getDescription())
+            ->addMeta('property', 'og:url', $requestPrime->getUri());
 
         return $this->render('EmployerBundle:Offer:show.html.twig', array(
             'offer' => $offer,
