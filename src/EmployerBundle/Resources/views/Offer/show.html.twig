@@ -20,7 +20,6 @@
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
             {% endif %}
-
             {% if offer.image is not null and offer.image.imageName is not null %}
                 {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
             {% elseif offer.employer.coverImage.imageName is not null %}
@@ -28,15 +27,20 @@
             {% else %}
                 {% set image = 'images/default_cover_image2.jpg' %}
             {% endif %}
-            <div id="shareBtn" class="btn btn-success clearfix">{{ 'offer.share'|trans }}</div>
-            <script>
-                document.getElementById('shareBtn').onclick = function() {
-                    FB.ui({
-                        method: 'share',
-                        display: 'popup',
-                    }, function(response){});
-                }
-            </script>
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+
+            <!-- Your share button code -->
+            <div class="fb-share-button"
+                 data-href="{{ app.request.uri }}"
+                 data-layout="button_count">
+            </div>
 
         </h3>
     </div>
