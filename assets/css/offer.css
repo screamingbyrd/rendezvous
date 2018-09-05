@@ -111,11 +111,14 @@
 }
 
 .share-container-offer{
-    margin-top: 5px;
+    margin-top: 15px;
     display: inline-flex;
+    border-top: 1px #ddd solid;
+    padding-top: 16px;
 }
 .share-container-offer span{
     margin-right: 15px;
+    font-weight: bold;
 }
 .share-container-offer .fa-linkedin-in{
     margin-left: 6px;
