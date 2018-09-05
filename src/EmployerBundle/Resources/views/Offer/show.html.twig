@@ -105,11 +105,17 @@
                         }(document, 'script', 'facebook-jssdk'));</script>
 
                     <!-- Your share button code -->
-                    <div class="fb-share-button"
-                         data-href="{{ app.request.uri }}"
-                         data-layout="button" data-size="large">
-                    </div>
-                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
+                    <a href="#" class="facebook-share"><i class="fa fa-facebook"></i></a>
+                    <script>
+                        $('.facebook-share').click(function(e) {
+                            e.preventDefault();
+                            FB.ui({
+                                method: 'share',
+                                href: '{{ app.request.uri }}',
+                            }, function(response){});
+                        });
+                    </script>
+                    <a class="share-linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
             &summary=My%20favorite%20developer%20program&source=LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>

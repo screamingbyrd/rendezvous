@@ -120,10 +120,29 @@
     margin-right: 15px;
     font-weight: bold;
 }
-.share-container-offer a{
+.share-linkedin{
     background-color: #0077b5;
     padding-right: 6px;
     border-radius: 5px;
+    color: white;
+}
+.facebook-share{
+    background-color: #4469b3;
+    padding-right: 9px;
+    border-radius: 5px;
+    padding-left: 7px;
+    color: white;
+    margin-right: 20px;
+}
+.facebook-share .fa{
+    margin-top: 7px;
+}
+.share-container-offer a:hover {
+    text-decoration: none;
+    color: white;
+}
+.share-container-offer a:visited {
+    text-decoration: none;
     color: white;
 }
 .share-container-offer .fa-linkedin-in{
