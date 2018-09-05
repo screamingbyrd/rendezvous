@@ -126,12 +126,14 @@ class CandidateController extends Controller
         $titleCV = null;
         if (isset($originalCvPath)){
             $titleCV = substr($originalCvPath, strrpos($originalCvPath, '-job42-') + 7);
+            $titleCV = str_replace('-space-', ' ', $titleCV);
         }
 
         $originalCoverLetterPath = $candidate->getCoverLetter();
         $titleCoverLetter = null;
         if(isset($originalCoverLetterPath)){
             $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '-job42-') + 7);
+            $titleCoverLetter = str_replace('-space-', ' ', $titleCoverLetter);
         }
 
 
