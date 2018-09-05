@@ -110,7 +110,17 @@
     min-width: 130px;
 }
 
-
+.share-container-offer{
+    margin-top: 5px;
+    display: inline-flex;
+}
+.share-container-offer span{
+    margin-right: 15px;
+}
+.share-container-offer .fa-linkedin-in{
+    margin-left: 6px;
+    margin-top: 6px;
+}
 
 .offer-search-element{
     width: 94%;

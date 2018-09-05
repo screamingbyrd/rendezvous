@@ -27,21 +27,6 @@
             {% else %}
                 {% set image = 'images/default_cover_image2.jpg' %}
             {% endif %}
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
-
-            <!-- Your share button code -->
-            <div class="fb-share-button"
-                 data-href="{{ app.request.uri }}"
-                 data-layout="button_count">
-            </div>
-
         </h3>
     </div>
 
@@ -107,6 +92,25 @@
                         </div>
                     </div>
                 {% endif %}
+                <div class="col-md-12 share-container-offer">
+                    <span>{{ 'offer.share'|trans }} : </span>
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+
+                    <!-- Your share button code -->
+                    <div class="fb-share-button"
+                         data-href="{{ app.request.uri }}"
+                         data-layout="button_count">
+                    </div>
+                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
+            &summary=My%20favorite%20developer%20program&source=LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
 
             <div class="row fade-in-right animated shadow-box">
@@ -187,6 +191,7 @@
                 </div>
             {% endif %}
         </div>
+
 
     </div>
     {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}
