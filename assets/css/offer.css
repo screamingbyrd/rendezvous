@@ -120,6 +120,12 @@
     margin-right: 15px;
     font-weight: bold;
 }
+.share-container-offer a{
+    background-color: #0077b5;
+    padding-right: 6px;
+    border-radius: 5px;
+    color: white;
+}
 .share-container-offer .fa-linkedin-in{
     margin-left: 6px;
     margin-top: 6px;

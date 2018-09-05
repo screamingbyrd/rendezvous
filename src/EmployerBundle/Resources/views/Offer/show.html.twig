@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 {% endif %}
-                <div class="col-md-12 share-container-offer">
+                <div class="col-md-12 col-xs-12 col-sm-12 share-container-offer">
 
                     <span>{{ 'offer.share'|trans }} : </span>
                     <div id="fb-root"></div>
@@ -107,7 +107,7 @@
                     <!-- Your share button code -->
                     <div class="fb-share-button"
                          data-href="{{ app.request.uri }}"
-                         data-layout="button_count">
+                         data-layout="button" data-size="large">
                     </div>
                     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
             &summary=My%20favorite%20developer%20program&source=LinkedIn"><i class="fab fa-linkedin-in"></i></a>
