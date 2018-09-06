@@ -31,9 +31,14 @@ class GenerateUrl
             'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
             'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
             'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
-            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
+            'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', '\'' => '','(' => '', ')' => '');
 
-        $url .= str_replace([' ', '/'], '-', $offer->getEmployer()->getName()) .'/';
+
+
+
+        $offerEmployer = strtr( $offer->getEmployer()->getName(), $unwanted_array );
+
+        $url .= str_replace([' ', '/'], '-', $offerEmployer ) .'/';
         if(isset($tags) && count($tags)>0){
             foreach ($tags as $tag){
                 $translated = $this->translator->trans($tag->getName());
@@ -44,8 +49,12 @@ class GenerateUrl
             $url = rtrim($url,'-') . '/';
         }
 
-        $url .=  str_replace([' ', '/'], '-', $offer->getTitle()) . '/';
-        $url .=  str_replace([' ', '/', ','], '-', $offer->getLocation());
+        $offerTitle = strtr( $offer->getTitle(), $unwanted_array );
+        $offerLocation = strtr($offer->getLocation(), $unwanted_array);
+
+
+        $url .=  str_replace([' ', '/'], '-', $offerTitle ) . '/';
+        $url .=  str_replace([' ', '/', ','], '-', $offerLocation);
         return strtolower($url);
     }
 }
