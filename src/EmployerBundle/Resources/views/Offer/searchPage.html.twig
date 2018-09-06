@@ -142,6 +142,20 @@
 
         </div>
 
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-comparison">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Compare offers</h4>
+                    </div>
+                    <div class="table-comparison">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <style>
             .title-compare{
                 margin-bottom: 5px;
@@ -203,6 +217,35 @@
             }
             .compare-offer-title{
                 margin-left: 10px;
+            }
+            .modal-dialog{
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) !important;
+                text-align:center;
+                width: 80%;
+            }
+            .modal-content{
+                display:inline-block;
+                background-color: #21282B;
+                color: white;
+            }
+            .table-comparison thead th{
+                text-align: center;
+            }
+            .table-comparison td{
+                padding-left: 10px;
+                padding-right: 10px;
+                border: 1px white;
+                margin-bottom: 10px;
+            }
+            .table-comparison table{
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+                border-collapse: separate;
+                border-spacing: 14px 14px;
             }
         </style>
 
@@ -372,15 +415,15 @@
             $('.title-compare').on('click', function () {
                 if($('.list-to-compare').css('display') == 'none'){
                     $('.list-to-compare').show();
+                    if($('.offer-to-compare').length > 0){
+                        $('.compare-button-container').show()
+                    }
                 }else {
                     $('.list-to-compare').hide();
+                    $('.compare-button-container').hide()
                 }
             })
 
-
-
-        </script>
-        <script>
 
 
         </script>
@@ -401,7 +444,8 @@
                 var draggableId = ui.draggable.attr("data-title");
                 var logo = ui.draggable.attr("data-logo");
                 var offerId = ui.draggable.attr("data-id");
-                var offer = '<div class="offer-to-compare" data-id="'+offerId+'"><img class="compare-offer-logo" src="'+logo+'"><div class="compare-offer-title">'+ draggableId + '</div><a class="remove-offer" href="#" onclick="removeOffer(event, this)"><i class="far fa-times-circle"></i></a></div>';
+                var info = ui.draggable.attr("data-info");
+                var offer = "<div class='offer-to-compare' data-info='"+info+"' data-id='"+offerId+"'><img class='compare-offer-logo' src='"+logo+"'><div class='compare-offer-title'>"+ draggableId + "</div><a class='remove-offer' href='#' onclick='removeOffer(event, this)'><i class='far fa-times-circle'></i></a></div>";
                 $('.drop-here').hide();
                 $(this).append(offer);
                 $(this).removeClass("hover-offer-comparison");
@@ -419,6 +463,105 @@
                     $('.compare-button-container').hide()
                     $('.drop-here').show();
                 }
+            }
+
+
+            $(".compare-button").on("click", function(e){
+
+                var table = new Table();
+
+                var values = [];
+                $('.offer-to-compare').each(function () {
+                   var newValue = JSON.parse($(this).attr('data-info'));
+                    newValue = newValue.map(function(v) {
+                        if(v == ''){
+                            return "-";
+                        }
+                        return v;
+                    });
+                    values.push(newValue);
+                });
+                var data = {
+                    k: ['offer','employer','salaire','experience','benefice','date de disponibilité','contrat'],
+                    v: values
+                }
+                table
+                    .setHeader(data.k)
+                    .setData(data.v).setTableClass('table slot-table')
+                    .build()
+
+
+                $("#modal-comparison").modal('show');
+            });
+
+            function Table() {
+                //sets attributes
+                this.header = [];
+                this.data = [[]];
+                this.tableClass = ''
+            }
+
+            Table.prototype.setHeader = function(keys) {
+                //sets header data
+                this.header = keys;
+                return this
+            };
+
+            Table.prototype.setData = function(data) {
+                //sets the main data
+                this.data = data;
+                return this
+            };
+
+            Table.prototype.setTableClass = function(tableClass) {
+                //sets the table class name
+                this.tableClass = tableClass;
+                return this
+            }
+
+            Table.prototype.build = function(container) {
+
+                //default selector
+                container = container || '.table-container';
+
+                //creates table
+                var table = $('<table></table>').addClass(this.tableClass);
+
+                var tr = $('<tr></tr>'); //creates row
+                var th = $('<th></th>'); //creates table header cells
+                var td = $('<td></td>'); //creates table cells
+
+
+                //creates
+                var tbody = $('<tbody></tbody>');
+
+                // var row = td.clone(); //creates a row
+                //
+                // var head = ['offer','employer','salaire','experience','benefice','date de disponibilité','contrat'];
+                // head.forEach(function(e,j) {
+                //     var tr = tr.clone();
+                //     tr.append(th.clone().text(e));
+                //     row.append(tr);
+                // });
+                // tbody.append(row);
+                //fills out the table body
+                this.data.forEach(function(d) {
+                    var row = td.clone(); //creates a row
+                    d.forEach(function(e,j) {
+                        if(j == 0){
+                            e = '<td><a target="_blank" href="'+e[1]+'">'+e[0]+'</a></td>';
+                            row.append(e)
+                        }else {
+                            row.append(tr.clone().text(e)) //fills in the row
+                        }
+
+                    });
+                    tbody.append(row) //puts row on the tbody
+                });
+
+                $('.table-comparison').html(table.append(tbody));
+
+                return this
             }
 
         </script>
