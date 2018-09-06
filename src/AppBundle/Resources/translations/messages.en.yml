@@ -30,6 +30,9 @@ homepage:
 
 searchPage:
   display: Displaying %numberOfItem% of %countResult% Job(s)
+  compare: Compare
+  compareTitle: Compare Offers
+  dropHere: Drag and drop an offer here
 
 how:
   title: An explanation is always better

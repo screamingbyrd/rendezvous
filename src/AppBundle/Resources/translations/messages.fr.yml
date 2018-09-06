@@ -30,6 +30,9 @@ homepage:
 
 searchPage:
   display: Affiche %numberOfItem% sur %countResult% offre(s)
+  compare: Comparer
+  compareTitle: Comparer les offres
+  dropHere: Glisser une offre ici
 
 how:
   title: Une explication est toujours mieux

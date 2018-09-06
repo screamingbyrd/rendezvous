@@ -133,11 +133,11 @@
 
         <div class="compare-offers">
             <div class="header-compare">
-                <div class="title-compare">Compare offers</div>
+                <div class="title-compare">{{ 'searchPage.compareTitle'|trans }}</div>
                 <div class="list-to-compare" id="droppable">
-                    <div class="drop-here">Drop here</div>
+                    <div class="drop-here">{{ 'searchPage.dropHere'|trans }}</div>
                 </div>
-                <div class="compare-button-container"><button class="btn btn-success compare-button" value="">compare</button> </div>
+                <div class="compare-button-container"><button class="btn btn-success compare-button" value="">{{ 'searchPage.compare'|trans }}</button> </div>
             </div>
 
         </div>
@@ -147,7 +147,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Compare offers</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'searchPage.compareTitle'|trans }}</h4>
                     </div>
                     <div class="table-comparison">
 
@@ -424,8 +424,6 @@
                 }
             })
 
-
-
         </script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
@@ -482,7 +480,6 @@
                     values.push(newValue);
                 });
                 var data = {
-                    k: ['offer','employer','salaire','experience','benefice','date de disponibilité','contrat'],
                     v: values
                 }
                 table
@@ -535,15 +532,15 @@
                 //creates
                 var tbody = $('<tbody></tbody>');
 
-                // var row = td.clone(); //creates a row
-                //
-                // var head = ['offer','employer','salaire','experience','benefice','date de disponibilité','contrat'];
-                // head.forEach(function(e,j) {
-                //     var tr = tr.clone();
-                //     tr.append(th.clone().text(e));
-                //     row.append(tr);
-                // });
-                // tbody.append(row);
+                var row = td.clone(); //creates a row
+
+                var head = ['{{ 'dashboard.employer.slot.offer'|trans }}','{{ 'notification.employer'|trans }}','{{ 'offer.wage'|trans }}','{{ 'offer.experience'|trans }}','{{ 'offer.benefits'|trans }}','{{ 'offer.available'|trans }}','{{ 'offer.contract'|trans }}'];
+                head.forEach(function(e,j) {
+                    var tt = tr.clone();
+                    tt.append(th.clone().text(e));
+                    row.append(tt);
+                });
+                tbody.append(row);
                 //fills out the table body
                 this.data.forEach(function(d) {
                     var row = td.clone(); //creates a row
