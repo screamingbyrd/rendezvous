@@ -84,12 +84,12 @@
     <div class="container">
 
         <div class="row">
-            <div class="{% if featuredOffer is defined and featuredOffer|length > 0 and chosenEmployer is null %}col-md-8{% endif %}">
+            <div class="{% if featuredOffer is defined and featuredOffer|length > 0 and (chosenEmployer is null or chosenEmployer is empty) %}col-md-8{% endif %}">
                 <ul id="myUL">
 
                 </ul>
             </div>
-            {% if featuredOffer is defined and featuredOffer|length > 0 and chosenEmployer is null %}
+            {% if featuredOffer is defined and featuredOffer|length > 0 and (chosenEmployer is null or chosenEmployer is empty) %}
             <div class="col-md-3 featured-offer-search">
                 <h1>{{ 'featured.offer.title'|trans }}</h1>
                 <ul >
@@ -130,6 +130,41 @@
         <div id="paginator-offer">
 
         </div>
+
+        <div class="compare-offers">
+            <div class="header-compare">
+                <div class="title-compare">Compare offers</div>
+                <div class="list-to-compare" id="droppable">
+
+                </div>
+            </div>
+
+        </div>
+
+        <style>
+            .title-compare{
+                margin-bottom: 5px;
+                color: white;
+                padding-top: 5px;
+            }
+            .compare-offers{
+                position: fixed;
+                bottom: 20px;
+                right: 50px;
+                width: 30%;
+            }
+            .header-compare{
+                background: #272f3b;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            .list-to-compare{
+                height: 500px;
+                background-color: white;
+                color: black;
+                display: none;
+            }
+        </style>
 
         <script>
             let searchedTags = [];
@@ -186,6 +221,8 @@
                     url += 'keyword='+keyword+'&location='+location+'&employer='+employer;
 
                     window.history.replaceState('object or string', 'Title', url);
+
+                    $(".draggable").draggable({ revert: 'invalid' })
                 });
             }
 
@@ -271,8 +308,44 @@
             //     }
             // });
 
-        </script>
+            window.onscroll = function() {myFunction()};
 
+
+            // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+            function myFunction() {
+                    if (($(".navbar-bottom").offset().top) <= ($(window).scrollTop() + $(window).height()) ) {
+                        if(!$(".compare-offers").hasClass('sticky')){
+                            $(".compare-offers").css("bottom", (20+ window.scrollY + window.innerHeight - $(".navbar-bottom").offset().top));
+                        }
+
+                    }else{
+                        $(".compare-offers").css("bottom", "20px");
+                    }
+
+
+            }
+
+            $('.compare-offers').on('click', function () {
+                if($('.list-to-compare').css('display') == 'none'){
+                    $('.list-to-compare').show();
+                }else {
+                    $('.list-to-compare').hide();
+                }
+            })
+
+
+
+        </script>
+        <script>
+
+
+        </script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $("#droppable").droppable({ accept: '.draggable'})
+            } );
+        </script>
     </div>
 
 {% endblock %}
