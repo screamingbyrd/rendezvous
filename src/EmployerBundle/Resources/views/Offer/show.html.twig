@@ -20,6 +20,13 @@
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
                 <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
             {% endif %}
+            {% if offer.image is not null and offer.image.imageName is not null %}
+                {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
+            {% elseif offer.employer.coverImage.imageName is not null %}
+                {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+            {% else %}
+                {% set image = 'images/default_cover_image2.jpg' %}
+            {% endif %}
         </h3>
     </div>
 
@@ -85,6 +92,32 @@
                         </div>
                     </div>
                 {% endif %}
+                <div class="col-md-12 col-xs-12 col-sm-12 share-container-offer">
+
+                    <span>{{ 'offer.share'|trans }} : </span>
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s); js.id = id;
+                            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+
+                    <!-- Your share button code -->
+                    <a href="#" class="facebook-share"><i class="fa fa-facebook"></i></a>
+                    <script>
+                        $('.facebook-share').click(function(e) {
+                            e.preventDefault();
+                            FB.ui({
+                                method: 'share',
+                                href: '{{ app.request.uri }}',
+                            }, function(response){});
+                        });
+                    </script>
+                    <a class="share-linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
+            &summary=My%20favorite%20developer%20program&source=LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
 
             <div class="row fade-in-right animated shadow-box">
@@ -165,6 +198,7 @@
                 </div>
             {% endif %}
         </div>
+
 
     </div>
     {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {{ sonata_seo_metadatas() }}
     <link rel="icon" href="{{asset('images/fav_icon_jn.png')}}">
     <title>{% block title %}Jobnow.lu{% endblock %}</title>
 
@@ -49,6 +49,28 @@
         {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                appId      : '1225236684282099',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.1'
+                });
+
+                FB.AppEvents.logPageView();
+
+            };
+
+            (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 
     {% endblock %}
 </head>

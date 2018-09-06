@@ -110,7 +110,45 @@
     min-width: 130px;
 }
 
-
+.share-container-offer{
+    margin-top: 15px;
+    display: inline-flex;
+    border-top: 1px #ddd solid;
+    padding-top: 16px;
+}
+.share-container-offer span{
+    margin-right: 15px;
+    font-weight: bold;
+}
+.share-linkedin{
+    background-color: #0077b5;
+    padding-right: 6px;
+    border-radius: 5px;
+    color: white;
+}
+.facebook-share{
+    background-color: #4469b3;
+    padding-right: 10px;
+    border-radius: 5px;
+    padding-left: 8px;
+    color: white;
+    margin-right: 20px;
+}
+.facebook-share .fa{
+    margin-top: 7px;
+}
+.share-container-offer a:hover {
+    text-decoration: none;
+    color: white;
+}
+.share-container-offer a:visited {
+    text-decoration: none;
+    color: white;
+}
+.share-container-offer .fa-linkedin-in{
+    margin-left: 6px;
+    margin-top: 6px;
+}
 
 .offer-search-element{
     width: 94%;

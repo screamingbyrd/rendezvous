@@ -304,6 +304,8 @@ offer:
   linkInfo: If you want to redirect to your internal recruitment platform
   inSlot: In slot
 
+  share: Share
+
   search:
       title: Search offers
   delete:
