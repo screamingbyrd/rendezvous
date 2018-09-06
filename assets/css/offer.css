@@ -28,6 +28,7 @@
 
 #myUL li .offer-element {
     border: 1px solid #ddd;
+    background-color: white;
     font-size: 18px;
     color: black;
     -webkit-transition: ease-out 0.7s;
@@ -906,6 +907,9 @@ h3.post-offer{
     }
     .post-offer .col-md-4,.col-md-3{
         margin-bottom: 10px;
+    }
+    .compare-offers{
+        display: none;
     }
 }
 

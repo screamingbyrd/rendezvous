@@ -71,7 +71,7 @@
             {% set adOrder = adOrder + 1 %}
         {% endif %}
         {% set count = count + 1 %}
-        <li class="search-result animated fadeIn draggable">
+        <li class="search-result animated fadeIn draggable" data-title="{{ offer.title }}" data-id="{{ offer.id }}" data-logo="{% if offer.employer.logo.imageName is not null%}{{asset('uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') )}}{% else %}{{ asset('images/logo-default.png') }}{% endif %}">
             <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
                 {% if offer.image is not null and offer.image.imageName is not null %}
                     {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}

@@ -135,8 +135,9 @@
             <div class="header-compare">
                 <div class="title-compare">Compare offers</div>
                 <div class="list-to-compare" id="droppable">
-
+                    <div class="drop-here">Drop here</div>
                 </div>
+                <div class="compare-button-container"><button class="btn btn-success compare-button" value="">compare</button> </div>
             </div>
 
         </div>
@@ -163,6 +164,45 @@
                 background-color: white;
                 color: black;
                 display: none;
+            }
+            .offer-to-compare{
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: white;
+                display: flex;
+                align-items: center;
+            }
+            .hover-offer-comparison{
+                background-color: #1F80F0;
+            }
+            .drop-here{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+            }
+            .remove-offer{
+                position: absolute;
+                right: 30px;
+            }
+            .compare-button-container{
+                width: 100%;
+                display: none;
+                background-color: #272f3b;
+                height: 50px;
+            }
+            .compare-button{
+                margin-top: 14px;
+            }
+            .compare-offer-logo{
+                width: 50px;
+                height: 50px;
+            }
+            .compare-offer-title{
+                margin-left: 10px;
             }
         </style>
 
@@ -222,7 +262,11 @@
 
                     window.history.replaceState('object or string', 'Title', url);
 
-                    $(".draggable").draggable({ revert: 'invalid' })
+                    $(".draggable").draggable({
+                        revert: 'invalid',
+                        zIndex: 700,
+                        drag : Drag
+                    })
                 });
             }
 
@@ -325,7 +369,7 @@
 
             }
 
-            $('.compare-offers').on('click', function () {
+            $('.title-compare').on('click', function () {
                 if($('.list-to-compare').css('display') == 'none'){
                     $('.list-to-compare').show();
                 }else {
@@ -343,8 +387,40 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $("#droppable").droppable({ accept: '.draggable'})
+                $("#droppable").droppable({ drop: Drop,
+                    over: function( event, ui ) {
+                        $(this).addClass("hover-offer-comparison");
+                    },
+                    out: function( event, ui ) {
+                        $(this).removeClass("hover-offer-comparison");
+                    }
+                })
             } );
+
+            function Drop(event, ui) {
+                var draggableId = ui.draggable.attr("data-title");
+                var logo = ui.draggable.attr("data-logo");
+                var offerId = ui.draggable.attr("data-id");
+                var offer = '<div class="offer-to-compare" data-id="'+offerId+'"><img class="compare-offer-logo" src="'+logo+'"><div class="compare-offer-title">'+ draggableId + '</div><a class="remove-offer" href="#" onclick="removeOffer(event, this)"><i class="far fa-times-circle"></i></a></div>';
+                $('.drop-here').hide();
+                $(this).append(offer);
+                $(this).removeClass("hover-offer-comparison");
+                ui.draggable.removeAttr("style");
+                $('.compare-button-container').show()
+            }
+            function Drag(event, ui) {
+                $('.list-to-compare').show();
+            }
+            function removeOffer(e, button) {
+                e.preventDefault();
+                button.parentElement.remove();
+                var numberOfOffers = $('.offer-to-compare').length;
+                if(numberOfOffers == 0){
+                    $('.compare-button-container').hide()
+                    $('.drop-here').show();
+                }
+            }
+
         </script>
     </div>
 
