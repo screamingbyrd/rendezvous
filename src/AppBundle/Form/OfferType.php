@@ -23,6 +23,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 
 
 class OfferType extends AbstractType
@@ -141,23 +143,10 @@ class OfferType extends AbstractType
                     'data-placeholder' =>  $translator->trans('offer.diplomaPH')),
             ))
 
-            ->add('wage', ChoiceType::class, array('choices' => array(
-                'form.registration.wag1' => 'form.registration.wag1',
-                'form.registration.wag2' => 'form.registration.wag2',
-                'form.registration.wag3' => 'form.registration.wag3',
-                'form.registration.wag4' => 'form.registration.wag4',
-                'form.registration.wag5' => 'form.registration.wag5',
-                'form.registration.wag6' => 'form.registration.wag6',
-                'form.registration.wag7' => 'form.registration.wag7',
-                'form.registration.wag8' => 'form.registration.wag8',
-                'form.registration.wag9' => 'form.registration.wag9',
-                'form.registration.wag10' => 'form.registration.wag10',
-
-            ),
+            ->add('wage', IntegerType::class, array(
                 'required' => false,
                 'label' => 'offer.wage',
                 'attr' => array(
-                    'class' => 'select2',
                     'data-placeholder' =>  $translator->trans('offer.wagePH')
                     ),
             ))

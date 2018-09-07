@@ -60,7 +60,7 @@ header:
     post: Poster une offre
     edit: Editer une offre
     findCandidate: Trouver un candidat
-    pricing: Tarifs
+    pricing: Acheter des crédits
     dashboard: Tableau de bord
     register: Employeur
   about:
@@ -227,7 +227,7 @@ dashboard:
     totalInSlot: Total offre dans un slot
     editProfile: Editer mon profil
     watchProfile: Voir mon profil
-    return: Retour au table de bord
+    return: Tableau de bord
   candidate:
     list: Un résumé rapide des postes auxquels vous avez postulé
     appliedThe: Postulé le
@@ -503,7 +503,7 @@ faq:
   kind: Quelle type d'utilisateur êtes vous ?
   subTitle: Une explication est toujours mieux
   employer:
-    intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi pour ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le candidat idéal au moment où vous en avez besoin."
+    intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi dans ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le candidat idéal au moment où vous en avez besoin."
     1:
       question: Comment ça marche ?
       answer: Après création de votre compte, vous pouvez publier votre annonce de poste à pourvoir au sein de votre entreprise et c’est TOUT ! Asseyez-vous, détendez-vous et laissez-nous faire, les candidats viendront à vous comme par magie.
@@ -512,24 +512,24 @@ faq:
       answer: Au moment de la création de votre annonce, choisissez bien les étiquettes (les tags) afin de décrire, avec le plus de justesse possible, les caractéristiques du poste. Vous obtiendrez ainsi avec assurance des candidats au profil en accord avec votre offre d’emploi. Ceci facilitera d’autant plus le choix futur du meilleur candidat.
     3:
       question: Pourquoi et comment s'inscrire ?
-      answer: L’inscription sur notre site vous permet de bénéficier de toutes les fonctionnalités proposées sur notre plateforme. C’estsimple et gratuit jusqu’au 15 octobre 2018 ! Pour s’inscrire, il suffit de se rendre dans la rubrique prévue à cet effet et de suivre la procédure. Vous pourrez bien entendu modifier le profil de votre entreprise à tout moment et ajouter toutes les offres d’emplois que vous souhaitez.
+      answer: L’inscription sur notre site vous permet de bénéficier de toutes les fonctionnalités proposées sur notre plateforme. C’est simple et gratuit jusqu’au 15 octobre 2018 ! Pour s’inscrire, il suffit de se rendre dans la rubrique prévue à cet effet et de suivre la procédure. Vous pourrez bien entendu modifier le profil de votre entreprise à tout moment et ajouter toutes les offres d’emplois que vous souhaitez.
     4:
       question: Comment fonctionne mon tableau de bord ?
-      answer: Le tableau de bord est pensé et conçu pour vous. Dessus sont regroupées toutes les informations concernant vos candidats favoris, vos offres d’emplois et vos crédits restants. En un seul coup d’œil, vous retrouvez toutes les éléments clefs ! Cliquez simplement sur l’une des sections pour découvrir ce qui s’y cache.
+      answer: Le tableau de bord est pensé et conçu pour vous. Dessus sont regroupées toutes les informations concernant vos candidats favoris, vos offres d’emplois et vos crédits restants. En un seul coup d’œil, vous retrouvez tous les éléments clefs ! Cliquez simplement sur l’une des sections pour découvrir ce qui s’y cache.
     5:
       question: Comment poster une offre ?
       answer: Allez dans la barre de menu puis dans la rubrique « Employeurs ». A partir de là, cliquez sur « Publier une offre » et remplissez les informations à propos du poste à pourvoir. Vous serez en mesure de prévisualiser votre offre d’emploi avant sa publication et de voir ainsi la mise en page proposée.
     6:
       question: Quels sont les crédits ?
-      answer: "Le principe est le suivant : 1 offre d’emploi = 1 crédit. Les crédits vous permettent donc de publier des offres mais pas seulement ! Ils peuvent être utilisés pour de nombreuses autres fonctionnalités de notre plateforme."
+      answer: "Le principe est le suivant : 1 offre d’emploi = 1 crédit. Les crédits vous permettent donc de publier des offres mais pas seulement ! Ils peuvent être utilisés pour de nombreuses autres fonctionnalités sur notre plateforme."
     7:
       question: Combien valent-ils ?
       answer: Après inscription dans la section employeur, vous trouvez une section détaillant les tarifs des crédits. Le recrutement coûte cher, c’est un fait tiré de notre propre expérience. C’est pourquoi nous avons décidé de mobiliser nos compétences pour vous proposer une solution alternative à moindre coût. L’acquisition de crédits est en plus agrémentée de jolis bonus !
     8:
-      question: Qu'est-ce qu'une offre en vedette ?
+      question: Qu'est-ce qu'une offre en avant ?
       answer: Vous souhaitez mettre en valeur une offre d’emploi et ainsi rester en tête du moteur de recherche de notre plateforme ? L’option « offre vedette » est faite pour vous ! Cette dernière vous assure d’avoir une visibilité maximale auprès des candidats potentiels.
     9:
-      question: Qu'est-ce qu'un employeur en vedette ?
+      question: Qu'est-ce qu'un employeur en avant ?
       answer: Vous voulez promouvoir votre entreprise ainsi que les nombreux avantages offerts à vos employés ? Devenez Employeur Premium ! Votre entreprise sera mise en avant sur notre page d’accueil, assurant une forte visibilité. Les candidats pourront alors parcourir l’historique et la description de votre entreprise ainsi que vos postes disponibles.
     10:
       question: Que sont les slots?

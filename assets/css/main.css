@@ -136,10 +136,12 @@ body {
         width: 83% !important;
     }
     .return-to-dashboard{
-        position: absolute;
+        position: fixed;
         left: 30px;
         z-index: 200;
         margin-top: 20px;
+        font-size: 1em !important;
+        padding: .5em 1em !important;
     }
     .homepage-search-bar{
         width: 50% !important;
@@ -1046,10 +1048,6 @@ legend{
     justify-content: center;
 }
 
-.navbar-nav .open .dropdown-menu a{
-    color: white !important;
-}
-
 @media (max-width: 991px) {
     .navbar-nav .open .dropdown-menu {
         position: static;
@@ -1149,6 +1147,9 @@ legend{
     }
     .contractType-list{
         display: block !important;
+    }
+    .navbar-nav .open .dropdown-menu a{
+        color: white !important;
     }
 }
 @media (min-width: 600px){
