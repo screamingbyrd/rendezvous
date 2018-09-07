@@ -133,7 +133,7 @@
 
         <div class="compare-offers">
             <div class="header-compare">
-                <div class="title-compare">{{ 'searchPage.compareTitle'|trans }}</div>
+                <div class="title-compare">{{ 'searchPage.compareTitle'|trans }}  <i class="fas fa-plus-square icon-open-compare"></i></div>
                 <div class="list-to-compare" id="droppable">
                     <div class="drop-here">{{ 'searchPage.dropHere'|trans }}</div>
                 </div>
@@ -158,9 +158,10 @@
 
         <style>
             .title-compare{
-                margin-bottom: 5px;
+                margin-bottom: 9px;
                 color: white;
-                padding-top: 5px;
+                padding-top: 0;
+                cursor:pointer;
             }
             .compare-offers{
                 position: fixed;
@@ -189,6 +190,9 @@
             }
             .hover-offer-comparison{
                 background-color: #1F80F0;
+            }
+            .icon-open-compare{
+                float: right;
             }
             .drop-here{
                 width: 100%;
@@ -415,12 +419,14 @@
             $('.title-compare').on('click', function () {
                 if($('.list-to-compare').css('display') == 'none'){
                     $('.list-to-compare').show();
+                    $('.icon-open-compare').hide();
                     if($('.offer-to-compare').length > 0){
                         $('.compare-button-container').show()
                     }
                 }else {
                     $('.list-to-compare').hide();
                     $('.compare-button-container').hide()
+                    $('.icon-open-compare').show();
                 }
             })
 
