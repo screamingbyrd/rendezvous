@@ -169,6 +169,7 @@ form:
 
     logoInfo: L'image doit faire moins de 20 Mo. La meilleure résolution est de 180 par 180 pixels
     coverImageInfo: L'image doit faire moins de 20 Mo. La meilleure résolution est de 1920 par 400 pixels.
+    coverImageModify: Modifier l'image de fond.
 
   offer:
     creation:

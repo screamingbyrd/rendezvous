@@ -8,18 +8,28 @@
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
         <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
+    {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors(form) }}
     <div class="jumbotron employer-jumbotron">
         <div>
             <div class="container-logo-employer">
-                {% if user.employer.logo.imageName is not null %}
-                    {% set image =  'uploads' ~ vich_uploader_asset(user.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                {% else %}
-                    {% set image = 'images/logo-default.png' %}
-                {% endif %}
-                <img class="logo-employer" src="{{ asset(image) }}"/>
+
+                {% form_theme form.logo 'imageEmployerLogoInput.html.twig' %}
+                <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.logoInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
+                {{ form_widget(form.logo, {'logo': logo}) }}
+                {{ form_errors(form.logo) }}
             </div>
             <div class="title-employer">{{ user.employer.name }}</div>
         </div>
+        <div class="container-cover-employer">
+            {% form_theme form.coverImage 'imageEmployerCoverInput.html.twig' %}
+            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.coverImageInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
+            {{ form_widget(form.coverImage, {'coverImage': coverImage}) }}
+            {{ form_errors(form.coverImage) }}
+        </div>
+
 
     </div>
 
@@ -40,11 +50,6 @@
             <div class="completion-success animated fadeIn">
                 {{ 'employer.edit.completed'|trans }}
             </div>
-
-            {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
-
-            {# Les erreurs générales du formulaire. #}
-            {{ form_errors(form) }}
 
             <div class="row">
 
@@ -103,21 +108,6 @@
                             {{ form_label (form.description,null, { 'label_attr': {'class': 'label-form'} }) }}
                             {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
                             {{ form_errors(form.description) }}
-                        </div>
-                        <div class="col-md-6 form-group">
-                            {% form_theme form.logo 'imageEmployerLogoInput.html.twig' %}
-                            {{ form_label (form.logo,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.logoInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
-                            {{ form_widget(form.logo, {'logo': logo}) }}
-                            {{ form_errors(form.logo) }}
-                        </div>
-                        <div class="col-md-6 form-group">
-
-                            {% form_theme form.coverImage 'imageEmployerCoverInput.html.twig' %}
-                            {{ form_label (form.coverImage,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.coverImageInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
-                            {{ form_widget(form.coverImage, {'coverImage': coverImage}) }}
-                            {{ form_errors(form.coverImage) }}
                         </div>
                 </fieldset>
 
@@ -278,6 +268,17 @@
             position:absolute;
             z-index: -1;
             background-position: center center;
+        }
+        .container-logo-employer{
+            position: absolute;
+            left: 14%;
+            z-index: 1000;
+            top: 98px;
+        }
+        .container-cover-employer{
+            position: absolute;
+            right: 20%;
+            width: 200px;
         }
     </style>
 

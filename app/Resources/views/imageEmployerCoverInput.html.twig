@@ -8,39 +8,47 @@
                     this.value = "";
                 }else {
                     var reader = new FileReader();
-                    var fileInput = $('#'+input.id);
 
                     reader.onload = function (e) {
-                        fileInput.parent().css('background-image', 'url(' + e.target.result + ')');
-                        fileInput.parent().find('label').hide();
-                        fileInput.parent().find('.remove-image').show();
+                        $('.employer-jumbotron::after').css('background-image', 'url(' + e.target.result + ')');
+
+                        var styleElem = document.head.appendChild(document.createElement("style"));
+
+                        styleElem.innerHTML = ".employer-jumbotron::after {background-image: url(" + e.target.result + ")!important;}";
                     };
 
                     reader.readAsDataURL(input.files[0]);
+                    
+                    var inputCover = $('#'+input.id);
+                    let empty = $('.empty').length;
+                    let full = $('.not-empty').length;
+                    if( !$(inputCover).val().length ) {
+                        $(inputCover).addClass('empty');
+                        $(inputCover).removeClass('not-empty');
+                    } else {
+                        $(inputCover).addClass('not-empty');
+                        $(inputCover).removeClass('empty');
+                    }
+                    empty = $('.empty').length;
+                    full = $('.not-empty').length;
+                    let percent = full / (full + empty) * 100;
+                    $('.completion-bar').animate({'width' :percent + '%'});
+                    if(percent >= 100){
+                        $('.completion-container').fadeOut("slow", function () {
+                            $(this).css({display:"none"});
+                            $('.completion-success').css({'display' :'block'});
+                        });
+                    }else{
+                        $('.completion-container').css({'display' :'block'});
+                        $('.completion-success').css({'display' :'none'});
+                    }
+
                 }
 
 
             }
         }
 
-        function removeImage(input) {
-            input.parentNode.getElementsByTagName('input')[0].value = "";
-            input.parentNode.style.backgroundImage = '';
-            input.parentNode.getElementsByTagName('label')[0].style.display = "flex";
-            input.style.display = "none";
-
-            if(input.getAttribute("data-image-id") !== null){
-                let id = input.getAttribute("data-image-id");
-                let url = "{{ path('delete_image') }}";
-                $.ajax({
-                    url: url,
-                    data: {id:id}
-                }).done(function( data ) {
-
-                });
-            }
-
-        }
 
         $( document ).ready(function() {
             {% if coverImage is defined and coverImage.imageName is not null %}
@@ -51,21 +59,12 @@
             input.parent().find('.remove-image').show();
             {% endif %}
         });
-
     </script>
 
     <div id="appbundle_employer_coverImage_imageFile">
         <div class="form-group">
-            <div id="appbundle_employer_coverImage_imageFile">
-                <div class="form-group">
-                    <div class="cover-label ui-state-default col-md-3 col-sm-3">
-                        <input accept=".png,.jpg" type="file" onchange="readURL(this);" id="appbundle_employer_coverImage_imageFile_file" name="appbundle_employer[coverImage][imageFile][file]" class="inputfile {% if coverImage is defined and coverImage.imageName is not null %}not-empty{% else %}empty{% endif %}">
-                        <label for="appbundle_employer_coverImage_imageFile_file"><i class="fas fa-download"></i></label>
-                        <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-
-            </div>
+            <input accept=".png,.jpg" type="file" style="position:absolute; visibility: hidden" onchange="readURL(this);" id="appbundle_employer_coverImage_imageFile_file" name="appbundle_employer[coverImage][imageFile][file]" class="{% if coverImage is defined and coverImage.imageName is not null %}not-empty{% else %}empty{% endif %}">
+            <button  data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.coverImageModify'|trans }}" class="edit-cover" type="button" id="browseButton" value="Choisir un fichier" onclick="appbundle_employer_coverImage_imageFile_file.click()"><i class="fas fa-pencil-alt"></i></button>
         </div>
     </div>
 
@@ -75,9 +74,10 @@
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
-        .remove-image{
+        .edit-cover{
+            display: block;
             border-radius: 50%;
-            background-color: #00000080;
+            background-color: #000000;
             border: none;
             color: white;
             padding: 8px;
@@ -87,48 +87,10 @@
             margin: 4px 2px;
             cursor: pointer;
             position: absolute;
-            right: 0;
-            top: 0;
-            display: none;
+            right: 80px;
+            bottom: -20px;
             padding-bottom: 3px;
             padding-top: 3px;
-        }
-        .cover-label{
-            width: 200px;
-            height: 100px;
-        }
-        .ui-state-default{
-            background-position: center center;
-            background-size: cover;
-            padding-right: 0 !important;
-            padding-left: 0 !important;
-            border: 1px solid #c5c5c5;
-            font-weight: normal;
-            color: #454545;
-        }
-        .inputfile{
-            width: 0.1px;
-            height: 0.1px;
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
-            z-index: -1;
-        }
-        .inputfile + label {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.25rem;
-            font-weight: 700;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: pointer;
-            overflow: hidden;
-            padding: 0.625rem 1.25rem;
-            color: #f1e5e6;
-            background-color: #2e6da4;
         }
     </style>
 {% endblock %}

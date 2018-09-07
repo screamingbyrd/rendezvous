@@ -172,6 +172,7 @@ form:
 
     logoInfo: The image must be below 20 Mo. The optimal reolution is 180 par 180 pixels
     coverImageInfo: The image must be below 20 Mo. The optimal resolution is 1920 par 400 pixels.
+    coverImageModify: Change the cover image.
 
   offer:
     creation:
