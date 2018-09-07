@@ -221,6 +221,10 @@
             }
             .compare-offer-title{
                 margin-left: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 38px;
             }
             .modal-dialog{
                 position: fixed;
@@ -255,7 +259,7 @@
 
         <script>
             let searchedTags = [];
-            function searchOffer(row, totalItem) {
+            function searchOffer(row, totalItem, scroll=true) {
 
                 $(".search-result").removeClass('fadeIn').addClass('fadeOut');
                 //$("#myUL").html(loader);
@@ -273,7 +277,7 @@
                     url: url,
                     data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem,tags:tags}
                 }).done(function( data ) {
-                    if(detectmob()){
+                    if(detectmob() && scroll){
                         if(tags.length >= searchedTags.length){
                             let $el = $('.searchpage-jumbotron');
                             let bottom = $el.position().top + $el.outerHeight(true) - 40;
@@ -340,7 +344,7 @@
 
             $(".type-contract-checkbox").change(function() {
                 let total = $('#number-of-offer').val();
-                searchOffer(1,total);
+                searchOffer(1,total, false);
             });
 
             $("#employer-input").change(function() {
