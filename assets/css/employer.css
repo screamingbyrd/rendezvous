@@ -7,6 +7,9 @@ h3.box{
 
 
 }
+.user-guide{
+    margin-top: 80px !important;
+}
 .article-title{
     position: relative;
     margin: 0;
@@ -300,6 +303,9 @@ h3.box{
     }
     .logo-employer{
         width: 160px;
+    }
+    .user-guide{
+        display: none;
     }
 }
 @media (min-width: 1200px){

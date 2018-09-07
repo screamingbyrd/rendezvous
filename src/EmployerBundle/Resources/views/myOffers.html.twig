@@ -47,6 +47,9 @@
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
         <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
     {% endif %}
+
+    <button class="btn btn-primary return-to-dashboard user-guide">{{ 'header.how'|trans }}</button>
+
     <div class="container">
 
         <div class="shadow-box">
@@ -299,6 +302,9 @@
                         $("#modal-first-time").modal('show');
                         localStorage.setItem('firstTimeState','shown')
                     }
+                });
+                $('.user-guide').on('click', function () {
+                    $("#modal-first-time").modal('show');
                 });
 
                 $(".offer-element").click(function() {
