@@ -126,7 +126,9 @@ body {
 
     }
     .homepage-subtitle{
-        margin-bottom: 60px !important;
+        margin-bottom: 29px !important;
+        margin-top: 36px;
+        font-size: 30px;
     }
     .dashboard-container{
         display: flex;
@@ -151,6 +153,12 @@ body {
     }
     .choose-featured-offer{
         width: 35%;
+    }
+    .jumbotron h2{
+        font-weight: 100 !important;
+        font-size: 55px !important;
+        margin-bottom: 16px !important;
+        letter-spacing: 2px !important;
     }
 }
 
@@ -280,9 +288,11 @@ h3.title{
 
 
 
-
-
-
+.alert-success{
+    color: white !important;
+    background-color: #E03C14 !important;
+    border: none !important;
+}
 
 
 
