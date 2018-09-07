@@ -18,7 +18,7 @@
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">{{ 'offer.posted' | trans }} {{ offer.creationDate |date('d/m/Y')}}</div>
             {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}"><i class="fa fa-star"></i></a>
+                <a data-toggle="tooltip" data-placement="top" title="{{ 'favorite.add' | trans }}" href="{{ path('create_favorite', {'id':offer.id}) }}" class="add-to-favorite"><i class="fa fa-star"></i></a>
             {% endif %}
             {% if offer.image is not null and offer.image.imageName is not null %}
                 {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}

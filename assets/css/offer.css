@@ -514,6 +514,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.add-to-favorite{
+    color: orange !important;
+    text-decoration: none !important;
+}
 @media screen and (min-device-width: 481px)and (max-device-width: 992px){
     .cover-letter-offer-title{
         width: 275px;
