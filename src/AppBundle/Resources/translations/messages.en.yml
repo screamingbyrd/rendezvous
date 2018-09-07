@@ -317,7 +317,7 @@ offer:
       sure: Are you sure that you want to activate / extend this offer? This will cost you %credit% credit(s).
       sureMultiple: Are you sure that you want to activate / extend those offers? This will cost you %credit% credit(s).
   boost:
-      sure: Are you sure that you want to boost yout offers? This will cost you %credit% credit(s).
+      sure: Are you sure that you want to boost yout offers? This will cost you %credit% credit(s). Don't forget to unarchive and activate the offers you want to boost.
   endDate: End date:
   archived: Archived
   apply:
@@ -409,7 +409,7 @@ apprenticeship: Apprenticeship
 featured:
   week: Week
   reserved: Booked
-  empoyer:
+  employer:
     title: Featured Employer
     modal: Are you sure you want to book this week? This will cost you %credit% credit(s).
     reserve: Book

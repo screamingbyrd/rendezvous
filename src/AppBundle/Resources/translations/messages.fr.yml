@@ -316,7 +316,7 @@ offer:
       sure: Êtes-vous sûr vouloir activer / prolonger cette offre? Cela vous coûtera %credit% crédit(s).
       sureMultiple: Êtes-vous sûr de vouloir activer / prolonger ces offre ? Cela vous coûtera %credit% crédit(s).
   boost:
-      sure: Êtes-vous sûr de vouloir booster vos offres ? Cela vous coûtera %credit% crédit(s).
+      sure: Êtes-vous sûr de vouloir booster vos offres ? Cela vous coûtera %credit% crédit(s). Pensez à désarchiver et activer les offres que vous souhaitez bootser.
   endDate: Date de fin :
   archived: Archivée
   apply:
