@@ -83,7 +83,7 @@
                             <div class="caption">
                                 <h3>{{ offer.offer.title |truncate(30, true)}}</h3>
                                 <p><span class="other-element">{{ offer.offer.employer.name }}</span><span class="other-element"><i class="fa fa-map-marker"></i>{{ offer.offer.location|truncate(20, true) }}</span><span class="other-element"><i class="fa fa-file-text-o"></i>{{ offer.offer.contractType.name |trans }}</span></p>
-                                <div class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)| raw}}</div>
+                                {#<div class="offer-thumb-description">{{ offer.offer.description |truncate(250, true)| raw}}</div>#}
                             </div>
                         </div>
                     </a>
