@@ -83,15 +83,16 @@
                         </div>
                     </div>
                 {% endif %}
-                {% if offer.wage is not null and offer.wage != '' %}
-                    <div class="col-xs-6 col-sm-4 col-md-4 about-offer-elements">
-                        <div class="about-offer-item">
-                            <h4><b>{{ 'offer.wage'|trans }}</b></h4>
-
+                <div class="col-xs-6 col-sm-4 col-md-4 about-offer-elements">
+                    <div class="about-offer-item">
+                        <h4><b>{{ 'offer.wage'|trans }}</b></h4>
+                        {% if offer.wage is not null and offer.wage != '' %}
                             {{ offer.wage |trans }} €
-                        </div>
+                        {% else %}
+                            {{ 'offer.notCommunicated'|trans }}
+                        {% endif %}
                     </div>
-                {% endif %}
+                </div>
                 <div class="col-md-12 col-xs-12 col-sm-12 share-container-offer">
 
                     <span>{{ 'offer.share'|trans }} : </span>

@@ -307,6 +307,7 @@ offer:
   linkPH: "ex : www.yourwebsite.com/recruitment"
   linkInfo: If you want to redirect to your internal recruitment platform
   inSlot: In slot
+  notCommunicated: Not communicated
 
   share: Share
   shareByMail: Share this offer
