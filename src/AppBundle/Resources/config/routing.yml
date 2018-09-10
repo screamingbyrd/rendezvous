@@ -6,6 +6,11 @@ jobnow_contact:
         en: "/contact"
         fr: "/contacter"
     defaults: { _controller: AppBundle:Contact:contact }
+share_by_mail:
+    locales:
+        en: "/share-by-mai"
+        fr: "/partager-par-mail"
+    defaults: { _controller: AppBundle:Contact:shareByMail }
 jobnow_credit:
     locales:
         en: "/employer/credit"

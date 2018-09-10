@@ -299,7 +299,7 @@ offer:
   sorry: Sorry, this offer has been closed
   hereSomeSimilar: Here are some similar offers you might be interested in:
   similarOffer: Similar offers
-  watchSimilar: Watch all similar offers
+  watchSimilar: See all similar offers
   experience: Experience
   startDate: Start date
   candidatesList: Candidates who applied to this offer
@@ -309,6 +309,10 @@ offer:
   inSlot: In slot
 
   share: Share
+  shareByMail: Share this offer
+  yourMail: Your email adress
+  friendMail: Your fried email adress
+  shared: The offer has been shared !
 
   search:
       title: Search offers
@@ -451,6 +455,9 @@ email:
   footer:
     contact: If you wish to contact us, you can send an email to %link_start%contact@jobnow.lu%link_end%
     consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
+  share:
+    title: A friend shared this with you
+    shared: %sendFrom% shared this offer
 
 contact:
   form: Contact form

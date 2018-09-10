@@ -80,4 +80,51 @@ class ContactController extends Controller
         return $this->render('AppBundle:Contact:contactUs.html.twig');
 
     }
+
+    public function shareByMailAction(Request $request)
+    {
+        $session = $request->getSession();
+        $emailSender = $request->get('email');
+        $emailTo = $request->get('emailTo');
+        $idOffer = $request->get('id');
+
+        $offerRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Offer')
+        ;
+        $offer = $offerRepository->findOneBy(array('id'=>$idOffer));
+
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $translated = $this->get('translator')->trans('email.share');
+        $message = (new \Swift_Message($translated))
+            ->setFrom('jobnow@noreply.lu')
+            ->setTo($emailTo)
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:shareByMail.html.twig',
+                    array(
+                        'offer' => $offer,
+                        'sendFrom' => $emailSender
+                    )
+                ),
+                'text/html'
+            )
+        ;
+
+        $message->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+
+        $mailer->send($message);
+
+        $generateUrlService = $this->get('app.offer_generate_url');
+
+        $translated = $this->get('translator')->trans('offer.shared');
+        $session->getFlashBag()->add('info', $translated);
+
+        return $this->redirectToRoute('show_offer', array('id' => $offer->getId(),'url' => $generateUrlService->generateOfferUrl($offer)));
+
+    }
 }

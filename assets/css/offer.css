@@ -126,6 +126,15 @@
     padding-right: 6px;
     border-radius: 5px;
     color: white;
+    margin-right: 13px;
+}
+.share-email{
+    background-color: #272F3B;
+    padding-right: 6px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 13px;
+    padding-left: 6px;
 }
 .facebook-share{
     background-color: #4469b3;
@@ -133,7 +142,7 @@
     border-radius: 5px;
     padding-left: 8px;
     color: white;
-    margin-right: 20px;
+    margin-right: 13px;
 }
 .facebook-share .fa{
     margin-top: 7px;
@@ -677,6 +686,9 @@
     }
     .offer-search-element .offer-location,.offer-date{
         margin-left: 0 !important;
+    }
+    .about-the-offer b{
+        color: black !important;
     }
 }
 

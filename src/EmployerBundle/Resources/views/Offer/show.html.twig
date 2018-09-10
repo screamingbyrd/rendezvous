@@ -117,6 +117,8 @@
                     </script>
                     <a class="share-linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ app.request.uri }}&title=LinkedIn%20Developer%20Network
             &summary=My%20favorite%20developer%20program&source=LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+                    <a href="#" class="share-email"><i style="padding-top: 5px;" class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -220,6 +222,41 @@
             </div>
         </div>
     {% endif %}
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal-share">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'offer.shareByMail'|trans }}</h4>
+                </div>
+                <form method="post" action="{{ path('share_by_mail') }}" id="search-offer-homepage">
+                    <input id="offer-id" type="hidden" name="id" value="{{ offer.id }}">
+                    <table style="margin-right: 30px;">
+                        <tr>
+                            <th class="label-contact-us">
+                                <label>{{ 'offer.yourMail'|trans }}</label>
+                            </th>
+                            <td class="td-share-field">
+                                <input type="email" class="form-control" name="email" title="your email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="label-contact-us">
+                                <label>{{ 'offer.friendMail'|trans }}</label>
+                            </th>
+                            <td class="td-share-field">
+                                <input type="email" class="form-control" name="emailTo" title="other email">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="{{ 'email.send'|trans }}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <style>
         {% if offer.image is not null and offer.image.imageName is not null %}
             {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
@@ -305,6 +342,11 @@
 
             }
         }
+
+        $('.share-email').on('click', function (e) {
+            e.preventDefault();
+            $("#modal-share").modal('show');
+        });
 
     </script>
 

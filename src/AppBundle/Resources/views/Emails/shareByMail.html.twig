@@ -87,9 +87,9 @@
         border-top-left-radius: 3px;
     }
     .background-employer-in-offer-search .layer {
-         border-top-right-radius: 0;
-         border-bottom-left-radius: 3px;
-     }
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 3px;
+    }
     .layer {
         position: absolute;
         top: 0;
@@ -140,14 +140,14 @@
         color: #929292;
     }
     .item-contract-temporary{
-         background: red;
-         color: white !important;
-         text-transform: uppercase;
-         text-align: center;
-         border-radius: 4px;
-         display: inline-block;
-         padding: 3px 10px;
-     }
+        background: red;
+        color: white !important;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 3px 10px;
+    }
     .item-contract-freelance{
         background: orange;
         color: white !important;
@@ -199,15 +199,9 @@
         </div>
 
         <div class="content-mail">
-            {% if search %}
-                {% set title = 'email.notification.send.title.search'|trans %}
-            {% else %}
-                {% set title = 'email.notification.send.title.regular'|trans({'subject':subject}) %}
-            {% endif %}
-            <h3>{{ title }}</h3>
+            <h3>{{ 'email.share'|trans({'%sendFrom%':sendFrom}) }}</h3>
 
             <ul id="myUL" class="candidat-dashboard">
-                {% for offer in offers %}
                     <li class="search-result animated fadeIn">
                         <a class='offer-element' href="{{ path('show_offer', {'id': offer.id, 'url':offer.offerUrl}) }}">
                             {% if offer.image is not null and offer.image.imageName is not null %}
@@ -234,12 +228,7 @@
                             </div>
                         </a>
                     </li>
-                {% endfor %}
             </ul>
-
-            <div class="other-footer">
-                {{ 'notification.if'|trans }} <a href="https://jobnow.lu{{ path('delete_notification', {'id': id}) }}">{{ 'notification.here'|trans }}</a>
-            </div>
 
 
         </div>

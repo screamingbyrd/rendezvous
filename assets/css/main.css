@@ -586,6 +586,9 @@ legend{
     #navbar {
         top: 60px !important;
     }
+    .td-share-field{
+        width: 49% !important;
+    }
 }
 
 @media (max-width: 767px){
@@ -741,6 +744,9 @@ legend{
 
 .td-contact-us{
     width: 82%;
+}
+.td-share-field{
+    width: 65%;
 }
 .label-contact-us{
     text-align: right;
