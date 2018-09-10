@@ -31,6 +31,13 @@ class AdminController extends Controller
         ;
         $employerCount = $employerRepository->countTotalDifferentEmployer();
 
+        $candidateRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Candidate')
+        ;
+        $candidateCount = count($candidateRepository->findAll());
+
         $offerRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -48,6 +55,7 @@ class AdminController extends Controller
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
             'countEmployer' => $employerCount,
+            'candidateCount' => $candidateCount,
             'totalSLot' => $totalSLot
         ));
     }

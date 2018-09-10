@@ -612,6 +612,7 @@ admin:
     adminList: Admins list
     totalActiveOffers: Total active offers:
     totalEmployers: Total Employers:
+    totalCandidates: Total candidates:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Add an admin
