@@ -97,7 +97,7 @@ class ContactController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $translated = $this->get('translator')->trans('email.share');
+        $translated = $this->get('translator')->trans('email.share.title');
         $message = (new \Swift_Message($translated))
             ->setFrom('jobnow@noreply.lu')
             ->setTo($emailTo)
