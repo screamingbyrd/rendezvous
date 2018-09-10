@@ -45,6 +45,13 @@
             </tbody>
 
         </table>
+        <div id="paginator-offer">
+            <a href="{{ path('list_candidate_admin', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
+            {% for i in 1..total %}
+                <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('list_candidate_admin', {'row':i}) }}">{{ i }}</a>
+            {% endfor %}
+            <a href="{{ path('list_candidate_admin', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
+        </div>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
             <div class="modal-dialog modal-sm">

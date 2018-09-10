@@ -60,7 +60,14 @@ class AdminController extends Controller
         ));
     }
 
-    public function listEmployerAction(){
+    public function listEmployerAction(Request $request){
+
+        $currentPage = $request->get('row');
+        $sort = $request->get('sort');
+        $currentPage = isset($currentPage)?$currentPage:1;
+        $sort = isset($sort)?$sort:'DESC';
+
+        $numberOfItem = 20;
 
         $user = $this->getUser();
 
@@ -84,12 +91,27 @@ class AdminController extends Controller
             }
         }
 
+        $countResult = count($employers);
+
+        $finalArray = array_slice($employers, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
+
         return $this->render('AdminBundle::listEmployer.html.twig', array(
-            'employers' => $employers,
+            'employers' => $finalArray,
+            'page' => $currentPage,
+            'total' => $totalPage,
+            'sort' => $sort,
         ));
     }
 
-    public function listCandidateAction(){
+    public function listCandidateAction(Request$request){
+        $currentPage = $request->get('row');
+        $sort = $request->get('sort');
+        $currentPage = isset($currentPage)?$currentPage:1;
+        $sort = isset($sort)?$sort:'DESC';
+
+        $numberOfItem = 20;
 
         $user = $this->getUser();
 
@@ -104,8 +126,17 @@ class AdminController extends Controller
         ;
         $candidates = $candidateRepository->findAll();
 
+        $countResult = count($candidates);
+
+        $finalArray = array_slice($candidates, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
+
         return $this->render('AdminBundle::listCandidate.html.twig', array(
-            'candidates' => $candidates
+            'candidates' => $finalArray,
+            'page' => $currentPage,
+            'total' => $totalPage,
+            'sort' => $sort,
         ));
     }
 
@@ -184,7 +215,12 @@ class AdminController extends Controller
     }
 
     public function listOfferAction(Request $request){
+        $currentPage = $request->get('row');
+        $sort = $request->get('sort');
+        $currentPage = isset($currentPage)?$currentPage:1;
+        $sort = isset($sort)?$sort:'DESC';
 
+        $numberOfItem = 20;
         $archived = $request->get('archived');
         $archived = isset($archived)?$archived:0;
         $active = $request->get('active');
@@ -213,13 +249,22 @@ class AdminController extends Controller
         $totalActiveOffer = $offerRepository->countTotalActiveOffer();
         $totalNotValidatedActiveOffer = $offerRepository->countTotalNotValidatedActiveOffer();
 
+        $countResult = count($offers);
+
+        $finalArray = array_slice($offers, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
+
         return $this->render('AdminBundle::listOffer.html.twig', array(
-            'offers' => $offers,
+            'offers' => $finalArray,
             'active' => $active,
             'archived' => $archived,
             'validated' => $validated,
             'totalActiveOffer' => $totalActiveOffer,
-            'totalNotValidatedActiveOffer' => $totalNotValidatedActiveOffer
+            'totalNotValidatedActiveOffer' => $totalNotValidatedActiveOffer,
+            'page' => $currentPage,
+            'total' => $totalPage,
+            'sort' => $sort,
         ));
     }
 
