@@ -507,23 +507,27 @@ class CandidateController extends Controller
             ->getRepository('AppBundle:PostulatedOffers')
         ;
         $candidates = $candidateRepository->findAll();
+
+        $now = new \datetime();
+        $past = $now->modify( '- 2 month' );
         $em = $this->getDoctrine()->getManager();
         foreach ($candidates as $candidate){
             $recentOffers = $postulatedOfferRepository->getRecentPostulatedOffers($candidate);
-            if(empty($recentOffers)){
+            if(empty($recentOffers) && $candidate->getCreationDate() < $past){
                 $cvLink = $candidate->getCv();
                 $coverLink = $candidate->getCoverLetter();
+
                 if(isset($cvLink) and $cvLink != ''){
                     if(file_exists($cvLink)){
                         unlink($cvLink);
                     }
-                    $candidate->setCv(null);
+                    $candidate->setCv('');
                 }
                 if(isset($coverLink) and $coverLink != ''){
                     if(file_exists($coverLink)){
                         unlink($coverLink);
                     }
-                    $candidate->setCoverLetter(null);
+                    $candidate->setCoverLetter('');
                 }
                 $em->merge($candidate);
             }

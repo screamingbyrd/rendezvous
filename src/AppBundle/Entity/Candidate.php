@@ -767,4 +767,23 @@ class Candidate
         return $this;
     }
 
+    /**
+     * @return \datetime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \datetime $creationDate
+     * @return Candidate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+
 }

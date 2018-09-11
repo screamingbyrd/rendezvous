@@ -16,8 +16,8 @@ candidate:
     resource: "@CandidateBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-        en: "/{_locale}/candidat"
-        fr: "/{_locale}/candidate"
+        en: "/{_locale}/candidate"
+        fr: "/{_locale}/candidat"
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
