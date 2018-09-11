@@ -476,7 +476,7 @@
     margin-right: 3px;
 }
 
-.floating-employer{
+.floating-pro{
     -webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
@@ -490,11 +490,11 @@
     text-align: center;
     margin-bottom: 23px;
 }
-.floating-employer .rendezvous-button{
+.floating-pro .rendezvous-button{
     margin-bottom: 20px;
     width: 88%;
 }
-.header-floating-employer{
+.header-floating-pro{
     background: #272f3b;
     color: white;
     padding: 15px;
@@ -503,22 +503,22 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.hr-floating-employer{
+.hr-floating-pro{
     margin-top: 10px;
     margin-bottom: 10px;
     border-top: 1px solid #d4d3d3;
 }
-.floating-employer-logo{
+.floating-pro-logo{
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 27%;
     margin-top: 10px;
 }
-.floating-employer-description{
+.floating-pro-description{
     padding: 20px;
 }
-.offer-employer-description{
+.offer-pro-description{
     max-height: 200px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -534,7 +534,7 @@
 }
 
 @media screen and (max-device-width: 480px){
-    .floating-employer{
+    .floating-pro{
         margin-top: 20px;
         margin-bottom: 20px;
         border-bottom-left-radius: 8px;
@@ -576,7 +576,7 @@
         width: 100% !important;
         margin: 10px 0 !important;
     }
-    .background-employer-in-offer-search{
+    .background-pro-in-offer-search{
         width: 100% !important;
         min-height: 90px !important;
     }
@@ -587,7 +587,7 @@
     .offer-element-title{
         font-size: 21px !important;
     }
-    .logo-employer-in-offer-search{
+    .logo-pro-in-offer-search{
         margin-top: -50px !important;
         width: 24% !important;
         margin-left: auto !important;
@@ -611,11 +611,11 @@
         margin-right: 0 !important;
         margin-left: 0 !important;
     }
-    .background-employer-in-offer-search .layer{
+    .background-pro-in-offer-search .layer{
         border-top-right-radius: 3px !important;
         border-bottom-left-radius: 0 !important;
     }
-    .background-employer-in-offer-search{
+    .background-pro-in-offer-search{
         border-top-right-radius: 3px !important;
         border-bottom-left-radius: 0 !important;
     }
@@ -692,7 +692,7 @@
     }
 }
 
-#employer-input{
+#pro-input{
     line-height: inherit;
     background-position: 10px 12px;
     background-repeat: no-repeat;
@@ -730,7 +730,7 @@
 .no-offer-alert{
     margin-top: 20px;
 }
-.background-employer-in-offer-search{
+.background-pro-in-offer-search{
     min-height: 140px;
     width: 30%;
     position: relative;
@@ -740,11 +740,11 @@
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
-.background-employer-in-offer-search .layer{
+.background-pro-in-offer-search .layer{
     border-top-right-radius: 0;
     border-bottom-left-radius: 3px;
 }
-.logo-employer-in-offer-search{
+.logo-pro-in-offer-search{
     width: 13%;
     max-width: 73px;
     margin-left: -31px;
@@ -824,7 +824,7 @@
     margin-bottom: 10px !important;
 }
 
-.featured-offer-item, .featured-employer-item{
+.featured-offer-item, .featured-pro-item{
     webkit-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     -moz-box-shadow: 2px 5px 20px rgba(0,0,0,0.1);
     box-shadow: 2px 5px 20px rgba(0,0,0,0.1);

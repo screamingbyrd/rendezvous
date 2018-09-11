@@ -32,7 +32,7 @@ h3.box{
     list-style: none;
     padding: 0;
 }
-.link-offer-employer{
+.link-offer-pro{
     display: block;
     padding: 15px 0;
     line-height: 24px;
@@ -46,7 +46,7 @@ h3.box{
     -moz-transition: ease-out 0.7s;
     transition: ease-out 0.7s;
 }
-.link-offer-employer:hover {
+.link-offer-pro:hover {
     background-color: #e8f0f0;
 }
 .slide-button {
@@ -66,33 +66,33 @@ h3.box{
     #myInput-offer{
         width: 100% !important;
     }
-    .logo-employer{
+    .logo-pro{
         width: 85px !important;
         margin-bottom: 20px;
     }
-    .container-logo-employer{
+    .container-logo-pro{
         position: static !important;
 
     }
-    .title-employer {
+    .title-pro {
         font-size: 26px !important;
     }
-    .container-tag-employer{
+    .container-tag-pro{
         left: auto !important;
         bottom: -74px !important;
         width: 275px !important;
     }
-    .add-employer-notification{
+    .add-pro-notification{
         margin-left: 10px;
         margin-right: 10px;
         display: flex !important;
         justify-content: center;
         float: inherit !important;
     }
-    .search-employer{
+    .search-pro{
         margin-bottom: 0 !important;
     }
-    .search-employer-page #myUL{
+    .search-pro-page #myUL{
         margin-top: -20px;
     }
     .block-dashboard{
@@ -114,23 +114,23 @@ h3.box{
          margin-left: 0 !important;
          margin-right: 0 !important;
     }
-    #appbundle_employer_coverImage, #appbundle_employer_logo{
+    #appbundle_pro_coverImage, #appbundle_pro_logo{
         overflow: hidden;
     }
 }
-.container-logo-employer{
+.container-logo-pro{
     position: absolute;
     left: 14%;
     z-index: 1000;
     top: 154px;
 }
-.container-tag-employer{
+.container-tag-pro{
     position: relative;
     left: 242px;
     bottom: 37px;
     width: 600px;
 }
-.logo-employer{
+.logo-pro{
     background-color: white;
     padding: 10px;
     border-radius: 3px;
@@ -143,27 +143,27 @@ h3.box{
     -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
     -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
 }
-.description-employer{
+.description-pro{
     min-height: 200px;
     font-size: 20px;
 }
-.add-employer-notification{
+.add-pro-notification{
     float: right;
     font-size: 1em !important;
     padding: .5em 1em !important;
     margin-top: 10px;
 }
-.title-employer{
+.title-pro{
     font-size: 36px;
 }
-.employer-jumbotron{
+.pro-jumbotron{
     min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: initial !important;
 }
-.search-employer{
+.search-pro{
     margin-bottom: 20px !important;
 }
 .offer-element-dashboard .fa-eye{
@@ -230,7 +230,7 @@ h3.box{
 .square-credit{
     background-color: #ff9e00;
 }
-.square-featured-employers{
+.square-featured-pros{
     background-color: #ffc443;
 }
 .square-featured-offers{
@@ -301,7 +301,7 @@ h3.box{
         width: 24%;
         padding-bottom: 24%;
     }
-    .logo-employer{
+    .logo-pro{
         width: 160px;
     }
     .user-guide{
@@ -321,10 +321,10 @@ h3.box{
     .use-money-button{
         float: right;
     }
-    .create-employer-submit{
+    .create-pro-submit{
         margin-top: -25px;
     }
-    .create-employer-terms{
+    .create-pro-terms{
         margin-top: -12px;
     }
 }

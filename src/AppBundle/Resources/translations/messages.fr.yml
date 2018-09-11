@@ -36,7 +36,7 @@ searchPage:
 
 how:
   title: Une explication est toujours mieux
-  employers: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de candidats et d’assurer des candidats correspondant à votre offre d’emploi, ce qui facilitera le choix du candidat approprié.
+  pros: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de candidats et d’assurer des candidats correspondant à votre offre d’emploi, ce qui facilitera le choix du candidat approprié.
   candidates: Parce que trouver un nouveau job peut être stressant, nous vous avons simplifié les choses ! Notre plateforme est conçu pour vous aider à trouver le poste idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez complété votre profil, vous n'avez plus qu'à postuler aux offres qui vous correspondent !
 header:
   register: S'inscrire
@@ -55,7 +55,7 @@ header:
       applied: Mes candidatures
       favorites: Mes favoris
     register: Candidat
-  employers:
+  pros:
     title: Espace Employeur
     post: Poster une offre
     edit: Editer une offre
@@ -80,12 +80,12 @@ form:
     title:
       title: Titre
       candidate: S'incrire en tant que candidat
-      employer: S'inscrire en tant qu'employeur
+      pro: S'inscrire en tant qu'employeur
       create: Créer votre compte
       edit: Modifier vos informations
     subTitle:
       candidate: Votre recherche du poste idéal commence ici!
-      employer: Votre recherche pour le candidat parfait commence maintenant!
+      pro: Votre recherche pour le candidat parfait commence maintenant!
     complete: Compléter votre profil
     completed: Profil complété
     already: Vous avez déjà un profil ?
@@ -198,14 +198,14 @@ form:
       keyword: Mots-clefs
       location: Lieu de travail
       search: Recherche
-      employerPH:  Société
+      proPH:  Société
       categoryPH: Catégorie
       empty: Vide
 
 
 dashboard:
   title: Tableau de bord
-  employer:
+  pro:
     slot:
       title: Slot
       use: Les slots vous permettent de mettre en ligne une offre de votre choix, modifiable à volonté, pendant un an.
@@ -341,7 +341,7 @@ offer:
   applied:
     success: Vous avez bien postulé à l'offre %title% !
     candidate: Vous avez postulez à l'offre
-    employer: Un candidat a postulé à cette offre :
+    pro: Un candidat a postulé à cette offre :
 
   carousel:
     activate: Une fois votre offre créée vous pouvez dépenser 1 crédit pour la mettre en ligne pendant 2 mois en cliquant sur Activer/Prolonger.
@@ -355,7 +355,7 @@ candidate:
   tag: Domaines de compétence
   about: A propos de ce candidat
 
-employer:
+pro:
   show:
     title: Présentation de l'entreprise
     lastOffers: Dernières offres
@@ -406,7 +406,7 @@ apprenticeship: Alternance
 featured:
   week: Semaine
   reserved: Réservé
-  employer:
+  pro:
     title: Employeurs en avant
     modal: Êtes-vous sûr de vouloir réserver cette semaine ? Cela vous coûtera %credit% crédits.
     reserve: Réserver
@@ -420,7 +420,7 @@ email:
   send: Envoyer
   application:
     candidate:  Vous avez postulé à cette offre :
-    employer:
+    pro:
       applied: Un candidat a postulé à votre offre:
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
@@ -461,7 +461,7 @@ contact:
     title: Contactez-nous
     subTitle: N'hésitez pas à nous contacter !
     smallTitle: Contact
-    employer: Contacter un conseiller
+    pro: Contacter un conseiller
   location: Notre localisation
   openingHours: Heures d'ouverture:
   monday: Lundi – Vendredi / 9h – 19h (non-stop)
@@ -481,7 +481,7 @@ notification:
   mine: Mes notifications
   already: La notification existe déjà !
   tag: Categorie
-  employer: Employeur
+  pro: Employeur
   search: Recherche
   if: Si vous ne souhaitez plus reçevoir cette alert email cliquez
   here: ici
@@ -512,7 +512,7 @@ privacy:
 faq:
   kind: Quelle type d'utilisateur êtes vous ?
   subTitle: Une explication est toujours mieux
-  employer:
+  pro:
     intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi dans ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le candidat idéal au moment où vous en avez besoin."
     1:
       question: Comment ça marche ?
@@ -560,7 +560,7 @@ faq:
 
 redirect:
   candidate: Veuillez vous inscrire en tant que candidat
-  employer: Veuillez vous inscrire en tant qu'employer
+  pro: Veuillez vous inscrire en tant qu'pro
 
 price:
   credit: Crédit
@@ -604,7 +604,7 @@ bill:
 admin:
   title: Administrateur
   dashboard:
-    employerList: Liste des employeurs
+    proList: Liste des employeurs
     candidateList: Liste des candidats
     adList: Liste des pubs
     createAd: Créer une pub

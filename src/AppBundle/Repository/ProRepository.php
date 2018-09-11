@@ -13,19 +13,19 @@ class ProRepository extends \Doctrine\ORM\EntityRepository
     public function countTotalDifferentPro()
     {
         $query = $this->createQueryBuilder('e')->select("e")
-            ->leftJoin('AppBundle:user', 'u', 'WITH', 'e = u.employer');
+            ->leftJoin('AppBundle:user', 'u', 'WITH', 'e = u.pro');
         $query->andWhere('u.main = 1');
 
-        $employers = $query->getQuery()->getResult();
+        $pros = $query->getQuery()->getResult();
 
-        return count($employers);
+        return count($pros);
     }
 
     public function countActiveBetween($endDate){
         return $this->getEntityManager()
             ->createQuery(
                 'select count(distinct em.id) as total
-                    from AppBundle:employer em
+                    from AppBundle:pro em
                     where em.creationDate <= :endDate'
             )->setParameter('endDate',$endDate)->execute();
     }

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Pro
  *
- * @ORM\Table(name="employer")
+ * @ORM\Table(name="pro")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProRepository")
  */
 class Pro
@@ -23,7 +23,7 @@ class Pro
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", cascade={"persist","remove"}, mappedBy="employer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", cascade={"persist","remove"}, mappedBy="pro")
      *
      */
     private $user;
@@ -34,8 +34,8 @@ class Pro
      * @Assert\Length(
      *      min = 3,
      *      max = 50,
-     *      minMessage = "employer.minName",
-     *      maxMessage = "employer.maxName"
+     *      minMessage = "pro.minName",
+     *      maxMessage = "pro.maxName"
      * )
      *
      *
@@ -62,10 +62,24 @@ class Pro
 
     /**
      * @var string
-     *-
+     *
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zipcode", type="string", length=255, nullable=true)
+     */
+    private $zipcode;
 
     /**
      * @var string
@@ -74,20 +88,13 @@ class Pro
      * @Assert\Length(
      *      min = 3,
      *      max = 50,
-     *      minMessage = "employer.minName",
-     *      maxMessage = "employer.maxName"
+     *      minMessage = "pro.minName",
+     *      maxMessage = "pro.maxName"
      * )
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="vatNumber", type="string", length=255)
-     */
-    private $vatNumber;
 
     private $email;
 
@@ -365,19 +372,57 @@ class Pro
     /**
      * @return string
      */
-    public function getVatNumber()
+    public function getCity()
     {
-        return $this->vatNumber;
+        return $this->city;
     }
 
     /**
-     * @param string $vatNumber
+     * @param string $city
      * @return Pro
      */
-    public function setVatNumber($vatNumber)
+    public function setCity($city)
     {
-        $this->vatNumber = $vatNumber;
+        $this->city = $city;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * @param string $zipcode
+     * @return Pro
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+        return $this;
+    }
+
+    /**
+     * @return \datetime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param \datetime $creationDate
+     * @return Pro
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+
 
 }

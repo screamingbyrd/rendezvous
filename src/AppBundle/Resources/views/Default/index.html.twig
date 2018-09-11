@@ -34,8 +34,8 @@
 
 
         {% if featuredPro|length > 0 %}
-            <div class="row featured-employer fade-in-right animated">
-                <h1 class="featured-offer text-center">{{ 'featured.employer.title'|trans }}</h1>
+            <div class="row featured-pro fade-in-right animated">
+                <h1 class="featured-offer text-center">{{ 'featured.pro.title'|trans }}</h1>
                 {% if featuredPro|length == 1 %}
                     {% set blocPro = 12 %}
                 {% elseif featuredPro|length == 2 %}
@@ -43,27 +43,27 @@
                 {% else %}
                     {% set blocPro = 4 %}
                 {% endif %}
-                {%  for employer in featuredPro %}
-                <a class="col-sm-{{ blocPro }} col-md-{{ blocPro }} zoom thump-employer" href="{{ path('show_employer', {'id':employer.employer.id}) }}">
-                    <div class="thumbnail featured-employer-item" >
-                        <div class="header-thumb-employer">
-                            {% if employer.employer.logo.imageName is not null %}
-                                {% set image =  'uploads' ~ vich_uploader_asset(employer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                {%  for pro in featuredPro %}
+                <a class="col-sm-{{ blocPro }} col-md-{{ blocPro }} zoom thump-pro" href="{{ path('show_pro', {'id':pro.pro.id}) }}">
+                    <div class="thumbnail featured-pro-item" >
+                        <div class="header-thumb-pro">
+                            {% if pro.pro.logo.imageName is not null %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(pro.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
                             {% else %}
                                 {% set image = 'images/logo-default.png' %}
                             {% endif %}
-                            <img src="{{asset(image)}}" class="employer-thumb-logo" />
-                            <h3>{{ employer.employer.name }}</h3>
+                            <img src="{{asset(image)}}" class="pro-thumb-logo" />
+                            <h3>{{ pro.pro.name }}</h3>
                         </div>
-                        {% if employer.employer.coverImage.imageName is not null %}
-                            {% set image =  'uploads' ~ vich_uploader_asset(employer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                        {% if pro.pro.coverImage.imageName is not null %}
+                            {% set image =  'uploads' ~ vich_uploader_asset(pro.pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
                         {% else %}
                             {% set image = 'images/default_cover_image6.jpg' %}
                         {% endif %}
                         <div class="caption" style="background-position: center center;background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});min-height: 185px;">
                         </div>
-                        <div class="thumb-employer-info">
-                            {{ employer.employer.description}}
+                        <div class="thumb-pro-info">
+                            {{ pro.pro.description}}
                         </div>
                     </div>
                 </a>
@@ -97,11 +97,11 @@
                     <a class='offer-element ad' href="{{ ad.link }}" target="_blank">
                         {% if ads[0].description is not null and ad.link is not empty %}
                             {% set image =  'uploads' ~ vich_uploader_asset(ad.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});background-position: center center;">
+                            <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});background-position: center center;">
                                 <div class="layer layer-offer-element animated">
                                 </div>
                             </div>
-                            {% if ad.logo.imageName is not null %}<img class="logo-employer-in-offer-search" src="{{asset('uploads' ~ vich_uploader_asset(ad.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
+                            {% if ad.logo.imageName is not null %}<img class="logo-pro-in-offer-search" src="{{asset('uploads' ~ vich_uploader_asset(ad.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
                             <div class="offer-search-element">
                                 <div class="offer-element-details">
                                     <div class="offer-element-name">{{ ad.title }}</div>
@@ -110,7 +110,7 @@
                             </div>
                         {% else %}
                             {% set image =  'uploads' ~ vich_uploader_asset(ads[adOrder].coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                            <div class="background-employer-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});background-position: center center;"></div>
+                            <div class="background-pro-in-offer-search" style="width: 100% !important;background-repeat: no-repeat;background-size: cover;background-image: url({{asset(image)}});background-position: center center;"></div>
                         {% endif %}
                     </a>
                 </li>

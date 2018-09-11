@@ -6,46 +6,46 @@
 
 {% block body %}
     {%  if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="container">
 
-        <h2>{{ 'admin.dashboard.employerList' | trans }}</h2>
+        <h2>{{ 'admin.dashboard.proList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'admin.enterCompnay'|trans }}" title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'admin.enterCompnay'|trans }}" title="Type in a name" class="search-pro">
 
         <table class="table table-bordered table-striped well">
             <thead>
                 <tr>
-                    <th>{{ 'form.offer.search.employerPH' | trans }}</th>
+                    <th>{{ 'form.offer.search.proPH' | trans }}</th>
                     <th>{{ 'form.registration.email' | trans }}</th>
-                    <th>{{ 'employer.credit.title' | trans }}</th>
+                    <th>{{ 'pro.credit.title' | trans }}</th>
                     <th>{{ 'dashboard.action' | trans }}</th>
                 </tr>
             </thead>
 
-            <tbody id="table-employer">
-                {% for employer in employers %}
+            <tbody id="table-pro">
+                {% for pro in pros %}
                     <tr>
                         <td>
-                            <a class="employer-title" href="{{ path('employer_offers', { 'id': employer.employer.id }) }}">
-                                {{ employer.employer.name }}
+                            <a class="pro-title" href="{{ path('pro_offers', { 'id': pro.pro.id }) }}">
+                                {{ pro.pro.name }}
                             </a>
                         </td>
-                        <td>{{ employer.email }}</td>
+                        <td>{{ pro.email }}</td>
 
-                        <td>{{ employer.employer.credit }}</td>
+                        <td>{{ pro.pro.credit }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ path('edit_employer', { 'id': employer.employer.id }) }}">
-                                {{ 'dashboard.employer.editOffer' | trans }}
+                            <a class="btn btn-primary" href="{{ path('edit_pro', { 'id': pro.pro.id }) }}">
+                                {{ 'dashboard.pro.editOffer' | trans }}
                             </a>
-                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
+                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_pro', { 'id': pro.pro.id }) }}">
                                 {{ 'delete' | trans }}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('rendezvous_bills', { 'id': employer.employer.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('rendezvous_bills', { 'id': pro.pro.id }) }}">
                                 {{ 'price.bills' | trans }}
                             </a>
-                            <a href="{{ path('add_credit_admin', {'id':employer.id}) }}" class="btn btn-primary">{{ 'admin.addCredit.title'|trans }}</a>
+                            <a href="{{ path('add_credit_admin', {'id':pro.id}) }}" class="btn btn-primary">{{ 'admin.addCredit.title'|trans }}</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -53,11 +53,11 @@
 
         </table>
         <div id="paginator-offer">
-            <a href="{{ path('list_employer_admin', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
+            <a href="{{ path('list_pro_admin', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
             {% for i in 1..total %}
-                <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('list_employer_admin', {'row':i}) }}">{{ i }}</a>
+                <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('list_pro_admin', {'row':i}) }}">{{ i }}</a>
             {% endfor %}
-            <a href="{{ path('list_employer_admin', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
+            <a href="{{ path('list_pro_admin', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
         </div>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
@@ -79,13 +79,13 @@
                 let input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
-                ul = document.getElementById("table-employer");
+                ul = document.getElementById("table-pro");
                 a = ul.getElementsByTagName("tr");
                 for (i = 0; i < a.length; i++) {
                     a[i].style.display = "none";
                 }
                 for (i = 0; i < a.length; i++) {
-                    let h = a[i].getElementsByClassName("employer-title")[0];
+                    let h = a[i].getElementsByClassName("pro-title")[0];
                     if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
                         a[i].style.display = "";
                     } else {

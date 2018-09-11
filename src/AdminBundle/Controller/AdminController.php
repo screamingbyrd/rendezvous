@@ -24,12 +24,12 @@ class AdminController extends Controller
             return $this->redirectToRoute('rendezvous_home');
         }
 
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro')
         ;
-        $employerCount = $employerRepository->countTotalDifferentPro();
+        $proCount = $proRepository->countTotalDifferentPro();
 
         $candidateRepository = $this
             ->getDoctrine()
@@ -54,7 +54,7 @@ class AdminController extends Controller
 
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
-            'countPro' => $employerCount,
+            'countPro' => $proCount,
             'candidateCount' => $candidateCount,
             'totalSLot' => $totalSLot
         ));
@@ -82,23 +82,23 @@ class AdminController extends Controller
         ;
         $users = $repository->findAll();
 
-        $employers = [];
+        $pros = [];
         foreach($users as $user)
         {
             if($user->getPro() != NULL)
             {
-                $employers[] = $user;
+                $pros[] = $user;
             }
         }
 
-        $countResult = count($employers);
+        $countResult = count($pros);
 
-        $finalArray = array_slice($employers, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+        $finalArray = array_slice($pros, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
         $totalPage = ceil ($countResult / $numberOfItem);
 
         return $this->render('AdminBundle::listPro.html.twig', array(
-            'employers' => $finalArray,
+            'pros' => $finalArray,
             'page' => $currentPage,
             'total' => $totalPage,
             'sort' => $sort,
@@ -297,11 +297,11 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        $users = $userRepository->findBy(array('employer' => $offer->getPro()));
+        $users = $userRepository->findBy(array('pro' => $offer->getPro()));
         $arrayEmail = array();
 
-        foreach ($users as $employerUser){
-            $arrayEmail[] = $employerUser->getEmail();
+        foreach ($users as $proUser){
+            $arrayEmail[] = $proUser->getEmail();
         }
 
         if(is_array($arrayEmail) && !$status){
@@ -349,7 +349,7 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:ActiveLog');
 
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro');
@@ -390,7 +390,7 @@ class AdminController extends Controller
             $finalClientLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
             $finalApplicationLog[] = (int)$applicationRepository->countTotalBefore($endDate)[0]['total'];
             $monthlyApplicationLog[] = (int)$applicationRepository->countTotalMonthly($i, $year)[0]['total'];
-            $finalProLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
+            $finalProLog[] =(int)$proRepository->countActiveBetween($endDate)[0]['total'];
             $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
             $monthlyCreditLog[] = (int)$logCreditRepository->countTotalMonthly($i, $year)[0]['total'];
             $finalPriceLog[] =(int)$logCreditRepository->countTotalMoneyBefore($endDate)[0]['total'];
@@ -421,14 +421,14 @@ class AdminController extends Controller
             return $this->redirectToRoute('rendezvous_home');
         }
 
-        $employerId = $request->get('id');
+        $proId = $request->get('id');
 
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro');
-        $employer = $employerRepository->findOneBy(array('id' => $employerId));
-        $vatNumber = $employer->getVatNumber();
+        $pro = $proRepository->findOneBy(array('id' => $proId));
+        $vatNumber = $pro->getVatNumber();
         $countryCode = substr($vatNumber, 0, 2);
 
         $withVat = $countryCode == 'LU';
@@ -476,14 +476,14 @@ class AdminController extends Controller
 
                 $logCredit->setDate(new \DateTime());
                 $logCredit->setCredit($data['credits']);
-                $logCredit->setPro($employer);
+                $logCredit->setPro($pro);
                 $logCredit->setPrice($data['price']);
                 $logCredit->setName($data['name']);
                 $logCredit->setPhone($data['phone']);
                 $logCredit->setLocation($data['location']);
                 $logCredit->setZipcode($data['zipcode']);
 
-                $employer->setCredit($employer->getCredit() + $data['credits']);
+                $pro->setCredit($pro->getCredit() + $data['credits']);
 
                 $em->persist($logCredit);
                 $em->flush();
@@ -493,11 +493,11 @@ class AdminController extends Controller
                     ->getManager()
                     ->getRepository('AppBundle:User')
                 ;
-                $users = $userRepository->findBy(array('employer' => $employer));
+                $users = $userRepository->findBy(array('pro' => $pro));
                 $arrayEmail = array();
 
-                foreach ($users as $employerUser){
-                    $arrayEmail[] = $employerUser->getEmail();
+                foreach ($users as $proUser){
+                    $arrayEmail[] = $proUser->getEmail();
                 }
 
                 if(is_array($arrayEmail)) {
@@ -539,12 +539,12 @@ class AdminController extends Controller
                 $translated = $this->get('translator')->trans('price.payment.success', array('%credits%' => $data['credits']));
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('list_employer_admin');
+                return $this->redirectToRoute('list_pro_admin');
             }
         }
         return $this->render('AdminBundle::addCredit.html.twig', [
             'form' => $form->createView(),
-            'employer' => $employer,
+            'pro' => $pro,
             'withVat' => $withVat
         ]);
     }

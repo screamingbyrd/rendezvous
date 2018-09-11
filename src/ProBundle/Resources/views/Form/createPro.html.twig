@@ -1,15 +1,15 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ 'form.registration.title.employer' | trans }}
+    {{ parent() }} - {{ 'form.registration.title.pro' | trans }}
 {% endblock %}
 
 {% block body %}
 
-    <div class="container register-employer">
+    <div class="container register-pro">
         <div class="col-md-5 shadow-box">
-            <h3 class="title">{{ 'form.registration.title.employer' | trans }}</h3>
-            <div>{{ 'form.registration.subTitle.employer'|trans }}</div>
+            <h3 class="title">{{ 'form.registration.title.pro' | trans }}</h3>
+            <div>{{ 'form.registration.subTitle.pro'|trans }}</div>
             <div>{{ 'form.registration.already'|trans }} <a href="{{ path('fos_user_security_login') }}">{{ 'header.login.title'|trans }}</a></div>
 
             <hr>
@@ -53,19 +53,12 @@
                     {{ form_errors(form.phone) }}
                 </div>
 
-                <div class="col-md-12 form-group">
-                    {{ form_label (form.vatNumber) }}
-                    {{ form_widget(form.vatNumber) }}
-                    {{ form_errors(form.vatNumber) }}
-                    <div class="error-vat"></div>
-                </div>
-
                 <div class="col-md-12">
                     <p>{{ 'form.registration.passwordValidation'|trans }}</p>
                     {{ form_widget(form.password) }}
                     {{ form_errors(form.password) }}
                 </div>
-                {#<div class="col-md-12 create-employer-terms">#}
+                {#<div class="col-md-12 create-pro-terms">#}
                     {#{{ form_widget(form.terms) }}#}
                     {#{{ form_errors(form.terms) }}#}
                 {#</div>#}
@@ -76,13 +69,18 @@
                 {{ form_widget(form.description) }}
                 {{ form_errors(form.description) }}
 
-                {{ form_label (form.tag) }}
-                {{ form_widget(form.tag) }}
-                {{ form_errors(form.tag) }}
 
                 {{ form_label (form.location) }}
                 {{ form_widget(form.location) }}
                 {{ form_errors(form.location) }}
+
+                {{ form_label (form.city) }}
+                {{ form_widget(form.city) }}
+                {{ form_errors(form.city) }}
+
+                {{ form_label (form.zipcode) }}
+                {{ form_widget(form.zipcode) }}
+                {{ form_errors(form.zipcode) }}
 
                 {{ form_label (form.phone) }}
                 {{ form_widget(form.phone) }}
@@ -100,7 +98,7 @@
             </div>
 
 
-            <div class="col-md-6 col-md-offset-3 create-employer-submit">
+            <div class="col-md-6 col-md-offset-3 create-pro-submit">
                 {{ form_widget(form.submit, { 'label': 'offer.submit' }) }}
             </div>
 
@@ -125,13 +123,8 @@
             {#</div>#}
         </div>
     </div>
-    <style>
-        .error-vat{
-            color: red !important;
-        }
-    </style>
     <script>
-        $('#appbundle_employer_email').on('blur', function () {
+        $('#appbundle_pro_email').on('blur', function () {
             let mail = this.value;
             url = "{{ path('user_already_exist') }}";
             $.ajax({
@@ -140,44 +133,15 @@
             }).done(function( data ) {
                 if(data != ''){
                     $('.error-already-exist').css({'display':'block'});
-                    $("#appbundle_employer_submit").prop("disabled",true);
+                    $("#appbundle_pro_submit").prop("disabled",true);
                 }else{
                     $('.error-already-exist').css({'display':'none'});
-                    $("#appbundle_employer_submit").prop("disabled",false);
+                    $("#appbundle_pro_submit").prop("disabled",false);
                 }
 
             });
         });
-        $('#appbundle_employer_vatNumber').on('blur', function () {
-            let vat = this.value;
-            url = "{{ path('vat_exist') }}";
-            $.ajax({
-                statusCode: {
-                    500: function() {
-                        $('.error-vat').css({'display':'block'});
-                        $('.error-vat').html('{{ 'form.registration.invalidVatFormat'|trans }}');
-                        $("#appbundle_employer_submit").prop("disabled",true);
-                    }
-                },
-                url: url,
-                data: {vat:vat}
-            }).done(function( data ) {
-                if(data==''){
-                    $('.error-vat').css({'display':'block'});
-                    $('.error-vat').html('{{ 'form.registration.invalidVatFormat'|trans }}');
-                    $("#appbundle_employer_submit").prop("disabled",true);
-                }else if(data == 'false'){
-                    $('.error-vat').css({'display':'block'});
-                    $('.error-vat').html('{{ 'form.registration.invalidVat'|trans }}');
-                    $("#appbundle_employer_submit").prop("disabled",true);
-                }else{
-                    $('.error-vat').css({'display':'none'});
-                    $("#appbundle_employer_submit").prop("disabled",false);
-                }
-
-            });
-        });
-        $('#appbundle_employer_email').on('keyup', function () {
+        $('#appbundle_pro_email').on('keyup', function () {
             let mail = this.value;
             url = "{{ path('user_already_exist') }}";
             $.ajax({

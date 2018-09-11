@@ -1,25 +1,25 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ employer.name }}
+    {{ parent() }} - {{ pro.name }}
 {% endblock %}
 
 {% block body %}
-    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and app.user.employer == employer %}
-        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and app.user.pro == pro %}
+        <a href="{{ path('dashboard_pro') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
 
-    <div class="jumbotron employer-jumbotron">
+    <div class="jumbotron pro-jumbotron">
         <div>
-            <div class="container-logo-employer">
-                {% if employer.logo.imageName is not null %}
-                    {% set image =  'uploads' ~ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+            <div class="container-logo-pro">
+                {% if pro.logo.imageName is not null %}
+                    {% set image =  'uploads' ~ vich_uploader_asset(pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="logo-employer" src="{{ asset(image) }}"/>
+                <img class="logo-pro" src="{{ asset(image) }}"/>
             </div>
-            <h2>{{ employer.name }}</h2>
+            <h2>{{ pro.name }}</h2>
         </div>
 
     </div>
@@ -28,26 +28,26 @@
         <div class="row">
             <div style="height: 38px;">
                 {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                    <a href="{{ path('create_notification', {'type':'notification.employer', 'id':employer.id}) }}" class="rendezvous-button add-employer-notification">ajouter au notificaions</a>
+                    <a href="{{ path('create_notification', {'type':'notification.pro', 'id':pro.id}) }}" class="rendezvous-button add-pro-notification">ajouter au notificaions</a>
                 {% endif %}
-                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and app.user.employer == employer %}
-                    <a href="{{ path('edit_employer', {'id':employer.id}) }}" class="btn btn-primary add-employer-notification">{{ 'dashboard.employer.editProfile'|trans }}</a>
+                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and app.user.pro == pro %}
+                    <a href="{{ path('edit_pro', {'id':pro.id}) }}" class="btn btn-primary add-pro-notification">{{ 'dashboard.pro.editProfile'|trans }}</a>
                 {% endif %}
             </div>
             <hr>
             <div class="col-md-8">
                 <div class="shadow-box fade-in-right animated">
                     <div class="article-title">{{ 'form.registration.description'|trans }}</div>
-                    <p class="description-employer">{{ employer.description |nl2br}}</p>
+                    <p class="description-pro">{{ pro.description |nl2br}}</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="shadow-box fade-in-right animated">
-                    <div class="article-title">{{ 'employer.show.lastOffers'|trans }}</div>
+                    <div class="article-title">{{ 'pro.show.lastOffers'|trans }}</div>
                     {% if offers[0] is defined %}
                         <ul class="last-job-list">
                             <li>
-                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[0].id, 'url':offers[0].offerUrl}) }}">
+                                <a class="link-offer-pro" href="{{ path('show_offer', {'id':offers[0].id, 'url':offers[0].offerUrl}) }}">
                                     <div class="slide-button">
                                         <div><b>{{ offers[0].title }}</b></div>
                                         <div class="job-meta"><span>{{ offers[0].contractType.name |trans }}</span> - <span>{{ offers[0].location }}</span></div>
@@ -56,7 +56,7 @@
                             </li>
                             {% if offers[1] is defined %}
                                 <li>
-                                    <a class="link-offer-employer" href="{{ path('show_offer', {'id':offers[1].id, 'url':offers[1].offerUrl}) }}">
+                                    <a class="link-offer-pro" href="{{ path('show_offer', {'id':offers[1].id, 'url':offers[1].offerUrl}) }}">
                                         <div class="slide-button">
                                             <div><b>{{ offers[1].title }}</b></div>
                                             <div class="job-meta"><span>{{ offers[1].contractType.name |trans }}</span> - <span>{{ offers[1].location }}</span></div>
@@ -67,11 +67,11 @@
                         </ul>
                         {% if offers|length > 2 %}
                             <hr class="hr-last-offer">
-                            <a href="{{ path('search_page_offer', {'employer':employer.name}) }}" class="rendezvous-button">{{ 'employer.show.allOffers'|trans }}</a>
+                            <a href="{{ path('search_page_offer', {'pro':pro.name}) }}" class="rendezvous-button">{{ 'pro.show.allOffers'|trans }}</a>
                         {% endif %}
                     {% else %}
                         <div class="no-recent-offers">
-                            {{ 'employer.show.noOffer'|trans }}
+                            {{ 'pro.show.noOffer'|trans }}
                         </div>
                     {% endif %}
                 </div>
@@ -82,7 +82,7 @@
                         <ul class="last-job-list">
                             {% for tag in tags %}
                                 <li>
-                                    <a  href="{{ path('search_page_offer', {'tags':[tag.name], 'employer':employer.name}) }}">
+                                    <a  href="{{ path('search_page_offer', {'tags':[tag.name], 'pro':pro.name}) }}">
                                         {{ tag.name|trans }}
                                     </a>
                                 </li>
@@ -90,15 +90,15 @@
                         </ul>
                     {% else %}
                         <div class="no-recent-offers">
-                            {{ 'employer.show.noTag'|trans }}
+                            {{ 'pro.show.noTag'|trans }}
                         </div>
                     {% endif %}
                 </div>
 
                 {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_EMPLOYER' not in app.user.roles) %}
                     <div class="shadow-box">
-                        <button class="spontaneous-button rendezvous-button">{{ 'employer.show.spontaenous.title'|trans }}</button>
-                        <form method="post" action="{{ path('apply_spontaneous', {'id':employer.id}) }}" id="spontaneous-form" enctype="multipart/form-data" style="display:none;">
+                        <button class="spontaneous-button rendezvous-button">{{ 'pro.show.spontaenous.title'|trans }}</button>
+                        <form method="post" action="{{ path('apply_spontaneous', {'id':pro.id}) }}" id="spontaneous-form" enctype="multipart/form-data" style="display:none;">
                             <div class="inside-offer-apply">
                                 <div>
                                     {{ 'offer.apply.addCV' | trans }}<input name="cv" type="file" class="spontaneous-cv">
@@ -114,10 +114,10 @@
 
         </div>
     </div>
-    {% if employer.location is not null and map is defined and map is not null %}
+    {% if pro.location is not null and map is defined and map is not null %}
         <div class="container">
             <div class="shadow-box fade-in-left animated">
-                <h3>{{ employer.location }}</h3>
+                <h3>{{ pro.location }}</h3>
                 {{ ivory_google_map(map) }}
                 {{ ivory_google_api([map]) }}
             </div>
@@ -126,7 +126,7 @@
 
     <script>
         $(".spontaneous-button").click(function() {
-            $(".spontaneous-button").text(($(".spontaneous-button").text() == "{{ 'employer.show.spontaenous.title' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'employer.show.spontaenous.title' | trans }}").fadeIn();
+            $(".spontaneous-button").text(($(".spontaneous-button").text() == "{{ 'pro.show.spontaenous.title' | trans }}") ? "{{ 'offer.apply.close' | trans }}" : "{{ 'pro.show.spontaenous.title' | trans }}").fadeIn();
             $("#spontaneous-form").slideToggle("medium");
         });
     </script>
@@ -139,12 +139,12 @@
             margin-bottom: 10px;
             width: 100%;
         }
-        {% if employer.coverImage.imageName is not null %}
-            {% set image =  'uploads' ~ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% if pro.coverImage.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
         {% else %}
             {% set image = 'images/default_cover_image6.jpg' %}
         {% endif %}
-        .employer-jumbotron::after{
+        .pro-jumbotron::after{
             content: '';
             background-image:url({{ asset(image) }});
             background-size: cover;

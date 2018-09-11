@@ -66,7 +66,7 @@
         </div>
 
         <div class="content-mail">
-            <h3>{% if offer is not defined %}{{ 'employer.show.spontaenous.send'| trans}}{% else %}{{ 'email.application.employer.applied'| trans}}{% endif %}</h3>
+            <h3>{% if offer is not defined %}{{ 'pro.show.spontaenous.send'| trans}}{% else %}{{ 'email.application.pro.applied'| trans}}{% endif %}</h3>
             {% if offer is defined  %}
                 <div><a href="https://rendezvous.lu{{ path('show_offer', {'id':offer.id,'url':offer.offerUrl}) }}">{{ offer.title }}</a></div>
             {% endif %}
@@ -74,18 +74,18 @@
             {% if link is defined  %}
             <div class="other-footer">
                 <a href="https://rendezvous.lu{{ asset(link) }}" download>
-                    {{ 'email.application.employer.download'|trans }}
+                    {{ 'email.application.pro.download'|trans }}
                 </a>
             </div>
             {% endif %}
             <div class="other-footer">
-                {{ 'email.application.employer.comment'| trans}}
+                {{ 'email.application.pro.comment'| trans}}
             </div>
 
             {% if linkCover is defined and linkCover is not null and linkCover != '' %}
                 <div class="other-footer">
                     <a href="https://rendezvous.lu{{ asset(linkCover) }}" download>
-                        {{ 'email.application.employer.downloadCoverLetter'|trans }}
+                        {{ 'email.application.pro.downloadCoverLetter'|trans }}
                     </a>
                 </div>
             {% endif %}

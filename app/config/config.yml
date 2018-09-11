@@ -79,7 +79,7 @@ fos_elastica:
                                     min_gram: 6
                                     max_gram: 20
                 types:
-                    offer:
+                    pro:
                         properties:
                             id: ~
                             description: ~
@@ -95,7 +95,7 @@ fos_elastica:
                               type: object
                               properties:
                                 name: { type: text }
-                            employer:
+                            pro:
                               type: object
                               properties:
                                 name: { type: text }
@@ -153,10 +153,10 @@ swiftmailer:
 vich_uploader:
     db_driver: orm
     mappings:
-        employer_image:
-            uri_prefix: /images/employer
-            upload_destination: '%kernel.project_dir%/web/uploads/images/employer'
-            namer: app.employer_image
+        pro_image:
+            uri_prefix: /images/pro
+            upload_destination: '%kernel.project_dir%/web/uploads/images/pro'
+            namer: app.pro_image
 
 
 ivory_google_map:

@@ -19,7 +19,7 @@ class StripeClient
         $this->em = $em;
         $this->logger = $logger;
     }
-    public function createPremiumCharge(User $user, $token, $amount, Pro $employer, $nbrCredit)
+    public function createPremiumCharge(User $user, $token, $amount, Pro $pro, $nbrCredit)
     {
         try {
             $customer = \Stripe\Customer::create(array(
@@ -41,11 +41,11 @@ class StripeClient
         }
         $user->setChargeId($charge->id);
 
-        $credit = $employer->getCredit();
+        $credit = $pro->getCredit();
 
         $credit += $nbrCredit;
 
-        $employer->setCredit($credit);
+        $pro->setCredit($credit);
 
         $this->em->flush();
     }

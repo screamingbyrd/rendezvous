@@ -1,37 +1,37 @@
-create_employer:
+create_pro:
     locales:
         en: "/register"
         fr: "/inscription"
     defaults: { _controller: ProBundle:Pro:create }
-edit_employer:
+edit_pro:
     locales:
         en: "/edit"
         fr: "/editer"
     defaults: { _controller: ProBundle:Pro:edit }
-delete_employer:
+delete_pro:
     locales:
         en: "/delete/{id}"
         fr: "/supprimer/{id}"
     defaults: { _controller: ProBundle:Pro:delete }
 
-show_employer:
+show_pro:
     locales:
         en: "/{id}"
         fr: "/{id}"
     defaults: { _controller: ProBundle:Pro:show }
     requirements:
         id: \d+
-list_employer:
+list_pro:
     locales:
-        en: "/list-employer"
+        en: "/list-pro"
         fr: "/liste-employeur"
     defaults: { _controller: ProBundle:Pro:list }
-dashboard_employer:
+dashboard_pro:
     locales:
         en: "/dashboard"
         fr: "/tableaux-de-bord"
     defaults: { _controller: ProBundle:Pro:dashboard}
-employer_offers:
+pro_offers:
     locales:
         en: "/my-offers/{archived}"
         fr: "/mes-offres/{archived}"
@@ -110,19 +110,19 @@ increment_offer:
         en: "/increment-offer"
         fr: "/incrementer-offre"
     defaults: { _controller: ProBundle:Offer:increment }
-featured_employer_page:
+featured_pro_page:
     locales:
-        en: "/featured-employer"
+        en: "/featured-pro"
         fr: "/employeur-en-avant"
     defaults: { _controller: ProBundle:Pro:featuredProPage }
-reserve_featured_employer:
+reserve_featured_pro:
     locales:
-        en: "/reserve-featured-employer"
+        en: "/reserve-featured-pro"
         fr: "/reserver-employeur-en-avant"
     defaults: { _controller: ProBundle:Pro:reserveFeaturedPro }
-delete_featured_employer:
+delete_featured_pro:
     locales:
-        en: "/delete-featured-employer"
+        en: "/delete-featured-pro"
         fr: "/supprimer-employeur-en-avant"
     defaults: { _controller: ProBundle:Pro:deleteFeaturedPro }
 featured_offer_page:

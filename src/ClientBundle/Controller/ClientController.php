@@ -290,7 +290,7 @@ class ClientController extends Controller
             return $this->redirectToRoute('create_candidate');
         }
 
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro')
@@ -326,9 +326,9 @@ class ClientController extends Controller
             $newNotification['elementId'] = $notification->getElementId();
             $type = $notification->getTypeNotification();
             $newNotification['type'] = $type;
-            if($type == 'notification.employer'){
-                $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
-                $newNotification['name'] = $employer->getName();
+            if($type == 'notification.pro'){
+                $pro = $proRepository->findOneBy(array('id' => $notification->getElementId()));
+                $newNotification['name'] = $pro->getName();
             }elseif ($type == 'notification.tag'){
                 $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
                 $newNotification['name'] = $tag->getName();
@@ -464,9 +464,9 @@ class ClientController extends Controller
         $session = $request->getSession();
 
         if(!(isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) || in_array('ROLE_ADMIN', $user->getRoles()) || $user->getId() != $id)){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $candidateRepository = $this

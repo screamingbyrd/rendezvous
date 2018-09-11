@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FeaturedPro
  *
- * @ORM\Table(name="featured_employer")
+ * @ORM\Table(name="featured_pro")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FeaturedProRepository")
  */
 class FeaturedPro
@@ -23,9 +23,9 @@ class FeaturedPro
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro")
-     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="pro_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $employer;
+    private $pro;
 
     /**
      * @var \DateTime
@@ -60,27 +60,27 @@ class FeaturedPro
     }
 
     /**
-     * Set employer
+     * Set pro
      *
-     * @param string $employer
+     * @param string $pro
      *
      * @return FeaturedPro
      */
-    public function setPro($employer)
+    public function setPro($pro)
     {
-        $this->employer = $employer;
+        $this->pro = $pro;
 
         return $this;
     }
 
     /**
-     * Get employer
+     * Get pro
      *
      * @return string
      */
     public function getPro()
     {
-        return $this->employer;
+        return $this->pro;
     }
 
     /**

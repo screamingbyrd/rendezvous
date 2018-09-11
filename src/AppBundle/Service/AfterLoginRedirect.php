@@ -38,7 +38,7 @@ class AfterLoginRedirect implements AuthenticationSuccessHandlerInterface
         }, $roles);
 
         if (in_array('ROLE_EMPLOYER', $rolesTab, true)) {
-            $redirection = new RedirectResponse($this->router->generate('dashboard_employer'));
+            $redirection = new RedirectResponse($this->router->generate('dashboard_pro'));
         } elseif(in_array('ROLE_CANDIDATE', $rolesTab, true)) {
             $redirection = new RedirectResponse($this->router->generate('dashboard_candidate'));
         }else {

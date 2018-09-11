@@ -8,7 +8,7 @@
 {% block body %}
     <div class="jumbotron homepage-jumbotron">
         <div>
-            <div class="title-employer">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="title-pro">{{ user.firstName }} {{ user.lastName }}</div>
         </div>
 
     </div>
@@ -40,7 +40,7 @@
 
 
                 <fieldset>
-                    <legend>{{ 'employer.edit.personalData'|trans }}</legend>
+                    <legend>{{ 'pro.edit.personalData'|trans }}</legend>
 
                     <div class="col-md-3 form-group">
                         {{ form_label (form.email,null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -64,7 +64,7 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>{{ 'employer.edit.professionalData'|trans }}</legend>
+                    <legend>{{ 'pro.edit.professionalData'|trans }}</legend>
 
                     <div class="col-md-6 form-group">
                         {{ form_label (form.tag,null, { 'label_attr': {'class': 'label-form'} }) }}
@@ -161,8 +161,8 @@
             </div>
             <div class="button-profile">
                 <button class="btn btn-primary " id="btn-confirm">{{ 'candidate.delete.delete'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">{{ 'employer.edit.changePassword'|trans }}</a>
-                <a class="btn btn-primary" href="{{ path('fos_user_resetting_request') }}">{{ 'employer.edit.forgotPassword'|trans }}</a>
+                <a class="btn btn-primary" href="{{ path('fos_user_change_password') }}">{{ 'pro.edit.changePassword'|trans }}</a>
+                <a class="btn btn-primary" href="{{ path('fos_user_resetting_request') }}">{{ 'pro.edit.forgotPassword'|trans }}</a>
             </div>
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
                 <div class="modal-dialog modal-sm">

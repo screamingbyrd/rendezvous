@@ -71,31 +71,22 @@ class ProType extends AbstractType
                 'label' => 'form.registration.companyName'
             ))
 
-            ->add('vatNumber', TextType::class, array(
-                'required' => true,
-                'label' => 'form.registration.vatNumber',
-                'attr' => array(
-                'placeholder' => 'LU49647567'
-                )
-            ))
-
             ->add('description', TextareaType::class, array(
                 'required' => false,
                 'label' => 'form.registration.description',
             ))
 
-            ->add('tag', EntityType::class, array(
-                'choice_translation_domain' => true,
+            ->add('location', TextType::class,array(
+                'attr' => array('class' => 'form-control'),
                 'required' => false,
-                'class' => Tag::class,
-                'choice_label' =>  'name',
-                'placeholder' => 'Category',
-                'multiple' => true,
-                'attr' => array('class' => 'select2'),
+                ))
 
-            ))
+            ->add('city', TextType::class,array(
+                'attr' => array('class' => 'form-control'),
+                'required' => false,
+                ))
 
-            ->add('location', PlaceAutocompleteType::class,array(
+            ->add('zipcode', TextType::class,array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
                 ))
@@ -132,7 +123,7 @@ class ProType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_employer';
+        return 'appbundle_pro';
     }
 
 

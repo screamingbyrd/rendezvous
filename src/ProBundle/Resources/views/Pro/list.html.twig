@@ -6,37 +6,37 @@
 
 {% block body %}
 
-    <div class="container search-employer-page">
+    <div class="container search-pro-page">
         <h2 class="text-center">{{ 'searchPro.title'|trans }}</h2>
         <br>
         <div class="shadow-box">{{ 'searchPro.discover'|trans }}</div>
 
-        <input style="margin-top: 16px;" type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'searchPro.type'|trans }}" title="Type in a name" class="search-employer">
+        <input style="margin-top: 16px;" type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'searchPro.type'|trans }}" title="Type in a name" class="search-pro">
 
         <ul id="myUL">
 
-            {% for employer in employers %}
-                    {% if employer.phone is not null %}
-                        <a target="_blank" href="{{ path('show_employer', {'id':employer.id}) }}" class="col-md-4 col-sm-6 featured-offer zoom  thump-employer">
+            {% for pro in pros %}
+                    {% if pro.phone is not null %}
+                        <a target="_blank" href="{{ path('show_pro', {'id':pro.id}) }}" class="col-md-4 col-sm-6 featured-offer zoom  thump-pro">
                             <div class="thumbnail featured-offer-item" style="margin-right: 0;margin-left: 0;">
-                                <div class="header-thumb-employer">
-                                    {% if employer.logo.imageName is not null %}
-                                        {% set image =  'uploads' ~ vich_uploader_asset(employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                <div class="header-thumb-pro">
+                                    {% if pro.logo.imageName is not null %}
+                                        {% set image =  'uploads' ~ vich_uploader_asset(pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
                                     {% else %}
                                         {% set image = 'images/logo-default.png' %}
                                     {% endif %}
-                                    <img src="{{ asset(image) }}" class="employer-thumb-logo" />
-                                    <h3 class="employer-title">{{ employer.name }}</h3>
+                                    <img src="{{ asset(image) }}" class="pro-thumb-logo" />
+                                    <h3 class="pro-title">{{ pro.name }}</h3>
                                 </div>
-                                {% if employer.coverImage.imageName is not null %}
-                                    {% set image =  'uploads' ~ vich_uploader_asset(employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                {% if pro.coverImage.imageName is not null %}
+                                    {% set image =  'uploads' ~ vich_uploader_asset(pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
                                 {% else %}
                                     {% set image = 'images/default_cover_image6.jpg' %}
                                 {% endif %}
                                 <div class="caption" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});min-height: 185px;background-position: center center;">
                                 </div>
-                                <div class="thumb-employer-info">
-                                    {{ employer.description}}
+                                <div class="thumb-pro-info">
+                                    {{ pro.description}}
                                 </div>
                             </div>
                         </a>
@@ -56,7 +56,7 @@
                 a[i].style.display = "none";
             }
             for (i = 0; i < a.length; i++) {
-                let h = a[i].getElementsByClassName("employer-title")[0];
+                let h = a[i].getElementsByClassName("pro-title")[0];
                 if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
                     a[i].style.display = "";
                 } else {

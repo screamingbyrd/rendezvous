@@ -1,12 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ 'employer.credit.title' | trans }}
+    {{ parent() }} - {{ 'pro.credit.title' | trans }}
 {% endblock %}
 
 {% block body %}
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_pro') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="jumbotron homepage-jumbotron">
         <h2>{{ 'price.payment.title' | trans }}</h2>

@@ -63,11 +63,11 @@ class SitemapController extends Controller
 
         //ProBundle routing
         $urls[] = ['loc' =>
-            'https://rendezvous.lu' . $this->get('router')->generate('create_employer',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+            'https://rendezvous.lu' . $this->get('router')->generate('create_pro',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
 
         $urls[] = ['loc' =>
-            'https://rendezvous.lu' . $this->get('router')->generate('list_employer',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
+            'https://rendezvous.lu' . $this->get('router')->generate('list_pro',array('locale' => $locale, '_locale' => $locale)), 'changefreq' => 'weekly', 'priority' => '1.0'
         ];
 
         $urls[] = ['loc' =>

@@ -4,9 +4,9 @@ dashboard_admin:
         fr: "/tableau-de-bord"
     defaults: { _controller: AdminBundle:Admin:index }
 
-list_employer_admin:
+list_pro_admin:
     locales:
-        en: "/employer/list"
+        en: "/pro/list"
         fr: "/employeur/liste"
     defaults: { _controller: AdminBundle:Admin:listPro }
 

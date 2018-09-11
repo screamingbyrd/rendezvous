@@ -47,9 +47,9 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro", cascade={"persist"}, inversedBy="user")
-     * @ORM\JoinColumn(name="employer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="pro_id", referencedColumnName="id")
      */
-    private $employer;
+    private $pro;
 
     /**
      * @var boolean
@@ -124,27 +124,27 @@ class User extends BaseUser
 
 
     /**
-     * Set employer
+     * Set pro
      *
-     * @param \AppBundle\Entity\Pro $employer
+     * @param \AppBundle\Entity\Pro $pro
      *
      * @return User
      */
-    public function setPro(\AppBundle\Entity\Pro $employer = null)
+    public function setPro(\AppBundle\Entity\Pro $pro = null)
     {
-        $this->employer = $employer;
+        $this->pro = $pro;
 
         return $this;
     }
 
     /**
-     * Get employer
+     * Get pro
      *
      * @return \AppBundle\Entity\Pro
      */
     public function getPro()
     {
-        return $this->employer;
+        return $this->pro;
     }
 
     /**

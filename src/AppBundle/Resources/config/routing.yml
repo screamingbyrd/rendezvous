@@ -13,27 +13,27 @@ share_by_mail:
     defaults: { _controller: AppBundle:Contact:shareByMail }
 rendezvous_credit:
     locales:
-        en: "/employer/credit"
+        en: "/pro/credit"
         fr: "/employeur/credit"
     defaults: { _controller: AppBundle:Credit:credit }
 rendezvous_bills:
     locales:
-        en: "/employer/bills"
+        en: "/pro/bills"
         fr: "/employeur/facture"
     defaults: { _controller: AppBundle:Credit:bills }
 rendezvous_bills_generate:
     locales:
-        en: "/employer/bills/pdf"
+        en: "/pro/bills/pdf"
         fr: "/employeur/facture/pdf"
     defaults: { _controller: AppBundle:Credit:generateBill }
 rendezvous_estimation_generate:
     locales:
-        en: "/employer/estimation/pdf"
+        en: "/pro/estimation/pdf"
         fr: "/employeur/devis/pdf"
     defaults: { _controller: AppBundle:Credit:generateEstimation }
 rendezvous_payment:
     locales:
-        en: "/employer/payment/{id}"
+        en: "/pro/payment/{id}"
         fr: "/employeur/paiement/{id}"
     defaults: { _controller: AppBundle:Credit:credit }
 contact_us_page:

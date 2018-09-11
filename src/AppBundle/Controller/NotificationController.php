@@ -185,7 +185,7 @@ class NotificationController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro')
@@ -205,9 +205,9 @@ class NotificationController extends Controller
                 if(!empty($offers)){
                     $candidate = $candidateRepository->findOneBy(array('id' => $notification->getClient()));
 
-                    if($notification->getTypeNotification() == 'notification.employer'){
-                        $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
-                        $subject = $employer->getName();
+                    if($notification->getTypeNotification() == 'notification.pro'){
+                        $pro = $proRepository->findOneBy(array('id' => $notification->getElementId()));
+                        $subject = $pro->getName();
                     }elseif ($notification->getTypeNotification() == 'notification.tag'){
                         $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
                         $subject = $tag->getName();

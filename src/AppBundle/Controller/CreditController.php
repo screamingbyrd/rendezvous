@@ -32,9 +32,9 @@ class CreditController extends Controller
         $session = $request->getSession();
 
         if($id != 0 && !(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $withVat = true;
@@ -71,17 +71,17 @@ class CreditController extends Controller
                 $logsCredit = 0;
                 $user =$this->getUser();
                 if(isset($user)){
-                    $employer = $this->getUser()->getPro();
+                    $pro = $this->getUser()->getPro();
 
-                    if(isset($employer)){
-                        $creditPro = $employer->getCredit();
+                    if(isset($pro)){
+                        $creditPro = $pro->getCredit();
 
                         $repository = $this
                             ->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:LogCredit')
                         ;
-                        $logsCredit = $repository->findBy(array('employer' => $employer));
+                        $logsCredit = $repository->findBy(array('pro' => $pro));
                     }
 
                 }
@@ -108,12 +108,12 @@ class CreditController extends Controller
         $session = $request->getSession();
 
         if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles())) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $employer = $this->getUser()->getPro();
+        $pro = $this->getUser()->getPro();
 
         $idPro = $request->get('id');
 
@@ -123,7 +123,7 @@ class CreditController extends Controller
                 ->getManager()
                 ->getRepository('AppBundle:Pro')
             ;
-            $employer = $repository->findOneBy(array('id' => $idPro));
+            $pro = $repository->findOneBy(array('id' => $idPro));
         }
 
         $repository = $this
@@ -131,7 +131,7 @@ class CreditController extends Controller
             ->getManager()
             ->getRepository('AppBundle:LogCredit')
         ;
-        $logsCredit = $repository->findBy(array('employer' => $employer),array('date' => $sort));
+        $logsCredit = $repository->findBy(array('pro' => $pro),array('date' => $sort));
 
         $countResult = count($logsCredit);
 
@@ -269,9 +269,9 @@ class CreditController extends Controller
         $logsCredit = $repository->findOneBy(array('id' => $id));
 
         if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles()) and $logsCredit->getPro() == $user->getPro()) or in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $vatNumber = $user->getPro()->getVatNumber();
@@ -307,9 +307,9 @@ class CreditController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles())) or in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $vatNumber = $user->getPro()->getVatNumber();

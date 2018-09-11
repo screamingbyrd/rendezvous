@@ -2,15 +2,15 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ 'dashboard.employer.myBills' | trans }}
+    {{ parent() }} - {{ 'dashboard.pro.myBills' | trans }}
 {% endblock %}
 
 {% block body %}
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_pro') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="container rendezvous-container">
-        <h1>{{ 'dashboard.employer.myBills' | trans }}</h1>
+        <h1>{{ 'dashboard.pro.myBills' | trans }}</h1>
 
         {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
 

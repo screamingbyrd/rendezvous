@@ -5,11 +5,11 @@ root:
         path: /%locale%/
         permanent: true
 
-employer:
+pro:
     resource: "@ProBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-         en: "/{_locale}/employer"
+         en: "/{_locale}/pro"
          fr: "/{_locale}/employeur"
 
 candidate:

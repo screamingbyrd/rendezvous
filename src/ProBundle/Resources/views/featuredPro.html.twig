@@ -1,7 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {{ 'featured.employer.title' | trans }}
+    {{ parent() }} - {{ 'featured.pro.title' | trans }}
 {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
         }
     </style>
     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-        <a href="{{ path('dashboard_employer') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_pro') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="col-md-1 select-year">
         <select id="log-year" class="col-md-1 col-md-offset-3 form-control">
@@ -24,7 +24,7 @@
         </select>
     </div>
     <div class="container">
-        <h1>{{ 'featured.employer.title' | trans }}</h1>
+        <h1>{{ 'featured.pro.title' | trans }}</h1>
         <div class="row">
             {% set firstWeekStart = year ~ '-01-01 00:00' %}
             {% set modify = 0 %}
@@ -34,13 +34,13 @@
                     <div class="shadow-box feature-box {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}past-box{% endif %}">
                         <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         <div class="fromTo">{{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y") }} {{ 'to'|trans }} {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date_modify("+" ~ 6 ~ "day")|date("d/m/Y") }}</div>
-                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
-                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
+                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.pro.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-pro" data-href="{{ path('reserve_featured_pro', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.pro.reserve' | trans }}</button>{% endif %}
+                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.pro.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
                         {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-                            {% for employer in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
+                            {% for pro in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
                                 <div>
-                                {{ employer.employer.name }}
-                                <a href="{{ path('delete_featured_employer', { 'id': employer.id }) }}">
+                                {{ pro.pro.name }}
+                                <a href="{{ path('delete_featured_pro', { 'id': pro.id }) }}">
                                     <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                 </a>
                                 </div>
@@ -55,13 +55,13 @@
                     <div class="shadow-box feature-box {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}past-box{% endif %}">
                         <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         <div class="fromTo">{{ firstWeekStart|date_modify("+"~  modify  ~"week")|date("d/m/Y") }} {{ 'to'|trans }} {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date_modify("+" ~ 6 ~ "day")|date("d/m/Y") }}</div>
-                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
-                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<span class="count-info reserved-employer reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</span>{% endif %}
+                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.pro.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-pro" data-href="{{ path('reserve_featured_pro', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.pro.reserve' | trans }}</button>{% endif %}
+                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.pro.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<span class="count-info reserved-pro reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</span>{% endif %}
                         {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-                            {% for employer in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
+                            {% for pro in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
                                 <div>
-                                    {{ employer.employer.name }}
-                                    <a href="{{ path('delete_featured_employer', { 'id': employer.id }) }}">
+                                    {{ pro.pro.name }}
+                                    <a href="{{ path('delete_featured_pro', { 'id': pro.id }) }}">
                                         <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                     </a>
                                 </div>
@@ -76,13 +76,13 @@
                     <div class="shadow-box feature-box {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}past-box{% endif %}">
                     <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                     <div class="fromTo">{{ firstWeekStart|date_modify("+"~ modify  ~"week")|date("d/m/Y") }} {{ 'to'|trans }} {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date_modify("+" ~ 6 ~ "day")|date("d/m/Y") }}</div>
-                    {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
-                    {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
+                    {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.pro.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-pro" data-href="{{ path('reserve_featured_pro', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.pro.reserve' | trans }}</button>{% endif %}
+                    {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.pro.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
                     {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-                        {% for employer in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
+                        {% for pro in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
                             <div>
-                                {{ employer.employer.name }}
-                                <a href="{{ path('delete_featured_employer', { 'id': employer.id }) }}">
+                                {{ pro.pro.name }}
+                                <a href="{{ path('delete_featured_pro', { 'id': pro.id }) }}">
                                     <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                 </a>
                             </div>
@@ -97,13 +97,13 @@
                     <div class="shadow-box feature-box {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}past-box{% endif %}">
                         <div><b>{{ 'featured.week'|trans }} {{ modify + 1 }}</b></div>
                         <div class="fromTo">{{ firstWeekStart|date_modify("+" ~ modify  ~"week")|date("d/m/Y") }} {{ 'to'|trans }} {{ firstWeekStart|date_modify("+" ~ modify ~ "week")|date_modify("+" ~ 6 ~ "day")|date("d/m/Y") }}</div>
-                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.employer.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-employer" data-href="{{ path('reserve_featured_employer', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.employer.reserve' | trans }}</button>{% endif %}
-                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.employer.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
+                        {% if (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is not defined or (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]|length < 3) and user.pro.id not in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']))%}<button {% if now > firstWeekStart|date_modify("+" ~ modify ~ "week")%}disabled{% endif %} class="btn btn-primary reserve-feature reserve-featured-pro" data-href="{{ path('reserve_featured_pro', {'date':firstWeekStart|date_modify("+" ~ modify ~ "week"), 'user':user.id}) }}">{{ 'featured.pro.reserve' | trans }}</button>{% endif %}
+                        {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id'] is defined and user.pro.id in (featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['id']) %}<div><button type="button" class="btn btn-success reserve-feature reserved-button">{{ 'featured.reserved'|trans }}</button></div>{% endif %}
                         {% if featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")] is defined and (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-                            {% for employer in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
+                            {% for pro in featuredProArray[firstWeekStart|date_modify("+" ~ modify ~ "week")|date("d/m/Y")]['featured'] %}
                                 <div>
-                                    {{ employer.employer.name }}
-                                    <a href="{{ path('delete_featured_employer', { 'id': employer.id }) }}">
+                                    {{ pro.pro.name }}
+                                    <a href="{{ path('delete_featured_pro', { 'id': pro.id }) }}">
                                         <button type="button" class="btn btn-danger">{{ 'delete'|trans }}</button>
                                     </a>
                                 </div>
@@ -122,10 +122,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ 'featured.employer.modal'|trans({'%credit%': featuredProCredit}) }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'featured.pro.modal'|trans({'%credit%': featuredProCredit}) }}</h4>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-default" id="modal-btn-yes-reserve-featured-employer">{{ 'yes'|trans }}</a>
+                    <a type="button" class="btn btn-default" id="modal-btn-yes-reserve-featured-pro">{{ 'yes'|trans }}</a>
                     <button type="button" class="btn btn-primary modal-btn-no">{{ 'no'|trans }}</button>
                 </div>
             </div>
@@ -133,8 +133,8 @@
     </div>
 
     <script>
-        $(".reserve-featured-employer").on("click", function(e){
-            $('#modal-btn-yes-reserve-featured-employer').attr("href", $(this).data('href'));
+        $(".reserve-featured-pro").on("click", function(e){
+            $('#modal-btn-yes-reserve-featured-pro').attr("href", $(this).data('href'));
             $("#modal-featured").modal('show');
         });
 
@@ -146,10 +146,10 @@
             let year = $(this).val();
             switch(year){
                 case '2018':
-                    window.location.replace('{{ path('featured_employer_page', {'year': 2018}) }}');
+                    window.location.replace('{{ path('featured_pro_page', {'year': 2018}) }}');
                     break;
                 case '2019':
-                    window.location.replace('{{ path('featured_employer_page', {'year': 2019}) }}');
+                    window.location.replace('{{ path('featured_pro_page', {'year': 2019}) }}');
                     break;
             }
         });

@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block body %}
-    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and (offer.employer == app.user.employer) %}
-        <a href="{{ path('edit_offer', {'id':offer.id}) }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.editOffer' | trans }}</a>
+    {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and (offer.pro == app.user.pro) %}
+        <a href="{{ path('edit_offer', {'id':offer.id}) }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.editOffer' | trans }}</a>
     {% endif %}
 
     <div class="jumbotron offer-jumbotron">
         <h2>{{ offer.title }}</h2>
         <h3 class="page-subtitle">
-            <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_employer', {'id':offer.employer.id}) }}">{{ offer.employer.name }}</a></div>
+            <div class="offer-company-name"><a class="button-company-name" href="{{ path('show_pro', {'id':offer.pro.id}) }}">{{ offer.pro.name }}</a></div>
             <div class="job-title"><a class="button-company-name" href="{{ path('search_page_offer', {'contracts':[offer.contractType.name]}) }}">{{ offer.contractType.name |trans }}</a></div>
             <div class="job-title">{{ offer.location }}</div>
             <div class="updated-date">{{ 'offer.posted' | trans }} {{ offer.creationDate |date('d/m/Y')}}</div>
@@ -22,8 +22,8 @@
             {% endif %}
             {% if offer.image is not null and offer.image.imageName is not null %}
                 {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
-            {% elseif offer.employer.coverImage.imageName is not null %}
-                {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+            {% elseif offer.pro.coverImage.imageName is not null %}
+                {% set image =  'uploads' ~ vich_uploader_asset(offer.pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
             {% else %}
                 {% set image = 'images/default_cover_image2.jpg' %}
             {% endif %}
@@ -138,29 +138,29 @@
         </div>
 
         <div class="col-sm-6 col-md-3" style="margin-bottom: 50px;">
-            <div class="floating-employer fade-in-right animated">
-                <div class="header-floating-employer ">
-                    {{ offer.employer.name|upper }}
+            <div class="floating-pro fade-in-right animated">
+                <div class="header-floating-pro ">
+                    {{ offer.pro.name|upper }}
                 </div>
-                {% if offer.employer.logo.imageName is not null %}
-                    {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                {% if offer.pro.logo.imageName is not null %}
+                    {% set image =  'uploads' ~ vich_uploader_asset(offer.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
                 {% else %}
                     {% set image = 'images/logo-default.png' %}
                 {% endif %}
-                <img class="floating-employer-logo" src="{{ asset(image) }}"/>
-                <div class="floating-employer-description">
-                    <div class="offer-employer-description">
-                        {{ offer.employer.description| raw }}
+                <img class="floating-pro-logo" src="{{ asset(image) }}"/>
+                <div class="floating-pro-description">
+                    <div class="offer-pro-description">
+                        {{ offer.pro.description| raw }}
                     </div>
-                    <hr class="hr-floating-employer">
+                    <hr class="hr-floating-pro">
                 </div>
 
-                <a href="{{ path('show_employer', {'id': offer.employer.id}) }}" class="rendezvous-button">{{ 'offer.companyPage'|trans }}</a>
+                <a href="{{ path('show_pro', {'id': offer.pro.id}) }}" class="rendezvous-button">{{ 'offer.companyPage'|trans }}</a>
             </div>
 
             {% if offer.tag is defined and offer.tag|length >0 %}
                 <div class="shadow-box fade-in-left animated offer-tag-container">
-                    <div class="article-title"><i class="fa fa-tag"></i> {{ 'employer.show.tags'|trans }}</div>
+                    <div class="article-title"><i class="fa fa-tag"></i> {{ 'pro.show.tags'|trans }}</div>
                     <ul class="last-job-list">
                         {% for tag in offer.tag %}
                             <li>
@@ -178,7 +178,7 @@
                     <div class="article-title">{{ 'offer.similarOffer'|trans }}</div>
                     <ul class="last-job-list">
                         <li>
-                            <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[0].id, 'url':similarOfferArray[0].offerUrl}) }}">
+                            <a class="link-offer-pro" href="{{ path('show_offer', {'id':similarOfferArray[0].id, 'url':similarOfferArray[0].offerUrl}) }}">
                                 <div class="slide-button">
                                     <div><b>{{ similarOfferArray[0].title }}</b></div>
                                     <div class="job-meta"><span>{{ similarOfferArray[0].contractType.name |trans }}</span> - <span>{{ similarOfferArray[0].location }}</span></div>
@@ -187,7 +187,7 @@
                         </li>
                         {% if similarOfferArray[1] is defined %}
                             <li>
-                                <a class="link-offer-employer" href="{{ path('show_offer', {'id':similarOfferArray[1].id, 'url':similarOfferArray[1].offerUrl}) }}">
+                                <a class="link-offer-pro" href="{{ path('show_offer', {'id':similarOfferArray[1].id, 'url':similarOfferArray[1].offerUrl}) }}">
                                     <div class="slide-button">
                                         <div><b>{{ similarOfferArray[1].title }}</b></div>
                                         <div class="job-meta"><span>{{ similarOfferArray[1].contractType.name |trans }}</span> - <span>{{ similarOfferArray[1].location }}</span></div>
@@ -261,8 +261,8 @@
     <style>
         {% if offer.image is not null and offer.image.imageName is not null %}
             {% set image =  'uploads' ~ vich_uploader_asset(offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
-        {% elseif offer.employer.coverImage.imageName is not null %}
-            {% set image =  'uploads' ~ vich_uploader_asset(offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+        {% elseif offer.pro.coverImage.imageName is not null %}
+            {% set image =  'uploads' ~ vich_uploader_asset(offer.pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
         {% else %}
             {% set image = 'images/default_cover_image2.jpg' %}
         {% endif %}

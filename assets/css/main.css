@@ -296,9 +296,9 @@ h3.title{
 
 
 
-/*Register candidate / employer*/
+/*Register candidate / pro*/
 
-.register-employer{
+.register-pro{
     
     margin-top: 0;
 
@@ -308,7 +308,7 @@ h3.title{
     margin-top: 17px;
 }
 
-.register-candidate, .register-employer{
+.register-candidate, .register-pro{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -417,7 +417,7 @@ legend{
     font-weight: 600;
     font-size: 42px;
 }
-.homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
+.homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .pro-jumbotron{
     text-align: center;
     overflow: hidden;
     padding: 95px  0;
@@ -433,7 +433,7 @@ legend{
 }
 
 @media screen and (max-device-width: 480px){
-    .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .employer-jumbotron{
+    .homepage-jumbotron, .offer-jumbotron, .searchpage-jumbotron, .pro-jumbotron{
         padding: 0;
     }
     body{
@@ -451,7 +451,7 @@ legend{
         border-radius: 8px;
         padding: 10px 19px;
     }
-    .dashboard-employer-logo{
+    .dashboard-pro-logo{
         width: 50px !important;
         height: 50px !important;
     }
@@ -495,7 +495,7 @@ legend{
     .navbar-fixed-bottom{
         position: relative !important;
     }
-    .register-candidate, .register-employer, .login{
+    .register-candidate, .register-pro, .login{
         margin-top: 0 !important;
         margin-bottom: 20px;
     }
@@ -678,21 +678,21 @@ legend{
     padding-right: 0;
     padding-top: 0;
 }
-.header-thumb-employer{
+.header-thumb-pro{
     display: inline-flex;
     padding-top: 4px;
 }
-.header-thumb-employer h3{
+.header-thumb-pro h3{
     margin-top: 12px;
 
 }
-.thumb-employer-info{
+.thumb-pro-info{
     font-size: 16px;
     margin: 10px;
     height: 91px;
     overflow: hidden;
 }
-.employer-thumb-logo{
+.pro-thumb-logo{
     margin-left: 5px;
     width: 50px;
     height: 50px;
@@ -766,7 +766,7 @@ legend{
     border: 1px solid #ddd;
     margin-bottom: 12px;
 }
-.dashboard-employer-logo{
+.dashboard-pro-logo{
     width: 100px;
     height: 100px;
 }
@@ -867,7 +867,7 @@ legend{
 .title-featured-offer{
     margin-top: 5px;
 }
-.reserved-employer{
+.reserved-pro{
     float: right;padding: 7px 12px !important;
     width: 85px;
     text-align: center;
@@ -908,7 +908,7 @@ legend{
 .reserved-button{
     pointer-events:none;
 }
-.feature-box-employer {
+.feature-box-pro {
     height: 238px;
 }
 .fromTo{
@@ -1150,7 +1150,7 @@ legend{
     #navbarfooter .navbar-right li{
         margin-right: 20px;
     }
-    .feature-box-employer {
+    .feature-box-pro {
         height: 268px;
     }
     .return-to-dashboard{

@@ -7,7 +7,7 @@
 {% block body %}
 
     {%  if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="col-md-1 select-year">
         <select id="log-year" class="col-md-1 col-md-offset-3 form-control">
@@ -20,11 +20,11 @@
         <div class="navbar-dashboard">
             <ul class="nav nav-tabs nav-candidate navbar-dashboard">
                 <li class="active">
-                    <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">{{ 'dashboard.employer.slot.offer'|trans }}</a>
+                    <a class="tab-log" data-target="#applied" data-toggle="tab" data-id="offer">{{ 'dashboard.pro.slot.offer'|trans }}</a>
                 </li>
                 <li><a class="tab-log" data-target="#application" data-toggle="tab" data-id="application">Application</a>
                 </li>
-                <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="employer">{{ 'notification.employer'|trans }}</a>
+                <li><a class="tab-log" data-target="#alerts" data-toggle="tab" data-id="pro">{{ 'notification.pro'|trans }}</a>
                 </li>
                 <li><a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="candidate">{{ 'header.candidates.register'|trans }}</a>
                 </li>
@@ -46,7 +46,7 @@
                 <div class="tab-pane active fade" id="alerts">
                     <div class="shadow-box">
                         <h2>{{ 'admin.log.nbrPro'|trans }}</h2>
-                        <div class="ct-chart ct-employer ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="ct-chart ct-pro ct-perfect-fourth" style="height: 500px;"></div>
                         <div class="point-value"></div>
                     </div>
                 </div>
@@ -192,14 +192,14 @@
                             }
                         });}, 500);
                     break;
-                case 'employer':
+                case 'pro':
                     setTimeout(function(){  var data = {
                         labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
                         series: [
                             {{ activeProLog |json_encode|raw}}
                         ]
                     };
-                        let chart = new Chartist.Line('.ct-employer', data, options);
+                        let chart = new Chartist.Line('.ct-pro', data, options);
                         let addedEvents = false;
                         chart.on('draw', function() {
                             if (!addedEvents) {

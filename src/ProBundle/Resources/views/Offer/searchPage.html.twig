@@ -32,11 +32,11 @@
                     <input type="submit" class="rendezvous-button searchOffer" value="Search">
                 </div>
                 <div class="col-md-2" style="display: none;">
-                    <select title="Pro" id="employer-input" class="select2" data-placeholder="{{ 'form.offer.search.employerPH' | trans }}">
+                    <select title="Pro" id="pro-input" class="select2" data-placeholder="{{ 'form.offer.search.proPH' | trans }}">
                         <option></option>
                         <option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>
-                        {% for employer in employers %}
-                            <option value="{{ employer.name }}" {% if chosenPro is defined and employer.name == chosenPro %}selected{% endif %}>{{ employer.name |truncate(20, true)}}</option>
+                        {% for pro in pros %}
+                            <option value="{{ pro.name }}" {% if chosenPro is defined and pro.name == chosenPro %}selected{% endif %}>{{ pro.name |truncate(20, true)}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -99,10 +99,10 @@
                                 <div class="thumbnail  featured-offer-item">
                                     {% if offer.offer.image is not null and offer.offer.image.imageName is not null %}
                                         {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.image, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                                    {% elseif offer.offer.employer.coverImage.imageName is not null %}
-                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.employer.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                                    {% elseif offer.offer.employer.logo.imageName is not null %}
-                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                    {% elseif offer.offer.pro.coverImage.imageName is not null %}
+                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                                    {% elseif offer.offer.pro.logo.imageName is not null %}
+                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
                                     {% else %}
                                         {% set image = 'images/default_cover_image6.jpg' %}
                                     {% endif %}
@@ -110,7 +110,7 @@
                                         <div class="layer">
                                         </div>
                                         <div class="offer-thumb-image-div">
-                                            {% if offer.offer.employer.logo.imageName is not null and offer.offer.employer.coverImage.imageName is not null %}<img src="{{asset('uploads' ~ vich_uploader_asset(offer.offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}" class="offer-thumb-logo" />{% endif %}
+                                            {% if offer.offer.pro.logo.imageName is not null and offer.offer.pro.coverImage.imageName is not null %}<img src="{{asset('uploads' ~ vich_uploader_asset(offer.offer.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}" class="offer-thumb-logo" />{% endif %}
                                         </div>
                                     </div>
 
@@ -265,7 +265,7 @@
                 //$("#myUL").html(loader);
                 let keyword = $("#keyword-input").val();
                 let location = $("#place_input").val();
-                let employer = $("#employer-input").val();
+                let pro = $("#pro-input").val();
                 let tags = $("#category-input").val();
                 let url = window.location.href;
                 let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
@@ -275,7 +275,7 @@
                 url = "{{ path('search_offer') }}";
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location,employer:employer,type:type,row:row,number:totalItem,tags:tags}
+                    data: {keyword:keyword,location:location,pro:pro,type:type,row:row,number:totalItem,tags:tags}
                 }).done(function( data ) {
                     if(detectmob() && scroll){
                         if(tags.length >= searchedTags.length){
@@ -309,7 +309,7 @@
                             url += 'tags%5B%5D='+tags[i]+'&';
                         }
                     }
-                    url += 'keyword='+keyword+'&location='+location+'&employer='+employer;
+                    url += 'keyword='+keyword+'&location='+location+'&pro='+pro;
 
                     window.history.replaceState('object or string', 'Title', url);
 
@@ -347,7 +347,7 @@
                 searchOffer(1,total, false);
             });
 
-            $("#employer-input").change(function() {
+            $("#pro-input").change(function() {
                 let total = $('#number-of-offer').val();
                 searchOffer(1,total);
             });
@@ -545,7 +545,7 @@
 
                 var row = td.clone(); //creates a row
 
-                var head = ['{{ 'dashboard.employer.slot.offer'|trans }}','{{ 'notification.employer'|trans }}','{{ 'offer.wage'|trans }}','{{ 'offer.experience'|trans }}','{{ 'offer.benefits'|trans }}','{{ 'offer.available'|trans }}','{{ 'offer.contract'|trans }}'];
+                var head = ['{{ 'dashboard.pro.slot.offer'|trans }}','{{ 'notification.pro'|trans }}','{{ 'offer.wage'|trans }}','{{ 'offer.experience'|trans }}','{{ 'offer.benefits'|trans }}','{{ 'offer.available'|trans }}','{{ 'offer.contract'|trans }}'];
                 head.forEach(function(e,j) {
                     var tt = tr.clone();
                     tt.append(th.clone().text(e));

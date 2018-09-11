@@ -51,7 +51,7 @@
                 overflow: hidden;
                 transition: max-height 0.2s ease-out;
             }
-            #tab-employer, #tab-candidate{
+            #tab-pro, #tab-candidate{
                 display: none;
             }
             .faq-choice{
@@ -72,18 +72,18 @@
             {#<div class="choose-faq">{{('faq.kind')|trans}}</div>#}
             <div>
                 <button onclick="showTab('tab-candidate')" class="rendezvous-button faq-button"><i class="fas fa-search"></i>{{ 'header.candidates.register'|trans }}</button>
-                <button onclick="showTab('tab-employer')" class="rendezvous-button faq-button"><i class="fas fa-clipboard"></i>{{ 'header.employers.register'|trans }}</button>
+                <button onclick="showTab('tab-pro')" class="rendezvous-button faq-button"><i class="fas fa-clipboard"></i>{{ 'header.pros.register'|trans }}</button>
             </div>
 
         </div>
 
-        <div id="tab-employer">
-            <div class="shadow-box">{{('faq.employer.intro')|trans}}</div>
+        <div id="tab-pro">
+            <div class="shadow-box">{{('faq.pro.intro')|trans}}</div>
             {% for i in range(1,8) %}
                 <p></p>
-                <button class="accordion">{{('faq.employer.'~i~'.question')|trans}}</button>
+                <button class="accordion">{{('faq.pro.'~i~'.question')|trans}}</button>
                 <div class="panel">
-                    <p>{{('faq.employer.'~i~'.answer')|trans}}</p>
+                    <p>{{('faq.pro.'~i~'.answer')|trans}}</p>
                 </div>
             {% endfor %}
         </div>
@@ -102,7 +102,7 @@
         <script>
             function showTab(id) {
                 let tab = $('#'+id),
-                    otherId = (id == 'tab-employer'?'tab-candidate':'tab-employer'),
+                    otherId = (id == 'tab-pro'?'tab-candidate':'tab-pro'),
                     otherTab = $('#'+otherId);
                 if(tab.is(":visible")){
                     tab.hide();

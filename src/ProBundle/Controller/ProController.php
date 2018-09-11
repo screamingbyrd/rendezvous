@@ -40,7 +40,7 @@ class ProController extends Controller
         $postAnOffer = $request->get('postOffer');
         $session = $request->getSession();
 
-        $employer = new Pro();
+        $pro = new Pro();
 
         $form = $this->get('form.factory')->create(ProType::class);
 
@@ -57,16 +57,15 @@ class ProController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
 
-                $employer->setName($data->getName());
-                $employer->setDescription($data->getDescription());
-                $employer->setCredit(2);
-                $employer->setLocation($data->getLocation());
-                $employer->setPhone($data->getPhone());
-                $employer->setVatNumber($data->getVatNumber());
-                $employer->addUser($user);
-                $employer->setLogo($data->getLogo());
-                $employer->setCoverImage($data->getCoverImage());
+                $pro->setName($data->getName());
+                $pro->setDescription($data->getDescription());
+                $pro->setLocation($data->getLocation());
+                $pro->setPhone($data->getPhone());
+                $pro->addUser($user);
+                $pro->setLogo($data->getLogo());
+                $pro->setCoverImage($data->getCoverImage());
 
+                $em->persist($pro);
                 $em->persist($user);
                 $em->flush();
 
@@ -76,7 +75,7 @@ class ProController extends Controller
                 if(isset($postAnOffer) and $postAnOffer){
                     return $this->redirectToRoute('post_offer');
                 }else{
-                    return $this->redirectToRoute('edit_employer');
+                    return $this->redirectToRoute('edit_pro');
                 }
 
 
@@ -111,25 +110,25 @@ class ProController extends Controller
             ->getRepository('AppBundle:User')
         ;
 
-        $employer = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
+        $pro = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
 
-        if(!((isset($user) and $user->getPro() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+        if(!((isset($user) and $user->getPro() == $pro) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         if(in_array('ROLE_ADMIN', $user->getRoles())){
-            $user = $userRepository->findOneBy(array('employer' => $employer));
+            $user = $userRepository->findOneBy(array('pro' => $pro));
         }
 
         $session = $request->getSession();
 
-        $employer->setFirstName($user->getFirstName());
-        $employer->setLastName($user->getLastName());
-        $employer->setEmail($user->getEmail());
+        $pro->setFirstName($user->getFirstName());
+        $pro->setLastName($user->getLastName());
+        $pro->setEmail($user->getEmail());
 
-        $form = $this->get('form.factory')->create(ProType::class, $employer);
+        $form = $this->get('form.factory')->create(ProType::class, $pro);
 
         $form->remove('password');
         $form->remove('terms');
@@ -152,46 +151,45 @@ class ProController extends Controller
                 $user->SetLastName($data->getLastName());
                 $userManager->updateUser($user);
 
-                $employer->setName($data->getName());
-                $employer->setDescription($data->getDescription());
-                $employer->setLocation($data->getLocation());
-                $employer->setPhone($data->getPhone());
-                $employer->setVatNumber($data->getVatNumber());
-                $employer->addUser($user);
-                $employer->setLogo($data->getLogo());
-                $employer->setCoverImage($data->getCoverImage());
+                $pro->setName($data->getName());
+                $pro->setDescription($data->getDescription());
+                $pro->setLocation($data->getLocation());
+                $pro->setPhone($data->getPhone());
+                $pro->addUser($user);
+                $pro->setLogo($data->getLogo());
+                $pro->setCoverImage($data->getCoverImage());
 
                 $em = $this->getDoctrine()->getManager();
-                $em->merge($employer);
+                $em->merge($pro);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('form.registration.edited');
                 $session->getFlashBag()->add('info', $translated);
 
 
-                return $this->redirectToRoute('dashboard_employer');
+                return $this->redirectToRoute('dashboard_pro');
 
             }
         }
 
         $completion = 6;
 
-        if(isset($employer->getTag()[0])){
+        if(isset($pro->getTag()[0])){
             $completion += 1;
         }
-        $location = $employer->getLocation();
+        $location = $pro->getLocation();
         if(isset($location)){
             $completion += 1;
         }
-        $description = $employer->getDescription();
+        $description = $pro->getDescription();
         if(isset($description)){
             $completion += 1;
         }
-        $logo = $employer->getLogo()->getImageName();
+        $logo = $pro->getLogo()->getImageName();
         if(isset($logo)){
             $completion += 1;
         }
-        $cover = $employer->getCoverImage()->getImageName();
+        $cover = $pro->getCoverImage()->getImageName();
         if(isset($cover)){
             $completion += 1;
         }
@@ -232,24 +230,24 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:FeaturedPro');
 
-        $employer = $repository->findOneBy(array('id' => isset($id)?$id:$user->getPro()));
+        $pro = $repository->findOneBy(array('id' => isset($id)?$id:$user->getPro()));
 
-        if(!((isset($user) and $user->getPro() == $employer) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+        if(!((isset($user) and $user->getPro() == $pro) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $userArray = $userRepository->findBy(array('employer' => $employer));
+        $userArray = $userRepository->findBy(array('pro' => $pro));
 
-        $featuredProArray = $featuredProRepository->findBy(array('employer' => $employer));
+        $featuredProArray = $featuredProRepository->findBy(array('pro' => $pro));
 
-        $offers = $offerRepository->findBy(array('employer' => $employer, 'archived' => false));
+        $offers = $offerRepository->findBy(array('pro' => $pro, 'archived' => false));
 
         $em = $this->getDoctrine()->getManager();
 
-        $employer->setPhone(null);
-        $em->merge($employer);
+        $pro->setPhone(null);
+        $em->merge($pro);
 
         foreach ($offers as $offer) {
             $offer->setArchived(true);
@@ -285,7 +283,7 @@ class ProController extends Controller
             $mailer->send($message);
         }
 
-        $message = (new \Swift_Message($employer->getName().' has archived his account'))
+        $message = (new \Swift_Message($pro->getName().' has archived his account'))
             ->setFrom('rendezvouslu@noreply.lu')
             ->setTo('contact@rendezvous.lu')
             ->setBody(
@@ -318,9 +316,9 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Pro');
 
-        $employer = $repository->find($id);
+        $pro = $repository->find($id);
 
-        $phone = $employer->getPhone();
+        $phone = $pro->getPhone();
         if(!isset($phone)){
             return $this->redirectToRoute('rendezvous_home');
         }
@@ -332,7 +330,7 @@ class ProController extends Controller
 
 
         $offers = $offerRepository->findBy(
-            array('employer' => $employer, 'archived' => false),
+            array('pro' => $pro, 'archived' => false),
             array('startDate' => 'DESC')
         );
 
@@ -348,10 +346,10 @@ class ProController extends Controller
             }
         }
 
-        $tagArray  = $employer->getTag();
+        $tagArray  = $pro->getTag();
 
         if(count($tagArray) == 0){
-            $tagArray = $offerRepository->getOfferTags($employer->getId());
+            $tagArray = $offerRepository->getOfferTags($pro->getId());
         }
 
         //workarround to ssl certificat pb curl error 60
@@ -366,8 +364,8 @@ class ProController extends Controller
         $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
 
         //try to match string location to get Object with lat long info
-        if($employer->getLocation()){
-            $request = new GeocoderAddressRequest($employer->getLocation());
+        if($pro->getLocation()){
+            $request = new GeocoderAddressRequest($pro->getLocation());
         }else{
             $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
         }
@@ -402,7 +400,7 @@ class ProController extends Controller
         }
 
         return $this->render('ProBundle:Pro:show.html.twig', array(
-            'employer' => $employer,
+            'pro' => $pro,
             'map' => $map,
             'status' => $status,
             'offers' => $arrayOffer,
@@ -417,10 +415,10 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Pro');
 
-        $employers = $repository->findAll();
+        $pros = $repository->findAll();
 
         return $this->render('ProBundle:Pro:list.html.twig', array(
-            'employers' => $employers
+            'pros' => $pros
         ));
     }
 
@@ -429,9 +427,9 @@ class ProController extends Controller
         $session = $request->getSession();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $repository = $this
@@ -446,12 +444,12 @@ class ProController extends Controller
             ->getRepository('AppBundle:User')
         ;
 
-        $employer = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
-        $user = $userRepository->findOneBy(array('employer' => $employer));
+        $pro = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
+        $user = $userRepository->findOneBy(array('pro' => $pro));
 
 
         return $this->render('ProBundle::dashboard.html.twig', array(
-            'employer' => $employer,
+            'pro' => $pro,
         ));
     }
 
@@ -460,9 +458,9 @@ class ProController extends Controller
         $session = $request->getSession();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $repository = $this
@@ -477,8 +475,8 @@ class ProController extends Controller
             ->getRepository('AppBundle:User')
         ;
 
-        $employer = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
-        $user = $userRepository->findOneBy(array('employer' => $employer));
+        $pro = $repository->findOneBy(array('id' => isset($idPro)?$idPro:$user->getPro()));
+        $user = $userRepository->findOneBy(array('pro' => $pro));
 
         $OfferRepository = $this
             ->getDoctrine()
@@ -491,7 +489,7 @@ class ProController extends Controller
             ->getRepository('AppBundle:Slot')
         ;
         $currentSlot = $slotRepository->getCurrentSlotPro($user->getPro()->getId());
-        $searchArray = array('employer' => $user->getPro());
+        $searchArray = array('pro' => $user->getPro());
 
         if($archived == 0){
             $searchArray['archived'] = 0;
@@ -506,9 +504,9 @@ class ProController extends Controller
             $finalArray[$offer->getId()]['offer'] = $offer;
         }
 
-        $countOfferInSlot = $OfferRepository->countOffersInSlot($employer);
+        $countOfferInSlot = $OfferRepository->countOffersInSlot($pro);
 
-        $countActiveOffer = $OfferRepository->countActiveOffer($employer);
+        $countActiveOffer = $OfferRepository->countActiveOffer($pro);
 
         $creditInfo = $this->container->get('app.credit_info');
 
@@ -518,7 +516,7 @@ class ProController extends Controller
             'boostOffers' => $creditInfo->getBoostOffers(),
             'buySlot' => $creditInfo->getBuySlot(),
             'slots' => $currentSlot,
-            'employer' => $employer,
+            'pro' => $pro,
             'countOfferInSlot' => $countOfferInSlot,
             'countActiveOffer' => $countActiveOffer
         ));
@@ -566,14 +564,14 @@ class ProController extends Controller
 
         $user = $this->getUser();
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $creditInfo = $this->container->get('app.credit_info');
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
-        $creditPro = $employer->getCredit();
+        $creditPro = $pro->getCredit();
         $creditFeaturedPro = $creditInfo->getFeaturedPro();
 
         if($creditPro < $creditFeaturedPro){
@@ -582,10 +580,10 @@ class ProController extends Controller
             return $this->redirectToRoute('rendezvous_credit');
         }
 
-        $employer->setCredit($creditPro - $creditFeaturedPro);
+        $pro->setCredit($creditPro - $creditFeaturedPro);
 
         $featuredPro = new FeaturedPro();
-        $featuredPro->setPro($employer);
+        $featuredPro->setPro($pro);
         $startDate = new \DateTime($date['date']);
         $endDate = new \DateTime($date['date']);
 
@@ -597,7 +595,7 @@ class ProController extends Controller
         $em->persist($featuredPro);
         $em->flush();
 
-        return $this->redirectToRoute('featured_employer_page', array('year' => substr($date['date'], 0, strpos($date['date'], '-'))));
+        return $this->redirectToRoute('featured_pro_page', array('year' => substr($date['date'], 0, strpos($date['date'], '-'))));
     }
 
     public function deleteFeaturedProAction(Request $request){
@@ -623,9 +621,9 @@ class ProController extends Controller
         $em->merge($featuredPro);
         $em->flush();
 
-        $session->getFlashBag()->add('info', 'featured employer archived');
+        $session->getFlashBag()->add('info', 'featured pro archived');
 
-        return $this->redirectToRoute('featured_employer_page');
+        return $this->redirectToRoute('featured_pro_page');
     }
 
     public function featuredOfferPageAction(Request $request){
@@ -633,7 +631,7 @@ class ProController extends Controller
         $year = $request->get('year');
         $year = isset($year)?$year:$now->format('Y');
         $user = $this->getUser();
-        $employer = $user->getPro();
+        $pro = $user->getPro();
         $featuredOfferRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -648,11 +646,11 @@ class ProController extends Controller
             ->getRepository('AppBundle:Offer')
         ;
 
-        $offers = $offerRepository->findBy(array('employer' => $user->getPro(), 'archived' => false));
+        $offers = $offerRepository->findBy(array('pro' => $user->getPro(), 'archived' => false));
 
         foreach ($featuredOffer as $item) {
             $featuredArray[$item->getStartDate()->format('d/m/Y')]['ids'][] = $item->getOffer()->getId();
-            if($item->getOffer()->getPro() == $employer){
+            if($item->getOffer()->getPro() == $pro){
                 $featuredArray[$item->getStartDate()->format('d/m/Y')]['features'][] = $item;
             }
         }
@@ -680,7 +678,7 @@ class ProController extends Controller
 
         $user = $this->getUser();
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $offerRepository = $this
@@ -693,9 +691,9 @@ class ProController extends Controller
 
         $creditInfo = $this->container->get('app.credit_info');
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
-        $creditPro = $employer->getCredit();
+        $creditPro = $pro->getCredit();
         $creditFeaturedOffer = $creditInfo->getFeaturedOffer();
 
         if($creditPro < $creditFeaturedOffer){
@@ -704,7 +702,7 @@ class ProController extends Controller
             return $this->redirectToRoute('rendezvous_credit');
         }
 
-        $employer->setCredit($creditPro - $creditFeaturedOffer);
+        $pro->setCredit($creditPro - $creditFeaturedOffer);
 
         $featuredOffer = new FeaturedOffer();
         $featuredOffer->setOffer($offer[0]);
@@ -755,14 +753,14 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
         $creditInfo = $this->container->get('app.credit_info');
 
-        $creditPro = $employer->getCredit();
+        $creditPro = $pro->getCredit();
         $buySlot = $creditInfo->getBuySlot();
 
         if($creditPro < $buySlot){
@@ -771,15 +769,15 @@ class ProController extends Controller
             return $this->redirectToRoute('rendezvous_credit');
         }
 
-        $employer->setCredit($creditPro - $buySlot);
+        $pro->setCredit($creditPro - $buySlot);
 
         $em = $this->getDoctrine()->getManager();
-        $em->merge($employer);
+        $em->merge($pro);
         $em->flush();
 
         $slot = new Slot();
 
-        $slot->setPro($employer);
+        $slot->setPro($pro);
         $now =  new \DateTime();
         $next = new \DateTime();
         $slot->setStartDate($now);
@@ -792,7 +790,7 @@ class ProController extends Controller
         $translated = $this->get('translator')->trans('slot.buy.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function addToSlotAction(Request $request){
@@ -802,7 +800,7 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $offerRepository = $this
@@ -842,14 +840,14 @@ class ProController extends Controller
                 $translated = $this->get('translator')->trans('slot.add.success');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+                return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
             }
         }
 
         $translated = $this->get('translator')->trans('slot.add.error');
         $session->getFlashBag()->add('danger', $translated);
 
-        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function removeFromSlotAction(Request $request){
@@ -858,9 +856,9 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $offerRepository = $this
@@ -902,7 +900,7 @@ class ProController extends Controller
         $translated = $this->get('translator')->trans('slot.remove.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function EmptySlotAction(Request $request){
@@ -911,7 +909,7 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $slotRepository = $this
@@ -953,7 +951,7 @@ class ProController extends Controller
         $translated = $this->get('translator')->trans('slot.empty.success');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('employer_offers', array('archived' => $_SESSION['archived']));
+        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
     }
 
     public function listAppliedClientPageAction(Request $request){
@@ -963,7 +961,7 @@ class ProController extends Controller
 
         $user = $this->getUser();
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
         $offerRepository = $this
             ->getDoctrine()
@@ -975,10 +973,10 @@ class ProController extends Controller
         $generateUrlService = $this->get('app.offer_generate_url');
         $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
 
-        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getPro()->getId() == $employer->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getPro()->getId() == $pro->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $postulatedOfferRepository = $this
@@ -1002,13 +1000,13 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Pro')
         ;
-        $employer = $emloyerRepository->findOneBy(array('id' => $id));
+        $pro = $emloyerRepository->findOneBy(array('id' => $id));
         $userRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        $users = $userRepository->findBy(array('employer' => $employer));
+        $users = $userRepository->findBy(array('pro' => $pro));
 
         $arrayEmail = array();
 
@@ -1024,7 +1022,7 @@ class ProController extends Controller
 
         $mailer = $this->container->get('swiftmailer.mailer');
 
-        $message = (new \Swift_Message($this->get('translator')->trans('employer.show.spontaenous.send')))
+        $message = (new \Swift_Message($this->get('translator')->trans('pro.show.spontaenous.send')))
             ->setFrom('rendezvouslu@noreply.lu')
             ->setTo($firstUser)
             ->setCc(array_shift($arrayEmail))
@@ -1045,9 +1043,9 @@ class ProController extends Controller
         $mailer->send($message);
         unlink($target_file);
 
-        $translated = $this->get('translator')->trans('employer.show.spontaenous.sent');
+        $translated = $this->get('translator')->trans('pro.show.spontaenous.sent');
         $session->getFlashBag()->add('info', $translated);
-        return $this->redirectToRoute('show_employer', array('id' => $id));
+        return $this->redirectToRoute('show_pro', array('id' => $id));
     }
 
     public function addCollaboratorAction(Request $request){
@@ -1057,9 +1055,9 @@ class ProController extends Controller
         $session = $request->getSession();
 
         if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
         $form = $this->get('form.factory')
@@ -1078,10 +1076,10 @@ class ProController extends Controller
 
                 $email = $data['email'];
 
-                $employer = $user->getPro();
+                $pro = $user->getPro();
 
                 $userRegister = $this->get('app.user_register');
-                $collaborator = $userRegister->addCollaborator($email, $employer);
+                $collaborator = $userRegister->addCollaborator($email, $pro);
 
                 if(is_bool($collaborator) && !$collaborator){
                     $translated = $this->get('translator')->trans('form.registration.mailAlreadyExist');
@@ -1096,16 +1094,16 @@ class ProController extends Controller
 
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $translated = $this->get('translator')->trans('employer.addCollaborator.youHave');
+                $translated = $this->get('translator')->trans('pro.addCollaborator.youHave');
 
-                $message = (new \Swift_Message($translated . ' ' . $employer->getName()))
+                $message = (new \Swift_Message($translated . ' ' . $pro->getName()))
                     ->setFrom('rendezvouslu@noreply.lu')
                     ->setTo($email)
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:addedAsCollaborator.html.twig',
                             array(
-                                'employer' => $employer,
+                                'pro' => $pro,
                             )
                         ),
                         'text/html'
@@ -1117,10 +1115,10 @@ class ProController extends Controller
                 );
                 $mailer->send($message);
 
-                $translated = $this->get('translator')->trans('employer.addCollaborator.added');
+                $translated = $this->get('translator')->trans('pro.addCollaborator.added');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('edit_employer', array('id' => $employer->getId()));
+                return $this->redirectToRoute('edit_pro', array('id' => $pro->getId()));
 
             }
         }
@@ -1137,24 +1135,24 @@ class ProController extends Controller
         $currentUser = $this->getUser();
 
         if(!(isset($currentUser) and  in_array('ROLE_EMPLOYER', $currentUser->getRoles()) and $currentUser->isMain())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $employerRepository = $this
+        $proRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Pro');
 
-        $employer = $employerRepository->findOneBy(array('id' => $id));
+        $pro = $proRepository->findOneBy(array('id' => $id));
 
         $repository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:User');
 
-        $users = $repository->findBy(array('employer' => $employer, 'enabled' => 1));
+        $users = $repository->findBy(array('pro' => $pro, 'enabled' => 1));
 
         for ($i = 0; $i<= count($users); $i++){
             if($users[$i] == $currentUser){
@@ -1174,12 +1172,12 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
         $repository = $this
             ->getDoctrine()
@@ -1192,10 +1190,10 @@ class ProController extends Controller
         $collaborator->setEnabled(false);
         $userManager->updateUser($collaborator);
 
-        $translated = $this->get('translator')->trans('employer.addCollaborator.deleted');
+        $translated = $this->get('translator')->trans('pro.addCollaborator.deleted');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('list_collaborator', array('id' => $employer->getId()));
+        return $this->redirectToRoute('list_collaborator', array('id' => $pro->getId()));
     }
 
     public function changeAccessCollaboratorAction(Request $request, $id){
@@ -1205,12 +1203,12 @@ class ProController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
-            $translated = $this->get('translator')->trans('redirect.employer');
+            $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_employer');
+            return $this->redirectToRoute('create_pro');
         }
 
-        $employer = $user->getPro();
+        $pro = $user->getPro();
 
         $repository = $this
             ->getDoctrine()
@@ -1226,10 +1224,10 @@ class ProController extends Controller
         $em->merge($collaborator);
         $em->flush();
 
-        $translated = $this->get('translator')->trans('employer.addCollaborator.access.changed');
+        $translated = $this->get('translator')->trans('pro.addCollaborator.access.changed');
         $session->getFlashBag()->add('info', $translated);
 
-        return $this->redirectToRoute('list_collaborator', array('id' => $employer->getId()));
+        return $this->redirectToRoute('list_collaborator', array('id' => $pro->getId()));
     }
 
     public function deleteImageAction(Request $request)
@@ -1243,15 +1241,15 @@ class ProController extends Controller
 //        ;
 //        $image = $imageRepository->findOneBy(array('id' => $imageId));
 //
-//        $employerRepository = $this
+//        $proRepository = $this
 //            ->getDoctrine()
 //            ->getManager()
 //            ->getRepository('AppBundle:Pro')
 //        ;
-//        $employer = $employerRepository->findOneBy(array('id' => $image->getOffer()->getId()));
+//        $pro = $proRepository->findOneBy(array('id' => $image->getOffer()->getId()));
 //
 //        if(is_object($offer)){
-//            $employer->removeImage($image);
+//            $pro->removeImage($image);
 //        }
 //
 //        $em = $this->getDoctrine()->getManager();

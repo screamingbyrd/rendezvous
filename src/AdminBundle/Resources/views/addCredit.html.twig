@@ -1,12 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ 'employer.credit.title' | trans }}  - {{ parent() }}
+    {{ 'pro.credit.title' | trans }}  - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     {%  if (app.user.roles is defined) and ('ROLE_ADMIN' in app.user.roles) %}
-        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.employer.return' | trans }}</a>
+        <a href="{{ path('dashboard_admin') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
     <div class="jumbotron homepage-jumbotron">
         <h2>{{ 'admin.addCredit.title'|trans }}</h2>
@@ -61,13 +61,13 @@
                     <table class="table table-bordered">
                         <tbody>
                         <tr>
-                            <td>{{ employer.name }}</td>
+                            <td>{{ pro.name }}</td>
                         </tr>
                         <tr>
-                            <td>{{ 'price.credits'|trans }} : {{ employer.credit }}</td>
+                            <td>{{ 'price.credits'|trans }} : {{ pro.credit }}</td>
                         </tr>
                         <tr>
-                            <td class="with-line">{{ employer.vatNumber }}</td>
+                            <td class="with-line">{{ pro.vatNumber }}</td>
                         </tr>
                         </tbody>
                     </table>

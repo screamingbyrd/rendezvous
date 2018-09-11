@@ -18,8 +18,8 @@ services:
         arguments: ['@router']
   app.search.offer:
         class: AppBundle\Service\Search
-        arguments: ['@fos_elastica.finder.app.offer']
-  app.employer_image:
+        arguments: ['@fos_elastica.finder.app.pro']
+  app.pro_image:
         class: AppBundle\Service\Namer
         tags:
           - { name: namer }
