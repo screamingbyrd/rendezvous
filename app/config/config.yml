@@ -43,7 +43,7 @@ fos_user:
         firewall_name: main
         user_class: AppBundle\Entity\User
         from_email:
-            address: "arthur.regnault@altea.com"
+            address: "noreply@jobnow.lu"
             sender_name: "JobNow"
         registration:
             form:
