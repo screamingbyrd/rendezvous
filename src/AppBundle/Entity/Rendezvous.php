@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FeaturedPro
+ * Rendezvous
  *
- * @ORM\Table(name="featured_offer")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FeaturedOfferRepository")
+ * @ORM\Table(name="rendezvous")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RendezvousRepository")
  */
-class FeaturedOffer
+class Rendezvous
 {
     /**
      * @var int
@@ -22,10 +22,9 @@ class FeaturedOffer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer")
-     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Pro")
      */
-    private $offer;
+    private $pro;
 
     /**
      * @var \DateTime
@@ -35,18 +34,17 @@ class FeaturedOffer
     private $startDate;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ORM\Column(name="endDate", type="date")
      */
     private $endDate;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="archived", type="boolean")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Client")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true)
      */
-    private $archived;
+    private $client;
 
 
     /**
@@ -60,27 +58,27 @@ class FeaturedOffer
     }
 
     /**
-     * Set employer
+     * Set pro
      *
-     * @param string $offer
+     * @param string $pro
      *
-     * @return FeaturedOffer
+     * @return Rendezvous
      */
-    public function setOffer($offer)
+    public function setPro($pro)
     {
-        $this->offer = $offer;
+        $this->pro = $pro;
 
         return $this;
     }
 
     /**
-     * Get employer
+     * Get pro
      *
      * @return string
      */
-    public function getOffer()
+    public function getPro()
     {
-        return $this->offer;
+        return $this->pro;
     }
 
     /**
@@ -88,7 +86,7 @@ class FeaturedOffer
      *
      * @param \DateTime $startDate
      *
-     * @return FeaturedOffer
+     * @return Rendezvous
      */
     public function setStartDate($startDate)
     {
@@ -110,9 +108,9 @@ class FeaturedOffer
     /**
      * Set endDate
      *
-     * @param \DateTime $endDate
+     * @param string $endDate
      *
-     * @return FeaturedOffer
+     * @return Rendezvous
      */
     public function setEndDate($endDate)
     {
@@ -124,7 +122,7 @@ class FeaturedOffer
     /**
      * Get endDate
      *
-     * @return \DateTime
+     * @return string
      */
     public function getEndDate()
     {
@@ -132,27 +130,27 @@ class FeaturedOffer
     }
 
     /**
-     * Set archived
+     * Set client
      *
-     * @param boolean $archived
+     * @param string $client
      *
-     * @return FeaturedOffer
+     * @return Rendezvous
      */
-    public function setArchived($archived)
+    public function setClient($client)
     {
-        $this->archived = $archived;
+        $this->client = $client;
 
         return $this;
     }
 
     /**
-     * Get archived
+     * Get client
      *
-     * @return bool
+     * @return string
      */
-    public function getArchived()
+    public function getClient()
     {
-        return $this->archived;
+        return $this->client;
     }
 }
 

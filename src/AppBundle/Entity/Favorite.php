@@ -24,12 +24,12 @@ class Favorite
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client")
      */
-    private $candidate;
+    private $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Offer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro")
      */
-    private $offer;
+    private $pro;
 
 
     /**
@@ -43,51 +43,41 @@ class Favorite
     }
 
     /**
-     * Set candidate
-     *
-     * @param string $candidate
-     *
-     * @return Favorite
-     */
-    public function setClient($candidate)
-    {
-        $this->candidate = $candidate;
-
-        return $this;
-    }
-
-    /**
-     * Get candidate
-     *
-     * @return string
+     * @return mixed
      */
     public function getClient()
     {
-        return $this->candidate;
+        return $this->client;
     }
 
     /**
-     * Set offer
-     *
-     * @param string $offer
-     *
+     * @param mixed $client
      * @return Favorite
      */
-    public function setOffer($offer)
+    public function setClient($client)
     {
-        $this->offer = $offer;
-
+        $this->client = $client;
         return $this;
     }
 
     /**
-     * Get offer
-     *
-     * @return string
+     * @return mixed
      */
-    public function getOffer()
+    public function getPro()
     {
-        return $this->offer;
+        return $this->pro;
     }
+
+    /**
+     * @param mixed $pro
+     * @return Favorite
+     */
+    public function setPro($pro)
+    {
+        $this->pro = $pro;
+        return $this;
+    }
+
+
 }
 

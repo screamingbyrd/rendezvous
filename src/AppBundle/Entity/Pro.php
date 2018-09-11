@@ -51,13 +51,6 @@ class Pro
     private $description;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="credit", type="integer")
-     */
-    private $credit;
-
-    /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist"})
      */
     private $logo;
@@ -73,13 +66,6 @@ class Pro
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", cascade={"persist"})
-     * @ORM\JoinTable(name="employer_tag")
-     */
-    private $tag;
-
 
     /**
      * @var string
@@ -267,30 +253,6 @@ class Pro
     }
 
     /**
-     * Set credit
-     *
-     * @param integer $credit
-     *
-     * @return Pro
-     */
-    public function setCredit($credit)
-    {
-        $this->credit = $credit;
-
-        return $this;
-    }
-
-    /**
-     * Get credit
-     *
-     * @return int
-     */
-    public function getCredit()
-    {
-        return $this->credit;
-    }
-
-    /**
      * Set logo
      *
      * @param integer $logo
@@ -398,40 +360,6 @@ class Pro
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     *
-     * @return Pro
-     */
-    public function addTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \AppBundle\Entity\Tag $tag
-     */
-    public function removeTag(\AppBundle\Entity\Tag $tag)
-    {
-        $this->tag->removeElement($tag);
-    }
-
-    /**
-     * Get tag
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTag()
-    {
-        return $this->tag;
     }
 
     /**

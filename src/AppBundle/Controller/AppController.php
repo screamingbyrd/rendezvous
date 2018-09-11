@@ -32,42 +32,6 @@ class AppController extends Controller
 
         $featuredPro = $featuredProRepository->getCurrentFeaturedPro();
 
-        $featuredOfferRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:FeaturedOffer')
-        ;
-
-        $featuredOffer = $featuredOfferRepository->getCurrentFeaturedOffer();
-
-        $sql = " 
-        SELECT t.name, count(ot.offer_id) as 'countOffer' FROM `tag` t left join offer_tag ot on ot.tag_id = t.id left join offer o on o.id = ot.offer_id  WHERE o.archived = 0 AND (o.slot_id is not null OR (o.startDate <= NOW() AND o.endDate >= NOW())) GROUP BY NAME
-        ";
-
-        $em = $this->getDoctrine()->getManager();
-        $stmt = $em->getConnection()->prepare($sql);
-        $stmt->execute();
-        $tagArray = $stmt->fetchAll();
-
-        $em = $this->getDoctrine()->getManager();
-
-        $generateUrlService = $this->get('app.offer_generate_url');
-
-        foreach ($featuredOffer as $offer){
-            $now = new \DateTime();
-            $next = new \DateTime();
-            $offer->getOffer()->setOfferUrl($generateUrlService->generateOfferUrl($offer->getOffer()));
-            if($offer->getOffer()->getEndDate() < $now){
-                $offer->getOffer()->setStartDate($now);
-                $offer->getOffer()->setUpdateDate($now);
-
-                $offer->getOffer()->setEndDate($next->modify( '+ 2 month' ));
-
-                $em->merge($offer->getOffer());
-                $em->flush();
-            }
-        }
-
         $autoComplete = new Autocomplete();
         $autoComplete->setInputId('place_input');
 
@@ -83,14 +47,7 @@ class AppController extends Controller
 
         $apiHelper = $apiHelperBuilder->build();
 
-        $tags = array();
-        foreach ($tagArray as $tag){
-            $tags[] = $tag['name'];
-        }
-
         shuffle ($featuredPro);
-        shuffle ($featuredOffer);
-
         $adRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -101,9 +58,6 @@ class AppController extends Controller
 
         return $this->render('AppBundle:Default:index.html.twig', array(
             'featuredPro' => $featuredPro,
-            'featuredOffer' => $featuredOffer,
-            'tagArray' => $tagArray,
-            'tags' => $tags,
             'autoComplete' => $autoCompleteHelper->render($autoComplete),
             'autoCompleteScript' => $apiHelper->render([$autoComplete]),
             'ads' => $ads,
