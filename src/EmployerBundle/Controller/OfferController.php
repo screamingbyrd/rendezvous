@@ -1055,10 +1055,9 @@ class OfferController extends Controller
 
                 $userArray = $userRepository->findBy(array('employer' => $offer->getEmployer()));
 
-                $subject = 'Your offer will expire in '.$days.' days';
-
+                $translated = $this->get('translator')->trans('email.endOfActivation.title', array('%days%' => $days));
                 foreach ($userArray as $user){
-                    $message = (new \Swift_Message($subject))
+                    $message = (new \Swift_Message($translated))
                         ->setFrom('jobnowlu@noreply.lu')
                         ->setTo($user->getEmail())
                         ->setBody(

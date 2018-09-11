@@ -432,8 +432,9 @@ email:
   deleted: Votre compte a été supprimé
   contacted: Vous avez reçu un message !
   endOfActivation:
+    title: Votre annonce sera désactivé dans %days% jours
     youOffer: Votre annonce %title% sera désactivée dans %days% jours.
-    thinkAbout: Pensez à prolonger leurs activations sur votre tableau de bord
+    thinkAbout: Pensez à prolonger son activation sur votre tableau de bord
   notification:
     new: Vous avez créé une alerte email
     created:

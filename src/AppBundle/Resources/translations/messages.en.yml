@@ -441,8 +441,9 @@ email:
   deleted: Your account has been successfully deleted.
   contacted: You have received a new message!
   endOfActivation:
+    title: You offer will arrive at the end of activation in %days% days
     youOffer: Your offer %title% will arrive at the end of activation in %days% days
-    thinkAbout: Think about extending their activations on your dashboard
+    thinkAbout: Think about extending its activation on your dashboard
   notification:
     new: You have created an email alert
     created:
