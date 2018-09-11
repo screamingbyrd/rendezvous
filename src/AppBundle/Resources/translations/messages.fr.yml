@@ -7,7 +7,7 @@ job: Emploi
 
 title:
   home: Emplois, jobs, stages et missions d'intérim au Luxembourg
-  listEmployer: Répertoire des entreprise
+  listPro: Répertoire des entreprise
 
 homepage:
   title: Trouvez la carrière qui vous correspond
@@ -59,7 +59,7 @@ header:
     title: Espace Employeur
     post: Poster une offre
     edit: Editer une offre
-    findCandidate: Trouver un candidat
+    findClient: Trouver un candidat
     pricing: Acheter des crédits
     dashboard: Tableau de bord
     register: Employeur
@@ -106,10 +106,10 @@ form:
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
     edited: L'employeur a bien été modifé !
-    editedCandidate: Votre compté à bien été modifié !
+    editedClient: Votre compté à bien été modifié !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
-    successEmployer: Vous êtes à présent inscrit en temps que recruteur !
-    successCandidate: Vous êtes à présent inscrit en temps que candidat !
+    successPro: Vous êtes à présent inscrit en temps que recruteur !
+    successClient: Vous êtes à présent inscrit en temps que candidat !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
     exp0: -- Indiquez votre expérience --
     exp00: -- Experience requirement --
@@ -241,7 +241,7 @@ dashboard:
   action: Action
   view: Vue
   applied: Candidature
-  viewCandidate: Voir la liste des candidats
+  viewClient: Voir la liste des candidats
   not: Non activée
 
 slot:
@@ -439,14 +439,14 @@ email:
     new: Vous avez créé une alerte email
     created:
       title: Votre alerte email a bien été créée !
-      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Jobnow.lu.
+      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Rendezvous.lu.
     send:
       title:
         regular: De nouveaux emplois sont disponibles pour ces %parameter%
         search: De nouveaux emplois sont disponibles pour vous
       new: De nouvelles offres pourraient vous intéresser
   footer:
-    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@jobnow.lu%link_end%
+    contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@rendezvous.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
   share:
     title: Un ami a partagé cette offre avec vous
@@ -496,13 +496,13 @@ favorite:
 add: Ajouter
 delete: Supprimer
 
-searchEmployer:
+searchPro:
   title: Les entreprises luxembourgeoises incontournables
   discover: "Découvrez sans plus attendre les entreprises luxembourgeoises de notre répertoire. Elles n'attendent plus que vous pour enrichir leur équipes. Les entreprises vous choisissent et VOUS les choisissez !"
   type: Chercher une entreprise
 about:
   let: Laissez nous nous présenter
-  text1: Jobnow est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
+  text1: Rendezvous est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
   text2: L'équipe est également composée de deux développeurs dédiés, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
   text3: Enfin, notre équipe dévouée de conseillers est là pour répondre à vos questions et vous guider tout au long du processus d'acquisition de crédits pour vos offres d'emploi.
 
@@ -612,8 +612,8 @@ admin:
     offerList: Liste des offres
     adminList: Liste des admins
     totalActiveOffers: Total offre active:
-    totalEmployers: Total employeurs:
-    totalCandidates: Total candidats:
+    totalPros: Total employeurs:
+    totalClients: Total candidats:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Ajouter un admin
@@ -633,8 +633,8 @@ admin:
   enterMail: Entrer un email
   enterCompnay: Entrer un nom de société
   enterTitle: Entrer un titre
-  sureCandidate: Êtes-vous sûr de vouloir effacer ce candidat ?
-  sureEmployer: Êtes-vous sûr de vouloir effacer cet employeur ?
+  sureClient: Êtes-vous sûr de vouloir effacer ce candidat ?
+  surePro: Êtes-vous sûr de vouloir effacer cet employeur ?
   offerList:
     totalNonVerifiedOffer: Total offres actives non-vérifiée
     nonArchivedOffers: Offres non archivées
@@ -649,8 +649,8 @@ admin:
     whyInvalid: Pourquoi cette offre n'est-elle pas valide ?
   log:
     nbrActive: Nombre d'offres actives
-    nbrEmployer: Nombre d'employeurs
-    nbrCandidate: Nombre de candidats
+    nbrPro: Nombre d'employeurs
+    nbrClient: Nombre de candidats
     total: Total
     monthly: Mensuel
     totalCredit: Nombre total de crédit(s)

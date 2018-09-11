@@ -23,7 +23,7 @@
 
         <h2>{{ 'admin.dashboard.adminList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="Search for mail.." title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showPro()" placeholder="Search for mail.." title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <script>
-            function showEmployer() {
+            function showPro() {
                 let input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();

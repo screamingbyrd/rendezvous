@@ -11,7 +11,7 @@ namespace AppBundle\Repository;
 class SlotRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getCurrentSlotEmployer($employerId)
+    public function getCurrentSlotPro($employerId)
     {
         return $this->getEntityManager()
             ->createQuery(

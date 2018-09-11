@@ -39,7 +39,7 @@ class CreditController extends Controller
 
         $withVat = true;
         if($id != 0){
-            $vatNumber = $user->getEmployer()->getVatNumber();
+            $vatNumber = $user->getPro()->getVatNumber();
             $countryCode = substr($vatNumber, 0, 2);
 
             $withVat = $countryCode == 'LU';
@@ -67,14 +67,14 @@ class CreditController extends Controller
 
             }
             default: {
-                $creditEmployer = 0;
+                $creditPro = 0;
                 $logsCredit = 0;
                 $user =$this->getUser();
                 if(isset($user)){
-                    $employer = $this->getUser()->getEmployer();
+                    $employer = $this->getUser()->getPro();
 
                     if(isset($employer)){
-                        $creditEmployer = $employer->getCredit();
+                        $creditPro = $employer->getCredit();
 
                         $repository = $this
                             ->getDoctrine()
@@ -87,7 +87,7 @@ class CreditController extends Controller
                 }
 
                 return $this->render('AppBundle:Credit:credit.html.twig', array(
-                    'credit' => $creditEmployer,
+                    'credit' => $creditPro,
                     'logsCredit' => $logsCredit,
                     'creditService' => $creditInfo
                 ));
@@ -113,17 +113,17 @@ class CreditController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
-        $employer = $this->getUser()->getEmployer();
+        $employer = $this->getUser()->getPro();
 
-        $idEmployer = $request->get('id');
+        $idPro = $request->get('id');
 
-        if(isset($idEmployer) && in_array('ROLE_ADMIN', $user->getRoles())){
+        if(isset($idPro) && in_array('ROLE_ADMIN', $user->getRoles())){
             $repository = $this
                 ->getDoctrine()
                 ->getManager()
-                ->getRepository('AppBundle:Employer')
+                ->getRepository('AppBundle:Pro')
             ;
-            $employer = $repository->findOneBy(array('id' => $idEmployer));
+            $employer = $repository->findOneBy(array('id' => $idPro));
         }
 
         $repository = $this
@@ -144,7 +144,7 @@ class CreditController extends Controller
             'page' => $currentPage,
             'total' => $totalPage,
             'sort' => $sort,
-            'id' => $idEmployer
+            'id' => $idPro
         ]);
 
     }
@@ -155,7 +155,7 @@ class CreditController extends Controller
 
         $session = $request->getSession();
 
-        $vatNumber = $user->getEmployer()->getVatNumber();
+        $vatNumber = $user->getPro()->getVatNumber();
         $countryCode = substr($vatNumber, 0, 2);
 
         $withVat = $countryCode == 'LU';
@@ -190,7 +190,7 @@ class CreditController extends Controller
 
                     $data = $form->getData();
 
-                    $this->get('app.client.stripe')->createPremiumCharge($this->getUser(), $data['token'] ,$price,$this->getUser()->getEmployer(),$nbrCredit);
+                    $this->get('app.client.stripe')->createPremiumCharge($this->getUser(), $data['token'] ,$price,$this->getUser()->getPro(),$nbrCredit);
 
                     //Logging credit purchase in db
                     $logCredit = new LogCredit();
@@ -198,7 +198,7 @@ class CreditController extends Controller
 
                     $logCredit->setDate(new \DateTime());
                     $logCredit->setCredit($nbrCredit);
-                    $logCredit->setEmployer($this->getUser()->getEmployer());
+                    $logCredit->setPro($this->getUser()->getPro());
                     $logCredit->setPrice($price);
                     $logCredit->setName($data['name']);
                     $logCredit->setPhone($data['phone']);
@@ -212,7 +212,7 @@ class CreditController extends Controller
 
                     $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
                         'logCredit' => $logCredit,
-                        'vatNumber' => $logCredit->getEmployer()->getVatNumber(),
+                        'vatNumber' => $logCredit->getPro()->getVatNumber(),
                         'withVat' => $withVat
                     ));
                     $html2pdf->writeHTML($html);
@@ -220,8 +220,8 @@ class CreditController extends Controller
 
                     $mailer = $this->container->get('swiftmailer.mailer');
                     $message = (new \Swift_Message('achat de crédit'))
-                        ->setFrom('jobnowlu@noreply.lu')
-                        ->setTo('accounting@jobnow.lu')
+                        ->setFrom('rendezvouslu@noreply.lu')
+                        ->setTo('accounting@rendezvous.lu')
                         ->setBody(
                             'Someone bought something'
                         )
@@ -236,11 +236,11 @@ class CreditController extends Controller
                     $translated = $this->get('translator')->trans('price.payment.success', array('%credits%' => $nbrCredit));
                     $session->getFlashBag()->add('info', $translated);
 
-                    return $this->redirectToRoute('jobnow_credit');
+                    return $this->redirectToRoute('rendezvous_credit');
 
                 } catch (\Stripe\Error\Base $e) {
                     $this->addFlash('warning', sprintf($this->get('translator')->trans('price.payment.unable'), $e instanceof \Stripe\Error\Card ? lcfirst($e->getMessage()) : $this->get('translator')->trans('price.payment.please')));
-                    return $this->redirectToRoute('jobnow_payment', array('id' => 1));
+                    return $this->redirectToRoute('rendezvous_payment', array('id' => 1));
                 }
 
             }
@@ -268,13 +268,13 @@ class CreditController extends Controller
         ;
         $logsCredit = $repository->findOneBy(array('id' => $id));
 
-        if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles()) and $logsCredit->getEmployer() == $user->getEmployer()) or in_array('ROLE_ADMIN', $user->getRoles()))){
+        if(!(isset($user) and  (in_array('ROLE_EMPLOYER', $user->getRoles()) and $logsCredit->getPro() == $user->getPro()) or in_array('ROLE_ADMIN', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.employer');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_employer');
         }
 
-        $vatNumber = $user->getEmployer()->getVatNumber();
+        $vatNumber = $user->getPro()->getVatNumber();
         $countryCode = substr($vatNumber, 0, 2);
 
         $withVat = $countryCode == 'LU';
@@ -289,7 +289,7 @@ class CreditController extends Controller
 
 //        return $this->render('AppBundle:Credit:billsPdf.html.twig', array(
 //            'logCredit' => $logsCredit,
-//            'vatNumber' => $user->getEmployer()->getVatNumber(),
+//            'vatNumber' => $user->getPro()->getVatNumber(),
 //            'withVat' => $withVat
 //        ));
 
@@ -312,7 +312,7 @@ class CreditController extends Controller
             return $this->redirectToRoute('create_employer');
         }
 
-        $vatNumber = $user->getEmployer()->getVatNumber();
+        $vatNumber = $user->getPro()->getVatNumber();
         $countryCode = substr($vatNumber, 0, 2);
 
         $withVat = $countryCode == 'LU';
@@ -324,7 +324,7 @@ class CreditController extends Controller
             'price' => $price,
             'vatNumber' => $vatNumber,
             'withVat' => $withVat,
-            'name' => $user->getEmployer()->getName()
+            'name' => $user->getPro()->getName()
         ));
 
 //        return $this->render('AppBundle:Credit:estimationPdf.html.twig', array(

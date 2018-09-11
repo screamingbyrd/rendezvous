@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ sonata_seo_metadatas() }}
     <link rel="icon" href="{{asset('images/fav_icon_jn.png')}}">
-    <title>{% block title %}Jobnow.lu{% endblock %}</title>
+    <title>{% block title %}Rendezvous.lu{% endblock %}</title>
 
     {% block stylesheets %}
         {# On charge le CSS de bootstrap depuis le site directement #}
@@ -87,8 +87,8 @@
         <span class="icon-bar"></span>
     </button>
     <div class="container">
-            <a class="navbar-brand  header-text" href="{{ path('jobnow_home') }}">
-                <img class="logo-jobnow" src="{{asset('images/logo_jobnow.png')}}">
+            <a class="navbar-brand  header-text" href="{{ path('rendezvous_home') }}">
+                <img class="logo-rendezvous" src="{{asset('images/logo_rendezvous.png')}}">
             </a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -120,8 +120,8 @@
                             {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
                                 <li><a href="{{ path('employer_offers') }}"><i class="fas fa-list-ul"></i>{{ 'dashboard.employer.myOffers'|trans }}</a></li>
                             {% endif %}
-                            {#<li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findCandidate'|trans }}</a></li>#}
-                            <li><a href="{{ path('jobnow_credit') }}"><img class="logo-credit" src="{{asset('images/white-coin.svg')}}"> {{ 'header.employers.pricing'|trans }}</a></li>
+                            {#<li><a href="{{ path('search_candidate') }}">{{ 'header.employers.findClient'|trans }}</a></li>#}
+                            <li><a href="{{ path('rendezvous_credit') }}"><img class="logo-credit" src="{{asset('images/white-coin.svg')}}"> {{ 'header.employers.pricing'|trans }}</a></li>
                         </ul>
                     </li>
                 {% endif %}
@@ -147,7 +147,7 @@
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
                     {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-                        <li class="navbar-brand-header header-text"><div class="credit-total"><a href="{{ path('jobnow_credit') }}"><img class="logo-credit" src="{{asset('images/credit.svg')}}"> {{ app.user.employer.credit  }} </a></div></li>
+                        <li class="navbar-brand-header header-text"><div class="credit-total"><a href="{{ path('rendezvous_credit') }}"><img class="logo-credit" src="{{asset('images/credit.svg')}}"> {{ app.user.employer.credit  }} </a></div></li>
                     {% endif %}
 
                     <li class="dropdown">
@@ -184,7 +184,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><i class="fas fa-globe"></i>{{ app.request.locale }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        {% if 'jobnow_home' in app.request.attributes.get('_route') or 'fos_user_security_login' in app.request.attributes.get('_route') or 'faq_page' in app.request.attributes.get('_route')  %}
+                        {% if 'rendezvous_home' in app.request.attributes.get('_route') or 'fos_user_security_login' in app.request.attributes.get('_route') or 'faq_page' in app.request.attributes.get('_route')  %}
                             <li><a href="{{ path(app.request.get('_route'), { '_locale': 'fr'}) }}">Français</a></li>
                             <li><a href="{{ path(app.request.get('_route'), { '_locale': 'en'}) }}">English</a></li>
                         {% else %}
@@ -209,7 +209,7 @@
 <nav class="navbar navbar-default navbar-bottom navbar-inverse">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand header-text" href="{{ path('jobnow_home') }}"> © 2018 JobNow</a>
+            <a class="navbar-brand header-text" href="{{ path('rendezvous_home') }}"> © 2018 RendezVous</a>
         </div>
         <div id="navbarfooter" class="navbar-collapse">
             <ul class="nav navbar-nav">
@@ -221,8 +221,8 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a target="_blank" href="https://www.facebook.com/jobnow.lu/"><i class="fab fa-facebook-square"></i></a></li>
-                <li><a target="_blank" href="https://www.linkedin.com/company/jobnow-luxembourg/"><i class="fab fa-linkedin"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/rendezvous.lu/"><i class="fab fa-facebook-square"></i></a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/company/rendezvous-luxembourg/"><i class="fab fa-linkedin"></i></a></li>
             </ul>
         </div>
     </div>

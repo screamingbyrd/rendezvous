@@ -21,20 +21,20 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $employerRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Employer')
+            ->getRepository('AppBundle:Pro')
         ;
-        $employerCount = $employerRepository->countTotalDifferentEmployer();
+        $employerCount = $employerRepository->countTotalDifferentPro();
 
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $candidateCount = count($candidateRepository->findAll());
 
@@ -54,13 +54,13 @@ class AdminController extends Controller
 
         return $this->render('AdminBundle::index.html.twig',array(
             'totalActiveOffer' => $totalActiveOffer,
-            'countEmployer' => $employerCount,
+            'countPro' => $employerCount,
             'candidateCount' => $candidateCount,
             'totalSLot' => $totalSLot
         ));
     }
 
-    public function listEmployerAction(Request $request){
+    public function listProAction(Request $request){
 
         $currentPage = $request->get('row');
         $sort = $request->get('sort');
@@ -72,7 +72,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $repository = $this
@@ -85,7 +85,7 @@ class AdminController extends Controller
         $employers = [];
         foreach($users as $user)
         {
-            if($user->getEmployer() != NULL)
+            if($user->getPro() != NULL)
             {
                 $employers[] = $user;
             }
@@ -97,7 +97,7 @@ class AdminController extends Controller
 
         $totalPage = ceil ($countResult / $numberOfItem);
 
-        return $this->render('AdminBundle::listEmployer.html.twig', array(
+        return $this->render('AdminBundle::listPro.html.twig', array(
             'employers' => $finalArray,
             'page' => $currentPage,
             'total' => $totalPage,
@@ -105,7 +105,7 @@ class AdminController extends Controller
         ));
     }
 
-    public function listCandidateAction(Request$request){
+    public function listClientAction(Request$request){
         $currentPage = $request->get('row');
         $sort = $request->get('sort');
         $currentPage = isset($currentPage)?$currentPage:1;
@@ -116,13 +116,13 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $candidates = $candidateRepository->findAll();
 
@@ -132,7 +132,7 @@ class AdminController extends Controller
 
         $totalPage = ceil ($countResult / $numberOfItem);
 
-        return $this->render('AdminBundle::listCandidate.html.twig', array(
+        return $this->render('AdminBundle::listClient.html.twig', array(
             'candidates' => $finalArray,
             'page' => $currentPage,
             'total' => $totalPage,
@@ -145,7 +145,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $userRepository = $this
@@ -167,7 +167,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $userRepository = $this
@@ -194,7 +194,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $userRepository = $this
@@ -230,7 +230,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $offerRepository = $this
@@ -276,7 +276,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $offerRepository = $this
@@ -297,7 +297,7 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        $users = $userRepository->findBy(array('employer' => $offer->getEmployer()));
+        $users = $userRepository->findBy(array('employer' => $offer->getPro()));
         $arrayEmail = array();
 
         foreach ($users as $employerUser){
@@ -310,7 +310,7 @@ class AdminController extends Controller
             $mailer = $this->container->get('swiftmailer.mailer');
             $translated = $this->get('translator')->trans('form.offer.invalid.subject');
             $message = (new \Swift_Message($translated . ' ' . $offer->getTitle() . " Id: " .$offer->getId()))
-                ->setFrom('jobnowlu@noreply.lu')
+                ->setFrom('rendezvouslu@noreply.lu')
                 ->setTo($firstUser)
                 ->setCc(array_shift($arrayEmail))
                 ->setBody(
@@ -341,7 +341,7 @@ class AdminController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $logRepository = $this
@@ -352,12 +352,12 @@ class AdminController extends Controller
         $employerRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Employer');
+            ->getRepository('AppBundle:Pro');
 
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate');
+            ->getRepository('AppBundle:Client');
 
         $logCreditRepository = $this
             ->getDoctrine()
@@ -370,8 +370,8 @@ class AdminController extends Controller
             ->getRepository('AppBundle:PostulatedOffers');
 
         $finalActiveLog = array();
-        $finalCandidateLog = array();
-        $finalEmployerLog = array();
+        $finalClientLog = array();
+        $finalProLog = array();
         $finalCreditLog = array();
         $monthlyCreditLog = array();
         $finalPriceLog = array();
@@ -387,10 +387,10 @@ class AdminController extends Controller
             $endDate= new \DateTime();
             $endDate->setDate($year, $i, $lastDay);
             $finalActiveLog[] = (int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total'];
-            $finalCandidateLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
+            $finalClientLog[] = (int)$candidateRepository->countActiveBetween($endDate)[0]['total'];
             $finalApplicationLog[] = (int)$applicationRepository->countTotalBefore($endDate)[0]['total'];
             $monthlyApplicationLog[] = (int)$applicationRepository->countTotalMonthly($i, $year)[0]['total'];
-            $finalEmployerLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
+            $finalProLog[] =(int)$employerRepository->countActiveBetween($endDate)[0]['total'];
             $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
             $monthlyCreditLog[] = (int)$logCreditRepository->countTotalMonthly($i, $year)[0]['total'];
             $finalPriceLog[] =(int)$logCreditRepository->countTotalMoneyBefore($endDate)[0]['total'];
@@ -399,8 +399,8 @@ class AdminController extends Controller
 
         return $this->render('AdminBundle::logPage.html.twig',array(
             'activeOfferLog' => $finalActiveLog,
-            'activeEmployerLog' => $finalEmployerLog,
-            'activeCandidateLog' => $finalCandidateLog,
+            'activeProLog' => $finalProLog,
+            'activeClientLog' => $finalClientLog,
             'creditLog' => $finalCreditLog,
             'monthlyCreditLog' => $monthlyCreditLog,
             'finalPriceLog' => $finalPriceLog,
@@ -418,7 +418,7 @@ class AdminController extends Controller
         $session = $request->getSession();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $employerId = $request->get('id');
@@ -426,7 +426,7 @@ class AdminController extends Controller
         $employerRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Employer');
+            ->getRepository('AppBundle:Pro');
         $employer = $employerRepository->findOneBy(array('id' => $employerId));
         $vatNumber = $employer->getVatNumber();
         $countryCode = substr($vatNumber, 0, 2);
@@ -461,7 +461,7 @@ class AdminController extends Controller
             ))
             ->add('submit', SubmitType::class, array(
                 'attr' => array(
-                    'class' => 'jobnow-button',
+                    'class' => 'rendezvous-button',
                 )
             ))
             ->getForm();
@@ -476,7 +476,7 @@ class AdminController extends Controller
 
                 $logCredit->setDate(new \DateTime());
                 $logCredit->setCredit($data['credits']);
-                $logCredit->setEmployer($employer);
+                $logCredit->setPro($employer);
                 $logCredit->setPrice($data['price']);
                 $logCredit->setName($data['name']);
                 $logCredit->setPhone($data['phone']);
@@ -506,7 +506,7 @@ class AdminController extends Controller
 
                     $html = $this->renderView('AppBundle:Credit:billsPdf.html.twig', array(
                         'logCredit' => $logCredit,
-                        'vatNumber' => $logCredit->getEmployer()->getVatNumber(),
+                        'vatNumber' => $logCredit->getPro()->getVatNumber(),
                         'withVat' => $withVat
                     ));
 
@@ -516,7 +516,7 @@ class AdminController extends Controller
                     $mailer = $this->container->get('swiftmailer.mailer');
                     $translated = $this->get('translator')->trans('admin.addCredit.subject');
                     $message = (new \Swift_Message($translated))
-                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setFrom('rendezvouslu@noreply.lu')
                         ->setTo($firstUser)
                         ->setCc(array_shift($arrayEmail))
                         ->setBody(

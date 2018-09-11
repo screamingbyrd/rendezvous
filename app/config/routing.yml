@@ -6,14 +6,14 @@ root:
         permanent: true
 
 employer:
-    resource: "@EmployerBundle/Resources/config/routing.yml"
+    resource: "@ProBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
          en: "/{_locale}/employer"
          fr: "/{_locale}/employeur"
 
 candidate:
-    resource: "@CandidateBundle/Resources/config/routing.yml"
+    resource: "@ClientBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
         en: "/{_locale}/candidate"

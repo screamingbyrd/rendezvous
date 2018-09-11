@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FeaturedEmployer
+ * FeaturedPro
  *
  * @ORM\Table(name="featured_offer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FeaturedOfferRepository")

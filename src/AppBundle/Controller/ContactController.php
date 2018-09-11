@@ -22,7 +22,7 @@ class ContactController extends Controller
         $name = $request->get('name');
         $emailSender = $request->get('email');
         $emailTo = $request->get('emailTo');
-        $emailTo = isset($emailTo)?$emailTo:'contact@jobnow.lu';
+        $emailTo = isset($emailTo)?$emailTo:'contact@rendezvous.lu';
         $message = $request->get('message');
         $type = $request->get('type');
         $type = isset($type)?$type:'contactUs';
@@ -99,7 +99,7 @@ class ContactController extends Controller
 
         $translated = $this->get('translator')->trans('email.share.title');
         $message = (new \Swift_Message($translated))
-            ->setFrom('jobnow@noreply.lu')
+            ->setFrom('rendezvous@noreply.lu')
             ->setTo($emailTo)
             ->setBody(
                 $this->renderView(

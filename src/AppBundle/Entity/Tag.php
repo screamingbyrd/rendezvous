@@ -35,7 +35,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Candidate", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Client", cascade={"persist"})
      */
     private $candidate;
 
@@ -122,11 +122,11 @@ class Tag
     /**
      * Add candidate
      *
-     * @param \AppBundle\Entity\Candidate $candidate
+     * @param \AppBundle\Entity\Client $candidate
      *
      * @return Tag
      */
-    public function addCandidate(\AppBundle\Entity\Candidate $candidate)
+    public function addClient(\AppBundle\Entity\Client $candidate)
     {
         $this->candidate[] = $candidate;
 
@@ -136,9 +136,9 @@ class Tag
     /**
      * Remove candidate
      *
-     * @param \AppBundle\Entity\Candidate $candidate
+     * @param \AppBundle\Entity\Client $candidate
      */
-    public function removeCandidate(\AppBundle\Entity\Candidate $candidate)
+    public function removeClient(\AppBundle\Entity\Client $candidate)
     {
         $this->candidate->removeElement($candidate);
     }
@@ -148,7 +148,7 @@ class Tag
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCandidate()
+    public function getClient()
     {
         return $this->candidate;
     }

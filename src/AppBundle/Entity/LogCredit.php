@@ -45,7 +45,7 @@ class LogCredit
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employer;
@@ -144,7 +144,7 @@ class LogCredit
      *
      * @return logCredit
      */
-    public function setEmployer($employer)
+    public function setPro($employer)
     {
         $this->employer = $employer;
 
@@ -156,7 +156,7 @@ class LogCredit
      *
      * @return int
      */
-    public function getEmployer()
+    public function getPro()
     {
         return $this->employer;
     }

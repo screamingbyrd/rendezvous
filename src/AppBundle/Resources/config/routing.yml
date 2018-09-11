@@ -1,7 +1,7 @@
-jobnow_home:
+rendezvous_home:
     path: "/"
     defaults: { _controller: AppBundle:App:index }
-jobnow_contact:
+rendezvous_contact:
     locales:
         en: "/contact"
         fr: "/contacter"
@@ -11,27 +11,27 @@ share_by_mail:
         en: "/share-by-mai"
         fr: "/partager-par-mail"
     defaults: { _controller: AppBundle:Contact:shareByMail }
-jobnow_credit:
+rendezvous_credit:
     locales:
         en: "/employer/credit"
         fr: "/employeur/credit"
     defaults: { _controller: AppBundle:Credit:credit }
-jobnow_bills:
+rendezvous_bills:
     locales:
         en: "/employer/bills"
         fr: "/employeur/facture"
     defaults: { _controller: AppBundle:Credit:bills }
-jobnow_bills_generate:
+rendezvous_bills_generate:
     locales:
         en: "/employer/bills/pdf"
         fr: "/employeur/facture/pdf"
     defaults: { _controller: AppBundle:Credit:generateBill }
-jobnow_estimation_generate:
+rendezvous_estimation_generate:
     locales:
         en: "/employer/estimation/pdf"
         fr: "/employeur/devis/pdf"
     defaults: { _controller: AppBundle:Credit:generateEstimation }
-jobnow_payment:
+rendezvous_payment:
     locales:
         en: "/employer/payment/{id}"
         fr: "/employeur/paiement/{id}"
@@ -104,7 +104,7 @@ delete_favorite:
         en: "/delete-favorite"
         fr: "/supprimer-favori"
     defaults: { _controller: AppBundle:Favorite:delete }
-jobnow_sitemap:
+rendezvous_sitemap:
     path: "/sitemap.xml"
     defaults: { _controller: AppBundle:Sitemap:sitemap }
     requirements: {_format: "xml"}

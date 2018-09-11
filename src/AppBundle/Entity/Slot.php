@@ -22,7 +22,7 @@ class Slot
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Employer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro")
      *
      */
     private $employer;
@@ -66,7 +66,7 @@ class Slot
      *
      * @return Slot
      */
-    public function setEmployer($employer)
+    public function setPro($employer)
     {
         $this->employer = $employer;
 
@@ -78,7 +78,7 @@ class Slot
      *
      * @return string
      */
-    public function getEmployer()
+    public function getPro()
     {
         return $this->employer;
     }

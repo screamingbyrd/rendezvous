@@ -22,7 +22,7 @@ class PostulatedOffers
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Candidate", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client", cascade={"persist"})
      */
     private $candidate;
 
@@ -69,7 +69,7 @@ class PostulatedOffers
      *
      * @return PostulatedOffers
      */
-    public function setCandidate($candidate)
+    public function setClient($candidate)
     {
         $this->candidate = $candidate;
 
@@ -81,7 +81,7 @@ class PostulatedOffers
      *
      * @return int
      */
-    public function getCandidate()
+    public function getClient()
     {
         return $this->candidate;
     }

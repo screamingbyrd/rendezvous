@@ -8,13 +8,13 @@ list_employer_admin:
     locales:
         en: "/employer/list"
         fr: "/employeur/liste"
-    defaults: { _controller: AdminBundle:Admin:listEmployer }
+    defaults: { _controller: AdminBundle:Admin:listPro }
 
 list_candidate_admin:
     locales:
         en: "/candidate/list"
         fr: "/candidat/liste"
-    defaults: { _controller: AdminBundle:Admin:listCandidate }
+    defaults: { _controller: AdminBundle:Admin:listClient }
 
 add_credit_admin:
     locales:

@@ -33,7 +33,7 @@ class NotificationController extends Controller
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
 
@@ -60,7 +60,7 @@ class NotificationController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $notification->setCandidate($candidate);
+        $notification->setClient($candidate);
 
         $now =  new \DateTime();
         $notification->setDate($now);
@@ -93,7 +93,7 @@ class NotificationController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $notification->setCandidate(null);
+        $notification->setClient(null);
 
         $now =  new \DateTime();
         $notification->setDate($now);
@@ -110,7 +110,7 @@ class NotificationController extends Controller
         $translated = $this->get('translator')->trans('email.notification.new');
         $message = (new \Swift_Message($translated))
 
-            ->setFrom('jobnowlu@noreply.lu')
+            ->setFrom('rendezvouslu@noreply.lu')
             ->setTo($mail)
             ->setBody(
                 $this->renderView(
@@ -159,7 +159,7 @@ class NotificationController extends Controller
         }else{
             $translated = $this->get('translator')->trans('notification.deleted');
             $session->getFlashBag()->add('info', $translated);
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
     }
 
@@ -183,12 +183,12 @@ class NotificationController extends Controller
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $employerRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Employer')
+            ->getRepository('AppBundle:Pro')
         ;
         $tagRepository = $this
             ->getDoctrine()
@@ -203,7 +203,7 @@ class NotificationController extends Controller
                 $offers = $offerRepository->getNotificationOffers($notification);
 
                 if(!empty($offers)){
-                    $candidate = $candidateRepository->findOneBy(array('id' => $notification->getCandidate()));
+                    $candidate = $candidateRepository->findOneBy(array('id' => $notification->getClient()));
 
                     if($notification->getTypeNotification() == 'notification.employer'){
                         $employer = $employerRepository->findOneBy(array('id' => $notification->getElementId()));
@@ -216,7 +216,7 @@ class NotificationController extends Controller
                     $mailer = $this->container->get('swiftmailer.mailer');
 
                     $message = (new \Swift_Message($this->get('translator')->trans('email.notification.send.title.search')))
-                        ->setFrom('jobnowlu@noreply.lu')
+                        ->setFrom('rendezvouslu@noreply.lu')
                         ->setTo($mail)
                         ->setBody(
                             $this->renderView(
@@ -281,7 +281,7 @@ class NotificationController extends Controller
 
                 $translated = $this->get('translator')->trans('email.notification.send.title.search');
                 $message = (new \Swift_Message($translated))
-                    ->setFrom('jobnowlu@noreply.lu')
+                    ->setFrom('rendezvouslu@noreply.lu')
                     ->setTo($mail)
                     ->setBody(
                         $this->renderView(

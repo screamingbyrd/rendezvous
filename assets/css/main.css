@@ -234,13 +234,13 @@ h3.title{
 }
 
 
-.jobnow-button.login {
+.rendezvous-button.login {
     width: 100%;
     margin-top: 15px;
 
 }
 
-.logo-jobnow{
+.logo-rendezvous{
     position: absolute;
     left: 2%;
     top: -3px;
@@ -348,7 +348,7 @@ legend{
     width: 60% !important;
 }
 
-.jobnow-button{
+.rendezvous-button{
     color: #fbfef5;
     border: solid 1px #e03c14;
     border-radius: 3px;
@@ -366,7 +366,7 @@ legend{
     min-width: 100px;
     margin-top: 0;
 }
-.jobnow-button:hover{
+.rendezvous-button:hover{
     box-shadow: inset 1000px 0 0 0 #ff6940;
     color: white;
 }
@@ -447,7 +447,7 @@ legend{
     .send-contact{
         width: 100% !important;
     }
-    .jobnow-button{
+    .rendezvous-button{
         border-radius: 8px;
         padding: 10px 19px;
     }
@@ -471,11 +471,11 @@ legend{
     .navbar-dashboard{
         margin-top: 0 !important;
     }
-    .add-notification .jobnow-dropdown{
+    .add-notification .rendezvous-dropdown{
         width: 100%;
         margin-left: 0 !important;
     }
-    .add-notification .jobnow-button{
+    .add-notification .rendezvous-button{
         width: 100%;
     }
     .nav-candidate{
@@ -535,7 +535,7 @@ legend{
         padding-left: 7px !important;
         padding-right: 7px !important;
     }
-    .jobnow-container{
+    .rendezvous-container{
         min-height: 270px;
         margin-bottom: 20px;
     }
@@ -575,7 +575,7 @@ legend{
     .navbar-toggle{
         margin-top: 13px;
     }
-    .logo-jobnow{
+    .logo-rendezvous{
         position: absolute;
         left: 2%;
         top: -3px;
@@ -795,7 +795,7 @@ legend{
 .add-notification h4{
     margin-bottom: 20px;
 }
-.jobnow-dropdown{
+.rendezvous-dropdown{
     line-height: inherit;
     background-position: 10px 12px;
     background-repeat: no-repeat;
@@ -808,7 +808,7 @@ legend{
     min-width: 130px;
 }
 
-.jobnow-dropdown.alerts{
+.rendezvous-dropdown.alerts{
 
     margin-left: 0;
 
@@ -851,7 +851,7 @@ legend{
     -moz-transition: -moz-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
     -o-transition: -o-transform 0.5s cubic-bezier(0.9, 0.26, 0.58, 1) false false;
 }
-.shadow-box .jobnow-button{
+.shadow-box .rendezvous-button{
     width: 100%;
 }
 .shadow-box h3{
@@ -1132,7 +1132,7 @@ legend{
     body{
         padding-bottom: 0!important;
     }
-    .jobnow-container{
+    .rendezvous-container{
         min-height: 405px;
         margin-bottom: 20px;
     }

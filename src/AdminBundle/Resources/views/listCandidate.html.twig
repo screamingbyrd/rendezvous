@@ -12,7 +12,7 @@
 
         <h2>{{ 'admin.dashboard.candidateList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="{{ 'admin.enterMail'|trans }}" title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'admin.enterMail'|trans }}" title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
@@ -58,7 +58,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.sureCandidate'|trans }}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.sureClient'|trans }}</h4>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <script>
-            function showEmployer() {
+            function showPro() {
                 let input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();

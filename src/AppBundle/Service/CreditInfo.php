@@ -16,7 +16,7 @@ class CreditInfo
     private $publishOffer = 1;
     private $boostOffers = 1;
     private $featuredOffer = 2;
-    private $featuredEmployer = 2;
+    private $featuredPro = 2;
     private $buySlot = 5;
     private $oneCredit = 234;
     private $oneCreditWithoutVAT = 200;
@@ -86,18 +86,18 @@ class CreditInfo
     /**
      * @return int
      */
-    public function getFeaturedEmployer()
+    public function getFeaturedPro()
     {
-        return $this->featuredEmployer;
+        return $this->featuredPro;
     }
 
     /**
-     * @param int $featuredEmployer
+     * @param int $featuredPro
      * @return CreditInfo
      */
-    public function setFeaturedEmployer($featuredEmployer)
+    public function setFeaturedPro($featuredPro)
     {
-        $this->featuredEmployer = $featuredEmployer;
+        $this->featuredPro = $featuredPro;
         return $this;
     }
 

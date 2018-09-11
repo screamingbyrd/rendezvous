@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <style type="text/css">
-    .logo-jobnow{
+    .logo-rendezvous{
         width: 250px;
     }
     .header-mail{
@@ -195,7 +195,7 @@
 <div class="container">
     <div class="container-mail">
         <div class="header-mail">
-            <a href="https://jobnow.lu{{ path('jobnow_home') }}"><img  style="width: 190px;" class="logo-jobnow" src="https://jobnow.lu/images/logo_jobnow.png"></a>
+            <a href="https://rendezvous.lu{{ path('rendezvous_home') }}"><img  style="width: 190px;" class="logo-rendezvous" src="https://rendezvous.lu/images/logo_rendezvous.png"></a>
         </div>
 
         <div class="content-mail">
@@ -213,11 +213,11 @@
                             {% else %}
                                 {% set image = 'images/default_cover_image6.jpg' %}
                             {% endif %}
-                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('https://jobnow.lu'{{ image }});background-position: center center;">
+                            <div class="background-employer-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url('https://rendezvous.lu'{{ image }});background-position: center center;">
                                 <div class="layer layer-offer-element animated">
                                 </div>
                             </div>
-                            {% if offer.employer.logo.imageName is not null and offer.employer.coverImage.imageName is not null %}<img class="logo-employer-in-offer-search" src="https://jobnow.lu{{ asset('uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
+                            {% if offer.employer.logo.imageName is not null and offer.employer.coverImage.imageName is not null %}<img class="logo-employer-in-offer-search" src="https://rendezvous.lu{{ asset('uploads' ~ vich_uploader_asset(offer.employer.logo, 'imageFile', 'AppBundle\\Entity\\Image')) }}"/>{% endif %}
                             <div class="offer-search-element">
                                 <div class="offer-element-details">
                                     <div class="offer-element-name">{{ offer.employer.name }}</div>
@@ -235,8 +235,8 @@
 
         <div class="footer-mail">
             <div class="social-netwok-container">
-                <a href="https://www.facebook.com/jobnow.lu/"><img class="logo-facebook" src="https://jobnow.lu/images/logo-facebook.png"></a>
-                <a href="https://www.linkedin.com/company/jobnow-luxembourg/"><img class="logo-linkedin" src="https://jobnow.lu/images/logo-linkedin.png"></a>
+                <a href="https://www.facebook.com/rendezvous.lu/"><img class="logo-facebook" src="https://rendezvous.lu/images/logo-facebook.png"></a>
+                <a href="https://www.linkedin.com/company/rendezvous-luxembourg/"><img class="logo-linkedin" src="https://rendezvous.lu/images/logo-linkedin.png"></a>
             </div>
 
             <div class="other-footer">
@@ -244,7 +244,7 @@
                 {#<div>{{ 'email.footer.consult'| trans({'%link_start%' : '<a href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) |raw}}</div>#}
             </div>
             <div class="other-footer">
-                © 2018 Jobnow.lu
+                © 2018 Rendezvous.lu
             </div>
             <div class="other-footer">
                 <div class="location"><a href="" style="text-decoration:none;color: white;">228 Route d’Esch</a></div>

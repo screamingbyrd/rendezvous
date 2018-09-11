@@ -2,8 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@EmployerBundle/Resources/config/services.yml" }
-    - { resource: "@CandidateBundle/Resources/config/services.yml" }
+    - { resource: "@ProBundle/Resources/config/services.yml" }
+    - { resource: "@ClientBundle/Resources/config/services.yml" }
     - { resource: "@AdminBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -43,8 +43,8 @@ fos_user:
         firewall_name: main
         user_class: AppBundle\Entity\User
         from_email:
-            address: "noreply@jobnow.lu"
-            sender_name: "JobNow"
+            address: "noreply@rendezvous.lu"
+            sender_name: "RendezVous"
         registration:
             form:
                 type: AppBundle\Form\RegistrationType

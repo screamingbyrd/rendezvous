@@ -28,7 +28,7 @@ class FavoriteController extends Controller
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
 
@@ -61,7 +61,7 @@ class FavoriteController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $favorite->setCandidate($candidate);
+        $favorite->setClient($candidate);
         $favorite->setOffer($offer);
 
         $em->persist($favorite);
@@ -87,7 +87,7 @@ class FavoriteController extends Controller
         $candidateRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Candidate')
+            ->getRepository('AppBundle:Client')
         ;
         $candidate = $candidateRepository->findOneBy(array('user' => $user->getId()));
 
@@ -98,7 +98,7 @@ class FavoriteController extends Controller
         ;
         $favorite = $favoriteRepository->findOneBy(array('id' => $favoriteId));
 
-        if(!isset($favorite) || $candidate != $favorite->getCandidate()){
+        if(!isset($favorite) || $candidate != $favorite->getClient()){
             return $this->redirectToRoute('create_candidate');
         }
 

@@ -22,7 +22,7 @@ class Notification
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Candidate")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client")
      */
     private $candidate;
 
@@ -79,7 +79,7 @@ class Notification
      *
      * @return Notification
      */
-    public function setCandidate($candidate)
+    public function setClient($candidate)
     {
         $this->candidate = $candidate;
 
@@ -91,7 +91,7 @@ class Notification
      *
      * @return string
      */
-    public function getCandidate()
+    public function getClient()
     {
         return $this->candidate;
     }

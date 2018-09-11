@@ -24,13 +24,13 @@ class AppController extends Controller
     public function indexAction(Request $request)
     {
 
-        $featuredEmployerRepository = $this
+        $featuredProRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:FeaturedEmployer')
+            ->getRepository('AppBundle:FeaturedPro')
         ;
 
-        $featuredEmployer = $featuredEmployerRepository->getCurrentFeaturedEmployer();
+        $featuredPro = $featuredProRepository->getCurrentFeaturedPro();
 
         $featuredOfferRepository = $this
             ->getDoctrine()
@@ -88,7 +88,7 @@ class AppController extends Controller
             $tags[] = $tag['name'];
         }
 
-        shuffle ($featuredEmployer);
+        shuffle ($featuredPro);
         shuffle ($featuredOffer);
 
         $adRepository = $this
@@ -100,7 +100,7 @@ class AppController extends Controller
         shuffle($ads);
 
         return $this->render('AppBundle:Default:index.html.twig', array(
-            'featuredEmployer' => $featuredEmployer,
+            'featuredPro' => $featuredPro,
             'featuredOffer' => $featuredOffer,
             'tagArray' => $tagArray,
             'tags' => $tags,
@@ -198,11 +198,11 @@ class AppController extends Controller
 
         foreach ($arrayNewUser as $mail){
             $message = (new \Swift_Message('Jownow is live !'))
-                ->setFrom('jobnowlu@noreply.lu')
+                ->setFrom('rendezvouslu@noreply.lu')
                 ->setTo($mail)
                 ->setBody(
                     $this->renderView(
-                        'AppBundle:Emails:startJobnow.html.twig',
+                        'AppBundle:Emails:startRendezvous.html.twig',
                         array()
                     ),
                     'text/html'

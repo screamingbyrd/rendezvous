@@ -83,7 +83,7 @@ class RegisterUser
         $user->SetLastName('');
         $user->setPlainPassword('0000');
         $user->addRole('ROLE_EMPLOYER');
-        $user->setEmployer($employer);
+        $user->setPro($employer);
         $this->userManager->updateUser($user);
 
 

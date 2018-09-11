@@ -12,7 +12,7 @@
 
         <h2>{{ 'admin.dashboard.employerList' | trans }}</h2>
 
-        <input type="text" id="myInput" onkeyup="showEmployer()" placeholder="{{ 'admin.enterCompnay'|trans }}" title="Type in a name" class="search-employer">
+        <input type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'admin.enterCompnay'|trans }}" title="Type in a name" class="search-employer">
 
         <table class="table table-bordered table-striped well">
             <thead>
@@ -42,7 +42,7 @@
                             <button class="modal-open btn btn-danger" data-href="{{ path('delete_employer', { 'id': employer.employer.id }) }}">
                                 {{ 'delete' | trans }}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('jobnow_bills', { 'id': employer.employer.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('rendezvous_bills', { 'id': employer.employer.id }) }}">
                                 {{ 'price.bills' | trans }}
                             </a>
                             <a href="{{ path('add_credit_admin', {'id':employer.id}) }}" class="btn btn-primary">{{ 'admin.addCredit.title'|trans }}</a>
@@ -65,7 +65,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.sureEmployer'|trans }}</h4>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.surePro'|trans }}</h4>
                     </div>
                     <div class="modal-footer">
                         <a type="button" class="btn btn-default" id="modal-btn-yes">{{ 'yes'|trans }}</a>
@@ -75,7 +75,7 @@
             </div>
         </div>
         <script>
-            function showEmployer() {
+            function showPro() {
                 let input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();

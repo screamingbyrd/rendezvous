@@ -9,8 +9,8 @@
 namespace AdminBundle\Controller;
 
 use AppBundle\Entity\Ad;
-use AppBundle\Entity\Employer;
-use AppBundle\Entity\FeaturedEmployer;
+use AppBundle\Entity\Pro;
+use AppBundle\Entity\FeaturedPro;
 use AppBundle\Entity\FeaturedOffer;
 use AppBundle\Entity\Slot;
 use AppBundle\Form\AdType;
@@ -52,7 +52,7 @@ class AdController extends Controller
             $em->persist($ad);
             $em->flush();
 
-            $translated = $this->get('translator')->trans('form.registration.successEmployer');
+            $translated = $this->get('translator')->trans('form.registration.successPro');
             $session->getFlashBag()->add('info', $translated);
 
             return $this->redirectToRoute('list_ad_admin', array('archived' => $_SESSION['archived']));
@@ -109,7 +109,7 @@ class AdController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $session = $request->getSession();
@@ -137,7 +137,7 @@ class AdController extends Controller
         $user = $this->getUser();
 
         if(!(isset($user) and in_array('ROLE_ADMIN', $user->getRoles()))){
-            return $this->redirectToRoute('jobnow_home');
+            return $this->redirectToRoute('rendezvous_home');
         }
 
         $repository = $this

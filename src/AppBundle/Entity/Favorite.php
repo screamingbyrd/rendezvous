@@ -22,7 +22,7 @@ class Favorite
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Candidate")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client")
      */
     private $candidate;
 
@@ -49,7 +49,7 @@ class Favorite
      *
      * @return Favorite
      */
-    public function setCandidate($candidate)
+    public function setClient($candidate)
     {
         $this->candidate = $candidate;
 
@@ -61,7 +61,7 @@ class Favorite
      *
      * @return string
      */
-    public function getCandidate()
+    public function getClient()
     {
         return $this->candidate;
     }
