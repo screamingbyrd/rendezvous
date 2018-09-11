@@ -482,7 +482,7 @@ notification:
   tag: Categorie
   employer: Employeur
   search: Recherche
-  if: Si vous ne souhaitez plus reçevoir cette alert email clickez
+  if: Si vous ne souhaitez plus reçevoir cette alert email cliquez
   here: ici
 
 favorite:

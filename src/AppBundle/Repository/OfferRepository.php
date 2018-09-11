@@ -17,10 +17,10 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
         $query->andWhere('o.archived = 0 and (o.startDate > :date OR (o.creationDate > :date AND o.slot is not null))')
             ->setParameter('date', $notification->getDate());
 
-        if($notification->getTypeNotification() == 'employer'){
+        if($notification->getTypeNotification() == 'notification.employer'){
             $query->andWhere('o.employer = :employer')
             ->setParameter('employer', $notification->getElementId());
-        }elseif ($notification->getTypeNotification() == 'tag'){
+        }elseif ($notification->getTypeNotification() == 'notification.tag'){
             $query->andWhere(':tag MEMBER OF o.tag')
             ->setParameter('tag', $notification->getElementId());
         }

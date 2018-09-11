@@ -279,7 +279,7 @@ class NotificationController extends Controller
                 $mail = $notification->getMail();
                 $mailer = $this->container->get('swiftmailer.mailer');
 
-                $translated = $this->get('translator')->trans('email.notification.new');
+                $translated = $this->get('translator')->trans('email.notification.send.title.search');
                 $message = (new \Swift_Message($translated))
                     ->setFrom('jobnowlu@noreply.lu')
                     ->setTo($mail)

@@ -199,12 +199,7 @@
         </div>
 
         <div class="content-mail">
-            {% if search %}
-                {% set title = 'email.notification.send.title.search'|trans %}
-            {% else %}
-                {% set title = 'email.notification.send.title.regular'|trans({'subject':subject}) %}
-            {% endif %}
-            <h3>{{ title }}</h3>
+            <h3>{{ 'email.notification.send.title.search'|trans }}</h3>
 
             <ul id="myUL" class="candidat-dashboard">
                 {% for offer in offers %}
@@ -228,7 +223,7 @@
                                 <div class="offer-element-details">
                                     <div class="offer-element-name">{{ offer.employer.name }}</div>
                                     <div class="offer-element-title">{{ offer.title |truncate(20, true)}}</div>
-                                    <div><span class="other-element">{{ offer.location }}</span></div>
+                                    <div><span class="other-element" style="overflow: hidden;text-overflow: ellipsis;width: 89%;">{{ offer.location }}</span></div>
                                     <div class="offer-element-other"><span class="other-element offer-item-contract item-contract-{{ offer.contractType.name }}">{{ offer.contractType.name | trans }}</span><span class="other-element">{{ offer.startDate|time_diff }}</span></div>
                                 </div>
                             </div>
