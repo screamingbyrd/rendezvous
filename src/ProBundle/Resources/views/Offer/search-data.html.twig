@@ -45,16 +45,49 @@
         {% endif %}
         {% set count = count + 1 %}
         <li class="search-result animated fadeIn">
-            <a class='offer-element' href="{{ path('show_pro', {'id': pro.id}) }}">
+            <span class='offer-element' href="{{ path('show_pro', {'id': pro.id}) }}">
                 {% if pro.images.first != false and pro.images.first.imageName is not null %}
-                    {% set image =  'uploads' ~ vich_uploader_asset(pro.images.first, 'imageFile', 'AppBundle\\Entity\\Image') %}
+
+
+
+                <div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        {% set i = 0 %}
+                        {% for image in pro.images %}
+                            <li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" {% if i == 0 %}class="active"{% endif %}></li>
+                            {% set i = i + 1 %}
+                        {% endfor %}
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        {% set i = 0 %}
+                        {% for image in pro.images %}
+                            <div class="item {% if i == 0 %}active{% endif %}">
+                                <img class="image-search-pro" src="{{ asset('uploads' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
+                            </div>
+                            {% set i = i + 1 %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel-{{ pro.id }}" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel-{{ pro.id }}" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
                 {% else %}
                     {% set image = 'images/default_cover_image6.jpg' %}
-                {% endif %}
-                <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
-                    <div class="layer layer-offer-element animated">
+                    <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                        <div class="layer layer-offer-element animated">
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 <div class="offer-search-element">
                     <div class="offer-element-details">
                         <div class="offer-element-title">{{ pro.name }}</div>
@@ -64,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </span>
         </li>
         {% if (count-1) % 7 == 0 and ads is not empty and ads[adOrder] is defined %}
 
