@@ -2,13 +2,9 @@
 
 namespace ProBundle\Controller;
 
-use AppBundle\Entity\ActiveLog;
 use AppBundle\Entity\Pro;
 use AppBundle\Entity\FeaturedPro;
-use AppBundle\Entity\FeaturedOffer;
-use AppBundle\Entity\Slot;
 use AppBundle\Form\ProType;
-use AppBundle\Form\OfferType;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Overlay\Marker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,7 +33,6 @@ class ProController extends Controller
     public function createAction(Request $request)
     {
 
-        $postAnOffer = $request->get('postOffer');
         $session = $request->getSession();
 
         $pro = new Pro();
@@ -58,27 +53,18 @@ class ProController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $pro->setName($data->getName());
-                $pro->setDescription($data->getDescription());
-                $pro->setLocation($data->getLocation());
                 $pro->setPhone($data->getPhone());
                 $pro->addUser($user);
-                $pro->setLogo($data->getLogo());
-                $pro->setCoverImage($data->getCoverImage());
+                $user->setPro($pro);
 
-                $em->persist($pro);
                 $em->persist($user);
+                $em->persist($pro);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('form.registration.successPro');
                 $session->getFlashBag()->add('info', $translated);
 
-                if(isset($postAnOffer) and $postAnOffer){
-                    return $this->redirectToRoute('post_offer');
-                }else{
-                    return $this->redirectToRoute('edit_pro');
-                }
-
-
+                return $this->redirectToRoute('edit_pro');
 
             }else{
 
@@ -138,7 +124,9 @@ class ProController extends Controller
 
             $form->handleRequest($request);
             if ($form->isValid()) {
-
+                if ($pro->getImages()) {
+                    foreach ($pro->getImages() as $image) $image->setOffer($pro);
+                }
                 $data = $form->getData();
 
                 $userManager = $this->get('fos_user.user_manager');
@@ -156,8 +144,6 @@ class ProController extends Controller
                 $pro->setLocation($data->getLocation());
                 $pro->setPhone($data->getPhone());
                 $pro->addUser($user);
-                $pro->setLogo($data->getLogo());
-                $pro->setCoverImage($data->getCoverImage());
 
                 $em = $this->getDoctrine()->getManager();
                 $em->merge($pro);
@@ -172,36 +158,10 @@ class ProController extends Controller
             }
         }
 
-        $completion = 6;
-
-        if(isset($pro->getTag()[0])){
-            $completion += 1;
-        }
-        $location = $pro->getLocation();
-        if(isset($location)){
-            $completion += 1;
-        }
-        $description = $pro->getDescription();
-        if(isset($description)){
-            $completion += 1;
-        }
-        $logo = $pro->getLogo()->getImageName();
-        if(isset($logo)){
-            $completion += 1;
-        }
-        $cover = $pro->getCoverImage()->getImageName();
-        if(isset($cover)){
-            $completion += 1;
-        }
-
-        $completion = $completion/11 * 100;
-
         return $this->render('ProBundle:Form:editPro.html.twig', array(
             'form' => $form->createView(),
             'user' => $user,
-            'completion' => $completion,
-            'logo' => $form->getData()->getLogo(),
-            'coverImage' => $form->getData()->getCoverImage(),
+            'images' => $form->getData()->getImages()
         ));
     }
 

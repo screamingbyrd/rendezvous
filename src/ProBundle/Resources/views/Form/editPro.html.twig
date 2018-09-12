@@ -14,22 +14,9 @@
     {{ form_errors(form) }}
     <div class="jumbotron pro-jumbotron">
         <div>
-            <div class="container-logo-pro">
 
-                {% form_theme form.logo 'imageProLogoInput.html.twig' %}
-                <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.logoInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
-                {{ form_widget(form.logo, {'logo': logo}) }}
-                {{ form_errors(form.logo) }}
-            </div>
             <div class="title-pro">{{ user.pro.name }}</div>
         </div>
-        <div class="container-cover-pro">
-            {% form_theme form.coverImage 'imageProCoverInput.html.twig' %}
-            <span class="info-bubble" data-toggle="tooltip" data-placement="top" title="{{ 'form.registration.coverImageInfo'|trans }}"><i class="fas fa-info-circle"></i></span>
-            {{ form_widget(form.coverImage, {'coverImage': coverImage}) }}
-            {{ form_errors(form.coverImage) }}
-        </div>
-
 
     </div>
 
@@ -38,18 +25,6 @@
 
             <h3 class="login-login-title">{{ 'form.registration.title.edit'|trans }}</h3>
 
-            {% if completion < 100 %}
-                <div class="completion-container">
-                    {{ 'pro.edit.complete'|trans }}
-                    <div class="meter red">
-                        <span class="completion-bar" style="width: {{ completion }}%"></span>
-                    </div>
-                </div>
-            {% endif %}
-
-            <div class="completion-success animated fadeIn">
-                {{ 'pro.edit.completed'|trans }}
-            </div>
 
             <div class="row">
 
@@ -83,32 +58,39 @@
                 </fieldset>
                 <fieldset>
                     <legend>{{ 'pro.edit.companyData'|trans }}</legend>
-                        <div class="col-md-3 form-group">
-                            {{ form_label (form.name,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.name) }}
-                            {{ form_errors(form.name) }}
-                        </div>
+                    <div class="col-md-3 form-group">
+                        {{ form_label (form.name,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.name) }}
+                        {{ form_errors(form.name) }}
+                    </div>
 
-                        <div class="col-md-3 form-group">
-                            {{ form_label (form.location,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.location) }}
-                            {{ form_errors(form.location) }}
-                        </div>
-                        <div class="col-md-3 form-group">
-                            {{ form_label (form.city,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.city) }}
-                            {{ form_errors(form.city) }}
-                        </div>
-                        <div class="col-md-3 form-group">
-                            {{ form_label (form.zipcode,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.zipcode) }}
-                            {{ form_errors(form.zipcode) }}
-                        </div>
-                        <div class="col-md-12 form-group">
-                            {{ form_label (form.description,null, { 'label_attr': {'class': 'label-form'} }) }}
-                            {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
-                            {{ form_errors(form.description) }}
-                        </div>
+                    <div class="col-md-3 form-group">
+                        {{ form_label (form.location,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.location) }}
+                        {{ form_errors(form.location) }}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        {{ form_label (form.city,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.city) }}
+                        {{ form_errors(form.city) }}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        {{ form_label (form.zipcode,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.zipcode) }}
+                        {{ form_errors(form.zipcode) }}
+                    </div>
+                    <div class="col-md-12 form-group">
+                        {{ form_label (form.description,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.description, { 'attr': {'class':'edit-text'} }) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                    <div class="col-md-12 form-group ">
+
+                        {% form_theme form.images 'jquery.collection.html.twig' %}
+                        {{ form_label (form.images, null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.images, {'images': images}) }}
+                        {{ form_errors(form.images) }}
+                    </div>
                 </fieldset>
 
                 <div class="col-md-4 col-md-offset-4">
@@ -222,11 +204,9 @@
     </script>
 
     <style>
-        {% if user.pro.coverImage.imageName is not null %}
-        {% set image =  'uploads' ~ vich_uploader_asset(user.pro.coverImage, 'imageFile', 'AppBundle\\Entity\\Image') %}
-        {% else %}
+
         {% set image = 'images/default_cover_image6.jpg' %}
-        {% endif %}
+
         .pro-jumbotron::after{
             content: '';
             background-image:url({{ asset(image) }});

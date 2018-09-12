@@ -16,7 +16,7 @@ services:
   app.redirect.after.login:
         class: AppBundle\Service\AfterLoginRedirect
         arguments: ['@router']
-  app.search.offer:
+  app.search.pro:
         class: AppBundle\Service\Search
         arguments: ['@fos_elastica.finder.app.pro']
   app.pro_image:

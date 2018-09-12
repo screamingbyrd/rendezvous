@@ -83,26 +83,11 @@ fos_elastica:
                         properties:
                             id: ~
                             description: ~
-                            title: { type: text, analyzer: autocomplete_analyzer }
-                            updateDate: { type: date }
                             location: { type: text, analyzer: location_tokenizer }
-                            archived: ~
-                            contractType:
-                              type: object
-                              properties:
-                                name: { type: text }
-                            tag:
-                              type: object
-                              properties:
-                                name: { type: text }
-                            pro:
-                              type: object
-                              properties:
-                                name: { type: text }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm
-                            model: AppBundle\Entity\Offer
+                            model: AppBundle\Entity\Pro
                             provider: ~
                             finder: ~
 

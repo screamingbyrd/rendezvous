@@ -51,16 +51,6 @@ class Pro
     private $description;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist"})
-     */
-    private $logo;
-
-    /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist"})
-     */
-    private $coverImage;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
@@ -103,6 +93,13 @@ class Pro
     private $firstName;
 
     private $lastName;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="pro", cascade={"persist"})
+     *
+     */
+    private $images;
 
     /**
      * @var \datetime
@@ -260,54 +257,6 @@ class Pro
     }
 
     /**
-     * Set logo
-     *
-     * @param integer $logo
-     *
-     * @return Pro
-     */
-    public function setLogo($logo)
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    /**
-     * Get logo
-     *
-     * @return int
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Set coverImage
-     *
-     * @param string $coverImage
-     *
-     * @return Pro
-     */
-    public function setCoverImage($coverImage)
-    {
-        $this->coverImage = $coverImage;
-
-        return $this;
-    }
-
-    /**
-     * Get coverImage
-     *
-     * @return string
-     */
-    public function getCoverImage()
-    {
-        return $this->coverImage;
-    }
-
-    /**
      * @return string
      */
     public function getPhone()
@@ -331,6 +280,7 @@ class Pro
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->creationDate =  new \datetime();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -423,6 +373,39 @@ class Pro
         return $this;
     }
 
+    /**
+     * Add image
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Pro
+     */
+    public function addImage(\AppBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \AppBundle\Entity\Image $image
+     */
+    public function removeImage(\AppBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
 
 
 }

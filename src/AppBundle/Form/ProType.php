@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 
-use AppBundle\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,6 +20,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 class ProType extends AbstractType
@@ -96,10 +96,18 @@ class ProType extends AbstractType
                 'label' => 'form.registration.phone'
             ))
 
-            ->add('logo', ImageType::class)
+            ->add('images', CollectionType::class, array(
 
-            ->add('coverImage', ImageType::class)
+                'entry_type' => ImageType::class,
 
+                'entry_options' => array('label' => false),
+                'attr' => array(
+                    'class' => 'my-selector'
+                ),
+                'required' => false,
+                'allow_add' => true,
+                'allow_delete'=>true,
+            ))
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(
                     'class' => 'rendezvous-button login',

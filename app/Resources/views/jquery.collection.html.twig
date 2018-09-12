@@ -1,0 +1,209 @@
+{#
+# jquery.collection.html.twig
+#
+# Adds the following html attributes to the root node of your collection fields:
+#
+# - data-prototype-name: placeholder used in the prototype to replace element indexes on the collection
+# - data-allow-add: if set to false, plugin will automatically set allow_add option to false
+# - data-allow-delete: if set to false, plugin will automatically set allow_remove option to false
+# - data-name-prefix: contains the collection's prefix used in descendant field names
+#
+# Those information let you configure the plugin options automatically.
+#
+# If you are already using a form theme, you can use both by using:
+# {%
+#   form_theme myForm
+#       'FuzAppBundle::my-form-theme.html.twig'
+#       'FuzAppBundle::jquery.collection.html.twig'
+#       ...
+# %}
+#}
+
+{% block collection_widget %}
+    {% spaceless %}
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    var fileInput = $('#'+input.id);
+
+                    reader.onload = function (e) {
+                        fileInput.parent().css('background-image', 'url(' + e.target.result + ')');
+                        fileInput.parent().find('label').hide();
+                        fileInput.parent().find('.remove-image').show();
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            function removeImage(input) {
+                input.parentNode.getElementsByTagName('input')[0].value = "";
+                input.parentNode.style.backgroundImage = '';
+                input.parentNode.getElementsByTagName('label')[0].style.display = "flex";
+                input.style.display = "none";
+
+                if(input.getAttribute("data-image-id") !== null){
+                    let id = input.getAttribute("data-image-id");
+                    let url = "{{ path('delete_image') }}";
+                    $.ajax({
+                        url: url,
+                        data: {id:id}
+                    }).done(function( data ) {
+
+                    });
+                }
+
+            }
+
+            $('.form-vertical').submit(function(e) {
+                var reorderedValues = [];
+                //loop trought each input...
+                $('#sortable li input').each( function(e) {
+                    reorderedValues.push( $(this).val() );
+                });
+
+                var i;
+                for (i = 0; i < reorderedValues.length; i++) {
+                    if(typeof reorderedValues[i] == 'undefined' ){
+                        reorderedValues[i] = '';
+                    }
+                    $('input[name="appbundle_proposer[images]['+i+'][imageFile][file]"]').val(reorderedValues[i]);
+                }
+
+                return true;
+            });
+
+            $( document ).ready(function() {
+                {% if images is defined %}
+                    {% set i = 0 %}
+                    {% for image in images %}
+                        var input = $('#sortable li input:eq({{ i }})');
+                        input.parent().find('.remove-image').attr('data-image-id', {{ image.id }});
+                        input.parent().css('background-image', 'url({{ asset('uploads' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }})');
+                        input.parent().find('label').hide();
+                        input.parent().find('.remove-image').show();
+
+                        {% set i = i+1 %}
+                    {% endfor %}
+                {% endif %}
+            });
+
+        </script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#sortable" ).sortable();
+                $( "#sortable" ).disableSelection();
+            } );
+        </script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <ul id="sortable" class="row">
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="0" class="inputfile inputfile-1" id="appbundle_proposer_images_0_imageFile_file" name="appbundle_proposer[images][0][imageFile][file]">
+                <label for="appbundle_proposer_images_0_imageFile_file"><i class="fas fa-download"></i><span>  1</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="1" class="inputfile inputfile-1" id="appbundle_proposer_images_1_imageFile_file" name="appbundle_proposer[images][1][imageFile][file]">
+                <label for="appbundle_proposer_images_1_imageFile_file"><i class="fas fa-download"></i><span>  2</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="2" class="inputfile inputfile-1" id="appbundle_proposer_images_2_imageFile_file" name="appbundle_proposer[images][2][imageFile][file]">
+                <label for="appbundle_proposer_images_2_imageFile_file"><i class="fas fa-download"></i><span>  3</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="3" class="inputfile inputfile-1" id="appbundle_proposer_images_3_imageFile_file" name="appbundle_proposer[images][3][imageFile][file]">
+                <label for="appbundle_proposer_images_3_imageFile_file"><i class="fas fa-download"></i><span>  4</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="4" class="inputfile inputfile-1" id="appbundle_proposer_images_4_imageFile_file" name="appbundle_proposer[images][4][imageFile][file]">
+                <label for="appbundle_proposer_images_4_imageFile_file"><i class="fas fa-download"></i><span>  5</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="5" class="inputfile inputfile-1" id="appbundle_proposer_images_5_imageFile_file" name="appbundle_proposer[images][5][imageFile][file]">
+                <label for="appbundle_proposer_images_5_imageFile_file"><i class="fas fa-download"></i><span>  6</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="6" class="inputfile inputfile-1" id="appbundle_proposer_images_6_imageFile_file" name="appbundle_proposer[images][6][imageFile][file]">
+                <label for="appbundle_proposer_images_6_imageFile_file"><i class="fas fa-download"></i><span>  7</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+            <li class="ui-state-default col-md-3 col-sm-3">
+                <input type="file" onchange="readURL(this);" data-image-id="7" class="inputfile inputfile-1" id="appbundle_proposer_images_7_imageFile_file" name="appbundle_proposer[images][7][imageFile][file]">
+                <label for="appbundle_proposer_images_7_imageFile_file"><i class="fas fa-download"></i><span>  8</span></label>
+                <button type="button" class="remove-image" onclick="removeImage(this)"><i class="fas fa-times"></i></button>
+            </li>
+        </ul>
+
+        <style>
+            #sortable li{
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .remove-image{
+                border-radius: 50%;
+                background-color: #00000080;
+                border: none;
+                color: white;
+                padding: 8px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                top: 0;
+                display: none;
+                padding-bottom: 3px;
+                padding-top: 3px;
+            }
+            #sortable {
+                list-style-type: none; margin: 0; padding: 0;
+            }
+            #sortable li {
+                padding: 1px; float: left;
+                width: 24%;
+                height: 106px;
+                font-size: 4em;
+                text-align: center;
+                position: relative;
+            }
+            .ui-state-default{
+                background-position: center center;
+                background-size: cover;
+            }
+            .inputfile{
+                width: 0.1px;
+                height: 0.1px;
+                opacity: 0;
+                overflow: hidden;
+                position: absolute;
+                z-index: -1;
+            }
+            .inputfile + label {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3.25rem;
+                font-weight: 700;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                cursor: pointer;
+                overflow: hidden;
+                padding: 0.625rem 1.25rem;
+                color: #f1e5e6;
+                background-color: #2e6da4;
+            }
+        </style>
+    {% endspaceless %}
+{% endblock collection_widget %}

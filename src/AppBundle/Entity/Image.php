@@ -48,6 +48,10 @@ class Image
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pro", inversedBy="images")
+     */
+    private $pro;
 
     /**
      * Get id
@@ -133,6 +137,30 @@ class Image
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \AppBundle\Entity\Pro $pro
+     *
+     * @return Image
+     */
+    public function setOffer(\AppBundle\Entity\Pro $pro = null)
+    {
+        $this->pro = $pro;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \AppBundle\Entity\Pro
+     */
+    public function getPro()
+    {
+        return $this->pro;
     }
 }
 
