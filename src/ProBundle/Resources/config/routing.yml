@@ -94,12 +94,12 @@ search_offer:
     locales:
         en: "/search-offer"
         fr: "/chercher-offre"
-    defaults: { _controller: ProBundle:Offer:search }
+    defaults: { _controller: ProBundle:Pro:search }
 search_page_offer:
     locales:
         en: "/search-offer-page"
         fr: "/page-chercher-offre"
-    defaults: { _controller: ProBundle:Offer:searchPage }
+    defaults: { _controller: ProBundle:Pro:searchPage }
 boost_offers:
     locales:
         en: "/boost-offer"

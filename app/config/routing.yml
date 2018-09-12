@@ -10,14 +10,14 @@ pro:
     type: "be_simple_i18n"
     prefix:
          en: "/{_locale}/pro"
-         fr: "/{_locale}/employeur"
+         fr: "/{_locale}/professionnel"
 
 candidate:
     resource: "@ClientBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:
-        en: "/{_locale}/candidate"
-        fr: "/{_locale}/candidat"
+        en: "/{_locale}/client"
+        fr: "/{_locale}/clients"
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"

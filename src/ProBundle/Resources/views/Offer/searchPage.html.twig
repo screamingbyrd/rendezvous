@@ -13,14 +13,6 @@
 
 
             <div class="row form-group search-input-container">
-                <div class="col-md-3">
-                    <select title="Category" id="category-input" multiple class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
-                        <option></option>
-                        {% for tag in tags %}
-                            <option value="{{ tag.name }}">{{ tag.name|trans }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
                 <div class=" col-md-4">
                     <input value="{{ keyword }}" class="form-control" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}">
                 </div>
@@ -31,28 +23,9 @@
                 <div class="col-md-2">
                     <input type="submit" class="rendezvous-button searchOffer" value="Search">
                 </div>
-                <div class="col-md-2" style="display: none;">
-                    <select title="Pro" id="pro-input" class="select2" data-placeholder="{{ 'form.offer.search.proPH' | trans }}">
-                        <option></option>
-                        <option value="0">-- {{ 'form.offer.search.empty'|trans }} --</option>
-                        {% for pro in pros %}
-                            <option value="{{ pro.name }}" {% if chosenPro is defined and pro.name == chosenPro %}selected{% endif %}>{{ pro.name |truncate(20, true)}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
             </div>
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <ul class="contractType-list">
-                            {% for type in contractType %}
-                                <li class="contract-type {% if type.name == 'apprenticeship' %}apprentice-li{% endif %}">
-                                    <input type="checkbox" name="filter_job_type[]" class="type-contract-checkbox" value="{{ type.name }}" {% if chosenContracts is null or type.name in chosenContracts %}checked="checked"{% endif %} id="job_type_{{ type.name }}">
-                                    {{  type.name | trans }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
                     <div class="col-md-1" style="display: none">
                         <select id="number-of-offer" class="col-md-1 col-md-offset-3 form-control">
                             <option value="20" selected>20</option>
@@ -322,15 +295,6 @@
             }
 
             window.onload = function() {
-                let arrayTags = {{ chosenTags|json_encode|raw }};
-                if(arrayTags != null){
-                    arrayTags.forEach(function(element) {
-                        let option = new Option(element.text, element.value);
-                        option.selected = true;
-
-                        $("#category-input").append(option);
-                    });
-                }
 
                 let total = $('#number-of-offer').val();
                 searchOffer(1,total);
@@ -405,7 +369,6 @@
 
             window.onscroll = function() {myFunction()};
 
-
             // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
             function myFunction() {
                     if (($(".navbar-bottom").offset().top) <= ($(window).scrollTop() + $(window).height()) ) {
@@ -416,8 +379,6 @@
                     }else{
                         $(".compare-offers").css("bottom", "20px");
                     }
-
-
             }
 
             $('.title-compare').on('click', function () {

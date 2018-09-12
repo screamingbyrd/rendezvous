@@ -20,7 +20,11 @@ use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
-
+use Ivory\GoogleMap\Place\Autocomplete;
+use Ivory\GoogleMap\Place\AutocompleteType;
+use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
+use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
+use Ivory\GoogleMap\Event\Event;
 
 
 class ProController extends Controller
@@ -283,35 +287,6 @@ class ProController extends Controller
             return $this->redirectToRoute('rendezvous_home');
         }
 
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer');
-
-
-        $offers = $offerRepository->findBy(
-            array('pro' => $pro, 'archived' => false),
-            array('startDate' => 'DESC')
-        );
-
-        $arrayOffer = array();
-        $generateUrlService = $this->get('app.offer_generate_url');
-
-        foreach ($offers as $offer){
-            if($offer->isActive()){
-
-                $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
-
-                $arrayOffer[] = $offer;
-            }
-        }
-
-        $tagArray  = $pro->getTag();
-
-        if(count($tagArray) == 0){
-            $tagArray = $offerRepository->getOfferTags($pro->getId());
-        }
-
         //workarround to ssl certificat pb curl error 60
 
         $config = [
@@ -363,8 +338,6 @@ class ProController extends Controller
             'pro' => $pro,
             'map' => $map,
             'status' => $status,
-            'offers' => $arrayOffer,
-            'tags' => $tagArray
         ));
 
     }
@@ -586,428 +559,6 @@ class ProController extends Controller
         return $this->redirectToRoute('featured_pro_page');
     }
 
-    public function featuredOfferPageAction(Request $request){
-        $now = new \DateTime();
-        $year = $request->get('year');
-        $year = isset($year)?$year:$now->format('Y');
-        $user = $this->getUser();
-        $pro = $user->getPro();
-        $featuredOfferRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:FeaturedOffer')
-        ;
-        $featuredOffer = $featuredOfferRepository->findBy(array('archived' => 0));
-        $featuredArray = array();
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-
-        $offers = $offerRepository->findBy(array('pro' => $user->getPro(), 'archived' => false));
-
-        foreach ($featuredOffer as $item) {
-            $featuredArray[$item->getStartDate()->format('d/m/Y')]['ids'][] = $item->getOffer()->getId();
-            if($item->getOffer()->getPro() == $pro){
-                $featuredArray[$item->getStartDate()->format('d/m/Y')]['features'][] = $item;
-            }
-        }
-
-        $creditInfo = $this->container->get('app.credit_info');
-
-        $now = new \DateTime();
-        $now->modify( '- 1 week' );
-
-        return $this->render('ProBundle::featuredOffer.html.twig', array(
-            'featuredOfferArray' => $featuredArray,
-            'user' => $user,
-            'featuredOfferCredit' => $creditInfo->getFeaturedOffer(),
-            'offers' => $offers,
-            'now' => $now,
-            'year' => $year
-        ));
-    }
-
-    public function reserveFeaturedOfferAction(Request $request){
-        $date = $request->get('date');
-        $userId = $request->get('user');
-        $offerId = $request->get('offerId');
-        $session = $request->getSession();
-
-        $user = $this->getUser();
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-
-        $offer = $offerRepository->findById($offerId);
-
-        $creditInfo = $this->container->get('app.credit_info');
-
-        $pro = $user->getPro();
-
-        $creditPro = $pro->getCredit();
-        $creditFeaturedOffer = $creditInfo->getFeaturedOffer();
-
-        if($creditPro < $creditFeaturedOffer){
-            $translated = $this->get('translator')->trans('form.offer.activate.error');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('rendezvous_credit');
-        }
-
-        $pro->setCredit($creditPro - $creditFeaturedOffer);
-
-        $featuredOffer = new FeaturedOffer();
-        $featuredOffer->setOffer($offer[0]);
-        $startDate = new \DateTime($date['date']);
-        $endDate = new \DateTime($date['date']);
-
-        $featuredOffer->setStartDate($startDate);
-        $featuredOffer->setEndDate($endDate->modify( '+ 1 week' ));
-        $featuredOffer->setArchived(0);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($featuredOffer);
-        $em->flush();
-
-        return $this->redirectToRoute('featured_offer_page', array('year' => substr($date['date'], 0, strpos($date['date'], '-'))));
-    }
-
-    public function deleteFeaturedOfferAction(Request $request){
-
-        $session = $request->getSession();
-        $featuredId = $request->get('id');
-        $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_ADMIN', $user->getRoles())){
-            return $this->redirectToRoute('create_candidate');
-        }
-
-        $featuredOfferRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:FeaturedOffer')
-        ;
-        $featuredOffer = $featuredOfferRepository->findOneBy(array('id' => $featuredId));
-
-        $featuredOffer->setArchived(true);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->merge($featuredOffer);
-        $em->flush();
-
-        $session->getFlashBag()->add('info', 'featured offer deleted');
-
-        return $this->redirectToRoute('featured_offer_page');
-    }
-
-    public function buySlotAction(Request $request){
-        $session = $request->getSession();
-        $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $pro = $user->getPro();
-
-        $creditInfo = $this->container->get('app.credit_info');
-
-        $creditPro = $pro->getCredit();
-        $buySlot = $creditInfo->getBuySlot();
-
-        if($creditPro < $buySlot){
-            $translated = $this->get('translator')->trans('form.offer.activate.error');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('rendezvous_credit');
-        }
-
-        $pro->setCredit($creditPro - $buySlot);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->merge($pro);
-        $em->flush();
-
-        $slot = new Slot();
-
-        $slot->setPro($pro);
-        $now =  new \DateTime();
-        $next = new \DateTime();
-        $slot->setStartDate($now);
-        $slot->setEndDate($next->modify( '+ 1 year' ));
-
-        $em->persist($slot);
-        $em->flush();
-
-
-        $translated = $this->get('translator')->trans('slot.buy.success');
-        $session->getFlashBag()->add('info', $translated);
-
-        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
-    }
-
-    public function addToSlotAction(Request $request){
-        $session = $request->getSession();
-        $id = $request->get('id');
-        $ajax = $request->get('ajax');
-        $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $currentOffer = $offerRepository->findOneBy(array('id' => $id));
-
-        $slotRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Slot')
-        ;
-        $currentSlot = $slotRepository->getCurrentSlotPro($user->getPro()->getId());
-
-        $em = $this->getDoctrine()->getManager();
-
-        foreach ($currentSlot as $slot){
-            $offer = $slot->getOffer();
-            if(!isset($offer)){
-                $now =  new \DateTime();
-                $slot->setOffer($currentOffer);
-                $currentOffer->setSlot($slot);
-                $currentOffer->setUpdateDate($now);
-
-                $activeLog = new ActiveLog();
-                $activeLog->setOfferId($currentOffer->getId());
-                $activeLog->setSlotId($slot->getId());
-                $activeLog->setStartDate($now);
-
-                $em->merge($slot);
-                $em->merge($currentOffer);
-                $em->merge($activeLog);
-                $em->flush();
-
-                $translated = $this->get('translator')->trans('slot.add.success');
-                $session->getFlashBag()->add('info', $translated);
-
-                return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
-            }
-        }
-
-        $translated = $this->get('translator')->trans('slot.add.error');
-        $session->getFlashBag()->add('danger', $translated);
-
-        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
-    }
-
-    public function removeFromSlotAction(Request $request){
-        $session = $request->getSession();
-        $id = $request->get('id');
-        $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            $translated = $this->get('translator')->trans('redirect.pro');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $offer = $offerRepository->findOneBy(array('id' => $id));
-
-        $slotRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Slot')
-        ;
-        $slot = $slotRepository->findOneBy(array('offer' => $offer));
-
-        $em = $this->getDoctrine()->getManager();
-
-        $slot->setOffer(null);
-        $offer->setSlot(null);
-
-        $activeLogRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:ActiveLog')
-        ;
-        $activeLog = $activeLogRepository->selectCurrentLog($offer->getId(), $slot->getId(), true);
-
-        if(isset($activeLog) && !empty($activeLog)){
-            $now = new \DateTime("midnight");
-            $activeLog[0]->setEndDate($now);
-            $em->merge($activeLog[0]);
-        }
-
-        $em->merge($slot);
-        $em->merge($offer);
-        $em->flush();
-
-        $translated = $this->get('translator')->trans('slot.remove.success');
-        $session->getFlashBag()->add('info', $translated);
-
-        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
-    }
-
-    public function EmptySlotAction(Request $request){
-        $session = $request->getSession();
-        $id = $request->get('id');
-        $user = $this->getUser();
-
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $slotRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Slot')
-        ;
-        $slot = $slotRepository->findOneBy(array('id' => $id));
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $offer = $offerRepository->findOneBy(array('slot' => $slot));
-
-        $em = $this->getDoctrine()->getManager();
-
-        $slot->setOffer(null);
-        $offer->setSlot(null);
-
-        $activeLogRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:ActiveLog')
-        ;
-        $activeLog = $activeLogRepository->selectCurrentLog($offer->getId(), $slot->getId(), true);
-
-        if(isset($activeLog) && !empty($activeLog)){
-            $now = new \DateTime("midnight");
-            $activeLog[0]->setEndDate($now);
-            $em->merge($activeLog[0]);
-        }
-
-        $em->merge($slot);
-        $em->merge($offer);
-        $em->flush();
-
-        $translated = $this->get('translator')->trans('slot.empty.success');
-        $session->getFlashBag()->add('info', $translated);
-
-        return $this->redirectToRoute('pro_offers', array('archived' => $_SESSION['archived']));
-    }
-
-    public function listAppliedClientPageAction(Request $request){
-        $id = $request->get('id');
-
-        $session = $request->getSession();
-
-        $user = $this->getUser();
-
-        $pro = $user->getPro();
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $offer = $offerRepository->findOneBy(array('id' => $id));
-
-        $generateUrlService = $this->get('app.offer_generate_url');
-        $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
-
-        if(!((isset($user) and in_array('ROLE_EMPLOYER', $user->getRoles()) and $offer->getPro()->getId() == $pro->getId()) || in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.pro');
-            $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_pro');
-        }
-
-        $postulatedOfferRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:PostulatedOffers')
-        ;
-
-        $postulatedOffers = $postulatedOfferRepository->findBy(array('offer' => $offer, 'archived' => 0));
-
-        return $this->render('ProBundle::appliedClientList.html.twig', array(
-            'postulatedOffers' => $postulatedOffers,
-            'offer' => $offer
-        ));
-    }
-
-    public function spontaneousApplyAction(Request $request, $id){
-        $session = $request->getSession();
-        $emloyerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Pro')
-        ;
-        $pro = $emloyerRepository->findOneBy(array('id' => $id));
-        $userRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:User')
-        ;
-        $users = $userRepository->findBy(array('pro' => $pro));
-
-        $arrayEmail = array();
-
-        foreach ($users as $user){
-            $arrayEmail[] = $user->getEmail();
-        }
-        $firstUser = $arrayEmail[0];
-
-        $comment = $request->get('comment');
-        $target_dir = "uploads/images/candidate/";
-        $target_file = $target_dir . md5(uniqid()) . basename($_FILES["cv"]["name"]);
-        move_uploaded_file($_FILES["cv"]["tmp_name"], $target_file);
-
-        $mailer = $this->container->get('swiftmailer.mailer');
-
-        $message = (new \Swift_Message($this->get('translator')->trans('pro.show.spontaenous.send')))
-            ->setFrom('rendezvouslu@noreply.lu')
-            ->setTo($firstUser)
-            ->setCc(array_shift($arrayEmail))
-            ->setBody(
-                $this->renderView(
-                    'AppBundle:Emails:apply.html.twig',
-                    array('comment' => $comment)
-                ),
-                'text/html'
-            )
-            ->attach(\Swift_Attachment::fromPath($target_file));
-        ;
-
-        $message->getHeaders()->addTextHeader(
-            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
-        );
-
-        $mailer->send($message);
-        unlink($target_file);
-
-        $translated = $this->get('translator')->trans('pro.show.spontaenous.sent');
-        $session->getFlashBag()->add('info', $translated);
-        return $this->redirectToRoute('show_pro', array('id' => $id));
-    }
-
     public function addCollaboratorAction(Request $request){
 
         $user = $this->getUser();
@@ -1192,33 +743,203 @@ class ProController extends Controller
 
     public function deleteImageAction(Request $request)
     {
-//        $imageId = $request->get('id');
-//
-//        $imageRepository = $this
-//            ->getDoctrine()
-//            ->getManager()
-//            ->getRepository('AppBundle:Image')
-//        ;
-//        $image = $imageRepository->findOneBy(array('id' => $imageId));
-//
-//        $proRepository = $this
-//            ->getDoctrine()
-//            ->getManager()
-//            ->getRepository('AppBundle:Pro')
-//        ;
-//        $pro = $proRepository->findOneBy(array('id' => $image->getOffer()->getId()));
-//
-//        if(is_object($offer)){
-//            $pro->removeImage($image);
-//        }
-//
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $em->merge($offer);
-//        $em->remove($image);
-//        $em->flush();
+        $imageId = $request->get('id');
+
+        $imageRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Image')
+        ;
+        $image = $imageRepository->findOneBy(array('id' => $imageId));
+
+        $proRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Pro')
+        ;
+        $pro = $proRepository->findOneBy(array('id' => $image->getPro()->getId()));
+
+        if(is_object($pro)){
+            $pro->removeImage($image);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->merge($pro);
+        $em->remove($image);
+        $em->flush();
 
 
         return new Response();
+    }
+
+
+    public function searchAction(Request $request){
+        $keywords = $request->get('keyword');
+        $location = $request->get('location');
+        $currentPage = $request->get('row');
+        $numberOfItem =  $request->get('number');
+
+        $searchParam = array(
+            'keywords' => $keywords,
+            'location' => $location,
+        );
+        $searchParam = json_encode($searchParam);
+
+        $searchService = $this->get('app.search.pro');
+
+        if(preg_match("/[0-9]/",$keywords)){
+            $offerRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Offer')
+            ;
+            $data = $offerRepository->findBy(array('id'=>$keywords));
+        }else{
+            $data = $searchService->searchOffer($searchParam);
+        }
+
+        $countResult = count($data);
+
+        $locationArray =array();
+        foreach ($data as $pro){
+            $locationArray[$pro->getLocation()][] = $pro;
+        }
+
+        $map = new Map();
+
+        //workarround to ssl certificat pb curl error 60
+
+        $config = [
+            'verify' => false,
+        ];
+
+        $adapter = GuzzleAdapter::createWithConfig($config);
+
+        // GeoCoder API
+        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
+        $markers = array();
+        $i = 1;
+
+        foreach ($locationArray as $location => $pros){
+
+            //try to match string location to get Object with lat long info
+            if($location){
+                $request = new GeocoderAddressRequest($location);
+            }else{
+                $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
+            }
+
+            $response = $geocoder->geocode($request);
+
+            $status = $response->getStatus();
+
+            foreach ($response->getResults() as $result) {
+
+                $coord = $result->getGeometry()->getLocation();
+                continue;
+
+            }
+
+            if(isset($coord)) {
+                $marker = new Marker($coord);
+
+                $marker->setVariable('marker' . $i);
+                $content = '<p class="map-offer-container">';
+                foreach ($pros as $pro){
+                    $content .=  '<a class="map-offer" href="'.$this->generateUrl('show_pro', array('id' => $pro->getId())).'">'.$pro->getName().'</a>';
+                }
+                $content .= '</p>';
+                $infoWindow = new InfoWindow($content);
+                $infoWindow->setAutoOpen(true);
+                $infoWindow->setAutoClose(true);
+                $infoWindow->setOption('maxWidth', 400);
+                $marker->setInfoWindow($infoWindow);
+
+                $markers[] = $marker;
+            }
+            $i++;
+        }
+        $map->getOverlayManager()->addMarkers($markers);
+
+        if(isset($marker)){
+            $event = new Event(
+                $map->getVariable(),
+                'zoom_changed',
+                'function(){'.
+                $marker->getVariable().'.setMap(null)'
+                .'}'
+            );
+            $map->getEventManager()->addEvent($event);
+        }
+
+        $map->setStylesheetOption('width', 300);
+        $map->setStylesheetOption('min-height', 1100);
+        $map->setStylesheetOption('height', '500px');
+        $map->setMapOption('zoom', 2);
+
+        $adRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Ad')
+        ;
+        $ads = $adRepository->getCurrentAds();
+        shuffle($ads);
+
+        $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+
+        $totalPage = ceil ($countResult / $numberOfItem);
+
+        return $this->render('ProBundle:Offer:search-data.html.twig',
+            array(
+                'data' => $finalArray,
+                'page' => $currentPage,
+                'total' => $totalPage,
+                'numberOfItem' =>($numberOfItem > $countResult? $countResult:$numberOfItem),
+                'countResult' => $countResult,
+                'searchParam' => $searchParam,
+                'ads' => $ads,
+                'map' => $map
+            )
+        );
+    }
+
+    public function searchPageAction(Request $request){
+        $keywords = $request->get('keyword');
+        $location = $request->get('location');
+
+        $autoComplete = new Autocomplete();
+        $autoComplete->setInputId('place_input');
+
+        $autoComplete->setInputAttributes(array(
+            'class' => 'form-control',
+            'name' => 'location',
+            'placeholder' =>  $this->get('translator')->trans('form.offer.search.location')
+        ));
+
+        if(isset($location) && $location != ''){
+            $autoComplete->setInputAttributes(array(
+                'class' => 'form-control',
+                'name' => 'location',
+                'placeholder' =>  $this->get('translator')->trans('form.offer.search.location'),
+                'value' => $location
+            ));
+        }
+
+        $autoComplete->setTypes(array(AutocompleteType::CITIES));
+        $autoCompleteHelperBuilder = new PlaceAutocompleteHelperBuilder();
+
+        $autoCompleteHelper = $autoCompleteHelperBuilder->build();
+        $apiHelperBuilder = ApiHelperBuilder::create();
+        $apiHelperBuilder->setKey('AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc');
+        $apiHelperBuilder->setLanguage($request->getLocale());
+
+        $apiHelper = $apiHelperBuilder->build();
+
+        return $this->render('ProBundle:Offer:searchPage.html.twig', array(
+            'keyword' => $keywords,
+            'autoComplete' => $autoCompleteHelper->render($autoComplete),
+            'autoCompleteScript' => $apiHelper->render([$autoComplete])
+        ));
     }
 }
