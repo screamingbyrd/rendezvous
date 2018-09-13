@@ -10,6 +10,7 @@ namespace ProBundle\Controller;
 
 use AppBundle\Entity\Pro;
 use AppBundle\Entity\FeaturedPro;
+use AppBundle\Entity\Service;
 use AppBundle\Form\ProType;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Overlay\Marker;
@@ -47,6 +48,8 @@ class ServiceController extends Controller
             return $this->redirectToRoute('create_pro');
         }
 
+        $pro = $user->getPro();
+
         $services = array();
 
         $serviceRepository = $this
@@ -59,13 +62,34 @@ class ServiceController extends Controller
 
         if ($request->isMethod('POST')) {
 
-            $data = $request->get('service');
-            var_dump($data);exit;
+            $servicesArray = $request->get('service');
+            $categoryNames = $request->get('category-name');
+            $em = $this->getDoctrine()->getManager();
+            foreach ($servicesArray as $key => $value){
+                foreach ($value as $data){
+                    $service = new Service();
 
-            return $this->redirectToRoute('edit_pro');
+                    $service->setName($data['name']);
+                    $service->setCategory($categoryNames[$key]);
+                    $service->setPrice($data['price']);
+                    $service->setLength($data['length']);
+                    $service->setPro($pro);
+
+                    $em->persist($service);
+                }
+            }
+            $em->flush();
+
+            return $this->redirectToRoute('manage_service');
         }
+
+        $categoryArray = array();
+        foreach ($services as $service){
+            $categoryArray[$service->getCategory()][] = $service;
+        }
+
         return $this->render('ProBundle::manageServices.html.twig', array(
-            'services' => $services,
+            'services' => $categoryArray,
         ));
     }
 

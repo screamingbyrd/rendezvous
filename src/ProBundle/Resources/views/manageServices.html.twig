@@ -14,20 +14,45 @@
         </div>
         <form method="POST" action="{{ path('manage_service') }}" class="form-manage-service">
             <div class="form-container-category">
-                <div class="shadow-box container-category">
-                    <div class="container-service">
-                        <fieldset data-id="0">
-                            <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name[0]"></legend>
-                            <button class="add-service" data-id="0">Add service</button>
-                            <div class="container-input-service">
-                                <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]"><br>
-                                <input type="text" class="form-control service-field" placeholder="Durée" name="service[0][0][length]"><br>
-                                <input type="text" class="form-control service-field" placeholder="Prix" name="service[0][0][price]"><span class="euro-price">€</span>
-                            </div>
+                {% if services|length == 0 %}
+                    <div class="shadow-box container-category">
+                        <div class="container-service">
+                            <fieldset data-id="0">
+                                <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name[0]"></legend>
+                                <button class="add-service" data-id="0">Add service</button>
+                                <div class="container-input-service">
+                                    <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]">
+                                    <input type="text" class="form-control service-field" placeholder="Durée" name="service[0][0][length]">
+                                    <input type="text" class="form-control service-field" placeholder="Prix" name="service[0][0][price]"><span class="euro-price">€</span>
+                                </div>
 
-                        </fieldset>
+                            </fieldset>
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    {% set categoryid = 0 %}
+                    {% for category,serviceArray in services %}
+                        {% set serviceid = 0 %}
+                        <div class="shadow-box container-category">
+                            <div class="container-service">
+                                <fieldset data-id="0">
+                                    <legend><input value="{{ category }}" type="text" class="form-control category-name" placeholder="Nom" name="category-name[{{ categoryid }}]"></legend>
+                                    <button class="add-service" data-id="0">Add service</button>
+                                    {% for service in serviceArray %}
+                                        <div class="container-input-service">
+                                            <input type="text" class="form-control service-field" placeholder="Nom" name="service[{{ categoryid }}][{{ serviceid }}][name]" value="{{ service.name }}">
+                                            <input type="text" class="form-control service-field" placeholder="Durée" name="service[{{ categoryid }}][{{ serviceid }}][length]" value="{{ service.length }}">
+                                            <input type="text" class="form-control service-field" placeholder="Prix" name="service[{{ categoryid }}][{{ serviceid }}][price]" value="{{ service.price }}"><span class="euro-price">€</span>
+                                        </div>
+                                        {% set serviceid = serviceid + 1 %}
+                                    {% endfor %}
+
+                                </fieldset>
+                            </div>
+                        </div>
+                        {% set categoryid = categoryid + 1 %}
+                    {% endfor %}
+                {% endif %}
             </div>
 
             <button>Submit</button>
@@ -70,27 +95,26 @@
             e.preventDefault();
             var category = $(this).closest('fieldset');
             var idCategory = category.data('id');
-            var id = $('.container-input-service').length;
+            var id = category.children('.container-input-service').length;
             var service = '<div class="container-input-service">\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']"><br>\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']"><br>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']">\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']">\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+id+']['+"price"+']"><span class="euro-price">€</span>\n' +
                 '                        </div>';
             category.append(service);
         })
         $('.add-category').on('click', function (e) {
             e.preventDefault();
-            var idService = $('.container-input-service').length;
             var idCategory = $('.container-category').length;
             var category = '<div class="shadow-box container-category">\n' +
                 '                <div class="container-service">\n' +
                 '                    <fieldset data-id="'+idCategory+'">\n' +
-                '                        <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category['+idCategory+']"></legend>\n' +
+                '                        <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name['+idCategory+']"></legend>\n' +
                 '                        <button class="add-service" data-id="'+idCategory+'">Add service</button>\n' +
                 '                        <div class="container-input-service">\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+idService+']['+"name"+']"><br>\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+idService+']['+"length"+']"><br>\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+idService+']['+"price"+']"><span class="euro-price">€</span>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+'][0]['+"name"+']">\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+'][0]['+"length"+']">\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+'][0]['+"price"+']"><span class="euro-price">€</span>\n' +
                 '                        </div>\n' +
                 '                    </fieldset>\n' +
                 '                </div>\n' +
