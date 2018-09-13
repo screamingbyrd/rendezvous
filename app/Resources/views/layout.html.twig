@@ -92,39 +92,7 @@
             </a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle c" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fas fa-search"></i>{{ 'header.candidates.title'|trans }}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ path('search_page_offer') }}"><i class="fas fa-search-plus"></i>{{ 'header.candidates.findJob'|trans }}</a></li>
-                        <li><a href="{{ path('list_pro') }}"><i class="fas fa-building"></i>{{ 'header.candidates.companies'|trans }}</a></li>
-                        {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                            <li><a href="{{ path('dashboard_candidate') }}#applied"><i class="fas fa-clipboard-list"></i>{{ 'header.candidates.dashboard.applied'|trans }}</a></li>
-                            <li><a href="{{ path('dashboard_candidate') }}#alerts"><i class="fas fa-flag"></i>{{ 'header.candidates.dashboard.alert'|trans }}</a></li>
-                            <li><a href="{{ path('dashboard_candidate') }}#favorites"><i class="fas fa-star"></i>{{ 'header.candidates.dashboard.favorites'|trans }}</a></li>
-                        {% endif %}
-                    </ul>
-                </li>
-
-                {%  if (app.user.roles is not defined) or (app.user.roles is defined and 'ROLE_CANDIDATE' not in app.user.roles) %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fas fa-clipboard"></i>{{ 'header.pros.title'|trans }}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-                                <li><a href="{{ path('dashboard_pro') }}"><i class="fas fa-th-large"></i>{{ 'header.pros.dashboard'|trans }}</a></li>
-                                <li><a href="{{ path('show_pro', {'id':app.user.pro.id}) }}"><i class="fas fa-user"></i>{{ 'dashboard.pro.watchProfile'|trans }}</a></li>
-                            {% endif %}
-                            <li><a href="{{ path('post_offer') }}"><i class="fas fa-edit"></i>{{ 'header.pros.post'|trans }}</a></li>
-                            {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) %}
-                                <li><a href="{{ path('pro_offers') }}"><i class="fas fa-list-ul"></i>{{ 'dashboard.pro.myOffers'|trans }}</a></li>
-                            {% endif %}
-                            {#<li><a href="{{ path('search_candidate') }}">{{ 'header.pros.findClient'|trans }}</a></li>#}
-                            <li><a href="{{ path('rendezvous_credit') }}"><img class="logo-credit" src="{{asset('images/white-coin.svg')}}"> {{ 'header.pros.pricing'|trans }}</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
+                <li><a id="login" href="{{ path('search_page_offer') }}"><i class="fas fa-search"></i>{{ 'header.candidates.findJob'|trans }}</a></li>
 
                 {%  if (app.user.roles is defined and 'ROLE_ADMIN' in app.user.roles) %}
                     <li class="dropdown">
@@ -145,8 +113,6 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-
-
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ app.user.username }}<span class="caret"></span></a>
@@ -160,6 +126,11 @@
                                         {% endif %}">
                                     <i class="fas fa-pencil-alt edit-icon"></i>{{ 'header.profile'|trans }}</a></li>
                             <li role="separator" class="divider"></li>
+                            {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                                <li><a href="{{ path('dashboard_client') }}">{{ 'header.pros.dashboard'|trans }}</a></li>
+                            {% elseif 'ROLE_EMPLOYER' in app.user.roles %}
+                                <li><a href="{{ path('dashboard_pro') }}"><i class="fas fa-th-large"></i>{{ 'header.pros.dashboard'|trans }}</a></li>
+                            {% endif %}
                             <li><a href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i>{{ 'header.logout'|trans }}</a></li>
                         </ul>
                     </li>

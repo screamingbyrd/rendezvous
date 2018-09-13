@@ -46,9 +46,7 @@
         {% set count = count + 1 %}
         <li class="search-result animated fadeIn">
             <span class='offer-element' href="{{ path('show_pro', {'id': pro.id}) }}">
-                {% if pro.images.first != false and pro.images.first.imageName is not null %}
-
-
+                {% if pro.images.first != false and pro.images.first.imageName is not null and pro.images|length > 1%}
 
                 <div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -82,7 +80,11 @@
                     </a>
                 </div>
                 {% else %}
-                    {% set image = 'images/default_cover_image6.jpg' %}
+                    {% if pro.images.first != false and pro.images.first.imageName is not null %}
+                        {% set image =  'uploads' ~ vich_uploader_asset(pro.images.first, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                    {% else %}
+                        {% set image = 'images/default_cover_image6.jpg' %}
+                    {% endif %}
                     <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
                         <div class="layer layer-offer-element animated">
                         </div>

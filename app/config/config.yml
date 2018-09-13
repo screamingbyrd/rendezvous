@@ -84,6 +84,8 @@ fos_elastica:
                             id: ~
                             description: ~
                             location: { type: text, analyzer: location_tokenizer }
+                            city: { type: text, analyzer: autocomplete_analyzer }
+                            name: { type: text, analyzer: autocomplete_analyzer }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm

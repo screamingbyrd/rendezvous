@@ -1,0 +1,101 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ 'footer.faq'|trans }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container rendezvous-container">
+        <div class="shadow-box">
+            <button class="add-category">add category</button>
+        </div>
+        <form method="POST" action="{{ path('manage_service') }}" class="form-manage-service">
+            <div class="form-container-category">
+                <div class="shadow-box container-category">
+                    <div class="container-service">
+                        <fieldset data-id="0">
+                            <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name[0]"></legend>
+                            <button class="add-service" data-id="0">Add service</button>
+                            <div class="container-input-service">
+                                <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]"><br>
+                                <input type="text" class="form-control service-field" placeholder="Durée" name="service[0][0][length]"><br>
+                                <input type="text" class="form-control service-field" placeholder="Prix" name="service[0][0][price]"><span class="euro-price">€</span>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <style>
+        .category-name{
+            width: 200px;
+        }
+        legend{
+            margin-top: 0 !important;
+            width: inherit !important;
+        }
+        fieldset{
+            padding: .35em .625em .75em !important;
+            margin: 0 2px !important;
+            border: 1px solid silver !important;
+            display: flex;
+        }
+        .container-input-service{
+            display: inline-flex;
+            margin-bottom: 10px;
+        }
+        .service-field{
+            width: 200px;
+            margin-right: 20px;
+        }
+        .add-service{
+            margin-bottom: 17px;
+            margin-top: -10px;
+        }
+        .euro-price{
+            padding-top: 5px;
+            margin-left: -10px;
+        }
+    </style>
+    <script>
+        $(document).on('click','.add-service', function (e) {
+            e.preventDefault();
+            var category = $(this).closest('fieldset');
+            var idCategory = category.data('id');
+            var id = $('.container-input-service').length;
+            var service = '<div class="container-input-service">\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']"><br>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']"><br>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+id+']['+"price"+']"><span class="euro-price">€</span>\n' +
+                '                        </div>';
+            category.append(service);
+        })
+        $('.add-category').on('click', function (e) {
+            e.preventDefault();
+            var idService = $('.container-input-service').length;
+            var idCategory = $('.container-category').length;
+            var category = '<div class="shadow-box container-category">\n' +
+                '                <div class="container-service">\n' +
+                '                    <fieldset data-id="'+idCategory+'">\n' +
+                '                        <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category['+idCategory+']"></legend>\n' +
+                '                        <button class="add-service" data-id="'+idCategory+'">Add service</button>\n' +
+                '                        <div class="container-input-service">\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+idService+']['+"name"+']"><br>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+idService+']['+"length"+']"><br>\n' +
+                '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+idService+']['+"price"+']"><span class="euro-price">€</span>\n' +
+                '                        </div>\n' +
+                '                    </fieldset>\n' +
+                '                </div>\n' +
+                '            </div>';
+            $('.form-container-category').append(category);
+        })
+    </script>
+{% endblock %}

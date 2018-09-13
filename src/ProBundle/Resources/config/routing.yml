@@ -206,3 +206,8 @@ change_access_collaborator:
         en: "/change-access-collaborator/{id}"
         fr: "/changer-acces-collaborateur/{id}"
     defaults: { _controller: ProBundle:Pro:changeAccessCollaborator }
+manage_service:
+    locales:
+        en: "/manage-service"
+        fr: "/gerer-service"
+    defaults: { _controller: ProBundle:Service:manageService }
