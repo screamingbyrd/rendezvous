@@ -21,6 +21,7 @@
                                 <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name[0]"></legend>
                                 <button class="add-service" data-id="0">Add service</button>
                                 <div class="container-input-service">
+                                    <input type="hidden" name="service[0][0][id]">
                                     <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]">
                                     <input type="text" class="form-control service-field" placeholder="Durée" name="service[0][0][length]">
                                     <input type="text" class="form-control service-field" placeholder="Prix" name="service[0][0][price]"><span class="euro-price">€</span>
@@ -35,14 +36,21 @@
                         {% set serviceid = 0 %}
                         <div class="shadow-box container-category">
                             <div class="container-service">
-                                <fieldset data-id="0">
+                                <fieldset data-id="{{ categoryid }}">
                                     <legend><input value="{{ category }}" type="text" class="form-control category-name" placeholder="Nom" name="category-name[{{ categoryid }}]"></legend>
-                                    <button class="add-service" data-id="0">Add service</button>
+                                    <div>
+                                        <button class="add-service" data-id="0">Add service</button>
+                                        <button class="remove-category" data-id="0">Remove category</button>
+                                        <input type="hidden" class="remove-category-input" name="removeCategory[{{ categoryid }}]" data-id="{{ category }}">
+                                    </div>
                                     {% for service in serviceArray %}
                                         <div class="container-input-service">
+                                            <input type="hidden" name="service[{{ categoryid }}][{{ serviceid }}][id]" value="{{ service.id }}">
+                                            <input class="remove-service-input" type="hidden" name="removeService[]" data-id="{{ service.id }}">
                                             <input type="text" class="form-control service-field" placeholder="Nom" name="service[{{ categoryid }}][{{ serviceid }}][name]" value="{{ service.name }}">
                                             <input type="text" class="form-control service-field" placeholder="Durée" name="service[{{ categoryid }}][{{ serviceid }}][length]" value="{{ service.length }}">
                                             <input type="text" class="form-control service-field" placeholder="Prix" name="service[{{ categoryid }}][{{ serviceid }}][price]" value="{{ service.price }}"><span class="euro-price">€</span>
+                                            <button class="remove-service"><i class="fas fa-times-circle"></i></button>
                                         </div>
                                         {% set serviceid = serviceid + 1 %}
                                     {% endfor %}
@@ -89,6 +97,12 @@
             padding-top: 5px;
             margin-left: -10px;
         }
+        .remove-category{
+            float: right;
+        }
+        .remove-service{
+            margin-left: 20px;
+        }
     </style>
     <script>
         $(document).on('click','.add-service', function (e) {
@@ -97,12 +111,29 @@
             var idCategory = category.data('id');
             var id = category.children('.container-input-service').length;
             var service = '<div class="container-input-service">\n' +
+                '<input type="hidden" name="service['+idCategory+']['+id+'][id]">'+
+                    '<input class="remove-service-input" type="hidden" name="removeService[]" data-id="">'+
                 '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']">\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']">\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+id+']['+"price"+']"><span class="euro-price">€</span>\n' +
+                    '<button class="remove-service"><i class="fas fa-times-circle"></i></button>'+
                 '                        </div>';
             category.append(service);
-        })
+        });
+        $(document).on('click','.remove-category', function (e) {
+            e.preventDefault();
+            var removeInput = $(this).parent().children('.remove-category-input');
+            removeInput.val(removeInput.data('id'));
+            $(this).closest('.container-category').hide();
+
+        });
+        $(document).on('click','.remove-service', function (e) {
+            e.preventDefault();
+            var removeInput = $(this).parent().children('.remove-service-input');
+            removeInput.val(removeInput.data('id'));
+            $(this).closest('.container-input-service').hide();
+
+        });
         $('.add-category').on('click', function (e) {
             e.preventDefault();
             var idCategory = $('.container-category').length;
@@ -110,11 +141,16 @@
                 '                <div class="container-service">\n' +
                 '                    <fieldset data-id="'+idCategory+'">\n' +
                 '                        <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name['+idCategory+']"></legend>\n' +
-                '                        <button class="add-service" data-id="'+idCategory+'">Add service</button>\n' +
+                '                        <div><button class="add-service" data-id="'+idCategory+'">Add service</button>\n' +
+                    '<button class="remove-category" data-id="0">Remove category</button></div>\n' +
+                '                                        <input type="hidden" class="remove-category-input" name="removeCategory['+idCategory+']" data-id="">'+
                 '                        <div class="container-input-service">\n' +
+                '<input type="hidden" name="service['+idCategory+'][0][id]">'+
+                '<input class="remove-service-input" type="hidden" name="removeService[]" data-id="">'+
                 '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+'][0]['+"name"+']">\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+'][0]['+"length"+']">\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+'][0]['+"price"+']"><span class="euro-price">€</span>\n' +
+                '<button class="remove-service"><i class="fas fa-times-circle"></i></button>'+
                 '                        </div>\n' +
                 '                    </fieldset>\n' +
                 '                </div>\n' +

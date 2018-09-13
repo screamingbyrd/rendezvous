@@ -64,18 +64,53 @@ class ServiceController extends Controller
 
             $servicesArray = $request->get('service');
             $categoryNames = $request->get('category-name');
+            $categoryToRemove = $request->get('removeCategory');
+            $serviceToRemove = $request->get('removeService');
             $em = $this->getDoctrine()->getManager();
             foreach ($servicesArray as $key => $value){
                 foreach ($value as $data){
-                    $service = new Service();
 
-                    $service->setName($data['name']);
-                    $service->setCategory($categoryNames[$key]);
-                    $service->setPrice($data['price']);
-                    $service->setLength($data['length']);
-                    $service->setPro($pro);
+                    if($data['id'] == ''){
+                        if($data['name'] != '' || $data['price'] != '' || $data['length'] != ''){
+                            $service = new Service();
 
-                    $em->persist($service);
+                            $service->setName($data['name']);
+                            $service->setCategory($categoryNames[$key]);
+                            $service->setPrice($data['price']);
+                            $service->setLength($data['length']);
+                            $service->setPro($pro);
+
+                            $em->persist($service);
+                        }
+
+                    }else{
+                        $service = $serviceRepository->findOneBy(array('id' => $data['id']));
+                        if($data['name'] != '' || $data['price'] != '' || $data['length'] != '') {
+                            $service->setName($data['name']);
+                            $service->setCategory($categoryNames[$key]);
+                            $service->setPrice($data['price']);
+                            $service->setLength($data['length']);
+
+                            $em->merge($service);
+                        }else{
+                            $em->remove($service);
+                        }
+                    }
+                }
+            }
+            foreach ($categoryToRemove as $category){
+                if($category != ''){
+                    $services = $serviceRepository->findBy(array('category' => $category, 'pro' => $pro));
+                    foreach ($services as $service){
+                        $em->remove($service);
+                    }
+
+                }
+            }
+            foreach ($serviceToRemove as $id){
+                if($id != ''){
+                    $service = $serviceRepository->findOneBy(array('id' => $id));
+                    $em->remove($service);
                 }
             }
             $em->flush();
