@@ -7,6 +7,9 @@ require('../css/offer.css');
 // require jQuery normally
 const $ = require('jquery');
 
+import 'fullcalendar'
+import 'fullcalendar/dist/fullcalendar.css'
+
 // create global $ and jQuery variables
 global.$ = global.jQuery = $;
 

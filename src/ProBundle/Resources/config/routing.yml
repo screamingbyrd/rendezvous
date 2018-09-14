@@ -211,3 +211,8 @@ manage_service:
         en: "/manage-service"
         fr: "/gerer-service"
     defaults: { _controller: ProBundle:Service:manageService }
+manage_schedule:
+    locales:
+        en: "/manage-schedule"
+        fr: "/gerer-emplois-du-temps"
+    defaults: { _controller: ProBundle:Service:manageSchedule }

@@ -1,0 +1,70 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ 'footer.faq'|trans }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container rendezvous-container">
+        <script>
+            $(document).ready(() => {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev, next',
+                        center: 'title',
+                        right: 'agendaWeek, agendaDay'
+                    },
+                    timezone: ('Europe/London'),
+                    allDaySlot: false,
+                    defaultView: 'agendaWeek',
+                    lazyFetching: true,
+                    firstDay: 1,
+                    selectable: true,
+                    editable: true,
+                    eventDurationEditable: true,
+                    events: [
+                        {
+                            title  : 'event1',
+                            start  : '2018-09-14 11',
+                            end  : '2018-09-14 12',
+                        }
+                    ],
+                    eventRender: function(event, element) {
+                        element.attr('title', event.tip);
+                    },
+                    select: function(start, end, jsEvent, view) {
+                        // start contains the date you have selected
+                        // end contains the end date.
+                        // Caution: the end date is exclusive (new since v2).
+                        var allDay = !start.hasTime && !end.hasTime;
+                        var newEvent = new Object();
+                        newEvent.title = 'Durée du travail';
+                        newEvent.start = start;
+                        newEvent.end = end;
+                        newEvent.allDay = false;
+                        $('#calendar').fullCalendar('renderEvent', newEvent);
+                    }
+                })
+
+                $("#calendar").fullCalendar('rerenderEvents');
+            })
+
+        </script>
+        <div id='calendar'></div>
+    </div>
+
+
+
+    <style>
+
+    </style>
+
+{% endblock %}

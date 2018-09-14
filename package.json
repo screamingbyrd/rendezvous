@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "animate.css": "^3.6.1",
+    "fullcalendar": "^3.9.0",
     "jquery-ui": "^1.12.1",
     "select2-bootstrap-theme": "^0.1.0-beta.10"
   }

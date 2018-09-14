@@ -128,4 +128,35 @@ class ServiceController extends Controller
         ));
     }
 
+    public function manageScheduleAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+        $pro = $user->getPro();
+
+        $services = array();
+
+        $serviceRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Service')
+        ;
+
+        $services = $serviceRepository->findBy(array('pro' => $user->getPro()));
+
+
+
+        return $this->render('ProBundle::manageSchedules.html.twig', array(
+            'services' => $services,
+        ));
+    }
+
 }

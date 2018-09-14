@@ -16,7 +16,7 @@
             <div class="container-square">
                 <a class="zoom block-dashboard square-profile" href="{{ path('show_pro', {'id':pro.id}) }}"><div class="content-square"><i class="fas fa-user"></i><div class="text-square">{{ 'dashboard.pro.watchProfile' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-offers" href="{{ path('manage_service') }}" ><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">Mes service</div></div></a>
-                <a class="zoom block-dashboard square-credit" href="{{ path('pro_offers') }}"><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">{{ 'dashboard.pro.myOffers' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-credit" href="{{ path('manage_schedule') }}"><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">Gérer les emplois du temps</div></div></a>
                 <a class="zoom block-dashboard square-featured-offers" href="{{ path('featured_offer_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.offer.title' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-bills" href="{{ path('rendezvous_credit') }}"><div class="content-square"><i class="fas fa-shopping-cart"></i><div class="text-square">{{ 'pro.credit.buy' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-post" href="{{ path('rendezvous_bills') }}"><div class="content-square"><i class="fas fa-file"></i><div class="text-square">{{ 'dashboard.pro.myBills' | trans }}</div></div></a>
