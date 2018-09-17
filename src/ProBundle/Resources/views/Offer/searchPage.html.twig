@@ -250,16 +250,7 @@
                     url: url,
                     data: {keyword:keyword,location:location,pro:pro,type:type,row:row,number:totalItem,tags:tags}
                 }).done(function( data ) {
-                    if(detectmob() && scroll){
-                        if(tags.length >= searchedTags.length){
-                            let $el = $('.searchpage-jumbotron');
-                            let bottom = $el.position().top + $el.outerHeight(true) - 40;
-                            $('html, body').animate({
-                                scrollTop: bottom
-                            }, 500);
-                        }
-                        searchedTags = tags;
-                    }
+
                     $('#loading').hide();
 
                     $("#myUL").html(data);
@@ -277,11 +268,7 @@
                     var url = window.location.href;
                     url = url.substr(0, url.lastIndexOf("?"));
                     url += '?';
-                    if(tags.length>0){
-                        for (i = 0; i < tags.length; i++) {
-                            url += 'tags%5B%5D='+tags[i]+'&';
-                        }
-                    }
+
                     url += 'keyword='+keyword+'&location='+location+'&pro='+pro;
 
                     window.history.replaceState('object or string', 'Title', url);

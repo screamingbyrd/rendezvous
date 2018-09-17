@@ -45,7 +45,7 @@
         {% endif %}
         {% set count = count + 1 %}
         <li class="search-result animated fadeIn">
-            <span class='offer-element' href="{{ path('show_pro', {'id': pro.id}) }}">
+            <span class='offer-element' data-href="{{ path('show_pro', {'id': pro.id}) }}">
                 {% if pro.images.first != false and pro.images.first.imageName is not null and pro.images|length > 1%}
 
                 <div id="myCarousel-{{ pro.id }}" class="background-pro-in-offer-search carousel slide" data-ride="carousel">
@@ -53,7 +53,7 @@
                     <ol class="carousel-indicators">
                         {% set i = 0 %}
                         {% for image in pro.images %}
-                            <li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" {% if i == 0 %}class="active"{% endif %}></li>
+                            <li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>
                             {% set i = i + 1 %}
                         {% endfor %}
                     </ol>
@@ -144,6 +144,12 @@
         $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
     });
 
+    $(".offer-element").on("click ", function(e){
+        if(!($(e.target).hasClass('carousel-control') || $(e.target).hasClass('glyphicon')|| $(e.target).hasClass('carousel-dot'))){
+            window.location.href = $(this).data('href');
+        }
+    });
+
     $('#alert-search-offer').submit(function(e) {
         e.preventDefault();
         e.returnValue = false;
@@ -197,7 +203,7 @@
     let featuredOfferWidth = $('.search-map').outerWidth();
     $(window).scroll(function() {
         let currentScroll = $(window).scrollTop();
-        if (currentScroll +160 >= featuredOfferTop && detectmob() == false) {
+        if (currentScroll +105 >= featuredOfferTop && detectmob() == false) {
             $('.search-map').css({
                 position: 'fixed',
                 top: '105px',
