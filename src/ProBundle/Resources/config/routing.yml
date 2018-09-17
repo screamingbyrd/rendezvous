@@ -226,3 +226,8 @@ remove_schedule:
         en: "/remove-schedule"
         fr: "/enlever-emplois-du-temps"
     defaults: { _controller: ProBundle:Service:removeSchedule }
+replicate_schedule:
+    locales:
+        en: "/replicate-schedule"
+        fr: "/repliquer-emplois-du-temps"
+    defaults: { _controller: ProBundle:Service:replicateSchedule }

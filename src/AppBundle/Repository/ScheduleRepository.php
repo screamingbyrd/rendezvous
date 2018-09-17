@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class ScheduleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findBetween($givenUser, $startDate, $endDate){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select s
+                    from AppBundle:schedule s
+                    where s.startDate >= :startDate and s.endDate <= :endDate and s.user = :user'
+            )->setParameter('user',$givenUser)
+            ->setParameter('startDate',$startDate)
+            ->setParameter('endDate',$endDate)->execute();
+    }
 }

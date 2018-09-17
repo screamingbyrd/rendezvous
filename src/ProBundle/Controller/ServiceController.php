@@ -133,7 +133,8 @@ class ServiceController extends Controller
     public function manageScheduleAction(Request $request)
     {
         $user = $this->getUser();
-
+        $userId = $request->get('userId');
+        $userId = isset($userId)?$userId:0;
         $session = $request->getSession();
 
         if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
@@ -143,22 +144,50 @@ class ServiceController extends Controller
         }
 
 
-        $scheduleArray = array();
+        $scheduleArray = $finalColorArray = array();
 
-        $scheduleRepository = $this
+        $colorArray = ['#3A87AD','red','orange','green','black'];
+
+        $userRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Schedule')
+            ->getRepository('AppBundle:User')
         ;
+        $scheduleRepository = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('AppBundle:Schedule')
+    ;
 
-        $schedules = $scheduleRepository->findBy(array('user' => $user));
+        if ($userId == 0){
+            $givenUser = $userRepository->findBy(array('pro' => $user->getPro()));
+            $username = null;
+        }else{
+            $givenUser = $userRepository->findBy(array('id' => $userId));
+            $username = $givenUser[0]->getUsername();
+        }
+
+        $schedules = $scheduleRepository->findBy(array('user' => $givenUser));
+        for ($i = 0; $i < count($givenUser); $i++){
+            $finalColorArray[$givenUser[$i]->getUsername()] = $colorArray[$i];
+        }
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $users = $repository->findBy(array('pro' => $user->getPro(), 'enabled' => 1));
 
         foreach ($schedules as $schedule){
-            $scheduleArray[]  = array('title' => 'horraire de travail', 'id' => $schedule->getId(), 'start' => $schedule->getStartDate()->format('Y-m-d H:i:s'), 'end' => $schedule->getEndDate()->format('Y-m-d H:i:s'));
+            $scheduleArray[]  = array('color' => $finalColorArray[$schedule->getUser()->getUsername()], 'title' => $schedule->getUser()->getUsername(), 'id' => $schedule->getId(), 'start' => $schedule->getStartDate()->format('Y-m-d H:i:s'), 'end' => $schedule->getEndDate()->format('Y-m-d H:i:s'));
         }
 
         return $this->render('ProBundle::manageSchedules.html.twig', array(
             'schedules' => $scheduleArray,
+            'userId' => $userId,
+            'collaborators' => $users,
+            'username' => $username
         ));
     }
 
@@ -249,6 +278,80 @@ class ServiceController extends Controller
         $em->flush();
 
         return new Response();
+    }
+
+    public function replicateScheduleAction(Request $request){
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $userId = $request->get('userId');
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $scheduleRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Schedule')
+        ;
+
+        if ($userId == 0){
+            $givenUser = $userRepository->findBy(array('pro' => $user->getPro()));
+            foreach ($givenUser as $singleUser){
+                $schedules = $scheduleRepository->findBetween($singleUser, $startDate, $endDate);
+                foreach ($schedules as $schedule){
+                    for($i = 1;$i <=1; $i++){
+                        $newStartDate = new DateTime($schedule->getStartDate()->format("Y-m-d H:i:s"));
+                        $newEndDate = new DateTime($schedule->getEndDate()->format("Y-m-d H:i:s"));
+                        $newSchedule = new Schedule();
+
+                        $newSchedule->setUser($singleUser);
+                        $newSchedule->setStartDate($newStartDate->modify('+'.$i.'week'));
+                        $newSchedule->setEndDate($newEndDate->modify('+'.$i.'week'));
+
+                        $em->persist($newSchedule);
+                    }
+                }
+            }
+        }else{
+            $givenUser = $userRepository->findOneBy(array('id' => $userId));
+            $schedules = $scheduleRepository->findBetween($givenUser, $startDate, $endDate);
+            foreach ($schedules as $schedule){
+                for($i = 1;$i <=1; $i++){
+                    $newStartDate = new DateTime($schedule->getStartDate()->format("Y-m-d H:i:s"));
+                    $newEndDate = new DateTime($schedule->getEndDate()->format("Y-m-d H:i:s"));
+                    $newSchedule = new Schedule();
+
+                    $newSchedule->setUser($givenUser);
+                    $newSchedule->setStartDate($newStartDate->modify('+'.$i.'week'));
+                    $newSchedule->setEndDate($newEndDate->modify('+'.$i.'week'));
+
+                    $em->persist($newSchedule);
+                }
+            }
+        }
+
+
+        $em->flush();
+
+        $translated = $this->get('translator')->trans('form.offer.activate.success');
+        $session->getFlashBag()->add('info', $translated);
+
+        return new JsonResponse($this->generateUrl('manage_schedule', array('userId' => $userId)));
+
     }
 
 }
