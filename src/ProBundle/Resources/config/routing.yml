@@ -216,3 +216,13 @@ manage_schedule:
         en: "/manage-schedule"
         fr: "/gerer-emplois-du-temps"
     defaults: { _controller: ProBundle:Service:manageSchedule }
+save_schedule:
+    locales:
+        en: "/save-schedule"
+        fr: "/sauver-emplois-du-temps"
+    defaults: { _controller: ProBundle:Service:saveSchedule }
+remove_schedule:
+    locales:
+        en: "/remove-schedule"
+        fr: "/enlever-emplois-du-temps"
+    defaults: { _controller: ProBundle:Service:removeSchedule }

@@ -10,6 +10,10 @@ const $ = require('jquery');
 import 'fullcalendar'
 import 'fullcalendar/dist/fullcalendar.css'
 
+const moment = require('moment');
+// create global $ and jQuery variables
+global.moment  = moment;
+
 // create global $ and jQuery variables
 global.$ = global.jQuery = $;
 

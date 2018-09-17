@@ -629,7 +629,7 @@ class ProController extends Controller
                 $translated = $this->get('translator')->trans('pro.addCollaborator.added');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('edit_pro', array('id' => $pro->getId()));
+                return $this->redirectToRoute('list_collaborator', array('id' => $pro->getId()));
 
             }
         }

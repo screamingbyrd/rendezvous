@@ -10,6 +10,7 @@ namespace ProBundle\Controller;
 
 use AppBundle\Entity\Pro;
 use AppBundle\Entity\FeaturedPro;
+use AppBundle\Entity\Schedule;
 use AppBundle\Entity\Service;
 use AppBundle\Form\ProType;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -32,6 +33,7 @@ use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 use Ivory\GoogleMap\Event\Event;
+use DateTime;
 
 class ServiceController extends Controller
 {
@@ -140,23 +142,113 @@ class ServiceController extends Controller
             return $this->redirectToRoute('create_pro');
         }
 
-        $pro = $user->getPro();
 
-        $services = array();
+        $scheduleArray = array();
 
-        $serviceRepository = $this
+        $scheduleRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Service')
+            ->getRepository('AppBundle:Schedule')
         ;
 
-        $services = $serviceRepository->findBy(array('pro' => $user->getPro()));
+        $schedules = $scheduleRepository->findBy(array('user' => $user));
 
-
+        foreach ($schedules as $schedule){
+            $scheduleArray[]  = array('title' => 'horraire de travail', 'id' => $schedule->getId(), 'start' => $schedule->getStartDate()->format('Y-m-d H:i:s'), 'end' => $schedule->getEndDate()->format('Y-m-d H:i:s'));
+        }
 
         return $this->render('ProBundle::manageSchedules.html.twig', array(
-            'services' => $services,
+            'schedules' => $scheduleArray,
         ));
+    }
+
+    public function saveScheduleAction(Request $request){
+        $userId = $request->get('userId');
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $id = $request->get('id');
+
+        $startDate = \DateTime::createFromFormat('Y-m-d H:i:s', $startDate);
+        $endDate = \DateTime::createFromFormat('Y-m-d H:i:s', $endDate);
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(isset($id)){
+            $scheduleRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Schedule')
+            ;
+
+            $schedule = $scheduleRepository->findOneBy(array('id' => $id));
+            $schedule->setStartDate($startDate);
+            $schedule->setEndDate($endDate);
+
+            $em->merge($schedule);
+        }else{
+            $userRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:User')
+            ;
+
+            $schedule = new Schedule();
+
+            $user = $userRepository->findOneBy(array('id' => $userId));
+
+            $schedule->setUser($user);
+            $schedule->setStartDate($startDate);
+            $schedule->setEndDate($endDate);
+
+            $em->persist($schedule);
+        }
+
+
+        $em->flush();
+
+        return new Response($schedule->getId());
+    }
+
+    public function removeScheduleAction(Request $request){
+        $id = $request->get('id');
+
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        if(isset($id)){
+            $scheduleRepository = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Schedule')
+            ;
+
+            $schedule = $scheduleRepository->findOneBy(array('id' => $id));
+
+            $em->remove($schedule);
+        }
+
+        $em->flush();
+
+        return new Response();
     }
 
 }
