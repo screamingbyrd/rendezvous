@@ -231,3 +231,8 @@ replicate_schedule:
         en: "/replicate-schedule"
         fr: "/repliquer-emplois-du-temps"
     defaults: { _controller: ProBundle:Service:replicateSchedule }
+reservation_page:
+    locales:
+        en: "/reservation-page"
+        fr: "/page-de-reservation"
+    defaults: { _controller: ProBundle:Service:reservationPage }

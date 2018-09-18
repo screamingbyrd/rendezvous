@@ -300,6 +300,12 @@ h3.box{
     object-fit: cover;
     object-position: center;
 }
+.image-show-pro{
+    height: 400px !important;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 
 .homepage-jumbotron{
     padding: 63px 0;

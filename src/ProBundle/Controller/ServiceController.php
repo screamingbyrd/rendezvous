@@ -172,12 +172,7 @@ class ServiceController extends Controller
             $finalColorArray[$givenUser[$i]->getUsername()] = $colorArray[$i];
         }
 
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:User');
-
-        $users = $repository->findBy(array('pro' => $user->getPro(), 'enabled' => 1));
+        $users = $userRepository->findBy(array('pro' => $user->getPro(), 'enabled' => 1));
 
         foreach ($schedules as $schedule){
             $scheduleArray[]  = array('color' => $finalColorArray[$schedule->getUser()->getUsername()], 'title' => $schedule->getUser()->getUsername(), 'id' => $schedule->getId(), 'start' => $schedule->getStartDate()->format('Y-m-d H:i:s'), 'end' => $schedule->getEndDate()->format('Y-m-d H:i:s'));
@@ -352,6 +347,41 @@ class ServiceController extends Controller
 
         return new JsonResponse($this->generateUrl('manage_schedule', array('userId' => $userId)));
 
+    }
+
+    public function reservationPageAction(Request $request)
+    {
+        $user = $this->getUser();
+        $proId = $request->get('proId');
+        $serviceId = $request->get('serviceId');
+        $session = $request->getSession();
+
+        $scheduleArray = $finalColorArray = array();
+
+        $scheduleRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Schedule')
+        ;
+        $proRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Pro')
+        ;
+        $pro = $proRepository->findOneBy(array('id' => $proId));
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User');
+
+        $users = $repository->findBy(array('pro' => $pro, 'enabled' => 1));
+
+
+        return $this->render('ProBundle::reservationPage.html.twig', array(
+            'schedules' => $scheduleArray,
+            'collaborators' => $users,
+        ));
     }
 
 }

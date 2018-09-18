@@ -9,45 +9,95 @@
         <a href="{{ path('dashboard_pro') }}" class="btn btn-primary return-to-dashboard">{{ 'dashboard.pro.return' | trans }}</a>
     {% endif %}
 
-    <div class="jumbotron pro-jumbotron">
-        <div>
-            <div class="container-logo-pro">
-
-                    {% set image = 'images/logo-default.png' %}
-                <img class="logo-pro" src="{{ asset(image) }}"/>
-            </div>
-            <h2>{{ pro.name }}</h2>
-        </div>
-
-    </div>
-
     <div class="container">
         <div class="row">
-            <div style="height: 38px;">
-                {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                    <a href="{{ path('create_notification', {'type':'notification.pro', 'id':pro.id}) }}" class="rendezvous-button add-pro-notification">ajouter au notificaions</a>
-                {% endif %}
-                {%  if (app.user.roles is defined) and ('ROLE_EMPLOYER' in app.user.roles) and app.user.pro == pro %}
-                    <a href="{{ path('edit_pro', {'id':pro.id}) }}" class="btn btn-primary add-pro-notification">{{ 'dashboard.pro.editProfile'|trans }}</a>
-                {% endif %}
-            </div>
-            <hr>
             <div class="col-md-8">
-                <div class="shadow-box fade-in-right animated">
-                    <div class="article-title">{{ 'form.registration.description'|trans }}</div>
-                    <p class="description-pro">{{ pro.description |nl2br}}</p>
+                <div class="title-pro">{{ pro.name }}</div>
+                <div class="article-title">{{ pro.location }} {{ pro.zipcode }} {{ pro.city }}</div>
+                {% if pro.images.first != false and pro.images.first.imageName is not null and pro.images|length > 1%}
+
+                    <div id="myCarousel-{{ pro.id }}" class="carousel-show-pro carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            {% set i = 0 %}
+                            {% for image in pro.images %}
+                                <li data-target="#myCarousel-{{ pro.id }}" data-slide-to="{{ i }}" class="carousel-dot {% if i == 0 %}active{% endif %}"></li>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            {% set i = 0 %}
+                            {% for image in pro.images %}
+                                <div class="item {% if i == 0 %}active{% endif %}">
+                                    <img class="image-show-pro" src="{{ asset('uploads' ~ vich_uploader_asset(image, 'imageFile', 'AppBundle\\Entity\\Image')) }}">
+                                </div>
+                                {% set i = i + 1 %}
+                            {% endfor %}
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel-{{ pro.id }}" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel-{{ pro.id }}" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                {% else %}
+                    {% if pro.images.first != false and pro.images.first.imageName is not null %}
+                        {% set image =  'uploads' ~ vich_uploader_asset(pro.images.first, 'imageFile', 'AppBundle\\Entity\\Image') %}
+                    {% else %}
+                        {% set image = 'images/default_cover_image6.jpg' %}
+                    {% endif %}
+                    <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
+                        <div class="layer layer-offer-element">
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="shadow-box">
+                    <p class="description-show-pro">{{ pro.description |nl2br}}</p>
+                    <p class="show-button-container"><a class="show-description">Voir plus</a></p>
                 </div>
+
+                <div class="article-title show-button-container">Prendre rendez vous en ligne</div>
+
+                {% for category,services in serviceArray %}
+                    <div class="article-title">{{ category }}</div>
+                    <div class="shadow-box category-container">
+                        {% for service in services %}
+                            <div class="service-container" data-href="{{ path('reservation_page',{'proId':pro.id, 'serviceId':service.id}) }}">
+                                <div class="service-name">
+                                    {{ service.name }}
+                                </div>
+                                <div class="other-service-info">
+                                    {{ service.price }}€
+                                </div>
+                                <div class="other-service-info">
+                                    {{ service.length }}
+                                </div>
+                                <div class="other-service-info">
+                                    <a>choose</a>
+                                </div>
+                            </div>
+
+
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
             <div class="col-md-4">
-                <div class="shadow-box fade-in-right animated">
-                    <div class="article-title">{{ 'pro.show.lastOffers'|trans }}</div>
-
-                        <div class="no-recent-offers">
-                            {{ 'pro.show.noOffer'|trans }}
+                {% if pro.location is not null and map is defined and map is not null %}
+                        <div class="shadow-box">
+                            {{ ivory_google_map(map) }}
+                            {{ ivory_google_api([map]) }}
                         </div>
-                </div>
+                {% endif %}
 
-                <div class="shadow-box fade-in-left animated">
+                <div class="shadow-box">
                     <div class="article-title"><i class="fa fa-tag"></i> Tags</div>
 
                         <div class="no-recent-offers">
@@ -60,39 +110,53 @@
 
         </div>
     </div>
-    {% if pro.location is not null and map is defined and map is not null %}
-        <div class="container">
-            <div class="shadow-box fade-in-left animated">
-                <h3>{{ pro.location }}</h3>
-                {{ ivory_google_map(map) }}
-                {{ ivory_google_api([map]) }}
-            </div>
-        </div>
-    {% endif %}
+
 
     <style>
-        #spontaneous-form{
-            margin-top: 10px;
+        .show-button-container{
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0 !important;
         }
-        .spontaneous-cv{
-            margin-top: 5px;
-            margin-bottom: 10px;
-            width: 100%;
+        .show-button-container a{
+            cursor: pointer;
+            text-decoration: initial !important;
         }
-            {% set image = 'images/default_cover_image6.jpg' %}
-        .pro-jumbotron::after{
-            content: '';
-            background-image:url({{ asset(image) }});
-            background-size: cover;
-            background-repeat: no-repeat;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            position:absolute;
-            z-index: -1;
-            background-position: center center;
+        .description-show-pro{
+            max-height: 80px;
+            overflow: hidden;
+        }
+        .carousel-show-pro{
+            margin-bottom: 20px;
+        }
+        .service-container{
+            display: flex;
+            padding: 10px;
+            border: #ddd 1px solid;
+        }
+        .service-name{
+            width: 70%;
+        }
+        .other-service-info{
+            width: 10%;
         }
     </style>
+    <script>
+        $('.show-description').on('click', function () {
+            if($(this).hasClass('expended')){
+                $(this).html('Show more').removeClass('expended');
+                $('.description-show-pro').css('max-height', '80px');
+            }else {
+                $(this).html('Show less').addClass('expended');
+                $('.description-show-pro').css('max-height', 'none');
+            }
+
+        });
+
+        $(".service-container").on("click ", function(e){
+            window.location.href = $(this).data('href');
+        });
+
+    </script>
 
 {% endblock %}

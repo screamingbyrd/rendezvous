@@ -334,10 +334,24 @@ class ProController extends Controller
             $map->setMapOption('zoom', 10);
         }
 
+        $serviceRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Service');
+
+        $services = $serviceRepository->findBy(array('pro' => $pro));
+
+        $serviceArray = array();
+
+        foreach ($services as $service){
+            $serviceArray[$service->getCategory()][] = $service;
+        }
+
         return $this->render('ProBundle:Pro:show.html.twig', array(
             'pro' => $pro,
             'map' => $map,
             'status' => $status,
+            'serviceArray' => $serviceArray
         ));
 
     }
