@@ -22,26 +22,31 @@ class Rendezvous
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Pro")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      */
-    private $pro;
+    private $collaborator;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service")
+     */
+    private $service;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="date")
+     * @ORM\Column(name="startDate", type="datetime")
      */
     private $startDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="endDate", type="date")
+     * @ORM\Column(name="endDate", type="datetime")
      */
     private $endDate;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Client")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=true)
      */
     private $client;
@@ -55,30 +60,6 @@ class Rendezvous
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set pro
-     *
-     * @param string $pro
-     *
-     * @return Rendezvous
-     */
-    public function setPro($pro)
-    {
-        $this->pro = $pro;
-
-        return $this;
-    }
-
-    /**
-     * Get pro
-     *
-     * @return string
-     */
-    public function getPro()
-    {
-        return $this->pro;
     }
 
     /**
@@ -152,5 +133,42 @@ class Rendezvous
     {
         return $this->client;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCollaborator()
+    {
+        return $this->collaborator;
+    }
+
+    /**
+     * @param mixed $collaborator
+     * @return Rendezvous
+     */
+    public function setCollaborator($collaborator)
+    {
+        $this->collaborator = $collaborator;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param mixed $service
+     * @return Rendezvous
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+        return $this;
+    }
+
 }
 

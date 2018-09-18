@@ -5,17 +5,131 @@
 {% endblock %}
 
 {% block body %}
-    
+
     <div class="container rendezvous-container">
+
+        <div class="title-pro">{{ pro.name }}</div>
+        <div class="article-title">{{ pro.location }} {{ pro.zipcode }} {{ pro.city }}</div>
+        <div class="shadow-box service-reservation-info">
+            <div class="service-name">
+                {{ service.name }} - {{ service.length }} - {{ service.price }}€
+            </div>
+            <div class="select-collaborator-container other-service-info">
+                <select class="select2" title="" onchange="changeCollaborator(this)">
+                    <option></option>
+                    {% for collaborator in collaborators %}
+                        <option value="{{ collaborator.id }}" {% if collaboratorId == collaborator.id %}selected{% endif %}>{{ collaborator.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <a class="return-to-pro" href="{{ path('show_pro',{'id':pro.id}) }}"><i class="fas fa-times-circle"></i></a>
+        </div>
+
+        <div class="shadow-box container-reservation-field">
+            <div class="service-reservation-info">
+                {% set now = "now"|date %}
+                {% if collaboratorId is defined and collaboratorId != '' %}
+                    {% set array = schedules[collaboratorId] %}
+                    {% for i in 0 .. 6 %}
+                        {% set givenDate = now|date_modify("+"~i ~"day") %}
+                        <div class="reservation-of-day">
+                            <h3>{{ givenDate|date('l') }}{{ givenDate|date('Y-m-d') }}</h3>
+                            {% if array[givenDate|date('Y-m-d')] is defined %}
+                                {% for dayDate in array[givenDate|date('Y-m-d')] %}
+                                    {% set precondition = true %}
+                                    {% for i in 0..10000 if precondition %}
+                                        {% set givenDate = dayDate.startDate|date_modify("+"~i *30 ~"minute") %}
+                                        {% if givenDate >= dayDate.endDate|date_modify("-"~ service.length ~"minute")%}
+                                            {% set precondition = false %}
+                                        {% else %}
+                                            <div>
+                                                <a class="choose-time" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
+                                                    {{ givenDate|date('H:i') }}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </div>
+
+        <div class="container-summary-reservation">
+            <div class="shadow-box" style="display: flex;">
+                <div class="summary-information">
+
+                </div>
+                <a class="cancel-selection-button"><i class="fas fa-pencil-alt"></i></a>
+            </div>
+            <div class="shadow-box">
+                <a class="submit-reservation rendezvous-button">Submit</a>
+            </div>
+        </div>
+
 
     </div>
 
 
     <style>
-
+        .choose-time{
+            text-decoration: #1F80F0;
+            cursor: pointer;
+        }
+        .service-reservation-info{
+            display: flex;
+        }
+        .select-collaborator-container{
+            float: right;
+            width: 200px;
+        }
+        .return-to-pro{
+            margin-left: 20px;
+            font-size: 20px;
+            padding-top: 3px;
+        }
+        .reservation-of-day{
+            width: 20%;
+        }
+        .container-summary-reservation{
+            display: none;
+        }
+        .summary-information{
+            margin-right: auto;
+        }
     </style>
     <script>
+        function changeCollaborator(select) {
+            var url = "{{ path('reservation_page',{'proId':pro.id}) }}";
 
+            url += "&serviceId="+"{{ service.id }}"+"&collaboratorId=" + select.value;
+            console.log(url);
+            document.location.href = url;
+        }
+
+        $('.choose-time').on('click', function () {
+            $('.container-reservation-field').hide();
+            var summaryContainer = $('.container-summary-reservation');
+            summaryContainer.show();
+            $('.summary-information').html('<div>'+$(this).data('time')+'</div>');
+            var url = '{{ path('reserve_rendezvous',{'proId':pro.id}) }}';
+                url += '&serviceId='+'{{ service.id }}'+'&date='+$(this).data('date')+'&hour='+$(this).data('hour');
+            {% if collaboratorId is defined %}
+                url += '&collaboratorId='+'{{ collaboratorId }}';
+            {% endif %}
+            $('.submit-reservation').attr('href', url);
+        });
+
+        $('.cancel-selection-button').on('click', function () {
+            $('.container-summary-reservation').hide();
+            $('.container-reservation-field').show();
+            $('.submit-reservation').attr('href', '#')
+        });
 
     </script>
 

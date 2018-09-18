@@ -187,7 +187,13 @@ h3.box{
 .slot-button{
     min-width: 126px;
 }
-.archived-info{
+
+.service-name{
+    width: 70%;
+}
+.other-service-info{
+    width: 10%;
+}.archived-info{
     padding: 7px;
     color: #333;
     font-size: 14px;

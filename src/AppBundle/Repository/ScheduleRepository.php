@@ -20,4 +20,13 @@ class ScheduleRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('startDate',$startDate)
             ->setParameter('endDate',$endDate)->execute();
     }
+
+    public function findNext($givenUser){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select s
+                    from AppBundle:schedule s
+                    where s.endDate >= :now and s.user = :user'
+            )->setParameter('user',$givenUser)->setParameter('now', new \DateTime())->execute();
+    }
 }

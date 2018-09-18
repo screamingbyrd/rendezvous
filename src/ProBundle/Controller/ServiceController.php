@@ -10,6 +10,7 @@ namespace ProBundle\Controller;
 
 use AppBundle\Entity\Pro;
 use AppBundle\Entity\FeaturedPro;
+use AppBundle\Entity\Rendezvous;
 use AppBundle\Entity\Schedule;
 use AppBundle\Entity\Service;
 use AppBundle\Form\ProType;
@@ -354,6 +355,8 @@ class ServiceController extends Controller
         $user = $this->getUser();
         $proId = $request->get('proId');
         $serviceId = $request->get('serviceId');
+        $collaboratorId = $request->get('collaboratorId');
+        isset($collaboratorId)?$collaboratorId:null;
         $session = $request->getSession();
 
         $scheduleArray = $finalColorArray = array();
@@ -363,6 +366,13 @@ class ServiceController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Schedule')
         ;
+        $serviceRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Service')
+        ;
+        $service = $serviceRepository->findOneBy(array('id' => $serviceId));
+
         $proRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -377,11 +387,134 @@ class ServiceController extends Controller
 
         $users = $repository->findBy(array('pro' => $pro, 'enabled' => 1));
 
+        foreach ($users as $collaborator){
+            $reorderedSchedule = array();
+            $schedulesOfUser = $scheduleRepository->findNext(array('user' => $collaborator));
+            foreach ($schedulesOfUser as $schedule){
+                $reorderedSchedule[$schedule->getStartDate()->format('Y-m-d')][] = $schedule;
+            }
+            $scheduleArray[$collaborator->getId()] = $reorderedSchedule;
+        }
+
 
         return $this->render('ProBundle::reservationPage.html.twig', array(
             'schedules' => $scheduleArray,
             'collaborators' => $users,
+            'service' => $service,
+            'pro' => $pro,
+            'collaboratorId' => $collaboratorId
         ));
+    }
+
+    public function reserveAction(Request $request){
+        $session = $request->getSession();
+
+        $user = $this->getUser();
+
+        $proId = $request->get('proId');
+        $serviceId = $request->get('serviceId');
+        $collaboratorId = $request->get('collaboratorId');
+        $date = $request->get('date');
+        $hour = $request->get('hour');
+
+//        if(isset($postulatedOffer) && count($postulatedOffer) > 0){
+//            $translated = $this->get('translator')->trans('offer.apply.already');
+//            $session->getFlashBag()->add('danger', $translated);
+//            return $this->redirectToRoute('dashboard_candidate');
+//        }
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        if(isset($collaboratorId)){
+            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorId));
+        }
+
+
+        $serviceRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Service')
+        ;
+        $service = $serviceRepository->findOneBy(array('id' => $serviceId));
+
+        $clientRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Client')
+        ;
+        $client = $clientRepository->findOneBy(array('user' => $user));
+
+        $rendezvous = new Rendezvous();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $datetime = new DateTime($date.' '.$hour);
+        $endDatetime = new DateTime($date.' '.$hour);
+
+        $rendezvous->setClient($client);
+        $rendezvous->setCollaborator($collaborator);
+        $rendezvous->setService($service);
+        $rendezvous->setStartDate($datetime);
+        $rendezvous->setEndDate($endDatetime->modify('+ '.$service->getLength().'minute'));
+
+        $em->persist($rendezvous);
+
+        $em->flush();
+
+//        $arrayEmail = array();
+//
+//        foreach ($users as $emplyerUser){
+//            $arrayEmail[] = $emplyerUser->getEmail();
+//        }
+//        $firstUser = $arrayEmail[0];
+//
+//        $mailer = $this->container->get('swiftmailer.mailer');
+
+//        $translatedEmployer = $this->get('translator')->trans('offer.applied.employer');
+//
+//        $messageEmmployer = (new \Swift_Message($translatedEmployer . ' ' . $offer->getTitle()))
+//            ->setFrom('jobnowlu@noreply.lu')
+//            ->setTo($firstUser)
+//            ->setCc(array_shift($arrayEmail))
+//            ->setBody(
+//                $this->renderView(
+//                    'AppBundle:Emails:apply.html.twig',
+//                    array('comment' => $comment, 'offer' => $offer, 'link' => $target_file, 'linkCover' => $target_file_cover)
+//                ),
+//                'text/html'
+//            );
+//        ;
+//
+//        $translatedCandidate = $this->get('translator')->trans('offer.applied.candidate');
+//        $messageCandidate = (new \Swift_Message($translatedCandidate . ' ' . $offer->getTitle()))
+//            ->setFrom('jobnowlu@noreply.lu')
+//            ->setTo($candidateMail)
+//            ->setBody(
+//                $this->renderView(
+//                    'AppBundle:Emails:applied.html.twig',
+//                    array('offer' => $offer)
+//                ),
+//                'text/html'
+//            );
+//        ;
+//        $messageEmmployer->getHeaders()->addTextHeader(
+//            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+//        );
+//        $messageCandidate->getHeaders()->addTextHeader(
+//            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+//        );
+//
+//        $mailer->send($messageCandidate);
+//        $mailer->send($messageEmmployer);
+
+
+//        $translated = $this->get('translator')->trans('offer.applied.success', array('%title%' => $offer->getTitle()));
+        $session->getFlashBag()->add('info', 'Vous avez bien réservé');
+
+        return $this->redirectToRoute('rendezvous_home');
     }
 
 }

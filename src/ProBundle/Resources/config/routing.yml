@@ -236,3 +236,8 @@ reservation_page:
         en: "/reservation-page"
         fr: "/page-de-reservation"
     defaults: { _controller: ProBundle:Service:reservationPage }
+reserve_rendezvous:
+    locales:
+        en: "/reserve"
+        fr: "/reserver"
+    defaults: { _controller: ProBundle:Service:reserve }
