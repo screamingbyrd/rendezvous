@@ -26,7 +26,7 @@ class ScheduleRepository extends \Doctrine\ORM\EntityRepository
             ->createQuery(
                 'select s
                     from AppBundle:schedule s
-                    where s.endDate >= :now and s.user = :user'
+                    where s.endDate >= :now and s.user = :user ORDER BY s.startDate ASC'
             )->setParameter('user',$givenUser)->setParameter('now', new \DateTime())->execute();
     }
 }
