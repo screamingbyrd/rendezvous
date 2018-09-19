@@ -359,12 +359,17 @@ class ServiceController extends Controller
         isset($collaboratorId)?$collaboratorId:null;
         $session = $request->getSession();
 
-        $scheduleArray = $finalColorArray = array();
+        $scheduleArray = $rendezvousArray = $finalColorArray = array();
 
         $scheduleRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Schedule')
+        ;
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
         ;
         $serviceRepository = $this
             ->getDoctrine()
@@ -389,16 +394,23 @@ class ServiceController extends Controller
 
         foreach ($users as $collaborator){
             $reorderedSchedule = array();
+            $reorderedRendezvous = array();
             $schedulesOfUser = $scheduleRepository->findNext(array('user' => $collaborator));
+            $rendezvousOfUser = $rendezvousRepository->findNext(array('user' => $collaborator));
+
             foreach ($schedulesOfUser as $schedule){
                 $reorderedSchedule[$schedule->getStartDate()->format('Y-m-d')][] = $schedule;
             }
+            foreach ($rendezvousOfUser as $rendezvous){
+                $reorderedRendezvous[$rendezvous->getStartDate()->format('Y-m-d')][] = $rendezvous;
+            }
             $scheduleArray[$collaborator->getId()] = $reorderedSchedule;
+            $rendezvousArray[$collaborator->getId()] = $reorderedRendezvous;
         }
-
 
         return $this->render('ProBundle::reservationPage.html.twig', array(
             'schedules' => $scheduleArray,
+            'rendezvous' => $rendezvousArray,
             'collaborators' => $users,
             'service' => $service,
             'pro' => $pro,

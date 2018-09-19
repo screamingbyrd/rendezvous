@@ -24,7 +24,7 @@ class Rendezvous
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      */
-    private $collaborator;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Service")
@@ -137,18 +137,18 @@ class Rendezvous
     /**
      * @return mixed
      */
-    public function getCollaborator()
+    public function getUser()
     {
-        return $this->collaborator;
+        return $this->user;
     }
 
     /**
-     * @param mixed $collaborator
+     * @param mixed $user
      * @return Rendezvous
      */
-    public function setCollaborator($collaborator)
+    public function setUser($user)
     {
-        $this->collaborator = $collaborator;
+        $this->user = $user;
         return $this;
     }
 

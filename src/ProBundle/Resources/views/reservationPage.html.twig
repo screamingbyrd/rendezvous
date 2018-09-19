@@ -39,11 +39,21 @@
                                     {% set precondition = true %}
                                     {% for i in 0..10000 if precondition %}
                                         {% set givenDate = dayDate.startDate|date_modify("+"~i *30 ~"minute") %}
-                                        {% if givenDate >= dayDate.endDate|date_modify("-"~ service.length ~"minute")%}
+                                        {% set endOfPeriod = dayDate.endDate|date_modify("-"~ service.length ~"minute") %}
+                                        {% set endgivenDate = givenDate|date_modify("-"~ service.length ~"minute") %}
+                                        {% if givenDate >= endOfPeriod%}
                                             {% set precondition = false %}
                                         {% else %}
                                             <div>
-                                                <a class="choose-time" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
+                                                {% set busy = 0 %}
+                                                {% if rendezvous[collaboratorId][givenDate|date('Y-m-d')] is defined %}
+                                                    {% for busyTime in rendezvous[collaboratorId][givenDate|date('Y-m-d')] %}
+                                                        {% if givenDate|date('H:i:s') < busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') > busyTime.startDate|date('H:i:s') or givenDate|date('H:i:s') >= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') %}
+                                                            {% set busy = busy + 1 %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <a class="choose-time {% if busy > 0 %}busy-slot{% endif %}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
                                                     {{ givenDate|date('H:i') }}
                                                 </a>
                                             </div>
@@ -101,6 +111,12 @@
         }
         .summary-information{
             margin-right: auto;
+        }
+        .busy-slot{
+            pointer-events: none;
+            cursor: default;
+            text-decoration: none;
+            color: #ddd;
         }
     </style>
     <script>

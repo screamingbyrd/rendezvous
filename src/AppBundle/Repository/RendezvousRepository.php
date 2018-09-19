@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class RendezvousRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findNext($givenUser){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select r
+                    from AppBundle:rendezvous r
+                    where r.endDate >= :now and r.user = :user'
+            )->setParameter('user',$givenUser)->setParameter('now', new \DateTime())->execute();
+    }
 }
