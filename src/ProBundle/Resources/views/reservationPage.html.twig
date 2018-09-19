@@ -16,7 +16,7 @@
             </div>
             <div class="select-collaborator-container other-service-info">
                 <select class="select2" title="" onchange="changeCollaborator(this)">
-                    <option></option>
+                    <option value="">Global</option>
                     {% for collaborator in collaborators %}
                         <option value="{{ collaborator.id }}" {% if collaboratorId == collaborator.id %}selected{% endif %}>{{ collaborator.username }}</option>
                     {% endfor %}
@@ -28,19 +28,19 @@
         <div class="shadow-box container-reservation-field">
             <div class="service-reservation-info">
                 {% set now = "now"|date %}
-                {% if collaboratorId is defined and collaboratorId != '' %}
-                    {% set array = schedules[collaboratorId] %}
-                    {% for i in 0 .. 6 %}
-                        {% set givenDate = now|date_modify("+"~i ~"day") %}
-                        <div class="reservation-of-day">
-                            <h3>{{ givenDate|date('l') }}{{ givenDate|date('Y-m-d') }}</h3>
+                {% for i in 0 .. 6 %}
+                    {% set givenDate = now|date_modify("+"~i ~"day") %}
+                    <div class="reservation-of-day">
+                        <h3>{{ givenDate|date('l') }}{{ givenDate|date('Y-m-d') }}</h3>
+                        {% if collaboratorId is defined and collaboratorId != '' %}
+                            {% set array = schedules[collaboratorId] %}
                             {% if array[givenDate|date('Y-m-d')] is defined %}
                                 {% for dayDate in array[givenDate|date('Y-m-d')] %}
                                     {% set precondition = true %}
                                     {% for i in 0..10000 if precondition %}
                                         {% set givenDate = dayDate.startDate|date_modify("+"~i *30 ~"minute") %}
                                         {% set endOfPeriod = dayDate.endDate|date_modify("-"~ service.length ~"minute") %}
-                                        {% set endgivenDate = givenDate|date_modify("-"~ service.length ~"minute") %}
+                                        {% set endgivenDate = givenDate|date_modify("+"~ service.length ~"minute") %}
                                         {% if givenDate >= endOfPeriod%}
                                             {% set precondition = false %}
                                         {% else %}
@@ -48,7 +48,7 @@
                                                 {% set busy = 0 %}
                                                 {% if rendezvous[collaboratorId][givenDate|date('Y-m-d')] is defined %}
                                                     {% for busyTime in rendezvous[collaboratorId][givenDate|date('Y-m-d')] %}
-                                                        {% if givenDate|date('H:i:s') < busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') > busyTime.startDate|date('H:i:s') or givenDate|date('H:i:s') >= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') %}
+                                                        {% if givenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') > busyTime.startDate|date('H:i:s') or givenDate|date('H:i:s') >= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') %}
                                                             {% set busy = busy + 1 %}
                                                         {% endif %}
                                                     {% endfor %}
@@ -61,10 +61,44 @@
                                     {% endfor %}
                                 {% endfor %}
                             {% endif %}
-                        </div>
-
-                    {% endfor %}
-                {% endif %}
+                        {% else %}
+                            {% set array = globalSchedules %}
+                            {% if array[givenDate|date('Y-m-d')] is defined %}
+                                {% for dayDate in array[givenDate|date('Y-m-d')] %}
+                                    {% set precondition = true %}
+                                    {% for i in 0..10000 if precondition %}
+                                        {% set givenDate = dayDate.startDate|date_modify("+"~i *30 ~"minute") %}
+                                        {% set endOfPeriod = dayDate.endDate|date_modify("-"~ service.length ~"minute") %}
+                                        {% set endgivenDate = givenDate|date_modify("-"~ service.length ~"minute") %}
+                                        {% if givenDate >= endOfPeriod%}
+                                            {% set precondition = false %}
+                                        {% else %}
+                                            <div>
+                                                {% set busy = 0 %}
+                                                {% set numberOfAvailable = rendezvous|length %}
+                                                {% for collaboratorSchedule in rendezvous %}
+                                                    {% if collaboratorSchedule[givenDate|date('Y-m-d')] is defined %}
+                                                        {% for busyTime in collaboratorSchedule[givenDate|date('Y-m-d')] %}
+                                                            {% if givenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') > busyTime.startDate|date('H:i:s') or givenDate|date('H:i:s') >= busyTime.startDate|date('H:i:s') and endgivenDate|date('H:i:s') <= busyTime.startDate|date('H:i:s') %}
+                                                                {% set busy = busy + 1 %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% if busy > 0 %}
+                                                            {% set numberOfAvailable = numberOfAvailable - 1 %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <a class="choose-time {% if numberOfAvailable <= 0 %}busy-slot{% endif %}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
+                                                    {{ givenDate|date('H:i') }}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
 
 

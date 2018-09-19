@@ -359,7 +359,7 @@ class ServiceController extends Controller
         isset($collaboratorId)?$collaboratorId:null;
         $session = $request->getSession();
 
-        $scheduleArray = $rendezvousArray = $finalColorArray = array();
+        $scheduleArray = $rendezvousArray = $finalColorArray = $globalScheduleArray = $globalRendezvousArray = array();
 
         $scheduleRepository = $this
             ->getDoctrine()
@@ -400,12 +400,41 @@ class ServiceController extends Controller
 
             foreach ($schedulesOfUser as $schedule){
                 $reorderedSchedule[$schedule->getStartDate()->format('Y-m-d')][] = $schedule;
+                $globalScheduleArray[$schedule->getStartDate()->format('Y-m-d')][] = $schedule;
             }
             foreach ($rendezvousOfUser as $rendezvous){
                 $reorderedRendezvous[$rendezvous->getStartDate()->format('Y-m-d')][] = $rendezvous;
+                $globalRendezvousArray[$rendezvous->getStartDate()->format('Y-m-d')][] = $rendezvous;
             }
             $scheduleArray[$collaborator->getId()] = $reorderedSchedule;
             $rendezvousArray[$collaborator->getId()] = $reorderedRendezvous;
+        }
+//        var_dump($globalScheduleArray);exit;
+
+        $finalGlobalScheduleArray = array();
+        foreach ($globalScheduleArray as $date => $dailyArray){
+            $dateArray = array();
+            foreach ($dailyArray as $schedule){
+                $dateArray[] = array('startDate' => $schedule->getStartDate(), 'endDate' => $schedule->getEndDate());
+            }
+            usort($dateArray, function($a, $b)
+            {
+                return $a['startDate'] > $b['startDate'];
+            });
+
+            $n = 0; $len = count($dateArray);
+            for ($i = 1; $i < $len; ++$i)
+            {
+                if ($dateArray[$i]['startDate'] > $dateArray[$n]['endDate'])
+                    $n = $i;
+                else
+                {
+                    if ($dateArray[$n]['endDate'] < $dateArray[$i]['endDate'])
+                        $dateArray[$n]['endDate'] = $dateArray[$i]['endDate'];
+                    unset($dateArray[$i]);
+                }
+            }
+            $finalGlobalScheduleArray[$date] = $dateArray;
         }
 
         return $this->render('ProBundle::reservationPage.html.twig', array(
@@ -414,7 +443,8 @@ class ServiceController extends Controller
             'collaborators' => $users,
             'service' => $service,
             'pro' => $pro,
-            'collaboratorId' => $collaboratorId
+            'collaboratorId' => $collaboratorId,
+            'globalSchedules' => $finalGlobalScheduleArray
         ));
     }
 
@@ -467,7 +497,7 @@ class ServiceController extends Controller
         $endDatetime = new DateTime($date.' '.$hour);
 
         $rendezvous->setClient($client);
-        $rendezvous->setCollaborator($collaborator);
+        $rendezvous->setUser($collaborator);
         $rendezvous->setService($service);
         $rendezvous->setStartDate($datetime);
         $rendezvous->setEndDate($endDatetime->modify('+ '.$service->getLength().'minute'));
