@@ -70,21 +70,27 @@
                     <div class="shadow-box category-container">
                         {% for service in services %}
                             <div class="service-container" data-href="{{ path('reservation_page',{'proId':pro.id, 'serviceId':service.id}) }}">
-                                <div class="service-name">
-                                    {{ service.name }}
+                                <div class="service-info-container-choose">
+                                    <div class="service-name">
+                                        {{ service.name }}
+                                    </div>
+                                    <div class="container-price-length">
+                                        <div class="other-service-info">
+                                            {{ service.price }}€
+                                        </div>
+                                        <div class="length-info">
+                                            {% set hours = service.length // 60 %}
+                                            {% set minutes = service.length % 60 %}
+                                            {% if hours >= 1 %}
+                                                {{ hours }}h {{ minutes }}min
+                                            {% else %}
+                                                {{ minutes }}min
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="other-service-info">
-                                    {{ service.price }}€
-                                </div>
-                                <div class="length-info">
-                                    {% set hours = service.length // 60 %}
-                                    {% set minutes = service.length % 60 %}
-                                    {% if hours >= 1 %}
-                                        {{ hours }}h {{ minutes }}min
-                                    {% else %}
-                                        {{ minutes }}min
-                                    {% endif %}
-                                </div>
+
                                 <div class="other-service-info">
                                     <a>choose</a>
                                 </div>

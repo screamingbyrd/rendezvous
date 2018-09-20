@@ -11,24 +11,27 @@
         <div class="title-pro">{{ pro.name }}</div>
         <div class="article-title">{{ pro.location }} {{ pro.zipcode }} {{ pro.city }}</div>
         <div class="shadow-box container-reservation-info">
-            <div class="service-name">
+            <div class="header-reservation-page">
+                <div class="service-name">
 
-                {{ service.name }} - {% set hours = service.length // 60 %}
-                {% set minutes = service.length % 60 %}
-                {% if hours >= 1 %}
-                    {{ hours }}h {{ minutes }}min
-                {% else %}
-                    {{ minutes }}min
-                {% endif %} - {{ service.price }}€
+                    {{ service.name }} - {% set hours = service.length // 60 %}
+                    {% set minutes = service.length % 60 %}
+                    {% if hours >= 1 %}
+                        {{ hours }}h {{ minutes }}min
+                    {% else %}
+                        {{ minutes }}min
+                    {% endif %} - {{ service.price }}€
+                </div>
+                <div class="select-collaborator-container other-service-info">
+                    <select class="select2" title="" onchange="changeCollaborator(this)">
+                        <option value="">Global</option>
+                        {% for collaborator in collaborators %}
+                            <option value="{{ collaborator.id }}" {% if collaboratorId == collaborator.id %}selected{% endif %}>{{ collaborator.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
-            <div class="select-collaborator-container other-service-info">
-                <select class="select2" title="" onchange="changeCollaborator(this)">
-                    <option value="">Global</option>
-                    {% for collaborator in collaborators %}
-                        <option value="{{ collaborator.id }}" {% if collaboratorId == collaborator.id %}selected{% endif %}>{{ collaborator.username }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+
             <a class="return-to-pro" href="{{ path('show_pro',{'id':pro.id}) }}"><i class="fas fa-times-circle"></i></a>
         </div>
         <div class="shadow-box container-reservation-field">

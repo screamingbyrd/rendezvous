@@ -117,6 +117,29 @@ h3.box{
     #appbundle_pro_coverImage, #appbundle_pro_logo{
         overflow: hidden;
     }
+    .service-info-container-choose{
+        display: initial !important;
+    }
+    .container-price-length{
+        display: flex !important;
+    }
+    .other-service-info{
+        width: initial !important;
+    }
+    .length-info{
+        margin-left: 10px;
+        width: initial !important;
+    }
+    .header-reservation-page{
+        display: initial !important;
+    }
+    .service-name{
+        width: initial !important;
+        margin-bottom: 10px;
+    }
+    .select-collaborator-container{
+        float: initial !important;
+    }
 }
 .container-logo-pro{
     position: absolute;
@@ -188,6 +211,17 @@ h3.box{
     min-width: 126px;
 }
 
+.service-info-container-choose{
+    display: flex;
+    width: 100%;
+}
+.container-price-length{
+    display: contents;
+}
+.header-reservation-page{
+    display: flex;
+    width: 100%;
+}
 .service-name{
     width: 70%;
 }
