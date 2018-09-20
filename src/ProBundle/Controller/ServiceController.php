@@ -409,7 +409,6 @@ class ServiceController extends Controller
             $scheduleArray[$collaborator->getId()] = $reorderedSchedule;
             $rendezvousArray[$collaborator->getId()] = $reorderedRendezvous;
         }
-//        var_dump($globalScheduleArray);exit;
 
         $finalGlobalScheduleArray = array();
         foreach ($globalScheduleArray as $date => $dailyArray){
@@ -453,11 +452,12 @@ class ServiceController extends Controller
 
         $user = $this->getUser();
 
-        $proId = $request->get('proId');
         $serviceId = $request->get('serviceId');
         $collaboratorId = $request->get('collaboratorId');
+        $collaboratorList = $request->get('list');
         $date = $request->get('date');
         $hour = $request->get('hour');
+
 
 //        if(isset($postulatedOffer) && count($postulatedOffer) > 0){
 //            $translated = $this->get('translator')->trans('offer.apply.already');
@@ -470,10 +470,14 @@ class ServiceController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        if(isset($collaboratorId)){
+        if(isset($collaboratorId) && $collaboratorId != ''){
             $collaborator = $userRepository->findOneBy(array('id' => $collaboratorId));
+        }else{
+            $collaboratorList = rtrim($collaboratorList,"-");
+            $collaboratorList = explode('-', $collaboratorList);
+            shuffle($collaboratorList);
+            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorList[0]));
         }
-
 
         $serviceRepository = $this
             ->getDoctrine()
