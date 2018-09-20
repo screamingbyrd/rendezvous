@@ -10,7 +10,7 @@
 
         <div class="title-pro">{{ pro.name }}</div>
         <div class="article-title">{{ pro.location }} {{ pro.zipcode }} {{ pro.city }}</div>
-        <div class="shadow-box service-reservation-info">
+        <div class="shadow-box container-reservation-info">
             <div class="service-name">
                 {{ service.name }} - {{ service.length }} - {{ service.price }}€
             </div>
@@ -26,9 +26,16 @@
         </div>
 
         <div class="shadow-box container-reservation-field">
-            <div class="service-reservation-info">
                 {% set now = "now"|date %}
-                {% for i in 0 .. 6 %}
+                {% set containerId = 1 %}
+                {% for i in 0 .. numberOfDays %}
+                    {% if i == 0 %}
+                        <div class="service-reservation-info active" id="1">
+                    {% endif %}
+                    {% if i % 7 == 0 and i != 0 %}
+                        {% set containerId = containerId + 1 %}
+                        <span class="glyphicon glyphicon-chevron-right next-week"></span></div><div class="service-reservation-info" id="{{ containerId }}"><span class="glyphicon glyphicon-chevron-left precedent-week"></span>
+                    {% endif %}
                     {% set givenDate = now|date_modify("+"~i ~"day") %}
                     <div class="reservation-of-day">
                         <h3>{{ givenDate|date('l') }}{{ givenDate|date('Y-m-d') }}</h3>
@@ -134,8 +141,10 @@
                             {% endif %}
                         {% endif %}
                     </div>
+                    {% if i == numberOfDays %}
+                        </div> {# close last row #}
+                    {% endif %}
                 {% endfor %}
-            </div>
 
 
         </div>
@@ -161,7 +170,7 @@
             text-decoration: #1F80F0;
             cursor: pointer;
         }
-        .service-reservation-info{
+        .container-reservation-info{
             display: flex;
         }
         .select-collaborator-container{
@@ -187,6 +196,18 @@
             cursor: default;
             text-decoration: none;
             color: #ddd;
+        }
+        .active{
+            display: flex !important;
+        }
+        .service-reservation-info{
+            display: none;
+        }
+        .next-week, precendent-week{
+            cursor: pointer;
+        }
+        .reservation-of-day h3{
+            border: 1px solid #ddd;
         }
     </style>
     <script>
@@ -215,6 +236,18 @@
             $('.container-summary-reservation').hide();
             $('.container-reservation-field').show();
             $('.submit-reservation').attr('href', '#')
+        });
+
+        $('.precedent-week').on('click', function () {
+            var parent = $(this).parent();
+            parent.removeClass('active');
+            $('#'+(parseInt(parent.attr('id'))-1)).addClass('active')
+        });
+
+        $('.next-week').on('click', function () {
+            var parent = $(this).parent();
+            parent.removeClass('active');
+            $('#'+(parseInt(parent.attr('id'))+1)).addClass('active')
         });
 
     </script>

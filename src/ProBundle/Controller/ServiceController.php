@@ -435,6 +435,14 @@ class ServiceController extends Controller
             }
             $finalGlobalScheduleArray[$date] = $dateArray;
         }
+        end($finalGlobalScheduleArray);         // move the internal pointer to the end of the array
+        $key = key($finalGlobalScheduleArray);
+
+        $now = time(); // or your date as well
+        $your_date = strtotime($key);
+        $datediff = $your_date - $now;
+
+        $numberOfDays = round($datediff / (60 * 60 * 24));
 
         return $this->render('ProBundle::reservationPage.html.twig', array(
             'schedules' => $scheduleArray,
@@ -443,7 +451,8 @@ class ServiceController extends Controller
             'service' => $service,
             'pro' => $pro,
             'collaboratorId' => $collaboratorId,
-            'globalSchedules' => $finalGlobalScheduleArray
+            'globalSchedules' => $finalGlobalScheduleArray,
+            'numberOfDays' => $numberOfDays
         ));
     }
 
