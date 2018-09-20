@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new BeSimple\I18nRoutingBundle\BeSimpleI18nRoutingBundle(),
             new \Trt\SwiftCssInlinerBundle\TrtSwiftCssInlinerBundle(),
             new Sonata\SeoBundle\SonataSeoBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
 
         ];

@@ -19,6 +19,61 @@
     margin-left: 5px;
 }
 
+.choose-time{
+    text-decoration: #1F80F0;
+    cursor: pointer;
+}
+.container-reservation-info{
+    display: flex;
+}
+.select-collaborator-container{
+    float: right;
+    width: 200px;
+}
+.return-to-pro{
+    margin-left: 20px;
+    font-size: 20px;
+    padding-top: 3px;
+}
+.reservation-of-day{
+    width: 20%;
+}
+.container-summary-reservation{
+    display: none;
+}
+.summary-information{
+    margin-right: auto;
+}
+.busy-slot{
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: #ddd;
+}
+.active{
+    display: flex !important;
+}
+.service-reservation-info{
+    display: none;
+}
+.next-week, .precedent-week{
+    cursor: pointer;
+    margin-top: 16px;
+}
+.header-table-reservation-page{
+    border: 1px solid #ddd;
+    text-align: center;
+}
+.time-button-reservation-container{
+    text-align: center;
+}
+.submit-reservation{
+    width: 140px !important;
+}
+.submit-rendezvous-container{
+    text-align: center;
+}
+
 #myUL {
     list-style-type: none;
     padding: 0;
@@ -690,6 +745,9 @@
     }
     .about-the-offer b{
         color: black !important;
+    }
+    .reservation-of-day{
+        width: 33%;
     }
 }
 

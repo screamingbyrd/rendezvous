@@ -24,21 +24,33 @@
             </div>
             <a class="return-to-pro" href="{{ path('show_pro',{'id':pro.id}) }}"><i class="fas fa-times-circle"></i></a>
         </div>
-
         <div class="shadow-box container-reservation-field">
                 {% set now = "now"|date %}
                 {% set containerId = 1 %}
+                {% if is_mobile() and not is_tablet() %}
+                    {% set row = 3 %}
+                {% else %}
+                    {% set row = 7 %}
+                {% endif %}
                 {% for i in 0 .. numberOfDays %}
                     {% if i == 0 %}
                         <div class="service-reservation-info active" id="1">
                     {% endif %}
-                    {% if i % 7 == 0 and i != 0 %}
+                    {% if i % row == 0 and i != 0 %}
                         {% set containerId = containerId + 1 %}
                         <span class="glyphicon glyphicon-chevron-right next-week"></span></div><div class="service-reservation-info" id="{{ containerId }}"><span class="glyphicon glyphicon-chevron-left precedent-week"></span>
                     {% endif %}
                     {% set givenDate = now|date_modify("+"~i ~"day") %}
                     <div class="reservation-of-day">
-                        <h3>{{ givenDate|date('l') }}{{ givenDate|date('Y-m-d') }}</h3>
+                        <div class="header-table-reservation-page">
+                            <div>
+                                {{ givenDate|date('l')|trans }}
+                            </div>
+                            <div>
+                                {{ givenDate|date('d/m') }}
+                            </div>
+
+                        </div>
                         {% if collaboratorId is defined and collaboratorId != '' %}
                             {% set array = schedules[collaboratorId] %}
                             {% if array[givenDate|date('Y-m-d')] is defined %}
@@ -51,7 +63,7 @@
                                         {% if givenDate >= endOfPeriod%}
                                             {% set precondition = false %}
                                         {% else %}
-                                            <div>
+                                            <div  class="time-button-reservation-container">
                                                 {% set busy = 0 %}
                                                 {% if rendezvous[collaboratorId][givenDate|date('Y-m-d')] is defined %}
                                                     {% for busyTime in rendezvous[collaboratorId][givenDate|date('Y-m-d')] %}
@@ -60,7 +72,7 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
-                                                <a class="choose-time {% if busy > 0 %}busy-slot{% endif %}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
+                                                <a class="choose-time {% if busy > 0 %}busy-slot{% endif %}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')|trans}} {{ givenDate|date('m/Y H:i') }}">
                                                     {{ givenDate|date('H:i') }}
                                                 </a>
                                             </div>
@@ -80,7 +92,7 @@
                                         {% if givenDate >= endOfPeriod%}
                                             {% set precondition = false %}
                                         {% else %}
-                                            <div>
+                                            <div class="time-button-reservation-container">
                                                 {% set numberOfAvailable = rendezvous|length %}
                                                 {%  set collaboratorList = '' %}
                                                 {% for collaboratorId,collaboratorSchedule in rendezvous %}
@@ -131,7 +143,7 @@
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endfor %}
-                                                <a class="choose-time {% if numberOfAvailable <= 0 %}busy-slot{% endif %}" data-list="{{ collaboratorList }}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')}}{{ givenDate|date('m Y H:i') }}">
+                                                <a class="choose-time {% if numberOfAvailable <= 0 %}busy-slot{% endif %}" data-list="{{ collaboratorList }}" data-date="{{ givenDate|date('Y-m-d') }}" data-hour="{{ givenDate|date('H:i:s') }}" data-time="{{ givenDate|date('l')|trans}} {{ givenDate|date('m/Y H:i') }}">
                                                     {{ givenDate|date('H:i') }}
                                                 </a>
                                             </div>
@@ -156,7 +168,7 @@
                 </div>
                 <a class="cancel-selection-button"><i class="fas fa-pencil-alt"></i></a>
             </div>
-            <div class="shadow-box">
+            <div class="shadow-box submit-rendezvous-container">
                 <a class="submit-reservation rendezvous-button">Submit</a>
             </div>
         </div>
@@ -164,52 +176,6 @@
 
     </div>
 
-
-    <style>
-        .choose-time{
-            text-decoration: #1F80F0;
-            cursor: pointer;
-        }
-        .container-reservation-info{
-            display: flex;
-        }
-        .select-collaborator-container{
-            float: right;
-            width: 200px;
-        }
-        .return-to-pro{
-            margin-left: 20px;
-            font-size: 20px;
-            padding-top: 3px;
-        }
-        .reservation-of-day{
-            width: 20%;
-        }
-        .container-summary-reservation{
-            display: none;
-        }
-        .summary-information{
-            margin-right: auto;
-        }
-        .busy-slot{
-            pointer-events: none;
-            cursor: default;
-            text-decoration: none;
-            color: #ddd;
-        }
-        .active{
-            display: flex !important;
-        }
-        .service-reservation-info{
-            display: none;
-        }
-        .next-week, precendent-week{
-            cursor: pointer;
-        }
-        .reservation-of-day h3{
-            border: 1px solid #ddd;
-        }
-    </style>
     <script>
         function changeCollaborator(select) {
             var url = "{{ path('reservation_page',{'proId':pro.id}) }}";
