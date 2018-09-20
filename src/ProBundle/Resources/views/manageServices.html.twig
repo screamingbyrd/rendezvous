@@ -23,7 +23,7 @@
                                 <div class="container-input-service">
                                     <input type="hidden" name="service[0][0][id]">
                                     <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]">
-                                    <input type="text" class="form-control service-field" placeholder="Durée" name="service[0][0][length]">
+                                    <input type="number" class="form-control service-field" placeholder="Durée" name="service[0][0][length]"><span class="euro-price">minute</span>
                                     <input type="text" class="form-control service-field" placeholder="Prix" name="service[0][0][price]"><span class="euro-price">€</span>
                                 </div>
 
@@ -48,7 +48,7 @@
                                             <input type="hidden" name="service[{{ categoryid }}][{{ serviceid }}][id]" value="{{ service.id }}">
                                             <input class="remove-service-input" type="hidden" name="removeService[]" data-id="{{ service.id }}">
                                             <input type="text" class="form-control service-field" placeholder="Nom" name="service[{{ categoryid }}][{{ serviceid }}][name]" value="{{ service.name }}">
-                                            <input type="text" class="form-control service-field" placeholder="Durée" name="service[{{ categoryid }}][{{ serviceid }}][length]" value="{{ service.length }}">
+                                            <input type="number" class="form-control service-field" placeholder="Durée" name="service[{{ categoryid }}][{{ serviceid }}][length]" value="{{ service.length }}"><span class="euro-price">minute</span>
                                             <input type="text" class="form-control service-field" placeholder="Prix" name="service[{{ categoryid }}][{{ serviceid }}][price]" value="{{ service.price }}"><span class="euro-price">€</span>
                                             <button class="remove-service"><i class="fas fa-times-circle"></i></button>
                                         </div>
@@ -96,6 +96,7 @@
         .euro-price{
             padding-top: 5px;
             margin-left: -10px;
+            margin-right: 10px;
         }
         .remove-category{
             float: right;
@@ -114,7 +115,7 @@
                 '<input type="hidden" name="service['+idCategory+']['+id+'][id]">'+
                     '<input class="remove-service-input" type="hidden" name="removeService[]" data-id="">'+
                 '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']">\n' +
-                '                            <input type="text" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']">\n' +
+                '                            <input type="number" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']"><span class="euro-price">minute</span>\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+id+']['+"price"+']"><span class="euro-price">€</span>\n' +
                     '<button class="remove-service"><i class="fas fa-times-circle"></i></button>'+
                 '                        </div>';

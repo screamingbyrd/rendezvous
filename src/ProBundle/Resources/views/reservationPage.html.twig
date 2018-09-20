@@ -12,7 +12,14 @@
         <div class="article-title">{{ pro.location }} {{ pro.zipcode }} {{ pro.city }}</div>
         <div class="shadow-box container-reservation-info">
             <div class="service-name">
-                {{ service.name }} - {{ service.length }} - {{ service.price }}€
+
+                {{ service.name }} - {% set hours = service.length // 60 %}
+                {% set minutes = service.length % 60 %}
+                {% if hours >= 1 %}
+                    {{ hours }}h {{ minutes }}min
+                {% else %}
+                    {{ minutes }}min
+                {% endif %} - {{ service.price }}€
             </div>
             <div class="select-collaborator-container other-service-info">
                 <select class="select2" title="" onchange="changeCollaborator(this)">

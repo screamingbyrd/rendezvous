@@ -193,7 +193,11 @@ h3.box{
 }
 .other-service-info{
     width: 10%;
-}.archived-info{
+}
+.length-info{
+    width: 14%;
+}
+.archived-info{
     padding: 7px;
     color: #333;
     font-size: 14px;
