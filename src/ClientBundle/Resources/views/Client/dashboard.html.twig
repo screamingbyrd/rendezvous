@@ -9,156 +9,87 @@
         <span style="font-size: 42px">{{ 'dashboard.title' | trans }}</span>
     </div>
 
-    <div class="navbar-dashboard">
-        <ul class="nav nav-tabs nav-candidate navbar-dashboard">
-            <li class="active">
-                <a  data-target="#applied" data-toggle="tab">{{ 'header.candidates.dashboard.applied'|trans }}</a>
-            </li>
-            <li><a data-target="#alerts" data-toggle="tab">{{ 'dashboard.candidate.notifications'|trans }}</a>
-            </li>
-            <li><a data-target="#favorites" data-toggle="tab">{{ 'dashboard.candidate.favorites'|trans }}</a>
-            </li>
-        </ul>
-    </div>
     <div class="container rendezvous-container">
-        <div class="tab-content candidate-content">
-            <div class="tab-pane active fade in" id="applied">
-                <div class="text-center">{{ 'dashboard.candidate.list' | trans }}</div>
-                <h3>{{ 'header.candidates.dashboard.applied' | trans }}</h3>
-                <table class="table" style="table-layout: fixed">
-                    <thead>
-                    <tr>
-                        <th scope="col">{{ 'dashboard.candidate.name' | trans }}</th>
-                        <th scope="col" style="width: 100px">{{ 'dashboard.candidate.date' | trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for offer in appliedOffer %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('show_offer', {'id': offer.offer.id, 'url':offer.offer.offerUrl}) }}">
-                                    {% if offer.offer.pro.logo.imageName is not null %}
-                                        {% set image =  'uploads' ~ vich_uploader_asset(offer.offer.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                                    {% else %}
-                                        {% set image = 'images/logo-default.png' %}
-                                    {% endif %}
-                                        <img class="logo-pro-in-applied-offer" src="{{ asset(image) }}"/>
+        <div class="tab-content client-content">
 
-                                    {{ offer.offer.title |truncate(150)}}
-                                </a>
-                            </td>
-                            <td><div class="date-postulated">{{ offer.date|date('d/m/Y') }}</div></td>
-                        </tr>
+            <div class="text-center">{{ 'dashboard.client.list' | trans }}</div>
+            <h3>Mes prochain rendez vous</h3>
+
+            <div class="row">
+                <div class="next-rendezvous-list col-md-8">
+                    {% for rendezvous in nextRendezvous %}
+                        <div class="next-rendezvous-container shadow-box">
+                            <div>
+                                <div>
+                                    <b>{{ rendezvous.startDate|date('H') }}h{{ rendezvous.startDate|date('i') }}</b> le <b>{{ rendezvous.startDate|date('d/m/Y') }}</b>
+                                </div>
+                                <div>
+                                    <b>{{ rendezvous.user.pro.name }}</b> - <b>{{  rendezvous.user.pro.location }}
+                                        {{ rendezvous.user.pro.zipcode }}
+                                        {{ rendezvous.user.pro.city }}</b>
+                                </div>
+                                <div>
+                                    {{ rendezvous.service.name }} - {% set hours = rendezvous.service.length // 60 %}
+                                    {% set minutes = rendezvous.service.length % 60 %}
+                                    {% if hours >= 1 %}
+                                        {{ hours }}h {{ minutes }}min
+                                    {% else %}
+                                        {{ minutes }}min
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
                     {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="alerts">
-                <div class="text-center">{{ 'notification.title'|trans }}</div>
-                <div class="add-notification">
-                    <h3>{{ 'notification.create' |trans}}</h3>
-                    <form method="post" action="{{ path('create_notification') }}" id="search-offer-homepage">
-                        <input name="type" type="hidden" id="type-input" value="notification.tag">
-                        <select title="Category" id="id-input" name="id"  class="rendezvous-dropdown alerts">
-                            {% for tag in tags %}
-                                <option value="{{ tag.id }}">{{ tag.name|trans }}</option>
-                            {% endfor %}
-                        </select>
-                        <input type="submit" class="rendezvous-button " value="{{ 'add' | trans }}">
-                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="shadow-box">
+                        {{ ivory_google_map(map) }}
+                        {{ ivory_google_api([map]) }}
+                    </div>
                 </div>
 
-
-                {% if notifications is defined and notifications|length > 0 %}
-
-                    <h3>{{ 'notification.mine' | trans }}</h3>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">{{ 'dashboard.candidate.type' | trans }}</th>
-                            <th scope="col">{{ 'dashboard.candidate.name' | trans }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in 1..notifications|length %}
-                            <tr>
-                                <td>{{ notifications[i-1].type |trans }}</td>
-                                <td><a  href="{% if notifications[i-1].type == 'notification.tag' %}{{ path('search_page_offer', {'tags':[notifications[i-1].name]}) }}{% elseif notifications[i-1].type == 'notification.pro' %}{{ path('show_pro', {'id':notifications[i-1].elementId}) }}{% endif %}">{{ notifications[i-1].name|trans }}</a></td>
-                                <td><a href="{{ path('delete_notification', {'id':notifications[i-1].uid}) }}" class="btn btn-primary element-offer-list">{{ 'delete' | trans }}</a></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                {% endif %}
-            </div>
-            <div class="tab-pane fade" id="favorites">
-                <div class="text-center">{{ 'favorite.title'|trans }}</div>
-                {% if favorites is defined and favorites|length > 0 %}
-                    <h3>{{ 'header.candidates.dashboard.favorites' | trans }}</h3>
-
-                        <div class="tab-pane active fade in" id="applied">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">{{ 'dashboard.candidate.name' | trans }}</th>
-                                    <th style="width: 100px"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for favorite in favorites %}
-                                    <tr>
-                                        <td>
-                                            <a href="{{ path('show_offer', {'id': favorite.offer.id, 'url':favorite.offer.offerUrl}) }}">
-                                                {% if favorite.offer.pro.logo.imageName is not null %}
-                                                    {% set image =  'uploads' ~ vich_uploader_asset(favorite.offer.pro.logo, 'imageFile', 'AppBundle\\Entity\\Image') %}
-                                                {% else %}
-                                                    {% set image = 'images/logo-default.png' %}
-                                                {% endif %}
-                                                <img class="logo-pro-in-applied-offer" src="{{ asset(image) }}"/>
-                                                {{ favorite.offer.title |trans }}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="{{ path('delete_favorite', {'id':favorite.id}) }}" class="btn btn-primary element-offer-list delete-favorite">
-                                                {{ 'delete' | trans }}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                <h3>Mes derniers rendez vous</h3>
+                {% for rendezvous in lastRendezvous %}
+                    <div class="next-rendezvous-container shadow-box">
+                        <div>
+                            <div>
+                                le <b>{{ rendezvous.startDate|date('H') }}h{{ rendezvous.startDate|date('i') }}</b> le <b>{{ rendezvous.startDate|date('d/m/Y') }}</b>
+                            </div>
+                            <div>
+                                <b>{{ rendezvous.user.pro.name }}</b> - <b>{{  rendezvous.user.pro.location }}
+                                    {{ rendezvous.user.pro.zipcode }}
+                                    {{ rendezvous.user.pro.city }}</b>
+                            </div>
+                            <div>
+                                {{ rendezvous.service.name }} - {% set hours = rendezvous.service.length // 60 %}
+                                {% set minutes = rendezvous.service.length % 60 %}
+                                {% if hours >= 1 %}
+                                    {{ hours }}h {{ minutes }}min
+                                {% else %}
+                                    {{ minutes }}min
+                                {% endif %}
+                            </div>
                         </div>
-                {% endif %}
+
+                    </div>
+                {% endfor %}
             </div>
+
+
+
         </div>
     </div>
 
-    <script>
-        var url = document.location.toString();
-        $(window).on('hashchange', function(e){
-            $('#navbar').removeClass('in');
-            if (document.location.toString().match('#')) {
-                $('.nav-tabs a[data-target="#' + document.location.toString().split('#')[1] + '"]').tab('show');
-                window.scrollTo(0,0);
-            }
-        });
-        if (url.match('#')) {
-            $('.nav-tabs a[data-target="#' + url.split('#')[1] + '"]').tab('show');
-            window.scrollTo(0,0);
-        }
-        $('.nav-tabs a').on('shown.bs.tab', function (e) {
-            window.location.hash = e.target.hash;
-        });
-        $(window).on('load', () => {
-            let iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-            if (iOS)
-                $('[data-toggle="tab"]').each((i,e) => {
-                    if (!$(e).attr('href'))
-                        $(e).attr('href', $(e).data('target'));
-                })
-        })
-    </script>
     <style>
+        .next-rendezvous-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 290px;
+            text-align: center;
+            font-size: 20px;
+        }
         .date-postulated{
             margin-top: 25px;
         }

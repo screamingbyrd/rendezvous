@@ -14,6 +14,14 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ClientType;
 use Symfony\Component\HttpFoundation\Response;
 use Trt\SwiftCssInlinerBundle\Plugin\CssInlinerPlugin;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
+use Ivory\GoogleMap\Overlay\InfoWindow;
+use Ivory\GoogleMap\Event\Event;
+use Ivory\GoogleMap\Overlay\Marker;
 
 class ClientController extends Controller
 {
@@ -175,8 +183,6 @@ class ClientController extends Controller
         $idClient = $request->get('id');
         $session = $request->getSession();
 
-        $generateUrlService = $this->get('app.offer_generate_url');
-
         $clientRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -195,86 +201,101 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Pro')
         ;
-        $favoriteRepository = $this
+
+        $rendezvousRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Favorite')
-        ;
-        $tagRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Tag')
+            ->getRepository('AppBundle:Rendezvous')
         ;
 
-        $notificationRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Notification')
-        ;
-        $notifications = $notificationRepository->findBy(array('client' => $client));
-        $favorites = $favoriteRepository->findBy(array('client' => $client));
+        $nextRendezvous = $rendezvousRepository->findNextForClient(array('client' => $client));
 
-        foreach ($favorites as &$favorite){
-            $favorite->getOffer()->setOfferUrl($generateUrlService->generateOfferUrl($favorite->getOffer()));
+        $lastRendezvous = $rendezvousRepository->findLastForClient(array('client' => $client));
+
+        $locationArray =array();
+        foreach ($nextRendezvous as $rendezvous){
+            $locationArray[$rendezvous->getUser()->getPro()->getLocation()][] = $rendezvous->getUser()->getPro();
         }
 
-        $notificationsArray = array();
+        $map = new Map();
 
-        foreach ($notifications as $notification){
-            $newNotification = array();
-            $newNotification['uid'] = $notification->getUid();
-            $newNotification['elementId'] = $notification->getElementId();
-            $type = $notification->getTypeNotification();
-            $newNotification['type'] = $type;
-            if($type == 'notification.pro'){
-                $pro = $proRepository->findOneBy(array('id' => $notification->getElementId()));
-                $newNotification['name'] = $pro->getName();
-            }elseif ($type == 'notification.tag'){
-                $tag = $tagRepository->findOneBy(array('id' => $notification->getElementId()));
-                $newNotification['name'] = $tag->getName();
+        //workarround to ssl certificat pb curl error 60
+
+        $config = [
+            'verify' => false,
+        ];
+
+        $adapter = GuzzleAdapter::createWithConfig($config);
+
+        // GeoCoder API
+        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
+        $markers = array();
+        $i = 1;
+
+        foreach ($locationArray as $location => $pros){
+
+            //try to match string location to get Object with lat long info
+            if($location){
+                $request = new GeocoderAddressRequest($location);
+            }else{
+                $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
             }
-            $notificationsArray[] = $newNotification;
+
+            $response = $geocoder->geocode($request);
+
+            $status = $response->getStatus();
+
+            foreach ($response->getResults() as $result) {
+
+                $coord = $result->getGeometry()->getLocation();
+                continue;
+
+            }
+
+            if(isset($coord)) {
+                $marker = new Marker($coord);
+
+                $marker->setVariable('marker' . $i);
+                $content = '<p class="map-offer-container">';
+                foreach ($pros as $pro){
+                    $content .=  '<a class="map-offer" href="'.$this->generateUrl('show_pro', array('id' => $pro->getId())).'">'.$pro->getName().'</a>';
+                }
+                $content .= '</p>';
+                $infoWindow = new InfoWindow($content);
+                $infoWindow->setAutoOpen(true);
+                $infoWindow->setAutoClose(true);
+                $infoWindow->setOption('maxWidth', 400);
+                $marker->setInfoWindow($infoWindow);
+
+                $markers[] = $marker;
+            }
+            $i++;
+        }
+        $map->getOverlayManager()->addMarkers($markers);
+
+        if(isset($marker)){
+            $event = new Event(
+                $map->getVariable(),
+                'zoom_changed',
+                'function(){'.
+                $marker->getVariable().'.setMap(null)'
+                .'}'
+            );
+            $map->getEventManager()->addEvent($event);
         }
 
-        $postulatedOfferRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:PostulatedOffers')
-        ;
-        $postulatedOffers = $postulatedOfferRepository->findBy(array('client' => $client));
+        $map->setStylesheetOption('width', 300);
+        $map->setStylesheetOption('min-height', 1100);
 
-        $offerIdArray = $finalArray = array();
+        $map->setStylesheetOption('height', (count($nextRendezvous) * 250).'px');
+        $map->setMapOption('zoom', 2);
 
-        foreach ($postulatedOffers as $postulatedOffer) {
-            $offerIdArray[] = $postulatedOffer->getOffer()->getId();
-            $finalArray[$postulatedOffer->getOffer()->getId()]['date'] = $postulatedOffer->getDate();
-        }
-
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer')
-        ;
-        $offers = $offerRepository->findById($offerIdArray);
-
-        $tagRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Tag')
-        ;
-        $tags = $tagRepository->findAll();
-
-        foreach ($offers as &$offer){
-            $offer->setOfferUrl($generateUrlService->generateOfferUrl($offer));
-            $finalArray[$offer->getId()]['offer'] = $offer;
-        }
 
         return $this->render('ClientBundle:Client:dashboard.html.twig',
             array(
-                'appliedOffer' => $finalArray,
-                'notifications' => $notificationsArray,
-                'favorites' => $favorites,
-                'tags' => $tags
+                'nextRendezvous' => $nextRendezvous,
+                'lastRendezvous' => $lastRendezvous,
+                'map' => $map
             ));
     }
 

@@ -18,4 +18,22 @@ class RendezvousRepository extends \Doctrine\ORM\EntityRepository
                     where r.endDate >= :now and r.user = :user'
             )->setParameter('user',$givenUser)->setParameter('now', new \DateTime())->execute();
     }
+
+    public function findNextForClient($client){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select r
+                    from AppBundle:rendezvous r
+                    where r.startDate >= :now and r.client = :client ORDER BY r.startDate ASC'
+            )->setParameter('client',$client)->setParameter('now', new \DateTime())->execute();
+    }
+
+    public function findLastForClient($client){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select r
+                    from AppBundle:rendezvous r
+                    where r.startDate <= :now and r.client = :client ORDER BY r.startDate ASC'
+            )->setParameter('client',$client)->setParameter('now', new \DateTime())->execute();
+    }
 }

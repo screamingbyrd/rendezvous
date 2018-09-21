@@ -8,6 +8,7 @@
 
 namespace ProBundle\Controller;
 
+use AppBundle\Entity\Client;
 use AppBundle\Entity\Pro;
 use AppBundle\Entity\FeaturedPro;
 use AppBundle\Entity\Rendezvous;
@@ -35,6 +36,7 @@ use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 use Ivory\GoogleMap\Event\Event;
 use DateTime;
+use AppBundle\Form\ClientType;
 
 class ServiceController extends Controller
 {
@@ -45,7 +47,7 @@ class ServiceController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -138,7 +140,7 @@ class ServiceController extends Controller
         $userId = isset($userId)?$userId:0;
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -200,7 +202,7 @@ class ServiceController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -251,7 +253,7 @@ class ServiceController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -285,7 +287,7 @@ class ServiceController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -358,6 +360,9 @@ class ServiceController extends Controller
         $collaboratorId = $request->get('collaboratorId');
         isset($collaboratorId)?$collaboratorId:null;
         $session = $request->getSession();
+
+        $form = $this->get('form.factory')->create(ClientType::class);
+        $form->remove('submit');
 
         $scheduleArray = $rendezvousArray = $finalColorArray = $globalScheduleArray = $globalRendezvousArray = array();
 
@@ -452,7 +457,8 @@ class ServiceController extends Controller
             'pro' => $pro,
             'collaboratorId' => $collaboratorId,
             'globalSchedules' => $finalGlobalScheduleArray,
-            'numberOfDays' => $numberOfDays
+            'numberOfDays' => $numberOfDays,
+            'form' => $form->createView()
         ));
     }
 
@@ -467,6 +473,26 @@ class ServiceController extends Controller
         $date = $request->get('date');
         $hour = $request->get('hour');
 
+        if(!isset($user) || in_array('ROLE_PRO', $user->getRoles())){
+            return $this->redirectToRoute('create_client');
+        }
+
+
+//        if(!isset($user)){
+//            $userRegister = $this->get('app.user_register');
+//            $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_PROPOSER');
+//            $client = new Client();
+//
+//            $em = $this->getDoctrine()->getManager();
+//
+//            $client->setPhone($data->getPhone());
+//            $client->setUser($user);
+//
+//            $em->persist($user);
+//            $em->persist($client);
+//            $em->flush();
+//
+//        }
 
 //        if(isset($postulatedOffer) && count($postulatedOffer) > 0){
 //            $translated = $this->get('translator')->trans('offer.apply.already');

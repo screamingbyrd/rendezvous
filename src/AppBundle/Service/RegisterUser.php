@@ -47,7 +47,7 @@ class RegisterUser
         $user->setPlainPassword($password);
         $user->addRole($role);
 
-        if($role == 'ROLE_EMPLOYER'){
+        if($role == 'ROLE_PRO'){
             $user->setMain(1);
         }
 
@@ -82,7 +82,7 @@ class RegisterUser
         $user->setFirstName('');
         $user->SetLastName('');
         $user->setPlainPassword('0000');
-        $user->addRole('ROLE_EMPLOYER');
+        $user->addRole('ROLE_PRO');
         $user->setPro($pro);
         $this->userManager->updateUser($user);
 

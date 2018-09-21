@@ -178,7 +178,83 @@
                 </div>
                 <a class="cancel-selection-button"><i class="fas fa-pencil-alt"></i></a>
             </div>
-            <div class="shadow-box submit-rendezvous-container">
+            <div class="shadow-box" style="text-align: center">
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                {% else %}
+                    <h3>Vous devez être connecté pour finaliser la reservation</h3>
+
+                    <div class="submit-rendezvous-container register-client">
+                        <div class="col-md-5">
+
+                            {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+
+                            {# Les erreurs générales du formulaire. #}
+                            {{ form_errors(form) }}
+
+                            <div class="row form-group">
+                                <div class="col-md-6 form-group">
+                                    {{ form_label (form.firstName) }}
+                                    {{ form_widget(form.firstName) }}
+                                    {{ form_errors(form.firstName) }}
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    {{ form_label (form.lastName) }}
+                                    {{ form_widget(form.lastName) }}
+                                    {{ form_errors(form.lastName) }}
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    {{ form_label (form.email) }}
+                                    {{ form_widget(form.email) }}
+                                    {{ form_errors(form.email) }}
+                                    <div class="error-already-exist">{{ 'form.registration.mailAlreadyExist'|trans }}</div>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    {{ form_label (form.phone) }}
+                                    {{ form_widget(form.phone) }}
+                                    {{ form_errors(form.phone) }}
+                                </div>
+
+                                <div class="col-md-12">
+                                    <p>{{ 'form.registration.passwordValidation'|trans }}</p>
+                                    {{ form_widget(form.password) }}
+                                    {{ form_errors(form.password) }}
+                                </div>
+
+                                {#<div class="col-md-12">#}
+                                {#{{ form_widget(form.terms) }}#}
+                                {#{{ form_errors(form.terms) }}#}
+                                {#</div>#}
+
+                            </div>
+
+                            {#<div class="col-md-12">#}
+                            {#<div style="margin-top: 10px; font-size: 12px;">#}
+                            {#<div>#}
+                            {#{{ 'form.registration.bySubmitting'|trans({'%link_start%' : '<a target="_blank" href="'~path('legal_page')~'">', '%link_end%' : '</a>'}) | raw }}#}
+                            {#</div>#}
+                            {#<div>#}
+                            {#{{ 'form.registration.consult'|trans({'%link_start%' : '<a target="_blank" href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) | raw }}#}
+                            {#</div>#}
+                            {#</div>#}
+                            {#</div>#}
+
+
+                            {# Génération automatique des champs pas encore écrits.
+                               Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+                               et tous les champs cachés (type « hidden »). #}
+                            {{ form_rest(form) }}
+
+                            {# Fermeture de la balise <form> du formulaire HTML #}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+
+
+
+                {% endif %}
                 <a class="submit-reservation rendezvous-button">Submit</a>
             </div>
         </div>
