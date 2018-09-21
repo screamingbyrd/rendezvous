@@ -1,0 +1,89 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ 'footer.faq'|trans }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container rendezvous-container">
+
+        <div class="schedule-action-container">
+            <div class="select-collaborator-container">
+                <select class="select2 select-collaborator" onchange="changeCollaborator(this)">
+                    <option value="0" {% if  userId == 0%}selected{% endif %}>Global</option>
+                    {% for collaborator in collaborators %}
+                        <option value="{{ collaborator.id }}" {% if collaborator.id == userId %}selected{% endif %}>{{ collaborator.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(() => {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev, next',
+                        center: 'title',
+                        right: 'agendaWeek, agendaDay',
+                    },
+                    slotLabelFormat: 'H:mm',
+                    columnHeaderFormat: 'ddd D/M',
+                    timezone: ('Europe/London'),
+                    allDaySlot: false,
+                    defaultView: 'agendaWeek',
+                    lazyFetching: true,
+                    firstDay: 1,
+                    selectable: true,
+                    editable: false,
+                    disableResizing: true,
+                    maxTime: "22:00:00",
+                    minTime: "06:00:00",
+                    locale: '{{ app.request.locale }}',
+                    eventDurationEditable: true,
+                    events: {{ rendezvousArray|json_encode()|raw }},
+                    eventRender: function(event, element) {
+                        element.attr('title', event.tip);
+                    },
+                })
+            });
+
+            function changeCollaborator(select) {
+                var url = '{{ path('rendezvous_page') }}';
+                url += '?userId='+select.value;
+                document.location.href = url;
+            }
+
+        </script>
+        <div id='calendar'></div>
+    </div>
+
+
+
+    <style>
+        .fc-resizer.fc-end-resizer {
+            display: none !important;
+        }
+        .select-collaborator-container{
+            width: 20%;
+        }
+        .schedule-action-container{
+            display: flex;
+        }
+        .fc-event .fc-bg {
+            display: none !important;
+        }
+        #calendar{
+            margin-top: 10px;
+        }
+    </style>
+
+{% endblock %}

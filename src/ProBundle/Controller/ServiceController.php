@@ -598,4 +598,102 @@ class ServiceController extends Controller
         return $this->redirectToRoute('rendezvous_home');
     }
 
+    public function rendezvousPageAction(Request $request)
+    {
+        $user = $this->getUser();
+        $userId = $request->get('userId');
+        $userId = isset($userId)?$userId:0;
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+
+        $finalArray = $finalColorArray = array();
+
+        $colorArray = ['#3A87AD','red','orange','green','black'];
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        $rendezvouvRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
+        ;
+
+        if ($userId == 0){
+            $givenUser = $userRepository->findBy(array('pro' => $user->getPro()));
+            $username = null;
+        }else{
+            $givenUser = $userRepository->findBy(array('id' => $userId));
+            $username = $givenUser[0]->getUsername();
+        }
+
+        $rendezvousArray = $rendezvouvRepository->findBy(array('user' => $givenUser));
+        for ($i = 0; $i < count($givenUser); $i++){
+            $finalColorArray[$givenUser[$i]->getUsername()] = $colorArray[$i];
+        }
+
+        $users = $userRepository->findBy(array('pro' => $user->getPro(), 'enabled' => 1));
+
+        foreach ($rendezvousArray as $rendezvous){
+            $finalArray[]  = array(
+                'color' => $finalColorArray[$rendezvous->getUser()->getUsername()],
+                'title' => $rendezvous->getUser()->getUsername().' - '.$rendezvous->getClient()->getUser()->getLastname().' - '.$rendezvous->getService()->getCategory().' - '.$rendezvous->getService()->getName(),
+                'id' => $rendezvous->getId(),
+                'start' => $rendezvous->getStartDate()->format('Y-m-d H:i:s'),
+                'end' => $rendezvous->getEndDate()->format('Y-m-d H:i:s')
+            );
+        }
+
+        return $this->render('ProBundle::rendezvousPage.html.twig', array(
+            'rendezvousArray' => $finalArray,
+            'userId' => $userId,
+            'collaborators' => $users,
+            'username' => $username
+        ));
+    }
+
+    public function cancelRendezvousAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $idRendezvous = $request->get('id');
+        $session = $request->getSession();
+
+        $clientRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Client')
+        ;
+        $client = $clientRepository->findOneBy(array('user' => $user->getId()));
+
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
+        ;
+        $rendezvous = $rendezvousRepository->findOneBy(array('id' => $idRendezvous));
+
+        if(!((isset($user) and in_array('ROLE_CLIENT', $user->getRoles()) and $client == $rendezvous->getClient()) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.client');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_client');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($rendezvous);
+        $em->flush();
+
+//        $translated = $this->get('translator')->trans('redirect.client');
+        $session->getFlashBag()->add('danger', 'Le rendez vous à bien été annulé');
+        return $this->redirectToRoute('dashboard_client');
+    }
+
 }

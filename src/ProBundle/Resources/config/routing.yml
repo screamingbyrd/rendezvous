@@ -241,3 +241,13 @@ reserve_rendezvous:
         en: "/reserve"
         fr: "/reserver"
     defaults: { _controller: ProBundle:Service:reserve }
+rendezvous_page:
+    locales:
+        en: "/rendezvous-page"
+        fr: "/page-rendezvous"
+    defaults: { _controller: ProBundle:Service:rendezvousPage }
+cancel_rendezvous:
+    locales:
+        en: "/cancel-rendezvous"
+        fr: "/annuler-rendezvous"
+    defaults: { _controller: ProBundle:Service:cancelRendezvous }
