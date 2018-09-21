@@ -95,7 +95,7 @@ login:
   title: Welcome! Sign in
   subtitle: Sign in to enjoy all services
   noaccount: Don't have an account yet? Register as
-  candidate: Client
+  client: Client
   pro: Pro
   sign: Please sign in
   forgotPassword:

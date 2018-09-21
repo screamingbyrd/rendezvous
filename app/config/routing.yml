@@ -12,7 +12,7 @@ pro:
          en: "/{_locale}/pro"
          fr: "/{_locale}/professionnel"
 
-candidate:
+client:
     resource: "@ClientBundle/Resources/config/routing.yml"
     type: "be_simple_i18n"
     prefix:

@@ -296,7 +296,7 @@ h3.title{
 
 
 
-/*Register candidate / pro*/
+/*Register client / pro*/
 
 .register-pro{
     
@@ -304,11 +304,11 @@ h3.title{
 
 }
 
-.register-candidate{
+.register-client{
     margin-top: 17px;
 }
 
-.register-candidate, .register-pro{
+.register-client, .register-pro{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -478,12 +478,12 @@ legend{
     .add-notification .rendezvous-button{
         width: 100%;
     }
-    .nav-candidate{
+    .nav-client{
         display: inline-block !important;
         padding-left: 11px;
         margin-bottom: 10px !important;
     }
-    .nav-candidate li{
+    .nav-client li{
         float: left !important;
     }
     .homepage-div .alert{
@@ -495,7 +495,7 @@ legend{
     .navbar-fixed-bottom{
         position: relative !important;
     }
-    .register-candidate, .register-pro, .login{
+    .register-client, .register-pro, .login{
         margin-top: 0 !important;
         margin-bottom: 20px;
     }
@@ -814,17 +814,17 @@ legend{
 
 }
 
-.nav-candidate{
+.nav-client{
     display: table !important;
     width: 100%;
     table-layout: fixed;
     margin-bottom: 20px;
 }
-.nav-candidate li{
+.nav-client li{
     float: none;
     display: table-cell;
 }
-.nav-candidate a{
+.nav-client a{
     margin-bottom: -1px;
 }
 

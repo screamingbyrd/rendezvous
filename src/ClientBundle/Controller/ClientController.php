@@ -26,7 +26,7 @@ class ClientController extends Controller
 
         $session = $request->getSession();
 
-        $candidate = new Client();
+        $client = new Client();
 
         $form = $this->get('form.factory')->create(ClientType::class);
 
@@ -46,22 +46,16 @@ class ClientController extends Controller
                 $userRegister = $this->get('app.user_register');
 
 
-                $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CANDIDATE');
+                $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_CLIENT');
 
 
                 if($user != false){
-                $candidate->setUser($user);
-                $candidate->setDescription($data->getDescription());
-                $candidate->setAge($data->getAge());
-                $candidate->setExperience($data->getExperience());
-                $candidate->setLicense($data->getLicense());
-                $candidate->setDiploma($data->getDiploma());
-                $candidate->setSocialMedia($data->getSocialMedia());
-                $candidate->setPhone($data->getPhone());
+                $client->setUser($user);
+                $client->setPhone($data->getPhone());
 
                 // On enregistre notre objet $advert dans la base de données, par exemple
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($candidate);
+                $em->persist($client);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('form.registration.successClient');
@@ -81,7 +75,7 @@ class ClientController extends Controller
 
                     return $this->redirectToRoute('show_offer', array('id' => $id, 'url' => $offer->getOfferUrl()));
                 }else{
-                    return $this->redirectToRoute('edit_candidate');
+                    return $this->redirectToRoute('edit_client');
                 }
 
 
@@ -109,31 +103,17 @@ class ClientController extends Controller
         $session = $request->getSession();
         $idClient = $request->get('id');
 
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $candidate = $candidateRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
+        $client = $clientRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
 
-        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.candidate');
+        if(!((isset($user) and in_array('ROLE_CLIENT', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.client');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_candidate');
-        }
-
-        $originalCvPath = $candidate->getCv();
-        $titleCV = null;
-        if (isset($originalCvPath)){
-            $titleCV = substr($originalCvPath, strrpos($originalCvPath, '-job42-') + 7);
-            $titleCV = str_replace('-space-', ' ', $titleCV);
-        }
-
-        $originalCoverLetterPath = $candidate->getCoverLetter();
-        $titleCoverLetter = null;
-        if(isset($originalCoverLetterPath)){
-            $titleCoverLetter = substr($originalCoverLetterPath, strrpos($originalCoverLetterPath, '-job42-') + 7);
-            $titleCoverLetter = str_replace('-space-', ' ', $titleCoverLetter);
+            return $this->redirectToRoute('create_client');
         }
 
 
@@ -142,15 +122,13 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        $user = $userRepository->findOneBy(array('id' => $candidate->getUser()));
+        $user = $userRepository->findOneBy(array('id' => $client->getUser()));
 
+        $client->setFirstName($client->getUser()->getFirstName());
+        $client->setLastName($client->getUser()->getLastName());
+        $client->setEmail($client->getUser()->getEmail());
 
-
-        $candidate->setFirstName($candidate->getUser()->getFirstName());
-        $candidate->setLastName($candidate->getUser()->getLastName());
-        $candidate->setEmail($candidate->getUser()->getEmail());
-
-        $form = $this->get('form.factory')->create(ClientType::class, $candidate);
+        $form = $this->get('form.factory')->create(ClientType::class, $client);
 
         $form->remove('password');
         $form->remove('terms');
@@ -171,101 +149,23 @@ class ClientController extends Controller
                 $user->SetLastName($data->getLastName());
                 $userManager->updateUser($user);
 
-                $candidate->setDescription($data->getDescription());
-                $candidate->setAge($data->getAge());
-                $candidate->setExperience($data->getExperience());
-                $candidate->setLicense($data->getLicense());
-                $candidate->setDiploma($data->getDiploma());
-                $candidate->setSocialMedia($data->getSocialMedia());
-                $candidate->setPhone($data->getPhone());
-                $candidate->setModifiedDate( new \datetime());
-
-                $target_dir = "uploads/images/candidate/";
-                $newCv = $data->getCv();
-                if(isset($newCv) && is_object($newCv)){
-
-                    $target_file = $target_dir . md5(uniqid()) . '%' . basename($newCv->getClientOriginalName());
-                    move_uploaded_file($newCv->getPathname(), $target_file);
-
-                    if(isset($originalCvPath) && $originalCvPath != ''){
-                        unlink($originalCvPath);
-                    }
-                    $candidate->setCv($target_file);
-                }
-
-                $newCoverLetter = $data->getCoverLetter();
-                if(isset($newCoverLetter) && is_object($newCoverLetter)){
-                    $target_file_cover = $target_dir . md5(uniqid()) . '%' . basename($newCoverLetter->getClientOriginalName());
-                    move_uploaded_file($newCoverLetter->getPathname(), $target_file_cover);
-
-                    if(isset($originalCoverLetterPath) && $originalCoverLetterPath != ''){
-                        unlink($originalCoverLetterPath);
-                    }
-                    $candidate->setCoverLetter($target_file_cover);
-                }
+                $client->setPhone($data->getPhone());
 
                 $em = $this->getDoctrine()->getManager();
-                $em->merge($candidate);
+                $em->merge($client);
                 $em->flush();
 
                 $translated = $this->get('translator')->trans('form.registration.editedClient');
                 $session->getFlashBag()->add('info', $translated);
 
-                return $this->redirectToRoute('show_candidate', array('id' => $candidate->getId()) );
+                return $this->redirectToRoute('edit_client', array('id' => $client->getId()) );
             }
         }
 
-        $completion = 3;
-
-        $title = $candidate->getTitle();
-        if(isset($title)){
-            $completion += 1;
-        }
-        $description = $candidate->getDescription();
-        if(isset($description)){
-            $completion += 1;
-        }
-        $age = $candidate->getAge();
-        if(isset($age)){
-            $completion += 1;
-        }
-        $experience = $candidate->getExperience();
-        if(isset($experience)){
-            $completion += 1;
-        }
-        $diploma = $candidate->getDiploma();
-        if(isset($diploma)){
-            $completion += 1;
-        }
-        $socialMedia = $candidate->getSocialMedia();
-        if(isset($socialMedia)){
-            $completion += 1;
-        }
-        $phone = $candidate->getPhone();
-        if(isset($phone)){
-            $completion += 1;
-        }
-        if(isset($candidate->getLicense()[0])){
-            $completion += 1;
-        }
-        if(isset($candidate->getLanguage()[0])){
-            $completion += 1;
-        }
-        if(isset($candidate->getTag()[0])){
-            $completion += 1;
-        }
-        if(isset($candidate->getSearchedTag()[0])){
-            $completion += 1;
-        }
-
-        $completion = $completion/14 * 100;
 
         return $this->render('ClientBundle:Client:edit.html.twig', array(
             'form' => $form->createView(),
-            'completion' => $completion,
             'user' => $user,
-            'cvTitle' => $titleCV,
-            'coverLetterTitle' => $titleCoverLetter
         ));
     }
 
@@ -277,17 +177,17 @@ class ClientController extends Controller
 
         $generateUrlService = $this->get('app.offer_generate_url');
 
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $candidate = $candidateRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
+        $client = $clientRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
 
-        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.candidate');
+        if(!((isset($user) and in_array('ROLE_CLIENT', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.client');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_candidate');
+            return $this->redirectToRoute('create_client');
         }
 
         $proRepository = $this
@@ -311,8 +211,8 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Notification')
         ;
-        $notifications = $notificationRepository->findBy(array('candidate' => $candidate));
-        $favorites = $favoriteRepository->findBy(array('candidate' => $candidate));
+        $notifications = $notificationRepository->findBy(array('client' => $client));
+        $favorites = $favoriteRepository->findBy(array('client' => $client));
 
         foreach ($favorites as &$favorite){
             $favorite->getOffer()->setOfferUrl($generateUrlService->generateOfferUrl($favorite->getOffer()));
@@ -341,7 +241,7 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:PostulatedOffers')
         ;
-        $postulatedOffers = $postulatedOfferRepository->findBy(array('candidate' => $candidate));
+        $postulatedOffers = $postulatedOfferRepository->findBy(array('client' => $client));
 
         $offerIdArray = $finalArray = array();
 
@@ -383,22 +283,22 @@ class ClientController extends Controller
         $session = $request->getSession();
         $user = $this->getUser();
         $idClient = $request->get('id');
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $candidate = $candidateRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
+        $client = $clientRepository->findOneBy(isset($idClient)?array('id' => $idClient):array('user' => $user->getId()));
 
-        if(!((isset($user) and in_array('ROLE_CANDIDATE', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
-            $translated = $this->get('translator')->trans('redirect.candidate');
+        if(!((isset($user) and in_array('ROLE_CLIENT', $user->getRoles())) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.client');
             $session->getFlashBag()->add('danger', $translated);
-            return $this->redirectToRoute('create_candidate');
+            return $this->redirectToRoute('create_client');
         }
         $em = $this->getDoctrine()->getManager();
 
         if(in_array('ROLE_ADMIN', $user->getRoles())){
-            $user = $candidate->getUser();
+            $user = $client->getUser();
         }
 
         $postulatedRepository = $this
@@ -406,7 +306,7 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:PostulatedOffers')
         ;
-        $postulated = $postulatedRepository->findBy(array('candidate' => $candidate));
+        $postulated = $postulatedRepository->findBy(array('client' => $client));
         foreach ($postulated as $offer){
             $em->remove($offer);
         }
@@ -416,20 +316,20 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Favorite')
         ;
-        $favorites = $favoriteRepository->findBy(array('candidate' => $candidate));
+        $favorites = $favoriteRepository->findBy(array('client' => $client));
         foreach ($favorites as $favorite){
             $em->remove($favorite);
         }
 
         $mail = $user->getEmail();
 
-        $cv = $candidate->getCv();
+        $cv = $client->getCv();
 
         if(isset($cv)){
             unlink($cv);
         }
 
-        $em->remove($candidate);
+        $em->remove($client);
         $em->remove($user);
         $em->flush();
 
@@ -452,7 +352,7 @@ class ClientController extends Controller
         );
         $mailer->send($message);
 
-        $translated = $this->get('translator')->trans('candidate.delete.deleted');
+        $translated = $this->get('translator')->trans('client.delete.deleted');
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('rendezvous_home');
@@ -469,34 +369,34 @@ class ClientController extends Controller
             return $this->redirectToRoute('create_pro');
         }
 
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $candidate = $candidateRepository->findOneBy(array('id' => $id));
+        $client = $clientRepository->findOneBy(array('id' => $id));
 
         return $this->render('ClientBundle:Client:show.html.twig', array(
-            'candidate' => $candidate,
+            'client' => $client,
         ));
     }
 
     public function searchAction(){
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
         ;
-        $candidates = $candidateRepository->findAll();
+        $clients = $clientRepository->findAll();
 
         return $this->render('ClientBundle:Client:search.html.twig', array(
-            'candidates' => $candidates,
+            'clients' => $clients,
         ));
     }
 
     //@TODO put in CRON
     public function eraseUnusedCvsAction(){
-        $candidateRepository = $this
+        $clientRepository = $this
             ->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Client')
@@ -506,30 +406,30 @@ class ClientController extends Controller
             ->getManager()
             ->getRepository('AppBundle:PostulatedOffers')
         ;
-        $candidates = $candidateRepository->findAll();
+        $clients = $clientRepository->findAll();
 
         $now = new \datetime();
         $past = $now->modify( '- 2 month' );
         $em = $this->getDoctrine()->getManager();
-        foreach ($candidates as $candidate){
-            $recentOffers = $postulatedOfferRepository->getRecentPostulatedOffers($candidate);
-            if(empty($recentOffers) && $candidate->getCreationDate() < $past){
-                $cvLink = $candidate->getCv();
-                $coverLink = $candidate->getCoverLetter();
+        foreach ($clients as $client){
+            $recentOffers = $postulatedOfferRepository->getRecentPostulatedOffers($client);
+            if(empty($recentOffers) && $client->getCreationDate() < $past){
+                $cvLink = $client->getCv();
+                $coverLink = $client->getCoverLetter();
 
                 if(isset($cvLink) and $cvLink != ''){
                     if(file_exists($cvLink)){
                         unlink($cvLink);
                     }
-                    $candidate->setCv('');
+                    $client->setCv('');
                 }
                 if(isset($coverLink) and $coverLink != ''){
                     if(file_exists($coverLink)){
                         unlink($coverLink);
                     }
-                    $candidate->setCoverLetter('');
+                    $client->setCoverLetter('');
                 }
-                $em->merge($candidate);
+                $em->merge($client);
             }
         }
         $em->flush();

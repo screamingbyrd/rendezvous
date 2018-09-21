@@ -49,7 +49,7 @@ class ProController extends Controller
 
 
             $userRegister = $this->get('app.user_register');
-            $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_EMPLOYER');
+            $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_PRO');
 
             if($user != false){
                 // the user is now registered !
@@ -373,7 +373,7 @@ class ProController extends Controller
         $user = $this->getUser();
         $session = $request->getSession();
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+        if(!isset($user) || !in_array('ROLE_PRO', $user->getRoles())){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -404,7 +404,7 @@ class ProController extends Controller
         $user = $this->getUser();
         $session = $request->getSession();
 
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())){
+        if(!isset($user) || !in_array('ROLE_PRO', $user->getRoles())){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -510,7 +510,7 @@ class ProController extends Controller
         $session = $request->getSession();
 
         $user = $this->getUser();
-        if(!isset($user) || !in_array('ROLE_EMPLOYER', $user->getRoles())|| $user->getId() != (int)$userId){
+        if(!isset($user) || !in_array('ROLE_PRO', $user->getRoles())|| $user->getId() != (int)$userId){
             return $this->redirectToRoute('create_pro');
         }
 
@@ -579,7 +579,7 @@ class ProController extends Controller
 
         $session = $request->getSession();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()))){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -659,7 +659,7 @@ class ProController extends Controller
 
         $currentUser = $this->getUser();
 
-        if(!(isset($currentUser) and  in_array('ROLE_EMPLOYER', $currentUser->getRoles()) and $currentUser->isMain())){
+        if(!(isset($currentUser) and  in_array('ROLE_PRO', $currentUser->getRoles()) and $currentUser->isMain())){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -696,7 +696,7 @@ class ProController extends Controller
 
         $user = $this->getUser();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()) and $user->isMain())){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');
@@ -727,7 +727,7 @@ class ProController extends Controller
 
         $user = $this->getUser();
 
-        if(!(isset($user) and  in_array('ROLE_EMPLOYER', $user->getRoles()) and $user->isMain())){
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()) and $user->isMain())){
             $translated = $this->get('translator')->trans('redirect.pro');
             $session->getFlashBag()->add('danger', $translated);
             return $this->redirectToRoute('create_pro');

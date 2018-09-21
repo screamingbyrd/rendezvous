@@ -1,14 +1,14 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-  {{ parent() }} - {{ 'form.registration.title.candidate' | trans }}
+  {{ parent() }} - {{ 'form.registration.title.client' | trans }}
 {% endblock %}
 
 {% block body %}
-    <div class="register-candidate container">
+    <div class="register-client container">
         <div class="col-md-5 shadow-box">
-            <h3 class="title">{{ 'form.registration.title.candidate' | trans }}</h3>
-            <div>{{ 'form.registration.subTitle.candidate'|trans }}</div>
+            <h3 class="title">{{ 'form.registration.title.client' | trans }}</h3>
+            <div>{{ 'form.registration.subTitle.client'|trans }}</div>
             <div>{{ 'form.registration.already'|trans }} {{ 'form.registration.connect'|trans({'%link_start%' : '<a href="'~path('fos_user_security_login')~'">', '%link_end%' : '</a>'}) |raw }}</div>
 
             <hr>
@@ -85,7 +85,7 @@
         </div>
     </div>
     <script>
-        $('#appbundle_candidate_email').on('blur', function () {
+        $('#appbundle_client_email').on('blur', function () {
             let mail = this.value;
             url = "{{ path('user_already_exist') }}";
             $.ajax({
@@ -94,15 +94,15 @@
             }).done(function( data ) {
                 if(data != ''){
                     $('.error-already-exist').css({'display':'block'});
-                    $("#appbundle_candidate_submit").prop("disabled",true);
+                    $("#appbundle_client_submit").prop("disabled",true);
                 }else{
                     $('.error-already-exist').css({'display':'none'});
-                    $("#appbundle_candidate_submit").prop("disabled",false);
+                    $("#appbundle_client_submit").prop("disabled",false);
                 }
 
             });
         });
-        $('#appbundle_candidate_email').on('keyup', function () {
+        $('#appbundle_client_email').on('keyup', function () {
             let mail = this.value;
             url = "{{ path('user_already_exist') }}";
             $.ajax({
@@ -111,7 +111,7 @@
             }).done(function( data ) {
                 if(data == ''){
                     $('.error-already-exist').css({'display':'none'});
-                    $("#appbundle_candidate_submit").prop("disabled",false);
+                    $("#appbundle_client_submit").prop("disabled",false);
                 }
 
             });

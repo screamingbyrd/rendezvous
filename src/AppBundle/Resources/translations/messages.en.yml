@@ -23,10 +23,10 @@ homepage:
   ourMission:
       1:
         title: Our mission is double.
-        text: We help locally implanted companies to find the perfect candidate for them when the time is right while working for the candidates to help them find and get their ideal job in Luxembourg.
+        text: We help locally implanted companies to find the perfect client for them when the time is right while working for the clients to help them find and get their ideal job in Luxembourg.
       2:
         title: A dedicated team.
-        text: Our recruiting experts work everyday to offer the best customer service and match for both pros and candidates.
+        text: Our recruiting experts work everyday to offer the best customer service and match for both pros and clients.
       3:
         title: A permanent questioning.
         text: Our brand new website offers a continued development for a better experience every day.
@@ -44,8 +44,8 @@ searchPage:
 
 how:
   title: An explanation is always better
-  pros: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
-  candidates: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+  pros: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect client at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the clients come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of clients and make sure to get clients that match your job posting, making it easier to choose the right client.
+  clients: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect client at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the clients come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of clients and make sure to get clients that match your job posting, making it easier to choose the right client.
 
 
 header:
@@ -54,7 +54,7 @@ header:
   findjob: Find a job
   register: Register
   how: How it works
-  candidates:
+  clients:
     title: Clients
     findJob: Find a job
     companies: Companies
@@ -69,7 +69,7 @@ header:
     title: Pros
     post: Post a job
     edit: Edit a job
-    findClient: Find a candidate
+    findClient: Find a client
     pricing: Buy credits
     dashboard: Dashborard
     register: Pro
@@ -89,13 +89,13 @@ form:
   registration:
     title:
       title: Title
-      candidate: Register as a candidate
+      client: Register as a client
       pro: Register as an pro
       create: Create your account
       edit: Edit your informations
     subTitle:
-      candidate: Your hunt for the perfect job position starts here!
-      pro: Your lookout for the perfect candidate starts now!
+      client: Your hunt for the perfect job position starts here!
+      pro: Your lookout for the perfect client starts now!
     complete: Complete your profile
     completed: Profile completed
     already: Already have a profile?
@@ -119,7 +119,7 @@ form:
     editedClient: Your account has been modified !
     error: Email already used, try again !
     successPro: You successfully registered as an pro !
-    successClient: You successfully registered as a candidate !
+    successClient: You successfully registered as a client !
     error: Email address already used !
     exp0: -- Your experience --
 
@@ -239,7 +239,7 @@ dashboard:
     editProfile: Edit my profile
     watchProfile: See my profile
     return: Dashboard
-  candidate:
+  client:
     list: A quick summary of which job posting you’ve applied to
     appliedThe: Applied on the
     appliedOffers: My offers
@@ -251,7 +251,7 @@ dashboard:
   action: Action
   view: View
   applied: Applied
-  viewClient: View the list of candidates
+  viewClient: View the list of clients
   not: Not activated
 
 slot:
@@ -310,7 +310,7 @@ offer:
   watchSimilar: See all similar offers
   experience: Experience
   startDate: Start date
-  candidatesList: Clients who applied to this offer
+  clientsList: Clients who applied to this offer
   link: Redirection link
   linkPH: "ex : www.yourwebsite.com/recruitment"
   linkInfo: If you want to redirect to your internal recruitment platform
@@ -346,22 +346,22 @@ offer:
     cv: CV
   applied:
     success: You applied to the offer %title% !
-    candidate: You applied to the offer
-    pro: A candidate applied to the offer:
+    client: You applied to the offer
+    pro: A client applied to the offer:
   countView: Views
   countContact: Applications
 
   carousel:
     activate: Once your offer is created you can spend 1 credit to put it online for two month by clicking on Activate/Extend.
 
-candidate:
+client:
   delete:
     delete: Delete my account
     sure: Are you sure that you want to delete your account?
     deleted: Your profile has been deleted
   age: Age
   tag: Skills
-  about: About this candidate
+  about: About this client
 
 
 pro:
@@ -374,7 +374,7 @@ pro:
     tags: Main categories
     spontaenous:
       title: Spontaneous application
-      send: A candidate send you a spontaneous application
+      send: A client send you a spontaneous application
       sent: You application has been sent.
   edit:
     complete: Complete your information
@@ -395,7 +395,7 @@ pro:
 
   credit:
     title: Credits
-    subTitle: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost!
+    subTitle: Finding the perfect client can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect client at a lower cost!
     have: You currently have %credit% credit(s)!
     buy: Buy some credits
   addCollaborator:
@@ -436,9 +436,9 @@ email:
   sent: You message has been sent !
   send: Send
   application:
-    candidate:  You applied to this offer:
+    client:  You applied to this offer:
     pro:
-      applied: A candidate has applied to your offer:
+      applied: A client has applied to your offer:
       comment: Comment/ motivation letter:
       download: Download CV
       downloadCoverLetter: Download cover letter
@@ -518,7 +518,7 @@ searchPro:
   type: Search a company
 about:
   let: Let us present ourselves
-  text1: Rendezvous is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and candidates alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
+  text1: Rendezvous is a very young startup. Our founder, Jean-Charles Weiss has had some previous experience in the recruiting field and he has wanted to offer companies and clients alike a better, cheaper and more modern approach to recruiting. So he created this platform, which designs and concept is unique in Luxembourg.
   text2: The team is also composed of two very dedicated, even if a bit grouchy full-stack developers that are the fingers behind the website construction, design and execution.
   text3: Finally, our dedicated team of sales advisor are here to answer your questions and guide you through the process of acquiring credits for your job postings.
 
@@ -529,13 +529,13 @@ faq:
   kind: What kind of users are you?
   subTitle: An explanation is always better
   pro:
-    intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+    intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect client at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the clients come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of clients and make sure to get clients that match your job posting, making it easier to choose the right client.
     1:
       question: How & Why register?
       answer: Registering with us allows you to benefit from all the features that our platform offers. It is super easy to do and free! You simply need to click on register and fill out the information requested. You will then be able to edit your company’s profile and start adding any job opening you have.
     2:
       question: How does my dashboard work?
-      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once. Simply click on one of the sections to discover what they hide and how they can help you get the perfect candidate.
+      answer: You will find a dashboard thought and designed with your comfort in mind. You will have all the information you need regarding your favorite profiles, your job postings, your invoices and your remaining credits all at once. Simply click on one of the sections to discover what they hide and how they can help you get the perfect client.
     3:
       question: How to post an offer?
       answer: Posting an offer is super easy! Simply click on “post an offer” under Pros in the menu bar and you will be guided to fill out the information regarding the open position. You will be able to preview your job posting before accepting its layout and content and publishing it.
@@ -547,18 +547,18 @@ faq:
       answer: Once you have registered yourself as an pro, you’ll find a section detailing the pricing of credits. Our own experience has taught us that recruiting is expensive so we decided to make these credits affordable to you… and they come with bonuses!
     6:
       question: What is a featured job?
-      answer: If you have a job posting you really want to highlight, you will be using the featured job option. This allows you to remain at the top of the search engine and thus be much more visible to potential candidates.
+      answer: If you have a job posting you really want to highlight, you will be using the featured job option. This allows you to remain at the top of the search engine and thus be much more visible to potential clients.
     7:
       question: What is a featured pro?
-      answer: Want to promote your company and the many benefits you offer to your employees? That is why we created the featured pro. Your company will be prominently displayed on our home page to offer you the maximum visibility with our candidates. They will be able to browse your company history and description and see any openings you have.
+      answer: Want to promote your company and the many benefits you offer to your employees? That is why we created the featured pro. Your company will be prominently displayed on our home page to offer you the maximum visibility with our clients. They will be able to browse your company history and description and see any openings you have.
     8:
       question: What are slots?
       answer: Slots are spaces you can “rent” for a whole year and where you can post any job opening you may have.
-  candidate:
-      intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect candidate at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the candidates come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of candidates and make sure to get candidates that match your job posting, making it easier to choose the right candidate.
+  client:
+      intro: Because we believe recruiting should be an easy task, we have made things as simple as possible for you! The website is designed to help you find the perfect client at the ideal time. How does it work? Once you’ve created your account and you’ve posted your first ad about an open position for your company, you simply have to sit back, relax and let the clients come to you! So how do you find your perfect match? The job posting allows you to choose tags to refine your pool of clients and make sure to get clients that match your job posting, making it easier to choose the right client.
       1:
         question: How to create a profile?
-        answer: To create a candidate profile, you will need to register. It is super easy and will only take about a minute. You will be able to complete your profile with your past experiences and apply to jobs opening.
+        answer: To create a client profile, you will need to register. It is super easy and will only take about a minute. You will be able to complete your profile with your past experiences and apply to jobs opening.
       2:
         question: How to apply to a job?
         answer: Now you are really here because you are looking for a new job, so here’s how to apply to one. Our “find a job” section will show you all the open positions we have. You can refine your search by using the search engine and its filters. Once you have found a job that fits you, you simply need to click on Apply, add your resume and a cover letter if you want. There you go! You have made the first step towards starting an exciting new journey!
@@ -567,13 +567,13 @@ faq:
         answer: Through email via our platform or directly via the information mentioned in your resume.
 
 redirect:
-  candidate: Please register as a candidate
+  client: Please register as a client
   pro: Please register as an pro
 
 price:
   credit: Credit
   credits: Credit(s)
-  find: Finding the perfect candidate can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect candidate at a lower cost! 1 credit = 1 job offer posted
+  find: Finding the perfect client can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on your job posting. Our competitive packages offer you an affordable option for recruiting the perfect client at a lower cost! 1 credit = 1 job offer posted
   price: Price
   bills: Bills
   ourPackages: Our packages
@@ -614,7 +614,7 @@ admin:
   title: Administrator
   dashboard:
     proList: Pros list
-    candidateList: Clients list
+    clientList: Clients list
     adList: Ads list
     createAd: Post an ad
     stat: Statistics
@@ -622,7 +622,7 @@ admin:
     adminList: Admins list
     totalActiveOffers: Total active offers:
     totalPros: Total Pros:
-    totalClients: Total candidates:
+    totalClients: Total clients:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Add an admin
@@ -642,7 +642,7 @@ admin:
   enterMail: Enter an email
   enterCompnay: Enter a company name
   enterTitle: Enter a title
-  sureClient: Are you sure that you want to delete this candidate ?
+  sureClient: Are you sure that you want to delete this client ?
   surePro: Are you sure you want to delete this pro ?
   offerList:
     totalNonVerifiedOffer: Total activated unverified offers
@@ -659,7 +659,7 @@ admin:
   log:
     nbrActive: Number of active offers
     nbrPro: Number of pros
-    nbrClient: Number of candidates
+    nbrClient: Number of clients
     total: Total
     monthly: Monthly
     totalCredit: Number total credit

@@ -23,10 +23,10 @@ homepage:
   ourMission:
       1:
         title: Notre mission est double.
-        text: Nous aidons les entreprises locales à trouver le candidat idéal tout en travaillant avec les candidats afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg.
+        text: Nous aidons les entreprises locales à trouver le client idéal tout en travaillant avec les clients afin de les aider à trouver et obtenir l’emploi qui leur correspond au Luxembourg.
       2:
         title: Une équipe dévouée.
-        text: Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les candidats et les entreprises.
+        text: Nos experts en recrutement s’unissent chaque jour pour offrir un service de qualité et proposer la meilleure combinaison possible entre les clients et les entreprises.
       3:
         title: Une remise en question permanente.
         text: Notre tout nouveau site est en perpétuelle évolution afin de proposer les toutes dernières innovations en termes de recrutement.
@@ -34,7 +34,7 @@ homepage:
   ourPartners: Nos partenaires
   discount:
     title: 2 crédits offerts !
-    description: Pour toute inscription en tant qu'employeur pendant tout le mois de Septembre vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, pour un total de quatre mois.
+    description: Pour toute inscription en tant qu'professionnel pendant tout le mois de Septembre vous recevrez 2 crédits pour mettre en ligne vos offres gratuitement, pour un total de quatre mois.
 
 searchPage:
   display: Affiche %numberOfItem% sur %countResult% offre(s)
@@ -44,33 +44,33 @@ searchPage:
 
 how:
   title: Une explication est toujours mieux
-  pros: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le candidat idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les candidats venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de candidats et d’assurer des candidats correspondant à votre offre d’emploi, ce qui facilitera le choix du candidat approprié.
-  candidates: Parce que trouver un nouveau job peut être stressant, nous vous avons simplifié les choses ! Notre plateforme est conçu pour vous aider à trouver le poste idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez complété votre profil, vous n'avez plus qu'à postuler aux offres qui vous correspondent !
+  pros: Parce que nous pensons que le recrutement devrait être une tâche facile, nous vous avons simplifié les choses! Notre plateforme est conçue pour vous aider à trouver le client idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez publié votre première annonce pour un poste vacant, vous devez simplement vous asseoir, vous détendre et laisser les clients venir à vous! Alors, comment trouvez-vous votre match parfait? L’offre d’emploi vous permet de choisir des tags pour affiner votre réserve de clients et d’assurer des clients correspondant à votre offre d’emploi, ce qui facilitera le choix du client approprié.
+  clients: Parce que trouver un nouveau job peut être stressant, nous vous avons simplifié les choses ! Notre plateforme est conçu pour vous aider à trouver le poste idéal au moment idéal. Comment ça marche? Une fois que vous avez créé votre compte et que vous avez complété votre profil, vous n'avez plus qu'à postuler aux offres qui vous correspondent !
 header:
   register: S'inscrire
   how: Guide d'utilisation
   findjob: Trouver un travail
   profile: Mon compte
   logout: Déconnexion
-  candidates:
-    title: Espace Candidat
+  clients:
+    title: Espace Client
     findJob: Trouver un travail
     companies: Découvrir les entreprises
     submit: Envoyer votre CV
     profile: Mon profil
     dashboard:
       alert: Mes Notifications
-      applied: Mes candidatures
+      applied: Mes clientures
       favorites: Mes favoris
-    register: Candidat
+    register: Client
   pros:
-    title: Espace Employeur
+    title: Espace Professionnel
     post: Poster une offre
     edit: Editer une offre
-    findClient: Trouver un candidat
+    findClient: Trouver un client
     pricing: Acheter des crédits
     dashboard: Tableau de bord
-    register: Employeur
+    register: Professionnel
   about:
     title: A propos de nous
     faq: FAQ
@@ -87,13 +87,13 @@ form:
   registration:
     title:
       title: Titre
-      candidate: S'incrire en tant que candidat
-      pro: S'inscrire en tant qu'employeur
+      client: S'incrire en tant que client
+      pro: S'inscrire en tant qu'professionnel
       create: Créer votre compte
       edit: Modifier vos informations
     subTitle:
-      candidate: Votre recherche du poste idéal commence ici!
-      pro: Votre recherche pour le candidat parfait commence maintenant!
+      client: Votre recherche du poste idéal commence ici!
+      pro: Votre recherche pour le client parfait commence maintenant!
     complete: Compléter votre profil
     completed: Profil complété
     already: Vous avez déjà un profil ?
@@ -113,11 +113,11 @@ form:
     description: Description
     license: Permis de conduire
     success: Vous êtes à présent inscrit en temps que recruteur !
-    edited: L'employeur a bien été modifé !
+    edited: L'professionnel a bien été modifé !
     editedClient: Votre compté à bien été modifié !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
     successPro: Vous êtes à présent inscrit en temps que recruteur !
-    successClient: Vous êtes à présent inscrit en temps que candidat !
+    successClient: Vous êtes à présent inscrit en temps que client !
     error: Adresse e-mail déjà utilisée, veuillez réessayer !
     exp0: -- Indiquez votre expérience --
     exp00: -- Experience requirement --
@@ -237,7 +237,7 @@ dashboard:
     editProfile: Editer mon profil
     watchProfile: Voir mon profil
     return: Tableau de bord
-  candidate:
+  client:
     list: Un résumé rapide des postes auxquels vous avez postulé
     appliedThe: Postulé le
     appliedOffers: Mes offres
@@ -248,8 +248,8 @@ dashboard:
     type: Type
   action: Action
   view: Vue
-  applied: Candidature
-  viewClient: Voir la liste des candidats
+  applied: Clienture
+  viewClient: Voir la liste des clients
   not: Non activée
 
 slot:
@@ -309,7 +309,7 @@ offer:
   watchSimilar: Voir toutes les offres similaires
   experience: Expérience
   startDate: Date de début
-  candidatesList: Candidats qui ont postulé à cette offre
+  clientsList: Clients qui ont postulé à cette offre
   link: Lien de redirection
   linkPH: "ex : www.votresiteweb.com/recrutement"
   linkInfo: Si vous voulez redirigez vers votre plateforme de recrutement interne
@@ -344,24 +344,24 @@ offer:
     message: Lettre de motivation
     cv: CV
   countView: Vues
-  countContact: Candidatures
+  countContact: Clientures
 
   applied:
     success: Vous avez bien postulé à l'offre %title% !
-    candidate: Vous avez postulez à l'offre
-    pro: Un candidat a postulé à cette offre :
+    client: Vous avez postulez à l'offre
+    pro: Un client a postulé à cette offre :
 
   carousel:
     activate: Une fois votre offre créée vous pouvez dépenser 1 crédit pour la mettre en ligne pendant 2 mois en cliquant sur Activer/Prolonger.
 
-candidate:
+client:
   delete:
     delete: Supprimer mon compte
     sure: Êtes-vous sûr de vouloir supprimer votre compte ?
     deleted: Votre profil été supprimé
   age: Âge
   tag: Domaines de compétence
-  about: A propos de ce candidat
+  about: A propos de ce client
 
 pro:
   show:
@@ -372,9 +372,9 @@ pro:
     allOffers: Toute nos offres
     tags: Catégories
     spontaenous:
-      title: Candidature spontanée
-      send: Vous avez reçu une candidature spontanée
-      sent: Votre candidature à bien été envoyé
+      title: Clienture spontanée
+      send: Vous avez reçu une clienture spontanée
+      sent: Votre clienture à bien été envoyé
   edit:
     complete: Complétez vos informations
     completed: Profil complété
@@ -386,7 +386,7 @@ pro:
     fileToo: Fichier trop lourd. Taille maximale 20 Mb.
   credit:
     title: Crédits
-    subTitle: Trouver le candidat idéal peut prendre du temps, mais il est plus important d'avoir la bonne plateforme. Parfois, cela est lié au montant que vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le candidat idéal à moindre coût! Pour information, 1 crédit est équivalent à 1 annonce.
+    subTitle: Trouver le client idéal peut prendre du temps, mais il est plus important d'avoir la bonne plateforme. Parfois, cela est lié au montant que vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le client idéal à moindre coût! Pour information, 1 crédit est équivalent à 1 annonce.
     have: Vous avez actuellement %credit% crédits !
     buy: Acheter des crédits
   addCollaborator:
@@ -415,7 +415,7 @@ featured:
   week: Semaine
   reserved: Réservé
   pro:
-    title: Employeurs en avant
+    title: Professionnels en avant
     modal: Êtes-vous sûr de vouloir réserver cette semaine ? Cela vous coûtera %credit% crédits.
     reserve: Réserver
   offer:
@@ -427,9 +427,9 @@ email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
   application:
-    candidate:  Vous avez postulé à cette offre :
+    client:  Vous avez postulé à cette offre :
     pro:
-      applied: Un candidat a postulé à votre offre:
+      applied: Un client a postulé à votre offre:
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation
@@ -489,7 +489,7 @@ notification:
   mine: Mes notifications
   already: La notification existe déjà !
   tag: Categorie
-  pro: Employeur
+  pro: Professionnel
   search: Recherche
   if: Si vous ne souhaitez plus reçevoir cette alert email cliquez
   here: ici
@@ -510,7 +510,7 @@ searchPro:
   type: Chercher une entreprise
 about:
   let: Laissez nous nous présenter
-  text1: Rendezvous est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux candidats une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
+  text1: Rendezvous est une très jeune startup. Notre fondateur, Jean-Charles Weiss, avait déjà une expérience dans le domaine du recrutement et a souhaité proposer aux entreprises et aux clients une meilleure approche de ce moment stressant. Une approche moins chère et plus moderne. Il a donc créé cette plateforme, dont le concept est unique au Luxembourg.
   text2: L'équipe est également composée de deux développeurs dédiés, qui sont à l'origine de la construction, de la conception et de l'exécution du site.
   text3: Enfin, notre équipe dévouée de conseillers est là pour répondre à vos questions et vous guider tout au long du processus d'acquisition de crédits pour vos offres d'emploi.
 
@@ -521,59 +521,59 @@ faq:
   kind: Quelle type d'utilisateur êtes vous ?
   subTitle: Une explication est toujours mieux
   pro:
-    intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi dans ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le candidat idéal au moment où vous en avez besoin."
+    intro: "Nous avons la conviction que le recrutement se doit d’être une tâche facile et nous œuvrons ainsi dans ce but, pour vous rendre les choses aussi simples que possible ! Notre site est conçu dans cette optique ambitieuse : trouver le client idéal au moment où vous en avez besoin."
     1:
       question: Comment ça marche ?
-      answer: Après création de votre compte, vous pouvez publier votre annonce de poste à pourvoir au sein de votre entreprise et c’est TOUT ! Asseyez-vous, détendez-vous et laissez-nous faire, les candidats viendront à vous comme par magie.
+      answer: Après création de votre compte, vous pouvez publier votre annonce de poste à pourvoir au sein de votre entreprise et c’est TOUT ! Asseyez-vous, détendez-vous et laissez-nous faire, les clients viendront à vous comme par magie.
     2:
-      question: Comment obtenir le candidat rêvé pour le poste ?
-      answer: Au moment de la création de votre annonce, choisissez bien les étiquettes (les tags) afin de décrire, avec le plus de justesse possible, les caractéristiques du poste. Vous obtiendrez ainsi avec assurance des candidats au profil en accord avec votre offre d’emploi. Ceci facilitera d’autant plus le choix futur du meilleur candidat.
+      question: Comment obtenir le client rêvé pour le poste ?
+      answer: Au moment de la création de votre annonce, choisissez bien les étiquettes (les tags) afin de décrire, avec le plus de justesse possible, les caractéristiques du poste. Vous obtiendrez ainsi avec assurance des clients au profil en accord avec votre offre d’emploi. Ceci facilitera d’autant plus le choix futur du meilleur client.
     3:
       question: Pourquoi et comment s'inscrire ?
       answer: L’inscription sur notre site vous permet de bénéficier de toutes les fonctionnalités proposées sur notre plateforme. C’est simple et gratuit jusqu’au 15 octobre 2018 ! Pour s’inscrire, il suffit de se rendre dans la rubrique prévue à cet effet et de suivre la procédure. Vous pourrez bien entendu modifier le profil de votre entreprise à tout moment et ajouter toutes les offres d’emplois que vous souhaitez.
     4:
       question: Comment fonctionne mon tableau de bord ?
-      answer: Le tableau de bord est pensé et conçu pour vous. Dessus sont regroupées toutes les informations concernant vos candidats favoris, vos offres d’emplois et vos crédits restants. En un seul coup d’œil, vous retrouvez tous les éléments clefs ! Cliquez simplement sur l’une des sections pour découvrir ce qui s’y cache.
+      answer: Le tableau de bord est pensé et conçu pour vous. Dessus sont regroupées toutes les informations concernant vos clients favoris, vos offres d’emplois et vos crédits restants. En un seul coup d’œil, vous retrouvez tous les éléments clefs ! Cliquez simplement sur l’une des sections pour découvrir ce qui s’y cache.
     5:
       question: Comment poster une offre ?
-      answer: Allez dans la barre de menu puis dans la rubrique « Employeurs ». A partir de là, cliquez sur « Publier une offre » et remplissez les informations à propos du poste à pourvoir. Vous serez en mesure de prévisualiser votre offre d’emploi avant sa publication et de voir ainsi la mise en page proposée.
+      answer: Allez dans la barre de menu puis dans la rubrique « Professionnels ». A partir de là, cliquez sur « Publier une offre » et remplissez les informations à propos du poste à pourvoir. Vous serez en mesure de prévisualiser votre offre d’emploi avant sa publication et de voir ainsi la mise en page proposée.
     6:
       question: Quels sont les crédits ?
       answer: "Le principe est le suivant : 1 offre d’emploi = 1 crédit. Les crédits vous permettent donc de publier des offres mais pas seulement ! Ils peuvent être utilisés pour de nombreuses autres fonctionnalités sur notre plateforme."
     7:
       question: Combien valent-ils ?
-      answer: Après inscription dans la section employeur, vous trouvez une section détaillant les tarifs des crédits. Le recrutement coûte cher, c’est un fait tiré de notre propre expérience. C’est pourquoi nous avons décidé de mobiliser nos compétences pour vous proposer une solution alternative à moindre coût. L’acquisition de crédits est en plus agrémentée de jolis bonus !
+      answer: Après inscription dans la section professionnel, vous trouvez une section détaillant les tarifs des crédits. Le recrutement coûte cher, c’est un fait tiré de notre propre expérience. C’est pourquoi nous avons décidé de mobiliser nos compétences pour vous proposer une solution alternative à moindre coût. L’acquisition de crédits est en plus agrémentée de jolis bonus !
     8:
       question: Qu'est-ce qu'une offre en avant ?
-      answer: Vous souhaitez mettre en valeur une offre d’emploi et ainsi rester en tête du moteur de recherche de notre plateforme ? L’option « offre vedette » est faite pour vous ! Cette dernière vous assure d’avoir une visibilité maximale auprès des candidats potentiels.
+      answer: Vous souhaitez mettre en valeur une offre d’emploi et ainsi rester en tête du moteur de recherche de notre plateforme ? L’option « offre vedette » est faite pour vous ! Cette dernière vous assure d’avoir une visibilité maximale auprès des clients potentiels.
     9:
-      question: Qu'est-ce qu'un employeur en avant ?
-      answer: Vous voulez promouvoir votre entreprise ainsi que les nombreux avantages offerts à vos employés ? Devenez Employeur Premium ! Votre entreprise sera mise en avant sur notre page d’accueil, assurant une forte visibilité. Les candidats pourront alors parcourir l’historique et la description de votre entreprise ainsi que vos postes disponibles.
+      question: Qu'est-ce qu'un professionnel en avant ?
+      answer: Vous voulez promouvoir votre entreprise ainsi que les nombreux avantages offerts à vos employés ? Devenez Professionnel Premium ! Votre entreprise sera mise en avant sur notre page d’accueil, assurant une forte visibilité. Les clients pourront alors parcourir l’historique et la description de votre entreprise ainsi que vos postes disponibles.
     10:
       question: Que sont les slots?
       answer: Ce sont des espaces que vous pouvez louez toute une année et permettant d’afficher toutes vos offres d’emploi.
 
-  candidate:
+  client:
       intro: Parce que nous croyons fermement que le recrutement devrait être une tâche facile, nous vous facilitons la vie autant que possible !  Comment ça marche ? Rien de plus simple ! Vous postulez aux emplois qui vous correspondent et l’entreprise entrera en contact avec vous via notre plateforme ou par mail.
       1:
         question: Comment créer un profil ?
-        answer: Pour créer un profil de candidat, il suffit de s’inscrire dans la rubrique prévue à cet effet. En plus, ça vous prendra moins de deux minutes. En complétant votre profil avec vos expériences passées, vous serez en mesure de postuler à tous les emplois dès l’instant de leur mise en ligne.
+        answer: Pour créer un profil de client, il suffit de s’inscrire dans la rubrique prévue à cet effet. En plus, ça vous prendra moins de deux minutes. En complétant votre profil avec vos expériences passées, vous serez en mesure de postuler à tous les emplois dès l’instant de leur mise en ligne.
       2:
         question: Comment postuler à un emploi ?
-        answer: Postulez grâce à notre section « Trouver un emploi » en pensant bien à affiner votre recherche par l’intermédiaire des filtres proposés dans notre moteur de recherche ! Vous avez trouvé le job de vos rêves parmi les annonces ? Il ne vous reste alors plus qu’à appuyer sur « soumettre ma candidature », après avoir ajouté votre CV et une lettre de motivation si l’envie vous dit (bien évidemment, cette dernière étape est fortement conseillée pour augmenter vos chances).
+        answer: Postulez grâce à notre section « Trouver un emploi » en pensant bien à affiner votre recherche par l’intermédiaire des filtres proposés dans notre moteur de recherche ! Vous avez trouvé le job de vos rêves parmi les annonces ? Il ne vous reste alors plus qu’à appuyer sur « soumettre ma clienture », après avoir ajouté votre CV et une lettre de motivation si l’envie vous dit (bien évidemment, cette dernière étape est fortement conseillée pour augmenter vos chances).
       3:
         question: Comment l'entreprise va-t-elle me contacter ?
         answer: En passant par notre plateforme, par mail ou bien directement grâce aux coordonnées indiquées dans votre CV.
 
 
 redirect:
-  candidate: Veuillez vous inscrire en tant que candidat
+  client: Veuillez vous inscrire en tant que client
   pro: Veuillez vous inscrire en tant qu'pro
 
 price:
   credit: Crédit
   credits: Crédit(s)
-  find: Trouver le candidat idéal peut prendre du temps, mais il est plus important encore d’utiliser la bonne plateforme. Parfois, cela est lié à combien vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le candidat idéal à moindre coût!
+  find: Trouver le client idéal peut prendre du temps, mais il est plus important encore d’utiliser la bonne plateforme. Parfois, cela est lié à combien vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le client idéal à moindre coût!
   price: Tarif
   bills: Facture
   ourPackages: Nos offres
@@ -612,16 +612,16 @@ bill:
 admin:
   title: Administrateur
   dashboard:
-    proList: Liste des employeurs
-    candidateList: Liste des candidats
+    proList: Liste des professionnels
+    clientList: Liste des clients
     adList: Liste des pubs
     createAd: Créer une pub
     stat: Statistique
     offerList: Liste des offres
     adminList: Liste des admins
     totalActiveOffers: Total offre active:
-    totalPros: Total employeurs:
-    totalClients: Total candidats:
+    totalPros: Total professionnels:
+    totalClients: Total clients:
     totalSlots: Total slot:
   adminList:
     addAdmin:  Ajouter un admin
@@ -641,8 +641,8 @@ admin:
   enterMail: Entrer un email
   enterCompnay: Entrer un nom de société
   enterTitle: Entrer un titre
-  sureClient: Êtes-vous sûr de vouloir effacer ce candidat ?
-  surePro: Êtes-vous sûr de vouloir effacer cet employeur ?
+  sureClient: Êtes-vous sûr de vouloir effacer ce client ?
+  surePro: Êtes-vous sûr de vouloir effacer cet professionnel ?
   offerList:
     totalNonVerifiedOffer: Total offres actives non-vérifiée
     nonArchivedOffers: Offres non archivées
@@ -657,8 +657,8 @@ admin:
     whyInvalid: Pourquoi cette offre n'est-elle pas valide ?
   log:
     nbrActive: Nombre d'offres actives
-    nbrPro: Nombre d'employeurs
-    nbrClient: Nombre de candidats
+    nbrPro: Nombre d'professionnels
+    nbrClient: Nombre de clients
     total: Total
     monthly: Mensuel
     totalCredit: Nombre total de crédit(s)

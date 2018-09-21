@@ -92,7 +92,7 @@
             </a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a id="login" href="{{ path('search_page_offer') }}"><i class="fas fa-search"></i>{{ 'header.candidates.findJob'|trans }}</a></li>
+                <li><a id="login" href="{{ path('search_page_offer') }}"><i class="fas fa-search"></i>{{ 'header.clients.findJob'|trans }}</a></li>
 
                 {%  if (app.user.roles is defined and 'ROLE_ADMIN' in app.user.roles) %}
                     <li class="dropdown">
@@ -102,7 +102,7 @@
                             <li><a href="{{ path('dashboard_admin') }}">{{ 'header.pros.dashboard'|trans }}</a></li>
                             <li><a href="{{ path('list_offer_admin') }}">{{ 'dashboard.pro.slot.offer'|trans }}</a></li>
                             <li><a href="{{ path('list_pro_admin') }}">{{ 'header.pros.title'|trans }}</a></li>
-                            <li><a href="{{ path('list_candidate_admin') }}">{{ 'header.candidates.title'|trans }}</a></li>
+                            <li><a href="{{ path('list_client_admin') }}">{{ 'header.clients.title'|trans }}</a></li>
                             <li><a href="{{ path('list_ad_admin',{'archived':0}) }}">{{ 'admin.dashboard.adList'|trans }}</a></li>
                         </ul>
                     </li>
@@ -117,18 +117,18 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{ app.user.username }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
-                                            {{ path('edit_candidate') }}
-                                        {% elseif 'ROLE_EMPLOYER' in app.user.roles %}
+                            <li><a href="{%  if (app.user.roles is defined) and ('ROLE_CLIENT' in app.user.roles) %}
+                                            {{ path('edit_client') }}
+                                        {% elseif 'ROLE_PRO' in app.user.roles %}
                                             {{ path('edit_pro') }}
                                         {% else %}
                                             {{ path('fos_user_profile_edit') }}
                                         {% endif %}">
                                     <i class="fas fa-pencil-alt edit-icon"></i>{{ 'header.profile'|trans }}</a></li>
                             <li role="separator" class="divider"></li>
-                            {%  if (app.user.roles is defined) and ('ROLE_CANDIDATE' in app.user.roles) %}
+                            {%  if (app.user.roles is defined) and ('ROLE_CLIENT' in app.user.roles) %}
                                 <li><a href="{{ path('dashboard_client') }}">{{ 'header.pros.dashboard'|trans }}</a></li>
-                            {% elseif 'ROLE_EMPLOYER' in app.user.roles %}
+                            {% elseif 'ROLE_PRO' in app.user.roles %}
                                 <li><a href="{{ path('dashboard_pro') }}"><i class="fas fa-th-large"></i>{{ 'header.pros.dashboard'|trans }}</a></li>
                             {% endif %}
                             <li><a href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i>{{ 'header.logout'|trans }}</a></li>
@@ -140,7 +140,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><i class="fas fa-user-plus"></i>{{ 'header.register'|trans }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('create_candidate') }}"><i class="fas fa-search"></i>{{ 'header.candidates.register'|trans }}</a></li>
+                            <li><a href="{{ path('create_client') }}"><i class="fas fa-search"></i>{{ 'header.clients.register'|trans }}</a></li>
                             <li><a href="{{ path('create_pro') }}"><i class="fas fa-clipboard"></i>{{ 'header.pros.register'|trans }}</a></li>
                         </ul>
                     </li>

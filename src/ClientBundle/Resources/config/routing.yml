@@ -1,31 +1,31 @@
-create_candidate:
+create_client:
     locales:
         en: "/register"
         fr: "/inscription"
     defaults: { _controller: ClientBundle:Client:create }
-edit_candidate:
+edit_client:
     locales:
         en: "/edit"
         fr: "/editer"
     defaults: { _controller: ClientBundle:Client:edit }
-delete_candidate:
+delete_client:
     locales:
         en: "/delete"
         fr: "/supprimer"
     defaults: { _controller: ClientBundle:Client:delete }
-show_candidate:
+show_client:
     locales:
         en: "/{id}"
         fr: "/{id}"
     requirements:
       id: \d+
     defaults: { _controller: ClientBundle:Client:show }
-dashboard_candidate:
+dashboard_client:
     locales:
         en: "/dashboard"
         fr: "/tableau-de-bord"
     defaults: { _controller: ClientBundle:Client:dashboard }
-search_candidate:
+search_client:
     locales:
         en: "/search"
         fr: "/chercher"
