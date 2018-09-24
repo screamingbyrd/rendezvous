@@ -41,12 +41,14 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="col-md-4">
-                    <div class="shadow-box">
-                        {{ ivory_google_map(map) }}
-                        {{ ivory_google_api([map]) }}
+                {% if nextRendezvous is defined and nextRendezvous|length > 0 %}
+                    <div class="col-md-4">
+                        <div class="shadow-box">
+                            {{ ivory_google_map(map) }}
+                            {{ ivory_google_api([map]) }}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
 
             </div>

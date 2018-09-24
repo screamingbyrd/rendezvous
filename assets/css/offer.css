@@ -50,7 +50,7 @@
     text-decoration: none;
     color: #ddd;
 }
-.active{
+.container-reservation-field .active{
     display: flex !important;
 }
 .service-reservation-info{
