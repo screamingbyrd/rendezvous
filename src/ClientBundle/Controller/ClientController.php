@@ -287,7 +287,7 @@ class ClientController extends Controller
         $map->setStylesheetOption('width', 300);
         $map->setStylesheetOption('min-height', 1100);
 
-        $map->setStylesheetOption('height', (count($nextRendezvous) * 250).'px');
+        $map->setStylesheetOption('height', count($nextRendezvous)>1?'560px':'250px');
         $map->setMapOption('zoom', 2);
 
 

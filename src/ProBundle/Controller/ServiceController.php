@@ -361,9 +361,6 @@ class ServiceController extends Controller
         isset($collaboratorId)?$collaboratorId:null;
         $session = $request->getSession();
 
-        $form = $this->get('form.factory')->create(ClientType::class);
-        $form->remove('submit');
-
         $scheduleArray = $rendezvousArray = $finalColorArray = $globalScheduleArray = $globalRendezvousArray = array();
 
         $scheduleRepository = $this
@@ -458,7 +455,6 @@ class ServiceController extends Controller
             'collaboratorId' => $collaboratorId,
             'globalSchedules' => $finalGlobalScheduleArray,
             'numberOfDays' => $numberOfDays,
-            'form' => $form->createView()
         ));
     }
 
@@ -472,9 +468,62 @@ class ServiceController extends Controller
         $collaboratorList = $request->get('list');
         $date = $request->get('date');
         $hour = $request->get('hour');
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $firstName = $request->get('firstName');
+        $lastName = $request->get('lastName');
+        $phone = $request->get('phone');
+        $connectionType = $request->get('connectionType');
+
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
+        if(isset($collaboratorId) && $collaboratorId != ''){
+            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorId));
+        }else{
+            $collaboratorList = rtrim($collaboratorList,"-");
+            $collaboratorList = explode('-', $collaboratorList);
+            shuffle($collaboratorList);
+            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorList[0]));
+        }
 
         if(!isset($user) || in_array('ROLE_PRO', $user->getRoles())){
-            return $this->redirectToRoute('create_client');
+
+            if($connectionType == 'register'){
+                $userRegister = $this->get('app.user_register');
+                $user = $userRegister->register($email,$email,$password,$firstName,$lastName,'ROLE_CLIENT');
+
+                $client = new Client();
+                $client->setUser($user);
+                $client->setPhone($phone);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($client);
+                $em->flush();
+            }else{
+                $user_manager = $this->get('fos_user.user_manager');
+                $factory = $this->get('security.encoder_factory');
+                $user = $user_manager->findUserByUsername($email);
+
+                if(!isset($user)){
+                    return $this->redirectToRoute('show_pro', array('id' => $collaborator->getPro()->getId()));
+                }
+
+                $encoder = $factory->getEncoder($user);
+                $bool = ($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())) ? "true" : "false";
+
+                if($bool == "false"){
+                    return $this->redirectToRoute('show_pro', array('id' => $collaborator->getPro()->getId()));
+                }
+
+                $token = new \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken($user, $password, "main", array('ROLE_CLIENT'));
+                $this->get('security.token_storage')->setToken($token);
+
+                $session->set('_security_secured_area', serialize($token));
+            }
+
+
         }
 
 
@@ -500,19 +549,6 @@ class ServiceController extends Controller
 //            return $this->redirectToRoute('dashboard_candidate');
 //        }
 
-        $userRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:User')
-        ;
-        if(isset($collaboratorId) && $collaboratorId != ''){
-            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorId));
-        }else{
-            $collaboratorList = rtrim($collaboratorList,"-");
-            $collaboratorList = explode('-', $collaboratorList);
-            shuffle($collaboratorList);
-            $collaborator = $userRepository->findOneBy(array('id' => $collaboratorList[0]));
-        }
 
         $serviceRepository = $this
             ->getDoctrine()
@@ -595,7 +631,7 @@ class ServiceController extends Controller
 //        $translated = $this->get('translator')->trans('offer.applied.success', array('%title%' => $offer->getTitle()));
         $session->getFlashBag()->add('info', 'Vous avez bien réservé');
 
-        return $this->redirectToRoute('rendezvous_home');
+        return $this->redirectToRoute('dashboard_client');
     }
 
     public function rendezvousPageAction(Request $request)

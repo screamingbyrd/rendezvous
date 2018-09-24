@@ -180,88 +180,84 @@
             </div>
             <div class="shadow-box" style="text-align: center">
 
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <form action="{{ path('reserve_rendezvous',{'proId':pro.id}) }}" method="POST">
+                    <input type="hidden" id="reservation-serviceId" name="serviceId">
+                    <input type="hidden" id="reservation-date" name="date">
+                    <input type="hidden" id="reservation-hour" name="hour">
+                    <input type="hidden" id="reservation-list" name="list">
+                    <input type="hidden" id="reservation-collaboratorId" name="collaboratorId">
 
-                {% else %}
-                    <h3>Vous devez être connecté pour finaliser la reservation</h3>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-                    <div class="submit-rendezvous-container register-client">
-                        <div class="col-md-5">
+                    {% else %}
+                        <input type="hidden" id="reservation-connectionType" name="connectionType" value="register">
+                        <h3>Vous devez être connecté pour finaliser la reservation</h3>
 
-                            {{ form_start(form, {'attr': {'class': 'form-vertical'}}) }}
+                        <div class="submit-rendezvous-container register-client">
+                            <div class="col-md-5 connect-reserve-container">
 
-                            {# Les erreurs générales du formulaire. #}
-                            {{ form_errors(form) }}
+                                <div class="article-title login-title">Se connecté</div>
+                                <a class="show-register-form">Nouveau sur Rendezvous?</a>
 
-                            <div class="row form-group">
-                                <div class="col-md-6 form-group">
-                                    {{ form_label (form.firstName) }}
-                                    {{ form_widget(form.firstName) }}
-                                    {{ form_errors(form.firstName) }}
+                                <div class="article-title register-element">Nouveau sur Rendezvous?</div>
+                                <a class="show-login-form">Vous avez déjà un compte ?</a>
+
+                                <div class="login-field-container register-element">
+                                    <div class="login-label">Prénom</div>
+                                    <input type="text" name="firstName" class="register-field" required>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    {{ form_label (form.lastName) }}
-                                    {{ form_widget(form.lastName) }}
-                                    {{ form_errors(form.lastName) }}
+                                <div class="login-field-container register-element">
+                                    <div class="login-label">Nom</div>
+                                    <input type="text" name="lastName" class="register-field" required>
                                 </div>
-
-                                <div class="col-md-6 form-group">
-                                    {{ form_label (form.email) }}
-                                    {{ form_widget(form.email) }}
-                                    {{ form_errors(form.email) }}
-                                    <div class="error-already-exist">{{ 'form.registration.mailAlreadyExist'|trans }}</div>
+                                <div class="login-field-container register-element">
+                                    <div class="login-label">Numéro de téléphone</div>
+                                    <input type="text" name="phone" class="register-field" required>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    {{ form_label (form.phone) }}
-                                    {{ form_widget(form.phone) }}
-                                    {{ form_errors(form.phone) }}
+                                <div class="login-field-container">
+                                    <div class="login-label">Email</div>
+                                    <input type="email" name="email" required>
                                 </div>
-
-                                <div class="col-md-12">
-                                    <p>{{ 'form.registration.passwordValidation'|trans }}</p>
-                                    {{ form_widget(form.password) }}
-                                    {{ form_errors(form.password) }}
+                                <div class="login-field-container">
+                                    <div class="login-label">Password</div>
+                                    <input type="password" name="password" required>
                                 </div>
-
-                                {#<div class="col-md-12">#}
-                                {#{{ form_widget(form.terms) }}#}
-                                {#{{ form_errors(form.terms) }}#}
-                                {#</div>#}
-
                             </div>
-
-                            {#<div class="col-md-12">#}
-                            {#<div style="margin-top: 10px; font-size: 12px;">#}
-                            {#<div>#}
-                            {#{{ 'form.registration.bySubmitting'|trans({'%link_start%' : '<a target="_blank" href="'~path('legal_page')~'">', '%link_end%' : '</a>'}) | raw }}#}
-                            {#</div>#}
-                            {#<div>#}
-                            {#{{ 'form.registration.consult'|trans({'%link_start%' : '<a target="_blank" href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) | raw }}#}
-                            {#</div>#}
-                            {#</div>#}
-                            {#</div>#}
-
-
-                            {# Génération automatique des champs pas encore écrits.
-                               Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-                               et tous les champs cachés (type « hidden »). #}
-                            {{ form_rest(form) }}
-
-                            {# Fermeture de la balise <form> du formulaire HTML #}
-                            {{ form_end(form) }}
                         </div>
-                    </div>
 
 
 
-                {% endif %}
-                <a class="submit-reservation rendezvous-button">Submit</a>
+                    {% endif %}
+                    <button class="submit-reservation rendezvous-button">Submit</button>
+
+                </form>
+
+
             </div>
         </div>
 
 
     </div>
 
+    <style>
+        .connect-reserve-container{
+            padding: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .login-label{
+            width: 100px;
+        }
+        .login-field-container{
+            display: flex;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .login-title, .show-register-form{
+            display: none;
+        }
+    </style>
     <script>
         function changeCollaborator(select) {
             var url = "{{ path('reservation_page',{'proId':pro.id}) }}";
@@ -276,12 +272,14 @@
             var summaryContainer = $('.container-summary-reservation');
             summaryContainer.show();
             $('.summary-information').html('<div>'+$(this).data('time')+'</div>');
-            var url = '{{ path('reserve_rendezvous',{'proId':pro.id}) }}';
-                url += '&serviceId='+'{{ service.id }}'+'&date='+$(this).data('date')+'&hour='+$(this).data('hour')+'&list='+$(this).data('list');
+
+            $('#reservation-serviceId').val({{ service.id }});
+            $('#reservation-date').val($(this).data('date'));
+            $('#reservation-hour').val($(this).data('hour'));
+            $('#reservation-list').val($(this).data('list'));
             {% if collaboratorId is defined %}
-                url += '&collaboratorId='+'{{ collaboratorId }}';
+            $('#reservation-collaboratorId').val({{ collaboratorId }});
             {% endif %}
-            $('.submit-reservation').attr('href', url);
         });
 
         $('.cancel-selection-button').on('click', function () {
@@ -300,6 +298,24 @@
             var parent = $(this).parent();
             parent.removeClass('active');
             $('#'+(parseInt(parent.attr('id'))+1)).addClass('active')
+        });
+
+        $('.show-login-form').on('click', function () {
+            $(this).hide();
+            $('.register-element').hide();
+            $('.show-register-form').show();
+            $('.login-title').show();
+            $('.register-field').removeAttr('required');
+            $('#reservation-connectionType').val('login');
+        });
+
+        $('.show-register-form').on('click', function () {
+            $(this).hide();
+            $('.register-element').show();
+            $('.show-login-form').show();
+            $('.login-title').hide();
+            $('.register-field').prop('required',true);
+            $('#reservation-connectionType').val('register');
         });
 
     </script>
