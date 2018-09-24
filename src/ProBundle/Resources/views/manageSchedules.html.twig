@@ -66,22 +66,23 @@
                         });
                     },
                     select: function(start, end, jsEvent, view) {
-                        var newEvent = new Object();
-                        newEvent.title = '{{ username }}';
-                        newEvent.start = start;
-                        newEvent.end = end;
-                        start=start.format('Y-MM-DD HH:mm:ss');
-                        end=end.format('Y-MM-DD HH:mm:ss');
-                        url = "{{ path('save_schedule') }}";
-                        $.ajax({
-                            url: url,
-                            data: {userId:{{ userId }},startDate:start, endDate:end}
-                        }).done(function( data ) {
-                            newEvent.id = data;
-                        });
+                        {% if  userId != 0%}
+                            var newEvent = new Object();
+                            newEvent.title = '{{ username }}';
+                            newEvent.start = start;
+                            newEvent.end = end;
+                            start=start.format('Y-MM-DD HH:mm:ss');
+                            end=end.format('Y-MM-DD HH:mm:ss');
+                            url = "{{ path('save_schedule') }}";
+                            $.ajax({
+                                url: url,
+                                data: {userId:{{ userId }},startDate:start, endDate:end}
+                            }).done(function( data ) {
+                                newEvent.id = data;
+                            });
 
-                        $('#calendar').fullCalendar('renderEvent', newEvent);
-
+                            $('#calendar').fullCalendar('renderEvent', newEvent);
+                        {% endif %}
                     },
                     eventDrop: function(event, delta, revertFunc) {
                         var start = event.start.format('Y-MM-DD HH:mm:ss');
