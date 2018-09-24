@@ -671,6 +671,13 @@ admin:
     subject: Credits have been added to your account
     creditsAdded: Following your bank transfer %credits% credits have been added to your account, you will find your invoice enclosed to this mail.
 
+
+service:
+  reserve:
+    login:
+      error: Your login information are incorect
+
+
 tag:
   accounting: Accounting/Finance
   admin: Admin/Secretarial

@@ -490,7 +490,6 @@ class ServiceController extends Controller
         }
 
         if(!isset($user) || in_array('ROLE_PRO', $user->getRoles())){
-
             if($connectionType == 'register'){
                 $userRegister = $this->get('app.user_register');
                 $user = $userRegister->register($email,$email,$password,$firstName,$lastName,'ROLE_CLIENT');
@@ -506,7 +505,10 @@ class ServiceController extends Controller
                 $factory = $this->get('security.encoder_factory');
                 $user = $user_manager->findUserByUsername($email);
 
+                $translated = $this->get('translator')->trans('service.reserve.login.error');
+
                 if(!isset($user)){
+                    $session->getFlashBag()->add('danger', $translated);
                     return $this->redirectToRoute('show_pro', array('id' => $collaborator->getPro()->getId()));
                 }
 
@@ -514,6 +516,7 @@ class ServiceController extends Controller
                 $bool = ($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())) ? "true" : "false";
 
                 if($bool == "false"){
+                    $session->getFlashBag()->add('danger', $translated);
                     return $this->redirectToRoute('show_pro', array('id' => $collaborator->getPro()->getId()));
                 }
 
@@ -522,33 +525,7 @@ class ServiceController extends Controller
 
                 $session->set('_security_secured_area', serialize($token));
             }
-
-
         }
-
-
-//        if(!isset($user)){
-//            $userRegister = $this->get('app.user_register');
-//            $user = $userRegister->register($data->getEmail(),$data->getEmail(),$data->getPassword(),$data->getFirstName(),$data->getLastName(), 'ROLE_PROPOSER');
-//            $client = new Client();
-//
-//            $em = $this->getDoctrine()->getManager();
-//
-//            $client->setPhone($data->getPhone());
-//            $client->setUser($user);
-//
-//            $em->persist($user);
-//            $em->persist($client);
-//            $em->flush();
-//
-//        }
-
-//        if(isset($postulatedOffer) && count($postulatedOffer) > 0){
-//            $translated = $this->get('translator')->trans('offer.apply.already');
-//            $session->getFlashBag()->add('danger', $translated);
-//            return $this->redirectToRoute('dashboard_candidate');
-//        }
-
 
         $serviceRepository = $this
             ->getDoctrine()

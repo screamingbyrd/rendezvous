@@ -670,6 +670,10 @@ admin:
     subject: Crédits ajoutés à votre compte
     creditsAdded: Suite à votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
 
+service:
+  reserve:
+    login:
+      error: Votre informations de connexions sont incorect
 
 
 tag:
