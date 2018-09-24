@@ -263,7 +263,6 @@
             var url = "{{ path('reservation_page',{'proId':pro.id}) }}";
 
             url += "&serviceId="+"{{ service.id }}"+"&collaboratorId=" + select.value;
-            console.log(url);
             document.location.href = url;
         }
 

@@ -116,8 +116,6 @@
                 var url = "{{ path('replicate_schedule') }}";
                 var start = $('#calendar').fullCalendar('getView').start.format('YYYY-MM-DD HH:mm:ss');
                 var end = $('#calendar').fullCalendar('getView').end.format('YYYY-MM-DD HH:mm:ss');
-                console.log(start);
-                console.log(end);
                 $.ajax({
                     url: url,
                     data: {userId:{{ userId }},startDate:start,endDate:end}
