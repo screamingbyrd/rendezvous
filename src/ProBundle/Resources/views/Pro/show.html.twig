@@ -110,11 +110,20 @@
                 {% endif %}
 
                 <div class="shadow-box">
-                    <div class="article-title"><i class="fa fa-tag"></i>Horraire</div>
-
+                    <div class="article-title"><i class="fas fa-clock"></i>Horaire d'ouverture</div>
+                    {% if pro.generalSchedule is null %}
                         <div class="no-recent-offers">
-                            {{ 'pro.show.noTag'|trans }}
+                            Non communiqué
                         </div>
+                    {% else %}
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Lundi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[0]["open"] == '' and pro.generalSchedule[0]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[0]["open"] }}-{{ pro.generalSchedule[0]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Mardi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[1]["open"] == '' and pro.generalSchedule[1]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[1]["open"] }}-{{ pro.generalSchedule[1]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Mercredi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[2]["open"] == '' and pro.generalSchedule[2]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[2]["open"] }}-{{ pro.generalSchedule[2]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Jeudi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[3]["open"] == '' and pro.generalSchedule[3]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[3]["open"] }}-{{ pro.generalSchedule[3]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Vendredi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[4]["open"] == '' and pro.generalSchedule[4]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[4]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Samedi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[5]["open"] == '' and pro.generalSchedule[5]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[5]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Dimanche</div><div class="info-day-general-schedule">{% if pro.generalSchedule[6]["open"] == '' and pro.generalSchedule[6]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[6]["open"] }}-{{ pro.generalSchedule[6]["close"] }}{% endif %}</div></div>
+                    {% endif %}
                 </div>
 
 
@@ -125,6 +134,24 @@
 
 
     <style>
+        .fa-clock{
+            margin-right: 10px;
+        }
+        .fa-square{
+            margin-right: 10px;
+            font-size: 11px;
+        }
+        .title-day{
+            margin-top: 10px;
+            margin-right: 45px;
+            width: 120px;
+        }
+        .info-day-general-schedule{
+            margin-top: 10px;
+        }
+        .container-day-general-schedule{
+            display: flex;
+        }
         .show-button-container{
             display: flex;
             justify-content: center;
