@@ -1,0 +1,115 @@
+
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - {{ 'footer.faq'|trans }}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container rendezvous-container">
+        <form method="POST" action="{{ path('manage_general_schedule') }}" class="form-manage-service">
+
+            <div class="form-container-category">
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Lundi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[0]["open"] is defined and generalSchedule[0]["open"] == '' and generalSchedule[0]["close"] == '' %}checked{% endif %} /><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[0]["open"] is defined and generalSchedule[0]["open"] == '' and generalSchedule[0]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time"  {% if generalSchedule[0]["open"] is defined %}value="{{ generalSchedule[0]["open"] }}"{% endif %} name="schedule[0][open]" min="6:00" max="22:00" {% if generalSchedule[0]["open"] is not defined or  generalSchedule[0]["open"] != '' and generalSchedule[0]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[0]["close"] is defined %}value="{{ generalSchedule[0]["close"] }}"{% endif %} name="schedule[0][close]" min="6:00" max="22:00" {% if generalSchedule[0]["open"] is not defined or  generalSchedule[0]["open"] != '' and generalSchedule[0]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Mardi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[1]["open"] is defined and generalSchedule[1]["open"] == '' and generalSchedule[1]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[1]["open"] is defined and generalSchedule[1]["open"] == '' and generalSchedule[1]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[1]["open"] is defined %}value="{{ generalSchedule[1]["open"] }}"{% endif %} name="schedule[1][open]" min="6:00" max="22:00" {% if generalSchedule[1]["open"] is not defined or  generalSchedule[1]["open"] != '' and generalSchedule[1]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[1]["close"] is defined %}value="{{ generalSchedule[1]["close"] }}"{% endif %} name="schedule[1][close]" min="6:00" max="22:00" {% if generalSchedule[1]["open"] is not defined or  generalSchedule[1]["open"] != '' and generalSchedule[1]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Mercredi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[2]["open"] is defined and generalSchedule[2]["open"] == '' and generalSchedule[2]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[2]["open"] is defined and generalSchedule[2]["open"] == '' and generalSchedule[2]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[2]["open"] is defined %}value="{{ generalSchedule[2]["open"] }}"{% endif %} name="schedule[2][open]" min="6:00" max="22:00" {% if generalSchedule[2]["open"] is not defined or  generalSchedule[2]["open"] != '' and generalSchedule[2]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[2]["close"] is defined %}value="{{ generalSchedule[2]["close"] }}"{% endif %} name="schedule[2][close]" min="6:00" max="22:00" {% if generalSchedule[2]["open"] is not defined or  generalSchedule[2]["open"] != '' and generalSchedule[2]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Jeudi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[3]["open"] is defined and generalSchedule[3]["open"] == '' and generalSchedule[3]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[3]["open"] is defined and generalSchedule[3]["open"] == '' and generalSchedule[3]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[3]["open"] is defined %}value="{{ generalSchedule[3]["open"] }}"{% endif %} name="schedule[3][open]" min="6:00" max="22:00" {% if generalSchedule[3]["open"] is not defined or  generalSchedule[3]["open"] != '' and generalSchedule[3]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[3]["close"] is defined %}value="{{ generalSchedule[3]["close"] }}"{% endif %} name="schedule[3][close]" min="6:00" max="22:00" {% if generalSchedule[3]["open"] is not defined or  generalSchedule[3]["open"] != '' and generalSchedule[3]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Vendredi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[4]["open"] is defined and generalSchedule[4]["open"] == '' and generalSchedule[4]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[4]["open"] is defined and generalSchedule[4]["open"] == '' and generalSchedule[4]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[4]["open"] is defined %}value="{{ generalSchedule[4]["open"] }}"{% endif %} name="schedule[4][open]" min="6:00" max="22:00" {% if generalSchedule[4]["open"] is not defined or  generalSchedule[4]["open"] != '' and generalSchedule[4]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[4]["close"] is defined %}value="{{ generalSchedule[4]["close"] }}"{% endif %} name="schedule[4][close]" min="6:00" max="22:00" {% if generalSchedule[4]["open"] is not defined or  generalSchedule[4]["open"] != '' and generalSchedule[4]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Samedi</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[5]["open"] is defined and generalSchedule[5]["open"] == '' and generalSchedule[5]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[5]["open"] is defined and generalSchedule[5]["open"] == '' and generalSchedule[5]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[5]["open"] is defined %}value="{{ generalSchedule[5]["open"] }}"{% endif %} name="schedule[5][open]" min="6:00" max="22:00" {% if generalSchedule[5]["open"] is not defined or  generalSchedule[5]["open"] != '' and generalSchedule[5]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[5]["close"] is defined %}value="{{ generalSchedule[5]["close"] }}"{% endif %} name="schedule[5][close]" min="6:00" max="22:00" {% if generalSchedule[5]["open"] is not defined or  generalSchedule[5]["open"] != '' and generalSchedule[5]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+                    <div class="shadow-box container-category">
+                        <b class="title-day">Dimanche</b>
+                        <input type="checkbox" id="1" class="closed-day-checkbox" value="scales"  {% if generalSchedule[6]["open"] is defined and generalSchedule[6]["open"] == '' and generalSchedule[6]["close"] == '' %}checked{% endif %}/><label for="scales">Fermé</label>
+                        <div class="time-day-container" {% if generalSchedule[6]["open"] is defined and generalSchedule[6]["open"] == '' and generalSchedule[6]["close"] == '' %}hidden{% endif %}>
+                            Ouverture <input type="time" id="open-1" class="input-time" {% if generalSchedule[6]["open"] is defined %}value="{{ generalSchedule[6]["open"] }}"{% endif %} name="schedule[6][open]" min="6:00" max="22:00" {% if generalSchedule[6]["open"] is not defined or  generalSchedule[6]["open"] != '' and generalSchedule[6]["close"] != '' %}required{% endif %} />
+                            Fermeture <input type="time" id="close-1" class="input-time" {% if generalSchedule[6]["close"] is defined %}value="{{ generalSchedule[6]["close"] }}"{% endif %} name="schedule[6][close]" min="6:00" max="22:00" {% if generalSchedule[6]["open"] is not defined or  generalSchedule[6]["open"] != '' and generalSchedule[6]["close"] != '' %}required{% endif %} />
+                        </div>
+
+                    </div>
+            </div>
+
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <style>
+        .container-category{
+            display: flex;
+        }
+        .title-day{
+            margin-right: 15px;
+            width: 80px;
+        }
+        .input-time{
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .time-day-container{
+            margin-left: 20px;
+        }
+        .closed-day-checkbox{
+            margin-right: 10px !important;
+        }
+    </style>
+    <script>
+        $('.closed-day-checkbox').on('click', function () {
+
+            if($(this).is(':checked')){
+                $(this).parent().children('.time-day-container').hide();
+                $(this).parent().children('.time-day-container').children('.input-time').removeAttr('required').val('');
+            } else {
+                $(this).parent().children('.time-day-container').show();
+                $(this).parent().children('.time-day-container').children('.input-time').prop('required',true);
+            }
+        });
+    </script>
+{% endblock %}

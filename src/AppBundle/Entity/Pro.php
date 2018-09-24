@@ -72,6 +72,13 @@ class Pro
     private $zipcode;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="generalSchedule", type="array", nullable=true)
+     */
+    private $generalSchedule;
+
+    /**
      * @var string
      *
      *
@@ -407,5 +414,22 @@ class Pro
         return $this->images;
     }
 
+    /**
+     * @return array
+     */
+    public function getGeneralSchedule()
+    {
+        return $this->generalSchedule;
+    }
+
+    /**
+     * @param array $generalSchedule
+     * @return Pro
+     */
+    public function setGeneralSchedule($generalSchedule)
+    {
+        $this->generalSchedule = $generalSchedule;
+        return $this;
+    }
 
 }

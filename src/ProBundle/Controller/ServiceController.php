@@ -709,4 +709,35 @@ class ServiceController extends Controller
         return $this->redirectToRoute('dashboard_client');
     }
 
+    public function manageGeneralScheduleAction(Request $request)
+    {
+        $user = $this->getUser();
+
+        $session = $request->getSession();
+
+        if(!(isset($user) and  in_array('ROLE_PRO', $user->getRoles()))){
+            $translated = $this->get('translator')->trans('redirect.pro');
+            $session->getFlashBag()->add('danger', $translated);
+            return $this->redirectToRoute('create_pro');
+        }
+
+        $pro = $user->getPro();
+
+        if ($request->isMethod('POST')) {
+            $arraySchedule = $request->get('schedule');
+            $em = $this->getDoctrine()->getManager();
+
+            $pro->setGeneralSchedule($arraySchedule);
+            $em->merge($pro);
+
+            $em->flush();
+
+            return $this->redirectToRoute('manage_general_schedule');
+        }
+
+        return $this->render('ProBundle::manageGeneralSchedule.html.twig', array(
+            'generalSchedule' => $pro->getGeneralSchedule(),
+        ));
+    }
+
 }

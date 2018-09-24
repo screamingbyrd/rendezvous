@@ -251,3 +251,8 @@ cancel_rendezvous:
         en: "/cancel-rendezvous"
         fr: "/annuler-rendezvous"
     defaults: { _controller: ProBundle:Service:cancelRendezvous }
+manage_general_schedule:
+    locales:
+        en: "/manage-general-schedule"
+        fr: "/modifier-horaire-globale"
+    defaults: { _controller: ProBundle:Service:manageGeneralSchedule }
