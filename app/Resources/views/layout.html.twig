@@ -92,7 +92,7 @@
             </a>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a id="login" href="{{ path('search_page_offer') }}"><i class="fas fa-search"></i>{{ 'header.clients.findJob'|trans }}</a></li>
+                <li><a id="login" href="{{ path('search_page_offer') }}"><i class="fas fa-calendar-check"></i>Prendre rendez vous</a></li>
 
                 {%  if (app.user.roles is defined and 'ROLE_ADMIN' in app.user.roles) %}
                     <li class="dropdown">

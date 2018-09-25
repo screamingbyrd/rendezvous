@@ -86,6 +86,7 @@ fos_elastica:
                             location: { type: text, analyzer: location_tokenizer }
                             city: { type: text, analyzer: autocomplete_analyzer }
                             name: { type: text, analyzer: autocomplete_analyzer }
+                            zipcode: { type: text, analyzer: autocomplete_analyzer }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm
@@ -150,7 +151,7 @@ ivory_google_map:
     map:
         debug: "%kernel.debug%"
         language: "%locale%"
-        api_key: "AIzaSyB_mt43fWT1l6hneIIuLQkFzd13BqFzafY"
+        api_key: "AIzaSyBY8KoA6XgncXKSfDq7Ue7R2a1QWFSFxjc"
     geocoder:
         client: httplug.client.default
         message_factory: httplug.message_factory.default

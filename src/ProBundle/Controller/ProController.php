@@ -287,52 +287,9 @@ class ProController extends Controller
             return $this->redirectToRoute('rendezvous_home');
         }
 
-        //workarround to ssl certificat pb curl error 60
+        $address = $pro->getLocation() . ', ' . $pro->getCity();
 
-        $config = [
-            'verify' => false,
-        ];
-
-        $adapter = GuzzleAdapter::createWithConfig($config);
-
-        // GeoCoder API
-        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
-
-        //try to match string location to get Object with lat long info
-        if($pro->getLocation()){
-            $request = new GeocoderAddressRequest($pro->getLocation());
-        }else{
-            $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
-        }
-
-        $response = $geocoder->geocode($request);
-
-
-        $status = $response->getStatus();
-
-        $map = null;
-
-        if($status == 'OK') {
-            $map = new Map();
-
-            foreach ($response->getResults() as $result) {
-
-                $coord = $result->getGeometry()->getLocation();
-                continue;
-
-            }
-
-            if (isset($coord)) {
-                $marker = new Marker($coord);
-                $marker->setVariable('marker');
-                $map->setCenter($coord);
-                $map->getOverlayManager()->addMarker($marker);
-            }
-
-            $map->setStylesheetOption('width', 1100);
-            $map->setStylesheetOption('min-height', 1100);
-            $map->setMapOption('zoom', 10);
-        }
+        $location = $this->get('app.find_latlong')->geocode($address);
 
         $serviceRepository = $this
             ->getDoctrine()
@@ -349,9 +306,8 @@ class ProController extends Controller
 
         return $this->render('ProBundle:Pro:show.html.twig', array(
             'pro' => $pro,
-            'map' => $map,
-            'status' => $status,
-            'serviceArray' => $serviceArray
+            'serviceArray' => $serviceArray,
+            'location' => $location
         ));
 
     }
@@ -810,87 +766,20 @@ class ProController extends Controller
             ;
             $data = $offerRepository->findBy(array('id'=>$keywords));
         }else{
-            $data = $searchService->searchOffer($searchParam);
+            $data = $searchService->searchPro($searchParam);
         }
 
         $countResult = count($data);
 
         $locationArray =array();
         foreach ($data as $pro){
-            $locationArray[$pro->getLocation()][] = $pro;
+            $address = $pro->getLocation().', '.$pro->getCity();
+            $marker = $this->get('app.find_latlong')->geocode($address);
+            $marker[] = $pro->getName();
+            $marker[] = $this->generateUrl('show_pro', array('id' => $pro->getId()));
+            $marker[] = ($pro->getImages()->first()?$pro->getImages()->first():'');
+            $locationArray[$pro->getId()] = $marker;
         }
-
-        $map = new Map();
-
-        //workarround to ssl certificat pb curl error 60
-
-        $config = [
-            'verify' => false,
-        ];
-
-        $adapter = GuzzleAdapter::createWithConfig($config);
-
-        // GeoCoder API
-        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
-        $markers = array();
-        $i = 1;
-
-        foreach ($locationArray as $location => $pros){
-
-            //try to match string location to get Object with lat long info
-            if($location){
-                $request = new GeocoderAddressRequest($location);
-            }else{
-                $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
-            }
-
-            $response = $geocoder->geocode($request);
-
-            $status = $response->getStatus();
-
-            foreach ($response->getResults() as $result) {
-
-                $coord = $result->getGeometry()->getLocation();
-                continue;
-
-            }
-
-            if(isset($coord)) {
-                $marker = new Marker($coord);
-
-                $marker->setVariable('marker' . $i);
-                $content = '<p class="map-offer-container">';
-                foreach ($pros as $pro){
-                    $content .=  '<a class="map-offer" href="'.$this->generateUrl('show_pro', array('id' => $pro->getId())).'">'.$pro->getName().'</a>';
-                }
-                $content .= '</p>';
-                $infoWindow = new InfoWindow($content);
-                $infoWindow->setAutoOpen(true);
-                $infoWindow->setAutoClose(true);
-                $infoWindow->setOption('maxWidth', 400);
-                $marker->setInfoWindow($infoWindow);
-
-                $markers[] = $marker;
-            }
-            $i++;
-        }
-        $map->getOverlayManager()->addMarkers($markers);
-
-        if(isset($marker)){
-            $event = new Event(
-                $map->getVariable(),
-                'zoom_changed',
-                'function(){'.
-                $marker->getVariable().'.setMap(null)'
-                .'}'
-            );
-            $map->getEventManager()->addEvent($event);
-        }
-
-        $map->setStylesheetOption('width', 300);
-        $map->setStylesheetOption('min-height', 1100);
-        $map->setStylesheetOption('height', '500px');
-        $map->setMapOption('zoom', 2);
 
         $adRepository = $this
             ->getDoctrine()
@@ -913,7 +802,7 @@ class ProController extends Controller
                 'countResult' => $countResult,
                 'searchParam' => $searchParam,
                 'ads' => $ads,
-                'map' => $map
+                'location' => $locationArray
             )
         );
     }

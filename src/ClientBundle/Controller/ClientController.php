@@ -214,88 +214,19 @@ class ClientController extends Controller
 
         $locationArray =array();
         foreach ($nextRendezvous as $rendezvous){
-            $locationArray[$rendezvous->getUser()->getPro()->getLocation()][] = $rendezvous->getUser()->getPro();
+            $address = $rendezvous->getUser()->getPro()->getLocation() . ', ' . $rendezvous->getUser()->getPro()->getCity();
+            $marker = $this->get('app.find_latlong')->geocode($address);
+            $marker[] = $rendezvous->getUser()->getPro()->getName();
+            $marker[] = $this->generateUrl('show_pro', array('id' => $rendezvous->getUser()->getPro()->getId()));
+            $marker[] = ($rendezvous->getUser()->getPro()->getImages()->first()?$rendezvous->getUser()->getPro()->getImages()->first():'');
+            $locationArray[$rendezvous->getUser()->getPro()->getId()] = $marker;
         }
-
-        $map = new Map();
-
-        //workarround to ssl certificat pb curl error 60
-
-        $config = [
-            'verify' => false,
-        ];
-
-        $adapter = GuzzleAdapter::createWithConfig($config);
-
-        // GeoCoder API
-        $geocoder = new GeocoderService($adapter, new GuzzleMessageFactory());
-        $markers = array();
-        $i = 1;
-
-        foreach ($locationArray as $location => $pros){
-
-            //try to match string location to get Object with lat long info
-            if($location){
-                $request = new GeocoderAddressRequest($location);
-            }else{
-                $request = new GeocoderAddressRequest('228 Route d\'Esch, Luxembourg');
-            }
-
-            $response = $geocoder->geocode($request);
-
-            $status = $response->getStatus();
-
-            foreach ($response->getResults() as $result) {
-
-                $coord = $result->getGeometry()->getLocation();
-                continue;
-
-            }
-
-            if(isset($coord)) {
-                $marker = new Marker($coord);
-
-                $marker->setVariable('marker' . $i);
-                $content = '<p class="map-offer-container">';
-                foreach ($pros as $pro){
-                    $content .=  '<a class="map-offer" href="'.$this->generateUrl('show_pro', array('id' => $pro->getId())).'">'.$pro->getName().'</a>';
-                }
-                $content .= '</p>';
-                $infoWindow = new InfoWindow($content);
-                $infoWindow->setAutoOpen(true);
-                $infoWindow->setAutoClose(true);
-                $infoWindow->setOption('maxWidth', 400);
-                $marker->setInfoWindow($infoWindow);
-
-                $markers[] = $marker;
-            }
-            $i++;
-        }
-        $map->getOverlayManager()->addMarkers($markers);
-
-        if(isset($marker)){
-            $event = new Event(
-                $map->getVariable(),
-                'zoom_changed',
-                'function(){'.
-                $marker->getVariable().'.setMap(null)'
-                .'}'
-            );
-            $map->getEventManager()->addEvent($event);
-        }
-
-        $map->setStylesheetOption('width', 300);
-        $map->setStylesheetOption('min-height', 1100);
-
-        $map->setStylesheetOption('height', count($nextRendezvous)>1?'560px':'250px');
-        $map->setMapOption('zoom', 2);
-
 
         return $this->render('ClientBundle:Client:dashboard.html.twig',
             array(
                 'nextRendezvous' => $nextRendezvous,
                 'lastRendezvous' => $lastRendezvous,
-                'map' => $map
+                'location' => $locationArray
             ));
     }
 

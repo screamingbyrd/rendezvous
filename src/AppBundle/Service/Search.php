@@ -17,7 +17,7 @@ class Search
         $this->finder = $finder;
     }
 
-    public function searchOffer($searchParam)
+    public function searchPro($searchParam)
     {
         $searchParam = (array)json_decode($searchParam);
         $boolQuery = new \Elastica\Query\BoolQuery();
@@ -37,11 +37,18 @@ class Search
         }
 
         if($searchParam['location'] != ''){
+            $locationBool = new \Elastica\Query\BoolQuery();
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('location', $searchParam['location']);
-            $boolQuery->addMust($fieldQuery);
+            $locationBool->addShould($fieldQuery);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('city', $searchParam['location']);
+            $locationBool->addShould($fieldQuery);
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('zipcode', $searchParam['location']);
+            $locationBool->addShould($fieldQuery);
+            $boolQuery->addMust($locationBool);
         }
-
 
         $query = new \Elastica\Query($boolQuery);
 
