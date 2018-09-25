@@ -140,27 +140,29 @@
             var location = {lat: {{ location|first[0] }}, lng: {{ location|first[1] }}};
             // The map, centered at Uluru
             var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 17, center: location});
+                document.getElementById('map'), {zoom: 17, center: location, mapTypeControl: false, fullscreenControl: false});
             // The marker, positioned at Uluru
 
             var bounds = new google.maps.LatLngBounds();
             var infoWindow = new google.maps.InfoWindow();
             {% for position in location %}
-                var marker = new google.maps.Marker({position: {lat: {{ position[0] }}, lng: {{ position[1] }}}, map: map});
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        {% if position[5] != '' %}
-                            {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AppBundle\\Entity\\Image') %}
-                        {% else %}
-                            {% set image = 'images/default_cover_image6.jpg' %}
-                        {% endif %}
+                {% if position[5] is defined %}
+                    var marker = new google.maps.Marker({position: {lat: {{ position[0] }}, lng: {{ position[1] }}}, map: map});
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            {% if position[5] != '' %}
+                                {% set image =  'uploads' ~ vich_uploader_asset(position[5], 'imageFile', 'AppBundle\\Entity\\Image') %}
+                            {% else %}
+                                {% set image = 'images/default_cover_image6.jpg' %}
+                            {% endif %}
 
-                        var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
-                        infoWindow.setContent(content);
-                        infoWindow.open(map, marker);
-                    }
-                })(marker, i));
-                bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
+                            var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
+                            infoWindow.setContent(content);
+                            infoWindow.open(map, marker);
+                        }
+                    })(marker, i));
+                    bounds.extend({lat: {{ position[0] }}, lng: {{ position[1] }}});
+                {% endif %}
             {% endfor %}
             {% if location|length > 1 %}
                 map.fitBounds(bounds);
@@ -271,4 +273,5 @@
             });
         }
     });
+
 </script>

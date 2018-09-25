@@ -54,7 +54,7 @@
                             var location = {lat: {{ location|first[0] }}, lng: {{ location|first[1] }}};
                             // The map, centered at Uluru
                             var map = new google.maps.Map(
-                                document.getElementById('map'), {zoom: 17, center: location});
+                                document.getElementById('map'), {zoom: 17, center: location, mapTypeControl: false, fullscreenControl: false});
                             // The marker, positioned at Uluru
 
                             var bounds = new google.maps.LatLngBounds();
