@@ -219,6 +219,7 @@ class ClientController extends Controller
             $marker[] = $rendezvous->getUser()->getPro()->getName();
             $marker[] = $this->generateUrl('show_pro', array('id' => $rendezvous->getUser()->getPro()->getId()));
             $marker[] = ($rendezvous->getUser()->getPro()->getImages()->first()?$rendezvous->getUser()->getPro()->getImages()->first():'');
+            $marker[] = $rendezvous->getUser()->getPro()->getPhone();
             $locationArray[$rendezvous->getUser()->getPro()->getId()] = $marker;
         }
 

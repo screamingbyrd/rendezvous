@@ -68,7 +68,7 @@
                                         {% else %}
                                             {% set image = 'images/default_cover_image6.jpg' %}
                                         {% endif %}
-                                        var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>';
+                                        var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
                                         infoWindow.setContent(content);
                                         infoWindow.open(map, marker);
                                     }

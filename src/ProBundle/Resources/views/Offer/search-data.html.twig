@@ -130,7 +130,7 @@
         {% endif %}
     {% endfor %}
     </div>
-    <div class="search-map shadow-box col-md-4">
+    <div class="search-map shadow-box col-md-4 animated fadeIn">
         <div id="map"></div>
     </div>
     <script>
@@ -155,7 +155,7 @@
                             {% set image = 'images/default_cover_image6.jpg' %}
                         {% endif %}
 
-                        var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>';
+                        var content = '<a target="_blank" href="'+ "{{ position[4] }}" +'"><div><img class="pro-image-map" src="{{ asset(image) }}"></div><div class="pro-title-map">' + "{{ position[3] }}" + '</div></a>'+"{{ position[6] }}";
                         infoWindow.setContent(content);
                         infoWindow.open(map, marker);
                     }
@@ -179,6 +179,7 @@
         .pro-title-map{
             margin-top: 5px;
             font-size: 15px;
+            margin-bottom: 1px;
         }
         .pro-image-map{
             width: 200px;

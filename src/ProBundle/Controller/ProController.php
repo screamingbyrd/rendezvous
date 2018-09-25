@@ -778,6 +778,7 @@ class ProController extends Controller
             $marker[] = $pro->getName();
             $marker[] = $this->generateUrl('show_pro', array('id' => $pro->getId()));
             $marker[] = ($pro->getImages()->first()?$pro->getImages()->first():'');
+            $marker[] = $pro->getPhone();
             $locationArray[$pro->getId()] = $marker;
         }
 
