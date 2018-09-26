@@ -165,6 +165,14 @@ form:
     wag9: Jusqu'à 80,000 €
     wag10: Jusqu'à 90,000 €
 
+    type: Type
+    typePH: Coiffeur, Salon de beauté,...
+    type1: Coiffeur
+    type2: Institut de beauté
+    type3: Barbier
+    type4: Manucure et pédicure
+    type5: Spa
+
     searchedtag: Domaine de compétences désirées
     tag: Vos domaines de compétences
 

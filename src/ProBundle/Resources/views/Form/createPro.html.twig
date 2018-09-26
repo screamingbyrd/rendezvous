@@ -23,10 +23,16 @@
 
             <div class="row form-group">
 
-                <div class="col-md-12 form-group">
+                <div class="col-md-6 form-group">
                     {{ form_label (form.name) }}
                     {{ form_widget(form.name) }}
                     {{ form_errors(form.name) }}
+                </div>
+
+                <div class="col-md-6 form-group">
+                    {{ form_label (form.type) }}
+                    {{ form_widget(form.type) }}
+                    {{ form_errors(form.type) }}
                 </div>
 
                 <div class="col-md-6 form-group">

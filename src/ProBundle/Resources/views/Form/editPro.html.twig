@@ -58,23 +58,29 @@
                 </fieldset>
                 <fieldset>
                     <legend>{{ 'pro.edit.companyData'|trans }}</legend>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-6 form-group">
                         {{ form_label (form.name,null, { 'label_attr': {'class': 'label-form'} }) }}
                         {{ form_widget(form.name) }}
                         {{ form_errors(form.name) }}
                     </div>
 
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-6 form-group">
+                        {{ form_label (form.type,null, { 'label_attr': {'class': 'label-form'} }) }}
+                        {{ form_widget(form.type) }}
+                        {{ form_errors(form.type) }}
+                    </div>
+
+                    <div class="col-md-4 form-group">
                         {{ form_label (form.location,null, { 'label_attr': {'class': 'label-form'} }) }}
                         {{ form_widget(form.location) }}
                         {{ form_errors(form.location) }}
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         {{ form_label (form.city,null, { 'label_attr': {'class': 'label-form'} }) }}
                         {{ form_widget(form.city) }}
                         {{ form_errors(form.city) }}
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-4 form-group">
                         {{ form_label (form.zipcode,null, { 'label_attr': {'class': 'label-form'} }) }}
                         {{ form_widget(form.zipcode) }}
                         {{ form_errors(form.zipcode) }}

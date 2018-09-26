@@ -87,6 +87,7 @@ fos_elastica:
                             city: { type: text, analyzer: autocomplete_analyzer }
                             name: { type: text, analyzer: autocomplete_analyzer }
                             zipcode: { type: text, analyzer: autocomplete_analyzer }
+                            type: { type: text, analyzer: autocomplete_analyzer }
                         persistence:
                         # the driver can be orm, mongodb or phpcr
                             driver: orm

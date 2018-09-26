@@ -81,6 +81,13 @@ class Pro
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
      *
      * @Assert\Length(
      *      min = 3,
@@ -432,4 +439,21 @@ class Pro
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return Pro
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
 }

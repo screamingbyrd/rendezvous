@@ -58,6 +58,7 @@ class ProController extends Controller
 
                 $pro->setName($data->getName());
                 $pro->setPhone($data->getPhone());
+                $pro->setType($data->getType());
                 $pro->addUser($user);
                 $user->setPro($pro);
 

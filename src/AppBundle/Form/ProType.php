@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class ProType extends AbstractType
@@ -107,6 +108,19 @@ class ProType extends AbstractType
                 'required' => false,
                 'allow_add' => true,
                 'allow_delete'=>true,
+            ))
+            ->add('type', ChoiceType::class, array(
+                'choices' => array(
+                    'form.registration.type1' => 'form.registration.type1',
+                    'form.registration.type2' => 'form.registration.type2',
+                    'form.registration.type3' => 'form.registration.type3',
+                    'form.registration.type4' => 'form.registration.type4',
+                    'form.registration.type5' => 'form.registration.type5',
+                ),
+                'required' => false,
+                'label' => 'form.registration.type',
+                'attr' => array(
+                    'class' => 'select2'),
             ))
             ->add('submit',      SubmitType::class, array(
                 'attr' => array(

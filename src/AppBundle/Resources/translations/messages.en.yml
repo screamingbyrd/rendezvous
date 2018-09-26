@@ -168,6 +168,9 @@ form:
     wag9: Up to 80,000 €
     wag10: Up to 90,000 €
 
+    type: Type
+    typePH: Hairdresser, Beauty saloon,...
+
     searchedtag: List your wanted skills area
     tag: Your skills
 

@@ -8,8 +8,6 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\ContractType;
-use AppBundle\Entity\Tag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 use Symfony\Component\Form\AbstractType;
