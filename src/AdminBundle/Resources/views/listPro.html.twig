@@ -19,14 +19,13 @@
                 <tr>
                     <th>{{ 'form.offer.search.proPH' | trans }}</th>
                     <th>{{ 'form.registration.email' | trans }}</th>
-                    <th>{{ 'pro.credit.title' | trans }}</th>
                     <th>{{ 'dashboard.action' | trans }}</th>
                 </tr>
             </thead>
 
             <tbody id="table-pro">
                 {% for pro in pros %}
-                    <tr>
+                    <tr class="{% if pro.pro.phone is null %}archived-offer{% endif %} {% if pro.pro.validated is null %}offer-not-validated{% elseif pro.pro.validated %}offer-validated{% else %}offer-invalid{% endif %}">
                         <td>
                             <a class="pro-title" href="{{ path('pro_offers', { 'id': pro.pro.id }) }}">
                                 {{ pro.pro.name }}
@@ -34,18 +33,21 @@
                         </td>
                         <td>{{ pro.email }}</td>
 
-                        <td>{{ pro.pro.credit }}</td>
                         <td>
+                            {% if pro.pro.validated is null or pro.pro.validated == false %}
+                                <a class="btn btn-success" href="{{ path('change_validation_status', {'id':pro.pro.id, 'status':1}) }}">{{ 'admin.offerList.valid'|trans }}</a>
+                            {% endif %}
+                            {% if pro.pro.validated is null or pro.pro.validated %}
+                                <button class="modal-open-invalid btn btn-danger" data-id="{{ pro.pro.id }}">
+                                    {{ 'admin.offerList.invalid'|trans }}
+                                </button>
+                            {% endif %}
                             <a class="btn btn-primary" href="{{ path('edit_pro', { 'id': pro.pro.id }) }}">
                                 {{ 'dashboard.pro.editOffer' | trans }}
                             </a>
                             <button class="modal-open btn btn-danger" data-href="{{ path('delete_pro', { 'id': pro.pro.id }) }}">
                                 {{ 'delete' | trans }}
                             </button>
-                            <a class="btn btn-primary" href="{{ path('rendezvous_bills', { 'id': pro.pro.id }) }}">
-                                {{ 'price.bills' | trans }}
-                            </a>
-                            <a href="{{ path('add_credit_admin', {'id':pro.id}) }}" class="btn btn-primary">{{ 'admin.addCredit.title'|trans }}</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -74,6 +76,27 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="invalid-modal">
+            <div class="modal-dialog modal-bg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{ 'admin.offerList.whyInvalid'|trans }}</h4>
+                    </div>
+                    <form method="post" action="{{ path('change_validation_status') }}" id="search-offer-homepage">
+                        <input id="invalid-offer-id" type="hidden" name="id">
+                        <input id="invalid-offer-id" type="hidden" name="status" value="0">
+                        <textarea title="message" style="width: 100%;" name="message"></textarea>
+
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="{{ 'email.send'|trans }}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <script>
             function showPro() {
                 let input, filter, ul, li, a, i;
@@ -109,7 +132,25 @@
             $("#payment-form_submit").on("click", function(){
                 $("#mi-modal").modal('hide');
             });
+            $(".modal-open-invalid").on("click", function(e){
+                $('#invalid-offer-id').val($(this).data('id'));
+                $("#invalid-modal").modal('show');
+            });
         </script>
-
+        <style>
+            .offer-not-validated{
+                background-color: #ffa500b5 !important;
+            }
+            .not-validated, .total-not-validated{
+                background-color: #ffa500b5 !important;
+                color: black;
+            }
+            .offer-validated{
+                background-color: #2fa551b5 !important;
+            }
+            .offer-invalid{
+                background-color: #c74646b5 !important;
+            }
+        </style>
     </div>
 {%  endblock %}

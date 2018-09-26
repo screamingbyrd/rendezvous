@@ -86,6 +86,14 @@ class Pro
     private $type;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="validated", type="boolean", nullable=true)
+
+     */
+    protected $validated;
+
+    /**
      * @var string
      *
      *
@@ -456,4 +464,24 @@ class Pro
         $this->type = $type;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param bool $validated
+     * @return Pro
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+        return $this;
+    }
+
+
 }

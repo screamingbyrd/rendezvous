@@ -109,7 +109,7 @@ class ProType extends AbstractType
                 'allow_add' => true,
                 'allow_delete'=>true,
             ))
-            ->add('kind', ChoiceType::class, array(
+            ->add('type', ChoiceType::class, array(
                 'choices' => array(
                     'form.registration.type1' => 'form.registration.type1',
                     'form.registration.type2' => 'form.registration.type2',

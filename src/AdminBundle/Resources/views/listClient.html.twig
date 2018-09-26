@@ -10,33 +10,33 @@
     {% endif %}
     <div class="container">
 
-        <h2>{{ 'admin.dashboard.candidateList' | trans }}</h2>
+        <h2>{{ 'admin.dashboard.clientList' | trans }}</h2>
 
         <input type="text" id="myInput" onkeyup="showPro()" placeholder="{{ 'admin.enterMail'|trans }}" title="Type in a name" class="search-pro">
 
         <table class="table table-bordered table-striped well">
             <thead>
                 <tr>
-                    <th>{{ 'dashboard.candidate.name' | trans }}</th>
+                    <th>{{ 'dashboard.client.name' | trans }}</th>
                     <th>{{ 'form.registration.email' | trans }}</th>
                     <th>{{ 'dashboard.action' | trans }}</th>
                 </tr>
             </thead>
 
-            <tbody id="table-candidate">
-                {% for candidate in candidates %}
+            <tbody id="table-client">
+                {% for client in clients %}
                     <tr>
                         <td>
-                            <a href="{{ path('dashboard_candidate', { 'id': candidate.id }) }}">
-                                {{ candidate.user.firstName }} {{ candidate.user.lastName }}
+                            <a href="{{ path('dashboard_client', { 'id': client.id }) }}">
+                                {{ client.user.firstName }} {{ client.user.lastName }}
                             </a>
                         </td>
-                        <td class="candidate-mail">{{ candidate.user.email }}</td>
+                        <td class="client-mail">{{ client.user.email }}</td>
                         <td>
-                            <a href="{{ path('edit_candidate', { 'id': candidate.id }) }}">
+                            <a href="{{ path('edit_client', { 'id': client.id }) }}">
                                 <button type="button" class="btn btn-primary">{{ 'dashboard.pro.editOffer' | trans }}</button>
                             </a>
-                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_candidate', { 'id': candidate.id }) }}">
+                            <button class="modal-open btn btn-danger" data-href="{{ path('delete_client', { 'id': client.id }) }}">
                                 {{ 'delete' | trans }}
                             </button>
                         </td>
@@ -46,11 +46,11 @@
 
         </table>
         <div id="paginator-offer">
-            <a href="{{ path('list_candidate_admin', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
+            <a href="{{ path('list_client_admin', {'row':(page == 1?page:page-1)}) }}">&laquo;</a>
             {% for i in 1..total %}
-                <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('list_candidate_admin', {'row':i}) }}">{{ i }}</a>
+                <a class="offer-page-link {% if i == page %}selected-page{% endif %}" href="{{ path('list_client_admin', {'row':i}) }}">{{ i }}</a>
             {% endfor %}
-            <a href="{{ path('list_candidate_admin', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
+            <a href="{{ path('list_client_admin', {'row':(page == total?page:page+1)}) }}">&raquo;</a>
         </div>
 
         <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
@@ -72,13 +72,13 @@
                 let input, filter, ul, li, a, i;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
-                ul = document.getElementById("table-candidate");
+                ul = document.getElementById("table-client");
                 a = ul.getElementsByTagName("tr");
                 for (i = 0; i < a.length; i++) {
                     a[i].style.display = "none";
                 }
                 for (i = 0; i < a.length; i++) {
-                    let h = a[i].getElementsByClassName("candidate-mail")[0];
+                    let h = a[i].getElementsByClassName("client-mail")[0];
                     if (h.innerHTML.toUpperCase().indexOf(filter) > -1) {
                         a[i].style.display = "";
                     } else {

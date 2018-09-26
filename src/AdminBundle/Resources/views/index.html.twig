@@ -15,28 +15,21 @@
                 <a class="zoom block-dashboard square-credit" href="{{ path('list_ad_admin',{'archived':0}) }}"><div class="content-square"><i class="fas fa-euro-sign"></i><div class="text-square">{{ 'admin.dashboard.adList' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-featured-offers" href="{{ path('featured_offer_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.offer.title' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-featured-pros" href="{{ path('list_offer_admin') }}"><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">{{ 'admin.dashboard.offerList' | trans }}</div></div></a>
-                <a class="zoom block-dashboard square-offers" href="{{ path('list_candidate_admin') }}"><div class="content-square"><i class="fas fa-search"></i><div class="text-square">{{ 'admin.dashboard.candidateList' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-offers" href="{{ path('list_client_admin') }}"><div class="content-square"><i class="fas fa-search"></i><div class="text-square">{{ 'admin.dashboard.clientList' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-bills" href="{{ path('log_page') }}"><div class="content-square"><i class="fas fa-chart-line"></i><div class="text-square">{{ 'admin.dashboard.stat' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-featured-pros" href="{{ path('featured_pro_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.pro.title' | trans }}</div></div></a>
                 <a class="zoom block-dashboard square-featured-pros" href="{{ path('list_admin') }}"><div class="content-square"><i class="fas fa-wrench"></i><div class="text-square">{{ 'admin.dashboard.adminList' | trans }}</div></div></a>
             </div>
         </div>
 
-
-        <div class="dashboard-total-offer">
-            {{ 'admin.dashboard.totalActiveOffers' | trans }} {{ totalActiveOffer }}
-        </div>
         <p></p>
         <div class="dashboard-total-offer">
             {{ 'admin.dashboard.totalPros' | trans }} {{ countPro }}
         </div>
         <div class="dashboard-total-offer">
-            {{ 'admin.dashboard.totalClients' | trans }} {{ candidateCount }}
+            {{ 'admin.dashboard.totalClients' | trans }} {{ clientCount }}
         </div>
         <p></p>
-        <div class="dashboard-total-offer">
-            {{ 'admin.dashboard.totalSlots' | trans }} {{ totalSLot }}
-        </div>
 
     </div>
 
