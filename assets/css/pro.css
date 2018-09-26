@@ -140,6 +140,9 @@ h3.box{
     .select-collaborator-container{
         float: initial !important;
     }
+    .search-map{
+        display: none;
+    }
 }
 .container-logo-pro{
     position: absolute;

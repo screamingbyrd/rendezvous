@@ -279,6 +279,7 @@
             {% if collaboratorId is defined %}
             $('#reservation-collaboratorId').val({{ collaboratorId }});
             {% endif %}
+            window.scrollTo(0,0);
         });
 
         $('.cancel-selection-button').on('click', function () {

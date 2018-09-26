@@ -103,19 +103,24 @@ class ServiceController extends Controller
                     }
                 }
             }
-            foreach ($categoryToRemove as $category){
-                if($category != ''){
-                    $services = $serviceRepository->findBy(array('category' => $category, 'pro' => $pro));
-                    foreach ($services as $service){
-                        $em->remove($service);
-                    }
+            if(isset($categoryToRemove)){
+                foreach ($categoryToRemove as $category){
+                    if($category != ''){
+                        $services = $serviceRepository->findBy(array('category' => $category, 'pro' => $pro));
+                        foreach ($services as $service){
+                            $em->remove($service);
+                        }
 
+                    }
                 }
             }
-            foreach ($serviceToRemove as $id){
-                if($id != ''){
-                    $service = $serviceRepository->findOneBy(array('id' => $id));
-                    $em->remove($service);
+
+            if(isset($serviceToRemove)) {
+                foreach ($serviceToRemove as $id) {
+                    if ($id != '') {
+                        $service = $serviceRepository->findOneBy(array('id' => $id));
+                        $em->remove($service);
+                    }
                 }
             }
             $em->flush();
