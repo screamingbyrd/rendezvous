@@ -50,6 +50,12 @@ class Search
             $boolQuery->addMust($locationBool);
         }
 
+        if($searchParam['type'] != ''){
+            $fieldQuery = new \Elastica\Query\Match();
+            $fieldQuery->setFieldQuery('type', $searchParam['type']);
+            $boolQuery->addMust($fieldQuery);
+        }
+
         $query = new \Elastica\Query($boolQuery);
 
         $data = $this->finder->find($query,3000);

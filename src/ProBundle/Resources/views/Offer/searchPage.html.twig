@@ -20,6 +20,16 @@
                     {{ autoComplete|raw  }}
                     {{ autoCompleteScript|raw  }}
                 </div>
+                <div class="col-md-3">
+                    <select title="Type" id="type-input" class="select2" data-placeholder="{{ 'form.offer.search.categoryPH' | trans }}">
+                        <option></option>
+                        <option value="form.registration.type1" {% if type == "form.registration.type1" %}selected{% endif %}>{{ 'form.registration.type1'|trans }}</option>
+                        <option value="form.registration.type2" {% if type == "form.registration.type2" %}selected{% endif %}>{{ 'form.registration.type2'|trans }}</option>
+                        <option value="form.registration.type3" {% if type == "form.registration.type3" %}selected{% endif %}>{{ 'form.registration.type3'|trans }}</option>
+                        <option value="form.registration.type4" {% if type == "form.registration.type4" %}selected{% endif %}>{{ 'form.registration.type4'|trans }}</option>
+                        <option value="form.registration.type5" {% if type == "form.registration.type5" %}selected{% endif %}>{{ 'form.registration.type5'|trans }}</option>
+                    </select>
+                </div>
                 <div class="col-md-2">
                     <input type="submit" class="rendezvous-button searchOffer" value="Search">
                 </div>
@@ -240,16 +250,13 @@
                 let keyword = $("#keyword-input").val();
                 let location = $("#place_input").val();
                 let pro = $("#pro-input").val();
-                let tags = $("#category-input").val();
+                let type = $("#type-input").val();
                 let url = window.location.href;
-                let type = $('input:checkbox:checked.type-contract-checkbox').map(function () {
-                    return this.value;
-                }).get();
 
                 url = "{{ path('search_offer') }}";
                 $.ajax({
                     url: url,
-                    data: {keyword:keyword,location:location,pro:pro,type:type,row:row,number:totalItem,tags:tags}
+                    data: {keyword:keyword,location:location,pro:pro,type:type,row:row,number:totalItem}
                 }).done(function( data ) {
 
                     $('#loading').hide();
@@ -270,7 +277,7 @@
                     url = url.substr(0, url.lastIndexOf("?"));
                     url += '?';
 
-                    url += 'keyword='+keyword+'&location='+location+'&pro='+pro;
+                    url += 'keyword='+keyword+'&location='+location+'&type='+type;
 
                     window.history.replaceState('object or string', 'Title', url);
 

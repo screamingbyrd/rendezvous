@@ -201,7 +201,7 @@
         $(this).find('.layer-offer-element').removeClass('fadeOut').addClass('fadeIn');
     });
 
-    $(".offer-element").on("click ", function(e){
+    $(document).on("click",".offer-element",function(e) {
         if(!($(e.target).hasClass('carousel-control') || $(e.target).hasClass('glyphicon')|| $(e.target).hasClass('carousel-dot'))){
             window.location.href = $(this).data('href');
         }

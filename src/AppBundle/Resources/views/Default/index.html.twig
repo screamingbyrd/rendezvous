@@ -15,6 +15,14 @@
                     <div class="div-keyword-input"><input class="form-control" name="keyword" type="text" id="keyword-input" placeholder="{{ 'form.offer.search.keyword' | trans }}" title="{{ 'form.offer.search.keyword' | trans }}"></div>
                     {#<div class="div-location-input">{{ autoComplete|raw  }}#}
                         {#{{ autoCompleteScript|raw  }}</div>#}
+                    <select title="Type" id="type-input" name="type"  class="selectpicker homepage-tag">
+                        <option value="" disabled selected>{{ 'form.registration.type'|trans }}</option>
+                        <option value="form.registration.type1">{{ 'form.registration.type1'|trans }}</option>
+                        <option value="form.registration.type2">{{ 'form.registration.type2'|trans }}</option>
+                        <option value="form.registration.type3">{{ 'form.registration.type3'|trans }}</option>
+                        <option value="form.registration.type4">{{ 'form.registration.type4'|trans }}</option>
+                        <option value="form.registration.type5">{{ 'form.registration.type5'|trans }}</option>
+                    </select>
                     <input type="submit" class="rendezvous-button searchOffer-home" value="{{ 'form.offer.search.search' | trans }}">
                 </div>
             </form>

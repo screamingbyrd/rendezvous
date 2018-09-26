@@ -748,12 +748,14 @@ class ProController extends Controller
     public function searchAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
+        $type = $request->get('type');
         $currentPage = $request->get('row');
         $numberOfItem =  $request->get('number');
 
         $searchParam = array(
             'keywords' => $keywords,
             'location' => $location,
+            'type' => $type
         );
         $searchParam = json_encode($searchParam);
 
@@ -773,15 +775,22 @@ class ProController extends Controller
         $countResult = count($data);
 
         $locationArray =array();
+        $finalData = array();
         foreach ($data as $pro){
-            $address = $pro->getLocation().', '.$pro->getCity();
-            $marker = $this->get('app.find_latlong')->geocode($address);
-            $marker[] = $pro->getName();
-            $marker[] = $this->generateUrl('show_pro', array('id' => $pro->getId()));
-            $marker[] = ($pro->getImages()->first()?$pro->getImages()->first():'');
-            $marker[] = $pro->getPhone();
-            $locationArray[$pro->getId()] = $marker;
+            if($pro->getType() == $type || $type == ''){
+                $address = $pro->getLocation().', '.$pro->getCity();
+                $marker = $this->get('app.find_latlong')->geocode($address);
+                $marker[] = $pro->getName();
+                $marker[] = $this->generateUrl('show_pro', array('id' => $pro->getId()));
+                $marker[] = ($pro->getImages()->first()?$pro->getImages()->first():'');
+                $marker[] = $pro->getPhone();
+                $locationArray[$pro->getId()] = $marker;
+                $finalData[] = $pro;
+            }
+
         }
+
+        $countResult = count($finalData);
 
         $adRepository = $this
             ->getDoctrine()
@@ -791,7 +800,7 @@ class ProController extends Controller
         $ads = $adRepository->getCurrentAds();
         shuffle($ads);
 
-        $finalArray = array_slice($data, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
+        $finalArray = array_slice($finalData, ($currentPage - 1 ) * $numberOfItem, $numberOfItem);
 
         $totalPage = ceil ($countResult / $numberOfItem);
 
@@ -812,6 +821,7 @@ class ProController extends Controller
     public function searchPageAction(Request $request){
         $keywords = $request->get('keyword');
         $location = $request->get('location');
+        $type = $request->get('type');
 
         $autoComplete = new Autocomplete();
         $autoComplete->setInputId('place_input');
@@ -843,6 +853,7 @@ class ProController extends Controller
 
         return $this->render('ProBundle:Offer:searchPage.html.twig', array(
             'keyword' => $keywords,
+            'type' => $type,
             'autoComplete' => $autoCompleteHelper->render($autoComplete),
             'autoCompleteScript' => $apiHelper->render([$autoComplete])
         ));

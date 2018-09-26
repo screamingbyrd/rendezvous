@@ -10,10 +10,10 @@ list_pro_admin:
         fr: "/employeur/liste"
     defaults: { _controller: AdminBundle:Admin:listPro }
 
-list_candidate_admin:
+list_client_admin:
     locales:
-        en: "/candidate/list"
-        fr: "/candidat/liste"
+        en: "/client/list"
+        fr: "/client/liste"
     defaults: { _controller: AdminBundle:Admin:listClient }
 
 add_credit_admin:

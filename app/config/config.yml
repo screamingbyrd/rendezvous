@@ -73,7 +73,7 @@ fos_elastica:
                                 autocomplete_tokenizer:
                                     type: nGram
                                     min_gram: 3
-                                    max_gram: 20
+                                    max_gram: 100
                                 location_tokenizer:
                                     type: nGram
                                     min_gram: 6
