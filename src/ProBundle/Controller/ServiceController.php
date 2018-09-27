@@ -125,6 +125,9 @@ class ServiceController extends Controller
             }
             $em->flush();
 
+            $translated = $this->get('translator')->trans('service.manageService.success');
+            $session->getFlashBag()->add('info', $translated);
+
             return $this->redirectToRoute('manage_service');
         }
 
@@ -736,6 +739,9 @@ class ServiceController extends Controller
             $em->merge($pro);
 
             $em->flush();
+
+            $translated = $this->get('translator')->trans('service.manageGeneralSchedule.success');
+            $session->getFlashBag()->add('info', $translated);
 
             return $this->redirectToRoute('manage_general_schedule');
         }

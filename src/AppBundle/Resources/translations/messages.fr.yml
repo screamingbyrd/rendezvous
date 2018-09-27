@@ -52,6 +52,7 @@ header:
   findjob: Trouver un travail
   profile: Mon compte
   logout: Déconnexion
+  myAppointment: Mes rendez-vous
   clients:
     title: Espace Client
     findJob: Trouver un travail
@@ -679,6 +680,10 @@ admin:
     creditsAdded: Suite à votre virement %credits% crédits ont été ajoutés à votre compte, vous trouverez ci-joint votre facture.
 
 service:
+  manageService:
+    success: Vos services ont bien été mis à jour !
+  manageGeneralSchedule:
+    success: Vos horraires ont bien été mis à jour !
   reserve:
     login:
       error: Votre informations de connexions sont incorect

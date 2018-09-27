@@ -53,10 +53,8 @@
                     {% else %}
                         {% set image = 'images/default_cover_image6.jpg' %}
                     {% endif %}
-                    <div class="background-pro-in-offer-search" style="background-repeat: no-repeat;background-size: cover;background-image: url({{ asset(image) }});">
-                        <div class="layer layer-offer-element">
-                        </div>
-                    </div>
+                    <img class="image-show-pro" src="{{ asset(image) }}">
+
                 {% endif %}
                 <div class="shadow-box">
                     <p class="description-show-pro">{{ pro.description |nl2br}}</p>

@@ -54,6 +54,7 @@ header:
   findjob: Find a job
   register: Register
   how: How it works
+  myAppointment: My appointments
   clients:
     title: Clients
     findJob: Find a job
@@ -676,6 +677,10 @@ admin:
 
 
 service:
+  manageService:
+    success: Your services has been updated !
+  manageGeneralSchedule:
+    success: Your general schedule has been updated !
   reserve:
     login:
       error: Your login information are incorect
