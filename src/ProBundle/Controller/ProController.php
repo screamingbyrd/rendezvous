@@ -185,11 +185,6 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User');
 
-        $offerRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Offer');
-
         $featuredProRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -207,17 +202,10 @@ class ProController extends Controller
 
         $featuredProArray = $featuredProRepository->findBy(array('pro' => $pro));
 
-        $offers = $offerRepository->findBy(array('pro' => $pro, 'archived' => false));
-
         $em = $this->getDoctrine()->getManager();
 
         $pro->setPhone(null);
         $em->merge($pro);
-
-        foreach ($offers as $offer) {
-            $offer->setArchived(true);
-            $em->merge($offer);
-        }
 
         foreach ($featuredProArray as $featuredPro) {
             $featuredPro->setArchived(true);
@@ -282,6 +270,11 @@ class ProController extends Controller
             ->getRepository('AppBundle:Pro');
 
         $pro = $repository->find($id);
+        $user = $this->getUser();
+
+        if(!(isset($user) && $user->getPro() == $pro) && ($pro->isValidated() != 1)){
+            return $this->redirectToRoute('rendezvous_home', array('id' => $id));
+        }
 
         $phone = $pro->getPhone();
         if(!isset($phone)){
@@ -772,12 +765,10 @@ class ProController extends Controller
             $data = $searchService->searchPro($searchParam);
         }
 
-        $countResult = count($data);
-
         $locationArray =array();
         $finalData = array();
         foreach ($data as $pro){
-            if($pro->getType() == $type || $type == ''){
+            if(($pro->getType() == $type || $type == '') and $pro->isValidated() == 1){
                 $address = $pro->getLocation().', '.$pro->getCity();
                 $marker = $this->get('app.find_latlong')->geocode($address);
                 $marker[] = $pro->getName();

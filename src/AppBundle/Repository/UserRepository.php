@@ -21,4 +21,19 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $query->execute();
     }
 
+    public function findPro($validated)
+    {
+        $query = $this->createQueryBuilder('u')->select();
+        $query->innerJoin('u.pro', 'p')->andWhere('p.id is not null')
+            ->orderBy('p.id', 'asc');
+
+        if(isset($validated)){
+            $query->andWhere('p.validated is null');
+        }
+
+        $user = $query->getQuery()->getResult();
+
+        return $user;
+    }
+
 }

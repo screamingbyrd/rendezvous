@@ -52,6 +52,8 @@ class AdminController extends Controller
         $currentPage = isset($currentPage)?$currentPage:1;
         $sort = isset($sort)?$sort:'DESC';
 
+        $valid = $request->get('validated');
+
         $numberOfItem = 20;
 
         $user = $this->getUser();
@@ -65,7 +67,7 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:User')
         ;
-        $users = $repository->findAll();
+        $users = $repository->findPro($valid);
 
         $pros = [];
         foreach($users as $user)
@@ -87,6 +89,7 @@ class AdminController extends Controller
             'page' => $currentPage,
             'total' => $totalPage,
             'sort' => $sort,
+            'validated' => $valid,
         ));
     }
 

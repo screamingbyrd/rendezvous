@@ -659,8 +659,8 @@ admin:
     nonArchivedOffers: Offres non archivées
     archivedOffers: Offres archivées
     showAll: Toutes les offres
-    showActive: Offres actives
-    showNotValidated: Offres actives non-validées
+    showActive: Tout les pros
+    showNotValidated: Pro non validés
     creationDate: Date de création
     valid: Valide
     invalid: Invalide
