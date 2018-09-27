@@ -332,11 +332,6 @@ class AdminController extends Controller
             return $this->redirectToRoute('rendezvous_home');
         }
 
-        $logRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:ActiveLog');
-
         $proRepository = $this
             ->getDoctrine()
             ->getManager()
@@ -347,25 +342,8 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Client');
 
-        $logCreditRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:LogCredit');
-
-        $applicationRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:PostulatedOffers');
-
-        $finalActiveLog = array();
         $finalClientLog = array();
         $finalProLog = array();
-        $finalCreditLog = array();
-        $monthlyCreditLog = array();
-        $finalPriceLog = array();
-        $monthlyPriceLog = array();
-        $finalApplicationLog = array();
-        $monthlyApplicationLog = array();
 
         for ($i = 1; $i <= 12; $i++){
             $startDate = new \DateTime();
@@ -374,27 +352,13 @@ class AdminController extends Controller
             $lastDay = date('t',strtotime($dateToTest));
             $endDate= new \DateTime();
             $endDate->setDate($year, $i, $lastDay);
-            $finalActiveLog[] = (int)$logRepository->countActiveBetween($startDate,$endDate)[0]['total'];
             $finalClientLog[] = (int)$clientRepository->countActiveBetween($endDate)[0]['total'];
-            $finalApplicationLog[] = (int)$applicationRepository->countTotalBefore($endDate)[0]['total'];
-            $monthlyApplicationLog[] = (int)$applicationRepository->countTotalMonthly($i, $year)[0]['total'];
             $finalProLog[] =(int)$proRepository->countActiveBetween($endDate)[0]['total'];
-            $finalCreditLog[] =(int)$logCreditRepository->countTotalBefore($endDate)[0]['total'];
-            $monthlyCreditLog[] = (int)$logCreditRepository->countTotalMonthly($i, $year)[0]['total'];
-            $finalPriceLog[] =(int)$logCreditRepository->countTotalMoneyBefore($endDate)[0]['total'];
-            $monthlyPriceLog[] = (int)$logCreditRepository->countTotalMoneyMonthly($i, $year)[0]['total'];
         }
 
         return $this->render('AdminBundle::logPage.html.twig',array(
-            'activeOfferLog' => $finalActiveLog,
             'activeProLog' => $finalProLog,
             'activeClientLog' => $finalClientLog,
-            'creditLog' => $finalCreditLog,
-            'monthlyCreditLog' => $monthlyCreditLog,
-            'finalPriceLog' => $finalPriceLog,
-            'monthlyPriceLog' => $monthlyPriceLog,
-            'application' => $finalApplicationLog,
-            'monthlyApplication' => $monthlyApplicationLog,
             'year' => $year
         ));
     }

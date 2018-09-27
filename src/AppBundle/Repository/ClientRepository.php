@@ -15,7 +15,7 @@ class ClientRepository extends \Doctrine\ORM\EntityRepository
         return $this->getEntityManager()
             ->createQuery(
                 'select count(distinct ca.id) as total
-                    from AppBundle:candidate ca
+                    from AppBundle:client ca
                     where ca.creationDate <= :endDate'
             )->setParameter('endDate',$endDate)->execute();
     }
