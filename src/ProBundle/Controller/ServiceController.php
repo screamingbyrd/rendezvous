@@ -314,26 +314,55 @@ class ServiceController extends Controller
             ->getRepository('AppBundle:Schedule')
         ;
 
+        $nextWeekStartDate = strtotime($startDate);
+        $nextWeekStartDate = strtotime("+7 day", $nextWeekStartDate);
+
+        $nextWeekEndDate = strtotime($endDate);
+        $nextWeekEndDate = strtotime("+7 day", $nextWeekEndDate);
+
         if ($userId == 0){
             $givenUser = $userRepository->findBy(array('pro' => $user->getPro()));
+            $i = 0;
             foreach ($givenUser as $singleUser){
                 $schedules = $scheduleRepository->findBetween($singleUser, $startDate, $endDate);
-                foreach ($schedules as $schedule){
-                    for($i = 1;$i <=1; $i++){
-                        $newStartDate = new DateTime($schedule->getStartDate()->format("Y-m-d H:i:s"));
-                        $newEndDate = new DateTime($schedule->getEndDate()->format("Y-m-d H:i:s"));
-                        $newSchedule = new Schedule();
+                $nextWeekSchedule = $scheduleRepository->findBetween($singleUser, date('Y-m-d 00:00:00', $nextWeekStartDate), date('Y-m-d 00:00:00', $nextWeekEndDate));
 
-                        $newSchedule->setUser($singleUser);
-                        $newSchedule->setStartDate($newStartDate->modify('+'.$i.'week'));
-                        $newSchedule->setEndDate($newEndDate->modify('+'.$i.'week'));
+                if(empty($nextWeekSchedule)){
+                    foreach ($schedules as $schedule){
+                        for($i = 1;$i <=1; $i++){
+                            $newStartDate = new DateTime($schedule->getStartDate()->format("Y-m-d H:i:s"));
+                            $newEndDate = new DateTime($schedule->getEndDate()->format("Y-m-d H:i:s"));
+                            $newSchedule = new Schedule();
 
-                        $em->persist($newSchedule);
+                            $newSchedule->setUser($singleUser);
+                            $newSchedule->setStartDate($newStartDate->modify('+'.$i.'week'));
+                            $newSchedule->setEndDate($newEndDate->modify('+'.$i.'week'));
+
+                            $em->persist($newSchedule);
+                        }
                     }
+                }else{
+                    $i++;
                 }
+            }
+            if($i == count($givenUser)){
+                $translated = $this->get('translator')->trans('service.manageSchedule.duplicate.error');
+                $session->getFlashBag()->add('danger', $translated);
+
+                return new JsonResponse($this->generateUrl('manage_schedule', array('userId' => $userId)));
             }
         }else{
             $givenUser = $userRepository->findOneBy(array('id' => $userId));
+
+            $nextWeekSchedule = $scheduleRepository->findBetween($givenUser, date('Y-m-d 00:00:00', $nextWeekStartDate), date('Y-m-d 00:00:00', $nextWeekEndDate));
+
+            if(!empty($nextWeekSchedule)){
+                $translated = $this->get('translator')->trans('service.manageSchedule.duplicate.error');
+                $session->getFlashBag()->add('danger', $translated);
+
+                return new JsonResponse($this->generateUrl('manage_schedule', array('userId' => $userId)));
+            }
+
             $schedules = $scheduleRepository->findBetween($givenUser, $startDate, $endDate);
             foreach ($schedules as $schedule){
                 for($i = 1;$i <=1; $i++){
@@ -353,7 +382,7 @@ class ServiceController extends Controller
 
         $em->flush();
 
-        $translated = $this->get('translator')->trans('form.offer.activate.success');
+        $translated = $this->get('translator')->trans('service.manageSchedule.duplicate.success');
         $session->getFlashBag()->add('info', $translated);
 
         return new JsonResponse($this->generateUrl('manage_schedule', array('userId' => $userId)));

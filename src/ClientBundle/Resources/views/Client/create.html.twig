@@ -50,6 +50,10 @@
                     {{ form_errors(form.password) }}
                 </div>
 
+                <div class="col-md-12">
+                    <input class="show-password" type="checkbox" onclick="myFunction()">{{ 'form.registration.showPassword'|trans }}
+                </div>
+
                 {#<div class="col-md-12">#}
                     {#{{ form_widget(form.terms) }}#}
                     {#{{ form_errors(form.terms) }}#}
@@ -85,6 +89,17 @@
         </div>
     </div>
     <script>
+        function myFunction() {
+            var x = document.getElementsByClassName("password-field");
+            for (var i = 0; i < x.length; i++) {
+                if (x[i].type === "password") {
+                    x[i].type = "text";
+                } else {
+                    x[i].type = "password";
+                }
+            }
+        }
+
         $('#appbundle_client_email').on('blur', function () {
             let mail = this.value;
             url = "{{ path('user_already_exist') }}";

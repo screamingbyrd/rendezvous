@@ -654,6 +654,10 @@ legend{
     padding: 11px 20px 12px 13px;
     border: 1px solid #000000;
 }
+.show-password{
+    margin-right: 10px !important;
+    margin-bottom: 10px !important;
+}
 .background-offer{
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;

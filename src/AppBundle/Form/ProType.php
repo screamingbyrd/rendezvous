@@ -45,6 +45,7 @@ class ProType extends AbstractType
                     'translation_domain' => 'FOSUserBundle',
                     'attr' => array(
                         'autocomplete' => 'new-password',
+                        'class' => 'password-field'
                     ),
                 ),
                 'constraints' => array(

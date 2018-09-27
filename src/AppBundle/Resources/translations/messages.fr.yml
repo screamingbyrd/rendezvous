@@ -188,6 +188,8 @@ form:
     coverImageInfo: L'image doit faire moins de 20 Mo. La meilleure résolution est de 1920 par 400 pixels.
     coverImageModify: Modifier l'image de fond.
 
+    showPassword: Voir mot de passe
+
   offer:
     creation:
       success: L'offre a bien été créée !
@@ -684,6 +686,10 @@ service:
     success: Vos services ont bien été mis à jour !
   manageGeneralSchedule:
     success: Vos horraires ont bien été mis à jour !
+  manageSchedule:
+    duplicate:
+      success: La semaine à été répliqué
+      error: Il y à déja des emplois du temps définit la semaine prochaine
   reserve:
     login:
       error: Votre informations de connexions sont incorect

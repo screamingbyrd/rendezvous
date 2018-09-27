@@ -186,6 +186,8 @@ form:
     coverImageInfo: The image must be below 20 Mo. The optimal resolution is 1920 par 400 pixels.
     coverImageModify: Change the cover image.
 
+    showPassword: Show password
+
   offer:
     creation:
       success: The offer has been created !
@@ -681,6 +683,10 @@ service:
     success: Your services has been updated !
   manageGeneralSchedule:
     success: Your general schedule has been updated !
+  manageSchedule:
+    duplicate:
+      success: The week has been replicated !
+      error: There are already some schedules defined next week
   reserve:
     login:
       error: Your login information are incorect

@@ -41,7 +41,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">{{ 'security.login.password'|trans }}</label>
-                                <input class="form-control" type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+                                <input class="form-control password-field" type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+                            </div>
+                            <div class="form-group">
+                                <div style="display: flex">
+                                    <input class="show-password" type="checkbox" onclick="myFunction()"><div>{{ 'security.login.showPassword'|trans }}</div>
+                                </div>
+
                             </div>
                             {#<div class="checkbox">#}
                                 {#<label>#}
@@ -58,6 +64,17 @@
         </div>
 
     <script>
+        function myFunction() {
+            var x = document.getElementsByClassName("password-field");
+            for (var i = 0; i < x.length; i++) {
+                if (x[i].type === "password") {
+                    x[i].type = "text";
+                } else {
+                    x[i].type = "password";
+                }
+            }
+        }
+
         window.fbAsyncInit = function() {
             FB.init({
                 appId: '1225236684282099',

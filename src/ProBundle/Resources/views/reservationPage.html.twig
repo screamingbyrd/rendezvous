@@ -220,7 +220,10 @@
                                 </div>
                                 <div class="login-field-container">
                                     <div class="login-label">Password</div>
-                                    <input type="password" name="password" required>
+                                    <input type="password" class="password-field" name="password" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="show-password" type="checkbox" onclick="myFunction()">{{ 'form.registration.showPassword'|trans }}
                                 </div>
                             </div>
                         </div>
@@ -259,6 +262,17 @@
         }
     </style>
     <script>
+        function myFunction() {
+            var x = document.getElementsByClassName("password-field");
+            for (var i = 0; i < x.length; i++) {
+                if (x[i].type === "password") {
+                    x[i].type = "text";
+                } else {
+                    x[i].type = "password";
+                }
+            }
+        }
+
         function changeCollaborator(select) {
             var url = "{{ path('reservation_page',{'proId':pro.id}) }}";
 
