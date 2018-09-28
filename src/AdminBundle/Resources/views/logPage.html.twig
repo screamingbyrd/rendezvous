@@ -25,6 +25,9 @@
                 <li>
                     <a class="tab-log" data-target="#favorites" data-toggle="tab" data-id="client">{{ 'header.clients.register'|trans }}</a>
                 </li>
+                <li>
+                    <a class="tab-log" data-target="#rendezvous" data-toggle="tab" data-id="rendezvous">Rendezvous</a>
+                </li>
             </ul>
         </div>
         <div class="container rendezvous-container">
@@ -40,6 +43,13 @@
                     <div class="shadow-box">
                         <h2>{{ 'admin.log.nbrClient'|trans }}</h2>
                         <div class="ct-chart ct-client ct-perfect-fourth" style="height: 500px;"></div>
+                        <div class="point-value"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="rendezvous">
+                    <div class="shadow-box">
+                        <h2>{{ 'admin.log.nbrRendezvous'|trans }}</h2>
+                        <div class="ct-chart ct-rendezvous ct-perfect-fourth" style="height: 500px;"></div>
                         <div class="point-value"></div>
                     </div>
                 </div>
@@ -103,6 +113,24 @@
                         ]
                     };
                         let chart = new Chartist.Line('.ct-client', data, options);
+                        let addedEvents = false;
+                        chart.on('draw', function() {
+                            if (!addedEvents) {
+                                $('.ct-point').on('mouseover', function() {
+                                    $('.point-value').html('<b>{{'admin.log.selected'|trans }}: </b>' + $(this).attr('ct:value'));
+                                });
+                            }
+                        });
+                    }, 500);
+                    break;
+                case 'rendezvous':
+                    setTimeout(function(){  var data = {
+                        labels: ['1', '2', '3', '4', '5','6', '7', '8', '9', '10', '11', '12'],
+                        series: [
+                            {{ monthlyRendezvousLog |json_encode|raw}}
+                        ]
+                    };
+                        let chart = new Chartist.Line('.ct-rendezvous', data, options);
                         let addedEvents = false;
                         chart.on('draw', function() {
                             if (!addedEvents) {

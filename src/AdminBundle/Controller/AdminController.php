@@ -38,10 +38,18 @@ class AdminController extends Controller
         ;
         $clientCount = count($clientRepository->findAll());
 
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
+        ;
+        $rendezvousCount = count($rendezvousRepository->findAll());
+
 
         return $this->render('AdminBundle::index.html.twig',array(
             'countPro' => $proCount,
             'clientCount' => $clientCount,
+            'rendezvousCount' => $rendezvousCount
         ));
     }
 
@@ -342,8 +350,14 @@ class AdminController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Client');
 
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous');
+
         $finalClientLog = array();
         $finalProLog = array();
+        $monthlyRendezvousLog = array();
 
         for ($i = 1; $i <= 12; $i++){
             $startDate = new \DateTime();
@@ -354,11 +368,13 @@ class AdminController extends Controller
             $endDate->setDate($year, $i, $lastDay);
             $finalClientLog[] = (int)$clientRepository->countActiveBetween($endDate)[0]['total'];
             $finalProLog[] =(int)$proRepository->countActiveBetween($endDate)[0]['total'];
+            $monthlyRendezvousLog[] = (int)$rendezvousRepository->countTotalMonthly($i, $year)[0]['total'];
         }
 
         return $this->render('AdminBundle::logPage.html.twig',array(
             'activeProLog' => $finalProLog,
             'activeClientLog' => $finalClientLog,
+            'monthlyRendezvousLog' => $monthlyRendezvousLog,
             'year' => $year
         ));
     }

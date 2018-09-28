@@ -36,4 +36,13 @@ class RendezvousRepository extends \Doctrine\ORM\EntityRepository
                     where r.startDate <= :now and r.client = :client ORDER BY r.startDate ASC'
             )->setParameter('client',$client)->setParameter('now', new \DateTime())->execute();
     }
+
+    public function countTotalMonthly($month, $year){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select count(r.id) as total
+                    from AppBundle:rendezvous r
+                    where month(r.startDate) = :month and year(r.startDate) = :year'
+            )->setParameter('month',$month)->setParameter('year',$year)->execute();
+    }
 }

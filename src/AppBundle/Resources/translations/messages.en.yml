@@ -666,6 +666,7 @@ admin:
     nbrActive: Number of active offers
     nbrPro: Number of pros
     nbrClient: Number of clients
+    nbrRendezvous: Number of rendezvous
     total: Total
     monthly: Monthly
     totalCredit: Number total credit

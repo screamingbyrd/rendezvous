@@ -670,6 +670,7 @@ admin:
     nbrActive: Nombre d'offres actives
     nbrPro: Nombre d'professionnels
     nbrClient: Nombre de clients
+    nbrRendezvous: Nombre de rendez-vous
     total: Total
     monthly: Mensuel
     totalCredit: Nombre total de crédit(s)
