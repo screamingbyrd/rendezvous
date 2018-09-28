@@ -460,6 +460,9 @@ email:
   share:
     title: A friend shared this with you
     shared: %sendFrom% shared this offer
+  cancel:
+    client: Your appointment has been canceled
+    pro: A client has canceled an appointment
 
 contact:
   form: Contact form
