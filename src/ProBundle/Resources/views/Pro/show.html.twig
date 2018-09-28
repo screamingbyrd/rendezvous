@@ -58,10 +58,10 @@
                 {% endif %}
                 <div class="shadow-box">
                     <p class="description-show-pro">{{ pro.description |nl2br}}</p>
-                    <p class="show-button-container"><a class="show-description">Voir plus</a></p>
+                    <p class="show-button-container"><a class="show-description">{{ 'pro.show.showMore'|trans }}</a></p>
                 </div>
 
-                <div class="article-title show-button-container">Prendre rendez vous en ligne</div>
+                <div class="article-title show-button-container">{{ 'pro.show.takeOnline'|trans }}</div>
 
                 {% for category,services in serviceArray %}
                     <div class="article-title">{{ category }}</div>
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="other-service-info">
-                                    <a>choose</a>
+                                    <a>{{ 'pro.show.choose'|trans }}</a>
                                 </div>
                             </div>
 
@@ -105,19 +105,19 @@
                         </div>
 
                 <div class="shadow-box">
-                    <div class="article-title"><i class="fas fa-clock"></i>Horaire d'ouverture</div>
+                    <div class="article-title"><i class="fas fa-clock"></i>{{ 'pro.show.openingHour'|trans }}</div>
                     {% if pro.generalSchedule is null %}
                         <div class="no-recent-offers">
-                            Non communiqué
+                            {{ 'pro.show.openningHour'|trans }}
                         </div>
                     {% else %}
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Lundi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[0]["open"] == '' and pro.generalSchedule[0]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[0]["open"] }}-{{ pro.generalSchedule[0]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Mardi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[1]["open"] == '' and pro.generalSchedule[1]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[1]["open"] }}-{{ pro.generalSchedule[1]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Mercredi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[2]["open"] == '' and pro.generalSchedule[2]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[2]["open"] }}-{{ pro.generalSchedule[2]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Jeudi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[3]["open"] == '' and pro.generalSchedule[3]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[3]["open"] }}-{{ pro.generalSchedule[3]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Vendredi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[4]["open"] == '' and pro.generalSchedule[4]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[4]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Samedi</div><div class="info-day-general-schedule">{% if pro.generalSchedule[5]["open"] == '' and pro.generalSchedule[5]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[5]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
-                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>Dimanche</div><div class="info-day-general-schedule">{% if pro.generalSchedule[6]["open"] == '' and pro.generalSchedule[6]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[6]["open"] }}-{{ pro.generalSchedule[6]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Monday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[0]["open"] == '' and pro.generalSchedule[0]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[0]["open"] }}-{{ pro.generalSchedule[0]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Tuesday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[1]["open"] == '' and pro.generalSchedule[1]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[1]["open"] }}-{{ pro.generalSchedule[1]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Wednesday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[2]["open"] == '' and pro.generalSchedule[2]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[2]["open"] }}-{{ pro.generalSchedule[2]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Thursday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[3]["open"] == '' and pro.generalSchedule[3]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[3]["open"] }}-{{ pro.generalSchedule[3]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Friday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[4]["open"] == '' and pro.generalSchedule[4]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[4]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Saturday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[5]["open"] == '' and pro.generalSchedule[5]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[5]["open"] }}-{{ pro.generalSchedule[4]["close"] }}{% endif %}</div></div>
+                        <div class="container-day-general-schedule"><div class="title-day"><i class="fas fa-square"></i>{{ 'Sunday'|trans }}</div><div class="info-day-general-schedule">{% if pro.generalSchedule[6]["open"] == '' and pro.generalSchedule[6]["close"] == '' %}Fermé{% else %}{{ pro.generalSchedule[6]["open"] }}-{{ pro.generalSchedule[6]["close"] }}{% endif %}</div></div>
                     {% endif %}
                 </div>
             </div>
@@ -197,10 +197,10 @@
     <script>
         $('.show-description').on('click', function () {
             if($(this).hasClass('expended')){
-                $(this).html('Show more').removeClass('expended');
+                $(this).html('{{ 'pro.show.showMore'|trans }}').removeClass('expended');
                 $('.description-show-pro').css('max-height', '80px');
             }else {
-                $(this).html('Show less').addClass('expended');
+                $(this).html('{{ 'pro.show.showLess'|trans }}').addClass('expended');
                 $('.description-show-pro').css('max-height', 'none');
             }
 

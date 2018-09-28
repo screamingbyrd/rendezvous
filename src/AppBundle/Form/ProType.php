@@ -81,15 +81,18 @@ class ProType extends AbstractType
             ->add('location', TextType::class,array(
                 'attr' => array('class' => 'form-control'),
                 'required' => false,
+                'label' => 'form.registration.location',
                 ))
 
             ->add('city', TextType::class,array(
                 'attr' => array('class' => 'form-control'),
+                'label' => 'form.registration.city',
                 'required' => false,
                 ))
 
             ->add('zipcode', TextType::class,array(
                 'attr' => array('class' => 'form-control'),
+                'label' => 'form.registration.zipcode',
                 'required' => false,
                 ))
 

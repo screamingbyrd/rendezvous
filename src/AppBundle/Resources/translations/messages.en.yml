@@ -85,6 +85,7 @@ header:
     title: Change language
     french: French
     english: English
+  searchPro: Take an apointment
 
 form:
   registration:
@@ -187,6 +188,9 @@ form:
     coverImageModify: Change the cover image.
 
     showPassword: Show password
+    location: Location
+    city: City
+    zipcode: Zipcode
 
   offer:
     creation:
@@ -213,7 +217,7 @@ form:
       error: You do not have enough credits !
     search:
       keyword: Keywords
-      location: Location
+      location: Town, location
       search: Search
       proPH: Select a company
       categoryPH: Select tag(s)
@@ -382,6 +386,11 @@ pro:
       title: Spontaneous application
       send: A client send you a spontaneous application
       sent: You application has been sent.
+    showMore: Show more
+    showLess: Show less
+    takeOnline: Take an apointment online
+    choose: Choose
+    openingHour: Openning hour
   edit:
     complete: Complete your information
     completed: Profile completed
@@ -391,19 +400,6 @@ pro:
     changePassword: Change password
     forgotPassword: Forgot password
     fileToo: File size is too large. Maximum size 20 Mb.
-
-
-
-
-
-
-
-
-  credit:
-    title: Credits
-    subTitle: Finding the perfect client can take some time but it is more important to have the right platform. Sometimes that is linked to how much you are willing to spend on you job posting. Our competitive packages offer you an affordable option for recruiting the perfect client at a lower cost!
-    have: You currently have %credit% credit(s)!
-    buy: Buy some credits
   addCollaborator:
     title: Add a contributor
     list: List of contributors
@@ -645,7 +641,7 @@ admin:
     archivedOffers: Archived offers
     showAll: All offers
     showActive: All pro
-    showNotValidated:Pro not verified
+    showNotValidated: Pro not verified
     creationDate: Creation date
     valid: Valid
     invalid: Invalid
@@ -670,10 +666,19 @@ admin:
 
 service:
   manageService:
+    title: My services
     success: Your services has been updated !
+    addCategory: Add a category
+    removeCategory: Remove the category
+    addService: Add a service
   manageGeneralSchedule:
+    title: Oppening hours
     success: Your general schedule has been updated !
+    closed: Closed
+    open: Opening
+    close: Closing
   manageSchedule:
+    title: Manage schedule
     duplicate:
       success: The week has been replicated !
       error: There are already some schedules defined next week
@@ -686,6 +691,9 @@ service:
       client: You took an appointment
   cancel:
     succes: The apointment has been canceled
+  collaboratorList: Employees list
+  rendezvous:
+    title: Rendezvous
 
 
 tag:

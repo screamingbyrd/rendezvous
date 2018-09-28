@@ -83,6 +83,7 @@ header:
     title: Changer de langue
     french: Français
     english: Anglais
+  searchPro: Prendre rendez-vous
 
 form:
   registration:
@@ -189,6 +190,9 @@ form:
     coverImageModify: Modifier l'image de fond.
 
     showPassword: Voir mot de passe
+    location: Adresse
+    city: Ville
+    zipcode: Code postale
 
   offer:
     creation:
@@ -215,7 +219,7 @@ form:
       error: Vous n'avez pas assez de crédit pour booster vos offres !
     search:
       keyword: Mots-clefs
-      location: Lieu de travail
+      location: Ville, adresse
       search: Recherche
       proPH:  Société
       categoryPH: Catégorie
@@ -386,6 +390,11 @@ pro:
       title: Clienture spontanée
       send: Vous avez reçu une clienture spontanée
       sent: Votre clienture à bien été envoyé
+    showMore: Voir plus
+    showLess: Voir moins
+    takeOnline: Prendre rendez vous en ligne
+    choose: Choisir
+    openingHour: Horaire d'ouverture
   edit:
     complete: Complétez vos informations
     completed: Profil complété
@@ -395,11 +404,6 @@ pro:
     changePassword: Changer de mot de passe
     forgotPassword: Mot de passe oublié
     fileToo: Fichier trop lourd. Taille maximale 20 Mb.
-  credit:
-    title: Crédits
-    subTitle: Trouver le client idéal peut prendre du temps, mais il est plus important d'avoir la bonne plateforme. Parfois, cela est lié au montant que vous êtes prêt à dépenser pour votre offre d'emploi. Nos forfaits compétitifs vous offrent une option abordable pour recruter le client idéal à moindre coût! Pour information, 1 crédit est équivalent à 1 annonce.
-    have: Vous avez actuellement %credit% crédits !
-    buy: Acheter des crédits
   addCollaborator:
     title: Ajouter un collaborateur
     list: Liste des collaborateurs
@@ -673,10 +677,19 @@ admin:
 
 service:
   manageService:
+    title: Mes services
     success: Vos services ont bien été mis à jour !
+    addCategory: Ajouter une catégorie
+    removeCategory: Supprimer la catégorie
+    addService: Ajouter un service
   manageGeneralSchedule:
+    title: Horraire
     success: Vos horraires ont bien été mis à jour !
+    closed: Fermé
+    open: Ouverture
+    close: Fermeture
   manageSchedule:
+    title: Gérer les emplois du temps
     duplicate:
       success: La semaine à été répliqué
       error: Il y à déja des emplois du temps définit la semaine prochaine
@@ -689,6 +702,9 @@ service:
       client: Vous avez pris rendez vous chez
   cancel:
     succes: Le rendez-vous à bien été annulé
+  collaboratorList: Liste des employés
+  rendezvous:
+    title: Rendez-vous
 
 
 tag:

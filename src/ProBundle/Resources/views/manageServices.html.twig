@@ -10,7 +10,7 @@
 
     <div class="container rendezvous-container">
         <div class="shadow-box">
-            <button class="add-category">add category</button>
+            <button class="add-category btn btn-primary">{{ 'service.manageService.addCategory'|trans }}</button>
         </div>
         <form method="POST" action="{{ path('manage_service') }}" class="form-manage-service">
             <div class="form-container-category">
@@ -19,7 +19,7 @@
                         <div class="container-service">
                             <fieldset data-id="0">
                                 <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name[0]"></legend>
-                                <button class="add-service" data-id="0">Add service</button>
+                                <button class="add-service btn btn-primary" data-id="0">{{ 'service.manageService.addService'|trans }}</button>
                                 <div class="container-input-service">
                                     <input type="hidden" name="service[0][0][id]">
                                     <input type="text" class="form-control service-field" placeholder="Nom" name="service[0][0][name]">
@@ -39,8 +39,8 @@
                                 <fieldset data-id="{{ categoryid }}">
                                     <legend><input value="{{ category }}" type="text" class="form-control category-name" placeholder="Nom" name="category-name[{{ categoryid }}]"></legend>
                                     <div>
-                                        <button class="add-service" data-id="0">Add service</button>
-                                        <button class="remove-category" data-id="0">Remove category</button>
+                                        <button class="add-service btn btn-primary" data-id="0">{{ 'service.manageService.addCategory'|trans }}</button>
+                                        <button class="remove-category btn btn-danger" data-id="0">{{ 'service.manageService.removeCategory'|trans }}</button>
                                         <input type="hidden" class="remove-category-input" name="removeCategory[{{ categoryid }}]" data-id="{{ category }}">
                                     </div>
                                     {% for service in serviceArray %}
@@ -50,7 +50,7 @@
                                             <input type="text" class="form-control service-field" placeholder="Nom" name="service[{{ categoryid }}][{{ serviceid }}][name]" value="{{ service.name }}">
                                             <input type="number" class="form-control service-field" placeholder="Durée" name="service[{{ categoryid }}][{{ serviceid }}][length]" value="{{ service.length }}"><span class="euro-price">minute</span>
                                             <input type="text" class="form-control service-field" placeholder="Prix" name="service[{{ categoryid }}][{{ serviceid }}][price]" value="{{ service.price }}"><span class="euro-price">€</span>
-                                            <button class="remove-service"><i class="fas fa-times-circle"></i></button>
+                                            <button class="remove-service btn btn-danger"><i class="fas fa-times-circle"></i></button>
                                         </div>
                                         {% set serviceid = serviceid + 1 %}
                                     {% endfor %}
@@ -63,7 +63,8 @@
                 {% endif %}
             </div>
 
-            <button>Submit</button>
+            <button class="btn btn-primary">{{ 'offer.submit'|trans }}</button>
+
         </form>
     </div>
 
@@ -117,7 +118,7 @@
                 '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+']['+id+']['+"name"+']">\n' +
                 '                            <input type="number" class="form-control service-field" placeholder="Durée" name="service['+idCategory+']['+id+']['+"length"+']"><span class="euro-price">minute</span>\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+']['+id+']['+"price"+']"><span class="euro-price">€</span>\n' +
-                    '<button class="remove-service"><i class="fas fa-times-circle"></i></button>'+
+                    '<button class="remove-service btn btn-danger"><i class="fas fa-times-circle"></i></button>'+
                 '                        </div>';
             category.append(service);
         });
@@ -142,8 +143,8 @@
                 '                <div class="container-service">\n' +
                 '                    <fieldset data-id="'+idCategory+'">\n' +
                 '                        <legend><input type="text" class="form-control category-name" placeholder="Nom" name="category-name['+idCategory+']"></legend>\n' +
-                '                        <div><button class="add-service" data-id="'+idCategory+'">Add service</button>\n' +
-                    '<button class="remove-category" data-id="0">Remove category</button></div>\n' +
+                '                        <div><button class="add-service btn btn-primary" data-id="'+idCategory+'">{{ 'service.manageService.addCategory'|trans }}</button>\n' +
+                    '<button class="remove-category btn btn-danger" data-id="0">{{ 'service.manageService.removeCategory'|trans }}</button></div>\n' +
                 '                                        <input type="hidden" class="remove-category-input" name="removeCategory['+idCategory+']" data-id="">'+
                 '                        <div class="container-input-service">\n' +
                 '<input type="hidden" name="service['+idCategory+'][0][id]">'+
@@ -151,7 +152,7 @@
                 '                            <input type="text" class="form-control service-field" placeholder="Nom" name="service['+idCategory+'][0]['+"name"+']">\n' +
                 '                            <input type="number" class="form-control service-field" placeholder="Durée" name="service['+idCategory+'][0]['+"length"+']"><span class="euro-price">minute</span>\n' +
                 '                            <input type="text" class="form-control service-field" placeholder="Prix" name="service['+idCategory+'][0]['+"price"+']"><span class="euro-price">€</span>\n' +
-                '<button class="remove-service"><i class="fas fa-times-circle"></i></button>'+
+                '<button class="remove-service btn btn-danger"><i class="fas fa-times-circle"></i></button>'+
                 '                        </div>\n' +
                 '                    </fieldset>\n' +
                 '                </div>\n' +

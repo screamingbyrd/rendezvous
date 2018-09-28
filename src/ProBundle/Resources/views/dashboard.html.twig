@@ -15,11 +15,11 @@
         <div class="dashboard-container">
             <div class="container-square">
                 <a class="zoom block-dashboard square-profile" href="{{ path('show_pro', {'id':pro.id}) }}"><div class="content-square"><i class="fas fa-user"></i><div class="text-square">{{ 'dashboard.pro.watchProfile' | trans }}</div></div></a>
-                <a class="zoom block-dashboard square-offers" href="{{ path('manage_service') }}" ><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">Mes service</div></div></a>
-                <a class="zoom block-dashboard square-credit" href="{{ path('manage_schedule') }}"><div class="content-square"><i class="fas fa-calendar-plus"></i><div class="text-square">Gérer les emplois du temps</div></div></a>
-                <a class="zoom block-dashboard square-featured-offers" href="{{ path('manage_general_schedule') }}"><div class="content-square"><i class="fas fa-clock"></i><div class="text-square">Horaires</div></div></a>
-                <a class="zoom block-dashboard square-bills" href="{{ path('rendezvous_page') }}"><div class="content-square"><i class="fas fa-calendar-alt"></i><div class="text-square">Rendez vous</div></div></a>
-                <a class="zoom block-dashboard square-post" href="{{ path('list_collaborator', {'id':app.user.pro.id}) }}"><div class="content-square"><i class="fas fa-users"></i><div class="text-square">Liste des employés</div></div></a>
+                <a class="zoom block-dashboard square-offers" href="{{ path('manage_service') }}" ><div class="content-square"><i class="fas fa-list-ul"></i><div class="text-square">{{ 'service.manageService.title' | trans }}</div></div></a>
+                <a class="zoom block-dashboard square-credit" href="{{ path('manage_schedule') }}"><div class="content-square"><i class="fas fa-calendar-plus"></i><div class="text-square">{{ 'service.manageSchedule.title'|trans }}</div></div></a>
+                <a class="zoom block-dashboard square-featured-offers" href="{{ path('manage_general_schedule') }}"><div class="content-square"><i class="fas fa-clock"></i><div class="text-square">{{ 'service.manageGeneralSchedule.title'|trans }}</div></div></a>
+                <a class="zoom block-dashboard square-bills" href="{{ path('rendezvous_page') }}"><div class="content-square"><i class="fas fa-calendar-alt"></i><div class="text-square">{{ 'service.rendezvous.title'|trans }}</div></div></a>
+                <a class="zoom block-dashboard square-post" href="{{ path('list_collaborator', {'id':app.user.pro.id}) }}"><div class="content-square"><i class="fas fa-users"></i><div class="text-square">{{ 'service.collaboratorList'|trans }}</div></div></a>
                 <a class="zoom block-dashboard square-contact" href="{{ path('contact_us_page') }}"><div class="content-square"><i class="fas fa-headphones"></i><div class="text-square">{{ 'contact.us.pro'|trans }}</div></div></a>
                 <a class="zoom block-dashboard square-featured-pros" href="{{ path('featured_pro_page') }}"><div class="content-square"><i class="far fa-calendar-alt"></i><div class="text-square">{{ 'featured.pro.title' | trans }}</div></div></a>
             </div>

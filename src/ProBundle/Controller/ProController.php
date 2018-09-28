@@ -573,7 +573,7 @@ class ProController extends Controller
 
                 $message = (new \Swift_Message($translated . ' ' . $pro->getName()))
                     ->setFrom('rendezvouslu@noreply.lu')
-                    ->setTo($email)
+                    ->setTo('arthur.regnault@altea.lu')
                     ->setBody(
                         $this->renderView(
                             'AppBundle:Emails:addedAsCollaborator.html.twig',
