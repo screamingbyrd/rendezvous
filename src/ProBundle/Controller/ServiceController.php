@@ -526,6 +526,8 @@ class ServiceController extends Controller
             $collaborator = $userRepository->findOneBy(array('id' => $collaboratorList[0]));
         }
 
+        $mainCollaborator = $userRepository->findOneBy(array('pro' => $collaborator->getPro(), 'main' => 1));
+
         if(!isset($user) || in_array('ROLE_PRO', $user->getRoles())){
             if($connectionType == 'register'){
                 $userRegister = $this->get('app.user_register');
@@ -595,55 +597,48 @@ class ServiceController extends Controller
 
         $em->flush();
 
-//        $arrayEmail = array();
-//
-//        foreach ($users as $emplyerUser){
-//            $arrayEmail[] = $emplyerUser->getEmail();
-//        }
-//        $firstUser = $arrayEmail[0];
-//
-//        $mailer = $this->container->get('swiftmailer.mailer');
+        $mailer = $this->container->get('swiftmailer.mailer');
 
-//        $translatedEmployer = $this->get('translator')->trans('offer.applied.employer');
-//
-//        $messageEmmployer = (new \Swift_Message($translatedEmployer . ' ' . $offer->getTitle()))
-//            ->setFrom('jobnowlu@noreply.lu')
-//            ->setTo($firstUser)
-//            ->setCc(array_shift($arrayEmail))
-//            ->setBody(
-//                $this->renderView(
-//                    'AppBundle:Emails:apply.html.twig',
-//                    array('comment' => $comment, 'offer' => $offer, 'link' => $target_file, 'linkCover' => $target_file_cover)
-//                ),
-//                'text/html'
-//            );
-//        ;
-//
-//        $translatedCandidate = $this->get('translator')->trans('offer.applied.candidate');
-//        $messageCandidate = (new \Swift_Message($translatedCandidate . ' ' . $offer->getTitle()))
-//            ->setFrom('jobnowlu@noreply.lu')
-//            ->setTo($candidateMail)
-//            ->setBody(
-//                $this->renderView(
-//                    'AppBundle:Emails:applied.html.twig',
-//                    array('offer' => $offer)
-//                ),
-//                'text/html'
-//            );
-//        ;
-//        $messageEmmployer->getHeaders()->addTextHeader(
-//            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
-//        );
-//        $messageCandidate->getHeaders()->addTextHeader(
-//            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
-//        );
-//
-//        $mailer->send($messageCandidate);
-//        $mailer->send($messageEmmployer);
+        $translatedPro = $this->get('translator')->trans('service.reserve.mail.pro');
+
+        $messagePro = (new \Swift_Message($translatedPro))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($mainCollaborator->getEmail())
+            ->setCc($collaborator->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:reserve.html.twig',
+                    array('rendezvous' => $rendezvous)
+                ),
+                'text/html'
+            );
+        ;
+
+        $translatedClient = $this->get('translator')->trans('service.reserve.mail.client');
+        $messageClient = (new \Swift_Message($translatedClient . ' ' . $collaborator->getPro()->getName()))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($client->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:reserved.html.twig',
+                    array('rendezvous' => $rendezvous)
+                ),
+                'text/html'
+            );
+        ;
+        $messagePro->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+        $messageClient->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+
+        $mailer->send($messageClient);
+        $mailer->send($messagePro);
 
 
-//        $translated = $this->get('translator')->trans('offer.applied.success', array('%title%' => $offer->getTitle()));
-        $session->getFlashBag()->add('info', 'Vous avez bien réservé');
+        $translated = $this->get('translator')->trans('service.reserve.success');
+        $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('dashboard_client');
     }

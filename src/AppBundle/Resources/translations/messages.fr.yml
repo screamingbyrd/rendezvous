@@ -437,10 +437,13 @@ featured:
 email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
-  application:
-    client:  Vous avez postulé à cette offre :
+  reservation:
+    client:  Vouss avez pris rendez vous
     pro:
-      applied: Un client a postulé à votre offre:
+      reserved: Un client a pris rendez-vous
+      name: Nom
+      service: Service
+      with: avec
       comment: Commentaire / Lettre de motivation :
       download: Télécharger le CV
       downloadCoverLetter: Télécharger la lettre de motivation
@@ -450,20 +453,6 @@ email:
   hasBeenModified: a été modifié, allez vérifier
   deleted: Votre compte a été supprimé
   contacted: Vous avez reçu un message !
-  endOfActivation:
-    title: Votre annonce sera désactivé dans %days% jours
-    youOffer: Votre annonce %title% sera désactivée dans %days% jours.
-    thinkAbout: Pensez à prolonger son activation sur votre tableau de bord
-  notification:
-    new: Vous avez créé une alerte email
-    created:
-      title: Votre alerte email a bien été créée !
-      now: Vous serez désormais prévenu(e) par email dès qu'une nouvelle annonce correspondant à vos critères de recherche est diffusée sur Rendezvous.lu.
-    send:
-      title:
-        regular: De nouveaux emplois sont disponibles pour ces %parameter%
-        search: De nouveaux emplois sont disponibles pour vous
-      new: De nouvelles offres pourraient vous intéresser
   footer:
     contact: Si vous souhaitez nous contacter, vous pouvez nous envoyer un e-mail à %link_start%contact@rendezvous.lu%link_end%
     consult: Consultez notre %link_start%politique de confidentialité%link_end% pour connaître vos droits.
@@ -692,8 +681,12 @@ service:
       success: La semaine à été répliqué
       error: Il y à déja des emplois du temps définit la semaine prochaine
   reserve:
+    success: Vous avez bien réservé
     login:
       error: Votre informations de connexions sont incorect
+    mail:
+      pro: Un client à pris rendez-vous
+      client: Vous avez pris rendez vous chez
 
 
 tag:
