@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -66,23 +67,22 @@
         </div>
 
         <div class="content-mail">
-            <h3>{{ 'email.reservation.pro.reserved'| trans}}</h3>
+            <h3>{{ 'email.cancel.client'| trans}}</h3>
 
             <div class="other-footer">
-                <div>{{ 'email.reservation.pro.name'| trans}} {{ rendezvous.client.user.lastname }}</div>
-                <div>{{ 'email.reservation.pro.service'| trans}} {{ rendezvous.service.name }} {{ 'email.reservation.pro.with'| trans}} {{ rendezvous.user.username }}</div>
+                <div>{{ rendezvous.user.pro.name }}</div>
+                <div>{{ 'email.reservation.pro.service'| trans}} {{ rendezvous.service.name }}</div>
                 <div>{{ rendezvous.startDate|date('d/m/Y h:i') }} - {{ rendezvous.endDate|date('d/m/Y h:i') }}</div>
             </div>
         </div>
 
 
         <div class="footer-mail">
-            {% if link is defined  %}
-                <div class="social-netwok-container">
-                    <a href="https://www.facebook.com/rendezvous.lu/"><img class="logo-facebook" src="https://rendezvous.lu/images/logo-facebook.png"></a>
-                    <a href="https://www.linkedin.com/company/rendezvous-luxembourg/"><img class="logo-linkedin" src="https://rendezvous.lu/images/logo-linkedin.png"></a>
-                </div>
-            {% endif %}
+            <div class="social-netwok-container">
+                <a href="https://www.facebook.com/rendezvous.lu/"><img class="logo-facebook" src="https://rendezvous.lu/images/logo-facebook.png"></a>
+                <a href="https://www.linkedin.com/company/rendezvous-luxembourg/"><img class="logo-linkedin" src="https://rendezvous.lu/images/logo-linkedin.png"></a>
+            </div>
+
             <div class="other-footer">
                 <div>{{ 'email.footer.contact'| trans({'%link_start%' : '<a href="mailto:support@athome.lu">', '%link_end%' : '</a>'}) |raw}}</div>
                 {#<div>{{ 'email.footer.consult'| trans({'%link_start%' : '<a href="'~path('privacy_page')~'">', '%link_end%' : '</a>'}) |raw}}</div>#}

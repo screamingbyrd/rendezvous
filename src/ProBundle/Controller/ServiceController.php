@@ -724,7 +724,14 @@ class ServiceController extends Controller
             ->getManager()
             ->getRepository('AppBundle:Rendezvous')
         ;
+        $userRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+        ;
         $rendezvous = $rendezvousRepository->findOneBy(array('id' => $idRendezvous));
+
+        $mainCollaborator = $userRepository->findOneBy(array('pro' => $rendezvous->getUser()->getPro(), 'main' => 1));
 
         if(!((isset($user) and in_array('ROLE_CLIENT', $user->getRoles()) and $client == $rendezvous->getClient()) ||  in_array('ROLE_ADMIN', $user->getRoles()))){
             $translated = $this->get('translator')->trans('redirect.client');
@@ -736,8 +743,48 @@ class ServiceController extends Controller
         $em->remove($rendezvous);
         $em->flush();
 
-//        $translated = $this->get('translator')->trans('redirect.client');
-        $session->getFlashBag()->add('danger', 'Le rendez vous à bien été annulé');
+        $mailer = $this->container->get('swiftmailer.mailer');
+
+        $translatedPro = $this->get('translator')->trans('email.cancel.pro');
+
+        $messagePro = (new \Swift_Message($translatedPro))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo($mainCollaborator->getEmail())
+            ->setCc($rendezvous->getUser()->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:cancel.html.twig',
+                    array('rendezvous' => $rendezvous)
+                ),
+                'text/html'
+            );
+        ;
+
+        $translatedClient = $this->get('translator')->trans('email.cancel.client');
+        $messageClient = (new \Swift_Message($translatedClient . ' : ' . $rendezvous->getUser()->getPro()->getName()))
+            ->setFrom('jobnowlu@noreply.lu')
+            ->setTo('arthur.regnault@altea.lu')
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:canceled.html.twig',
+                    array('rendezvous' => $rendezvous)
+                ),
+                'text/html'
+            );
+        ;
+        $messagePro->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+        $messageClient->getHeaders()->addTextHeader(
+            CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+        );
+
+        $mailer->send($messageClient);
+        $mailer->send($messagePro);
+
+
+        $translated = $this->get('translator')->trans('service.cancel.success');
+        $session->getFlashBag()->add('info', $translated);
         return $this->redirectToRoute('dashboard_client');
     }
 

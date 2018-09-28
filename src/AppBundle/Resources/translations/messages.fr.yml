@@ -438,15 +438,12 @@ email:
   sent: Votre message à bien été envoyé !
   send: Envoyer
   reservation:
-    client:  Vouss avez pris rendez vous
+    client:  Vous avez pris rendez vous
     pro:
       reserved: Un client a pris rendez-vous
       name: Nom
       service: Service
       with: avec
-      comment: Commentaire / Lettre de motivation :
-      download: Télécharger le CV
-      downloadCoverLetter: Télécharger la lettre de motivation
   contact: Vous avre reçu un message de %name%
   contactedUs: Quelqu'un vous a contacté
   message: Message
@@ -459,6 +456,9 @@ email:
   share:
     title: Un ami a partagé cette offre avec vous
     shared: %sendFrom% à partagé cett'e offre
+  cancel:
+    client: Votre rendez-vous a bien été annulé
+    pro: Un client a annulé un rendez-vous
 
 contact:
   form: Formulaire de contact
@@ -687,6 +687,8 @@ service:
     mail:
       pro: Un client à pris rendez-vous
       client: Vous avez pris rendez vous chez
+  cancel:
+    succes: Le rendez-vous à bien été annulé
 
 
 tag:

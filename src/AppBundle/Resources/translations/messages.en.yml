@@ -441,33 +441,19 @@ featured:
 email:
   sent: You message has been sent !
   send: Send
-  application:
-    client:  You applied to this offer:
+  reservation:
+    client:  You have taken an appointment
     pro:
-      applied: A client has applied to your offer:
-      comment: Comment/ motivation letter:
-      download: Download CV
-      downloadCoverLetter: Download cover letter
+      reserved: A client has made an appointment
+      name: Name
+      service: Service
+      with: with
   contact: You have received a message from %name%
   contactedUs: Somebody contacted us
   message: Message
   hasBeenModified: has been modified, go check it
   deleted: Your account has been successfully deleted.
   contacted: You have received a new message!
-  endOfActivation:
-    title: You offer will arrive at the end of activation in %days% days
-    youOffer: Your offer %title% will arrive at the end of activation in %days% days
-    thinkAbout: Think about extending its activation on your dashboard
-  notification:
-    new: You have created an email alert
-    created:
-      title: Your email alert has been created!
-      now: You will now be notified by email as soon as a new ad matching your search criteria is posted on Rendezvous.lu.
-    send:
-      title:
-        regular: New jobs are available for this %parameter%
-        search: New jobs are available for you
-      new: New offers could interest you
   footer:
     contact: If you wish to contact us, you can send an email to %link_start%contact@rendezvous.lu%link_end%
     consult: Click here %link_start%politique de confidentialité%link_end% to consult your rights.
@@ -689,8 +675,14 @@ service:
       success: The week has been replicated !
       error: There are already some schedules defined next week
   reserve:
+    success: You have made a rervation
     login:
       error: Your login information are incorect
+    mail:
+      pro: A client have made a reservation
+      client: You took an appointment
+  cancel:
+    succes: The apointment has been canceled
 
 
 tag:
