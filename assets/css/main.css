@@ -589,6 +589,24 @@ legend{
     .td-share-field{
         width: 49% !important;
     }
+    .list-type-container{
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    .list-type-homepage{
+        display: flex !important;
+        flex-flow: wrap;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .list-type-homepage .item{
+        width: 100%;
+        height: 110px;
+    }
+    .our-type{
+        width: 100%;
+        order: 1 !important;
+    }
 }
 
 @media (max-width: 767px){
