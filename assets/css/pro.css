@@ -143,6 +143,9 @@ h3.box{
     .search-map{
         display: none;
     }
+    .image-show-pro{
+        height: 150px !important;
+    }
 }
 .container-logo-pro{
     position: absolute;
@@ -348,7 +351,7 @@ h3.box{
     object-position: center;
 }
 .image-show-pro{
-    height: 400px !important;
+    height: 400px;
     width: 100%;
     object-fit: cover;
     object-position: center;
@@ -370,6 +373,9 @@ h3.box{
     }
 }
 @media (min-width: 1200px){
+    .image-show-pro{
+        height: 400px !important;
+    }
     .button-profile{
         position: absolute;
         right: -196px;

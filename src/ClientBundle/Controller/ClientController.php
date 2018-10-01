@@ -254,33 +254,17 @@ class ClientController extends Controller
             $user = $client->getUser();
         }
 
-        $postulatedRepository = $this
+        $rendezvousRepository = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:PostulatedOffers')
+            ->getRepository('AppBundle:Rendezvous')
         ;
-        $postulated = $postulatedRepository->findBy(array('client' => $client));
-        foreach ($postulated as $offer){
-            $em->remove($offer);
-        }
-        
-        $favoriteRepository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Favorite')
-        ;
-        $favorites = $favoriteRepository->findBy(array('client' => $client));
-        foreach ($favorites as $favorite){
-            $em->remove($favorite);
+        $rendezvousArray = $rendezvousRepository->findBy(array('client' => $client));
+        foreach ($rendezvousArray as $rendezvous){
+            $em->remove($rendezvous);
         }
 
         $mail = $user->getEmail();
-
-        $cv = $client->getCv();
-
-        if(isset($cv)){
-            unlink($cv);
-        }
 
         $em->remove($client);
         $em->remove($user);

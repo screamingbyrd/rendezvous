@@ -38,6 +38,8 @@ class AppController extends Controller
         $autoComplete->setInputAttributes(array('class' => 'form-control', 'name' => 'location','placeholder' =>  $this->get('translator')->trans('form.offer.search.location')));
 
         $autoComplete->setTypes(array(AutocompleteType::CITIES));
+        $autoComplete->setTypes(array(AutocompleteType::GEOCODE));
+        $autoComplete->addComponents(array('country' => ["fr","lu","be","de"]));
         $autoCompleteHelperBuilder = new PlaceAutocompleteHelperBuilder();
 
         $autoCompleteHelper = $autoCompleteHelperBuilder->build();

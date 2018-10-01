@@ -152,6 +152,24 @@
     margin-top: 15px;
 }
 
+.connect-reserve-container{
+    padding: 20px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.login-label{
+    width: 100px;
+}
+.login-field-container{
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+}
+.login-title, .show-register-form{
+    display: none;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -749,6 +767,9 @@
     }
     .reservation-of-day{
         width: 33%;
+    }
+    .login-field-container{
+        display: inherit !important;
     }
 }
 

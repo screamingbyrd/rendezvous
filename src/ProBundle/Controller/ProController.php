@@ -190,6 +190,23 @@ class ProController extends Controller
             ->getManager()
             ->getRepository('AppBundle:FeaturedPro');
 
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
+        ;
+
+        $scheduleRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Schedule')
+        ;
+        $serviceRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Service')
+        ;
+
         $pro = $repository->findOneBy(array('id' => isset($id)?$id:$user->getPro()));
 
         if(!((isset($user) and $user->getPro() == $pro) ||  (isset($user) and in_array('ROLE_ADMIN', $user->getRoles())))){
@@ -204,6 +221,13 @@ class ProController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $serviceArray = $serviceRepository->findBy(array('pro' => $pro));
+        if(isset($serviceArray) && count($serviceArray) > 0){
+            foreach ($serviceArray as $service){
+                $em->remove($service);
+            }
+        }
+
         $pro->setPhone(null);
         $em->merge($pro);
 
@@ -214,9 +238,22 @@ class ProController extends Controller
         $mailer = $this->container->get('swiftmailer.mailer');
         foreach ($userArray as $user){
             $mail = $user->getEmail();
-            $em->remove($user);
+            $rendezvousArray = $rendezvousRepository->findBy(array('user' => $user));
+            if(isset($rendezvousArray) && count($rendezvousArray) > 0){
+                foreach ($rendezvousArray as $rendezvous){
+                    $em->remove($rendezvous);
+                }
+            }
 
-            $translated = $this->get('translator')->trans('candidate.delete.deleted');
+            $scheduleArray = $scheduleRepository->findBy(array('user' => $user));
+            if(isset($scheduleArray) && count($scheduleArray) > 0){
+                foreach ($scheduleArray as $schedule){
+                    $em->remove($schedule);
+                }
+            }
+
+            $em->remove($user);
+            $translated = $this->get('translator')->trans('client.delete.deleted');
             $message = (new \Swift_Message($translated))
                 ->setFrom('rendezvouslu@noreply.lu')
                 ->setTo($mail)
@@ -228,7 +265,6 @@ class ProController extends Controller
                     'text/html'
                 )
             ;
-
 
             $message->getHeaders()->addTextHeader(
                 CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
@@ -255,7 +291,7 @@ class ProController extends Controller
         $mailer->send($message);
 
         $em->flush();
-        $translated = $this->get('translator')->trans('candidate.delete.deleted');
+        $translated = $this->get('translator')->trans('client.delete.deleted');
         $session->getFlashBag()->add('info', $translated);
 
         return $this->redirectToRoute('rendezvous_home');
@@ -768,7 +804,8 @@ class ProController extends Controller
         $locationArray =array();
         $finalData = array();
         foreach ($data as $pro){
-            if(($pro->getType() == $type || $type == '') and $pro->isValidated() == 1){
+            $phone = $pro->getPhone();
+            if(($pro->getType() == $type || $type == '') and $pro->isValidated() == 1 and isset($phone)){
                 $address = $pro->getLocation().', '.$pro->getCity();
                 $marker = $this->get('app.find_latlong')->geocode($address);
                 $marker[] = $pro->getName();
@@ -833,6 +870,8 @@ class ProController extends Controller
         }
 
         $autoComplete->setTypes(array(AutocompleteType::CITIES));
+        $autoComplete->setTypes(array(AutocompleteType::GEOCODE));
+        $autoComplete->addComponents(array('country' => ["fr","lu","be","de"]));
         $autoCompleteHelperBuilder = new PlaceAutocompleteHelperBuilder();
 
         $autoCompleteHelper = $autoCompleteHelperBuilder->build();

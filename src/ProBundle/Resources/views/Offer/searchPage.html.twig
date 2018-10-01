@@ -61,6 +61,25 @@
             z-index: -1;
             background-position: center center;
         }
+        .pac-container:after {
+            /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+            background-image: none !important;
+            height: 0;
+        }
+        .pac-icon {
+            display: none;
+        }
+
+        .pac-item-query {
+            padding-left: 10px;
+        }
+        .pac-item span {
+            color: #333;
+        }
+        .pac-matched{
+            font-weight: 800 !important;
+        }
     </style>
 
 
@@ -300,6 +319,10 @@
                     let total = $('#number-of-offer').val();
                     searchOffer(1,total);
             });
+            $('#place_input').on('change', function () {
+                let total = $('#number-of-offer').val();
+                searchOffer(1,total);
+            });
 
             $(".type-contract-checkbox").change(function() {
                 let total = $('#number-of-offer').val();
@@ -526,7 +549,8 @@
                 $('.table-comparison').html(table.append(tbody));
 
                 return this
-            }
+            };
+
 
         </script>
     </div>
