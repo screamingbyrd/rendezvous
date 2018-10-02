@@ -256,3 +256,9 @@ manage_general_schedule:
         en: "/manage-general-schedule"
         fr: "/modifier-horaire-globale"
     defaults: { _controller: ProBundle:Service:manageGeneralSchedule }
+
+send_reminder:
+    locales:
+        en: "/send-reminder"
+        fr: "/envoyer-rappel"
+    defaults: { _controller: ProBundle:Service:sendReminder }

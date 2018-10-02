@@ -20,6 +20,7 @@ title:
 homepage:
   title: Rendez vous rapide en ligne
   subtitle: Simple, facile et efficace
+  ourPro: Nos professionnels
   ourMission:
       1:
         title: Notre mission est double.
@@ -443,6 +444,7 @@ email:
   send: Envoyer
   reservation:
     client:  Vous avez pris rendez vous
+    reminder: Vous avez rendez vous demain
     pro:
       reserved: Un client a pris rendez-vous
       name: Nom

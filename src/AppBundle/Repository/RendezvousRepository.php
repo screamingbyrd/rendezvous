@@ -19,6 +19,15 @@ class RendezvousRepository extends \Doctrine\ORM\EntityRepository
             )->setParameter('user',$givenUser)->setParameter('now', new \DateTime())->execute();
     }
 
+    public function findAllNext(){
+        return $this->getEntityManager()
+            ->createQuery(
+                'select r
+                    from AppBundle:rendezvous r
+                    where r.startDate >= :now'
+            )->setParameter('now', new \DateTime())->execute();
+    }
+
     public function findNextForClient($client){
         return $this->getEntityManager()
             ->createQuery(

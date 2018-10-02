@@ -67,7 +67,7 @@
         </div>
 
         <div class="content-mail">
-            <h3>{{ 'email.reservation.client'| trans}}</h3>
+            <h3>{% if reminder is defined and reminder == 1 %}{{ 'email.reservation.reminder'| trans}}{% else %}{{ 'email.reservation.client'| trans}}{% endif %}</h3>
 
             <div class="other-footer">
                 <div>{{ rendezvous.user.pro.name }}</div>

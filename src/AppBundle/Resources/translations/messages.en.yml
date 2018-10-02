@@ -20,6 +20,7 @@ title:
 homepage:
   title: Find the career you deserve
   subtitle: Your job search begins and ends with us
+  ourPro: Our professional
   ourMission:
       1:
         title: Our mission is double.
@@ -439,6 +440,7 @@ email:
   send: Send
   reservation:
     client:  You have taken an appointment
+    reminder: You have an appointment tomorrow
     pro:
       reserved: A client has made an appointment
       name: Name

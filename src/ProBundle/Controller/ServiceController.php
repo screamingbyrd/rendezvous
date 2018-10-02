@@ -822,4 +822,50 @@ class ServiceController extends Controller
         ));
     }
 
+    //@TODO put in CRON
+    public function sendReminderAction(Request $request){
+
+        $session = $request->getSession();
+
+        $now =  new \DateTime();
+
+        $tomorrow = $now->modify('+1 day');
+
+        $rendezvousRepository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Rendezvous')
+        ;
+        $rendezvousArray = $rendezvousRepository->findAllNext();
+
+        foreach ($rendezvousArray as $rendezvous){
+            if($rendezvous->getStartDate()->format('Y-m-d') == $tomorrow->format('Y-m-d')){
+                $mail = $rendezvous->getClient()->getUser()->getEmail();
+                $mailer = $this->container->get('swiftmailer.mailer');
+
+                $translated = $this->get('translator')->trans('email.reservation.reminder');
+                $message = (new \Swift_Message($translated))
+                    ->setFrom('jobnowlu@noreply.lu')
+                    ->setTo('arthur.regnault@altea.lu')
+                    ->setBody(
+                        $this->renderView(
+                            'AppBundle:Emails:reserved.html.twig',
+                            array('rendezvous' => $rendezvous,
+                                'reminder' => 1)
+                        ),
+                        'text/html'
+                    )
+                ;
+
+                $message->getHeaders()->addTextHeader(
+                    CssInlinerPlugin::CSS_HEADER_KEY_AUTODETECT
+                );
+                $mailer->send($message);
+            }
+
+        }
+
+        return new Response();
+    }
+
 }
