@@ -350,15 +350,15 @@ legend{
 
 .rendezvous-button{
     color: #fbfef5;
-    border: solid 1px #e03c14;
+    border: solid 1px black;
     border-radius: 3px;
     padding: 10px 19px;
     display: inline-block;
     font-size: 16px;
     letter-spacing: 1px;
     cursor: pointer;
-    background: #e03c14;
-    box-shadow: inset 0 0 0 0 #d84a24;
+    background-color: #1EAAFC;
+    background-image: linear-gradient(130deg, #6C52D9 11%, #1EAAFC 83%, #3EDFD7 100%);
     -webkit-transition: ease-out 0.4s;
     -moz-transition: ease-out 0.4s;
     transition: ease-out 0.4s;
@@ -367,8 +367,8 @@ legend{
     margin-top: 0;
 }
 .rendezvous-button:hover{
-    box-shadow: inset 1000px 0 0 0 #ff6940;
-    color: white;
+    /*box-shadow: inset 1000px 0 0 0 #ff6940;*/
+    color: black;
 }
 
 
@@ -426,7 +426,7 @@ legend{
     margin-bottom: 10px;
     display: block;
     position:relative;
-    color: orange;
+    color: #ff6000;
     margin-top: -14px;
     padding-left: 4%;
     padding-right: 4%;
@@ -666,7 +666,6 @@ legend{
     min-width: 140px;
     height: 44px;
     line-height: inherit;
-    background-position: 10px 12px;
     background-repeat: no-repeat;
     font-size: 16px;
     padding: 11px 20px 12px 13px;
