@@ -84,7 +84,7 @@ fos_elastica:
                             id: ~
                             description: ~
                             location: { type: text, analyzer: location_tokenizer }
-                            city: { type: text, analyzer: autocomplete_analyzer }
+                            city: { type: text, analyzer: location_tokenizer }
                             name: { type: text, analyzer: autocomplete_analyzer }
                             zipcode: { type: text, analyzer: autocomplete_analyzer }
                             type: { type: text, analyzer: autocomplete_analyzer }
